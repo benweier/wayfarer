@@ -52,11 +52,9 @@ module.exports = {
         react: {
           version: 'detect',
         },
-        jest: {
-          version: 'detect',
-        },
       },
       parserOptions: {
+        project: './tsconfig.json',
         ecmaFeatures: {
           jsx: true,
         },
