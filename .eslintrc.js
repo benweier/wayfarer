@@ -18,6 +18,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'prettier/prettier': 'error',
     'import/order': [
