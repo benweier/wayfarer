@@ -12,7 +12,7 @@ import type {
 
 export const spacetradersAPI = createApi({
   reducerPath: 'spacetradersAPI',
-  tagTypes: ['Account'],
+  tagTypes: ['account'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.spacetraders.io',
     prepareHeaders: (headers, { getState }) => {
@@ -27,11 +27,11 @@ export const spacetradersAPI = createApi({
   }),
   endpoints: (builder) => ({
     claimUser: builder.mutation<TokenResponse, string>({
-      invalidatesTags: ['Account'],
+      invalidatesTags: ['account'],
       query: (user) => ({ url: `/users/${user}/claim`, method: 'POST' }),
     }),
     myAccount: builder.query<AccountResponse, string>({
-      providesTags: ['Account'],
+      providesTags: ['account'],
       query: (token) => ({ url: `/my/account`, headers: { authorization: token ? `Bearer ${token}` : undefined } }),
     }),
     takeOutLoan: builder.mutation<{ credits: number; loan: Loan }, { type: LoanType }>({
