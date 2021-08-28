@@ -1,4 +1,4 @@
-import Auth from '../components/Auth'
+import { Auth } from '../components/Auth'
 import { Meta } from '../components/Meta'
 import { AuthLayout } from '../layouts/Auth'
 
