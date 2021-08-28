@@ -1,12 +1,32 @@
-import tw from 'twin.macro'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AuthPage } from '../../routes'
+import { store } from '../../store'
+import { Main } from '../../templates/Main'
+import { Login, Register } from '../Auth'
+import { AuthRoute } from '../AuthRoute'
 
-const App = () => {
+export const App = () => {
   return (
-    <div css={tw`container mx-auto`}>
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+    <BrowserRouter>
+      <Provider store={store}>
+        <Main>
+          <Routes>
+            <Route path="/auth" element={<AuthPage />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
+            <Route
+              path="/"
+              element={
+                <AuthRoute>
+                  <AuthPage />
+                </AuthRoute>
+              }
+            />
+          </Routes>
+        </Main>
+      </Provider>
+    </BrowserRouter>
   )
 }
-
-export default App
