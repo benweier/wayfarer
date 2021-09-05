@@ -1,10 +1,10 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AuthPage } from '../../routes'
-import { store } from '../../store'
-import { Main } from '../../templates/Main'
-import { Login, Register } from '../Auth'
-import { AuthRoute } from '../AuthRoute'
+import { Login, Register } from 'components/Auth'
+import { AuthRoute } from 'components/AuthRoute'
+import { AuthPage } from 'routes'
+import { store } from 'store'
+import { Main } from 'templates/Main'
 
 export const App = () => {
   return (

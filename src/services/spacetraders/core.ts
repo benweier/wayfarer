@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { RootState } from '../../store/types.d'
+import type { RootState } from 'store/types.d'
 import type {
   AccountResponse,
   AvailableLoanResponse,
@@ -8,7 +8,7 @@ import type {
   LoanType,
   TokenResponse,
   YourShip,
-} from '../../types/spacetraders.d'
+} from 'types/spacetraders.d'
 
 export const spacetradersAPI = createApi({
   reducerPath: 'spacetradersAPI',

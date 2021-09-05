@@ -1,6 +1,6 @@
-import { Auth } from '../components/Auth'
-import { Meta } from '../components/Meta'
-import { AuthLayout } from '../layouts/Auth'
+import { Auth } from 'components/Auth'
+import { Meta } from 'components/Meta'
+import { AuthLayout } from 'layouts/Auth'
 
 export const AuthPage = () => {
   return (

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { spacetradersAPI } from '../../services/spacetraders/core'
-import { User } from '../../types/spacetraders'
+import { spacetradersAPI } from 'services/spacetraders/core'
+import { User } from 'types/spacetraders'
 
 const initialState = {
   user: null,
@@ -27,11 +27,11 @@ const slice = createSlice({
         state.isAuthenticated = true
       })
       .addMatcher(spacetradersAPI.endpoints.claimUser.matchRejected, (state, action) => {
-        console.log('rejected', action)
+        console.error('rejected', action)
       })
   },
 })
 
 export const { logout } = slice.actions
 
-export default slice.reducer
+export const authReducer = slice.reducer
