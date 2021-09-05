@@ -1,6 +1,7 @@
 import { InputHTMLAttributes, ReactNode } from 'react'
 import { useFormContext } from 'react-hook-form'
 import tw from 'twin.macro'
+import { Label } from 'components/Label'
 
 export const Input = ({
   label,
@@ -12,11 +13,7 @@ export const Input = ({
 
   return (
     <div>
-      {label && (
-        <label htmlFor={name} css={tw`block text-sm font-medium text-gray-300 mb-1`}>
-          {label}
-        </label>
-      )}
+      {label && <Label>{label}</Label>}
       <div css={tw`relative rounded-md shadow-sm`}>
         <input
           {...methods.register(name)}
