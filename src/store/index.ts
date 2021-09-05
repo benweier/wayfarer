@@ -1,14 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { spacetradersAPI } from '../services/spacetraders/core'
-import auth from './auth'
+import { middleware } from './middleware'
+import { reducer } from './reducers'
 
 export const store = configureStore({
-  reducer: {
-    [spacetradersAPI.reducerPath]: spacetradersAPI.reducer,
-    auth,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(spacetradersAPI.middleware),
+  reducer,
+  middleware,
 })
 
 setupListeners(store.dispatch)
