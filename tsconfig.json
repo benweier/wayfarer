@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "outDir": "build/dist",
     "module": "esnext",
-    "target": "es5",
-    "lib": ["es6", "dom"],
+    "target": "es2018",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "sourceMap": true,
     "allowJs": true,
     "moduleResolution": "node",
@@ -25,5 +29,8 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/twin.d.ts"]
+  "include": [
+    "src",
+    "src/twin.d.ts"
+  ]
 }
