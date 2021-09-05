@@ -1,7 +1,7 @@
 import { useEffect, ReactNode } from 'react'
 import { useNavigate } from 'react-router'
-import { selectIsAuthenticated } from '../../store/auth'
-import { useAppSelector } from '../../store/hooks'
+import { selectIsAuthenticated } from 'store/auth'
+import { useAppSelector } from 'store/hooks'
 
 export const AuthRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated)
@@ -9,7 +9,7 @@ export const AuthRoute = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/auth')
+      navigate('/auth/login')
     }
   }, [isAuthenticated, navigate])
 
