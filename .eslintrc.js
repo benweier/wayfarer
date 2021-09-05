@@ -14,7 +14,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   rules: {
@@ -34,7 +34,6 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
-    'import/namespace': ['error', { allowComputed: true }],
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
@@ -54,6 +53,10 @@ module.exports = {
         react: {
           version: 'detect',
         },
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts', '.tsx']
+        },
+        'import/resolver': 'typescript',
       },
       parserOptions: {
         project: './tsconfig.json',
