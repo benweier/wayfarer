@@ -28,7 +28,7 @@ export const Register = () => {
   const [claimUserMutation] = useClaimUserMutation()
   const onSubmit = useCallback<SubmitHandler<RegisterFormState>>(
     (values) => {
-      return claimUserMutation(values.user)
+      return claimUserMutation({ user: values.user })
         .unwrap()
         .then((response) => {
           reset()
@@ -53,6 +53,7 @@ export const Register = () => {
             type="text"
             name="token"
             label="Access Token"
+            placeholder="Register a username to receive your access token"
             onFocus={handleFocus}
             readOnly
             icon={
@@ -81,7 +82,7 @@ export const Register = () => {
           )}
           <div css={tw`text-sm text-center`}>
             Already have an access token?{' '}
-            <Link to={ROUTES.LOGIN} state={{ token }}>
+            <Link css={tw`font-bold`} to={ROUTES.LOGIN} state={{ token }}>
               Login
             </Link>
           </div>
