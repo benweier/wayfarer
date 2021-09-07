@@ -26,13 +26,16 @@ export const spacetradersAPI = createApi({
     },
   }),
   endpoints: (builder) => ({
-    claimUser: builder.mutation<TokenResponse, string>({
+    claimUser: builder.mutation<TokenResponse, { user: string }>({
       invalidatesTags: ['account'],
-      query: (user) => ({ url: `/users/${user}/claim`, method: 'POST' }),
+      query: (args) => ({ url: `/users/${args.user}/claim`, method: 'POST' }),
     }),
-    myAccount: builder.query<AccountResponse, string>({
+    myAccount: builder.query<AccountResponse, { token: string }>({
       providesTags: ['account'],
-      query: (token) => ({ url: `/my/account`, headers: { authorization: token ? `Bearer ${token}` : undefined } }),
+      query: (args) => ({
+        url: `/my/account`,
+        headers: { authorization: args.token ? `Bearer ${args.token}` : undefined },
+      }),
     }),
     takeOutLoan: builder.mutation<{ credits: number; loan: Loan }, { type: LoanType }>({
       query: (args) => ({ url: `/my/loans`, body: { type: args.type } }),
