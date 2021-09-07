@@ -17,6 +17,12 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx']
+    },
+    'import/resolver': 'typescript',
+  },
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/unbound-method': 'off',
@@ -53,10 +59,6 @@ module.exports = {
         react: {
           version: 'detect',
         },
-        'import/parsers': {
-          '@typescript-eslint/parser': ['.ts', '.tsx']
-        },
-        'import/resolver': 'typescript',
       },
       parserOptions: {
         project: './tsconfig.json',
