@@ -16,18 +16,16 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(spacetradersAPI.endpoints.claimUser.matchPending, (state) => {
-        state.token = initialState.token
-        state.user = initialState.user
-        state.isAuthenticated = initialState.isAuthenticated
+      .addMatcher(spacetradersAPI.endpoints.myAccount.matchPending, () => {
+        //
       })
-      .addMatcher(spacetradersAPI.endpoints.claimUser.matchFulfilled, (state, action) => {
-        state.token = action.payload.token
+      .addMatcher(spacetradersAPI.endpoints.myAccount.matchFulfilled, (state, action) => {
+        state.token = action.meta.arg.originalArgs.token
         state.user = action.payload.user
         state.isAuthenticated = true
       })
-      .addMatcher(spacetradersAPI.endpoints.claimUser.matchRejected, (state, action) => {
-        console.error('rejected', action)
+      .addMatcher(spacetradersAPI.endpoints.myAccount.matchRejected, () => {
+        //
       })
   },
 })
