@@ -19,7 +19,7 @@ export const Input = ({
           {...methods.register(name)}
           {...props}
           css={[
-            tw`p-3 text-gray-300 bg-gray-600 focus:(ring ring-blue-500 outline-none) block w-full sm:text-sm rounded-md`,
+            tw`p-3 text-gray-300 bg-gray-600 focus:(ring ring-emerald-400 outline-none) block w-full sm:text-sm rounded-md`,
             icon && tw`pr-10`,
           ]}
         />
