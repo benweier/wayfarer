@@ -1,5 +1,6 @@
 import { useEffect, ReactNode } from 'react'
 import { useNavigate } from 'react-router'
+import { ROUTES } from 'config/routes'
 import { selectIsAuthenticated } from 'store/auth'
 import { useAppSelector } from 'store/hooks'
 
@@ -8,8 +9,10 @@ export const AuthRoute = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/auth/login')
+    if (isAuthenticated) {
+      navigate('/', { replace: true })
+    } else {
+      navigate(ROUTES.LOGIN)
     }
   }, [isAuthenticated, navigate])
 
