@@ -1,10 +1,15 @@
-import { Outlet } from 'react-router-dom'
+import { Routes, Route } from 'react-router'
 import tw from 'twin.macro'
+import { Login } from './Login'
+import { Register } from './Register'
 
 export const Auth = () => {
   return (
     <div css={tw`rounded-lg border-2 border-gray-600 p-6`}>
-      <Outlet />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </div>
   )
 }
