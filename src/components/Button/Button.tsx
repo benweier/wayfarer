@@ -1,7 +1,10 @@
 import tw, { styled } from 'twin.macro'
 
 const styles = {
-  DEFAULT: tw`w-full text-sm font-bold bg-blue-500 leading-none p-3 rounded outline-none focus:(outline-none ring ring-emerald-400)`,
+  DEFAULT: [
+    tw`w-full text-sm font-bold bg-blue-500 leading-none p-3 rounded outline-none`,
+    tw`focus:(outline-none ring ring-emerald-400)`,
+  ],
   disabled: tw`disabled:(opacity-50 cursor-default)`,
 }
 
