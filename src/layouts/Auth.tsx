@@ -14,5 +14,5 @@ export const AuthLayout = ({ children }: { children: ReactNode }) => {
     }
   }, [isAuthenticated, navigate])
 
-  return <div css={tw`h-screen max-w-lg mx-auto py-16 grid items-center`}>{children}</div>
+  return <div css={tw`h-screen max-w-lg mx-auto px-4 py-4 grid items-center`}>{children}</div>
 }
