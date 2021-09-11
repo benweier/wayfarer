@@ -3,6 +3,7 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import tw from 'twin.macro'
 import { Button } from 'components/Button'
 import { Input } from 'components/Input'
+import { Label } from 'components/Label'
 import { Link } from 'components/Link'
 import { ROUTES } from 'config/routes'
 import { useLocation } from 'hooks/useLocation'
@@ -33,22 +34,35 @@ export const Login = () => {
   )
 
   return (
-    <FormProvider {...methods}>
-      <form css={tw`grid grid-cols-1 gap-6`} onSubmit={methods.handleSubmit(onSubmit)}>
-        <Input label="Username" type="text" name="user" />
-        <Input label="Access Token" type="password" name="token" onFocus={handleFocus} />
-        <div css={tw`grid grid-flow-row gap-4`}>
-          <Button type="submit" disabled={isLoading}>
-            Login
-          </Button>
-          <div css={tw`text-sm text-center`}>
-            Don&apos;t have an access token?{' '}
-            <Link css={tw`font-bold`} to={ROUTES.REGISTER}>
-              Register
-            </Link>
+    <div css={tw`grid grid-flow-row gap-4`}>
+      <div css={tw`text-xl font-bold text-center`}>Login</div>
+      <FormProvider {...methods}>
+        <form css={tw`grid grid-cols-1 gap-6`} onSubmit={methods.handleSubmit(onSubmit)}>
+          <div>
+            <Label>Username</Label>
+            <Input type="text" name="user" />
+            <div css={tw`text-xs text-gray-300 mt-1`}>
+              Your username is not required to login, but may be useful with password managers if you have multiple
+              accounts
+            </div>
           </div>
-        </div>
-      </form>
-    </FormProvider>
+          <div>
+            <Label>Access Token</Label>
+            <Input label="Access Token" type="password" name="token" onFocus={handleFocus} />
+          </div>
+          <div css={tw`grid grid-flow-row gap-4`}>
+            <Button type="submit" disabled={isLoading}>
+              Login
+            </Button>
+            <div css={tw`text-sm text-center`}>
+              Don&apos;t have an access token?&nbsp;
+              <Link css={tw`font-bold`} to={ROUTES.REGISTER}>
+                Register
+              </Link>
+            </div>
+          </div>
+        </form>
+      </FormProvider>
+    </div>
   )
 }
