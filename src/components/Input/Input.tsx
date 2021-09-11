@@ -4,7 +4,7 @@ import tw from 'twin.macro'
 
 const styles = {
   DEFAULT: [
-    tw`py-2 px-4 text-gray-300 bg-gray-700 border-2 border-gray-500 shadow-inner block w-full rounded-md`,
+    tw`py-2 px-4 text-sm text-gray-300 bg-gray-700 border-2 border-gray-500 shadow-inner block w-full rounded-md`,
     tw`focus:(ring ring-emerald-400 outline-none border-gray-800)`,
   ],
   disabled: [tw`disabled:(bg-gray-700 border-gray-600 opacity-80)`],
