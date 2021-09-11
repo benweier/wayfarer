@@ -39,7 +39,7 @@ export const Login = () => {
       <FormProvider {...methods}>
         <form css={tw`grid grid-cols-1 gap-6`} onSubmit={methods.handleSubmit(onSubmit)}>
           <div>
-            <Label>Username</Label>
+            <Label htmlFor="user">Username</Label>
             <Input type="text" name="user" />
             <div css={tw`text-xs text-gray-300 mt-1`}>
               Your username is not required to login, but may be useful with password managers if you have multiple
@@ -47,8 +47,8 @@ export const Login = () => {
             </div>
           </div>
           <div>
-            <Label>Access Token</Label>
-            <Input label="Access Token" type="password" name="token" onFocus={handleFocus} />
+            <Label htmlFor="token">Access Token</Label>
+            <Input label="Access Token" type="password" name="token" onFocus={handleFocus} autoFocus />
           </div>
           <div css={tw`grid grid-flow-row gap-4`}>
             <Button type="submit" disabled={isLoading}>

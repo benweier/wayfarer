@@ -56,13 +56,13 @@ export const Register = () => {
     <div css={tw`grid grid-flow-row gap-4`}>
       <div css={tw`text-xl font-bold text-center`}>Register</div>
       <FormProvider {...methods}>
-        <form css={tw`grid grid-cols-1 gap-6`} onSubmit={methods.handleSubmit(onSubmit)}>
+        <form autoComplete="off" css={tw`grid grid-cols-1 gap-6`} onSubmit={methods.handleSubmit(onSubmit)}>
           <div>
-            <Label>Username</Label>
-            <Input type="text" name="user" />
+            <Label htmlFor="user">Username</Label>
+            <Input type="text" name="user" autoComplete="off" autoFocus />
           </div>
           <div ref={ref}>
-            <Label>Access Token</Label>
+            <Label htmlFor="token">Access Token</Label>
             <Input
               type="text"
               name="token"
