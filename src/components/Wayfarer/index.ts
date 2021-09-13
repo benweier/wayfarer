@@ -1,0 +1,1 @@
+export { Wayfarer } from './Wayfarer'
