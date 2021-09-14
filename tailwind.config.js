@@ -267,7 +267,7 @@ module.exports = {
         '"Courier New"',
         'monospace',
       ],
-      impact: ['impact', 'sans-serif']
+      wayfarer: ['Arial Black', 'sans-serif']
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],
