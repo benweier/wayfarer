@@ -7,7 +7,7 @@ import { Wayfarer } from 'components/Wayfarer'
 export const AuthLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div css={tw`min-h-screen w-full px-4 py-4 grid gap-6 auto-rows-min grid-template-rows[auto 1fr auto]`}>
-      <div css={tw`grid justify-center`}>
+      <div css={tw`grid justify-center items-center py-8`}>
         <Wayfarer css={tw`text-center text-7xl`} />
         <div css={tw`text-center text-xl font-semibold text-gray-400`}>A SpaceTraders API Interface</div>
       </div>
