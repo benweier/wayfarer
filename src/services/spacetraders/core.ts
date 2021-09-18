@@ -1,5 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { RootState } from 'store/types.d'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import type {
   AccountResponse,
   AvailableLoanResponse,
@@ -9,22 +8,12 @@ import type {
   TokenResponse,
   YourShip,
 } from 'types/spacetraders.d'
+import { baseQueryWithTokenParam } from './base-query'
 
 export const spacetradersAPI = createApi({
   reducerPath: 'spacetradersAPI',
   tagTypes: ['account'],
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.spacetraders.io',
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token
-
-      if (token) {
-        headers.set('authentication', `Bearer ${token}`)
-      }
-
-      return headers
-    },
-  }),
+  baseQuery: baseQueryWithTokenParam,
   endpoints: (builder) => ({
     claimUser: builder.mutation<TokenResponse, { user: string }>({
       invalidatesTags: ['account'],
@@ -34,7 +23,7 @@ export const spacetradersAPI = createApi({
       providesTags: ['account'],
       query: (args) => ({
         url: `/my/account`,
-        headers: { authorization: args.token ? `Bearer ${args.token}` : undefined },
+        headers: { Authorization: args.token ? `Bearer ${args.token}` : undefined },
       }),
     }),
     takeOutLoan: builder.mutation<{ credits: number; loan: Loan }, { type: LoanType }>({
