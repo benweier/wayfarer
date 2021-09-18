@@ -1,39 +1,16 @@
-import { HiOutlineCash, HiOutlineStatusOnline, HiOutlineStatusOffline } from 'react-icons/hi'
+import { HiOutlineCash } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import tw, { css, styled } from 'twin.macro'
+import tw, { styled } from 'twin.macro'
+import { SpaceTradersStatus } from 'components/SpaceTradersStatus'
 import { Wayfarer } from 'components/Wayfarer'
 import { ROUTES } from 'config/routes'
-import { useStatusQuery } from 'services/spacetraders/core'
 import { selectUser } from 'store/auth'
 import { selectStatus } from 'store/auth/selectors'
 
 const HeaderLink = styled(Link)(
   () => tw`py-2 px-4 rounded font-medium leading-none hover:(bg-blue-500 bg-opacity-80) active:(bg-opacity-60)`,
 )
-
-const Status = () => {
-  const { data, isLoading, isFetching, isError } = useStatusQuery(undefined, {
-    refetchOnFocus: true,
-    pollingInterval: 60000,
-  })
-
-  return (
-    <div
-      css={[
-        css`
-          transition: color 300ms ease-in-out;
-        `,
-        data?.status && tw`text-emerald-400`,
-        (!data?.status || isError) && tw`text-rose-400`,
-        (isLoading || isFetching) && tw`text-yellow-400`,
-      ]}
-    >
-      {data?.status && !isError && <HiOutlineStatusOnline size={20} />}
-      {(!data?.status || isError) && <HiOutlineStatusOffline size={20} />}
-    </div>
-  )
-}
 
 const Sync = () => {
   const status = useSelector(selectStatus)
@@ -75,7 +52,7 @@ export const Header = () => {
       <div css={tw`h-16 px-6 grid items-center`}>
         <div css={tw`w-full grid grid-flow-col gap-4 justify-between items-center`}>
           <div css={tw`grid grid-flow-col gap-2 items-center`}>
-            <Status />
+            <SpaceTradersStatus />
 
             <Link to="/">
               <Wayfarer css={tw`text-2xl mx-4`} />
