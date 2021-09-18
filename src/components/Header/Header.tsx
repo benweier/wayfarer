@@ -1,9 +1,10 @@
-import { HiCurrencyDollar } from 'react-icons/hi'
+import { HiOutlineCash, HiOutlineStatusOnline, HiOutlineStatusOffline } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import tw, { styled } from 'twin.macro'
+import tw, { css, styled } from 'twin.macro'
 import { Wayfarer } from 'components/Wayfarer'
 import { ROUTES } from 'config/routes'
+import { useStatusQuery } from 'services/spacetraders/core'
 import { selectUser } from 'store/auth'
 import { selectStatus } from 'store/auth/selectors'
 
@@ -12,6 +13,29 @@ const HeaderLink = styled(Link)(
 )
 
 const Status = () => {
+  const { data, isLoading, isFetching, isError } = useStatusQuery(undefined, {
+    refetchOnFocus: true,
+    pollingInterval: 60000,
+  })
+
+  return (
+    <div
+      css={[
+        css`
+          transition: color 300ms ease-in-out;
+        `,
+        data?.status && tw`text-emerald-400`,
+        (!data?.status || isError) && tw`text-rose-400`,
+        (isLoading || isFetching) && tw`text-yellow-400`,
+      ]}
+    >
+      {data?.status && !isError && <HiOutlineStatusOnline size={20} />}
+      {(!data?.status || isError) && <HiOutlineStatusOffline size={20} />}
+    </div>
+  )
+}
+
+const Sync = () => {
   const status = useSelector(selectStatus)
 
   return (
@@ -19,8 +43,8 @@ const Status = () => {
       css={[
         tw`inline-block w-2.5 h-2.5 rounded-full`,
         status === 'IDLE' && tw`bg-emerald-400`,
-        status === 'PENDING' && tw`bg-yellow-300`,
-        status === 'ERROR' && tw`bg-rose-500`,
+        status === 'PENDING' && tw`bg-yellow-400`,
+        status === 'ERROR' && tw`bg-rose-400`,
       ]}
     />
   )
@@ -34,12 +58,12 @@ const User = () => {
   return (
     <div css={tw`grid grid-flow-col gap-8 items-center`}>
       <div css={tw`grid gap-2 grid-flow-col items-center`}>
-        <HiCurrencyDollar size={20} /> <span css={tw`font-bold`}>{user.credits}</span>
+        <HiOutlineCash size={20} /> <span css={tw`font-bold`}>{user.credits}</span>
       </div>
 
       <div css={tw`grid gap-2 grid-flow-col items-center`}>
         <span css={tw`font-bold`}>{user.username}</span>
-        <Status />
+        <Sync />
       </div>
     </div>
   )
@@ -51,11 +75,14 @@ export const Header = () => {
       <div css={tw`h-16 px-6 grid items-center`}>
         <div css={tw`w-full grid grid-flow-col gap-4 justify-between items-center`}>
           <div css={tw`grid grid-flow-col gap-2 items-center`}>
+            <Status />
+
             <Link to="/">
               <Wayfarer css={tw`text-2xl mx-4`} />
             </Link>
 
             <nav css={tw`grid grid-flow-col gap-2 items-center`}>
+              <HeaderLink to={ROUTES.DASHBOARD}>Dashboard</HeaderLink>
               <HeaderLink to={ROUTES.LOANS}>Loans</HeaderLink>
               <HeaderLink to={ROUTES.SHIPS}>Ships</HeaderLink>
             </nav>
