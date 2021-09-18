@@ -1,2 +1,2 @@
 export { authReducer, logout } from './slice'
-export { selectIsAuthenticated } from './selectors'
+export { selectIsAuthenticated, selectUser } from './selectors'
