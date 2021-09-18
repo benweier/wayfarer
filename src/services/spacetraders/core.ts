@@ -15,6 +15,12 @@ export const spacetradersAPI = createApi({
   tagTypes: ['account'],
   baseQuery: baseQueryWithTokenParam,
   endpoints: (builder) => ({
+    status: builder.query<{ status: boolean }, void>({
+      query: () => `/game/status`,
+      transformResponse: (response: { status: string }) => {
+        return { status: response.status === 'spacetraders is currently online and available to play' }
+      },
+    }),
     claimUser: builder.mutation<TokenResponse, { user: string }>({
       invalidatesTags: ['account'],
       query: (args) => ({ url: `/users/${args.user}/claim`, method: 'POST' }),
@@ -43,12 +49,15 @@ export const spacetradersAPI = createApi({
 
 export const {
   useAvailableLoansQuery,
-  useLazyAvailableLoansQuery,
   useClaimUserMutation,
-  useMyAccountQuery,
+  useLazyAvailableLoansQuery,
   useLazyMyAccountQuery,
+  useLazyShipListingsQuery,
+  useLazyStatusQuery,
+  useMyAccountQuery,
+  usePrefetch,
   usePurchaseShipMutation,
   useShipListingsQuery,
-  useLazyShipListingsQuery,
+  useStatusQuery,
   useTakeOutLoanMutation,
 } = spacetradersAPI
