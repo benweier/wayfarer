@@ -109,7 +109,7 @@ export const Register = () => {
             )}
             <div css={tw`text-sm text-center`}>
               Already have an access token?&nbsp;
-              <Link css={tw`font-bold`} to={ROUTES.LOGIN} state={{ token }}>
+              <Link css={tw`font-bold`} to={`/${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ token }}>
                 Login
               </Link>
             </div>
