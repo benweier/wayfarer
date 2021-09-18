@@ -4,19 +4,17 @@ import { ROUTES } from 'config/routes'
 import { selectIsAuthenticated } from 'store/auth'
 import { useAppSelector } from 'store/hooks'
 
-export const AuthRoute = ({ children }: { children: ReactNode }) => {
+export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/', { replace: true })
-    } else {
+    if (!isAuthenticated) {
       navigate(ROUTES.LOGIN)
     }
   }, [isAuthenticated, navigate])
 
-  if (!isAuthenticated) return null
+  if (!isAuthenticated) return <></>
 
   return <>{children}</>
 }

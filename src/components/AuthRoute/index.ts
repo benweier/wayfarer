@@ -1,1 +1,0 @@
-export { AuthRoute } from './AuthRoute'
