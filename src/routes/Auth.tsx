@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Auth } from 'components/Auth'
+import { useEffect, Suspense } from 'react'
+import { useNavigate, Outlet } from 'react-router-dom'
+import tw from 'twin.macro'
 import { ROUTES } from 'config/routes'
 import { AuthLayout } from 'layouts/Auth'
 import { selectIsAuthenticated } from 'store/auth'
@@ -18,7 +18,11 @@ export const AuthPage = () => {
 
   return (
     <AuthLayout>
-      <Auth />
+      <div css={tw`rounded-lg border border-gray-700 shadow-xl px-8 py-8`}>
+        <Suspense fallback={<></>}>
+          <Outlet />
+        </Suspense>
+      </div>
     </AuthLayout>
   )
 }

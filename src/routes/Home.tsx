@@ -12,7 +12,7 @@ export const HomePage = () => {
     if (isAuthenticated) {
       navigate(ROUTES.DASHBOARD)
     } else {
-      navigate(ROUTES.LOGIN)
+      navigate(`${ROUTES.AUTH}/${ROUTES.LOGIN}`)
     }
   }, [isAuthenticated, navigate])
 
