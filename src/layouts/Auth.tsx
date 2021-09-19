@@ -2,14 +2,26 @@ import { ReactNode } from 'react'
 import { IconContext } from 'react-icons'
 import { VscRocket, VscGithub } from 'react-icons/vsc'
 import tw, { theme } from 'twin.macro'
+import { SpaceTradersStatus, useSpaceTradersStatus } from 'components/SpaceTradersStatus'
 import { Wayfarer } from 'components/Wayfarer'
 
 export const AuthLayout = ({ children }: { children: ReactNode }) => {
+  const { data, isLoading } = useSpaceTradersStatus()
+
   return (
     <div css={tw`min-h-screen w-full px-4 py-4 grid gap-6 auto-rows-min grid-template-rows[auto 1fr auto]`}>
       <div css={tw`grid justify-center items-center py-8`}>
         <Wayfarer css={tw`text-center text-6xl lg:text-7xl`} />
         <div css={tw`text-center text-xl font-semibold text-gray-400`}>A SpaceTraders API Interface</div>
+        <div css={tw`grid grid-flow-col gap-2 items-center justify-center py-4`}>
+          <SpaceTradersStatus />
+          {!isLoading && (
+            <span css={tw`text-sm`}>
+              {data?.status && 'ONLINE'}
+              {!data?.status && 'OFFLINE'}
+            </span>
+          )}
+        </div>
       </div>
       <div css={tw`mx-auto max-w-lg w-full grid items-center`}>{children}</div>
       <div css={tw`grid grid-flow-col gap-8 py-8`}>
