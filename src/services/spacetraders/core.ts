@@ -3,8 +3,10 @@ import type {
   AccountResponse,
   AvailableLoanResponse,
   AvailableShipResponse,
+  LeaderboardResponse,
   Loan,
   LoanType,
+  SystemsResponse,
   TokenResponse,
   YourLoan,
   YourShip,
@@ -21,6 +23,9 @@ export const spacetradersAPI = createApi({
       transformResponse: (response: { status: string }) => {
         return { status: response.status === 'spacetraders is currently online and available to play' }
       },
+    }),
+    leaderboard: builder.query<LeaderboardResponse, void>({
+      query: () => `/game/leaderboard/net-worth`,
     }),
     claimUser: builder.mutation<TokenResponse, { user: string }>({
       invalidatesTags: ['account'],
@@ -50,7 +55,7 @@ export const spacetradersAPI = createApi({
     }),
     myShips: builder.query<{ ships: YourShip[] }, void>({
       providesTags: ['ships'],
-      query: () => `/my/shipd`,
+      query: () => `/my/ships`,
     }),
     shipListings: builder.query<AvailableShipResponse, { class: string; system: string }>({
       query: (args) => ({ url: `/systems/${args.system}/ship-listings`, method: 'GET', params: { class: args.class } }),
@@ -59,18 +64,25 @@ export const spacetradersAPI = createApi({
       invalidatesTags: ['ships'],
       query: (args) => ({ url: `/my/ships`, method: 'POST', body: { location: args.location, type: args.type } }),
     }),
+    availableSystems: builder.query<SystemsResponse, void>({
+      query: () => ({ url: `/game/systems`, method: 'GET' }),
+    }),
   }),
 })
 
 export const {
   useAvailableLoansQuery,
+  useAvailableSystemsQuery,
   useClaimUserMutation,
   useLazyAvailableLoansQuery,
+  useLazyAvailableSystemsQuery,
+  useLazyLeaderboardQuery,
   useLazyMyAccountQuery,
   useLazyMyLoansQuery,
   useLazyMyShipsQuery,
   useLazyShipListingsQuery,
   useLazyStatusQuery,
+  useLeaderboardQuery,
   useMyAccountQuery,
   useMyLoansQuery,
   useMyShipsQuery,
