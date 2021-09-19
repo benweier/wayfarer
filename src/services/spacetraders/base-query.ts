@@ -11,7 +11,9 @@ export const baseQueryWithTokenParam: BaseQueryFn<string | FetchArgs, unknown, F
   const token = (api.getState() as RootState).auth.token
 
   return await baseQuery(
-    typeof args === 'string' ? { url: args, params: { token } } : { ...args, params: { token: token ?? undefined } },
+    typeof args === 'string'
+      ? { url: args, params: { token: token ?? undefined } }
+      : { ...args, params: { token: token ?? undefined } },
     api,
     extraOptions,
   )
