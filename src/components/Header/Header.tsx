@@ -8,9 +8,11 @@ import { ROUTES } from 'config/routes'
 import { selectUser } from 'store/auth'
 import { selectStatus } from 'store/auth/selectors'
 
-const HeaderLink = styled(Link)(
-  () => tw`py-2 px-4 rounded text-sm font-medium leading-none hover:(bg-blue-500 bg-opacity-80) active:(bg-opacity-60)`,
-)
+const HeaderLink = styled(Link)(() => [
+  tw`py-2 px-4 rounded text-sm font-semibold leading-none`,
+  tw`outline-none focus:(ring-2 ring-emerald-400 ring-offset-gray-800 ring-inset)`,
+  tw`hover:(bg-blue-500) active:(bg-blue-600)`,
+])
 
 const Sync = () => {
   const status = useSelector(selectStatus)
@@ -20,7 +22,7 @@ const Sync = () => {
       css={[
         tw`inline-block w-2.5 h-2.5 rounded-full`,
         status === 'IDLE' && tw`bg-emerald-400`,
-        status === 'PENDING' && tw`bg-yellow-400`,
+        status === 'PENDING' && tw`bg-yellow-300`,
         status === 'ERROR' && tw`bg-rose-400`,
       ]}
     />
@@ -54,7 +56,7 @@ export const Header = () => {
           <div css={tw`grid grid-flow-col gap-2 items-center`}>
             <SpaceTradersStatus />
 
-            <Link to="/">
+            <Link to="/" css={tw`rounded outline-none focus:(ring ring-emerald-400)`}>
               <Wayfarer css={tw`text-2xl mx-4`} />
             </Link>
 
