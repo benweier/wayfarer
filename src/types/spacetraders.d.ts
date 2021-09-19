@@ -140,8 +140,8 @@ export interface User {
 export interface YourLoan {
   due: string
   id: string
-  repaymentAmount: boolean
-  status: string
+  repaymentAmount: number
+  status: 'CURRENT' | 'PAID'
   type: LoanType
 }
 
