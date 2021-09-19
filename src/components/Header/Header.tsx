@@ -9,7 +9,7 @@ import { selectUser } from 'store/auth'
 import { selectStatus } from 'store/auth/selectors'
 
 const HeaderLink = styled(Link)(
-  () => tw`py-2 px-4 rounded font-medium leading-none hover:(bg-blue-500 bg-opacity-80) active:(bg-opacity-60)`,
+  () => tw`py-2 px-4 rounded text-sm font-medium leading-none hover:(bg-blue-500 bg-opacity-80) active:(bg-opacity-60)`,
 )
 
 const Sync = () => {
@@ -59,9 +59,9 @@ export const Header = () => {
             </Link>
 
             <nav css={tw`grid grid-flow-col gap-2 items-center`}>
-              <HeaderLink to={ROUTES.DASHBOARD}>Dashboard</HeaderLink>
-              <HeaderLink to={ROUTES.LOANS}>Loans</HeaderLink>
-              <HeaderLink to={ROUTES.SHIPS}>Ships</HeaderLink>
+              <HeaderLink to={ROUTES.DASHBOARD}>DASHBOARD</HeaderLink>
+              <HeaderLink to={ROUTES.LOANS}>LOANS</HeaderLink>
+              <HeaderLink to={ROUTES.SHIPS}>SHIPS</HeaderLink>
             </nav>
           </div>
 
