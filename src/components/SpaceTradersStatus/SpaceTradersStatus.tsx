@@ -3,7 +3,7 @@ import tw, { css } from 'twin.macro'
 import { useSpaceTradersStatus } from './useSpaceTradersStatus'
 
 export const SpaceTradersStatus = () => {
-  const { data, isLoading, isFetching, isError } = useSpaceTradersStatus()
+  const { status, isChecking } = useSpaceTradersStatus()
 
   return (
     <div
@@ -11,13 +11,13 @@ export const SpaceTradersStatus = () => {
         css`
           transition: color 300ms ease-in-out;
         `,
-        data?.status && tw`text-emerald-400`,
-        (!data?.status || isError) && tw`text-rose-400`,
-        (isLoading || isFetching) && tw`text-yellow-400`,
+        status === 'ONLINE' && tw`text-emerald-400`,
+        status === 'OFFLINE' && tw`text-rose-400`,
+        isChecking && tw`text-yellow-400`,
       ]}
     >
-      {data?.status && !isError && <HiOutlineStatusOnline size={20} />}
-      {(!data?.status || isError) && <HiOutlineStatusOffline size={20} />}
+      {status === 'ONLINE' && <HiOutlineStatusOnline size={20} />}
+      {status === 'OFFLINE' && <HiOutlineStatusOffline size={20} />}
     </div>
   )
 }

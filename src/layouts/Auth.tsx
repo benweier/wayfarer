@@ -6,7 +6,7 @@ import { SpaceTradersStatus, useSpaceTradersStatus } from 'components/SpaceTrade
 import { Wayfarer } from 'components/Wayfarer'
 
 export const AuthLayout = ({ children }: { children: ReactNode }) => {
-  const { data, isLoading } = useSpaceTradersStatus()
+  const { status } = useSpaceTradersStatus()
 
   return (
     <div css={tw`min-h-screen w-full px-4 py-4 grid gap-6 auto-rows-min grid-template-rows[auto 1fr auto]`}>
@@ -15,12 +15,7 @@ export const AuthLayout = ({ children }: { children: ReactNode }) => {
         <div css={tw`text-center text-xl font-semibold text-gray-400`}>A SpaceTraders API Interface</div>
         <div css={tw`grid grid-flow-col gap-2 items-center justify-center py-4`}>
           <SpaceTradersStatus />
-          {!isLoading && (
-            <span css={tw`text-sm`}>
-              {data?.status && 'ONLINE'}
-              {!data?.status && 'OFFLINE'}
-            </span>
-          )}
+          <span css={tw`text-sm`}>{status}</span>
         </div>
       </div>
       <div css={tw`mx-auto max-w-lg w-full grid items-center`}>{children}</div>
