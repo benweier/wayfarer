@@ -4,6 +4,7 @@ export const ROUTES = {
   LOGIN: 'login',
   REGISTER: 'register',
   DASHBOARD: '/dashboard',
+  SYSTEMS: 'systems',
   LOANS: 'loans',
   SHIPS: 'ships',
   LEADERBOARD: 'leaderboard',

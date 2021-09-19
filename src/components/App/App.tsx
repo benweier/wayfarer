@@ -11,6 +11,7 @@ const DashboardPage = lazy(() => import('routes/Dashboard').then((mod) => ({ def
 const AuthPage = lazy(() => import('routes/Auth').then((mod) => ({ default: mod.AuthPage })))
 const Login = lazy(() => import('components/Auth').then((mod) => ({ default: mod.Login })))
 const Register = lazy(() => import('components/Auth').then((mod) => ({ default: mod.Register })))
+const SystemPage = lazy(() => import('routes/Systems').then((mod) => ({ default: mod.SystemPage })))
 const LoanPage = lazy(() => import('routes/Loans').then((mod) => ({ default: mod.LoanPage })))
 const ShipPage = lazy(() => import('routes/Ships').then((mod) => ({ default: mod.ShipPage })))
 const LeaderboardPage = lazy(() => import('routes/Leaderboard').then((mod) => ({ default: mod.LeaderboardPage })))
@@ -30,6 +31,7 @@ export const App = () => {
                 </ProtectedRoute>
               }
             >
+              <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
               <Route path={ROUTES.SHIPS} element={<ShipPage />} />
               <Route path={ROUTES.LOANS} element={<LoanPage />} />
               <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
