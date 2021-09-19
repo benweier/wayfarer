@@ -1,12 +1,9 @@
 import { HiOutlineStatusOffline, HiOutlineStatusOnline } from 'react-icons/hi'
 import tw, { css } from 'twin.macro'
-import { useStatusQuery } from 'services/spacetraders/core'
+import { useSpaceTradersStatus } from './useSpaceTradersStatus'
 
 export const SpaceTradersStatus = () => {
-  const { data, isLoading, isFetching, isError } = useStatusQuery(undefined, {
-    refetchOnFocus: true,
-    pollingInterval: 60000,
-  })
+  const { data, isLoading, isFetching, isError } = useSpaceTradersStatus()
 
   return (
     <div
