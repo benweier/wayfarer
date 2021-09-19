@@ -6,6 +6,7 @@ import type {
   Loan,
   LoanType,
   TokenResponse,
+  YourLoan,
   YourShip,
 } from 'types/spacetraders.d'
 import { baseQueryWithTokenParam } from './base-query'
@@ -37,6 +38,9 @@ export const spacetradersAPI = createApi({
     }),
     purchaseShip: builder.mutation<{ credits: number; ship: YourShip }, { location: string; type: string }>({
       query: (args) => ({ url: `/my/ships`, body: { location: args.location, type: args.type } }),
+    }),
+    myLoans: builder.query<{ loans: YourLoan[] }, void>({
+      query: () => `/my/loans`,
     }),
     availableLoans: builder.query<AvailableLoanResponse, void>({
       query: () => `/types/loans`,
