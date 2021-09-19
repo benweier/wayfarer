@@ -13,6 +13,7 @@ const Login = lazy(() => import('components/Auth').then((mod) => ({ default: mod
 const Register = lazy(() => import('components/Auth').then((mod) => ({ default: mod.Register })))
 const LoanPage = lazy(() => import('routes/Loans').then((mod) => ({ default: mod.LoanPage })))
 const ShipPage = lazy(() => import('routes/Ships').then((mod) => ({ default: mod.ShipPage })))
+const LeaderboardPage = lazy(() => import('routes/Leaderboard').then((mod) => ({ default: mod.LeaderboardPage })))
 
 export const App = () => {
   return (
@@ -31,6 +32,7 @@ export const App = () => {
             >
               <Route path={ROUTES.SHIPS} element={<ShipPage />} />
               <Route path={ROUTES.LOANS} element={<LoanPage />} />
+              <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
               <Route path="*" element={<Redirect to={ROUTES.DASHBOARD} />} />
             </Route>
             <Route path={ROUTES.AUTH} element={<AuthPage />}>

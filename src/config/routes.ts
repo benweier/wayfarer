@@ -6,4 +6,5 @@ export const ROUTES = {
   DASHBOARD: '/dashboard',
   LOANS: 'loans',
   SHIPS: 'ships',
+  LEADERBOARD: 'leaderboard',
 }

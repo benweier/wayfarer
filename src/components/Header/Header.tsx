@@ -64,6 +64,7 @@ export const Header = () => {
               <HeaderLink to={ROUTES.DASHBOARD}>DASHBOARD</HeaderLink>
               <HeaderLink to={ROUTES.LOANS}>LOANS</HeaderLink>
               <HeaderLink to={ROUTES.SHIPS}>SHIPS</HeaderLink>
+              <HeaderLink to={ROUTES.LEADERBOARD}>LEADERBOARD</HeaderLink>
             </nav>
           </div>
 
