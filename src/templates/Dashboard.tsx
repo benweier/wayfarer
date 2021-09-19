@@ -6,7 +6,7 @@ export const DashboardTemplate: FC = ({ children }) => {
   return (
     <div css={tw`relative`}>
       <Header />
-      {children}
+      <div css={tw`py-4`}>{children}</div>
     </div>
   )
 }
