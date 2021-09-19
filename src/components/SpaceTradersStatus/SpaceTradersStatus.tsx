@@ -1,4 +1,4 @@
-import { HiOutlineStatusOffline, HiOutlineStatusOnline } from 'react-icons/hi'
+import { HiRefresh, HiOutlineStatusOffline, HiOutlineStatusOnline } from 'react-icons/hi'
 import tw, { css } from 'twin.macro'
 import { useSpaceTradersStatus } from './useSpaceTradersStatus'
 
@@ -16,6 +16,7 @@ export const SpaceTradersStatus = () => {
         isChecking && tw`text-yellow-400`,
       ]}
     >
+      {status === 'UNKNOWN' && <HiRefresh size={20} />}
       {status === 'ONLINE' && <HiOutlineStatusOnline size={20} />}
       {status === 'OFFLINE' && <HiOutlineStatusOffline size={20} />}
     </div>
