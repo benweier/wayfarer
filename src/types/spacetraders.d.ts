@@ -272,3 +272,14 @@ export interface TokenResponse {
   token: string
   user: User
 }
+
+export interface UserWorth {
+  netWorth: number
+  rank: number
+  username: string
+}
+
+export interface LeaderboardResponse {
+  netWorth: UserWorth[]
+  userNetWorth: UserWorth
+}
