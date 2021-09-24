@@ -1,6 +1,7 @@
 import { useEffect, Suspense } from 'react'
+import { GiNorthStarShuriken } from 'react-icons/gi'
 import { useNavigate, Outlet } from 'react-router-dom'
-import tw from 'twin.macro'
+import tw, { theme } from 'twin.macro'
 import { ROUTES } from 'config/routes'
 import { AuthLayout } from 'layouts/Auth'
 import { selectIsAuthenticated } from 'store/auth'
@@ -19,7 +20,13 @@ export const AuthPage = () => {
   return (
     <AuthLayout>
       <div css={tw`rounded-lg border border-gray-700 shadow-xl px-8 py-8`}>
-        <Suspense fallback={<></>}>
+        <Suspense
+          fallback={
+            <div css={tw`animate-pulse flex justify-center items-center`}>
+              <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
+            </div>
+          }
+        >
           <Outlet />
         </Suspense>
       </div>
