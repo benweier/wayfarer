@@ -11,7 +11,7 @@ import { queryClient } from './utilities/query-client'
 Sentry.init({
   dsn: 'https://628afa9a45cd4952adf380cb9224ce2f@o121131.ingest.sentry.io/5977586',
   integrations: [new Integrations.BrowserTracing()],
-  enabled: process.env.NODE_ENV !== 'production',
+  enabled: process.env.NODE_ENV === 'production',
   environment: process.env.NODE_ENV,
   tracesSampleRate: 0.2,
 })
