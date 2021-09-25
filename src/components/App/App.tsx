@@ -49,11 +49,13 @@ export const App = Sentry.withProfiler(() => {
                       </ProtectedRoute>
                     }
                   >
+                    <Route path="" element={<Redirect to={ROUTES.OVERVIEW} />} />
+                    <Route path={ROUTES.OVERVIEW} element={<></>} />
                     <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
                     <Route path={ROUTES.SHIPS} element={<ShipPage />} />
                     <Route path={ROUTES.LOANS} element={<LoanPage />} />
                     <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
-                    <Route path="*" element={<Redirect to={ROUTES.DASHBOARD} />} />
+                    <Route path="*" element={<Redirect to={ROUTES.OVERVIEW} />} />
                   </Route>
                   <Route path={ROUTES.AUTH} element={<AuthPage />}>
                     <Route path="" element={<Redirect to={ROUTES.LOGIN} />} />
