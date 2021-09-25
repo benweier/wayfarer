@@ -10,7 +10,7 @@ export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate(`${ROUTES.AUTH}/${ROUTES.LOGIN}`)
+      navigate(`${ROUTES.AUTH}/${ROUTES.LOGIN}`, { state: { origin: window.location.pathname } })
     }
   }, [isAuthenticated, navigate])
 

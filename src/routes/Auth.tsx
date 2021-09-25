@@ -3,6 +3,7 @@ import { GiNorthStarShuriken } from 'react-icons/gi'
 import { useNavigate, Outlet } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
 import { ROUTES } from 'config/routes'
+import { useLocation } from 'hooks/useLocation'
 import { AuthLayout } from 'layouts/Auth'
 import { selectIsAuthenticated } from 'store/auth'
 import { useAppSelector } from 'store/hooks'
@@ -10,12 +11,13 @@ import { useAppSelector } from 'store/hooks'
 export const AuthPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated)
   const navigate = useNavigate()
+  const location = useLocation<Partial<{ origin: string }>>()
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(ROUTES.DASHBOARD, { replace: true })
+      navigate(location.state?.origin ?? ROUTES.DASHBOARD, { replace: true })
     }
-  }, [isAuthenticated, navigate])
+  }, [isAuthenticated, navigate, location.state?.origin])
 
   return (
     <AuthLayout>
