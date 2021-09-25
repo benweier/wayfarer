@@ -11,7 +11,7 @@ import { selectStatus } from 'store/auth/selectors'
 
 const HeaderLink = styled(NavLink)(() => [
   tw`py-2 px-4 rounded text-sm font-semibold leading-none`,
-  tw`outline-none focus:(ring-2 ring-emerald-400 ring-offset-gray-800 ring-inset)`,
+  tw`outline-none focus:(ring-2 ring-emerald-400 ring-offset-2 ring-offset-gray-800)`,
   tw`hover:(bg-blueGray-600) active:(bg-blueGray-700)`,
   css`
     &.active {
