@@ -1,6 +1,7 @@
 import { HiOutlineCash } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { css } from 'styled-components'
 import tw, { styled } from 'twin.macro'
 import { SpaceTradersStatus } from 'components/SpaceTradersStatus'
 import { Wayfarer } from 'components/Wayfarer'
@@ -8,10 +9,15 @@ import { ROUTES } from 'config/routes'
 import { selectUser } from 'store/auth'
 import { selectStatus } from 'store/auth/selectors'
 
-const HeaderLink = styled(Link)(() => [
+const HeaderLink = styled(NavLink)(() => [
   tw`py-2 px-4 rounded text-sm font-semibold leading-none`,
   tw`outline-none focus:(ring-2 ring-emerald-400 ring-offset-gray-800 ring-inset)`,
-  tw`hover:(bg-blue-500) active:(bg-blue-600)`,
+  tw`hover:(bg-blueGray-600) active:(bg-blueGray-700)`,
+  css`
+    &.active {
+      ${tw`bg-blue-500 text-white`}
+    }
+  `,
 ])
 
 const Sync = () => {
@@ -61,7 +67,7 @@ export const Header = () => {
             </Link>
 
             <nav css={tw`grid grid-flow-col gap-2 items-center`}>
-              <HeaderLink to={ROUTES.DASHBOARD}>DASHBOARD</HeaderLink>
+              <HeaderLink to={ROUTES.OVERVIEW}>OVERVIEW</HeaderLink>
               <HeaderLink to={ROUTES.SYSTEMS}>SYSTEMS</HeaderLink>
               <HeaderLink to={ROUTES.LOANS}>LOANS</HeaderLink>
               <HeaderLink to={ROUTES.SHIPS}>SHIPS</HeaderLink>
