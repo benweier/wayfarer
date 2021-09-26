@@ -4,7 +4,7 @@ import { Location, System } from 'types/spacetraders'
 
 const LocationList = ({ locations }: { locations: Location[] }) => {
   return (
-    <div css={tw`grid grid-cols-4 gap-4 my-2`}>
+    <div css={tw`grid grid-cols-4 gap-4 my-4`}>
       {locations.map((location) => (
         <div key={location.symbol}>
           <div css={tw`text-xs leading-tight uppercase font-bold text-gray-400`}>{location.symbol}</div>
@@ -31,7 +31,7 @@ const SystemList = () => {
   return (
     <>
       {!!data?.systems.length && (
-        <div css={tw`grid grid-flow-row gap-8`}>
+        <div css={tw`grid grid-flow-row gap-16`}>
           {data.systems.map((system) => (
             <SystemItem key={system.symbol} system={system} />
           ))}
