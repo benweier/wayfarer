@@ -56,7 +56,7 @@ export const Select = ({
               tw`focus:(ring ring-emerald-400 outline-none border-gray-800)`,
             ]}
           >
-            <span css={tw`block truncate`}>{selected.name}</span>
+            <span css={tw`block truncate font-semibold`}>{selected.name}</span>
             <span css={tw`absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none`}>
               <HiSelector size={20} color={theme`colors.gray.400`} aria-hidden="true" />
             </span>
@@ -72,7 +72,10 @@ export const Select = ({
           >
             <Listbox.Options
               static
-              css={tw`absolute z-10 mt-1 w-full bg-gray-700 shadow-inner max-h-60 rounded-md text-sm overflow-auto`}
+              css={[
+                tw`absolute z-10 mt-1 w-full bg-gray-700 max-h-60 rounded-md text-sm overflow-auto outline-none`,
+                tw`focus:(ring-2 ring-emerald-400)`,
+              ]}
             >
               {options.map((option) => (
                 <Listbox.Option key={option.id} value={option.id} css={tw`relative`}>
