@@ -56,7 +56,7 @@ export const Login = () => {
             </Button>
             <div css={tw`text-sm text-center`}>
               Don&apos;t have an access token?&nbsp;
-              <Link css={tw`font-bold`} to={`/${ROUTES.AUTH}/${ROUTES.REGISTER}`}>
+              <Link css={tw`font-bold`} to={`${ROUTES.AUTH}/${ROUTES.REGISTER}`}>
                 Register
               </Link>
             </div>

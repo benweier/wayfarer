@@ -2,12 +2,13 @@ import { Suspense, lazy, StrictMode } from 'react'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { HelmetProvider } from 'react-helmet-async'
+import { GiNorthStarShuriken } from 'react-icons/gi'
 import { QueryClientProvider } from 'react-query'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import tw, { theme } from 'twin.macro'
 import { AppStyles } from 'components/AppStyles'
 import { ProtectedRoute } from 'components/ProtectedRoute'
-import { Redirect } from 'components/Redirect'
 import { ROUTES } from 'config/routes'
 import { HomePage } from 'routes/Home'
 import { store } from 'store'
@@ -34,11 +35,17 @@ export const App = Sentry.withProfiler(() => {
   return (
     <StrictMode>
       <HelmetProvider>
-        <QueryClientProvider client={queryClient}>
-          <AppStyles />
-          <BrowserRouter>
-            <Provider store={store}>
-              <Suspense fallback={<></>}>
+        <Provider store={store}>
+          <QueryClientProvider client={queryClient}>
+            <AppStyles />
+            <BrowserRouter>
+              <Suspense
+                fallback={
+                  <div css={tw`w-screen h-screen animate-pulse flex justify-center items-center`}>
+                    <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
+                  </div>
+                }
+              >
                 <Routes>
                   <Route path={ROUTES.HOME} element={<HomePage />} />
                   <Route
@@ -49,25 +56,26 @@ export const App = Sentry.withProfiler(() => {
                       </ProtectedRoute>
                     }
                   >
-                    <Route path="" element={<Redirect to={ROUTES.OVERVIEW} />} />
-                    <Route path={ROUTES.OVERVIEW} element={<></>} />
+                    <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
+                    <Route path={ROUTES.OVERVIEW} element={<>overview</>} />
                     <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
                     <Route path={ROUTES.SHIPS} element={<ShipPage />} />
                     <Route path={ROUTES.LOANS} element={<LoanPage />} />
                     <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
-                    <Route path="*" element={<Redirect to={ROUTES.OVERVIEW} />} />
+                    <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
                   </Route>
                   <Route path={ROUTES.AUTH} element={<AuthPage />}>
-                    <Route path="" element={<Redirect to={ROUTES.LOGIN} />} />
+                    <Route index element={<Navigate to={ROUTES.LOGIN} replace />} />
                     <Route path={ROUTES.LOGIN} element={<Login />} />
                     <Route path={ROUTES.REGISTER} element={<Register />} />
+                    <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
                   </Route>
-                  <Route path="*" element={<Redirect to={ROUTES.HOME} />} />
+                  <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
                 </Routes>
               </Suspense>
-            </Provider>
-          </BrowserRouter>
-        </QueryClientProvider>
+            </BrowserRouter>
+          </QueryClientProvider>
+        </Provider>
       </HelmetProvider>
     </StrictMode>
   )

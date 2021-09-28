@@ -1,6 +1,6 @@
-import { useEffect, Suspense } from 'react'
+import { Suspense } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
-import { useNavigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
 import { ROUTES } from 'config/routes'
 import { useLocation } from 'hooks/useLocation'
@@ -10,14 +10,11 @@ import { useAppSelector } from 'store/hooks'
 
 export const AuthPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated)
-  const navigate = useNavigate()
   const location = useLocation<Partial<{ origin: string }>>()
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(location.state?.origin ?? ROUTES.DASHBOARD, { replace: true })
-    }
-  }, [isAuthenticated, navigate, location.state?.origin])
+  if (isAuthenticated) {
+    return <Navigate to={location.state?.origin ?? ROUTES.DASHBOARD} replace />
+  }
 
   return (
     <AuthLayout>
