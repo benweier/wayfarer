@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { FC } from 'react'
 import { IconContext } from 'react-icons'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { VscRocket, VscGithub } from 'react-icons/vsc'
@@ -6,9 +6,18 @@ import tw, { theme } from 'twin.macro'
 import { SpaceTradersStatus, useSpaceTradersStatus } from 'components/SpaceTradersStatus'
 import { Wayfarer } from 'components/Wayfarer'
 
-export const AuthLayout = ({ children }: { children: ReactNode }) => {
+const Status = () => {
   const { status } = useSpaceTradersStatus()
 
+  return (
+    <>
+      <SpaceTradersStatus />
+      <span css={tw`text-sm`}>{status}</span>
+    </>
+  )
+}
+
+export const AuthLayout: FC = ({ children }) => {
   return (
     <div css={tw`min-h-screen w-full px-4 py-4 grid gap-6 auto-rows-min grid-template-rows[auto 1fr auto]`}>
       <div css={tw`grid grid-flow-row justify-center items-center py-8`}>
@@ -18,11 +27,12 @@ export const AuthLayout = ({ children }: { children: ReactNode }) => {
         <Wayfarer css={tw`text-center text-6xl lg:text-7xl`} />
         <div css={tw`text-center text-xl font-semibold text-gray-400`}>A SpaceTraders API Interface</div>
         <div css={tw`grid grid-flow-col gap-2 items-center justify-center py-4`}>
-          <SpaceTradersStatus />
-          <span css={tw`text-sm`}>{status}</span>
+          <Status />
         </div>
       </div>
+
       <div css={tw`mx-auto max-w-lg w-full grid items-center`}>{children}</div>
+
       <div css={tw`grid grid-flow-col gap-8 py-16`}>
         <div css={tw`grid grid-flow-col gap-8 items-center justify-center`}>
           <IconContext.Provider value={{ size: '32', color: theme`colors.gray.400` }}>
