@@ -1,8 +1,12 @@
-import { useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { HiCheck, HiSelector } from 'react-icons/hi'
 import tw, { styled, theme } from 'twin.macro'
 import { Label } from 'components/Label'
+
+interface SelectOption {
+  id: string
+  name: string
+}
 
 const StyledTransition = styled(Transition)`
   &.enter {
@@ -32,21 +36,17 @@ const StyledTransition = styled(Transition)`
 
 export const Select = ({
   label,
+  selected,
   options = [],
+  onChange,
 }: {
   label: string
-  options?: Array<{ id: string; name: string }>
-  onChange: (value: { id: string; name: string }) => void
+  selected?: SelectOption
+  options?: SelectOption[]
+  onChange: (value?: SelectOption) => void
 }) => {
-  const [selected] = useState(options[0])
-
   return (
-    <Listbox
-      value={selected}
-      onChange={(value) => {
-        console.log(value)
-      }}
-    >
+    <Listbox value={selected} onChange={onChange}>
       <>
         <Listbox.Label as={Label}>{label}</Listbox.Label>
         <div css={tw`mt-1 relative`}>
@@ -56,7 +56,7 @@ export const Select = ({
               tw`focus:(ring ring-emerald-400 outline-none border-gray-800)`,
             ]}
           >
-            <span css={tw`block truncate font-semibold`}>{selected.name}</span>
+            <span css={tw`block truncate font-semibold`}>{selected?.name}</span>
             <span css={tw`absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none`}>
               <HiSelector size={20} color={theme`colors.gray.400`} aria-hidden="true" />
             </span>
@@ -78,7 +78,7 @@ export const Select = ({
               ]}
             >
               {options.map((option) => (
-                <Listbox.Option key={option.id} value={option.id} css={tw`relative`}>
+                <Listbox.Option key={option.id} value={option} css={tw`relative`}>
                   {({ selected, active }) => (
                     <>
                       <span

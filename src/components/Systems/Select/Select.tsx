@@ -34,5 +34,16 @@ export const SystemSelect = ({ systems, selected, isLoading, onChange }: SystemS
       </span>
     )
 
-  return <Select label="System" selected={selected} options={systems} onChange={onChange} />
+  const options = systems.map((system) => ({ id: system.symbol, name: system.name }))
+
+  return (
+    <Select
+      label="System"
+      selected={options.find((options) => options.id === selected?.symbol)}
+      options={options}
+      onChange={(value) => {
+        onChange(systems.find((system) => system.symbol === value?.id))
+      }}
+    />
+  )
 }
