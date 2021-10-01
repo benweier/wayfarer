@@ -1,10 +1,12 @@
 import tw from 'twin.macro'
-import { Systems } from 'components/Systems'
+import { SystemList } from 'components/Systems/List'
 
 export const SystemPage = () => {
   return (
     <div css={tw`container`}>
-      <Systems />
+      <div css={tw`grid grid-flow-row gap-10`}>
+        <SystemList />
+      </div>
     </div>
   )
 }
