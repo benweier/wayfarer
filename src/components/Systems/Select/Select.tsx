@@ -1,12 +1,10 @@
 import tw from 'twin.macro'
 import { Label } from 'components/Label'
 import { Select } from 'components/Select/Select'
-import { useAvailableSystemsQuery } from 'services/spacetraders/core'
+import { SystemSelectOptions } from './types'
 
-export const SystemSelect = () => {
-  const { data } = useAvailableSystemsQuery()
-
-  if (!data)
+export const SystemSelect = ({ systems, selected, isLoading, onChange }: SystemSelectOptions) => {
+  if (isLoading)
     return (
       <span>
         <Label>System</Label>
@@ -36,13 +34,5 @@ export const SystemSelect = () => {
       </span>
     )
 
-  return (
-    <Select
-      label="System"
-      onChange={console.log}
-      options={data?.systems.map((system) => {
-        return { name: system.name, id: system.symbol }
-      })}
-    />
-  )
+  return <Select label="System" selected={selected} options={systems} onChange={onChange} />
 }

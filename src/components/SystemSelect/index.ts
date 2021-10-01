@@ -1,1 +1,0 @@
-export { SystemSelect } from './SystemSelect'
