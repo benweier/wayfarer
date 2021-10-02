@@ -57,7 +57,7 @@ export const spacetradersAPI = createApi({
       providesTags: ['ships'],
       query: () => `/my/ships`,
     }),
-    shipListings: builder.query<AvailableShipResponse, { class: string; system: string }>({
+    shipListings: builder.query<AvailableShipResponse, { class?: string; system: string }>({
       query: (args) => ({ url: `/systems/${args.system}/ship-listings`, method: 'GET', params: { class: args.class } }),
     }),
     purchaseShip: builder.mutation<{ credits: number; ship: YourShip }, { location: string; type: string }>({
