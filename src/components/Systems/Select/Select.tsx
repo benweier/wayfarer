@@ -1,9 +1,19 @@
+import { useMemo, useCallback } from 'react'
 import tw from 'twin.macro'
 import { Label } from 'components/Label'
-import { Select } from 'components/Select/Select'
+import { Select } from 'components/Select'
 import { SystemSelectOptions } from './types'
 
 export const SystemSelect = ({ systems, selected, isLoading, onChange }: SystemSelectOptions) => {
+  const options = useMemo(() => systems.map((system) => ({ id: system.symbol, name: system.name })), [systems])
+  const value = useMemo(() => options.find((system) => system.id === selected?.symbol), [options, selected])
+  const handleChange = useCallback(
+    (value?: { id: string; name: string }) => {
+      onChange(systems.find((system) => system.symbol === value?.id))
+    },
+    [systems, onChange],
+  )
+
   if (isLoading)
     return (
       <span>
@@ -34,16 +44,5 @@ export const SystemSelect = ({ systems, selected, isLoading, onChange }: SystemS
       </span>
     )
 
-  const options = systems.map((system) => ({ id: system.symbol, name: system.name }))
-
-  return (
-    <Select
-      label="System"
-      selected={options.find((options) => options.id === selected?.symbol)}
-      options={options}
-      onChange={(value) => {
-        onChange(systems.find((system) => system.symbol === value?.id))
-      }}
-    />
-  )
+  return <Select label="System" selected={value} options={options} onChange={handleChange} />
 }
