@@ -93,20 +93,18 @@ export interface Order {
 }
 
 export interface Ship {
+  type: string
   class: string
-  dockingEfficiency: number
-  fuelEfficiency: number
-  maintenance: number
   manufacturer: string
   maxCargo: number
+  speed: number
+  loadingSpeed: number
   plating: number
+  weapons: number
   purchaseLocations: Array<{
     location: string
     price: number
   }>
-  speed: number
-  type: string
-  weapons: number
 }
 
 export interface StructureDetails {
