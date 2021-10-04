@@ -8,59 +8,7 @@ import { useSystemSelect } from 'components/Systems/Select/useSystemSelect'
 import { useShipListingsQuery } from 'services/spacetraders/core'
 import { Ship, System } from 'types/spacetraders'
 import { groupByFn } from 'utilities/group-by'
-
-type GroupByType = 'manufacturer' | 'class' | 'type'
-type SortByType = 'price' | 'maxCargo' | 'speed' | 'loadingSpeed' | 'plating' | 'weapons'
-type SortableShipAttributes = Extract<Ship, number>
-
-const groups: Array<{ id: GroupByType; name: string }> = [
-  { id: 'class', name: 'Class' },
-  { id: 'manufacturer', name: 'Manufacturer' },
-]
-
-const sorts: Array<{ id: SortByType; name: string }> = [
-  { id: 'price', name: 'Price' },
-  { id: 'maxCargo', name: 'Max Cargo' },
-  { id: 'speed', name: 'Speed' },
-  { id: 'loadingSpeed', name: 'Loading Speed' },
-  { id: 'weapons', name: 'Weapons' },
-  { id: 'plating', name: 'Plating' },
-]
-
-const sortByPrice = (a: Ship, b: Ship) => {
-  return getPriceFrom(a, Math.min) - getPriceFrom(b, Math.max)
-}
-
-const sortByAttribute = (attr: keyof SortableShipAttributes) => (a: Ship, b: Ship) => {
-  return a[attr] - b[attr]
-}
-
-const sortShips = (key: SortByType) => {
-  switch (key) {
-    case 'price':
-      return sortByPrice
-
-    default:
-      return sortByAttribute(key)
-  }
-}
-
-const getPriceFrom = (ship: Ship, getPriceFn: (...values: number[]) => number) => {
-  const range = ship.purchaseLocations.map((location) => location.price)
-  const price = getPriceFn(...range)
-
-  return price
-}
-
-const getPriceRange = (ship: Ship) => {
-  const range = ship.purchaseLocations.map((location) => location.price)
-  const min = Math.min(...range)
-  const max = Math.max(...range)
-
-  if (min === max) return `${min}`
-
-  return `${min}-${max}`
-}
+import { getPriceRange, GroupByType, groups, SortByType, sorts, sortShips } from 'utilities/ships'
 
 export const AvailableShipItem = ({ ship }: { ship: Ship }) => {
   return (
