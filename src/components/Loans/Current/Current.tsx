@@ -24,7 +24,7 @@ const PayLoan = ({ id, repayment }: { id: string; repayment: number }) => {
 
 const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
   return (
-    <div css={tw`my-2 shadow p-4 border border-gray-600 rounded-lg`}>
+    <div css={tw`shadow p-4 border border-gray-600 rounded-lg`}>
       <div css={tw`grid grid-flow-col auto-cols-min justify-between gap-2`}>
         <div>
           <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>{loan.type}</div>
@@ -53,7 +53,7 @@ const CurrentLoanList = () => {
   return (
     <>
       {!!data?.loans.length && (
-        <div css={tw`grid grid-cols-3 gap-4`}>
+        <div css={tw`grid grid-cols-3 gap-6`}>
           {data.loans.map((loan) => (
             <CurrentLoanItem key={loan.type} loan={loan} />
           ))}

@@ -26,7 +26,7 @@ const AcceptLoan = ({ type }: { type: LoanType }) => {
 
 const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
   return (
-    <div css={tw`my-2 shadow p-4 border border-gray-700 rounded-lg`}>
+    <div css={tw`shadow p-4 border border-gray-700 rounded-lg`}>
       <div css={tw`grid grid-flow-col justify-between gap-2`}>
         <div>
           <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>
@@ -70,7 +70,7 @@ const AvailableLoanList = () => {
   return (
     <>
       {!!data?.loans.length && (
-        <div css={tw`grid grid-cols-3 gap-4`}>
+        <div css={tw`grid grid-cols-3 gap-6`}>
           {data.loans.map((loan) => (
             <AvailableLoanItem key={loan.type} loan={loan} />
           ))}
