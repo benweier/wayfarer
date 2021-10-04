@@ -23,6 +23,10 @@ const sortByPrice = (a: Ship, b: Ship) => {
 }
 
 const sortByAttribute = (attr: keyof SortableShipAttributes) => (a: Ship, b: Ship) => {
+  if (a[attr] === b[attr]) {
+    return getPriceFrom(a, Math.min) - getPriceFrom(b, Math.min)
+  }
+
   return a[attr] - b[attr]
 }
 
