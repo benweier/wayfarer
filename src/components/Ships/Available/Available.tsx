@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
+import { useMemo, FC } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
-import tw from 'twin.macro'
+import tw, { theme } from 'twin.macro'
 import { Select } from 'components/Select'
 import { useSelect } from 'components/Select/useSelect'
 import { SystemSelect } from 'components/Systems/Select'
@@ -9,45 +9,41 @@ import { useShipListingsQuery } from 'services/spacetraders/core'
 import { Ship, System } from 'types/spacetraders'
 import { groupByFn } from 'utilities/group-by'
 import { getPriceRange, GroupByType, groups, SortByType, sorts, sortShips } from 'utilities/ships'
+import { PurchaseLocation } from '../PurchaseLocation'
 
-export const AvailableShipItem = ({ ship }: { ship: Ship }) => {
+const ShipStat = ({ label, value }: { label: string; value: number | string }) => {
   return (
-    <div key={ship.type} css={tw`shadow p-4 border border-gray-700 rounded-lg`}>
-      <div css={tw`grid grid-flow-col gap-2 grid-template-columns[1fr 2fr 1fr] justify-between items-center`}>
-        <div>
-          <div css={tw`text-lg font-bold`}>{ship.type}</div>
-          <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>
-            {ship.manufacturer} {ship.class}
+    <div css={tw`grid grid-flow-row gap-2`}>
+      <div css={tw`font-semibold text-center leading-none text-gray-50`}>{value}</div>
+      <div css={tw`text-center text-xs leading-none uppercase font-semibold text-gray-400`}>{label}</div>
+    </div>
+  )
+}
+
+export const AvailableShipItem: FC<{ ship: Ship }> = ({ ship, children }) => {
+  return (
+    <div key={ship.type} css={tw`shadow p-4 border border-gray-700 rounded-lg grid grid-flow-row gap-2`}>
+      <div css={tw`grid grid-flow-row gap-6`}>
+        <div css={tw`grid grid-cols-2 items-center`}>
+          <div>
+            <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>{ship.type}</div>
+            <div css={tw`text-lg font-bold`}>
+              {ship.manufacturer} {ship.class}
+            </div>
+          </div>
+          <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
+            <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
+            <div css={tw`text-xl font-black`}>{getPriceRange(ship)}</div>
           </div>
         </div>
-        <div css={tw`grid grid-flow-col gap-2`}>
-          <div>
-            <div css={tw`font-medium`}>{ship.maxCargo}</div>
-            <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>MAX CARGO</div>
-          </div>
-          <div>
-            <div css={tw`font-medium`}>{ship.speed}</div>
-            <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>SPEED</div>
-          </div>
-          <div>
-            <div css={tw`font-medium`}>{ship.loadingSpeed}</div>
-            <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>LOADING SPEED</div>
-          </div>
-          <div>
-            <div css={tw`font-medium`}>{ship.weapons}</div>
-            <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>WEAPONS</div>
-          </div>
-          <div>
-            <div css={tw`font-medium`}>{ship.plating}</div>
-            <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>PLATING</div>
-          </div>
+        <div css={tw`grid grid-flow-col gap-2 p-4 -mx-4 bg-gray-400 bg-opacity-5`}>
+          <ShipStat value={ship.maxCargo} label="MAX CARGO" />
+          <ShipStat value={ship.speed} label="SPEED" />
+          <ShipStat value={ship.loadingSpeed} label="LOADING SPEED" />
+          <ShipStat value={ship.weapons} label="WEAPONS" />
+          <ShipStat value={ship.plating} label="PLATING" />
         </div>
-        <div>
-          <div css={tw`flex flex-row space-x-1 items-center justify-end`}>
-            <HiOutlineCash size={16} />
-            <div css={tw`text-lg font-black`}>{getPriceRange(ship)}</div>
-          </div>
-        </div>
+        <div css={tw`grid grid-flow-row gap-2`}>{children}</div>
       </div>
     </div>
   )
@@ -76,9 +72,18 @@ const AvailableShipList = ({
       {shipListings.map(([key, ships]) => (
         <div key={key}>
           <div css={tw`text-lg font-bold m-2`}>{key}</div>
-          <div css={tw`grid grid-flow-row gap-4`}>
+          <div css={tw`grid grid-cols-2 gap-8`}>
             {ships.sort(sortShips(sortBy.id)).map((ship) => (
-              <AvailableShipItem key={ship.type} ship={ship} />
+              <AvailableShipItem key={ship.type} ship={ship}>
+                {ship.purchaseLocations.map((purchase) => (
+                  <PurchaseLocation
+                    key={purchase.location}
+                    type={ship.type}
+                    location={purchase.location}
+                    price={purchase.price}
+                  />
+                ))}
+              </AvailableShipItem>
             ))}
           </div>
         </div>
