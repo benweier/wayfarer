@@ -221,13 +221,12 @@ export interface MarketplaceResponse {
   marketplace: Marketplace[]
 }
 
-export interface PurchaseResponse {
+export interface PurchaseShipResponse {
   credits: number
-  order: Order
   ship: YourShip
 }
 
-export type SellResponse = PurchaseResponse & { order: Order }
+export type SellResponse = PurchaseShipResponse & { order: Order }
 
 export interface ShipSellResponse {
   success: string
