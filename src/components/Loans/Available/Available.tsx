@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
-import tw from 'twin.macro'
+import tw, { theme } from 'twin.macro'
 import { Button } from 'components/Button'
 import { useAvailableLoansQuery, useTakeOutLoanMutation, spacetradersAPI } from 'services/spacetraders/core'
 import { useAppSelector } from 'store/hooks'
@@ -33,7 +33,7 @@ const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
             {loan.type} &ndash; {loan.collateralRequired ? 'Collateral Required' : 'No Collateral'}
           </div>
           <div css={tw`flex flex-row space-x-2 items-center py-2`}>
-            <HiOutlineCash size={20} />
+            <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
             <span css={tw`text-2xl font-bold leading-10`}>{loan.amount}</span>
           </div>
         </div>
@@ -55,7 +55,7 @@ const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
         <div>
           <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>Repayment</div>
           <div css={tw`flex flex-row space-x-1 items-center`}>
-            <HiOutlineCash size={16} />
+            <HiOutlineCash size={16} color={theme`colors.emerald.400`} />
             <div css={tw`text-lg font-medium`}>{loan.amount + loan.amount * (loan.rate / 100)}</div>
           </div>
         </div>

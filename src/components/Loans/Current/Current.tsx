@@ -1,5 +1,5 @@
 import { HiOutlineCash } from 'react-icons/hi'
-import tw from 'twin.macro'
+import tw, { theme } from 'twin.macro'
 import { Button } from 'components/Button'
 import { useMyLoansQuery, usePayLoanMutation } from 'services/spacetraders/core'
 import { selectUser } from 'store/auth'
@@ -29,7 +29,7 @@ const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
         <div>
           <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>{loan.type}</div>
           <div css={tw`flex flex-row space-x-2 items-center py-2`}>
-            <HiOutlineCash size={20} />
+            <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
             <span css={tw`text-2xl font-bold leading-10`}>{loan.repaymentAmount}</span>
           </div>
         </div>
