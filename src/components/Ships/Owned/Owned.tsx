@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import tw from 'twin.macro'
+import { Caption } from 'components/Caption'
 import { useMyShipsQuery } from 'services/spacetraders/core'
 
 interface OwnedShip {
@@ -15,7 +16,7 @@ const OwnedShipItem = ({ ship }: { ship: OwnedShip }) => {
       <div css={tw`grid grid-flow-row gap-6`}>
         <div css={tw`grid grid-flow-col justify-between items-center`}>
           <div>
-            <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>{ship.type}</div>
+            <Caption>{ship.type}</Caption>
             <div css={tw`text-lg font-bold`}>
               {ship.manufacturer} {ship.class}
             </div>

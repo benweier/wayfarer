@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
 import { Button } from 'components/Button'
+import { Caption } from 'components/Caption'
 import { useAvailableLoansQuery, useTakeOutLoanMutation, spacetradersAPI } from 'services/spacetraders/core'
 import { useAppSelector } from 'store/hooks'
 import { Loan, LoanType } from 'types/spacetraders'
@@ -29,9 +30,9 @@ const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
     <div css={tw`shadow p-4 border border-gray-700 rounded-lg`}>
       <div css={tw`grid grid-flow-col justify-between gap-2`}>
         <div>
-          <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>
+          <Caption>
             {loan.type} &ndash; {loan.collateralRequired ? 'Collateral Required' : 'No Collateral'}
-          </div>
+          </Caption>
           <div css={tw`flex flex-row space-x-2 items-center py-2`}>
             <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
             <span css={tw`text-2xl font-bold leading-10`}>{loan.amount}</span>
@@ -43,17 +44,17 @@ const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
       </div>
       <div css={tw`grid grid-cols-3 gap-2`}>
         <div>
-          <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>Rate</div>
+          <Caption>Rate</Caption>
           <div css={tw`text-lg font-medium`}>{loan.rate}%</div>
         </div>
 
         <div>
-          <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>Term</div>
+          <Caption>Term</Caption>
           <div css={tw`text-lg font-medium`}>{loan.termInDays} days</div>
         </div>
 
         <div>
-          <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>Repayment</div>
+          <Caption>Repayment</Caption>
           <div css={tw`flex flex-row space-x-1 items-center`}>
             <HiOutlineCash size={16} color={theme`colors.emerald.400`} />
             <div css={tw`text-lg font-medium`}>{loan.amount + loan.amount * (loan.rate / 100)}</div>

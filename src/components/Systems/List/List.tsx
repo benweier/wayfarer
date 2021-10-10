@@ -1,4 +1,5 @@
 import tw from 'twin.macro'
+import { Caption } from 'components/Caption'
 import { useAvailableSystemsQuery } from 'services/spacetraders/core'
 import { Location, System } from 'types/spacetraders'
 
@@ -7,7 +8,7 @@ export const LocationList = ({ locations }: { locations: Location[] }) => {
     <div css={tw`grid grid-cols-4 gap-4 my-4`}>
       {locations.map((location) => (
         <div key={location.symbol}>
-          <div css={tw`text-xs leading-tight uppercase font-bold text-gray-400`}>{location.symbol}</div>
+          <Caption>{location.symbol}</Caption>
           <div css={tw`text-2xl font-bold leading-none`}>{location.name}</div>
         </div>
       ))}

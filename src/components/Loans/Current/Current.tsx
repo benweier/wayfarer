@@ -1,6 +1,7 @@
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
 import { Button } from 'components/Button'
+import { Caption } from 'components/Caption'
 import { useMyLoansQuery, usePayLoanMutation } from 'services/spacetraders/core'
 import { selectUser } from 'store/auth'
 import { useAppSelector } from 'store/hooks'
@@ -27,7 +28,7 @@ const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
     <div css={tw`shadow p-4 border border-gray-600 rounded-lg`}>
       <div css={tw`grid grid-flow-col auto-cols-min justify-between gap-2`}>
         <div>
-          <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>{loan.type}</div>
+          <Caption>{loan.type}</Caption>
           <div css={tw`flex flex-row space-x-2 items-center py-2`}>
             <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
             <span css={tw`text-2xl font-bold leading-10`}>{loan.repaymentAmount}</span>
@@ -39,7 +40,7 @@ const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
       </div>
       <div css={tw`grid grid-flow-col gap-2`}>
         <div>
-          <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>Due</div>
+          <Caption>Due</Caption>
           <div css={tw`text-lg font-medium`}>{loan.due}</div>
         </div>
       </div>
