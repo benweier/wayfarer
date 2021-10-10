@@ -1,11 +1,13 @@
 import { HiOutlineCash } from 'react-icons/hi'
+import { RiSpaceShipFill } from 'react-icons/ri'
 import { useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { css } from 'styled-components'
-import tw, { styled } from 'twin.macro'
+import tw, { styled, theme } from 'twin.macro'
 import { SpaceTradersStatus } from 'components/SpaceTradersStatus'
 import { Wayfarer } from 'components/Wayfarer'
 import { ROUTES } from 'config/routes'
+import { useMyShipsQuery } from 'services/spacetraders/core'
 import { selectUser } from 'store/auth'
 import { selectStatus } from 'store/auth/selectors'
 
@@ -35,6 +37,18 @@ const Sync = () => {
   )
 }
 
+const OwnedShips = () => {
+  const ownedShipsQuery = useMyShipsQuery()
+
+  return (
+    <>
+      <div css={tw`font-semibold grid grid-flow-col gap-2 items-center`}>
+        <RiSpaceShipFill size={16} /> {ownedShipsQuery.data?.ships.length ?? 0}
+      </div>
+    </>
+  )
+}
+
 const User = () => {
   const user = useSelector(selectUser)
 
@@ -43,7 +57,7 @@ const User = () => {
   return (
     <div css={tw`grid grid-flow-col gap-8 items-center`}>
       <div css={tw`grid gap-2 grid-flow-col items-center`}>
-        <HiOutlineCash size={20} /> <span css={tw`font-bold`}>{user.credits}</span>
+        <HiOutlineCash size={20} color={theme`colors.emerald.400`} /> <span css={tw`font-bold`}>{user.credits}</span>
       </div>
 
       <div css={tw`grid gap-2 grid-flow-col items-center`}>
@@ -74,8 +88,10 @@ export const Header = () => {
               <HeaderLink to={ROUTES.LEADERBOARD}>LEADERBOARD</HeaderLink>
             </nav>
           </div>
-
-          <User />
+          <div css={tw`grid grid-flow-col gap-8 items-center`}>
+            <OwnedShips />
+            <User />
+          </div>
         </div>
       </div>
     </div>
