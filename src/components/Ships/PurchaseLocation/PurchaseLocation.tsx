@@ -6,19 +6,18 @@ import { usePurchaseShipMutation } from 'services/spacetraders/core'
 import { selectUser } from 'store/auth'
 import { useAppSelector } from 'store/hooks'
 
-const PurchaseShip = ({ type, location, price }: { type: string; location: string; price: number }) => {
+const PurchaseShip = ({ type, location, disabled }: { type: string; location: string; disabled: boolean }) => {
   const [purchaseShip, { isLoading }] = usePurchaseShipMutation()
-  const user = useAppSelector(selectUser)
 
   return (
     <Button
-      css={tw`py-2 rounded-full`}
-      disabled={isLoading || (user?.credits ?? 0) < price}
+      css={tw`py-2 px-4 rounded-full text-xs leading-none`}
+      disabled={isLoading || disabled}
       onClick={async () => {
         await purchaseShip({ location, type })
       }}
     >
-      Purchase
+      PURCHASE
     </Button>
   )
 }
@@ -29,13 +28,17 @@ export const PurchaseLocation: FC<{ type: string; location: string; price: numbe
   price,
   children,
 }) => {
+  const user = useAppSelector(selectUser)
+
   return (
     <div>
       <div css={tw`grid grid-flow-col gap-4 justify-between items-center`}>
-        <div>{location}</div>
-        <div css={tw`grid grid-flow-col gap-1 items-center`}>
-          <HiOutlineCash size={16} color={theme`colors.emerald.400`} /> {price}{' '}
-          <PurchaseShip type={type} location={location} price={price} />
+        <div css={tw`font-bold`}>{location}</div>
+        <div css={tw`grid grid-flow-col gap-2 items-center`}>
+          <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
+            <HiOutlineCash size={16} color={theme`colors.emerald.400`} /> <div css={tw`font-semibold`}>{price}</div>
+          </div>
+          <PurchaseShip type={type} location={location} disabled={(user?.credits ?? 0) < price} />
         </div>
       </div>
       {children}
