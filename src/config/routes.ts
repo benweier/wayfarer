@@ -8,5 +8,6 @@ export const ROUTES = {
   SYSTEMS: 'systems',
   LOANS: 'loans',
   SHIPS: 'ships',
+  MARKETPLACE: 'marketplace',
   LEADERBOARD: 'leaderboard',
 }

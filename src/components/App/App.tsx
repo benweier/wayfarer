@@ -29,6 +29,7 @@ const Register = lazy(() => import('components/Auth').then((mod) => ({ default: 
 const SystemPage = lazy(() => import('routes/Systems').then((mod) => ({ default: mod.SystemPage })))
 const LoanPage = lazy(() => import('routes/Loans').then((mod) => ({ default: mod.LoanPage })))
 const ShipPage = lazy(() => import('routes/Ships').then((mod) => ({ default: mod.ShipPage })))
+const MarketplacePage = lazy(() => import('routes/Marketplace').then((mod) => ({ default: mod.MarketplacePage })))
 const LeaderboardPage = lazy(() => import('routes/Leaderboard').then((mod) => ({ default: mod.LeaderboardPage })))
 
 export const App = Sentry.withProfiler(() => {
@@ -61,6 +62,7 @@ export const App = Sentry.withProfiler(() => {
                     <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
                     <Route path={ROUTES.SHIPS} element={<ShipPage />} />
                     <Route path={ROUTES.LOANS} element={<LoanPage />} />
+                    <Route path={ROUTES.MARKETPLACE} element={<MarketplacePage />} />
                     <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
                     <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
                   </Route>

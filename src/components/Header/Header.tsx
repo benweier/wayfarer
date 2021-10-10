@@ -82,6 +82,7 @@ export const Header = () => {
 
             <nav css={tw`grid grid-flow-col gap-2 items-center`}>
               <HeaderLink to={ROUTES.OVERVIEW}>OVERVIEW</HeaderLink>
+              <HeaderLink to={ROUTES.MARKETPLACE}>MARKETPLACE</HeaderLink>
               <HeaderLink to={ROUTES.SYSTEMS}>SYSTEMS</HeaderLink>
               <HeaderLink to={ROUTES.LOANS}>LOANS</HeaderLink>
               <HeaderLink to={ROUTES.SHIPS}>SHIPS</HeaderLink>
