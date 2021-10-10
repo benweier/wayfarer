@@ -6,6 +6,7 @@ import type {
   LeaderboardResponse,
   Loan,
   LoanType,
+  MarketplaceResponse,
   SystemsResponse,
   TokenResponse,
   YourLoan,
@@ -67,6 +68,9 @@ export const spacetradersAPI = createApi({
     availableSystems: builder.query<SystemsResponse, void>({
       query: () => ({ url: `/game/systems`, method: 'GET' }),
     }),
+    marketplace: builder.query<MarketplaceResponse, { location: string }>({
+      query: (args) => ({ url: `/locations/${args.location}/marketplace`, method: 'GET' }),
+    }),
   }),
 })
 
@@ -77,12 +81,14 @@ export const {
   useLazyAvailableLoansQuery,
   useLazyAvailableSystemsQuery,
   useLazyLeaderboardQuery,
+  useLazyMarketplaceQuery,
   useLazyMyAccountQuery,
   useLazyMyLoansQuery,
   useLazyMyShipsQuery,
   useLazyShipListingsQuery,
   useLazyStatusQuery,
   useLeaderboardQuery,
+  useMarketplaceQuery,
   useMyAccountQuery,
   useMyLoansQuery,
   useMyShipsQuery,
