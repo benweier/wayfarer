@@ -131,8 +131,7 @@ export interface System {
 export interface User {
   username: string
   credits: number
-  loans: YourLoan[]
-  ships: YourShip[]
+  shipCount: number
 }
 
 export interface YourLoan {
