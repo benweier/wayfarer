@@ -1,39 +1,43 @@
 import { useMemo, FC } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
+import { Caption } from 'components/Caption'
 import { Select } from 'components/Select'
 import { useSelect } from 'components/Select/useSelect'
+import { PurchaseLocation } from 'components/Ships/PurchaseLocation'
 import { SystemSelect } from 'components/Systems/Select'
 import { useSystemSelect } from 'components/Systems/Select/useSystemSelect'
-import { useShipListingsQuery } from 'services/spacetraders/core'
+import { useMyShipsQuery, useShipListingsQuery } from 'services/spacetraders/core'
 import { Ship, System } from 'types/spacetraders'
 import { groupByFn } from 'utilities/group-by'
 import { getPriceRange, GroupByType, groups, SortByType, sorts, sortShips } from 'utilities/ships'
-import { PurchaseLocation } from '../PurchaseLocation'
 
 const ShipStat = ({ label, value }: { label: string; value: number | string }) => {
   return (
     <div css={tw`grid grid-flow-row gap-2`}>
       <div css={tw`font-semibold text-center leading-none text-gray-50`}>{value}</div>
-      <div css={tw`text-center text-xs leading-none uppercase font-semibold text-gray-400`}>{label}</div>
+      <Caption css={tw`text-center`}>{label}</Caption>
     </div>
   )
 }
 
-export const AvailableShipItem: FC<{ ship: Ship }> = ({ ship, children }) => {
+export const AvailableShipItem: FC<{ ship: Ship; owned?: number }> = ({ ship, owned = 0, children }) => {
   return (
     <div key={ship.type} css={tw`shadow p-4 border border-gray-700 rounded-lg grid grid-flow-row gap-2`}>
-      <div css={tw`grid grid-flow-row gap-6`}>
+      <div css={tw`grid grid-flow-row gap-6 auto-rows-min`}>
         <div css={tw`grid grid-cols-2 items-center`}>
           <div>
-            <div css={tw`text-xs leading-none uppercase font-bold text-gray-400`}>{ship.type}</div>
+            <Caption>{ship.type}</Caption>
             <div css={tw`text-lg font-bold`}>
               {ship.manufacturer} {ship.class}
             </div>
           </div>
-          <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
-            <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
-            <div css={tw`text-xl font-black`}>{getPriceRange(ship)}</div>
+          <div css={tw`grid grid-flow-row items-center justify-end`}>
+            <Caption css={[owned > 0 && tw`text-amber-400`]}>Owned {owned}</Caption>
+            <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
+              <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
+              <div css={tw`text-xl font-black`}>{getPriceRange(ship)}</div>
+            </div>
           </div>
         </div>
         <div css={tw`grid grid-flow-col gap-2 p-4 -mx-4 bg-gray-400 bg-opacity-5`}>
@@ -58,12 +62,24 @@ const AvailableShipList = ({
   groupBy?: { id: GroupByType; name: string }
   sortBy?: { id: SortByType; name: string }
 }) => {
-  const { data } = useShipListingsQuery({ system: system.symbol })
+  const shipListingsQuery = useShipListingsQuery({ system: system.symbol })
+  const myShipsQuery = useMyShipsQuery()
+
+  const ownedShips = useMemo(() => {
+    return (
+      myShipsQuery.data?.ships.reduce<Record<string, number>>((obj, ship) => {
+        obj[ship.type] = (obj[ship.type] ?? 0) + 1
+
+        return obj
+      }, {}) ?? {}
+    )
+  }, [myShipsQuery.data])
+
   const shipListings = useMemo(() => {
-    const ships = groupByFn(data?.shipListings, (ship) => ship[groupBy.id])
+    const ships = groupByFn(shipListingsQuery.data?.shipListings, (ship) => ship[groupBy.id])
 
     return Object.entries(ships).sort(([a], [b]) => a.localeCompare(b))
-  }, [data, groupBy])
+  }, [shipListingsQuery.data, groupBy])
 
   if (!shipListings.length) return null
 
@@ -74,7 +90,8 @@ const AvailableShipList = ({
           <div css={tw`text-lg font-bold m-2`}>{key}</div>
           <div css={tw`grid grid-cols-2 gap-8`}>
             {ships.sort(sortShips(sortBy.id)).map((ship) => (
-              <AvailableShipItem key={ship.type} ship={ship}>
+              <AvailableShipItem key={ship.type} ship={ship} owned={ownedShips[ship.type]}>
+                <Caption>Purchase Locations</Caption>
                 {ship.purchaseLocations.map((purchase) => (
                   <PurchaseLocation
                     key={purchase.location}
