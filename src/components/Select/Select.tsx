@@ -32,35 +32,37 @@ export const Select = <T extends SelectOption = SelectOption>({
             </span>
           </Listbox.Button>
 
-          <Listbox.Options
-            css={[
-              tw`absolute z-10 mt-1 w-full bg-gray-700 max-h-60 rounded-md text-sm overflow-auto outline-none`,
-              tw`focus:(ring-2 ring-emerald-400)`,
-            ]}
-          >
-            {options.map((option) => (
-              <Listbox.Option key={option.id} value={option} css={tw`relative`}>
-                {({ selected, active }) => (
-                  <>
-                    <span
-                      css={[
-                        tw`m-1 rounded cursor-default select-none relative py-2 pl-3 pr-9 block truncate`,
-                        active && tw`bg-gray-600`,
-                      ]}
-                    >
-                      {option.name}
-                    </span>
-
-                    {selected ? (
-                      <span css={[tw`absolute inset-y-0 right-0 flex items-center pr-4`]}>
-                        <HiCheck size={20} aria-hidden="true" color={theme`colors.emerald.400`} />
+          {options.length > 0 && (
+            <Listbox.Options
+              css={[
+                tw`absolute z-10 mt-1 w-full bg-gray-700 max-h-60 rounded-md text-sm overflow-auto outline-none`,
+                tw`focus:(ring-2 ring-emerald-400)`,
+              ]}
+            >
+              {options.map((option) => (
+                <Listbox.Option key={option.id} value={option} css={tw`relative`}>
+                  {({ selected, active }) => (
+                    <>
+                      <span
+                        css={[
+                          tw`m-1 rounded cursor-default select-none relative py-2 pl-3 pr-9 block truncate`,
+                          active && tw`bg-gray-600`,
+                        ]}
+                      >
+                        {option.name}
                       </span>
-                    ) : null}
-                  </>
-                )}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
+
+                      {selected ? (
+                        <span css={[tw`absolute inset-y-0 right-0 flex items-center pr-4`]}>
+                          <HiCheck size={20} aria-hidden="true" color={theme`colors.emerald.400`} />
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          )}
         </div>
       </>
     </Listbox>
