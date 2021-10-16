@@ -42,9 +42,8 @@ export const MarketplaceListings = () => {
             <LocationSelect {...location} />
           </div>
         </div>
+        {location.selected && <MarketplaceList location={location.selected} />}
       </div>
-
-      {location.selected && <MarketplaceList location={location.selected} />}
     </div>
   )
 }
