@@ -1,5 +1,5 @@
 import tw from 'twin.macro'
-import { MarketplaceListings } from 'components/Marketplace'
+import { MarketplaceListings } from 'components/Marketplace/Listings'
 
 export const MarketplacePage = () => {
   return (
