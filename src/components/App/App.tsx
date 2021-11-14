@@ -14,6 +14,12 @@ import { HomePage } from 'routes/Home'
 import { store } from 'store'
 import { queryClient } from 'utilities/query-client'
 
+const Loading = () => (
+  <div css={tw`w-screen h-screen animate-pulse flex justify-center items-center`}>
+    <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
+  </div>
+)
+
 Sentry.init({
   dsn: 'https://628afa9a45cd4952adf380cb9224ce2f@o121131.ingest.sentry.io/5977586',
   integrations: [new Integrations.BrowserTracing()],
@@ -40,15 +46,9 @@ export const App = Sentry.withProfiler(() => {
           <QueryClientProvider client={queryClient}>
             <AppStyles />
             <BrowserRouter>
-              <Suspense
-                fallback={
-                  <div css={tw`w-screen h-screen animate-pulse flex justify-center items-center`}>
-                    <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
-                  </div>
-                }
-              >
+              <Suspense fallback={<Loading />}>
                 <Routes>
-                  <Route path={ROUTES.HOME} element={<HomePage />} />
+                  <Route index element={<HomePage />} />
                   <Route
                     path={ROUTES.DASHBOARD}
                     element={
