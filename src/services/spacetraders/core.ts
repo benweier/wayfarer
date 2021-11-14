@@ -7,6 +7,7 @@ import type {
   Loan,
   LoanType,
   MarketplaceResponse,
+  Order,
   SystemsResponse,
   TokenResponse,
   YourLoan,
@@ -65,6 +66,9 @@ export const spacetradersAPI = createApi({
       invalidatesTags: ['ships'],
       query: (args) => ({ url: `/my/ships`, method: 'POST', body: { location: args.location, type: args.type } }),
     }),
+    purchaseGoods: builder.mutation<{ credits: number; order: Order; ship: YourShip }, { ship: string; good: string }>({
+      query: (args) => ({ url: `/my/purchase-orders`, method: 'POST', body: { shipId: args.ship, good: args.good } }),
+    }),
     availableSystems: builder.query<SystemsResponse, void>({
       query: () => ({ url: `/game/systems`, method: 'GET' }),
     }),
@@ -94,6 +98,7 @@ export const {
   useMyShipsQuery,
   usePayLoanMutation,
   usePrefetch,
+  usePurchaseGoodsMutation,
   usePurchaseShipMutation,
   useShipListingsQuery,
   useStatusQuery,
