@@ -1692,7 +1692,7 @@
     "@sentry/utils" "6.14.3"
     tslib "^1.9.3"
 
-"@sentry/types@6.14.3":
+"@sentry/types@6.14.3", "@sentry/types@^6.14.1":
   version "6.14.3"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-6.14.3.tgz#4af799df7ddfa2702a46bffabc3f1b6eb195de23"
   integrity sha512-GuyqvjQ/N0hIgAjGD1Rn0aQ8kpLBBsImk+Aoh7YFhnvXRhCNkp9N8BuXTfC/uMdMshcWa1OFik/udyjdQM3EJA==
@@ -10272,6 +10272,13 @@ react-router-dom@6.0.2:
   dependencies:
     history "^5.1.0"
     react-router "6.0.2"
+
+react-router-v6-instrumentation@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-router-v6-instrumentation/-/react-router-v6-instrumentation-2.0.1.tgz#72df8b1a0b857b373d49a187f8acb0cf984a46f3"
+  integrity sha512-VqUJHA7U89QP/SNJsxjAZ55sO5tROQlwOpnERAyxog+xSBG2AdlALksj2fV3ufeKZ0JR6rZbcF7PSh/lmZD1BA==
+  dependencies:
+    "@sentry/types" "^6.14.1"
 
 react-router@6.0.2:
   version "6.0.2"
