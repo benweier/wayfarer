@@ -1,5 +1,5 @@
 import tw from 'twin.macro'
-import { SystemList } from 'components/Systems/List'
+import { SystemList } from '@/components/Systems/List'
 
 export const SystemPage = () => {
   return (

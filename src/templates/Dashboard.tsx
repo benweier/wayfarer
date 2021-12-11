@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import tw from 'twin.macro'
-import { Header } from 'components/Header'
+import { Header } from '@/components/Header'
 
 export const DashboardTemplate: FC = ({ children }) => {
   return (

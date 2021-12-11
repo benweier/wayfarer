@@ -1,8 +1,8 @@
-import { Ship } from 'types/spacetraders'
+import { Ship } from '@/types/spacetraders'
 
 export type GroupByType = 'manufacturer' | 'class' | 'type'
-export type SortByType = 'price' | 'maxCargo' | 'speed' | 'loadingSpeed' | 'plating' | 'weapons'
-export type SortableShipAttributes = Extract<Ship, number>
+export type SortableShipAttributes = 'maxCargo' | 'speed' | 'loadingSpeed' | 'plating' | 'weapons'
+export type SortByType = 'price' | SortableShipAttributes
 
 export const groups: Array<{ id: GroupByType; name: string }> = [
   { id: 'class', name: 'Class' },
@@ -22,7 +22,7 @@ const sortByPrice = (a: Ship, b: Ship) => {
   return getPriceFrom(a, Math.min) - getPriceFrom(b, Math.max)
 }
 
-const sortByAttribute = (attr: keyof SortableShipAttributes) => (a: Ship, b: Ship) => {
+const sortByAttribute = (attr: SortableShipAttributes) => (a: Ship, b: Ship) => {
   if (a[attr] === b[attr]) {
     return getPriceFrom(a, Math.min) - getPriceFrom(b, Math.min)
   }

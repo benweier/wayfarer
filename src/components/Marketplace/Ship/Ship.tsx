@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import tw from 'twin.macro'
-import { Caption } from 'components/Caption'
-import { YourShip } from 'types/spacetraders'
+import { Caption } from '@/components/Caption'
+import { YourShip } from '@/types/spacetraders'
 
 export const MarketplaceShip: FC<{ ship: YourShip }> = ({ ship, children }) => {
   const cargo = ship.cargo.reduce((cargo, { totalVolume = 0 }) => cargo + totalVolume, 0)

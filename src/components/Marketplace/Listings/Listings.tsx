@@ -1,9 +1,9 @@
 import { Fragment, useMemo, ReactNode } from 'react'
 import tw from 'twin.macro'
-import { useMarketplaceQuery, useMyShipsQuery } from 'services/spacetraders/core'
-import { Marketplace } from 'types/spacetraders'
-import { PurchaseGoods } from '../PurchaseGoods'
-import { MarketplaceShip } from '../Ship'
+import { PurchaseGoods } from '@/components/Marketplace/PurchaseGoods'
+import { MarketplaceShip } from '@/components/Marketplace/Ship'
+import { useMarketplaceQuery, useMyShipsQuery } from '@/services/spacetraders/core'
+import { Marketplace } from '@/types/spacetraders'
 
 // const MarketplaceItem = ({ marketplace }: { marketplace: Marketplace }) => {
 //   return (

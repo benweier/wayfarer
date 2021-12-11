@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import tw from 'twin.macro'
-import { usePurchaseGoodsMutation } from 'services/spacetraders/core'
-import { Marketplace, YourShip } from 'types/spacetraders'
+import { usePurchaseGoodsMutation } from '@/services/spacetraders/core'
+import { Marketplace, YourShip } from '@/types/spacetraders'
 
 export const PurchaseGoods = ({ ship, marketplace }: { ship: YourShip; marketplace: Marketplace[] }) => {
   const [purchaseGoodsMutation] = usePurchaseGoodsMutation()

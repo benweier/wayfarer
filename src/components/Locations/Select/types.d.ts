@@ -1,4 +1,4 @@
-import { Location } from 'types/spacetraders'
+import { Location } from '@/types/spacetraders'
 
 type LocationSelectOptions =
   | {

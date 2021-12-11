@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Outlet } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
-import { DashboardTemplate } from 'templates/Dashboard'
+import { DashboardTemplate } from '@/templates/Dashboard'
 
 export const DashboardPage = () => {
   return (

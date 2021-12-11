@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { spacetradersAPI } from 'services/spacetraders/core'
-import { User } from 'types/spacetraders'
+import { spacetradersAPI } from '@/services/spacetraders/core'
+import { User } from '@/types/spacetraders'
 
 type AuthState =
   | { user: null; token: null; isAuthenticated: false }

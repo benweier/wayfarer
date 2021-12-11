@@ -2,11 +2,11 @@ import { Suspense } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Navigate, Outlet } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
-import { ROUTES } from 'config/routes'
-import { useLocation } from 'hooks/useLocation'
-import { AuthLayout } from 'layouts/Auth'
-import { selectIsAuthenticated } from 'store/auth'
-import { useAppSelector } from 'store/hooks'
+import { ROUTES } from '@/config/routes'
+import { useLocation } from '@/hooks/useLocation'
+import { AuthLayout } from '@/layouts/Auth'
+import { selectIsAuthenticated } from '@/store/auth'
+import { useAppSelector } from '@/store/hooks'
 
 export const AuthPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated)

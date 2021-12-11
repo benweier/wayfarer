@@ -1,6 +1,6 @@
 import tw from 'twin.macro'
-import { AvailableLoans } from 'components/Loans/Available'
-import { CurrentLoan } from 'components/Loans/Current'
+import { AvailableLoans } from '@/components/Loans/Available'
+import { CurrentLoan } from '@/components/Loans/Current'
 
 export const LoanPage = () => {
   return (

@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
-import { Button } from 'components/Button'
-import { Caption } from 'components/Caption'
-import { useAvailableLoansQuery, useTakeOutLoanMutation, spacetradersAPI } from 'services/spacetraders/core'
-import { useAppSelector } from 'store/hooks'
-import { Loan, LoanType } from 'types/spacetraders'
+import { Button } from '@/components/Button'
+import { Caption } from '@/components/Caption'
+import { useAvailableLoansQuery, useTakeOutLoanMutation, spacetradersAPI } from '@/services/spacetraders/core'
+import { useAppSelector } from '@/store/hooks'
+import { Loan, LoanType } from '@/types/spacetraders'
 
 const AcceptLoan = ({ type }: { type: LoanType }) => {
   const [takeOutLoanMutation, { isLoading }] = useTakeOutLoanMutation()

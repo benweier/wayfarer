@@ -1,6 +1,6 @@
 import tw from 'twin.macro'
-import { AvailableShips } from 'components/Ships/Available'
-import { OwnedShips } from 'components/Ships/Owned'
+import { AvailableShips } from '@/components/Ships/Available'
+import { OwnedShips } from '@/components/Ships/Owned'
 
 export const ShipPage = () => {
   return (

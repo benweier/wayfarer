@@ -1,13 +1,13 @@
 import { FocusEvent, useCallback } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import tw from 'twin.macro'
-import { Button } from 'components/Button'
-import { Input } from 'components/Input'
-import { Label } from 'components/Label'
-import { Link } from 'components/Link'
-import { ROUTES } from 'config/routes'
-import { useLocation } from 'hooks/useLocation'
-import { useLazyMyAccountQuery } from 'services/spacetraders/core'
+import { Button } from '@/components/Button'
+import { Input } from '@/components/Input'
+import { Label } from '@/components/Label'
+import { Link } from '@/components/Link'
+import { ROUTES } from '@/config/routes'
+import { useLocation } from '@/hooks/useLocation'
+import { useLazyMyAccountQuery } from '@/services/spacetraders/core'
 
 interface LoginFormState {
   user: string

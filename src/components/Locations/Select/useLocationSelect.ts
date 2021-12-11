@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
-import { useSelect } from 'components/Select/useSelect'
-import { useAvailableSystemsQuery } from 'services/spacetraders/core'
-import { Location, System } from 'types/spacetraders'
 import { LocationSelectOptions } from './types'
+import { useSelect } from '@/components/Select/useSelect'
+import { useAvailableSystemsQuery } from '@/services/spacetraders/core'
+import { Location, System } from '@/types/spacetraders'
 
 export const useLocationSelect = ({ system }: { system?: System }): LocationSelectOptions => {
   const { data, isLoading } = useAvailableSystemsQuery()

@@ -1,4 +1,4 @@
-import { useStatusQuery } from 'services/spacetraders/core'
+import { useStatusQuery } from '@/services/spacetraders/core'
 
 export const useSpaceTradersStatus = (): { status: 'UNKNOWN' | 'ONLINE' | 'OFFLINE'; isChecking: boolean } => {
   const { data, isLoading, isFetching, isError } = useStatusQuery(undefined, {

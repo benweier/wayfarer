@@ -1,4 +1,4 @@
-import { System } from 'types/spacetraders'
+import { System } from '@/types/spacetraders'
 
 type SystemSelectOptions =
   | {

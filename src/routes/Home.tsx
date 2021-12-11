@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router'
-import { ROUTES } from 'config/routes'
-import { selectIsAuthenticated } from 'store/auth'
-import { useAppSelector } from 'store/hooks'
+import { ROUTES } from '@/config/routes'
+import { selectIsAuthenticated } from '@/store/auth'
+import { useAppSelector } from '@/store/hooks'
 
 export const HomePage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated)

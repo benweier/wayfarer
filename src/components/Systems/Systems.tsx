@@ -1,7 +1,7 @@
 import tw from 'twin.macro'
-import { Caption } from 'components/Caption'
-import { useAvailableSystemsQuery } from 'services/spacetraders/core'
-import { Location, System } from 'types/spacetraders'
+import { Location, System } from '@/types/spacetraders'
+import { Caption } from '@/components/Caption'
+import { useAvailableSystemsQuery } from '@/services/spacetraders/core'
 
 const LocationList = ({ locations }: { locations: Location[] }) => {
   return (

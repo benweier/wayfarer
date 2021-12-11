@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import tw from 'twin.macro'
-import { Caption } from 'components/Caption'
-import { useMyShipsQuery } from 'services/spacetraders/core'
+import { Caption } from '@/components/Caption'
+import { useMyShipsQuery } from '@/services/spacetraders/core'
 
 interface OwnedShip {
   type: string

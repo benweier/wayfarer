@@ -1,11 +1,11 @@
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
-import { Button } from 'components/Button'
-import { Caption } from 'components/Caption'
-import { useMyLoansQuery, usePayLoanMutation } from 'services/spacetraders/core'
-import { selectUser } from 'store/auth'
-import { useAppSelector } from 'store/hooks'
-import { YourLoan } from 'types/spacetraders'
+import { Button } from '@/components/Button'
+import { Caption } from '@/components/Caption'
+import { useMyLoansQuery, usePayLoanMutation } from '@/services/spacetraders/core'
+import { selectUser } from '@/store/auth'
+import { useAppSelector } from '@/store/hooks'
+import { YourLoan } from '@/types/spacetraders'
 
 const PayLoan = ({ id, repayment }: { id: string; repayment: number }) => {
   const [payLoanMutation, { isLoading }] = usePayLoanMutation()

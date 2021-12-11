@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
-import { Button } from 'components/Button'
-import { usePurchaseShipMutation } from 'services/spacetraders/core'
-import { selectUser } from 'store/auth'
-import { useAppSelector } from 'store/hooks'
+import { Button } from '@/components/Button'
+import { usePurchaseShipMutation } from '@/services/spacetraders/core'
+import { selectUser } from '@/store/auth'
+import { useAppSelector } from '@/store/hooks'
 
 const PurchaseShip = ({ type, location, disabled }: { type: string; location: string; disabled: boolean }) => {
   const [purchaseShip, { isLoading }] = usePurchaseShipMutation()

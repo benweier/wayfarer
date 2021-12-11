@@ -1,7 +1,7 @@
 import { HiOutlineCash } from 'react-icons/hi'
 import tw from 'twin.macro'
-import { useLeaderboardQuery } from 'services/spacetraders/core'
-import { UserWorth } from 'types/spacetraders'
+import { useLeaderboardQuery } from '@/services/spacetraders/core'
+import { UserWorth } from '@/types/spacetraders'
 
 const LeaderboardItem = ({ leader, highlight = false }: { leader: UserWorth; highlight?: boolean }) => {
   return (

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import { spacetradersAPI } from 'services/spacetraders/core'
 import { authReducer } from './auth'
+import { spacetradersAPI } from '@/services/spacetraders/core'
 
 export const reducer = combineReducers({
   [spacetradersAPI.reducerPath]: spacetradersAPI.reducer,
