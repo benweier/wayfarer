@@ -12,7 +12,7 @@ module.exports = {
   },
   styledComponents: {
     pure: true,
-    ssr: true,
+    ssr: false,
     displayName: process.env.NODE_ENV !== 'production',
     fileName: process.env.NODE_ENV !== 'production',
   },
