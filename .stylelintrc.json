@@ -1,4 +1,20 @@
 {
   "processors": ["stylelint-processor-styled-components"],
-  "extends": ["stylelint-config-recommended", "stylelint-config-styled-components"]
+  "extends": ["stylelint-config-standard", "stylelint-config-recommended", "stylelint-config-styled-components"],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "variants",
+          "responsive",
+          "screen"
+        ]
+      }
+    ],
+    "declaration-block-trailing-semicolon": null,
+    "no-descending-specificity": null
+  }
 }
