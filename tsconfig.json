@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "lib": ["esnext", "dom"],
-    "module": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "module": "es2020",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "removeComments": true,
@@ -16,7 +16,7 @@
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "outDir": "build",
-    "target": "es2018",
+    "target": "es2020",
     "declaration": false,
     "checkJs": false,
     "sourceMap": false,
