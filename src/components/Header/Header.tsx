@@ -2,19 +2,19 @@ import { HiOutlineCash } from 'react-icons/hi'
 import { RiSpaceShipFill } from 'react-icons/ri'
 import { useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
-import { selectUser } from '@/store/auth'
-import { selectStatus } from '@/store/auth/selectors'
 import { css } from 'styled-components'
 import tw, { styled, theme } from 'twin.macro'
 import { SpaceTradersStatus } from '@/components/SpaceTradersStatus'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
 import { useMyShipsQuery } from '@/services/spacetraders/core'
+import { selectUser } from '@/store/auth'
+import { selectStatus } from '@/store/auth/selectors'
 
 const HeaderLink = styled(NavLink)(() => [
   tw`py-2 px-4 rounded text-sm font-semibold leading-none`,
   tw`outline-none focus:(ring-2 ring-emerald-400 ring-offset-2 ring-offset-gray-800)`,
-  tw`hover:(bg-blueGray-600) active:(bg-blueGray-700)`,
+  tw`hover:(bg-slate-600) active:(bg-slate-700)`,
   css`
     &.active {
       ${tw`bg-blue-500 text-white`}
