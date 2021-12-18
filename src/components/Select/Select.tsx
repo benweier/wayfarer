@@ -1,8 +1,8 @@
 import { Listbox } from '@headlessui/react'
 import { HiCheck, HiSelector } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
-import { Label } from '@/components/Label'
 import { SelectOption } from './types'
+import { Label } from '@/components/Label'
 
 export const Select = <T extends SelectOption = SelectOption>({
   label,
@@ -35,7 +35,7 @@ export const Select = <T extends SelectOption = SelectOption>({
           {options.length > 0 && (
             <Listbox.Options
               css={[
-                tw`absolute z-10 mt-1 w-full bg-gray-700 max-h-60 rounded-md text-sm overflow-auto outline-none`,
+                tw`absolute z-10 mt-1 w-full bg-gray-700 max-h-48 rounded-md text-sm overflow-auto outline-none`,
                 tw`focus:(ring-2 ring-emerald-400)`,
               ]}
             >
@@ -46,7 +46,8 @@ export const Select = <T extends SelectOption = SelectOption>({
                       <span
                         css={[
                           tw`m-1 rounded cursor-default select-none relative py-2 pl-3 pr-9 block truncate`,
-                          active && tw`bg-gray-600`,
+                          tw`transition-colors duration-100 ease-in-out`,
+                          active && tw`bg-gray-600 bg-opacity-80`,
                         ]}
                       >
                         {option.name}
