@@ -32,7 +32,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "incremental": true
+    "incremental": true,
+    "types": ["webpack-env"]
   },
   "files": ["twin.d.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "twin.d.ts"],
