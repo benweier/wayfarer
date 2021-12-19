@@ -8,4 +8,8 @@ export const store = configureStore({
   middleware,
 })
 
+if (process.env.NODE_ENV !== 'production' && module.hot) {
+  module.hot.accept('./reducers', () => store.replaceReducer(reducer))
+}
+
 setupListeners(store.dispatch)
