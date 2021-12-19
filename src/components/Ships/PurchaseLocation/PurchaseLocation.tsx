@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
 import { Button } from '@/components/Button'
@@ -8,16 +8,33 @@ import { useAppSelector } from '@/store/hooks'
 
 const PurchaseShip = ({ type, location, disabled }: { type: string; location: string; disabled: boolean }) => {
   const [purchaseShip, { isLoading }] = usePurchaseShipMutation()
+  const [confirm, setConfirm] = useState(false)
 
   return (
     <Button
-      css={tw`py-2 px-4 rounded-full text-xs leading-none`}
+      css={[
+        tw`py-2 px-4 rounded-full text-xs leading-none transition-colors duration-75`,
+        confirm && tw`bg-emerald-400 text-emerald-900`,
+      ]}
       disabled={isLoading || disabled}
+      onBlur={() => setConfirm(false)}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          setConfirm(false)
+        }
+      }}
       onClick={async () => {
-        await purchaseShip({ location, type })
+        if (!confirm) {
+          setConfirm(true)
+          return
+        }
+
+        await purchaseShip({ location, type }).then(() => {
+          setConfirm(false)
+        })
       }}
     >
-      PURCHASE
+      {confirm ? 'CONFIRM' : 'PURCHASE'}
     </Button>
   )
 }
@@ -38,7 +55,9 @@ export const PurchaseLocation: FC<{ type: string; location: string; price: numbe
           <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
             <HiOutlineCash size={16} color={theme`colors.emerald.400`} /> <div css={tw`font-semibold`}>{price}</div>
           </div>
-          <PurchaseShip type={type} location={location} disabled={(user?.credits ?? 0) < price} />
+          <div css={tw`w-32`}>
+            <PurchaseShip type={type} location={location} disabled={(user?.credits ?? 0) < price} />
+          </div>
         </div>
       </div>
       {children}
