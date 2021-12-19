@@ -27,8 +27,8 @@ const DefinePluginConfig = new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 })
 
-module.exports = (env) => {
-  const isProduction = process.env.NODE_ENV === 'production'
+module.exports = (env,argv) => {
+  const isProduction = argv.mode === 'production'
 
   const plugins = [HTMLPluginConfig, DefinePluginConfig]
 
