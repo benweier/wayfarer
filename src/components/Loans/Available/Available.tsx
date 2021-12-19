@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
 import { Button } from '@/components/Button'
@@ -9,18 +9,33 @@ import { Loan, LoanType } from '@/types/spacetraders'
 
 const AcceptLoan = ({ type }: { type: LoanType }) => {
   const [takeOutLoanMutation, { isLoading }] = useTakeOutLoanMutation()
+  const [confirm, setConfirm] = useState(false)
   const selectCurrentLoans = useMemo(() => spacetradersAPI.endpoints.myLoans.select(), [])
   const { data } = useAppSelector(selectCurrentLoans)
   const hasLoan = !!data?.loans.length
 
   return (
     <Button
+      css={[tw`transition-colors duration-75`, confirm && tw`bg-emerald-400 text-emerald-900`]}
       disabled={isLoading || hasLoan}
+      onBlur={() => setConfirm(false)}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          setConfirm(false)
+        }
+      }}
       onClick={async () => {
-        await takeOutLoanMutation({ type })
+        if (!confirm) {
+          setConfirm(true)
+          return
+        }
+
+        await takeOutLoanMutation({ type }).then(() => {
+          setConfirm(false)
+        })
       }}
     >
-      Accept
+      {confirm ? 'Confirm' : 'Accept'}
     </Button>
   )
 }
