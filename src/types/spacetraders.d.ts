@@ -69,6 +69,9 @@ export interface Location extends Coordinates {
   name: string
   symbol: string
   type: string
+  allowsConstruction: boolean
+  traits: string[]
+  dockedShips: number
 }
 
 export interface LocationWithMarketplace {
@@ -204,7 +207,6 @@ export interface ListStructuresResponse {
 }
 
 export interface LocationResponse {
-  dockedShips: number
   location: Location
 }
 
