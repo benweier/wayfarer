@@ -2,11 +2,13 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQueryWithTokenParam } from './base-query'
 import type {
   AccountResponse,
-  AvailableLoanResponse,
-  AvailableShipResponse,
+  AvailableGoodsResponse,
+  AvailableLoansResponse,
+  AvailableShipsResponse,
   LeaderboardResponse,
   Loan,
   LoanType,
+  LocationResponse,
   MarketplaceResponse,
   Order,
   SystemsResponse,
@@ -44,7 +46,7 @@ export const spacetradersAPI = createApi({
       providesTags: ['loans'],
       query: () => `/my/loans`,
     }),
-    availableLoans: builder.query<AvailableLoanResponse, void>({
+    availableLoans: builder.query<AvailableLoansResponse, void>({
       query: () => `/types/loans`,
     }),
     takeOutLoan: builder.mutation<{ credits: number; loan: Loan }, { type: LoanType }>({
@@ -59,12 +61,15 @@ export const spacetradersAPI = createApi({
       providesTags: ['ships'],
       query: () => `/my/ships`,
     }),
-    shipListings: builder.query<AvailableShipResponse, { class?: string; system: string }>({
+    shipListings: builder.query<AvailableShipsResponse, { class?: string; system: string }>({
       query: (args) => ({ url: `/systems/${args.system}/ship-listings`, method: 'GET', params: { class: args.class } }),
     }),
     purchaseShip: builder.mutation<{ credits: number; ship: YourShip }, { location: string; type: string }>({
       invalidatesTags: ['ships'],
       query: (args) => ({ url: `/my/ships`, method: 'POST', body: { location: args.location, type: args.type } }),
+    }),
+    availableGoods: builder.query<AvailableGoodsResponse, void>({
+      query: () => ({ url: `/types/goods`, method: 'GET' }),
     }),
     purchaseGoods: builder.mutation<{ credits: number; order: Order; ship: YourShip }, { ship: string; good: string }>({
       query: (args) => ({ url: `/my/purchase-orders`, method: 'POST', body: { shipId: args.ship, good: args.good } }),
@@ -75,16 +80,22 @@ export const spacetradersAPI = createApi({
     marketplace: builder.query<MarketplaceResponse, { location: string }>({
       query: (args) => ({ url: `/locations/${args.location}/marketplace`, method: 'GET' }),
     }),
+    location: builder.query<LocationResponse, { location: string }>({
+      query: (args) => ({ url: `/locations/${args.location}`, method: 'GET' }),
+    }),
   }),
 })
 
 export const {
+  useAvailableGoodsQuery,
   useAvailableLoansQuery,
   useAvailableSystemsQuery,
   useClaimUserMutation,
+  useLazyAvailableGoodsQuery,
   useLazyAvailableLoansQuery,
   useLazyAvailableSystemsQuery,
   useLazyLeaderboardQuery,
+  useLazyLocationQuery,
   useLazyMarketplaceQuery,
   useLazyMyAccountQuery,
   useLazyMyLoansQuery,
@@ -92,6 +103,7 @@ export const {
   useLazyShipListingsQuery,
   useLazyStatusQuery,
   useLeaderboardQuery,
+  useLocationQuery,
   useMarketplaceQuery,
   useMyAccountQuery,
   useMyLoansQuery,
