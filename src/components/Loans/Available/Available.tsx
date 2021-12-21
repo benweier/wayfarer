@@ -1,18 +1,16 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
 import { Button } from '@/components/Button'
 import { Caption } from '@/components/Caption'
-import { useAvailableLoansQuery, useTakeOutLoanMutation, spacetradersAPI } from '@/services/spacetraders/core'
-import { useAppSelector } from '@/store/hooks'
+import { useAvailableLoansQuery, useTakeOutLoanMutation, useMyLoansQuery } from '@/services/spacetraders/core'
 import { Loan, LoanType } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number'
 
 const AcceptLoan = ({ type }: { type: LoanType }) => {
   const [takeOutLoanMutation, { isLoading }] = useTakeOutLoanMutation()
   const [confirm, setConfirm] = useState(false)
-  const selectCurrentLoans = useMemo(() => spacetradersAPI.endpoints.myLoans.select(), [])
-  const { data } = useAppSelector(selectCurrentLoans)
+  const { data } = useMyLoansQuery()
   const hasLoan = !!data?.loans.length
 
   return (
