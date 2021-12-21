@@ -18,6 +18,14 @@ export interface AvailableStructure {
   symbol: string
 }
 
+export interface AvailableGoodsResponse {
+  goods: Array<{
+    name: string
+    symbol: Good
+    volumePerUnit: number
+  }>
+}
+
 export interface Cargo {
   good: Good
   quantity: number
@@ -165,11 +173,11 @@ export interface AccountResponse {
   user: User
 }
 
-export interface AvailableLoanResponse {
+export interface AvailableLoansResponse {
   loans: Loan[]
 }
 
-export interface AvailableShipResponse {
+export interface AvailableShipsResponse {
   shipListings: Ship[]
 }
 
