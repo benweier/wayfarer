@@ -2,6 +2,7 @@ import { HiOutlineCash } from 'react-icons/hi'
 import tw from 'twin.macro'
 import { useLeaderboardQuery } from '@/services/spacetraders/core'
 import { UserWorth } from '@/types/spacetraders'
+import { formatNumber } from '@/utilities/number'
 
 const LeaderboardItem = ({ leader, highlight = false }: { leader: UserWorth; highlight?: boolean }) => {
   return (
@@ -13,7 +14,7 @@ const LeaderboardItem = ({ leader, highlight = false }: { leader: UserWorth; hig
         </div>
         <div css={tw`flex flex-row items-center space-x-2`}>
           <HiOutlineCash size={20} />
-          <div css={tw`text-xl font-medium`}>{leader.netWorth}</div>
+          <div css={tw`text-xl font-medium`}>{formatNumber(leader.netWorth)}</div>
         </div>
       </div>
     </div>

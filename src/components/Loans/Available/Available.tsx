@@ -6,6 +6,7 @@ import { Caption } from '@/components/Caption'
 import { useAvailableLoansQuery, useTakeOutLoanMutation, spacetradersAPI } from '@/services/spacetraders/core'
 import { useAppSelector } from '@/store/hooks'
 import { Loan, LoanType } from '@/types/spacetraders'
+import { formatNumber } from '@/utilities/number'
 
 const AcceptLoan = ({ type }: { type: LoanType }) => {
   const [takeOutLoanMutation, { isLoading }] = useTakeOutLoanMutation()
@@ -50,7 +51,7 @@ const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
           </Caption>
           <div css={tw`flex flex-row space-x-2 items-center py-2`}>
             <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
-            <span css={tw`text-2xl font-bold leading-10`}>{loan.amount}</span>
+            <span css={tw`text-2xl font-bold leading-10`}>{formatNumber(loan.amount)}</span>
           </div>
         </div>
         <div>
@@ -72,7 +73,7 @@ const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
           <Caption>Repayment</Caption>
           <div css={tw`flex flex-row space-x-1 items-center`}>
             <HiOutlineCash size={16} color={theme`colors.emerald.400`} />
-            <div css={tw`text-lg font-medium`}>{loan.amount + loan.amount * (loan.rate / 100)}</div>
+            <div css={tw`text-lg font-medium`}>{formatNumber(loan.amount + loan.amount * (loan.rate / 100))}</div>
           </div>
         </div>
       </div>

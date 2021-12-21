@@ -1,3 +1,4 @@
+import { formatNumber } from './number'
 import { Ship } from '@/types/spacetraders'
 
 export type GroupByType = 'manufacturer' | 'class' | 'type'
@@ -52,7 +53,7 @@ export const getPriceRange = (ship: Ship) => {
   const min = Math.min(...range)
   const max = Math.max(...range)
 
-  if (min === max) return `${min}`
+  if (min === max) return `${formatNumber(min)}`
 
-  return `${min}-${max}`
+  return `${formatNumber(min)}-${formatNumber(max)}`
 }

@@ -6,6 +6,7 @@ import { useMyLoansQuery, usePayLoanMutation } from '@/services/spacetraders/cor
 import { selectUser } from '@/store/auth'
 import { useAppSelector } from '@/store/hooks'
 import { YourLoan } from '@/types/spacetraders'
+import { formatNumber } from '@/utilities/number'
 
 const PayLoan = ({ id, repayment }: { id: string; repayment: number }) => {
   const [payLoanMutation, { isLoading }] = usePayLoanMutation()
@@ -31,7 +32,7 @@ const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
           <Caption>{loan.type}</Caption>
           <div css={tw`flex flex-row space-x-2 items-center py-2`}>
             <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
-            <span css={tw`text-2xl font-bold leading-10`}>{loan.repaymentAmount}</span>
+            <span css={tw`text-2xl font-bold leading-10`}>{formatNumber(loan.repaymentAmount)}</span>
           </div>
         </div>
         <div>
