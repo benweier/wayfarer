@@ -24,6 +24,7 @@ module.exports = {
     'import/resolver': 'typescript',
   },
   rules: {
+    '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
