@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { css } from 'styled-components'
 import tw, { styled, theme } from 'twin.macro'
+import { Grid } from '@/components/Grid'
 import { SpaceTradersStatus } from '@/components/SpaceTradersStatus'
+import { Typography } from '@/components/Typography'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
 import { useMyShipsQuery } from '@/services/spacetraders/core'
@@ -41,60 +43,58 @@ const OwnedShips = () => {
   const ownedShipsQuery = useMyShipsQuery()
 
   return (
-    <>
-      <div css={tw`font-semibold grid grid-flow-col gap-2 items-center`}>
-        <RiSpaceShipFill size={16} /> {ownedShipsQuery.data?.ships.length ?? 0}
-      </div>
-    </>
+    <Grid cols={2} gap={2} align="center">
+      <RiSpaceShipFill size={16} /> <Typography weight="semibold">{ownedShipsQuery.data?.ships.length ?? 0}</Typography>
+    </Grid>
   )
 }
 
 const User = () => {
   const user = useSelector(selectUser)
 
-  if (!user) return <div />
+  if (!user) return <></>
 
   return (
-    <div css={tw`grid grid-flow-col gap-8 items-center`}>
-      <div css={tw`grid gap-2 grid-flow-col items-center`}>
+    <Grid cols="auto" gap={8} align="center">
+      <Grid cols="auto" gap={2} align="center">
         <HiOutlineCash size={20} color={theme`colors.emerald.400`} /> <span css={tw`font-bold`}>{user.credits}</span>
-      </div>
+      </Grid>
 
-      <div css={tw`grid gap-2 grid-flow-col items-center`}>
+      <Grid cols="auto" gap={2} align="center">
         <span css={tw`font-bold`}>{user.username}</span>
         <Sync />
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   )
 }
 
 export const Header = () => {
   return (
     <div css={tw`relative shadow-lg z-50`}>
-      <div css={tw`h-16 px-6 grid items-center`}>
-        <div css={tw`w-full grid grid-flow-col gap-4 justify-between items-center`}>
-          <div css={tw`grid grid-flow-col gap-2 items-center`}>
+      <Grid align="center" css={tw`h-16 px-6`}>
+        <Grid cols="auto" justify="between" align="center" gap={4}>
+          <Grid cols="auto" align="center" gap={2}>
             <SpaceTradersStatus />
 
             <Link to="/" css={tw`rounded outline-none focus:(ring ring-emerald-400)`}>
               <Wayfarer css={tw`text-2xl mx-4`} />
             </Link>
 
-            <nav css={tw`grid grid-flow-col gap-2 items-center`}>
+            <Grid as="nav" cols="auto" gap={2} align="center">
               <HeaderLink to={ROUTES.OVERVIEW}>OVERVIEW</HeaderLink>
               <HeaderLink to={ROUTES.MARKETPLACE}>MARKETPLACE</HeaderLink>
               <HeaderLink to={ROUTES.SYSTEMS}>SYSTEMS</HeaderLink>
               <HeaderLink to={ROUTES.LOANS}>LOANS</HeaderLink>
               <HeaderLink to={ROUTES.SHIPS}>SHIPS</HeaderLink>
               <HeaderLink to={ROUTES.LEADERBOARD}>LEADERBOARD</HeaderLink>
-            </nav>
-          </div>
-          <div css={tw`grid grid-flow-col gap-8 items-center`}>
+            </Grid>
+          </Grid>
+          <Grid cols="auto" gap={8} align="center">
             <OwnedShips />
             <User />
-          </div>
-        </div>
-      </div>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   )
 }
