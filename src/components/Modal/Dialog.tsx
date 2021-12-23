@@ -18,8 +18,8 @@ export const Dialog = ({ open, children, render = (children: ReactNode) => <>{ch
         aria-modal="true"
       >
         {render(
-          <div css={[tw`flex flex-col items-stretch py-4`, tw`maxHeight[80vh]`]}>
-            <div css={[tw`flex-auto px-8 py-1 min-h-0`]}>{children}</div>
+          <div css={[tw`flex flex-col items-stretch`, tw`maxHeight[80vh]`]}>
+            <div css={[tw`flex-auto min-h-0`]}>{children}</div>
           </div>,
         )}
       </div>
