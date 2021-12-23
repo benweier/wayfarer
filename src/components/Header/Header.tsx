@@ -24,7 +24,7 @@ const HeaderLink = styled(NavLink)(() => [
   `,
 ])
 
-const Sync = () => {
+export const Sync = () => {
   const status = useSelector(selectStatus)
 
   return (
@@ -60,10 +60,7 @@ const User = () => {
         <HiOutlineCash size={20} color={theme`colors.emerald.400`} /> <span css={tw`font-bold`}>{user.credits}</span>
       </Grid>
 
-      <Grid cols="auto" gap={2} align="center">
-        <span css={tw`font-bold`}>{user.username}</span>
-        <Sync />
-      </Grid>
+      <Typography weight="bold">{user.username}</Typography>
     </Grid>
   )
 }
