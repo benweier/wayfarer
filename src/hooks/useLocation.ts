@@ -1,12 +1,14 @@
-import { Path, State } from 'history'
+import { Path } from 'history'
 import { useLocation as useRouterLocation } from 'react-router'
 
-interface Location<T = any> extends Path {
+type LocationState = unknown
+
+interface Location<T = LocationState> extends Path {
   state?: T
 }
 
 interface UseLocation {
-  <T extends State = null>(): Location<T | null>
+  <T extends LocationState>(): Location<Partial<T>>
 }
 
 export const useLocation = useRouterLocation as UseLocation
