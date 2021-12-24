@@ -1,0 +1,1 @@
+export { ShipCargo } from './Cargo'
