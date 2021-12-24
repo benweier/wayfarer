@@ -2,6 +2,8 @@ import { Suspense } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Navigate, Outlet } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
+import { Box } from '@/components/Box'
+import { Grid } from '@/components/Grid'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { AuthLayout } from '@/layouts/Auth'
@@ -10,7 +12,7 @@ import { useAppSelector } from '@/store/hooks'
 
 export const AuthPage = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated)
-  const location = useLocation<Partial<{ origin: string }>>()
+  const location = useLocation<{ origin: string }>()
 
   if (isAuthenticated) {
     return <Navigate to={location.state?.origin ?? ROUTES.DASHBOARD} replace />
@@ -18,17 +20,17 @@ export const AuthPage = () => {
 
   return (
     <AuthLayout>
-      <div css={tw`rounded-lg border border-gray-700 shadow-xl px-8 py-8`}>
+      <Box p={8} css={tw`rounded-lg border border-gray-700 shadow-xl`}>
         <Suspense
           fallback={
-            <div css={tw`animate-pulse flex justify-center items-center`}>
+            <Grid justify="center" align="center" css={tw`animate-pulse`}>
               <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
-            </div>
+            </Grid>
           }
         >
           <Outlet />
         </Suspense>
-      </div>
+      </Box>
     </AuthLayout>
   )
 }
