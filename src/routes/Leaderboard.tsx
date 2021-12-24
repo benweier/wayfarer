@@ -1,10 +1,11 @@
 import tw from 'twin.macro'
+import { Box } from '@/components/Box'
 import { Leaderboard } from '@/components/Leaderboard'
 
 export const LeaderboardPage = () => {
   return (
-    <div css={tw`container`}>
+    <Box css={tw`container`}>
       <Leaderboard />
-    </div>
+    </Box>
   )
 }
