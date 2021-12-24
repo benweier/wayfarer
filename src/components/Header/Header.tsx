@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { css } from 'styled-components'
 import tw, { styled, theme } from 'twin.macro'
+import { Box } from '@/components/Box'
 import { Grid } from '@/components/Grid'
 import { SpaceTradersStatus } from '@/components/SpaceTradersStatus'
 import { Typography } from '@/components/Typography'
@@ -57,7 +58,10 @@ const User = () => {
   return (
     <Grid cols="auto" gap={8} align="center">
       <Grid cols="auto" gap={2} align="center">
-        <HiOutlineCash size={20} color={theme`colors.emerald.400`} /> <span css={tw`font-bold`}>{user.credits}</span>
+        <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
+        <Typography as="span" weight="bold">
+          {user.credits}
+        </Typography>
       </Grid>
 
       <Typography weight="bold">{user.username}</Typography>
@@ -67,7 +71,7 @@ const User = () => {
 
 export const Header = () => {
   return (
-    <div css={tw`relative shadow-lg z-50`}>
+    <Box css={tw`relative shadow-lg z-50`}>
       <Grid align="center" css={tw`h-16 px-6`}>
         <Grid cols="auto" justify="between" align="center" gap={4}>
           <Grid cols="auto" align="center" gap={2}>
@@ -92,6 +96,6 @@ export const Header = () => {
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </Box>
   )
 }
