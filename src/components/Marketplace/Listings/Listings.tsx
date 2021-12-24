@@ -6,6 +6,8 @@ import { Button } from '@/components/Button'
 import { Caption } from '@/components/Caption'
 import { PurchaseGoods } from '@/components/Marketplace/PurchaseGoods'
 import { MarketplaceShip } from '@/components/Marketplace/Ship'
+import { Modal } from '@/components/Modal'
+import { Select } from '@/components/Select'
 import {
   useAvailableGoodsQuery,
   useLocationQuery,
@@ -33,9 +35,7 @@ const MarketplaceItem = ({ item, children }: { item: Marketplace; children?: Rea
           <div css={tw`grid grid-flow-row items-center justify-end`}>
             <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
               <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
-              <div css={tw`flex space-x-2 items-center`}>
-                <span css={tw`text-xl font-black`}>{formatNumber(item.pricePerUnit)}</span>
-              </div>
+              <div css={tw`text-xl font-black`}>{formatNumber(item.pricePerUnit)}</div>
             </div>
             <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
               <span css={tw`text-xs text-gray-400`}>/</span>
@@ -53,15 +53,15 @@ const MarketplaceItem = ({ item, children }: { item: Marketplace; children?: Rea
           </div>
           <div css={tw`grid grid-flow-row gap-2`}>
             <div css={tw`font-semibold text-center leading-none text-gray-50`}>
-              {formatNumber(item.sellPricePerUnit)}
-            </div>
-            <Caption css={tw`text-center`}>SELL</Caption>
-          </div>
-          <div css={tw`grid grid-flow-row gap-2`}>
-            <div css={tw`font-semibold text-center leading-none text-gray-50`}>
               {formatNumber(item.purchasePricePerUnit)}
             </div>
             <Caption css={tw`text-center`}>BUY</Caption>
+          </div>
+          <div css={tw`grid grid-flow-row gap-2`}>
+            <div css={tw`font-semibold text-center leading-none text-gray-50`}>
+              {formatNumber(item.sellPricePerUnit)}
+            </div>
+            <Caption css={tw`text-center`}>SELL</Caption>
           </div>
           <div css={tw`grid grid-flow-row gap-2`}>
             <div css={tw`font-semibold text-center leading-none text-gray-50`}>{item.spread}</div>
@@ -119,8 +119,63 @@ export const MarketplaceListings = () => {
                     <Fragment key={item.symbol}>
                       <MarketplaceItem item={item}>
                         <div css={tw`grid grid-cols-2 gap-4`}>
-                          <Button css={tw`text-white bg-rose-500 font-bold`}>BUY</Button>
-                          <Button css={tw`text-white bg-emerald-500 font-bold`}>SELL</Button>
+                          <Modal
+                            action={({ openModal }) => (
+                              <Button
+                                onClick={openModal}
+                                css={[tw`text-white bg-rose-500 font-bold`, tw`focus:(ring-blue-400)`]}
+                              >
+                                BUY
+                              </Button>
+                            )}
+                          >
+                            {({ closeModal }) => (
+                              <>
+                                <div css={tw`grid grid-flow-row gap-4 p-4`}>
+                                  <div>
+                                    <Select
+                                      label="Ship"
+                                      options={ships.map((ship) => ({
+                                        id: ship.id,
+                                        name: (
+                                          <div css={tw`grid gap-4 grid-cols-3 items-center`}>
+                                            <div>
+                                              {ship.manufacturer} {ship.class}
+                                            </div>
+                                            <div css={tw`text-xs`}>
+                                              <span>
+                                                {ship.cargo.reduce(
+                                                  (cargo, { totalVolume = 0 }) => cargo + totalVolume,
+                                                  0,
+                                                )}
+                                              </span>
+                                              <span> / </span>
+                                              <span>{ship.maxCargo}</span>
+                                            </div>
+                                            <div css={tw`text-xs text-gray-400`}>ID: {ship.id}</div>
+                                          </div>
+                                        ),
+                                      }))}
+                                      onChange={console.log}
+                                    />
+                                  </div>
+                                </div>
+                                <div css={tw`border-t border-gray-900`}>
+                                  <div css={tw`grid grid-flow-col gap-2 bg-gray-900 p-2 rounded-b-lg`}>
+                                    <Button disabled onClick={closeModal}>
+                                      CONFIRM
+                                    </Button>
+                                    <Button onClick={closeModal} css={tw`bg-gray-800 ring-rose-500`}>
+                                      CANCEL
+                                    </Button>
+                                  </div>
+                                </div>
+                              </>
+                            )}
+                          </Modal>
+                          <Button css={[tw`text-white bg-emerald-500 font-bold`, tw`focus:(ring-blue-400)`]}>
+                            SELL
+                          </Button>
                         </div>
                       </MarketplaceItem>
                     </Fragment>
