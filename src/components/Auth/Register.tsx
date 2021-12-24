@@ -5,10 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import tw from 'twin.macro'
 import { Copy } from './Copy'
 import { useCopy } from './useCopy'
+import { Box } from '@/components/Box'
 import { Button } from '@/components/Button'
+import { Grid } from '@/components/Grid'
 import { Input } from '@/components/Input'
 import { Label } from '@/components/Label'
 import { Link } from '@/components/Link'
+import { Typography } from '@/components/Typography'
 import { ROUTES } from '@/config/routes'
 import { useClaimUserMutation } from '@/services/spacetraders/core'
 
@@ -53,69 +56,74 @@ export const Register = () => {
   const token = methods.watch('token')
 
   return (
-    <div css={tw`grid grid-flow-row gap-4`}>
-      <div css={tw`text-xl font-bold text-center`}>Register</div>
+    <Grid rows="auto" gap={4}>
+      <Typography size="xl" weight="bold" align="center">
+        Register
+      </Typography>
       <FormProvider {...methods}>
-        <form autoComplete="off" css={tw`grid grid-cols-1 gap-6`} onSubmit={methods.handleSubmit(onSubmit)}>
-          <div>
-            <Label htmlFor="user">Username</Label>
-            <Input type="text" name="user" autoComplete="off" autoFocus />
-          </div>
-          <div ref={ref}>
-            <Label htmlFor="token">Access Token</Label>
-            <Input
-              type="text"
-              name="token"
-              onFocus={handleFocus}
-              readOnly
-              disabled={!token}
-              icon={
-                <Copy
-                  disabled={!token}
-                  onClick={async () => {
-                    await onCopy(token)
-                  }}
-                />
-              }
-            />
-            <div css={tw`text-xs text-gray-300 mt-1`}>Register a username to receive your access token</div>
-          </div>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <Grid cols={1} gap={6}>
+            <Box>
+              <Label htmlFor="user">Username</Label>
+              <Input type="text" name="user" autoComplete="off" autoFocus />
+            </Box>
+            <Box ref={ref}>
+              <Label htmlFor="token">Access Token</Label>
+              <Input
+                type="text"
+                name="token"
+                onFocus={handleFocus}
+                readOnly
+                disabled={!token}
+                icon={
+                  <Copy
+                    disabled={!token}
+                    onClick={async () => {
+                      await onCopy(token)
+                    }}
+                  />
+                }
+              />
+              <Typography size="xs" css={tw`text-gray-300 mt-1`}>
+                Register a username to receive your access token
+              </Typography>
+            </Box>
 
-          <div css={tw`grid grid-flow-row gap-4`}>
-            {isSuccess && (
-              <div
-                css={[
-                  tw`flex items-center space-x-4`,
-                  styles.DEFAULT,
-                  isCopied && styles.copied,
-                  !isCopied && styles.notCopied,
-                ]}
-              >
-                <HiXCircle size={20} />
-                <span css={tw`text-sm`}>{isCopied ? 'Token Copied!' : 'Token Not Copied'}</span>
-              </div>
-            )}
-            {!isCopied && !token && <Button type="submit">Register</Button>}
-            {!!token && (
-              <Button
-                disabled={!isCopied}
-                type="button"
-                onClick={() => {
-                  navigate('/auth/login', { state: { token }, replace: true })
-                }}
-              >
-                Let&apos;s go!
-              </Button>
-            )}
-            <div css={tw`text-sm text-center`}>
-              Already have an access token?&nbsp;
-              <Link css={tw`font-bold`} to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ token }}>
-                Login
-              </Link>
-            </div>
-          </div>
+            <Grid gap={4}>
+              {isSuccess && (
+                <Grid
+                  variant="flex"
+                  gap={4}
+                  css={[styles.DEFAULT, isCopied && styles.copied, !isCopied && styles.notCopied]}
+                >
+                  <HiXCircle size={20} />
+                  <Typography as="span" size="sm" nowrap>
+                    {isCopied ? 'Token Copied!' : 'Token Not Copied'}
+                  </Typography>
+                </Grid>
+              )}
+              {!isCopied && !token && <Button type="submit">Register</Button>}
+              {!!token && (
+                <Button
+                  disabled={!isCopied}
+                  type="button"
+                  onClick={() => {
+                    navigate('/auth/login', { state: { token }, replace: true })
+                  }}
+                >
+                  Let&apos;s go!
+                </Button>
+              )}
+              <Typography size="sm" align="center">
+                Already have an access token?&nbsp;
+                <Typography as={Link} weight="bold" to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ token }}>
+                  Login
+                </Typography>
+              </Typography>
+            </Grid>
+          </Grid>
         </form>
       </FormProvider>
-    </div>
+    </Grid>
   )
 }
