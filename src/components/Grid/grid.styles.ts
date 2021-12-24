@@ -3,6 +3,8 @@ import tw from 'twin.macro'
 export const columnStyles = {
   auto: tw`grid-flow-col`,
   min: tw`auto-cols-min`,
+  max: tw`auto-cols-max`,
+  fr: tw`auto-cols-fr`,
   1: tw`grid-cols-1`,
   2: tw`grid-cols-2`,
   3: tw`grid-cols-3`,
@@ -19,13 +21,16 @@ export const columnStyles = {
 
 export const rowStyles = {
   auto: tw`grid-flow-row`,
+  none: tw`grid-rows-none`,
+  min: tw`auto-rows-min`,
+  max: tw`auto-rows-max`,
+  fr: tw`auto-rows-fr`,
   1: tw`grid-rows-1`,
   2: tw`grid-rows-2`,
   3: tw`grid-rows-3`,
   4: tw`grid-rows-4`,
   5: tw`grid-rows-5`,
   6: tw`grid-rows-6`,
-  none: tw`grid-rows-none`,
 }
 
 export const justifyStyles = {
