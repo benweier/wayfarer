@@ -22,6 +22,7 @@ const DashboardPage = lazy(() => import('@/routes/Dashboard').then((mod) => ({ d
 const AuthPage = lazy(() => import('@/routes/Auth').then((mod) => ({ default: mod.AuthPage })))
 const Login = lazy(() => import('@/components/Auth').then((mod) => ({ default: mod.Login })))
 const Register = lazy(() => import('@/components/Auth').then((mod) => ({ default: mod.Register })))
+const OverviewPage = lazy(() => import('@/routes/Overview').then((mod) => ({ default: mod.OverviewPage })))
 const SystemPage = lazy(() => import('@/routes/Systems').then((mod) => ({ default: mod.SystemPage })))
 const LoanPage = lazy(() => import('@/routes/Loans').then((mod) => ({ default: mod.LoanPage })))
 const ShipPage = lazy(() => import('@/routes/Ships').then((mod) => ({ default: mod.ShipPage })))
@@ -48,7 +49,7 @@ export const App = Sentry.withProfiler(() => {
                     }
                   >
                     <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
-                    <Route path={ROUTES.OVERVIEW} element={<>overview</>} />
+                    <Route path={ROUTES.OVERVIEW} element={<OverviewPage />} />
                     <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
                     <Route path={ROUTES.SHIPS} element={<ShipPage />} />
                     <Route path={ROUTES.LOANS} element={<LoanPage />} />
