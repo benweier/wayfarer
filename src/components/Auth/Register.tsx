@@ -5,9 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import tw from 'twin.macro'
 import { Copy } from './Copy'
 import { useCopy } from './useCopy'
-import { Box } from '@/components/Box'
 import { Button } from '@/components/Button'
-import { Grid } from '@/components/Grid'
 import { Input } from '@/components/Input'
 import { Label } from '@/components/Label'
 import { Link } from '@/components/Link'
@@ -56,18 +54,18 @@ export const Register = () => {
   const token = methods.watch('token')
 
   return (
-    <Grid rows="auto" gap={4}>
+    <div css={tw`grid gap-4`}>
       <Typography size="xl" weight="bold" align="center">
         Register
       </Typography>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <Grid cols={1} gap={6}>
-            <Box>
+          <div css={tw`grid grid-cols-1 gap-6`}>
+            <div>
               <Label htmlFor="user">Username</Label>
               <Input type="text" name="user" autoComplete="off" autoFocus />
-            </Box>
-            <Box ref={ref}>
+            </div>
+            <div ref={ref}>
               <Label htmlFor="token">Access Token</Label>
               <Input
                 type="text"
@@ -87,20 +85,16 @@ export const Register = () => {
               <Typography size="xs" css={tw`text-gray-300 mt-1`}>
                 Register a username to receive your access token
               </Typography>
-            </Box>
+            </div>
 
-            <Grid gap={4}>
+            <div css={tw`grid gap-4`}>
               {isSuccess && (
-                <Grid
-                  variant="flex"
-                  gap={4}
-                  css={[styles.DEFAULT, isCopied && styles.copied, !isCopied && styles.notCopied]}
-                >
+                <div css={[tw`flex gap-4`, styles.DEFAULT, isCopied && styles.copied, !isCopied && styles.notCopied]}>
                   <HiXCircle size={20} />
                   <Typography as="span" size="sm" nowrap>
                     {isCopied ? 'Token Copied!' : 'Token Not Copied'}
                   </Typography>
-                </Grid>
+                </div>
               )}
               {!isCopied && !token && <Button type="submit">Register</Button>}
               {!!token && (
@@ -120,10 +114,10 @@ export const Register = () => {
                   Login
                 </Typography>
               </Typography>
-            </Grid>
-          </Grid>
+            </div>
+          </div>
         </form>
       </FormProvider>
-    </Grid>
+    </div>
   )
 }

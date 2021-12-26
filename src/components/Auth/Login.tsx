@@ -1,9 +1,7 @@
 import { FocusEvent, useCallback } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import tw from 'twin.macro'
-import { Box } from '@/components/Box'
 import { Button } from '@/components/Button'
-import { Grid } from '@/components/Grid'
 import { Input } from '@/components/Input'
 import { Label } from '@/components/Label'
 import { Link } from '@/components/Link'
@@ -37,26 +35,26 @@ export const Login = () => {
   )
 
   return (
-    <Grid rows="auto" gap={4}>
+    <div css={tw`grid gap-4`}>
       <Typography size="xl" weight="bold" align="center">
         Login
       </Typography>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <Grid cols={1} gap={6}>
-            <Box>
+          <div css={tw`grid grid-cols-1 gap-6`}>
+            <div>
               <Label htmlFor="user">Username</Label>
               <Input type="text" name="user" />
               <Typography size="xs" css={tw`text-gray-300 mt-1`}>
                 Your username is not required to login, but may be useful with password managers if you have multiple
                 accounts
               </Typography>
-            </Box>
-            <Box>
+            </div>
+            <div>
               <Label htmlFor="token">Access Token</Label>
               <Input label="Access Token" type="password" name="token" onFocus={handleFocus} autoFocus />
-            </Box>
-            <Grid rows="auto" gap={4}>
+            </div>
+            <div css={tw`grid gap-4`}>
               <Button type="submit" disabled={isLoading}>
                 Login
               </Button>
@@ -66,10 +64,10 @@ export const Login = () => {
                   Register
                 </Typography>
               </Typography>
-            </Grid>
-          </Grid>
+            </div>
+          </div>
         </form>
       </FormProvider>
-    </Grid>
+    </div>
   )
 }

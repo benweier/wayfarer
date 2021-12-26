@@ -2,8 +2,6 @@ import { Suspense } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Navigate, Outlet } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
-import { Box } from '@/components/Box'
-import { Grid } from '@/components/Grid'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { AuthLayout } from '@/layouts/Auth'
@@ -20,17 +18,17 @@ export const AuthPage = () => {
 
   return (
     <AuthLayout>
-      <Box p={8} css={tw`rounded-lg border border-gray-700 shadow-xl`}>
+      <div css={tw`rounded-lg border border-gray-700 shadow-xl p-8`}>
         <Suspense
           fallback={
-            <Grid justify="center" align="center" css={tw`animate-pulse`}>
+            <div css={tw`grid justify-items-center animate-pulse`}>
               <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
-            </Grid>
+            </div>
           }
         >
           <Outlet />
         </Suspense>
-      </Box>
+      </div>
     </AuthLayout>
   )
 }

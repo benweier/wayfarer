@@ -1,6 +1,5 @@
 import { Fragment, ReactNode } from 'react'
-import { Box } from '@/components/Box'
-import { Grid } from '@/components/Grid'
+import tw from 'twin.macro'
 import { useAvailableGoodsQuery } from '@/services/spacetraders/core'
 import { YourShip } from '@/types/spacetraders'
 
@@ -8,17 +7,17 @@ export const ShipCargo = ({ ship, children }: { ship: YourShip; children?: React
   const { data } = useAvailableGoodsQuery()
 
   return (
-    <Box>
+    <div>
       {ship.cargo.map((cargo) => (
         <Fragment key={cargo.good}>
-          <Grid rows="auto" gap={4}>
+          <div css={tw`grid gap-4`}>
             <span>{data?.goods.find((good) => good.symbol === cargo.good)?.name}</span>
             <span>{cargo.totalVolume}</span>
-          </Grid>
+          </div>
         </Fragment>
       ))}
 
       {children}
-    </Box>
+    </div>
   )
 }
