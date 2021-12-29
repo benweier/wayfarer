@@ -9,7 +9,7 @@ export const DashboardPage = () => {
     <DashboardTemplate>
       <Suspense
         fallback={
-          <div css={tw`grid justify-items-center animate-pulse h-96`}>
+          <div css={tw`grid justify-center items-center animate-pulse h-96`}>
             <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
           </div>
         }

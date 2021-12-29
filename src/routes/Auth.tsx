@@ -23,7 +23,7 @@ export const AuthPage = () => {
         <div css={tw`rounded-lg border border-gray-700 shadow-xl p-8`}>
           <Suspense
             fallback={
-              <div css={tw`grid justify-items-center animate-pulse`}>
+              <div css={tw`grid justify-center items-center animate-pulse`}>
                 <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
               </div>
             }
