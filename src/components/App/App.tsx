@@ -1,11 +1,10 @@
-import { Suspense, lazy, StrictMode } from 'react'
+import { Suspense, lazy } from 'react'
 import * as Sentry from '@sentry/react'
 import { HelmetProvider } from 'react-helmet-async'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
-import { AppStyles } from '@/components/AppStyles'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { SentryInstrumentation } from '@/components/Sentry/Instrumentation'
 import { ROUTES } from '@/config/routes'
@@ -31,12 +30,11 @@ const LeaderboardPage = lazy(() => import('@/routes/Leaderboard').then((mod) => 
 
 export const App = Sentry.withProfiler(() => {
   return (
-    <StrictMode>
+    <>
       <BrowserRouter>
         <SentryInstrumentation>
           <HelmetProvider>
             <Provider store={store}>
-              <AppStyles />
               <Suspense fallback={<Loading />}>
                 <Routes>
                   <Route index element={<HomePage />} />
@@ -70,6 +68,6 @@ export const App = Sentry.withProfiler(() => {
           </HelmetProvider>
         </SentryInstrumentation>
       </BrowserRouter>
-    </StrictMode>
+    </>
   )
 })
