@@ -1,4 +1,4 @@
 import { render } from 'react-dom'
-import { App } from './components/App'
+import { Root } from './Root'
 
-render(<App />, document.getElementById('root'))
+render(<Root />, document.getElementById('root'))
