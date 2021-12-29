@@ -92,7 +92,7 @@ module.exports = (env,argv) => {
       compress: false,
       port: 8080,
       hot: true,
-      server: 'https',
+      server: 'spdy',
       static: {
         directory: path.join(__dirname, 'public'),
       },
