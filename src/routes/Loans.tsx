@@ -4,11 +4,9 @@ import { CurrentLoan } from '@/components/Loans/Current'
 
 export const LoanPage = () => {
   return (
-    <div css={tw`container`}>
-      <div css={tw`grid gap-10`}>
-        <CurrentLoan />
-        <AvailableLoans />
-      </div>
+    <div css={tw`grid gap-10`}>
+      <CurrentLoan />
+      <AvailableLoans />
     </div>
   )
 }
