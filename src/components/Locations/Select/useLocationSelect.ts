@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { LocationSelectOptions } from './types'
-import { useSelect } from '@/components/Select/useSelect'
+import { useSelect } from '@/components/Select'
 import { useAvailableSystemsQuery } from '@/services/spacetraders/core'
 import { Location, System } from '@/types/spacetraders'
 
