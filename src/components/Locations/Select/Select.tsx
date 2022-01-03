@@ -1,8 +1,8 @@
 import { useMemo, useCallback } from 'react'
 import tw from 'twin.macro'
-import { Label } from '@/components/Label'
-import { Select } from '@/components/Select'
 import { LocationSelectOptions } from './types'
+import { Label } from '@/components/Label'
+import { SelectField } from '@/components/Select'
 
 export const LocationSelect = ({ locations, selected, isLoading, onChange }: LocationSelectOptions) => {
   const options = useMemo(
@@ -33,5 +33,5 @@ export const LocationSelect = ({ locations, selected, isLoading, onChange }: Loc
       </span>
     )
 
-  return <Select label="Location" selected={value} options={options} onChange={handleChange} />
+  return <SelectField label="Location" selected={value} options={options} onChange={handleChange} />
 }

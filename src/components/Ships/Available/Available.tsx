@@ -2,8 +2,7 @@ import { useMemo, FC } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
 import { Caption } from '@/components/Caption'
-import { Select } from '@/components/Select'
-import { useSelect } from '@/components/Select/useSelect'
+import { SelectField, useSelect } from '@/components/Select'
 import { PurchaseLocation } from '@/components/Ships/PurchaseLocation'
 import { SystemSelect, useSystemSelect } from '@/components/Systems/Select'
 import { useMyShipsQuery, useShipListingsQuery } from '@/services/spacetraders/core'
@@ -122,10 +121,10 @@ export const AvailableShips = () => {
             <SystemSelect {...system} />
           </div>
           <div css={tw`w-72`}>
-            <Select label="Group By" {...groupBy} />
+            <SelectField label="Group By" {...groupBy} />
           </div>
           <div css={tw`w-72`}>
-            <Select label="Sort By" {...sortBy} />
+            <SelectField label="Sort By" {...sortBy} />
           </div>
         </div>
         {system.selected && (
