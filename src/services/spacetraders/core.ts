@@ -5,6 +5,7 @@ import type {
   AvailableGoodsResponse,
   AvailableLoansResponse,
   AvailableShipsResponse,
+  Good,
   LeaderboardResponse,
   Loan,
   LoanType,
@@ -71,7 +72,7 @@ export const spacetradersAPI = createApi({
     availableGoods: builder.query<AvailableGoodsResponse, void>({
       query: () => ({ url: `/types/goods`, method: 'GET' }),
     }),
-    purchaseGoods: builder.mutation<{ credits: number; order: Order; ship: YourShip }, { ship: string; good: string }>({
+    purchaseGoods: builder.mutation<{ credits: number; order: Order; ship: YourShip }, { ship: string; good: Good }>({
       query: (args) => ({ url: `/my/purchase-orders`, method: 'POST', body: { shipId: args.ship, good: args.good } }),
     }),
     availableSystems: builder.query<SystemsResponse, void>({
