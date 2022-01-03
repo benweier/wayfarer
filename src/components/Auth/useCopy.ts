@@ -4,7 +4,7 @@ export const useCopy = () => {
   const ref = useRef<HTMLDivElement>(null)
   const [isCopied, setIsCopied] = useState(false)
   const onCopy = useCallback(
-    async (value) => {
+    async (value: string) => {
       return await navigator.clipboard.writeText(value).then(() => {
         setIsCopied(true)
       })
