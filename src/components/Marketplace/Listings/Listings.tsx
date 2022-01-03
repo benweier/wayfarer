@@ -5,9 +5,7 @@ import tw, { theme } from 'twin.macro'
 import { Button } from '@/components/Button'
 import { Caption } from '@/components/Caption'
 import { PurchaseGoods } from '@/components/Marketplace/PurchaseGoods'
-import { MarketplaceShip } from '@/components/Marketplace/Ship'
 import { Modal } from '@/components/Modal'
-import { Select } from '@/components/Select'
 import {
   useAvailableGoodsQuery,
   useLocationQuery,
@@ -130,47 +128,12 @@ export const MarketplaceListings = () => {
                             )}
                           >
                             {({ closeModal }) => (
-                              <>
-                                <div css={tw`grid grid-flow-row gap-4 p-4`}>
-                                  <div>
-                                    <Select
-                                      label="Ship"
-                                      options={ships.map((ship) => ({
-                                        id: ship.id,
-                                        name: (
-                                          <div css={tw`grid gap-4 grid-cols-3 items-center`}>
-                                            <div>
-                                              {ship.manufacturer} {ship.class}
-                                            </div>
-                                            <div css={tw`text-xs`}>
-                                              <span>
-                                                {ship.cargo.reduce(
-                                                  (cargo, { totalVolume = 0 }) => cargo + totalVolume,
-                                                  0,
-                                                )}
-                                              </span>
-                                              <span> / </span>
-                                              <span>{ship.maxCargo}</span>
-                                            </div>
-                                            <div css={tw`text-xs text-gray-400`}>ID: {ship.id}</div>
-                                          </div>
-                                        ),
-                                      }))}
-                                      onChange={console.log}
-                                    />
-                                  </div>
-                                </div>
-                                <div css={tw`border-t border-gray-900`}>
-                                  <div css={tw`grid grid-flow-col gap-2 bg-gray-900 p-2 rounded-b-lg`}>
-                                    <Button disabled onClick={closeModal}>
-                                      CONFIRM
-                                    </Button>
-                                    <Button onClick={closeModal} css={tw`bg-gray-800 ring-rose-500`}>
-                                      CANCEL
-                                    </Button>
-                                  </div>
-                                </div>
-                              </>
+                              <PurchaseGoods
+                                ships={ships}
+                                marketplace={item}
+                                onDone={closeModal}
+                                onCancel={closeModal}
+                              />
                             )}
                           </Modal>
                           <Button css={[tw`text-white bg-emerald-500 font-bold`, tw`focus:(ring-blue-400)`]}>
