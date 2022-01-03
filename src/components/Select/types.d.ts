@@ -1,6 +1,11 @@
-import { ReactNode } from 'react'
+export type SelectOption = { id: string; name: string | JSX.Element }
 
-export interface SelectOption {
-  id: string
-  name: string | ReactNode
+export type SelectProps<T> = {
+  label: string
+  data: T[]
+  selected?: T
+  loading?: JSX.Element
+  onChange: (value?: T) => void
+  getOption: (item: T, index: number, source: T[]) => SelectOption
+  getItemKey: (value?: T) => string | number | undefined
 }

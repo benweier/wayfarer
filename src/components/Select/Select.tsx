@@ -1,71 +1,53 @@
-import { Listbox } from '@headlessui/react'
-import { HiCheck, HiSelector } from 'react-icons/hi'
-import tw, { theme } from 'twin.macro'
-import { SelectOption } from './types'
+import { useMemo, useCallback } from 'react'
+import tw from 'twin.macro'
+import { SelectField } from './Field'
+import { SelectProps, SelectOption } from './types'
 import { Label } from '@/components/Label'
 
-export const Select = <T extends SelectOption = SelectOption>({
+type SelectItem = unknown
+
+export const SelectSkeleton = ({ label }: { label: string }) => (
+  <span>
+    <Label>{label}</Label>
+    <div
+      css={[
+        tw`text-sm bg-gray-700 relative w-full border-2 border-gray-500 shadow-inner rounded-md px-4 py-2 opacity-50`,
+      ]}
+    >
+      <div css={tw`flex items-center h-5`}>
+        <div css={tw`animate-pulse rounded-full bg-gray-500 w-2/3 h-2`} />
+      </div>
+    </div>
+  </span>
+)
+
+export const Select = <T extends SelectItem>({
   label,
+  data,
   selected,
-  options = [],
+  loading,
   onChange,
-}: {
-  label: string
-  selected?: T
-  options?: T[]
-  onChange: (value?: T) => void
-}) => {
-  return (
-    <Listbox value={selected} onChange={onChange}>
-      <>
-        <Listbox.Label as={Label}>{label}</Listbox.Label>
-        <div css={tw`mt-1 relative`}>
-          <Listbox.Button
-            css={[
-              tw`text-sm bg-gray-700 relative w-full border-2 border-gray-500 shadow-inner rounded-md pl-4 pr-10 py-2 text-left cursor-default`,
-              tw`focus:(ring ring-emerald-400 outline-none border-gray-800)`,
-            ]}
-          >
-            <span css={tw`block truncate font-semibold`}>{selected?.name ?? <>&nbsp;</>}</span>
-            <span css={tw`absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none`}>
-              <HiSelector size={20} color={theme`colors.gray.400`} aria-hidden="true" />
-            </span>
-          </Listbox.Button>
+  getOption,
+  getItemKey,
+}: SelectProps<T>) => {
+  const options = useMemo(() => data.map(getOption), [data, getOption])
+  const value = useMemo(
+    () =>
+      data.reduce<SelectOption | undefined>((result, item, index, source) => {
+        if (getItemKey(item) === getItemKey(selected)) {
+          return getOption(item, index, source)
+        }
 
-          {options.length > 0 && (
-            <Listbox.Options
-              css={[
-                tw`absolute z-10 mt-1 w-full bg-gray-700 max-h-48 rounded-md text-sm overflow-auto outline-none`,
-                tw`focus:(ring-2 ring-emerald-400)`,
-              ]}
-            >
-              {options.map((option) => (
-                <Listbox.Option key={option.id} value={option} css={tw`relative`}>
-                  {({ selected, active }) => (
-                    <>
-                      <span
-                        css={[
-                          tw`m-1 rounded cursor-default select-none relative py-2 pl-3 pr-9 block truncate`,
-                          tw`transition-colors duration-100 ease-in-out`,
-                          active && tw`bg-gray-600 bg-opacity-80`,
-                        ]}
-                      >
-                        {option.name}
-                      </span>
-
-                      {selected ? (
-                        <span css={[tw`absolute inset-y-0 right-0 flex items-center pr-4`]}>
-                          <HiCheck size={20} aria-hidden="true" color={theme`colors.emerald.400`} />
-                        </span>
-                      ) : null}
-                    </>
-                  )}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          )}
-        </div>
-      </>
-    </Listbox>
+        return result
+      }, undefined),
+    [data, selected, getItemKey, getOption],
   )
+  const handleChange = useCallback(
+    (value?: SelectOption) => {
+      onChange(data.find((item) => getItemKey(item) === value?.id))
+    },
+    [data, onChange, getItemKey],
+  )
+
+  return loading ?? <SelectField label={label} selected={value} options={options} onChange={handleChange} />
 }
