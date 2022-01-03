@@ -9,4 +9,4 @@ const styles = {
   disabled: tw`disabled:(opacity-50 cursor-default)`,
 }
 
-export const Button = styled.button(() => [styles.DEFAULT, styles.disabled])
+export const Button = styled.button.attrs(({ type = 'button' }) => ({ type }))(() => [styles.DEFAULT, styles.disabled])
