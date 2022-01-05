@@ -1,5 +1,5 @@
-import { formatNumber } from './number'
 import { Ship } from '@/types/spacetraders'
+import { formatNumber } from './number'
 
 export type GroupByType = 'manufacturer' | 'class' | 'type'
 export type SortableShipAttributes = 'maxCargo' | 'speed' | 'loadingSpeed' | 'plating' | 'weapons'

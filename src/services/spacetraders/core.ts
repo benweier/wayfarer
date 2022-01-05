@@ -1,5 +1,4 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { baseQueryWithTokenParam } from './base-query'
 import type {
   AccountResponse,
   AvailableGoodsResponse,
@@ -17,6 +16,7 @@ import type {
   YourLoan,
   YourShip,
 } from '@/types/spacetraders.d'
+import { baseQueryWithTokenParam } from './base-query'
 
 export const spacetradersAPI = createApi({
   reducerPath: 'spacetradersAPI',
