@@ -33,7 +33,7 @@ export const AuthTemplate: FC = ({ children }) => {
 
       {children}
 
-      <div css={tw`grid grid-flow-col gap-8 py-16`}>
+      <div css={tw`grid grid-flow-col gap-8 py-8`}>
         <div css={tw`grid grid-flow-col gap-8 items-center justify-center`}>
           <IconContext.Provider value={{ size: '32', color: theme`colors.gray.400` }}>
             <a href="https://spacetraders.io" title="SpaceTraders">
