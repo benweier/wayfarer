@@ -99,6 +99,7 @@
   "scripts": {
     "start": "webpack serve --mode=development --node-env=development",
     "serve": "webpack serve --mode=production --node-env=production",
-    "build": "webpack --mode=production --node-env=production"
+    "build": "webpack --mode=production --node-env=production",
+    "lint": "eslint src/**/*.{ts,tsx} --ext .ts,.tsx"
   }
 }
