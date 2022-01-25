@@ -287,5 +287,5 @@ export interface UserWorth {
 
 export interface LeaderboardResponse {
   netWorth: UserWorth[]
-  userNetWorth: UserWorth
+  userNetWorth?: UserWorth
 }

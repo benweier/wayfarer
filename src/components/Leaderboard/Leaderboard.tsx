@@ -37,9 +37,11 @@ export const Leaderboard = () => {
       </div>
       <div css={tw`grid grid-flow-row gap-4`}>
         {data.netWorth.map((leader) => (
-          <LeaderboardItem key={leader.rank} leader={leader} highlight={leader.rank === data.userNetWorth.rank} />
+          <LeaderboardItem key={leader.rank} leader={leader} highlight={leader.rank === data.userNetWorth?.rank} />
         ))}
-        {data.userNetWorth.rank > data.netWorth.length && <LeaderboardItem leader={data.userNetWorth} highlight />}
+        {data.userNetWorth && data.userNetWorth.rank > data.netWorth.length && (
+          <LeaderboardItem leader={data.userNetWorth} highlight />
+        )}
       </div>
     </div>
   )
