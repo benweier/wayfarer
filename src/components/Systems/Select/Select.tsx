@@ -1,8 +1,8 @@
-import { useMemo, useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import tw from 'twin.macro'
-import { SystemSelectOptions } from './types'
 import { Label } from '@/components/Label'
 import { SelectField } from '@/components/Select'
+import { SystemSelectOptions } from './types'
 
 export const SystemSelect = ({ systems, selected, isLoading, onChange }: SystemSelectOptions) => {
   const options = useMemo(() => systems.map((system) => ({ id: system.symbol, name: system.name })), [systems])

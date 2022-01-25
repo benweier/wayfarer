@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { IconContext } from 'react-icons'
 import { GiNorthStarShuriken } from 'react-icons/gi'
-import { VscRocket, VscGithub } from 'react-icons/vsc'
+import { VscGithub, VscRocket } from 'react-icons/vsc'
 import tw, { theme } from 'twin.macro'
 import { SpaceTradersStatus, useSpaceTradersStatus } from '@/components/SpaceTradersStatus'
 import { Wayfarer } from '@/components/Wayfarer'
