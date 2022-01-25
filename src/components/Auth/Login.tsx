@@ -1,5 +1,5 @@
 import { FocusEvent, useCallback } from 'react'
-import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
+import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import tw from 'twin.macro'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
@@ -34,6 +34,8 @@ export const Login = () => {
     [myAccountQuery],
   )
 
+  const user = useWatch({ control: methods.control, name: 'user' })
+
   return (
     <div css={tw`grid gap-4`}>
       <Typography size="xl" weight="bold" align="center">
@@ -60,7 +62,7 @@ export const Login = () => {
               </Button>
               <Typography size="sm" align="center">
                 Don&apos;t have an access token?&nbsp;
-                <Typography as={Link} weight="bold" to={`${ROUTES.AUTH}/${ROUTES.REGISTER}`}>
+                <Typography as={Link} weight="bold" to={`${ROUTES.AUTH}/${ROUTES.REGISTER}`} state={{ user }}>
                   Register
                 </Typography>
               </Typography>

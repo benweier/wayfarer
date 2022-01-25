@@ -1,17 +1,18 @@
 import { FocusEvent, useCallback } from 'react'
-import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
+import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { HiXCircle } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import tw from 'twin.macro'
-import { Copy } from './Copy'
-import { useCopy } from './useCopy'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Label } from '@/components/Label'
 import { Link } from '@/components/Link'
 import { Typography } from '@/components/Typography'
 import { ROUTES } from '@/config/routes'
+import { useLocation } from '@/hooks/useLocation'
 import { useClaimUserMutation } from '@/services/spacetraders/core'
+import { Copy } from './Copy'
+import { useCopy } from './useCopy'
 
 interface RegisterFormState {
   user: string
@@ -27,10 +28,12 @@ const styles = {
 const handleFocus = (node: FocusEvent<HTMLInputElement>) => node.target.select()
 
 export const Register = () => {
+  const location = useLocation<Partial<RegisterFormState>>()
   const { ref, isCopied, onCopy, reset } = useCopy()
   const navigate = useNavigate()
   const methods = useForm<RegisterFormState>({
     defaultValues: {
+      user: location.state?.user ?? '',
       token: '',
     },
   })
@@ -51,7 +54,8 @@ export const Register = () => {
     [claimUserMutation, methods, reset, ref],
   )
 
-  const token = methods.watch('token')
+  const user = useWatch({ control: methods.control, name: 'user' })
+  const token = useWatch({ control: methods.control, name: 'token' })
 
   return (
     <div css={tw`grid gap-4`}>
@@ -102,7 +106,7 @@ export const Register = () => {
                   disabled={!isCopied}
                   type="button"
                   onClick={() => {
-                    navigate('/auth/login', { state: { token }, replace: true })
+                    navigate('/auth/login', { state: { user, token }, replace: true })
                   }}
                 >
                   Let&apos;s go!
@@ -110,7 +114,7 @@ export const Register = () => {
               )}
               <Typography size="sm" align="center">
                 Already have an access token?&nbsp;
-                <Typography as={Link} weight="bold" to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ token }}>
+                <Typography as={Link} weight="bold" to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ user, token }}>
                   Login
                 </Typography>
               </Typography>
