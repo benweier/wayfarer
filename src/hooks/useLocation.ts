@@ -4,7 +4,7 @@ import { useLocation as useRouterLocation } from 'react-router'
 type LocationState = unknown
 type Key = string
 
-interface Location<T = LocationState> extends Path {
+export interface Location<T = LocationState> extends Path {
   state?: T
   key: Key
 }
