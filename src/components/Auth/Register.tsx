@@ -106,10 +106,10 @@ export const Register = () => {
                   disabled={!isCopied}
                   type="button"
                   onClick={() => {
-                    navigate('/auth/login', { state: { user, token }, replace: true })
+                    navigate(`${ROUTES.AUTH}/${ROUTES.LOGIN}`, { state: { user, token }, replace: true })
                   }}
                 >
-                  Let&apos;s go!
+                  Got it. Let&apos;s go!
                 </Button>
               )}
               <Typography size="sm" align="center">
