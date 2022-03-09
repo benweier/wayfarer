@@ -1,24 +1,26 @@
 import { FC } from 'react'
-import { useTransition } from '@react-spring/web'
+import { UseTransitionProps, useTransition } from '@react-spring/web'
 import { Animated } from '@/components/Animated'
-import { useLocation } from '@/hooks/useLocation'
+import { Location, useLocation } from '@/hooks/useLocation'
 
 export const Transition: FC = ({ children }) => {
-  const location = useLocation()
+  const location = useLocation<{ transition: UseTransitionProps<Location> }>()
 
-  const transitions = useTransition(location, {
-    keys: location.pathname,
-    exitBeforeEnter: true,
-    config: { duration: 100 },
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  })
+  const transitions = useTransition(
+    location,
+    location.state?.transition ?? {
+      exitBeforeEnter: true,
+      config: { duration: 85 },
+      from: { opacity: 0 },
+      enter: { opacity: 1 },
+      leave: { opacity: 0 },
+    },
+  )
 
   return (
     <>
-      {transitions((style, location) => (
-        <Animated key={location.pathname} style={style}>
+      {transitions((style, loc) => (
+        <Animated key={loc.pathname} style={style}>
           {children}
         </Animated>
       ))}
