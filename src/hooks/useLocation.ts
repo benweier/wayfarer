@@ -2,9 +2,11 @@ import { Path } from 'history'
 import { useLocation as useRouterLocation } from 'react-router'
 
 type LocationState = unknown
+type Key = string
 
 interface Location<T = LocationState> extends Path {
   state?: T
+  key: Key
 }
 
 interface UseLocation {
