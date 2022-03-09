@@ -12,7 +12,7 @@ interface OwnedShip {
 
 const OwnedShipItem = ({ ship }: { ship: OwnedShip }) => {
   return (
-    <div css={tw`shadow p-4 border border-gray-700 rounded-lg grid grid-flow-row gap-2`}>
+    <div css={tw`shadow p-4 border border-gray-700 rounded grid grid-flow-row gap-2`}>
       <div css={tw`grid grid-flow-row gap-6`}>
         <div css={tw`grid grid-flow-col justify-between items-center`}>
           <div>

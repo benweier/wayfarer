@@ -26,7 +26,7 @@ const MarketplaceItem = ({ item, children }: { item: Marketplace; children?: Rea
   if (!good) return null
 
   return (
-    <div key={good.symbol} css={tw`shadow p-4 border border-gray-700 rounded-lg grid grid-flow-row gap-4`}>
+    <div key={good.symbol} css={tw`shadow p-4 border border-gray-700 rounded grid grid-flow-row gap-4`}>
       <div css={tw`grid grid-flow-row gap-6 auto-rows-min`}>
         <div css={tw`grid grid-cols-2 items-center`}>
           <div css={tw`text-lg font-bold`}>{good.name}</div>

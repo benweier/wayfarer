@@ -9,7 +9,8 @@ export const Typography = styled.div<{
   italic?: boolean
   underline?: boolean
   nowrap?: boolean
-}>(({ size, weight, align, leading, italic, underline, nowrap }) => [
+  truncate?: boolean
+}>(({ size, weight, align, leading, italic, underline, nowrap, truncate }) => [
   size && sizeStyles[size],
   weight && weightStyles[weight],
   align && alignStyles[align],
@@ -17,4 +18,5 @@ export const Typography = styled.div<{
   italic && tw`italic`,
   underline && tw`underline`,
   nowrap && tw`whitespace-nowrap`,
+  truncate && tw`truncate`,
 ])

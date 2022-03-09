@@ -14,7 +14,7 @@ export const Dialog = ({ open, children, render = rndr }: ModalProps) => {
       <div
         tabIndex={0}
         css={[
-          tw`fixed w-full h-full max-w-full bg-gray-800 sm:(h-auto rounded-lg maxHeight[80vh] max-w-3xl border border-gray-900 shadow-xl)`,
+          tw`fixed w-full h-full max-w-full bg-gray-800 sm:(h-auto rounded maxHeight[80vh] max-w-3xl border border-gray-900 shadow-xl)`,
         ]}
         role="dialog"
         aria-modal="true"

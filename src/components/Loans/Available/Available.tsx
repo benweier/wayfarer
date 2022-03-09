@@ -41,7 +41,7 @@ const AcceptLoan = ({ type }: { type: LoanType }) => {
 
 const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
   return (
-    <div css={tw`shadow p-4 border border-gray-700 rounded-lg`}>
+    <div css={tw`shadow p-4 border border-gray-700 bg-gray-700 bg-opacity-20 rounded`}>
       <div css={tw`grid grid-flow-col justify-between gap-2`}>
         <div>
           <Caption>

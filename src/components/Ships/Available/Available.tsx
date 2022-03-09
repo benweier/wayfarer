@@ -21,7 +21,10 @@ const ShipStat = ({ label, value }: { label: string; value: number | string }) =
 
 export const AvailableShipItem: FC<{ ship: Ship; owned?: number }> = ({ ship, owned = 0, children }) => {
   return (
-    <div key={ship.type} css={tw`shadow p-4 border border-gray-700 rounded-lg grid grid-flow-row gap-2`}>
+    <div
+      key={ship.type}
+      css={tw`shadow p-4 border border-gray-700 bg-gray-700 bg-opacity-20 rounded grid grid-flow-row gap-2`}
+    >
       <div css={tw`grid grid-flow-row gap-6 auto-rows-min`}>
         <div css={tw`grid grid-cols-2 items-center`}>
           <div>
@@ -86,7 +89,7 @@ const AvailableShipList = ({
       {shipListings.map(([key, ships]) => (
         <div key={key}>
           <div css={tw`text-lg font-bold m-2`}>{key}</div>
-          <div css={tw`grid grid-cols-2 gap-8`}>
+          <div css={tw`grid grid-cols-3 gap-8`}>
             {ships.sort(sortShips(sortBy.id)).map((ship) => (
               <AvailableShipItem key={ship.type} ship={ship} owned={ownedShips[ship.type]}>
                 <Caption>Purchase Locations</Caption>

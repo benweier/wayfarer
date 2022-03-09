@@ -19,7 +19,9 @@ const Status = () => {
 
 export const AuthTemplate: FC = ({ children }) => {
   return (
-    <div css={tw`min-h-screen w-full px-4 py-4 grid gap-6 auto-rows-min grid-template-rows[auto 1fr auto]`}>
+    <div
+      css={tw`min-h-screen w-full px-4 py-4 grid gap-6 items-center auto-rows-min grid-template-rows[auto 1fr auto]`}
+    >
       <div css={tw`grid grid-flow-row justify-center items-center py-8`}>
         <div css={tw`place-self-center`}>
           <GiNorthStarShuriken size={64} />
@@ -31,7 +33,7 @@ export const AuthTemplate: FC = ({ children }) => {
         </div>
       </div>
 
-      {children}
+      <div css={tw`will-change[opacity]`}>{children}</div>
 
       <div css={tw`grid grid-flow-col gap-8 py-8`}>
         <div css={tw`grid grid-flow-col gap-8 items-center justify-center`}>

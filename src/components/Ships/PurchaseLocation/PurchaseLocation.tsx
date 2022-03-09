@@ -15,7 +15,7 @@ const PurchaseShip = ({ type, location, disabled }: { type: string; location: st
   return (
     <Button
       css={[
-        tw`py-2 px-4 rounded-full text-xs leading-none transition-colors duration-75`,
+        tw`py-2 px-4 rounded text-xs leading-none transition-colors duration-75`,
         confirm && tw`bg-emerald-400 text-emerald-900`,
       ]}
       disabled={isLoading || disabled}

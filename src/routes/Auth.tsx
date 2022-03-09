@@ -21,7 +21,7 @@ export const AuthPage = () => {
   return (
     <AuthTemplate>
       <AuthLayout>
-        <div css={tw`rounded-lg border border-gray-700 shadow-xl p-8`}>
+        <div css={tw`rounded border border-gray-700 shadow-xl p-8`}>
           <Suspense
             fallback={
               <div css={tw`grid justify-center items-center animate-pulse`}>

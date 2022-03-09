@@ -6,7 +6,12 @@ import { formatNumber } from '@/utilities/number'
 
 const LeaderboardItem = ({ leader, highlight = false }: { leader: UserWorth; highlight?: boolean }) => {
   return (
-    <div css={[tw`border border-gray-700 rounded shadow py-4 px-6`, highlight && tw`bg-emerald-600`]}>
+    <div
+      css={[
+        tw`border border-gray-700 bg-gray-700 bg-opacity-20 rounded shadow py-4 px-6`,
+        highlight && tw`bg-emerald-600`,
+      ]}
+    >
       <div css={tw`grid grid-flow-col justify-start items-center grid-template-columns[min-content 1fr min-content]`}>
         <div css={tw`text-3xl font-bold w-24`}>{leader.rank}</div>
         <div css={tw`text-lg font-medium`}>

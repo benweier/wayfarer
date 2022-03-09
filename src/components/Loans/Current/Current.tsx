@@ -26,7 +26,7 @@ const PayLoan = ({ id, repayment }: { id: string; repayment: number }) => {
 
 const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
   return (
-    <div css={tw`shadow p-4 border border-gray-600 rounded-lg`}>
+    <div css={tw`shadow p-4 border border-gray-600 rounded`}>
       <div css={tw`grid grid-flow-col auto-cols-min justify-between gap-2`}>
         <div>
           <Caption>{loan.type}</Caption>

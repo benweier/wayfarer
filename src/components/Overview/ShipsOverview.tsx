@@ -11,7 +11,7 @@ export const ShipsOverview = () => {
     <div>
       {ownedShipsQuery.data?.ships.map((ship) => (
         <Fragment key={ship.id}>
-          <div css={tw`grid grid-flow-col gap-4 items-center shadow p-4 border border-gray-700 rounded-lg`}>
+          <div css={tw`grid grid-flow-col gap-4 items-center shadow p-4 border border-gray-700 rounded`}>
             <div>
               <Caption>{ship.type}</Caption>
               <Typography size="xl" weight="bold">
