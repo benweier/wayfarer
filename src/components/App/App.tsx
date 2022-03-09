@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/react'
 import { HelmetProvider } from 'react-helmet-async'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { SentryInstrumentation } from '@/components/Sentry/Instrumentation'
@@ -30,44 +30,42 @@ const LeaderboardPage = lazy(() => import('@/routes/Leaderboard').then((mod) => 
 
 export const App = Sentry.withProfiler(() => {
   return (
-    <>
-      <BrowserRouter>
-        <SentryInstrumentation>
-          <HelmetProvider>
-            <Provider store={store}>
-              <Suspense fallback={<Loading />}>
-                <Routes>
-                  <Route index element={<HomePage />} />
-                  <Route
-                    path={ROUTES.DASHBOARD}
-                    element={
-                      <ProtectedRoute>
-                        <DashboardPage />
-                      </ProtectedRoute>
-                    }
-                  >
-                    <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
-                    <Route path={ROUTES.OVERVIEW} element={<OverviewPage />} />
-                    <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
-                    <Route path={ROUTES.SHIPS} element={<ShipPage />} />
-                    <Route path={ROUTES.LOANS} element={<LoanPage />} />
-                    <Route path={ROUTES.MARKETPLACE} element={<MarketplacePage />} />
-                    <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
-                    <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
-                  </Route>
-                  <Route path={ROUTES.AUTH} element={<AuthPage />}>
-                    <Route index element={<Navigate to={ROUTES.LOGIN} replace />} />
-                    <Route path={ROUTES.LOGIN} element={<Login />} />
-                    <Route path={ROUTES.REGISTER} element={<Register />} />
-                    <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
-                  </Route>
-                  <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
-                </Routes>
-              </Suspense>
-            </Provider>
-          </HelmetProvider>
-        </SentryInstrumentation>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <SentryInstrumentation>
+        <HelmetProvider>
+          <Provider store={store}>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route index element={<HomePage />} />
+                <Route
+                  path={ROUTES.DASHBOARD}
+                  element={
+                    <ProtectedRoute>
+                      <DashboardPage />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
+                  <Route path={ROUTES.OVERVIEW} element={<OverviewPage />} />
+                  <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
+                  <Route path={ROUTES.SHIPS} element={<ShipPage />} />
+                  <Route path={ROUTES.LOANS} element={<LoanPage />} />
+                  <Route path={ROUTES.MARKETPLACE} element={<MarketplacePage />} />
+                  <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
+                  <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+                </Route>
+                <Route path={ROUTES.AUTH} element={<AuthPage />}>
+                  <Route index element={<Navigate to={ROUTES.LOGIN} replace />} />
+                  <Route path={ROUTES.LOGIN} element={<Login />} />
+                  <Route path={ROUTES.REGISTER} element={<Register />} />
+                  <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
+                </Route>
+                <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+              </Routes>
+            </Suspense>
+          </Provider>
+        </HelmetProvider>
+      </SentryInstrumentation>
+    </BrowserRouter>
   )
 })
