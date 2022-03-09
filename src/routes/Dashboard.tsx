@@ -1,7 +1,8 @@
 import { Suspense } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
-import { Outlet } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
+import { Outlet } from '@/components/Outlet'
+import { Transition } from '@/components/Transition'
 import { DashboardTemplate } from '@/templates/Dashboard'
 
 export const DashboardPage = () => {
@@ -14,7 +15,9 @@ export const DashboardPage = () => {
           </div>
         }
       >
-        <Outlet />
+        <Transition>
+          <Outlet />
+        </Transition>
       </Suspense>
     </DashboardTemplate>
   )

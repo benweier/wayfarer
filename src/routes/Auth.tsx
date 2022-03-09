@@ -3,6 +3,7 @@ import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Navigate } from 'react-router-dom'
 import tw, { theme } from 'twin.macro'
 import { Outlet } from '@/components/Outlet'
+import { Transition } from '@/components/Transition'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { AuthLayout } from '@/layouts/Auth'
@@ -29,7 +30,9 @@ export const AuthPage = () => {
               </div>
             }
           >
-            <Outlet />
+            <Transition>
+              <Outlet />
+            </Transition>
           </Suspense>
         </div>
       </AuthLayout>
