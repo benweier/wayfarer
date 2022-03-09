@@ -8,7 +8,17 @@ import { selectUser } from '@/store/auth'
 import { useAppSelector } from '@/store/hooks'
 import { formatNumber } from '@/utilities/number'
 
-const PurchaseShip = ({ type, location, disabled }: { type: string; location: string; disabled: boolean }) => {
+const PurchaseShip = ({
+  type,
+  location,
+  disabled,
+  onSuccess,
+}: {
+  type: string
+  location: string
+  disabled: boolean
+  onSuccess: (ship: string) => void
+}) => {
   const [purchaseShip, { isLoading }] = usePurchaseShipMutation()
   const [confirm, setConfirm] = useState(false)
 
@@ -31,9 +41,12 @@ const PurchaseShip = ({ type, location, disabled }: { type: string; location: st
           return
         }
 
-        await purchaseShip({ location, type }).then(() => {
-          setConfirm(false)
-        })
+        await purchaseShip({ location, type })
+          .unwrap()
+          .then((response) => {
+            setConfirm(false)
+            onSuccess(response.ship.id)
+          })
       }}
     >
       {confirm ? 'CONFIRM' : 'PURCHASE'}
@@ -48,6 +61,7 @@ export const PurchaseLocation: FC<{ type: string; location: string; price: numbe
   children,
 }) => {
   const user = useAppSelector(selectUser)
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -59,7 +73,12 @@ export const PurchaseLocation: FC<{ type: string; location: string; price: numbe
             <div css={tw`font-semibold`}>{formatNumber(price)}</div>
           </div>
           <div css={tw`w-32`}>
-            <PurchaseShip type={type} location={location} disabled={(user?.credits ?? 0) < price} />
+            <PurchaseShip
+              type={type}
+              location={location}
+              disabled={(user?.credits ?? 0) < price}
+              onSuccess={(id) => navigate(`/ships/${id}`)}
+            />
           </div>
         </div>
       </div>
