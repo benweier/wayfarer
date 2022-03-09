@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import tw from 'twin.macro'
-import { Typography } from '../Typography'
 import { Caption } from '@/components/Caption'
+import { Typography } from '@/components/Typography'
 import { useMyShipsQuery } from '@/services/spacetraders/core'
 
 export const ShipsOverview = () => {

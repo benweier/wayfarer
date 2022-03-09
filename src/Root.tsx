@@ -1,4 +1,4 @@
-import { lazy, StrictMode, Suspense } from 'react'
+import { StrictMode, Suspense, lazy } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import tw, { theme } from 'twin.macro'
 import { AppStyles } from './components/AppStyles'

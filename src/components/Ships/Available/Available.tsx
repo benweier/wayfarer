@@ -1,4 +1,4 @@
-import { useMemo, FC } from 'react'
+import { FC, useMemo } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
 import { Caption } from '@/components/Caption'
@@ -8,7 +8,7 @@ import { SystemSelect, useSystemSelect } from '@/components/Systems/Select'
 import { useMyShipsQuery, useShipListingsQuery } from '@/services/spacetraders/core'
 import { Ship, System } from '@/types/spacetraders'
 import { groupByFn } from '@/utilities/group-by'
-import { getPriceRange, GroupByType, groups, SortByType, sorts, sortShips } from '@/utilities/ships'
+import { GroupByType, SortByType, getPriceRange, groups, sortShips, sorts } from '@/utilities/ships'
 
 const ShipStat = ({ label, value }: { label: string; value: number | string }) => {
   return (

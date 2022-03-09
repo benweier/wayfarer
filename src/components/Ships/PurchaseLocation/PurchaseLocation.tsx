@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
+import { useNavigate } from 'react-router'
 import tw, { theme } from 'twin.macro'
 import { Button } from '@/components/Button'
 import { usePurchaseShipMutation } from '@/services/spacetraders/core'
