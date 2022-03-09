@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 const HTMLPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, 'public', 'index.html'),
@@ -30,7 +31,7 @@ const DefinePluginConfig = new webpack.DefinePlugin({
 module.exports = (env,argv) => {
   const isProduction = argv.mode === 'production'
 
-  const plugins = [HTMLPluginConfig, DefinePluginConfig]
+  const plugins = [HTMLPluginConfig, DefinePluginConfig, new WebpackManifestPlugin()]
 
   if (!isProduction) {
     plugins.push(new ReactRefreshPlugin())
@@ -57,7 +58,7 @@ module.exports = (env,argv) => {
       clean: true,
       path: path.resolve(__dirname, 'build'),
       publicPath: '/',
-      filename: '[name].[chunkhash].js',
+      filename: '[hash:8].[chunkhash].js',
     },
     optimization: {
       moduleIds: 'deterministic',
