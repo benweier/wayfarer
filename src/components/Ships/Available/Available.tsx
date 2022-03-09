@@ -42,9 +42,9 @@ export const AvailableShipItem: FC<{ ship: Ship; owned?: number }> = ({ ship, ow
           </div>
         </div>
         <div css={tw`grid grid-flow-col gap-2 p-4 -mx-4 bg-gray-400 bg-opacity-5`}>
-          <ShipStat value={ship.maxCargo} label="MAX CARGO" />
+          <ShipStat value={ship.maxCargo} label="CARGO" />
           <ShipStat value={ship.speed} label="SPEED" />
-          <ShipStat value={ship.loadingSpeed} label="LOADING SPEED" />
+          <ShipStat value={ship.loadingSpeed} label="LOADING" />
           <ShipStat value={ship.weapons} label="WEAPONS" />
           <ShipStat value={ship.plating} label="PLATING" />
         </div>
