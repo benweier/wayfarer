@@ -6,6 +6,10 @@
     "url": "https://github.com/benweier/wayfarer.git"
   },
   "license": "MIT",
+  "engines": {
+    "node": "16",
+    "npm": "8"
+  },
   "dependencies": {
     "@babel/runtime": "^7.17.2",
     "@floating-ui/react-dom": "^0.4.3",
