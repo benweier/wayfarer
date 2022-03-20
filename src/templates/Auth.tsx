@@ -38,10 +38,18 @@ export const AuthTemplate: FC = ({ children }) => {
       <div css={tw`grid grid-flow-col gap-8 py-8`}>
         <div css={tw`grid grid-flow-col gap-8 items-center justify-center`}>
           <IconContext.Provider value={{ size: '32', color: theme`colors.gray.400` }}>
-            <a href="https://spacetraders.io" title="SpaceTraders">
+            <a
+              href="https://spacetraders.io"
+              title="SpaceTraders"
+              css={tw`p-1 rounded-sm focus:(ring-2 outline-none ring-emerald-400 ring-offset-2 ring-offset-gray-800)`}
+            >
               <VscRocket />
             </a>
-            <a href="https://github.com/benweier/wayfarer" title="GitHub">
+            <a
+              href="https://github.com/benweier/wayfarer"
+              title="GitHub"
+              css={tw`p-1 rounded-sm focus:(ring-2 outline-none ring-emerald-400 ring-offset-2 ring-offset-gray-800)`}
+            >
               <VscGithub />
             </a>
           </IconContext.Provider>

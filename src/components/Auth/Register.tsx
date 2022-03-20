@@ -114,7 +114,13 @@ export const Register = () => {
               )}
               <Typography size="sm" align="center">
                 Already have an access token?&nbsp;
-                <Typography as={Link} weight="bold" to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ user, token }}>
+                <Typography
+                  as={Link}
+                  weight="bold"
+                  to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}
+                  state={{ user, token }}
+                  css={tw`rounded-sm focus:(ring-2 outline-none ring-emerald-400 ring-offset-2 ring-offset-gray-800)`}
+                >
                   Login
                 </Typography>
               </Typography>

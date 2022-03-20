@@ -62,7 +62,13 @@ export const Login = () => {
               </Button>
               <Typography size="sm" align="center">
                 Don&apos;t have an access token?&nbsp;
-                <Typography as={Link} weight="bold" to={`${ROUTES.AUTH}/${ROUTES.REGISTER}`} state={{ user }}>
+                <Typography
+                  as={Link}
+                  weight="bold"
+                  to={`${ROUTES.AUTH}/${ROUTES.REGISTER}`}
+                  state={{ user }}
+                  css={tw`rounded-sm focus:(ring-2 outline-none ring-emerald-400 ring-offset-2 ring-offset-gray-800)`}
+                >
                   Register
                 </Typography>
               </Typography>
