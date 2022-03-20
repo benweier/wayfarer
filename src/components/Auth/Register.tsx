@@ -80,8 +80,8 @@ export const Register = () => {
                 icon={
                   <Copy
                     disabled={!token}
-                    onClick={async () => {
-                      await onCopy(token)
+                    onClick={() => {
+                      void onCopy(token)
                     }}
                   />
                 }
