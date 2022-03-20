@@ -1,4 +1,8 @@
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Root } from './Root'
+const container = document.getElementById('root')
 
-render(<Root />, document.getElementById('root'))
+if (container) {
+  const root = createRoot(container)
+  root.render(<Root />)
+}
