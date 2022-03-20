@@ -1,8 +1,8 @@
-import { useImperativeHandle, forwardRef, ForwardedRef, ReactNode } from 'react'
+import { ForwardedRef, ReactNode, forwardRef, useImperativeHandle } from 'react'
+import { isFunction } from '@/utilities/is-function'
 import { ModalContext } from './context'
 import { ModalContextType, ModalProps } from './types.d'
 import { useModal } from './useModal'
-import { isFunction } from '@/utilities/is-function'
 
 const InternalModal = (
   {

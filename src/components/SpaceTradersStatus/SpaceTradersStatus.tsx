@@ -1,4 +1,4 @@
-import { HiRefresh, HiOutlineStatusOffline, HiOutlineStatusOnline } from 'react-icons/hi'
+import { HiOutlineStatusOffline, HiOutlineStatusOnline, HiRefresh } from 'react-icons/hi'
 import tw, { css } from 'twin.macro'
 import { useSpaceTradersStatus } from './useSpaceTradersStatus'
 

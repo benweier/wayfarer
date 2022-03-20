@@ -1,10 +1,10 @@
-import { FC, memo, RefObject } from 'react'
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
+import { FC, RefObject, memo } from 'react'
+import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import FocusLock from 'react-focus-lock'
 import usePortal from 'react-useportal'
+import { useUnmount } from '@/hooks/useUnmount'
 import { Dialog } from './Dialog'
 import { ModalProps, UseModalProps } from './types'
-import { useUnmount } from '@/hooks/useUnmount'
 
 type UsePortalType = {
   ref: RefObject<HTMLDivElement>

@@ -1,7 +1,7 @@
-import { SystemSelectOptions } from './types'
 import { useSelect } from '@/components/Select'
 import { useAvailableSystemsQuery } from '@/services/spacetraders/core'
 import { System } from '@/types/spacetraders'
+import { SystemSelectOptions } from './types'
 
 export const useSystemSelect = (): SystemSelectOptions => {
   const { data, isLoading } = useAvailableSystemsQuery()

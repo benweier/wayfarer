@@ -1,8 +1,8 @@
 import { Listbox } from '@headlessui/react'
 import { HiCheck, HiSelector } from 'react-icons/hi'
 import tw, { theme } from 'twin.macro'
-import { SelectOption } from './types'
 import { Label } from '@/components/Label'
+import { SelectOption } from './types'
 
 export const SelectField = <T extends SelectOption = SelectOption>({
   label,

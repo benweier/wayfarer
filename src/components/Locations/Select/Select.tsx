@@ -1,8 +1,8 @@
-import { useMemo, useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import tw from 'twin.macro'
-import { LocationSelectOptions } from './types'
 import { Label } from '@/components/Label'
 import { SelectField } from '@/components/Select'
+import { LocationSelectOptions } from './types'
 
 export const LocationSelect = ({ locations, selected, isLoading, onChange }: LocationSelectOptions) => {
   const options = useMemo(

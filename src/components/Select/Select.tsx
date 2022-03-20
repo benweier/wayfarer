@@ -1,8 +1,8 @@
-import { useMemo, useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import tw from 'twin.macro'
-import { SelectField } from './Field'
-import { SelectProps, SelectOption } from './types'
 import { Label } from '@/components/Label'
+import { SelectField } from './Field'
+import { SelectOption, SelectProps } from './types'
 
 type SelectItem = unknown
 

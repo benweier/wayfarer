@@ -1,4 +1,4 @@
-import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react'
+import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { RootState } from '@/store/types'
 
 export const baseQuery = fetchBaseQuery({ baseUrl: 'https://api.spacetraders.io' })
