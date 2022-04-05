@@ -58,7 +58,7 @@ module.exports = (env,argv) => {
       clean: true,
       path: path.resolve(__dirname, 'build'),
       publicPath: '/',
-      filename: '[hash:8].[chunkhash].js',
+      filename: '[fullhash:8].[chunkhash].js',
     },
     optimization: {
       moduleIds: 'deterministic',
