@@ -85,7 +85,7 @@ const AvailableLoanList = () => {
   return (
     <>
       {!!data?.loans.length && (
-        <div css={tw`grid grid-cols-3 gap-6`}>
+        <div css={tw`grid grid-cols-2 gap-6 2xl:grid-cols-3`}>
           {data.loans.map((loan) => (
             <AvailableLoanItem key={loan.type} loan={loan} />
           ))}
