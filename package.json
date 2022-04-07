@@ -11,14 +11,14 @@
     "npm": "8.5"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.8",
+    "@babel/runtime": "^7.17.9",
     "@floating-ui/react-dom": "^0.6.1",
     "@headlessui/react": "^1.5.0",
     "@inlet/react-pixi": "^6.7.0",
     "@react-spring/web": "^9.4.4",
     "@reduxjs/toolkit": "^1.8.1",
-    "@sentry/react": "^6.19.4",
-    "@sentry/tracing": "^6.19.4",
+    "@sentry/react": "^6.19.5",
+    "@sentry/tracing": "^6.19.5",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
     "appwrite": "^7.0.0",
@@ -45,7 +45,7 @@
     "twin.macro": "^2.8.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.8",
+    "@babel/core": "^7.17.9",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
@@ -66,10 +66,10 @@
     "css-loader": "^6.7.1",
     "cssnano": "^5.1.7",
     "eslint": "^8.12.0",
-    "eslint-config-airbnb-typescript": "^16.2.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.7.1",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
@@ -96,7 +96,7 @@
     "typescript": "^4.6.3",
     "webpack": "^5.71.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4",
+    "webpack-dev-server": "^4.8.1",
     "webpack-manifest-plugin": "^5.0.0"
   },
   "scripts": {
