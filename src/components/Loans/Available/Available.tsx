@@ -15,7 +15,7 @@ const AcceptLoan = ({ type }: { type: LoanType }) => {
 
   return (
     <Button
-      css={[tw`transition-colors duration-75`, confirm && tw`bg-emerald-400 text-emerald-900`]}
+      css={[tw`w-28 transition-colors duration-75`, confirm && tw`bg-emerald-400 text-emerald-900`]}
       disabled={isLoading || hasLoan}
       onBlur={() => setConfirm(false)}
       onKeyDown={(event) => {
