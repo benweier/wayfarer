@@ -49,6 +49,9 @@ module.exports = (env,argv) => {
         module: false,
         util: false,
       },
+      alias: {
+        "react-redux": "react-redux/es/next",
+      },
     },
     output: {
       module: isProduction,
