@@ -1,19 +1,44 @@
-import { Suspense, lazy } from 'react'
 import * as Sentry from '@sentry/react'
+import { BrowserTracing } from '@sentry/tracing'
+import { Suspense, lazy, useEffect } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import tw, { theme } from 'twin.macro'
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  createRoutesFromChildren,
+  matchRoutes,
+  useNavigationType,
+} from 'react-router-dom'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
-import { SentryInstrumentation } from '@/components/Sentry/Instrumentation'
 import { ROUTES } from '@/config/routes'
+import { useLocation } from '@/hooks/useLocation'
 import { HomePage } from '@/routes/Home'
 import { store } from '@/store'
 
+Sentry.init({
+  integrations: [
+    new BrowserTracing({
+      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
+        useEffect,
+        useLocation,
+        useNavigationType,
+        createRoutesFromChildren,
+        matchRoutes,
+      ),
+    }),
+  ],
+  tracesSampleRate: 1.0,
+})
+
+const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes)
+
 const Loading = () => (
-  <div css={tw`w-screen h-screen animate-pulse flex justify-center items-center`}>
-    <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
+  <div className="flex h-screen w-screen animate-pulse items-center justify-center text-gray-700">
+    <GiNorthStarShuriken size={96} />
   </div>
 )
 
@@ -31,41 +56,40 @@ const LeaderboardPage = lazy(() => import('@/routes/Leaderboard').then((mod) => 
 export const App = Sentry.withProfiler(() => {
   return (
     <BrowserRouter>
-      <SentryInstrumentation>
-        <HelmetProvider>
-          <Provider store={store}>
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route index element={<HomePage />} />
-                <Route
-                  path={ROUTES.DASHBOARD}
-                  element={
-                    <ProtectedRoute>
-                      <DashboardPage />
-                    </ProtectedRoute>
-                  }
-                >
-                  <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
-                  <Route path={ROUTES.OVERVIEW} element={<OverviewPage />} />
-                  <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
-                  <Route path={ROUTES.SHIPS} element={<ShipPage />} />
-                  <Route path={ROUTES.LOANS} element={<LoanPage />} />
-                  <Route path={ROUTES.MARKETPLACE} element={<MarketplacePage />} />
-                  <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
-                  <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
-                </Route>
-                <Route path={ROUTES.AUTH} element={<AuthPage />}>
-                  <Route index element={<Navigate to={ROUTES.LOGIN} replace />} />
-                  <Route path={ROUTES.LOGIN} element={<Login />} />
-                  <Route path={ROUTES.REGISTER} element={<Register />} />
-                  <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
-                </Route>
-                <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
-              </Routes>
-            </Suspense>
-          </Provider>
-        </HelmetProvider>
-      </SentryInstrumentation>
+      <HelmetProvider>
+        <Provider store={store}>
+          <Suspense fallback={<Loading />}>
+            <SentryRoutes>
+              <Route index element={<HomePage />} />
+              <Route
+                path={ROUTES.DASHBOARD}
+                element={
+                  <ProtectedRoute>
+                    <DashboardPage />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
+                <Route path={ROUTES.OVERVIEW} element={<OverviewPage />} />
+                <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
+                <Route path={ROUTES.SHIPS} element={<ShipPage />} />
+                <Route path={ROUTES.LOANS} element={<LoanPage />} />
+                <Route path={ROUTES.MARKETPLACE} element={<MarketplacePage />} />
+                <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
+                <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+              </Route>
+              <Route path={ROUTES.AUTH} element={<AuthPage />}>
+                <Route index element={<Navigate to={ROUTES.LOGIN} replace />} />
+
+                <Route path={ROUTES.LOGIN} element={<Login />} />
+                <Route path={ROUTES.REGISTER} element={<Register />} />
+                <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
+              </Route>
+              <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+            </SentryRoutes>
+          </Suspense>
+        </Provider>
+      </HelmetProvider>
     </BrowserRouter>
   )
 })
