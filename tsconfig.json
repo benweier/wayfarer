@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "lib": ["esnext", "dom", "dom.iterable"],
     "module": "es2020",
     "moduleResolution": "node",
@@ -32,10 +32,9 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "incremental": true,
-    "types": ["node", "webpack-env"]
+    "incremental": true
   },
-  "files": ["twin.d.ts"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "twin.d.ts"],
-  "exclude": ["node_modules", "build"]
+  "files": ["twin.d.ts", "css.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "build", "dist", ".parcel-cache"]
 }

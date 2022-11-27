@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["@types/node"],
+    "noEmit": true,
+    "allowJs": true
+  },
+  "include": [
+    ".eslintrc.js",
+    ".prettierrc.js",
+    "jest.config.js",
+    "jest.setup.ts",
+    "postcss.config.js",
+    "tailwind.config.js"
+  ]
+}
