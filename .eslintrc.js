@@ -71,7 +71,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js', 'jest.config.js', 'tailwind.config.js'],
+      files: ['.eslintrc.js', 'jest.config.js', 'tailwind.config.js', 'tailwind/**/*.js'],
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       parserOptions: {
