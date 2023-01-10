@@ -1,15 +1,18 @@
 import * as Sentry from '@sentry/react'
 import { BrowserTracing } from '@sentry/tracing'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Suspense, lazy, useEffect } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Provider } from 'react-redux'
 import {
-  BrowserRouter,
   Navigate,
+  Outlet,
   Route,
-  Routes,
+  RouterProvider,
+  createBrowserRouter,
   createRoutesFromChildren,
+  createRoutesFromElements,
   matchRoutes,
   useNavigationType,
 } from 'react-router-dom'
@@ -34,10 +37,11 @@ Sentry.init({
   tracesSampleRate: 1.0,
 })
 
-const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes)
+const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouter(createBrowserRouter)
+const client = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
 
 const Loading = () => (
-  <div className="flex h-screen w-screen animate-pulse items-center justify-center text-gray-700">
+  <div className="flex h-screen w-screen animate-pulse items-center justify-center text-zinc-200 dark:text-zinc-700">
     <GiNorthStarShuriken size={96} />
   </div>
 )
@@ -53,43 +57,51 @@ const ShipPage = lazy(() => import('@/routes/Ships').then((mod) => ({ default: m
 const MarketplacePage = lazy(() => import('@/routes/Marketplace').then((mod) => ({ default: mod.MarketplacePage })))
 const LeaderboardPage = lazy(() => import('@/routes/Leaderboard').then((mod) => ({ default: mod.LeaderboardPage })))
 
-export const App = Sentry.withProfiler(() => {
-  return (
-    <BrowserRouter>
-      <HelmetProvider>
-        <Provider store={store}>
-          <Suspense fallback={<Loading />}>
-            <SentryRoutes>
-              <Route index element={<HomePage />} />
-              <Route
-                path={ROUTES.DASHBOARD}
-                element={
-                  <ProtectedRoute>
-                    <DashboardPage />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
-                <Route path={ROUTES.OVERVIEW} element={<OverviewPage />} />
-                <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
-                <Route path={ROUTES.SHIPS} element={<ShipPage />} />
-                <Route path={ROUTES.LOANS} element={<LoanPage />} />
-                <Route path={ROUTES.MARKETPLACE} element={<MarketplacePage />} />
-                <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
-                <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
-              </Route>
-              <Route path={ROUTES.AUTH} element={<AuthPage />}>
-                <Route index element={<Navigate to={ROUTES.LOGIN} replace />} />
+const Base = () => (
+  <QueryClientProvider client={client}>
+    <HelmetProvider>
+      <Provider store={store}>
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
+      </Provider>
+    </HelmetProvider>
+  </QueryClientProvider>
+)
 
-                <Route path={ROUTES.LOGIN} element={<Login />} />
-                <Route path={ROUTES.REGISTER} element={<Register />} />
-                <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
-              </Route>
-              <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
-            </SentryRoutes>
-          </Suspense>
-        </Provider>
-      </HelmetProvider>
-    </BrowserRouter>
-  )
+const router = sentryCreateBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Base />}>
+      <Route index element={<HomePage />} />
+      <Route
+        path={ROUTES.DASHBOARD}
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
+        <Route path={ROUTES.OVERVIEW} element={<OverviewPage />} />
+        <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
+        <Route path={ROUTES.SHIPS} element={<ShipPage />} />
+        <Route path={ROUTES.LOANS} element={<LoanPage />} />
+        <Route path={ROUTES.MARKETPLACE} element={<MarketplacePage />} />
+        <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
+        <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+      </Route>
+      <Route path={ROUTES.AUTH} element={<AuthPage />}>
+        <Route index element={<Navigate to={ROUTES.LOGIN} replace />} />
+
+        <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.REGISTER} element={<Register />} />
+        <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
+      </Route>
+      <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+    </Route>,
+  ),
+)
+
+export const App = Sentry.withProfiler(() => {
+  return <RouterProvider router={router} />
 })
