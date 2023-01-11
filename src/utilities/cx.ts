@@ -3,16 +3,15 @@ export type ClassDictionary = Record<string, any>
 export type ClassArray = ClassValue[]
 
 function toVal(mix: ClassValue) {
-  let k,
-    y,
-    str = ''
+  let y
+  let str = ''
 
   if (typeof mix === 'string' || typeof mix === 'number') {
     str += mix
   } else if (typeof mix === 'object') {
     if (Array.isArray(mix)) {
       const len = mix.length
-      for (k = 0; k < len; k++) {
+      for (let k = 0; k < len; k++) {
         if (mix[k]) {
           if ((y = toVal(mix[k]))) {
             str && (str += ' ')
@@ -21,8 +20,8 @@ function toVal(mix: ClassValue) {
         }
       }
     } else {
-      for (k in mix) {
-        if (mix !== null && mix[k]) {
+      for (const k in mix) {
+        if (mix && mix[k]) {
           str && (str += ' ')
           str += k
         }
@@ -34,13 +33,13 @@ function toVal(mix: ClassValue) {
 }
 
 export function cx(...args: ClassValue[]) {
-  let i = 0,
-    tmp,
-    x,
-    str = ''
+  let tmp
+  let x
+  let str = ''
   const len = args.length
-  for (; i < len; i++) {
-    if ((tmp = args[i++])) {
+
+  for (let i = 0; i < len; i++) {
+    if ((tmp = args[i])) {
       if ((x = toVal(tmp))) {
         str && (str += ' ')
         str += x
