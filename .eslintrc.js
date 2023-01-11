@@ -71,7 +71,15 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js', 'jest.config.js', 'tailwind.config.js', 'tailwind/**/*.js'],
+      files: [
+        'babel.config.js',
+        'postcss.config.js',
+        '.eslintrc.js',
+        'jest.config.js',
+        'tailwind.config.js',
+        'tailwind/**/*.js',
+        'webpack.config.js',
+      ],
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       parserOptions: {

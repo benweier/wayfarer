@@ -6,11 +6,15 @@
     "allowJs": true
   },
   "include": [
+    "babel.config.js",
+    "postcss.config.js",
     ".eslintrc.js",
     ".prettierrc.js",
     "jest.config.js",
     "jest.setup.ts",
     "postcss.config.js",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "tailwind/**/*.js",
+    "webpack.config.js"
   ]
 }
