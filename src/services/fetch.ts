@@ -1,26 +1,48 @@
 import { http } from './http'
 
-export async function get<T>(path: string, args: RequestInit = { method: 'GET' }) {
-  return await http<T>(path, { ...args, method: 'GET', credentials: 'same-origin' })
+export async function get<T>(url: URL | RequestInfo, args: RequestInit = {}) {
+  return await http<T>(url, { ...args, method: 'GET', credentials: 'same-origin' })
 }
 
-export async function post<T>(path: string, data: Record<string, any> | null = null, args: RequestInit = {}) {
-  return await http<T>(path, { ...args, method: 'POST', credentials: 'same-origin', body: JSON.stringify(data) })
+export async function post<T = unknown, P extends Record<string, any> | null | unknown = unknown>(
+  url: URL | RequestInfo,
+  payload?: P,
+  args: RequestInit = {},
+) {
+  return await http<T>(url, {
+    ...args,
+    method: 'POST',
+    credentials: 'same-origin',
+    body: payload ? JSON.stringify(payload) : undefined,
+  })
 }
 
-export async function patch<T>(path: string, data: Record<string, any> | null = null, args: RequestInit = {}) {
-  return await http<T>(path, { ...args, method: 'PATCH', credentials: 'same-origin', body: JSON.stringify(data) })
+export async function patch<T = unknown, P extends Record<string, any> | null | unknown = unknown>(
+  url: URL | RequestInfo,
+  payload?: P,
+  args: RequestInit = {},
+) {
+  return await http<T>(url, {
+    ...args,
+    method: 'PATCH',
+    credentials: 'same-origin',
+    body: payload ? JSON.stringify(payload) : undefined,
+  })
 }
 
-export async function put<T>(path: string, data: BodyInit, args: RequestInit = {}) {
-  return await http<T>(path, { ...args, method: 'POST', credentials: 'same-origin', body: data })
+export async function put<T>(url: URL | RequestInfo, payload: BodyInit, args: RequestInit = {}) {
+  return await http<T>(url, { ...args, method: 'POST', credentials: 'same-origin', body: payload })
 }
 
-export async function remove<T>(path: string, data: Record<string, any> | null = null, args: RequestInit = {}) {
-  return await http<T>(path, {
+export async function remove<T = unknown, P extends Record<string, any> | null | unknown = unknown>(
+  url: URL | RequestInfo,
+  payload: P,
+  args: RequestInit = {},
+) {
+  return await http<T>(url, {
     ...args,
     method: 'DELETE',
     credentials: 'same-origin',
-    body: data ? JSON.stringify(data) : undefined,
+    body: payload ? JSON.stringify(payload) : undefined,
   })
 }
