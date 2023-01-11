@@ -34,7 +34,7 @@
     },
     "incremental": true
   },
-  "files": ["twin.d.ts", "css.d.ts"],
+  "files": ["env.d.ts", "css.d.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "build", "dist", ".parcel-cache"]
 }
