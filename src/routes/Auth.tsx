@@ -5,12 +5,11 @@ import { Navigate } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { AuthLayout } from '@/layouts/Auth'
-import { selectIsAuthenticated } from '@/store/auth'
-import { useAppSelector } from '@/store/hooks'
+import { useAuthStore } from '@/services/store/auth'
 import { AuthTemplate } from '@/templates/Auth'
 
 export const AuthPage = () => {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated)
+  const { isAuthenticated } = useAuthStore()
   const location = useLocation<{ origin: string }>()
 
   if (isAuthenticated) {

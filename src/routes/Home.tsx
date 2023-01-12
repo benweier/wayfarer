@@ -1,14 +1,13 @@
 import { Navigate } from 'react-router'
 import { ROUTES } from '@/config/routes'
-import { selectIsAuthenticated } from '@/store/auth'
-import { useAppSelector } from '@/store/hooks'
+import { useAuthStore } from '@/services/store/auth'
 
 export const HomePage = () => {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated)
+  const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {
     return <Navigate to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} replace />
   }
 
-  return <Navigate to={ROUTES.DASHBOARD} replace />
+  return <Navigate to={`${ROUTES.DASHBOARD}/${ROUTES.OVERVIEW}`} replace />
 }
