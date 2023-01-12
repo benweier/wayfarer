@@ -8,7 +8,9 @@ import { Link } from '@/components/Link'
 import { Typography } from '@/components/Typography'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
-import { useLazyMyAccountQuery } from '@/services/spacetraders/core'
+import { get } from '@/services/fetch'
+import { useAuthStore } from '@/services/store/auth'
+import { AccountResponse } from '@/types/spacetraders'
 
 interface LoginFormState {
   user: string
@@ -19,6 +21,7 @@ const handleFocus = (node: FocusEvent<HTMLInputElement>) => node.target.select()
 
 export const Login = () => {
   const location = useLocation<Partial<LoginFormState>>()
+  const { setAuth } = useAuthStore()
 
   const methods = useForm<LoginFormState>({
     defaultValues: {
@@ -26,12 +29,21 @@ export const Login = () => {
       token: location.state?.token ?? '',
     },
   })
-  const [myAccountQuery, { isLoading }] = useLazyMyAccountQuery()
+  const { mutateAsync, isLoading } = useMutation((values: LoginFormState) => {
+    const url = new URL('/my/account', 'https://api.spacetraders.io')
+    const headers = new Headers()
+
+    if (values.token) headers.set('Authorization', `Bearer ${values.token}`)
+
+    return get<AccountResponse>(url, { headers })
+  })
   const onSubmit = useCallback<SubmitHandler<LoginFormState>>(
     (values) => {
-      return myAccountQuery({ token: values.token })
+      return mutateAsync(values).then((response) => {
+        setAuth({ user: response.data?.user, token: values.token })
+      })
     },
-    [myAccountQuery],
+    [mutateAsync, setAuth],
   )
 
   const user = useWatch({ control: methods.control, name: 'user' })

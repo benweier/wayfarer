@@ -10,7 +10,8 @@ import { Link } from '@/components/Link'
 import { Typography } from '@/components/Typography'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
-import { useClaimUserMutation } from '@/services/spacetraders/core'
+import { post } from '@/services/fetch'
+import { TokenResponse } from '@/types/spacetraders'
 import { Copy } from './Copy'
 import { useCopy } from './useCopy'
 
@@ -37,21 +38,26 @@ export const Register = () => {
       token: '',
     },
   })
-  const [claimUserMutation, { isSuccess }] = useClaimUserMutation()
+  const { mutateAsync, isLoading, isSuccess } = useMutation((values: RegisterFormState) => {
+    const url = new URL(`/users/${values.user}/claim`, 'https://api.spacetraders.io')
+
+    return post<TokenResponse>(url)
+  })
   const onSubmit = useCallback<SubmitHandler<RegisterFormState>>(
     (values) => {
-      return claimUserMutation({ user: values.user })
-        .unwrap()
+      return mutateAsync(values)
         .then((response) => {
+          if (!response.data) return
+
           reset()
-          methods.setValue('token', response.token)
+          methods.setValue('token', response.data?.token)
           ref.current?.focus()
         })
         .catch((err) => {
           console.error(err)
         })
     },
-    [claimUserMutation, methods, reset, ref],
+    [mutateAsync, reset, methods, ref],
   )
 
   const user = useWatch({ control: methods.control, name: 'user' })
