@@ -1,32 +1,33 @@
+import { useQuery } from '@tanstack/react-query'
 import { HiOutlineCash } from 'react-icons/hi'
 import { RiSpaceShipFill } from 'react-icons/ri'
 import { useSelector } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
-import { css } from 'styled-components'
-import tw, { styled, theme } from 'twin.macro'
+import { Link, NavLink, NavLinkProps } from 'react-router-dom'
 import { SpaceTradersStatus } from '@/components/SpaceTradersStatus'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
-import { useMyShipsQuery } from '@/services/spacetraders/core'
+import { myShipsQuery } from '@/services/api/spacetraders/ships'
 import { selectUser } from '@/store/auth'
 
-const HeaderLink = styled(NavLink)(() => [
-  tw`py-2 px-4 rounded text-sm font-semibold leading-none`,
-  tw`outline-none focus:(ring-2 ring-emerald-400 ring-offset-2 ring-offset-gray-800)`,
-  tw`hover:(bg-slate-600) active:(bg-slate-700)`,
-  css`
-    &.active {
-      ${tw`bg-blue-500 text-white`}
-    }
-  `,
-])
+const MenuItem = ({ children, ...props }: NavLinkProps) => {
+  return (
+    <NavLink
+      {...props}
+      className="rounded py-2 px-4 text-sm font-bold leading-none outline-none ring-emerald-400 ring-offset-2 hover:bg-zinc-200 focus:ring-2 focus:ring-offset-gray-800 dark:hover:bg-zinc-700 [&.active]:bg-blue-500 [&.active]:text-white"
+    >
+      {children}
+    </NavLink>
+  )
+}
 
 const OwnedShips = () => {
-  const ownedShipsQuery = useMyShipsQuery()
+  const { isSuccess, data } = useQuery(['my-ships'], () => myShipsQuery())
+
+  const ships = isSuccess ? data.data?.ships.length ?? 0 : 0
 
   return (
-    <div css={tw`grid grid-flow-col gap-2 items-center`}>
-      <RiSpaceShipFill size={16} /> <span css={tw`font-semibold`}>{ownedShipsQuery.data?.ships.length ?? 0}</span>
+    <div className="grid grid-flow-col items-center gap-2">
+      <RiSpaceShipFill size={16} /> <span className="font-semibold">{ships}</span>
     </div>
   )
 }
@@ -37,13 +38,13 @@ const User = () => {
   if (!user) return <div />
 
   return (
-    <div css={tw`grid grid-flow-col gap-8 items-center`}>
-      <div css={tw`grid gap-2 grid-flow-col items-center`}>
-        <HiOutlineCash size={20} color={theme`colors.emerald.400`} /> <span css={tw`font-bold`}>{user.credits}</span>
+    <div className="grid grid-flow-col items-center gap-8">
+      <div className="grid grid-flow-col items-center gap-2 text-emerald-400">
+        <HiOutlineCash size={20} /> <span className="font-bold">{user.credits}</span>
       </div>
 
       <div>
-        <span css={tw`font-bold`}>{user.username}</span>
+        <span className="font-bold">{user.username}</span>
       </div>
     </div>
   )
@@ -51,26 +52,26 @@ const User = () => {
 
 export const Header = () => {
   return (
-    <div css={tw`relative shadow-lg z-50`}>
-      <div css={tw`h-16 px-6 grid items-center`}>
-        <div css={tw`w-full grid grid-flow-col gap-4 justify-between items-center`}>
-          <div css={tw`grid grid-flow-col gap-2 items-center`}>
+    <div className="relative z-50">
+      <div className="grid h-16 items-center px-6">
+        <div className="grid w-full grid-flow-col items-center justify-between gap-4">
+          <div className="grid grid-flow-col items-center gap-2">
             <SpaceTradersStatus />
 
-            <Link to="/" css={tw`rounded outline-none focus:(ring ring-emerald-400)`}>
-              <Wayfarer css={tw`text-2xl mx-4`} />
+            <Link to="/" className="mx-3 rounded px-3 py-0.5 outline-none focus:ring focus:ring-emerald-400">
+              <Wayfarer className="text-lg leading-none" />
             </Link>
 
-            <nav css={tw`grid grid-flow-col gap-2 items-center`}>
-              <HeaderLink to={ROUTES.OVERVIEW}>OVERVIEW</HeaderLink>
-              <HeaderLink to={ROUTES.MARKETPLACE}>MARKETPLACE</HeaderLink>
-              <HeaderLink to={ROUTES.SYSTEMS}>SYSTEMS</HeaderLink>
-              <HeaderLink to={ROUTES.LOANS}>LOANS</HeaderLink>
-              <HeaderLink to={ROUTES.SHIPS}>SHIPS</HeaderLink>
-              <HeaderLink to={ROUTES.LEADERBOARD}>LEADERBOARD</HeaderLink>
+            <nav className="grid grid-flow-col items-center gap-2">
+              <MenuItem to={ROUTES.OVERVIEW}>OVERVIEW</MenuItem>
+              <MenuItem to={ROUTES.MARKETPLACE}>MARKETPLACE</MenuItem>
+              <MenuItem to={ROUTES.SYSTEMS}>SYSTEMS</MenuItem>
+              <MenuItem to={ROUTES.LOANS}>LOANS</MenuItem>
+              <MenuItem to={ROUTES.SHIPS}>SHIPS</MenuItem>
+              <MenuItem to={ROUTES.LEADERBOARD}>LEADERBOARD</MenuItem>
             </nav>
           </div>
-          <div css={tw`grid grid-flow-col gap-8 items-center`}>
+          <div className="grid grid-flow-col items-center gap-8">
             <OwnedShips />
             <User />
           </div>

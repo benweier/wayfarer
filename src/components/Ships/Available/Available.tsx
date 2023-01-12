@@ -1,54 +1,53 @@
-import { FC, useMemo } from 'react'
+import { PropsWithChildren, useMemo } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
-import tw, { theme } from 'twin.macro'
-import { Caption } from '@/components/Caption'
 import { SelectField, useSelect } from '@/components/Select'
 import { PurchaseLocation } from '@/components/Ships/PurchaseLocation'
 import { SystemSelect, useSystemSelect } from '@/components/Systems/Select'
 import { useMyShipsQuery, useShipListingsQuery } from '@/services/spacetraders/core'
 import { Ship, System } from '@/types/spacetraders'
+import { cx } from '@/utilities/cx'
 import { groupByFn } from '@/utilities/group-by'
 import { GroupByType, SortByType, getPriceRange, groups, sortShips, sorts } from '@/utilities/ships'
 
 const ShipStat = ({ label, value }: { label: string; value: number | string }) => {
   return (
-    <div css={tw`grid grid-flow-row gap-2`}>
-      <div css={tw`font-semibold text-center leading-none text-gray-50`}>{value}</div>
-      <Caption css={tw`text-center`}>{label}</Caption>
+    <div className="grid grid-flow-row gap-2">
+      <div className="text-center font-semibold leading-none text-gray-50">{value}</div>
+      <div className="text-div text-center">{label}</div>
     </div>
   )
 }
 
-export const AvailableShipItem: FC<{ ship: Ship; owned?: number }> = ({ ship, owned = 0, children }) => {
+export const AvailableShipItem = ({ ship, owned = 0, children }: PropsWithChildren<{ ship: Ship; owned?: number }>) => {
   return (
     <div
       key={ship.type}
-      css={tw`shadow p-4 border border-gray-700 bg-gray-700 bg-opacity-20 rounded grid grid-flow-row gap-2`}
+      className="grid grid-flow-row gap-2 rounded border border-gray-700 bg-gray-700 bg-opacity-20 p-4 shadow"
     >
-      <div css={tw`grid grid-flow-row gap-6 auto-rows-min`}>
-        <div css={tw`grid grid-cols-2 items-center`}>
+      <div className="grid grid-flow-row auto-rows-min gap-6">
+        <div className="grid grid-cols-2 items-center">
           <div>
-            <Caption>{ship.type}</Caption>
-            <div css={tw`text-lg font-bold`}>
+            <div className="text-caption">{ship.type}</div>
+            <div className="text-lg font-bold">
               {ship.manufacturer} {ship.class}
             </div>
           </div>
-          <div css={tw`grid grid-flow-row items-center justify-end`}>
-            <Caption css={[owned > 0 && tw`text-amber-400`]}>Owned {owned}</Caption>
-            <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
-              <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
-              <div css={tw`text-xl font-black`}>{getPriceRange(ship)}</div>
+          <div className="grid grid-flow-row items-center justify-end">
+            <div className={cx('text-caption', { 'text-amber-400': owned > 0 })}>Owned {owned}</div>
+            <div className="grid grid-flow-col items-center justify-end gap-1">
+              <HiOutlineCash size={20} className="text-emerald-400" />
+              <div className="text-xl font-black">{getPriceRange(ship)}</div>
             </div>
           </div>
         </div>
-        <div css={tw`grid grid-flow-col gap-2 p-4 -mx-4 bg-gray-400 bg-opacity-5`}>
+        <div className="-mx-4 grid grid-flow-col gap-2 bg-gray-400 bg-opacity-5 p-4">
           <ShipStat value={ship.maxCargo} label="CARGO" />
           <ShipStat value={ship.speed} label="SPEED" />
           <ShipStat value={ship.loadingSpeed} label="LOADING" />
           <ShipStat value={ship.weapons} label="WEAPONS" />
           <ShipStat value={ship.plating} label="PLATING" />
         </div>
-        <div css={tw`grid grid-flow-row gap-2`}>{children}</div>
+        <div className="grid grid-flow-row gap-2">{children}</div>
       </div>
     </div>
   )
@@ -85,14 +84,14 @@ const AvailableShipList = ({
   if (!shipListings.length) return null
 
   return (
-    <div css={tw`grid grid-cols-1 gap-10`}>
+    <div className="grid grid-cols-1 gap-10">
       {shipListings.map(([key, ships]) => (
         <div key={key}>
-          <div css={tw`text-lg font-bold m-2`}>{key}</div>
-          <div css={tw`grid grid-cols-3 gap-8`}>
+          <div className="m-2 text-lg font-bold">{key}</div>
+          <div className="grid grid-cols-3 gap-8">
             {ships.sort(sortShips(sortBy.id)).map((ship) => (
               <AvailableShipItem key={ship.type} ship={ship} owned={ownedShips[ship.type]}>
-                <Caption>Purchase Locations</Caption>
+                <div className="text-caption">Purchase Locations</div>
                 {ship.purchaseLocations.map((purchase) => (
                   <PurchaseLocation
                     key={purchase.location}
@@ -117,16 +116,16 @@ export const AvailableShips = () => {
 
   return (
     <div>
-      <div css={tw`text-xl font-bold my-4`}>AVAILABLE SHIPS</div>
-      <div css={tw`grid grid-flow-row gap-8`}>
-        <div css={tw`grid grid-flow-col auto-cols-min gap-4`}>
-          <div css={tw`w-72`}>
+      <div className="my-4 text-xl font-bold">AVAILABLE SHIPS</div>
+      <div className="grid grid-flow-row gap-8">
+        <div className="grid auto-cols-min grid-flow-col gap-4">
+          <div className="w-72">
             <SystemSelect {...system} />
           </div>
-          <div css={tw`w-72`}>
+          <div className="w-72">
             <SelectField label="Group By" {...groupBy} />
           </div>
-          <div css={tw`w-72`}>
+          <div className="w-72">
             <SelectField label="Sort By" {...sortBy} />
           </div>
         </div>

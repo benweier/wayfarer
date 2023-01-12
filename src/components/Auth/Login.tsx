@@ -1,11 +1,10 @@
-import { FocusEvent, useCallback } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { useCallback } from 'react'
 import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
-import tw from 'twin.macro'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Label } from '@/components/Label'
 import { Link } from '@/components/Link'
-import { Typography } from '@/components/Typography'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { get } from '@/services/fetch'
@@ -16,8 +15,6 @@ interface LoginFormState {
   user: string
   token: string
 }
-
-const handleFocus = (node: FocusEvent<HTMLInputElement>) => node.target.select()
 
 export const Login = () => {
   const location = useLocation<Partial<LoginFormState>>()
@@ -49,41 +46,38 @@ export const Login = () => {
   const user = useWatch({ control: methods.control, name: 'user' })
 
   return (
-    <div css={tw`grid gap-4`}>
-      <Typography size="xl" weight="bold" align="center">
-        Login
-      </Typography>
+    <div className="grid gap-4">
+      <div className="text-overline text-center">Login</div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div css={tw`grid grid-cols-1 gap-6`}>
+          <div className="grid grid-cols-1 gap-8">
             <div>
               <Label htmlFor="user">Username</Label>
-              <Input type="text" name="user" />
-              <Typography size="xs" css={tw`text-gray-300 mt-1`}>
+              <Input {...methods.register('user')} type="text" />
+              <div className="text-hint mt-1">
                 Your username is not required to login, but may be useful with password managers if you have multiple
                 accounts
-              </Typography>
+              </div>
             </div>
             <div>
               <Label htmlFor="token">Access Token</Label>
-              <Input label="Access Token" type="password" name="token" onFocus={handleFocus} autoFocus />
+              <Input
+                {...methods.register('token')}
+                type="password"
+                onFocus={(node) => node.target.select()}
+                autoFocus
+              />
             </div>
-            <div css={tw`grid gap-4`}>
+            <div className="grid gap-4">
               <Button type="submit" disabled={isLoading}>
                 Login
               </Button>
-              <Typography size="sm" align="center">
+              <div className="text-caption text-center">
                 Don&apos;t have an access token?&nbsp;
-                <Typography
-                  as={Link}
-                  weight="bold"
-                  to={`${ROUTES.AUTH}/${ROUTES.REGISTER}`}
-                  state={{ user }}
-                  css={tw`rounded-sm focus:(ring-2 outline-none ring-emerald-400 ring-offset-2 ring-offset-gray-800)`}
-                >
+                <Link to={`${ROUTES.AUTH}/${ROUTES.REGISTER}`} state={{ user }}>
                   Register
-                </Typography>
-              </Typography>
+                </Link>
+              </div>
             </div>
           </div>
         </form>

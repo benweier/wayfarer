@@ -1,25 +1,24 @@
 import { HiOutlineCash } from 'react-icons/hi'
-import tw from 'twin.macro'
 import { useLeaderboardQuery } from '@/services/spacetraders/core'
 import { UserWorth } from '@/types/spacetraders'
+import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 
 const LeaderboardItem = ({ leader, highlight = false }: { leader: UserWorth; highlight?: boolean }) => {
   return (
     <div
-      css={[
-        tw`border border-gray-700 bg-gray-700 bg-opacity-20 rounded shadow py-4 px-6`,
-        highlight && tw`bg-emerald-600`,
-      ]}
+      className={cx('rounded border border-gray-700 bg-gray-700 bg-opacity-20 py-3 px-6 shadow', {
+        'bg-emerald-600': highlight,
+      })}
     >
-      <div css={tw`grid grid-flow-col justify-start items-center grid-template-columns[min-content 1fr min-content]`}>
-        <div css={tw`text-3xl font-bold w-24`}>{leader.rank}</div>
-        <div css={tw`text-lg font-medium`}>
-          {leader.username} {highlight && <span css={tw`text-xs text-emerald-100`}>(HEY, THAT&apos;S YOU!)</span>}
+      <div className="[grid-template-columns:min-content 1fr min-content] grid grid-flow-col items-center justify-start">
+        <div className="w-24 text-2xl font-bold">{leader.rank}</div>
+        <div className="text-lg font-medium">
+          {leader.username} {highlight && <span className="text-xs text-emerald-100">(HEY, THAT&apos;S YOU!)</span>}
         </div>
-        <div css={tw`flex flex-row items-center space-x-2`}>
+        <div className="flex flex-row items-center space-x-2">
           <HiOutlineCash size={20} />
-          <div css={tw`text-xl font-medium`}>{formatNumber(leader.netWorth)}</div>
+          <div className="text-xl font-medium">{formatNumber(leader.netWorth)}</div>
         </div>
       </div>
     </div>
@@ -32,15 +31,13 @@ export const Leaderboard = () => {
   if (!data) return <></>
 
   return (
-    <div css={tw`max-w-2xl mx-auto`}>
-      <div
-        css={tw`grid grid-flow-col justify-start items-center grid-template-columns[min-content 1fr auto] py-4 px-6`}
-      >
-        <div css={tw`text-gray-300 text-sm font-bold w-24`}>RANK</div>
-        <div css={tw`text-gray-300 text-sm font-bold`}>USERNAME</div>
-        <div css={tw`text-gray-300 text-sm font-bold`}>NET WORTH</div>
+    <div className="mx-auto max-w-5xl">
+      <div className="[grid-template-columns:min-content 1fr auto] grid grid-flow-col items-center justify-start py-4 px-6">
+        <div className="w-24 text-sm font-bold text-gray-300">RANK</div>
+        <div className="text-sm font-bold text-gray-300">USERNAME</div>
+        <div className="text-sm font-bold text-gray-300">NET WORTH</div>
       </div>
-      <div css={tw`grid grid-flow-row gap-4`}>
+      <div className="grid grid-flow-row gap-2">
         {data.netWorth.map((leader) => (
           <LeaderboardItem key={leader.rank} leader={leader} highlight={leader.rank === data.userNetWorth?.rank} />
         ))}

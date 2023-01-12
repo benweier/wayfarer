@@ -1,4 +1,6 @@
-import { Link as RouterLink } from 'react-router-dom'
-import tw, { styled } from 'twin.macro'
+import { LinkProps, Link as RouterLink } from 'react-router-dom'
+import { cx } from '@/utilities/cx'
 
-export const Link = styled(RouterLink)(tw`text-pink-500`)
+export const Link = ({ className, ...props }: LinkProps) => {
+  return <RouterLink {...props} className={cx('link', className)} />
+}

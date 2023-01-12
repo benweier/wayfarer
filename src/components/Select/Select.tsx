@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from 'react'
-import tw from 'twin.macro'
 import { Label } from '@/components/Label'
 import { SelectField } from './Field'
 import { SelectOption, SelectProps } from './types'
@@ -9,13 +8,9 @@ type SelectItem = unknown
 export const SelectSkeleton = ({ label }: { label: string }) => (
   <span>
     <Label>{label}</Label>
-    <div
-      css={[
-        tw`text-sm bg-gray-700 relative w-full border-2 border-gray-500 shadow-inner rounded-md px-4 py-2 opacity-50`,
-      ]}
-    >
-      <div css={tw`flex items-center h-5`}>
-        <div css={tw`animate-pulse rounded-full bg-gray-500 w-2/3 h-2`} />
+    <div className="relative w-full rounded-md border-2 border-gray-500 bg-gray-700 px-4 py-2 text-sm opacity-50 shadow-inner">
+      <div className="flex h-5 items-center">
+        <div className="h-2 w-2/3 animate-pulse rounded-full bg-gray-500" />
       </div>
     </div>
   </span>

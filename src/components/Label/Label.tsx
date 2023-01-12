@@ -1,3 +1,10 @@
-import tw, { styled } from 'twin.macro'
+import { FC, LabelHTMLAttributes } from 'react'
+import { cx } from '@/utilities/cx'
 
-export const Label = styled.label(tw`block text-sm leading-none font-medium text-gray-300 mb-2`)
+export const Label: FC<LabelHTMLAttributes<HTMLLabelElement>> = ({ className, children, ...props }) => {
+  return (
+    <label {...props} className={cx('label', className)}>
+      {children}
+    </label>
+  )
+}

@@ -1,12 +1,10 @@
-import tw, { styled } from 'twin.macro'
+import { ButtonHTMLAttributes } from 'react'
+import { cx } from '@/utilities/cx'
 
-const styles = {
-  DEFAULT: [
-    tw`w-full text-sm font-bold bg-blue-500 leading-none px-5 py-3 rounded outline-none`,
-    tw`ring-emerald-400 ring-offset-2 ring-offset-gray-800`,
-    tw`focus:(outline-none ring)`,
-  ],
-  disabled: tw`disabled:(opacity-50 cursor-default)`,
+export const Button = ({ className, children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button {...props} className={cx('button', className)}>
+      {children}
+    </button>
+  )
 }
-
-export const Button = styled.button.attrs(({ type = 'button' }) => ({ type }))(() => [styles.DEFAULT, styles.disabled])

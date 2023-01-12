@@ -1,9 +1,22 @@
+import { ButtonHTMLAttributes } from 'react'
 import { HiOutlineDuplicate } from 'react-icons/hi'
-import tw, { styled } from 'twin.macro'
+import { cx } from '@/utilities/cx'
 
-export const Copy = styled.button.attrs({ type: 'button', children: <HiOutlineDuplicate size={24} /> })(
-  tw`text-gray-300 p-1.5 rounded cursor-default border-0`,
-  tw`not-disabled:(hover:(text-blue-400 cursor-pointer))`,
-  tw`focus:(ring ring-inset ring-blue-500 outline-none)`,
-  tw`disabled:(opacity-50)`,
-)
+export const Copy = ({
+  className,
+  children = <HiOutlineDuplicate size={24} />,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button
+      {...props}
+      type="button"
+      className={cx(
+        'cursor-default rounded border-0 p-1.5 text-gray-300 focus:outline-none focus:ring focus:ring-inset focus:ring-blue-500 enabled:hover:cursor-pointer enabled:hover:text-blue-400 disabled:opacity-50',
+        className,
+      )}
+    >
+      {children}
+    </button>
+  )
+}

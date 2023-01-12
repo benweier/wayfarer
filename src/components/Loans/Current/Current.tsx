@@ -1,7 +1,5 @@
 import { HiOutlineCash } from 'react-icons/hi'
-import tw, { theme } from 'twin.macro'
 import { Button } from '@/components/Button'
-import { Caption } from '@/components/Caption'
 import { useMyLoansQuery, usePayLoanMutation } from '@/services/spacetraders/core'
 import { selectUser } from '@/store/auth'
 import { useAppSelector } from '@/store/hooks'
@@ -26,23 +24,23 @@ const PayLoan = ({ id, repayment }: { id: string; repayment: number }) => {
 
 const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
   return (
-    <div css={tw`shadow p-4 border border-gray-600 rounded`}>
-      <div css={tw`grid grid-flow-col auto-cols-min justify-between gap-2`}>
+    <div className="rounded border border-gray-700 bg-gray-700 bg-opacity-20 p-4 shadow">
+      <div className="grid auto-cols-min grid-flow-col justify-between gap-2">
         <div>
-          <Caption>{loan.type}</Caption>
-          <div css={tw`flex flex-row space-x-2 items-center py-2`}>
-            <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
-            <span css={tw`text-2xl font-bold leading-10`}>{formatNumber(loan.repaymentAmount)}</span>
+          <div className="text-caption">{loan.type}</div>
+          <div className="flex flex-row items-center space-x-2 py-2">
+            <HiOutlineCash size={20} className="text-emerald-400" />
+            <span className="text-2xl font-bold leading-10">{formatNumber(loan.repaymentAmount)}</span>
           </div>
         </div>
         <div>
           <PayLoan id={loan.id} repayment={loan.repaymentAmount} />
         </div>
       </div>
-      <div css={tw`grid grid-flow-col gap-2`}>
+      <div className="grid grid-flow-col gap-2">
         <div>
-          <Caption>Due</Caption>
-          <div css={tw`text-lg font-medium`}>{loan.due}</div>
+          <div className="text-caption">Due</div>
+          <div className="text-lg font-medium">{loan.due}</div>
         </div>
       </div>
     </div>
@@ -55,7 +53,7 @@ const CurrentLoanList = () => {
   return (
     <>
       {!!data?.loans.length && (
-        <div css={tw`grid grid-cols-3 gap-6`}>
+        <div className="grid grid-cols-3 gap-6">
           {data.loans.map((loan) => (
             <CurrentLoanItem key={loan.type} loan={loan} />
           ))}
@@ -68,7 +66,7 @@ const CurrentLoanList = () => {
 export const CurrentLoan = () => {
   return (
     <div>
-      <div css={tw`text-xl font-bold my-4`}>CURRENT LOAN</div>
+      <div className="my-4 text-xl font-bold">CURRENT LOAN</div>
       <CurrentLoanList />
     </div>
   )

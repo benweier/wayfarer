@@ -1,19 +1,17 @@
 import { StrictMode, Suspense, lazy } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
-import tw, { theme } from 'twin.macro'
-import { AppStyles } from './components/AppStyles'
+import './styles/tailwind.css'
 
 const App = lazy(() => import('@/components/App').then((mod) => ({ default: mod.App })))
 
 const Loading = () => (
-  <div css={tw`grid justify-center items-center w-screen h-screen animate-pulse`}>
-    <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
+  <div className="grid h-screen w-screen animate-pulse items-center justify-center text-zinc-200 dark:text-zinc-700">
+    <GiNorthStarShuriken size={96} />
   </div>
 )
 
 export const Root = () => (
   <StrictMode>
-    <AppStyles />
     <Suspense fallback={<Loading />}>
       <App />
     </Suspense>

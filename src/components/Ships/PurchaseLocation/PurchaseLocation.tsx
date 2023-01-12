@@ -1,11 +1,10 @@
-import { FC, useState } from 'react'
+import { PropsWithChildren, useState } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import { useNavigate } from 'react-router'
-import tw, { theme } from 'twin.macro'
-import { Button } from '@/components/Button'
 import { usePurchaseShipMutation } from '@/services/spacetraders/core'
 import { selectUser } from '@/store/auth'
 import { useAppSelector } from '@/store/hooks'
+import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 
 const PurchaseShip = ({
@@ -23,11 +22,10 @@ const PurchaseShip = ({
   const [confirm, setConfirm] = useState(false)
 
   return (
-    <Button
-      css={[
-        tw`py-2 px-4 rounded text-xs leading-none transition-colors duration-75`,
-        confirm && tw`bg-emerald-400 text-emerald-900`,
-      ]}
+    <button
+      className={cx('rounded py-2 px-4 text-xs leading-none transition-colors duration-75', {
+        'bg-emerald-400 text-emerald-900': confirm,
+      })}
       disabled={isLoading || disabled}
       onBlur={() => setConfirm(false)}
       onKeyDown={(event) => {
@@ -50,29 +48,29 @@ const PurchaseShip = ({
       }}
     >
       {confirm ? 'CONFIRM' : 'PURCHASE'}
-    </Button>
+    </button>
   )
 }
 
-export const PurchaseLocation: FC<{ type: string; location: string; price: number }> = ({
+export const PurchaseLocation = ({
   type,
   location,
   price,
   children,
-}) => {
+}: PropsWithChildren<{ type: string; location: string; price: number }>) => {
   const user = useAppSelector(selectUser)
   const navigate = useNavigate()
 
   return (
     <div>
-      <div css={tw`grid grid-flow-col gap-4 justify-between items-center`}>
-        <div css={tw`font-bold`}>{location}</div>
-        <div css={tw`grid grid-flow-col gap-2 items-center`}>
-          <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
-            <HiOutlineCash size={16} color={theme`colors.emerald.400`} />{' '}
-            <div css={tw`font-semibold`}>{formatNumber(price)}</div>
+      <div className="grid grid-flow-col items-center justify-between gap-4">
+        <div className="font-bold">{location}</div>
+        <div className="grid grid-flow-col items-center gap-2">
+          <div className="grid grid-flow-col items-center justify-end gap-1">
+            <HiOutlineCash size={16} className="text-emerald-400" />
+            <div className="font-semibold">{formatNumber(price)}</div>
           </div>
-          <div css={tw`w-32`}>
+          <div className="w-32">
             <PurchaseShip
               type={type}
               location={location}

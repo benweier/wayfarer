@@ -1,6 +1,4 @@
 import { useMemo } from 'react'
-import tw from 'twin.macro'
-import { Caption } from '@/components/Caption'
 import { useMyShipsQuery } from '@/services/spacetraders/core'
 
 interface OwnedShip {
@@ -12,16 +10,16 @@ interface OwnedShip {
 
 const OwnedShipItem = ({ ship }: { ship: OwnedShip }) => {
   return (
-    <div css={tw`shadow p-4 border border-gray-700 rounded grid grid-flow-row gap-2`}>
-      <div css={tw`grid grid-flow-row gap-6`}>
-        <div css={tw`grid grid-flow-col justify-between items-center`}>
+    <div className="grid grid-flow-row gap-2 rounded border border-gray-700 p-4 shadow">
+      <div className="grid grid-flow-row gap-6">
+        <div className="grid grid-flow-col items-center justify-between">
           <div>
-            <Caption>{ship.type}</Caption>
-            <div css={tw`text-lg font-bold`}>
+            <div className="text-caption">{ship.type}</div>
+            <div className="text-lg font-bold">
               {ship.manufacturer} {ship.class}
             </div>
           </div>
-          <div css={tw`font-black text-2xl px-2`}>{ship.count}</div>
+          <div className="px-2 text-2xl font-black">{ship.count}</div>
         </div>
       </div>
     </div>
@@ -52,7 +50,7 @@ const OwnedShipsList = () => {
   }, [ownedShipsQuery.data])
 
   return (
-    <div css={tw`grid grid-cols-3 gap-8`}>
+    <div className="grid grid-cols-3 gap-8">
       {ownedShips.ships.map((ship) => (
         <OwnedShipItem key={ship.type} ship={ship} />
       ))}
@@ -63,7 +61,7 @@ const OwnedShipsList = () => {
 export const OwnedShips = () => {
   return (
     <div>
-      <div css={tw`text-xl font-bold my-4`}>OWNED SHIPS</div>
+      <div className="my-4 text-xl font-bold">OWNED SHIPS</div>
       <OwnedShipsList />
     </div>
   )

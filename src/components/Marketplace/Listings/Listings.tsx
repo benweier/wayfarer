@@ -1,11 +1,9 @@
 import { Fragment, ReactNode, useMemo } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import { O } from 'ts-toolbelt'
-import tw, { theme } from 'twin.macro'
 import { Button } from '@/components/Button'
-import { Caption } from '@/components/Caption'
 import { PurchaseGoods } from '@/components/Marketplace/PurchaseGoods'
-import { Modal } from '@/components/Modal'
+import { Dialog, Modal } from '@/components/Modal'
 import {
   useAvailableGoodsQuery,
   useLocationQuery,
@@ -18,7 +16,7 @@ import { formatNumber } from '@/utilities/number'
 
 type ShipWithLocation = O.Compulsory<YourShip, 'location'>
 
-const MarketplaceItem = ({ item, children }: { item: Marketplace; children?: ReactNode }) => {
+const MarketplaceItem = ({ item, children }: WithChildren<{ item: Marketplace }>) => {
   const { data } = useAvailableGoodsQuery()
 
   const good = data?.goods.find((good) => good.symbol === item.symbol)
@@ -26,44 +24,44 @@ const MarketplaceItem = ({ item, children }: { item: Marketplace; children?: Rea
   if (!good) return null
 
   return (
-    <div key={good.symbol} css={tw`shadow p-4 border border-gray-700 rounded grid grid-flow-row gap-4`}>
-      <div css={tw`grid grid-flow-row gap-6 auto-rows-min`}>
-        <div css={tw`grid grid-cols-2 items-center`}>
-          <div css={tw`text-lg font-bold`}>{good.name}</div>
-          <div css={tw`grid grid-flow-row items-center justify-end`}>
-            <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
-              <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
-              <div css={tw`text-xl font-black`}>{formatNumber(item.pricePerUnit)}</div>
+    <div key={good.symbol} className="grid grid-flow-row gap-4 rounded border border-gray-700 p-4 shadow">
+      <div className="grid grid-flow-row auto-rows-min gap-6">
+        <div className="grid grid-cols-2 items-center">
+          <div className="text-lg font-bold">{good.name}</div>
+          <div className="grid grid-flow-row items-center justify-end">
+            <div className="grid grid-flow-col items-center justify-end gap-1">
+              <HiOutlineCash size={20} className="text-emerald-400" />
+              <div className="text-xl font-black">{formatNumber(item.pricePerUnit)}</div>
             </div>
-            <div css={tw`grid grid-flow-col gap-1 items-center justify-end`}>
-              <span css={tw`text-xs text-gray-400`}>/</span>
-              <span css={tw`text-xs font-bold text-gray-200`}>{item.volumePerUnit}</span>
-              <span css={tw`text-xs text-gray-400`}>{item.volumePerUnit === 1 ? 'UNIT' : 'UNITS'}</span>
+            <div className="grid grid-flow-col items-center justify-end gap-1">
+              <span className="text-xs text-gray-400">/</span>
+              <span className="text-xs font-bold text-gray-200">{item.volumePerUnit}</span>
+              <span className="text-xs text-gray-400">{item.volumePerUnit === 1 ? 'UNIT' : 'UNITS'}</span>
             </div>
           </div>
         </div>
-        <div css={tw`grid grid-flow-col gap-2 p-4 -mx-4 bg-gray-400 bg-opacity-5`}>
-          <div css={tw`grid grid-flow-row gap-2`}>
-            <div css={tw`font-semibold text-center leading-none text-gray-50`}>
+        <div className="-mx-4 grid grid-flow-col gap-2 bg-gray-400 bg-opacity-5 p-4">
+          <div className="grid grid-flow-row gap-2">
+            <div className="text-center font-semibold leading-none text-gray-50">
               {formatNumber(item.quantityAvailable)}
             </div>
-            <Caption css={tw`text-center`}>QTY</Caption>
+            <div className="text-caption text-center">QTY</div>
           </div>
-          <div css={tw`grid grid-flow-row gap-2`}>
-            <div css={tw`font-semibold text-center leading-none text-gray-50`}>
+          <div className="grid grid-flow-row gap-2">
+            <div className="text-center font-semibold leading-none text-gray-50">
               {formatNumber(item.purchasePricePerUnit)}
             </div>
-            <Caption css={tw`text-center`}>BUY</Caption>
+            <div className="text-caption text-center">BUY</div>
           </div>
-          <div css={tw`grid grid-flow-row gap-2`}>
-            <div css={tw`font-semibold text-center leading-none text-gray-50`}>
+          <div className="grid grid-flow-row gap-2">
+            <div className="text-center font-semibold leading-none text-gray-50">
               {formatNumber(item.sellPricePerUnit)}
             </div>
-            <Caption css={tw`text-center`}>SELL</Caption>
+            <div className="text-caption text-center">SELL</div>
           </div>
-          <div css={tw`grid grid-flow-row gap-2`}>
-            <div css={tw`font-semibold text-center leading-none text-gray-50`}>{item.spread}</div>
-            <Caption css={tw`text-center`}>SPREAD</Caption>
+          <div className="grid grid-flow-row gap-2">
+            <div className="text-center font-semibold leading-none text-gray-50">{item.spread}</div>
+            <div className="text-caption text-center">SPREAD</div>
           </div>
         </div>
       </div>
@@ -85,8 +83,8 @@ const MarketplaceList = ({
   if (!marketplaceQuery.data || !locationQuery.data) return null
 
   return (
-    <div css={tw`grid grid-flow-row gap-4`}>
-      <div css={tw`text-xl font-bold my-4`}>{locationQuery.data.location.name}</div>
+    <div className="grid grid-flow-row gap-4">
+      <div className="my-4 text-xl font-bold">{locationQuery.data.location.name}</div>
 
       {children && <div>{children(marketplaceQuery.data.marketplace)}</div>}
     </div>
@@ -106,39 +104,41 @@ export const MarketplaceListings = () => {
   }, [ownedShipsQuery.data])
 
   return (
-    <div css={tw`grid grid-flow-col gap-8`}>
+    <div className="grid grid-flow-col gap-8">
       {shipLocations.map(([location, ships]) => (
         <Fragment key={location}>
           <MarketplaceList location={location}>
             {(marketplace) =>
               marketplace.length > 0 && (
-                <div css={tw`grid grid-cols-3 gap-4`}>
+                <div className="grid grid-cols-3 gap-4">
                   {marketplace.map((item) => (
                     <Fragment key={item.symbol}>
                       <MarketplaceItem item={item}>
-                        <div css={tw`grid grid-cols-2 gap-4`}>
+                        <div className="grid grid-cols-2 gap-4">
                           <Modal
                             action={({ openModal }) => (
                               <Button
                                 onClick={openModal}
-                                css={[tw`text-white bg-rose-500 font-bold`, tw`focus:(ring-blue-400)`]}
+                                className="bg-rose-500 font-bold text-white focus:ring-blue-400"
                               >
                                 BUY
                               </Button>
                             )}
                           >
-                            {({ closeModal }) => (
-                              <PurchaseGoods
-                                ships={ships}
-                                marketplace={item}
-                                onDone={closeModal}
-                                onCancel={closeModal}
-                              />
-                            )}
+                            <Dialog
+                              render={({ closeModal }) => (
+                                <Dialog.Content>
+                                  <PurchaseGoods
+                                    ships={ships}
+                                    marketplace={item}
+                                    onDone={closeModal}
+                                    onCancel={closeModal}
+                                  />
+                                </Dialog.Content>
+                              )}
+                            />
                           </Modal>
-                          <Button css={[tw`text-white bg-emerald-500 font-bold`, tw`focus:(ring-blue-400)`]}>
-                            SELL
-                          </Button>
+                          <Button className="bg-emerald-500 font-bold text-white focus:ring-blue-400">SELL</Button>
                         </div>
                       </MarketplaceItem>
                     </Fragment>

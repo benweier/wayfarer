@@ -1,7 +1,4 @@
 import { Fragment } from 'react'
-import tw from 'twin.macro'
-import { Caption } from '@/components/Caption'
-import { Typography } from '@/components/Typography'
 import { useMyShipsQuery } from '@/services/spacetraders/core'
 
 export const ShipsOverview = () => {
@@ -11,31 +8,31 @@ export const ShipsOverview = () => {
     <div>
       {ownedShipsQuery.data?.ships.map((ship) => (
         <Fragment key={ship.id}>
-          <div css={tw`grid grid-flow-col gap-4 items-center shadow p-4 border border-gray-700 rounded`}>
+          <div className="grid grid-flow-col items-center gap-4 rounded border border-gray-700 p-4 shadow">
             <div>
-              <Caption>{ship.type}</Caption>
-              <Typography size="xl" weight="bold">
+              <div className="text-caption">{ship.type}</div>
+              <div className="text-body text-xl font-bold">
                 {ship.manufacturer} {ship.class}
-              </Typography>
+              </div>
             </div>
 
-            <div css={tw`text-right`}>
-              <Caption>Location</Caption>
-              <Typography weight="medium">{ship.location}</Typography>
+            <div className="text-right">
+              <div className="text-caption">Location</div>
+              <div className="font-medium">{ship.location}</div>
             </div>
-            <div css={tw`text-right`}>
-              <Caption>Cargo</Caption>
-              <Typography weight="medium">
+            <div className="text-right">
+              <div className="text-caption">Cargo</div>
+              <div className="font-medium">
                 <span>{ship.cargo.reduce((cargo, { totalVolume = 0 }) => cargo + totalVolume, 0)}</span>
                 <span> / </span>
                 <span>{ship.maxCargo}</span>
-              </Typography>
+              </div>
             </div>
-            <div css={tw`text-right`}>
-              <Caption>Fuel</Caption>
-              <Typography weight="medium">
+            <div className="text-right">
+              <div className="text-caption">Fuel</div>
+              <div className="font-medium">
                 {ship.cargo.reduce((fuel, cargo) => (cargo.good === 'FUEL' ? fuel + cargo.quantity : fuel), 0)}
-              </Typography>
+              </div>
             </div>
           </div>
         </Fragment>

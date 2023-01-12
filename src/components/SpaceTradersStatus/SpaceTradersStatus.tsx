@@ -1,5 +1,5 @@
 import { HiOutlineStatusOffline, HiOutlineStatusOnline, HiRefresh } from 'react-icons/hi'
-import tw, { css } from 'twin.macro'
+import { cx } from '@/utilities/cx'
 import { useSpaceTradersStatus } from './useSpaceTradersStatus'
 
 export const SpaceTradersStatus = () => {
@@ -7,14 +7,11 @@ export const SpaceTradersStatus = () => {
 
   return (
     <div
-      css={[
-        css`
-          transition: color 300ms ease-in-out;
-        `,
-        status === 'ONLINE' && tw`text-emerald-400`,
-        status === 'OFFLINE' && tw`text-rose-400`,
-        isChecking && tw`text-yellow-400`,
-      ]}
+      className={cx({
+        'text-emerald-400': status === 'ONLINE',
+        'text-rose-400': status === 'OFFLINE',
+        'text-yellow-400': isChecking,
+      })}
     >
       {status === 'UNKNOWN' && <HiRefresh size={20} />}
       {status === 'ONLINE' && <HiOutlineStatusOnline size={20} />}

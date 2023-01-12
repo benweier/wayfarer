@@ -1,7 +1,6 @@
 import { KeyboardEvent, createContext, useCallback, useContext, useRef } from 'react'
 import { Controller, FormProvider, SubmitHandler, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { HiMinus, HiOutlineCash, HiPlus } from 'react-icons/hi'
-import tw, { theme } from 'twin.macro'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { ShipSelect } from '@/components/Ships/Select'
@@ -46,20 +45,20 @@ const GoodsQuantity = ({ min = 0, max = 0 }: { min?: number; max?: number }) => 
   }, [])
 
   return (
-    <div css={tw`grid grid-cols-3 gap-2`}>
-      <div css={tw`grid grid-cols-3 gap-2`}>
-        <Button css={tw`p-1`} onClick={() => handleDecrement(100)}>
-          <span css={tw`flex justify-center items-center`}>
+    <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-2">
+        <Button className="p-1" onClick={() => handleDecrement(100)}>
+          <span className="flex items-center justify-center">
             <HiMinus size={12} /> 100
           </span>
         </Button>
-        <Button css={tw`p-1`} onClick={() => handleDecrement(10)}>
-          <span css={tw`flex justify-center items-center`}>
+        <Button className="p-1" onClick={() => handleDecrement(10)}>
+          <span className="flex items-center justify-center">
             <HiMinus size={12} /> 10
           </span>
         </Button>
-        <Button css={tw`p-1`} onClick={() => handleDecrement(1)}>
-          <span css={tw`flex justify-center items-center`}>
+        <Button className="p-1" onClick={() => handleDecrement(1)}>
+          <span className="flex items-center justify-center">
             <HiMinus size={12} /> 1
           </span>
         </Button>
@@ -72,23 +71,23 @@ const GoodsQuantity = ({ min = 0, max = 0 }: { min?: number; max?: number }) => 
           step={1}
           min={min}
           max={max}
-          css={tw`text-center`}
+          className="text-center"
           onKeyPress={handleKeyPress}
         />
       </div>
-      <div css={tw`grid grid-cols-3 gap-2`}>
-        <Button css={tw`p-1`} onClick={() => handleIncrement(1)}>
-          <span css={tw`flex justify-center items-center`}>
+      <div className="grid grid-cols-3 gap-2">
+        <Button className="p-1" onClick={() => handleIncrement(1)}>
+          <span className="flex items-center justify-center">
             <HiPlus size={12} /> 1
           </span>
         </Button>
-        <Button css={tw`p-1`} onClick={() => handleIncrement(10)}>
-          <span css={tw`flex justify-center items-center`}>
+        <Button className="p-1" onClick={() => handleIncrement(10)}>
+          <span className="flex items-center justify-center">
             <HiPlus size={12} /> 10
           </span>
         </Button>
-        <Button css={tw`p-1`} onClick={() => handleIncrement(100)}>
-          <span css={tw`flex justify-center items-center`}>
+        <Button className="p-1" onClick={() => handleIncrement(100)}>
+          <span className="flex items-center justify-center">
             <HiPlus size={12} /> 100
           </span>
         </Button>
@@ -102,9 +101,9 @@ const GoodsPurchasePrice = ({ marketplace }: { marketplace: Marketplace }) => {
   const qty = useWatch({ control, name: 'qty' })
 
   return (
-    <div css={tw`flex gap-2 justify-center items-center`}>
-      <HiOutlineCash size={20} color={theme`colors.emerald.400`} />
-      <span css={tw`font-bold`}>{formatNumber(marketplace.pricePerUnit * Number(qty))}</span>
+    <div className="flex items-center justify-center gap-2">
+      <HiOutlineCash size={20} className="text-emerald-400" />
+      <span className="font-bold">{formatNumber(marketplace.pricePerUnit * Number(qty))}</span>
     </div>
   )
 }
@@ -128,7 +127,7 @@ const PurchaseGoodsForm = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onDone)}>
         <fieldset disabled={methods.formState.isSubmitting}>
-          <div css={tw`grid grid-flow-row gap-4 p-4`}>
+          <div className="grid grid-flow-row gap-4 p-4">
             <div>
               <Controller
                 control={methods.control}
@@ -146,14 +145,14 @@ const PurchaseGoodsForm = ({
             <div>
               <GoodsQuantity min={0} max={marketplace?.quantityAvailable} />
             </div>
-            <div css={tw`text-center`}>{marketplace && <GoodsPurchasePrice marketplace={marketplace} />}</div>
+            <div className="text-center">{marketplace && <GoodsPurchasePrice marketplace={marketplace} />}</div>
           </div>
-          <div css={tw`border-t border-gray-900`}>
-            <div css={tw`grid grid-flow-col gap-2 bg-gray-900 p-2 rounded-b-lg`}>
+          <div className="border-t border-gray-900">
+            <div className="grid grid-flow-col gap-2 rounded-b-lg bg-gray-900 p-2">
               <Button type="submit" disabled={!marketplace}>
                 CONFIRM
               </Button>
-              <Button onClick={onCancel} css={tw`bg-gray-800 ring-rose-500`}>
+              <Button onClick={onCancel} className="bg-gray-800 ring-rose-500">
                 CANCEL
               </Button>
             </div>

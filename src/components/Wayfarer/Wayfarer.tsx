@@ -1,5 +1,5 @@
-import tw, { styled } from 'twin.macro'
+import { cx } from '@/utilities/cx'
 
-export const Wayfarer = styled.div.attrs({ children: 'WAYFARER' })(() => [
-  tw`text-3xl text-gray-200 leading-none font-black letter-spacing[-0.03em] font-feature-settings["kern"]`,
-])
+export const Wayfarer = ({ className }: WithClassName) => {
+  return <div className={cx('font-black leading-none text-zinc-800 dark:text-zinc-100', className)}>WAYFARER</div>
+}

@@ -1,17 +1,16 @@
-import { FocusEvent, useCallback } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { useCallback } from 'react'
 import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { HiXCircle } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
-import tw from 'twin.macro'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import { Label } from '@/components/Label'
 import { Link } from '@/components/Link'
-import { Typography } from '@/components/Typography'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { post } from '@/services/fetch'
 import { TokenResponse } from '@/types/spacetraders'
+import { cx } from '@/utilities/cx'
 import { Copy } from './Copy'
 import { useCopy } from './useCopy'
 
@@ -19,14 +18,6 @@ interface RegisterFormState {
   user: string
   token: string
 }
-
-const styles = {
-  DEFAULT: [tw`text-gray-500`],
-  copied: [tw`text-emerald-400`],
-  notCopied: [tw`text-rose-400`],
-}
-
-const handleFocus = (node: FocusEvent<HTMLInputElement>) => node.target.select()
 
 export const Register = () => {
   const location = useLocation<Partial<RegisterFormState>>()
@@ -64,49 +55,52 @@ export const Register = () => {
   const token = useWatch({ control: methods.control, name: 'token' })
 
   return (
-    <div css={tw`grid gap-4`}>
-      <Typography size="xl" weight="bold" align="center">
-        Register
-      </Typography>
+    <div className="grid gap-4">
+      <div className="text-overline text-center">Register</div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div css={tw`grid grid-cols-1 gap-6`}>
+          <div className="grid grid-cols-1 gap-8">
             <div>
-              <Label htmlFor="user">Username</Label>
+              <label className="label" htmlFor="user">
+                Username
+              </label>
               <Input type="text" name="user" autoComplete="off" autoFocus />
             </div>
             <div ref={ref}>
-              <Label htmlFor="token">Access Token</Label>
-              <Input
-                type="text"
-                name="token"
-                onFocus={handleFocus}
-                readOnly
-                disabled={!token}
-                icon={
+              <label className="label" htmlFor="token">
+                Access Token
+              </label>
+              <div className="relative">
+                <Input type="text" name="token" onFocus={(node) => node.target.select()} readOnly disabled={!token} />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-1">
                   <Copy
                     disabled={!token}
                     onClick={() => {
-                      void onCopy(token)
+                      onCopy(token)
                     }}
                   />
-                }
-              />
-              <Typography size="xs" css={tw`text-gray-300 mt-1`}>
-                Register a username to receive your access token
-              </Typography>
+                </div>
+              </div>
+              <div className="text-hint mt-1 text-gray-300">Register a username to receive your access token</div>
             </div>
 
-            <div css={tw`grid gap-4`}>
+            <div className="grid gap-4">
               {isSuccess && (
-                <div css={[tw`flex gap-4`, styles.DEFAULT, isCopied && styles.copied, !isCopied && styles.notCopied]}>
+                <div
+                  className={cx('flex gap-4', {
+                    'text-emerald-600 dark:text-emerald-400': isCopied,
+                    'text-rose-600 dark:text-rose-400': !isCopied,
+                  })}
+                >
                   <HiXCircle size={20} />
-                  <Typography as="span" size="sm" nowrap>
-                    {isCopied ? 'Token Copied!' : 'Token Not Copied'}
-                  </Typography>
+                  <span className="text-hint whitespace-nowrap">{isCopied ? 'Token Copied!' : 'Token Not Copied'}</span>
                 </div>
               )}
-              {!isCopied && !token && <Button type="submit">Register</Button>}
+              {!isCopied && !token && (
+                <Button disabled={isLoading} type="submit">
+                  Register
+                </Button>
+              )}
               {!!token && (
                 <Button
                   disabled={!isCopied}
@@ -118,18 +112,12 @@ export const Register = () => {
                   Got it. Let&apos;s go!
                 </Button>
               )}
-              <Typography size="sm" align="center">
+              <div className="text-caption text-center">
                 Already have an access token?&nbsp;
-                <Typography
-                  as={Link}
-                  weight="bold"
-                  to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}
-                  state={{ user, token }}
-                  css={tw`rounded-sm focus:(ring-2 outline-none ring-emerald-400 ring-offset-2 ring-offset-gray-800)`}
-                >
+                <Link to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ user, token }}>
                   Login
-                </Typography>
-              </Typography>
+                </Link>
+              </div>
             </div>
           </div>
         </form>

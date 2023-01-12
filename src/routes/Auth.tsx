@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Outlet } from 'react-router'
 import { Navigate } from 'react-router-dom'
-import tw, { theme } from 'twin.macro'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { AuthLayout } from '@/layouts/Auth'
@@ -21,11 +20,11 @@ export const AuthPage = () => {
   return (
     <AuthTemplate>
       <AuthLayout>
-        <div css={tw`rounded border border-gray-700 shadow-xl p-8`}>
+        <div className="p-8">
           <Suspense
             fallback={
-              <div css={tw`grid justify-center items-center animate-pulse`}>
-                <GiNorthStarShuriken size={96} color={theme`colors.gray.700`} />
+              <div className="grid animate-pulse items-center justify-center text-zinc-200 dark:text-zinc-700">
+                <GiNorthStarShuriken size={96} />
               </div>
             }
           >

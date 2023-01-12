@@ -1,6 +1,7 @@
-import { FC } from 'react'
-import tw from 'twin.macro'
-
-export const AuthLayout: FC = ({ children }) => {
-  return <div css={tw`grid items-center max-w-lg w-full mx-auto`}>{children}</div>
+export const AuthLayout = ({ children }: WithChildren) => {
+  return (
+    <div className="bg-zinc-200/40 dark:bg-zinc-700/20">
+      <div className="mx-auto grid w-full max-w-lg items-center">{children}</div>
+    </div>
+  )
 }

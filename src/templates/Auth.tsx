@@ -1,8 +1,6 @@
-import { FC } from 'react'
 import { IconContext } from 'react-icons'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { VscGithub, VscRocket } from 'react-icons/vsc'
-import tw, { theme } from 'twin.macro'
 import { SpaceTradersStatus, useSpaceTradersStatus } from '@/components/SpaceTradersStatus'
 import { Wayfarer } from '@/components/Wayfarer'
 
@@ -11,44 +9,43 @@ const Status = () => {
 
   return (
     <>
+      <span className="text-sm">Status:</span>
       <SpaceTradersStatus />
-      <span css={tw`text-sm`}>{status}</span>
+      <span className="text-sm font-semibold">{status}</span>
     </>
   )
 }
 
-export const AuthTemplate: FC = ({ children }) => {
+export const AuthTemplate = ({ children }: WithChildren) => {
   return (
-    <div
-      css={tw`min-h-screen w-full px-4 py-4 grid gap-6 items-center auto-rows-min grid-template-rows[auto 1fr auto]`}
-    >
-      <div css={tw`grid grid-flow-row justify-center items-center py-8`}>
-        <div css={tw`place-self-center`}>
+    <div className="grid min-h-screen w-full auto-rows-min items-center gap-6 [grid-template-rows:auto_1fr_auto]">
+      <div className="grid grid-flow-row items-center justify-center py-8">
+        <div className="place-self-center text-zinc-500">
           <GiNorthStarShuriken size={64} />
         </div>
-        <Wayfarer css={tw`text-center text-6xl lg:text-7xl`} />
-        <div css={tw`text-center text-xl font-semibold text-gray-400`}>A SpaceTraders API Interface</div>
-        <div css={tw`grid grid-flow-col gap-2 items-center justify-center py-4`}>
+        <Wayfarer className="text-center text-6xl font-black lg:text-7xl" />
+        <div className="text-center text-xl font-semibold text-zinc-500">A SpaceTraders API Interface</div>
+        <div className="grid grid-flow-col items-center justify-center gap-2 py-4">
           <Status />
         </div>
       </div>
 
-      <div css={tw`will-change[opacity]`}>{children}</div>
+      <div>{children}</div>
 
-      <div css={tw`grid grid-flow-col gap-8 py-8`}>
-        <div css={tw`grid grid-flow-col gap-8 items-center justify-center`}>
-          <IconContext.Provider value={{ size: '32', color: theme`colors.gray.400` }}>
+      <div className="grid grid-flow-col gap-8 py-8">
+        <div className="grid grid-flow-col items-center justify-center gap-8 text-zinc-500">
+          <IconContext.Provider value={{ size: '32' }}>
             <a
               href="https://spacetraders.io"
               title="SpaceTraders"
-              css={tw`p-1 rounded-sm focus:(ring-2 outline-none ring-emerald-400 ring-offset-2 ring-offset-gray-800)`}
+              className="rounded-full p-1 outline-none ring-emerald-400 ring-offset-2 focus:ring-2 focus:ring-offset-gray-800"
             >
               <VscRocket />
             </a>
             <a
               href="https://github.com/benweier/wayfarer"
               title="GitHub"
-              css={tw`p-1 rounded-sm focus:(ring-2 outline-none ring-emerald-400 ring-offset-2 ring-offset-gray-800)`}
+              className="rounded-full p-1 outline-none ring-emerald-400 ring-offset-2 focus:ring-2 focus:ring-offset-gray-800"
             >
               <VscGithub />
             </a>
