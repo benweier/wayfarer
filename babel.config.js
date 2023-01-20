@@ -4,7 +4,7 @@ module.exports = (api) => {
   const plugins = []
 
   if (BABEL_ENV === 'development') {
-    plugins.push(require.resolve('react-refresh/babel'),)
+    plugins.push(require.resolve('react-refresh/babel'))
   }
 
   return {
