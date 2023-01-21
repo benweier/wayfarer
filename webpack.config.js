@@ -139,6 +139,11 @@ module.exports = (env, argv) => {
             },
             {
               loader: require.resolve('postcss-loader'),
+              options: {
+                postcssOptions: {
+                  ident: 'postcss',
+                },
+              },
             },
           ],
         },
