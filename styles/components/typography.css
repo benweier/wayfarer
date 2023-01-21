@@ -1,0 +1,24 @@
+.text-hero {
+  @apply text-6xl font-black leading-tight tracking-tight;
+}
+.text-title {
+  @apply text-4xl font-black leading-tight tracking-tight;
+}
+.text-subtitle {
+  @apply text-2xl font-light leading-normal tracking-normal;
+}
+.text-headline {
+  @apply text-3xl font-bold leading-tight tracking-tight;
+}
+.text-overline {
+  @apply text-xl font-semibold leading-normal tracking-normal;
+}
+.text-body {
+  @apply text-base font-normal leading-normal tracking-normal;
+}
+.text-caption {
+  @apply text-sm font-normal leading-normal tracking-normal;
+}
+.text-hint {
+  @apply text-xs font-medium leading-normal tracking-normal;
+}

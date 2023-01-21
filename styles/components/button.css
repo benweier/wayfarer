@@ -1,0 +1,13 @@
+.btn {
+  @apply rounded-sm bg-blue-500 px-5 py-3 text-sm font-bold leading-none outline-none;
+  @apply focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2;
+  @apply disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.btn-hero {
+  @apply rounded bg-gradient-to-r from-pink-500 via-fuchsia-500 to-blue-500 disabled:opacity-70;
+  @apply py-3 px-5 text-sm font-bold text-white outline-none ring-zinc-700 ring-offset-2 ring-offset-zinc-100;
+  @apply hover:from-pink-600 hover:via-fuchsia-600 hover:to-blue-600 hover:ring-2;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70;
+  @apply dark:ring-zinc-200 dark:ring-offset-zinc-800 dark:hover:ring-zinc-400;
+}
