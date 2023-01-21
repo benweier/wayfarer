@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { useStore } from 'zustand'
 import { User } from '@/types/spacetraders'
 import { createVanillaStore } from './base'
 
@@ -29,4 +29,4 @@ const store = createVanillaStore<AuthStore>((set) => ({
 
 export const { getState, setState, subscribe, destroy } = store
 
-export const useAuthStore = create(store)
+export const useAuthStore = () => useStore(store)
