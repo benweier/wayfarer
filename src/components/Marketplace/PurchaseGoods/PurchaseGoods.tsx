@@ -1,8 +1,6 @@
 import { KeyboardEvent, createContext, useCallback, useContext, useRef } from 'react'
 import { Controller, FormProvider, SubmitHandler, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { HiMinus, HiOutlineCash, HiPlus } from 'react-icons/hi'
-import { Button } from '@/components/Button'
-import { Input } from '@/components/Input'
 import { ShipSelect } from '@/components/Ships/Select'
 import { usePurchaseGoodsMutation } from '@/services/spacetraders/core'
 import { Marketplace, YourShip } from '@/types/spacetraders'
@@ -47,24 +45,24 @@ const GoodsQuantity = ({ min = 0, max = 0 }: { min?: number; max?: number }) => 
   return (
     <div className="grid grid-cols-3 gap-2">
       <div className="grid grid-cols-3 gap-2">
-        <Button className="p-1" onClick={() => handleDecrement(100)}>
+        <button className="btn p-1" onClick={() => handleDecrement(100)}>
           <span className="flex items-center justify-center">
             <HiMinus size={12} /> 100
           </span>
-        </Button>
-        <Button className="p-1" onClick={() => handleDecrement(10)}>
+        </button>
+        <button className="btn p-1" onClick={() => handleDecrement(10)}>
           <span className="flex items-center justify-center">
             <HiMinus size={12} /> 10
           </span>
-        </Button>
-        <Button className="p-1" onClick={() => handleDecrement(1)}>
+        </button>
+        <button className="btn p-1" onClick={() => handleDecrement(1)}>
           <span className="flex items-center justify-center">
             <HiMinus size={12} /> 1
           </span>
-        </Button>
+        </button>
       </div>
       <div>
-        <Input
+        <input
           ref={ref}
           name="qty"
           type="number"
@@ -72,25 +70,25 @@ const GoodsQuantity = ({ min = 0, max = 0 }: { min?: number; max?: number }) => 
           min={min}
           max={max}
           className="text-center"
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
         />
       </div>
       <div className="grid grid-cols-3 gap-2">
-        <Button className="p-1" onClick={() => handleIncrement(1)}>
+        <button className="btn p-1" onClick={() => handleIncrement(1)}>
           <span className="flex items-center justify-center">
             <HiPlus size={12} /> 1
           </span>
-        </Button>
-        <Button className="p-1" onClick={() => handleIncrement(10)}>
+        </button>
+        <button className="btn p-1" onClick={() => handleIncrement(10)}>
           <span className="flex items-center justify-center">
             <HiPlus size={12} /> 10
           </span>
-        </Button>
-        <Button className="p-1" onClick={() => handleIncrement(100)}>
+        </button>
+        <button className="btn p-1" onClick={() => handleIncrement(100)}>
           <span className="flex items-center justify-center">
             <HiPlus size={12} /> 100
           </span>
-        </Button>
+        </button>
       </div>
     </div>
   )
@@ -149,12 +147,12 @@ const PurchaseGoodsForm = ({
           </div>
           <div className="border-t border-gray-900">
             <div className="grid grid-flow-col gap-2 rounded-b-lg bg-gray-900 p-2">
-              <Button type="submit" disabled={!marketplace}>
+              <button className="btn" type="submit" disabled={!marketplace}>
                 CONFIRM
-              </Button>
-              <Button onClick={onCancel} className="bg-gray-800 ring-rose-500">
+              </button>
+              <button onClick={onCancel} className="btn bg-gray-800 ring-rose-500">
                 CANCEL
-              </Button>
+              </button>
             </div>
           </div>
         </fieldset>

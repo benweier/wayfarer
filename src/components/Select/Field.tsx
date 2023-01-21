@@ -1,6 +1,5 @@
 import { Listbox } from '@headlessui/react'
 import { HiCheck, HiSelector } from 'react-icons/hi'
-import { Label } from '@/components/Label'
 import { cx } from '@/utilities/cx'
 import { SelectOption } from './types'
 
@@ -18,7 +17,9 @@ export const SelectField = <T extends SelectOption = SelectOption>({
   return (
     <Listbox value={selected} onChange={onChange}>
       <>
-        <Listbox.Label as={Label}>{label}</Listbox.Label>
+        <Listbox.Label as="label" className="label">
+          {label}
+        </Listbox.Label>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-md border-2 border-gray-500 bg-gray-700 py-2 pl-4 pr-10 text-left text-sm shadow-inner focus:border-gray-800 focus:outline-none focus:ring focus:ring-emerald-400">
             <span className="block truncate font-semibold">{selected?.name ?? <>&nbsp;</>}</span>

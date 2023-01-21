@@ -2,10 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { HiXCircle } from 'react-icons/hi'
-import { useNavigate } from 'react-router-dom'
-import { Button } from '@/components/Button'
-import { Input } from '@/components/Input'
-import { Link } from '@/components/Link'
+import { Link, useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { post } from '@/services/fetch'
@@ -64,14 +61,21 @@ export const Register = () => {
               <label className="label" htmlFor="user">
                 Username
               </label>
-              <Input type="text" name="user" autoComplete="off" autoFocus />
+              <input {...methods.register('user')} className="input" type="text" autoComplete="off" autoFocus />
             </div>
             <div ref={ref}>
               <label className="label" htmlFor="token">
                 Access Token
               </label>
               <div className="relative">
-                <Input type="text" name="token" onFocus={(node) => node.target.select()} readOnly disabled={!token} />
+                <input
+                  {...methods.register('token')}
+                  className="input"
+                  type="text"
+                  onFocus={(node) => node.target.select()}
+                  readOnly
+                  disabled={!token}
+                />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-1">
                   <Copy
                     disabled={!token}
@@ -97,12 +101,13 @@ export const Register = () => {
                 </div>
               )}
               {!isCopied && !token && (
-                <Button disabled={isLoading} type="submit">
+                <button className="btn-hero" disabled={isLoading} type="submit">
                   Register
-                </Button>
+                </button>
               )}
               {!!token && (
-                <Button
+                <button
+                  className="btn"
                   disabled={!isCopied}
                   type="button"
                   onClick={() => {
@@ -110,11 +115,11 @@ export const Register = () => {
                   }}
                 >
                   Got it. Let&apos;s go!
-                </Button>
+                </button>
               )}
               <div className="text-caption text-center">
                 Already have an access token?&nbsp;
-                <Link to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ user, token }}>
+                <Link className="link" to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ user, token }}>
                   Login
                 </Link>
               </div>

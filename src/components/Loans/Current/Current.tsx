@@ -1,5 +1,4 @@
 import { HiOutlineCash } from 'react-icons/hi'
-import { Button } from '@/components/Button'
 import { useMyLoansQuery, usePayLoanMutation } from '@/services/spacetraders/core'
 import { selectUser } from '@/store/auth'
 import { useAppSelector } from '@/store/hooks'
@@ -11,14 +10,15 @@ const PayLoan = ({ id, repayment }: { id: string; repayment: number }) => {
   const user = useAppSelector(selectUser)
 
   return (
-    <Button
+    <button
+      className="btn"
       disabled={isLoading || (user?.credits ?? 0) < repayment}
       onClick={async () => {
         await payLoanMutation({ id })
       }}
     >
       Pay
-    </Button>
+    </button>
   )
 }
 

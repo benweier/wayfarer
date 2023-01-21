@@ -1,7 +1,6 @@
 import { Fragment, ReactNode, useMemo } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import { O } from 'ts-toolbelt'
-import { Button } from '@/components/Button'
 import { PurchaseGoods } from '@/components/Marketplace/PurchaseGoods'
 import { Dialog, Modal } from '@/components/Modal'
 import {
@@ -117,12 +116,9 @@ export const MarketplaceListings = () => {
                         <div className="grid grid-cols-2 gap-4">
                           <Modal
                             action={({ openModal }) => (
-                              <Button
-                                onClick={openModal}
-                                className="bg-rose-500 font-bold text-white focus:ring-blue-400"
-                              >
+                              <button onClick={openModal} className="btn bg-rose-500 font-bold">
                                 BUY
-                              </Button>
+                              </button>
                             )}
                           >
                             <Dialog
@@ -138,7 +134,7 @@ export const MarketplaceListings = () => {
                               )}
                             />
                           </Modal>
-                          <Button className="bg-emerald-500 font-bold text-white focus:ring-blue-400">SELL</Button>
+                          <button className="btn bg-emerald-500 font-bold">SELL</button>
                         </div>
                       </MarketplaceItem>
                     </Fragment>

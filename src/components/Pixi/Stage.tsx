@@ -1,5 +1,5 @@
-import { ComponentProps, FC, ReactNode } from 'react'
 import { Stage as PixiStage } from '@inlet/react-pixi'
+import { ComponentProps, FC, ReactNode } from 'react'
 import { ReactReduxContext } from 'react-redux'
 
 const ContextBridge: FC<{ Context: typeof ReactReduxContext; render: (children: ReactNode) => ReactNode }> = ({
