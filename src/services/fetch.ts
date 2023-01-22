@@ -1,10 +1,13 @@
 import { http } from './http'
 
+export type URLParams = Record<string, any>
+export type RequestPayload = Record<string, any> | null | undefined | unknown
+
 export async function get<T>(url: URL | RequestInfo, args: RequestInit = {}) {
   return await http<T>(url, { ...args, method: 'GET', credentials: 'same-origin' })
 }
 
-export async function post<T = unknown, P extends Record<string, any> | null | unknown = unknown>(
+export async function post<T = unknown, P extends RequestPayload = unknown>(
   url: URL | RequestInfo,
   payload?: P,
   args: RequestInit = {},
@@ -17,7 +20,7 @@ export async function post<T = unknown, P extends Record<string, any> | null | u
   })
 }
 
-export async function patch<T = unknown, P extends Record<string, any> | null | unknown = unknown>(
+export async function patch<T = unknown, P extends RequestPayload = unknown>(
   url: URL | RequestInfo,
   payload?: P,
   args: RequestInit = {},
@@ -34,7 +37,7 @@ export async function put<T>(url: URL | RequestInfo, payload: BodyInit, args: Re
   return await http<T>(url, { ...args, method: 'POST', credentials: 'same-origin', body: payload })
 }
 
-export async function remove<T = unknown, P extends Record<string, any> | null | unknown = unknown>(
+export async function remove<T = unknown, P extends RequestPayload = unknown>(
   url: URL | RequestInfo,
   payload: P,
   args: RequestInit = {},
