@@ -1,19 +1,20 @@
 const path = require('node:path')
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const dotenv = require('dotenv')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const webpack = require('webpack')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
-module.exports = (env, argv) => {
-  const isProduction = argv.mode === 'production'
+dotenv.config({ silent: true })
 
+const isProduction = process.env.NODE_ENV === 'production'
+
+module.exports = () => {
   const plugins = [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-    }),
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'SPACETRADERS_API_URL']),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
@@ -49,9 +50,6 @@ module.exports = (env, argv) => {
         os: false,
         module: false,
         util: false,
-      },
-      alias: {
-        'react-redux': 'react-redux/es/next',
       },
     },
     output: {
@@ -168,7 +166,6 @@ module.exports = (env, argv) => {
       ],
     },
     plugins,
-    mode: env,
     experiments: {
       outputModule: isProduction,
       layers: true,
