@@ -2,3 +2,7 @@ node_modules
 build
 dist
 .parcel-cache
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
