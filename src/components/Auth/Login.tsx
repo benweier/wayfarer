@@ -1,3 +1,4 @@
+import { ErrorMessage } from '@hookform/error-message'
 import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
@@ -8,7 +9,7 @@ import { get } from '@/services/fetch'
 import { useAuthStore } from '@/services/store/auth'
 import { AccountResponse } from '@/types/spacetraders'
 
-interface LoginFormState {
+type LoginFormState = {
   user: string
   token: string
 }
@@ -24,7 +25,7 @@ export const Login = () => {
     },
   })
   const { mutateAsync, isLoading } = useMutation((values: LoginFormState) => {
-    const url = new URL('/my/account', 'https://api.spacetraders.io')
+    const url = new URL('/my/account', import.meta.env.SPACETRADERS_API_URL)
     const headers = new Headers()
 
     if (values.token) headers.set('Authorization', `Bearer ${values.token}`)
@@ -33,11 +34,20 @@ export const Login = () => {
   })
   const onSubmit = useCallback<SubmitHandler<LoginFormState>>(
     (values) => {
-      return mutateAsync(values).then((response) => {
-        setAuth({ user: response.data?.user, token: values.token })
-      })
+      return mutateAsync(values)
+        .then((response) => {
+          setAuth({ user: response.user, token: values.token })
+        })
+        .catch((err) => {
+          if (err.status === 401) {
+            methods.setError('token', {
+              type: 'manual',
+              message: 'Invalid token',
+            })
+          }
+        })
     },
-    [mutateAsync, setAuth],
+    [methods, mutateAsync, setAuth],
   )
 
   const user = useWatch({ control: methods.control, name: 'user' })
@@ -52,7 +62,7 @@ export const Login = () => {
               <label className="label" htmlFor="user">
                 Username
               </label>
-              <input {...methods.register('user')} className="input" type="text" />
+              <input {...methods.register('user')} className="input input-lg" type="text" />
               <div className="text-hint mt-1">
                 Your username is not required to login, but may be useful with password managers if you have multiple
                 accounts
@@ -63,11 +73,16 @@ export const Login = () => {
                 Access Token
               </label>
               <input
-                {...methods.register('token')}
-                className="input"
+                {...methods.register('token', { required: true })}
+                className="input input-lg"
                 type="password"
                 onFocus={(node) => node.target.select()}
                 autoFocus
+              />
+              <ErrorMessage
+                errors={methods.formState.errors}
+                name="token"
+                render={({ message }) => <div className="text-hint text-rose-400">{message}</div>}
               />
             </div>
             <div className="grid gap-4">
@@ -76,7 +91,7 @@ export const Login = () => {
               </button>
               <div className="text-caption text-center">
                 Don&apos;t have an access token?&nbsp;
-                <Link className="link" to={`${ROUTES.AUTH}/${ROUTES.REGISTER}`} state={{ user }}>
+                <Link className="link" to={ROUTES.REGISTER} state={{ user }}>
                   Register
                 </Link>
               </div>

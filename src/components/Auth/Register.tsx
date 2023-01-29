@@ -11,7 +11,7 @@ import { cx } from '@/utilities/cx'
 import { Copy } from './Copy'
 import { useCopy } from './useCopy'
 
-interface RegisterFormState {
+type RegisterFormState = {
   user: string
   token: string
 }
@@ -27,7 +27,7 @@ export const Register = () => {
     },
   })
   const { mutateAsync, isLoading, isSuccess } = useMutation((values: RegisterFormState) => {
-    const url = new URL(`/users/${values.user}/claim`, 'https://api.spacetraders.io')
+    const url = new URL(`/users/${values.user}/claim`, import.meta.env.SPACETRADERS_API_URL)
 
     return post<TokenResponse>(url)
   })
@@ -35,10 +35,10 @@ export const Register = () => {
     (values) => {
       return mutateAsync(values)
         .then((response) => {
-          if (!response.data) return
+          if (!response) return
 
           reset()
-          methods.setValue('token', response.data?.token)
+          methods.setValue('token', response.token)
           ref.current?.focus()
         })
         .catch((err) => {
@@ -61,7 +61,13 @@ export const Register = () => {
               <label className="label" htmlFor="user">
                 Username
               </label>
-              <input {...methods.register('user')} className="input" type="text" autoComplete="off" autoFocus />
+              <input
+                {...methods.register('user', { required: true })}
+                className="input input-lg"
+                type="text"
+                autoComplete="off"
+                autoFocus
+              />
             </div>
             <div ref={ref}>
               <label className="label" htmlFor="token">
@@ -70,7 +76,7 @@ export const Register = () => {
               <div className="relative">
                 <input
                   {...methods.register('token')}
-                  className="input"
+                  className="input input-lg"
                   type="text"
                   onFocus={(node) => node.target.select()}
                   readOnly
@@ -107,11 +113,11 @@ export const Register = () => {
               )}
               {!!token && (
                 <button
-                  className="btn"
+                  className="btn-hero"
                   disabled={!isCopied}
                   type="button"
                   onClick={() => {
-                    navigate(`${ROUTES.AUTH}/${ROUTES.LOGIN}`, { state: { user, token }, replace: true })
+                    navigate(ROUTES.LOGIN, { state: { user, token }, replace: true })
                   }}
                 >
                   Got it. Let&apos;s go!
@@ -119,7 +125,7 @@ export const Register = () => {
               )}
               <div className="text-caption text-center">
                 Already have an access token?&nbsp;
-                <Link className="link" to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} state={{ user, token }}>
+                <Link className="link" to={ROUTES.LOGIN} state={{ user, token }}>
                   Login
                 </Link>
               </div>
