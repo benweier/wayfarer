@@ -1,7 +1,8 @@
-import { useMemo } from 'react'
-import { useMyShipsQuery } from '@/services/spacetraders/core'
+import { useQuery } from '@tanstack/react-query'
+import { Suspense, useMemo } from 'react'
+import * as api from '@/services/api/spacetraders'
 
-interface OwnedShip {
+type OwnedShip = {
   type: string
   manufacturer: string
   class: string
@@ -10,7 +11,7 @@ interface OwnedShip {
 
 const OwnedShipItem = ({ ship }: { ship: OwnedShip }) => {
   return (
-    <div className="grid grid-flow-row gap-2 rounded border border-gray-700 p-4 shadow">
+    <div className="grid grid-flow-row gap-2 rounded border border-gray-700 p-4">
       <div className="grid grid-flow-row gap-6">
         <div className="grid grid-flow-col items-center justify-between">
           <div>
@@ -27,10 +28,10 @@ const OwnedShipItem = ({ ship }: { ship: OwnedShip }) => {
 }
 
 const OwnedShipsList = () => {
-  const ownedShipsQuery = useMyShipsQuery()
+  const myShipsQuery = useQuery(['my-ships'], api.myShipsQuery)
 
   const ownedShips = useMemo(() => {
-    const owned = ownedShipsQuery.data?.ships.reduce<{ ships: Record<string, OwnedShip> }>(
+    const owned = myShipsQuery.data?.ships.reduce<{ ships: Record<string, OwnedShip> }>(
       (obj, ship) => {
         const count = obj.ships[ship.type]?.count ?? 0
 
@@ -47,7 +48,7 @@ const OwnedShipsList = () => {
     ) ?? { ships: {} }
 
     return { ships: Object.values(owned.ships).sort((a, b) => a.type.localeCompare(b.type)) }
-  }, [ownedShipsQuery.data])
+  }, [myShipsQuery.data?.ships])
 
   return (
     <div className="grid grid-cols-3 gap-8">
@@ -62,7 +63,9 @@ export const OwnedShips = () => {
   return (
     <div>
       <div className="my-4 text-xl font-bold">OWNED SHIPS</div>
-      <OwnedShipsList />
+      <Suspense fallback={null}>
+        <OwnedShipsList />
+      </Suspense>
     </div>
   )
 }

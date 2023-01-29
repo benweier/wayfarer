@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { useCallback } from 'react'
 import { get } from '@/services/fetch'
-import { HttpResponse } from '@/services/http'
+
+const select = (response: { status: string }) => ({
+  status: response.status === 'spacetraders is currently online and available to play',
+})
 
 export const useSpaceTradersStatus = (): { status: 'UNKNOWN' | 'ONLINE' | 'OFFLINE'; isChecking: boolean } => {
   const { data, isLoading, isFetching, isSuccess, isError } = useQuery(
@@ -13,12 +15,7 @@ export const useSpaceTradersStatus = (): { status: 'UNKNOWN' | 'ONLINE' | 'OFFLI
     {
       refetchInterval: 60_000,
       staleTime: 60_000,
-      select: useCallback(
-        (response: HttpResponse<{ status: string }>) => ({
-          status: response.data?.status === 'spacetraders is currently online and available to play',
-        }),
-        [],
-      ),
+      select,
     },
   )
 

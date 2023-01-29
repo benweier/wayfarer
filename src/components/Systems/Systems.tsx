@@ -1,4 +1,5 @@
-import { useAvailableSystemsQuery } from '@/services/spacetraders/core'
+import { useQuery } from '@tanstack/react-query'
+import * as api from '@/services/api/spacetraders'
 import { Location, System } from '@/types/spacetraders'
 
 const LocationList = ({ locations }: { locations: Location[] }) => {
@@ -25,11 +26,11 @@ const SystemItem = ({ system }: { system: System }) => {
 }
 
 const SystemList = () => {
-  const { data } = useAvailableSystemsQuery()
+  const { data, isSuccess } = useQuery(['systems'], api.availableSystemsQuery)
 
   return (
     <>
-      {!!data?.systems.length && (
+      {isSuccess && !!data.systems.length && (
         <div className="grid grid-flow-row gap-16">
           {data.systems.map((system) => (
             <SystemItem key={system.symbol} system={system} />

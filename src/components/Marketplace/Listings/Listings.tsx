@@ -1,14 +1,11 @@
-import { Fragment, ReactNode, useMemo } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { Fragment, ReactNode } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import { O } from 'ts-toolbelt'
 import { PurchaseGoods } from '@/components/Marketplace/PurchaseGoods'
 import { Dialog, Modal } from '@/components/Modal'
-import {
-  useAvailableGoodsQuery,
-  useLocationQuery,
-  useMarketplaceQuery,
-  useMyShipsQuery,
-} from '@/services/spacetraders/core'
+import * as api from '@/services/api/spacetraders'
+import { useAvailableGoodsQuery, useLocationQuery, useMarketplaceQuery } from '@/services/spacetraders/core'
 import { Marketplace, YourShip } from '@/types/spacetraders'
 import { groupByFn } from '@/utilities/group-by'
 import { formatNumber } from '@/utilities/number'
@@ -23,7 +20,7 @@ const MarketplaceItem = ({ item, children }: WithChildren<{ item: Marketplace }>
   if (!good) return null
 
   return (
-    <div key={good.symbol} className="grid grid-flow-row gap-4 rounded border border-gray-700 p-4 shadow">
+    <div key={good.symbol} className="grid grid-flow-row gap-4 rounded border border-gray-700 p-4">
       <div className="grid grid-flow-row auto-rows-min gap-6">
         <div className="grid grid-cols-2 items-center">
           <div className="text-lg font-bold">{good.name}</div>
@@ -90,21 +87,23 @@ const MarketplaceList = ({
   )
 }
 
+const selectMyShipsByLocation = (response: { ships: YourShip[] }) => {
+  const ships = groupByFn(
+    response.ships.filter<ShipWithLocation>((ship): ship is ShipWithLocation => !!ship.location),
+    (ship) => ship.location,
+  )
+
+  return Object.entries(ships).sort(([a], [b]) => a.localeCompare(b))
+}
+
 export const MarketplaceListings = () => {
-  const ownedShipsQuery = useMyShipsQuery()
-
-  const shipLocations = useMemo(() => {
-    const ships = groupByFn(
-      ownedShipsQuery.data?.ships.filter<ShipWithLocation>((ship): ship is ShipWithLocation => !!ship.location),
-      (ship) => ship.location,
-    )
-
-    return Object.entries(ships).sort(([a], [b]) => a.localeCompare(b))
-  }, [ownedShipsQuery.data])
+  const { data } = useQuery(['my-ships'], api.myShipsQuery, {
+    select: selectMyShipsByLocation,
+  })
 
   return (
     <div className="grid grid-flow-col gap-8">
-      {shipLocations.map(([location, ships]) => (
+      {data?.map(([location, ships]) => (
         <Fragment key={location}>
           <MarketplaceList location={location}>
             {(marketplace) =>
@@ -116,7 +115,7 @@ export const MarketplaceListings = () => {
                         <div className="grid grid-cols-2 gap-4">
                           <Modal
                             action={({ openModal }) => (
-                              <button onClick={openModal} className="btn bg-rose-500 font-bold">
+                              <button onClick={openModal} className="btn btn-primary bg-rose-500 font-bold">
                                 BUY
                               </button>
                             )}
@@ -134,7 +133,7 @@ export const MarketplaceListings = () => {
                               )}
                             />
                           </Modal>
-                          <button className="btn bg-emerald-500 font-bold">SELL</button>
+                          <button className="btn btn-primary bg-emerald-500 font-bold">SELL</button>
                         </div>
                       </MarketplaceItem>
                     </Fragment>

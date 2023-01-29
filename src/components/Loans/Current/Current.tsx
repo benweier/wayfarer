@@ -1,20 +1,21 @@
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Suspense } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
-import { useMyLoansQuery, usePayLoanMutation } from '@/services/spacetraders/core'
-import { selectUser } from '@/store/auth'
-import { useAppSelector } from '@/store/hooks'
+import * as api from '@/services/api/spacetraders'
+import { useAuthStore } from '@/services/store/auth'
 import { YourLoan } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number'
 
 const PayLoan = ({ id, repayment }: { id: string; repayment: number }) => {
-  const [payLoanMutation, { isLoading }] = usePayLoanMutation()
-  const user = useAppSelector(selectUser)
+  const { user } = useAuthStore()
+  const { mutate, isLoading } = useMutation(api.payLoanMutation)
 
   return (
     <button
-      className="btn"
+      className="btn btn-primary"
       disabled={isLoading || (user?.credits ?? 0) < repayment}
-      onClick={async () => {
-        await payLoanMutation({ id })
+      onClick={() => {
+        mutate({ id })
       }}
     >
       Pay
@@ -24,7 +25,7 @@ const PayLoan = ({ id, repayment }: { id: string; repayment: number }) => {
 
 const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
   return (
-    <div className="rounded border border-gray-700 bg-gray-700 bg-opacity-20 p-4 shadow">
+    <div className="rounded border border-zinc-200 bg-zinc-300/20 p-4 dark:border-zinc-700 dark:bg-zinc-700/20">
       <div className="grid auto-cols-min grid-flow-col justify-between gap-2">
         <div>
           <div className="text-caption">{loan.type}</div>
@@ -48,11 +49,11 @@ const CurrentLoanItem = ({ loan }: { loan: YourLoan }) => {
 }
 
 const CurrentLoanList = () => {
-  const { data } = useMyLoansQuery()
+  const { data, isSuccess } = useQuery(['loans'], api.myLoansQuery)
 
   return (
     <>
-      {!!data?.loans.length && (
+      {isSuccess && (
         <div className="grid grid-cols-3 gap-6">
           {data.loans.map((loan) => (
             <CurrentLoanItem key={loan.type} loan={loan} />
@@ -67,7 +68,9 @@ export const CurrentLoan = () => {
   return (
     <div>
       <div className="my-4 text-xl font-bold">CURRENT LOAN</div>
-      <CurrentLoanList />
+      <Suspense fallback={null}>
+        <CurrentLoanList />
+      </Suspense>
     </div>
   )
 }

@@ -1,9 +1,10 @@
-import { PropsWithChildren, useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { PropsWithChildren } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import { useNavigate } from 'react-router'
-import { usePurchaseShipMutation } from '@/services/spacetraders/core'
-import { selectUser } from '@/store/auth'
-import { useAppSelector } from '@/store/hooks'
+import { useConfirmAction } from '@/hooks/useConfirmAction'
+import * as api from '@/services/api/spacetraders'
+import { useAuthStore } from '@/services/store/auth'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 
@@ -18,34 +19,32 @@ const PurchaseShip = ({
   disabled: boolean
   onSuccess: (ship: string) => void
 }) => {
-  const [purchaseShip, { isLoading }] = usePurchaseShipMutation()
-  const [confirm, setConfirm] = useState(false)
+  const { mutateAsync, isLoading } = useMutation(api.purchaseShipMutation)
+  const { confirm, onClick, onReset } = useConfirmAction(() =>
+    mutateAsync(
+      { location, type },
+      {
+        onSuccess: (response) => {
+          if (response) onSuccess(response.ship.id)
+        },
+      },
+    ),
+  )
 
   return (
     <button
-      className={cx('rounded py-2 px-4 text-xs leading-none transition-colors duration-75', {
-        'bg-emerald-400 text-emerald-900': confirm,
+      className={cx('btn btn-sm w-full', {
+        'btn-primary': !confirm,
+        'btn-confirm': confirm,
       })}
       disabled={isLoading || disabled}
-      onBlur={() => setConfirm(false)}
+      onBlur={onReset}
       onKeyDown={(event) => {
         if (event.key === 'Escape') {
-          setConfirm(false)
+          onReset()
         }
       }}
-      onClick={async () => {
-        if (!confirm) {
-          setConfirm(true)
-          return
-        }
-
-        await purchaseShip({ location, type })
-          .unwrap()
-          .then((response) => {
-            setConfirm(false)
-            onSuccess(response.ship.id)
-          })
-      }}
+      onClick={onClick}
     >
       {confirm ? 'CONFIRM' : 'PURCHASE'}
     </button>
@@ -58,7 +57,7 @@ export const PurchaseLocation = ({
   price,
   children,
 }: PropsWithChildren<{ type: string; location: string; price: number }>) => {
-  const user = useAppSelector(selectUser)
+  const { user } = useAuthStore()
   const navigate = useNavigate()
 
   return (

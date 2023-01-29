@@ -1,36 +1,32 @@
-import { useState } from 'react'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Suspense } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
-import { useAvailableLoansQuery, useMyLoansQuery, useTakeOutLoanMutation } from '@/services/spacetraders/core'
+import { useConfirmAction } from '@/hooks/useConfirmAction'
+import * as api from '@/services/api/spacetraders'
 import { Loan, LoanType } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 
 const AcceptLoan = ({ type }: { type: LoanType }) => {
-  const [takeOutLoanMutation, { isLoading }] = useTakeOutLoanMutation()
-  const [confirm, setConfirm] = useState(false)
-  const { data } = useMyLoansQuery()
-  const hasLoan = !!data?.loans.length
+  const { mutateAsync, isLoading } = useMutation(api.takeOutLoanMutation)
+  const { confirm, onClick, onReset } = useConfirmAction(() => mutateAsync({ type }))
+  const { data, isSuccess } = useQuery(['loans'], api.myLoansQuery)
+  const hasLoan = isSuccess && !!data.loans.length
 
   return (
     <button
-      className={cx('transition-colors duration-75', { 'bg-emerald-400 text-emerald-900': confirm })}
+      className={cx('btn', {
+        'btn-primary': !confirm,
+        'btn-confirm': confirm,
+      })}
       disabled={isLoading || hasLoan}
-      onBlur={() => setConfirm(false)}
+      onBlur={onReset}
       onKeyDown={(event) => {
         if (event.key === 'Escape') {
-          setConfirm(false)
+          onReset()
         }
       }}
-      onClick={async () => {
-        if (!confirm) {
-          setConfirm(true)
-          return
-        }
-
-        await takeOutLoanMutation({ type }).then(() => {
-          setConfirm(false)
-        })
-      }}
+      onClick={onClick}
     >
       {confirm ? 'Confirm' : 'Accept'}
     </button>
@@ -39,7 +35,7 @@ const AcceptLoan = ({ type }: { type: LoanType }) => {
 
 const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
   return (
-    <div className="rounded border border-gray-700 bg-gray-700 bg-opacity-20 p-4 shadow">
+    <div className="rounded border border-zinc-200 bg-zinc-300/20 p-4 dark:border-zinc-700 dark:bg-zinc-700/20">
       <div className="grid grid-flow-col justify-between gap-2">
         <div>
           <div className="text-caption">
@@ -78,11 +74,11 @@ const AvailableLoanItem = ({ loan }: { loan: Loan }) => {
 }
 
 const AvailableLoanList = () => {
-  const { data } = useAvailableLoansQuery()
+  const { data, isSuccess } = useQuery(['availableLoans'], api.availableLoansQuery)
 
   return (
     <>
-      {!!data?.loans.length && (
+      {isSuccess && (
         <div className="grid grid-cols-2 gap-6 2xl:grid-cols-3">
           {data.loans.map((loan) => (
             <AvailableLoanItem key={loan.type} loan={loan} />
@@ -97,7 +93,9 @@ export const AvailableLoans = () => {
   return (
     <div>
       <div className="my-4 text-xl font-bold">AVAILABLE LOANS</div>
-      <AvailableLoanList />
+      <Suspense fallback={null}>
+        <AvailableLoanList />
+      </Suspense>
     </div>
   )
 }

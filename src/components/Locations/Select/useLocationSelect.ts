@@ -1,27 +1,31 @@
-import { useMemo } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useCallback } from 'react'
 import { useSelect } from '@/components/Select'
-import { useAvailableSystemsQuery } from '@/services/spacetraders/core'
-import { Location, System } from '@/types/spacetraders'
+import * as api from '@/services/api/spacetraders'
+import { Location, System, SystemsResponse } from '@/types/spacetraders'
 import { LocationSelectOptions } from './types'
 
 export const useLocationSelect = ({ system }: { system?: System }): LocationSelectOptions => {
-  const { data, isLoading } = useAvailableSystemsQuery()
-  const locations = useMemo(
-    () =>
-      data?.systems.reduce<Location[]>((locations, item) => {
-        if (!system) return locations
+  const { data, isFetching } = useQuery(['systems'], api.availableSystemsQuery, {
+    select: useCallback(
+      (response: SystemsResponse) => {
+        return response.systems.reduce<Location[]>((locations, item) => {
+          if (!system) return locations
 
-        if (system.symbol === item.symbol) {
-          return [...locations, ...item.locations]
-        }
+          if (system.symbol === item.symbol) {
+            return [...locations, ...item.locations]
+          }
 
-        return locations
-      }, []),
-    [data, system],
-  )
-  const { options, selected, onChange } = useSelect<Location>(locations)
+          return locations
+        }, [])
+      },
+      [system],
+    ),
+  })
 
-  return isLoading
+  const { options, selected, onChange } = useSelect(data)
+
+  return isFetching
     ? {
         system: undefined,
         locations: [],

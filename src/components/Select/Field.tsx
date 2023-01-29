@@ -5,12 +5,12 @@ import { SelectOption } from './types'
 
 export const SelectField = <T extends SelectOption = SelectOption>({
   label,
-  selected,
+  selected = null,
   options = [],
   onChange,
 }: {
   label: string
-  selected?: T
+  selected?: T | null
   options?: T[]
   onChange: (value?: T) => void
 }) => {

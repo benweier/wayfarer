@@ -1,10 +1,11 @@
-import { PropsWithChildren, useMemo } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { PropsWithChildren, Suspense, useCallback, useMemo } from 'react'
 import { HiOutlineCash } from 'react-icons/hi'
 import { SelectField, useSelect } from '@/components/Select'
 import { PurchaseLocation } from '@/components/Ships/PurchaseLocation'
 import { SystemSelect, useSystemSelect } from '@/components/Systems/Select'
-import { useMyShipsQuery, useShipListingsQuery } from '@/services/spacetraders/core'
-import { Ship, System } from '@/types/spacetraders'
+import * as api from '@/services/api/spacetraders'
+import { AvailableShipsResponse, Ship, System } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { groupByFn } from '@/utilities/group-by'
 import { GroupByType, SortByType, getPriceRange, groups, sortShips, sorts } from '@/utilities/ships'
@@ -13,7 +14,7 @@ const ShipStat = ({ label, value }: { label: string; value: number | string }) =
   return (
     <div className="grid grid-flow-row gap-2">
       <div className="text-center font-semibold leading-none text-gray-50">{value}</div>
-      <div className="text-div text-center">{label}</div>
+      <div className="text-hint text-center">{label}</div>
     </div>
   )
 }
@@ -22,7 +23,7 @@ export const AvailableShipItem = ({ ship, owned = 0, children }: PropsWithChildr
   return (
     <div
       key={ship.type}
-      className="grid grid-flow-row gap-2 rounded border border-gray-700 bg-gray-700 bg-opacity-20 p-4 shadow"
+      className="grid grid-flow-row gap-2 rounded border border-gray-700 bg-gray-700 bg-opacity-20 p-4"
     >
       <div className="grid grid-flow-row auto-rows-min gap-6">
         <div className="grid grid-cols-2 items-center">
@@ -62,8 +63,17 @@ const AvailableShipList = ({
   groupBy?: { id: GroupByType; name: string }
   sortBy?: { id: SortByType; name: string }
 }) => {
-  const shipListingsQuery = useShipListingsQuery({ system: system.symbol })
-  const myShipsQuery = useMyShipsQuery()
+  const { data } = useQuery(['ship-listings', system.symbol], () => api.shipListingsQuery({ system: system.symbol }), {
+    select: useCallback(
+      (response: AvailableShipsResponse) => {
+        const ships = groupByFn(response.shipListings, (ship) => ship[groupBy.id])
+
+        return Object.entries(ships).sort(([a], [b]) => a.localeCompare(b))
+      },
+      [groupBy.id],
+    ),
+  })
+  const myShipsQuery = useQuery(['my-ships'], api.myShipsQuery)
 
   const ownedShips = useMemo(() => {
     return (
@@ -75,17 +85,11 @@ const AvailableShipList = ({
     )
   }, [myShipsQuery.data])
 
-  const shipListings = useMemo(() => {
-    const ships = groupByFn(shipListingsQuery.data?.shipListings, (ship) => ship[groupBy.id])
-
-    return Object.entries(ships).sort(([a], [b]) => a.localeCompare(b))
-  }, [shipListingsQuery.data, groupBy])
-
-  if (!shipListings.length) return null
+  if (!data?.length) return null
 
   return (
     <div className="grid grid-cols-1 gap-10">
-      {shipListings.map(([key, ships]) => (
+      {data.map(([key, ships]) => (
         <div key={key}>
           <div className="m-2 text-lg font-bold">{key}</div>
           <div className="grid grid-cols-3 gap-8">
@@ -130,7 +134,9 @@ export const AvailableShips = () => {
           </div>
         </div>
         {system.selected && (
-          <AvailableShipList system={system.selected} groupBy={groupBy.selected} sortBy={sortBy.selected} />
+          <Suspense fallback={null}>
+            <AvailableShipList system={system.selected} groupBy={groupBy.selected} sortBy={sortBy.selected} />
+          </Suspense>
         )}
       </div>
     </div>

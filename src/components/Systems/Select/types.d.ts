@@ -3,7 +3,7 @@ import { System } from '@/types/spacetraders'
 type SystemSelectOptions =
   | {
       systems: System[]
-      selected?: System
+      selected: System | null
       isLoading: false
       onChange: (system?: System) => void
     }

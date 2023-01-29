@@ -1,13 +1,14 @@
+import { useQuery } from '@tanstack/react-query'
 import { useSelect } from '@/components/Select'
-import { useAvailableSystemsQuery } from '@/services/spacetraders/core'
+import * as api from '@/services/api/spacetraders'
 import { System } from '@/types/spacetraders'
 import { SystemSelectOptions } from './types'
 
 export const useSystemSelect = (): SystemSelectOptions => {
-  const { data, isLoading } = useAvailableSystemsQuery()
+  const { data, isFetching } = useQuery(['systems'], api.availableSystemsQuery, { suspense: false })
   const { options, selected, onChange } = useSelect<System>(data?.systems)
 
-  return isLoading
+  return isFetching
     ? {
         systems: [],
         isLoading: true,
@@ -17,7 +18,7 @@ export const useSystemSelect = (): SystemSelectOptions => {
     : {
         systems: options,
         isLoading: false,
-        selected,
+        selected: selected ?? null,
         onChange,
       }
 }
