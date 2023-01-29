@@ -45,17 +45,17 @@ const GoodsQuantity = ({ min = 0, max = 0 }: { min?: number; max?: number }) => 
   return (
     <div className="grid grid-cols-3 gap-2">
       <div className="grid grid-cols-3 gap-2">
-        <button className="btn p-1" onClick={() => handleDecrement(100)}>
+        <button className="btn btn-primary p-1" onClick={() => handleDecrement(100)}>
           <span className="flex items-center justify-center">
             <HiMinus size={12} /> 100
           </span>
         </button>
-        <button className="btn p-1" onClick={() => handleDecrement(10)}>
+        <button className="btn btn-primary p-1" onClick={() => handleDecrement(10)}>
           <span className="flex items-center justify-center">
             <HiMinus size={12} /> 10
           </span>
         </button>
-        <button className="btn p-1" onClick={() => handleDecrement(1)}>
+        <button className="btn btn-primary p-1" onClick={() => handleDecrement(1)}>
           <span className="flex items-center justify-center">
             <HiMinus size={12} /> 1
           </span>
@@ -74,17 +74,17 @@ const GoodsQuantity = ({ min = 0, max = 0 }: { min?: number; max?: number }) => 
         />
       </div>
       <div className="grid grid-cols-3 gap-2">
-        <button className="btn p-1" onClick={() => handleIncrement(1)}>
+        <button className="btn btn-primary p-1" onClick={() => handleIncrement(1)}>
           <span className="flex items-center justify-center">
             <HiPlus size={12} /> 1
           </span>
         </button>
-        <button className="btn p-1" onClick={() => handleIncrement(10)}>
+        <button className="btn btn-primary p-1" onClick={() => handleIncrement(10)}>
           <span className="flex items-center justify-center">
             <HiPlus size={12} /> 10
           </span>
         </button>
-        <button className="btn p-1" onClick={() => handleIncrement(100)}>
+        <button className="btn btn-primary p-1" onClick={() => handleIncrement(100)}>
           <span className="flex items-center justify-center">
             <HiPlus size={12} /> 100
           </span>
@@ -147,7 +147,7 @@ const PurchaseGoodsForm = ({
           </div>
           <div className="border-t border-gray-900">
             <div className="grid grid-flow-col gap-2 rounded-b-lg bg-gray-900 p-2">
-              <button className="btn" type="submit" disabled={!marketplace}>
+              <button className="btn btn-confirm" type="submit" disabled={!marketplace}>
                 CONFIRM
               </button>
               <button onClick={onCancel} className="btn bg-gray-800 ring-rose-500">
