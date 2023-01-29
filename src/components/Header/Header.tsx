@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { HiOutlineCash } from 'react-icons/hi'
 import { RiSpaceShipFill } from 'react-icons/ri'
-import { useSelector } from 'react-redux'
 import { Link, NavLink, NavLinkProps } from 'react-router-dom'
 import { SpaceTradersStatus } from '@/components/SpaceTradersStatus'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
-import { myShipsQuery } from '@/services/api/spacetraders/ships'
-import { selectUser } from '@/store/auth'
+import { myShipsQuery } from '@/services/api/spacetraders'
+import { useAuthStore } from '@/services/store/auth'
 
 const MenuItem = ({ children, ...props }: NavLinkProps) => {
   return (
@@ -21,21 +20,19 @@ const MenuItem = ({ children, ...props }: NavLinkProps) => {
 }
 
 const OwnedShips = () => {
-  const { isSuccess, data } = useQuery(['my-ships'], () => myShipsQuery())
-
-  const ships = isSuccess ? data.data?.ships.length ?? 0 : 0
+  const { data } = useQuery(['my-ships'], myShipsQuery)
 
   return (
     <div className="grid grid-flow-col items-center gap-2">
-      <RiSpaceShipFill size={16} /> <span className="font-semibold">{ships}</span>
+      <RiSpaceShipFill size={16} /> <span className="font-semibold">{data?.ships.length ?? 0}</span>
     </div>
   )
 }
 
 const User = () => {
-  const user = useSelector(selectUser)
+  const { isAuthenticated, user } = useAuthStore()
 
-  if (!user) return <div />
+  if (!isAuthenticated) return <div />
 
   return (
     <div className="grid grid-flow-col items-center gap-8">
@@ -52,8 +49,8 @@ const User = () => {
 
 export const Header = () => {
   return (
-    <div className="relative z-50">
-      <div className="grid h-16 items-center px-6">
+    <header className="relative z-50">
+      <div className="container grid h-16 items-center">
         <div className="grid w-full grid-flow-col items-center justify-between gap-4">
           <div className="grid grid-flow-col items-center gap-2">
             <SpaceTradersStatus />
@@ -77,6 +74,6 @@ export const Header = () => {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   )
 }
