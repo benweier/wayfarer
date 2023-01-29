@@ -1,0 +1,12 @@
+import { ReactNode, Suspense } from 'react'
+import { Outlet } from 'react-router'
+
+export const Layout = ({ skeleton = null }: { skeleton?: ReactNode }) => {
+  return (
+    <div className="container max-w-5xl">
+      <Suspense fallback={skeleton}>
+        <Outlet />
+      </Suspense>
+    </div>
+  )
+}

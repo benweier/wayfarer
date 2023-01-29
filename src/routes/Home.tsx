@@ -6,8 +6,8 @@ export const HomePage = () => {
   const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {
-    return <Navigate to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`} replace />
+    return <Navigate to={ROUTES.LOGIN} replace />
   }
 
-  return <Navigate to={`${ROUTES.DASHBOARD}/${ROUTES.OVERVIEW}`} replace />
+  return <Navigate to={ROUTES.OVERVIEW} replace />
 }

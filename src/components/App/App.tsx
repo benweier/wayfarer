@@ -1,44 +1,32 @@
-import * as Sentry from '@sentry/react'
-import { BrowserTracing } from '@sentry/tracing'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Suspense, lazy, useEffect } from 'react'
-import { HelmetProvider } from 'react-helmet-async'
+import { QueryClient, QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query'
+import { Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { GiNorthStarShuriken } from 'react-icons/gi'
-import { Provider } from 'react-redux'
 import {
-  Navigate,
   Outlet,
   Route,
   RouterProvider,
   createBrowserRouter,
-  createRoutesFromChildren,
   createRoutesFromElements,
-  matchRoutes,
-  useNavigationType,
+  useNavigation,
 } from 'react-router-dom'
-import { ProtectedRoute } from '@/components/ProtectedRoute'
+import { AuthenticationRequired } from '@/components/AuthenticationRequired'
+import { NotFound } from '@/components/NotFound'
 import { ROUTES } from '@/config/routes'
-import { useLocation } from '@/hooks/useLocation'
-import { HomePage } from '@/routes/Home'
-import { store } from '@/store'
+import * as DashboardRoute from '@/routes/Dashboard'
+import * as LeaderboardRoute from '@/routes/Leaderboard'
+import { lazy } from '@/utilities/lazy'
 
-Sentry.init({
-  integrations: [
-    new BrowserTracing({
-      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
-        useEffect,
-        useLocation,
-        useNavigationType,
-        createRoutesFromChildren,
-        matchRoutes,
-      ),
-    }),
-  ],
-  tracesSampleRate: 1.0,
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+      staleTime: 1000 * 60 * 1,
+      cacheTime: 1000 * 60 * 10,
+      refetchOnWindowFocus: false,
+    },
+  },
 })
-
-const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouter(createBrowserRouter)
-const client = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
 
 const Loading = () => (
   <div className="flex h-screen w-screen animate-pulse items-center justify-center text-zinc-200 dark:text-zinc-700">
@@ -46,62 +34,76 @@ const Loading = () => (
   </div>
 )
 
-const DashboardPage = lazy(() => import('@/routes/Dashboard').then((mod) => ({ default: mod.DashboardPage })))
-const AuthPage = lazy(() => import('@/routes/Auth').then((mod) => ({ default: mod.AuthPage })))
-const Login = lazy(() => import('@/components/Auth').then((mod) => ({ default: mod.Login })))
-const Register = lazy(() => import('@/components/Auth').then((mod) => ({ default: mod.Register })))
-const OverviewPage = lazy(() => import('@/routes/Overview').then((mod) => ({ default: mod.OverviewPage })))
-const SystemPage = lazy(() => import('@/routes/Systems').then((mod) => ({ default: mod.SystemPage })))
-const LoanPage = lazy(() => import('@/routes/Loans').then((mod) => ({ default: mod.LoanPage })))
-const ShipPage = lazy(() => import('@/routes/Ships').then((mod) => ({ default: mod.ShipPage })))
-const MarketplacePage = lazy(() => import('@/routes/Marketplace').then((mod) => ({ default: mod.MarketplacePage })))
-const LeaderboardPage = lazy(() => import('@/routes/Leaderboard').then((mod) => ({ default: mod.LeaderboardPage })))
+const { HomePage } = lazy(() => import('@/routes/Home'), 'HomePage')
+const { AuthPage } = lazy(() => import('@/routes/Auth'), 'AuthPage')
+const { Login } = lazy(() => import('@/components/Auth'), 'Login')
+const { Register } = lazy(() => import('@/components/Auth'), 'Register')
 
-const Base = () => (
-  <QueryClientProvider client={client}>
-    <HelmetProvider>
-      <Provider store={store}>
-        <Suspense fallback={<Loading />}>
+const Core = () => {
+  const navigation = useNavigation()
+  const { reset } = useQueryErrorResetBoundary()
+
+  return (
+    <ErrorBoundary
+      onReset={reset}
+      fallbackRender={({ resetErrorBoundary }) => (
+        <div className="flex min-h-screen flex-col items-center justify-center">
+          <div className="flex w-full max-w-xs flex-col gap-4 p-3">
+            <div className="animate-pulse text-center font-mono text-5xl font-bold text-rose-500">ERROR</div>
+            <button className="btn btn-primary" onClick={() => resetErrorBoundary()}>
+              Try again
+            </button>
+          </div>
+        </div>
+      )}
+    >
+      <Suspense fallback={<Loading />}>
+        {navigation.state !== 'idle' && <span className="loader" />}
+
+        <div className="flex min-h-screen flex-col">
           <Outlet />
-        </Suspense>
-      </Provider>
-    </HelmetProvider>
-  </QueryClientProvider>
-)
+        </div>
+      </Suspense>
+    </ErrorBoundary>
+  )
+}
 
-const router = sentryCreateBrowserRouter(
+const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Base />}>
+    <Route element={<Core />}>
       <Route index element={<HomePage />} />
-      <Route
-        path={ROUTES.DASHBOARD}
-        element={
-          <ProtectedRoute>
-            <DashboardPage />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
-        <Route path={ROUTES.OVERVIEW} element={<OverviewPage />} />
-        <Route path={ROUTES.SYSTEMS} element={<SystemPage />} />
-        <Route path={ROUTES.SHIPS} element={<ShipPage />} />
-        <Route path={ROUTES.LOANS} element={<LoanPage />} />
-        <Route path={ROUTES.MARKETPLACE} element={<MarketplacePage />} />
-        <Route path={ROUTES.LEADERBOARD} element={<LeaderboardPage />} />
-        <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
-      </Route>
-      <Route path={ROUTES.AUTH} element={<AuthPage />}>
-        <Route index element={<Navigate to={ROUTES.LOGIN} replace />} />
 
+      <Route element={<AuthenticationRequired />}>
+        <Route element={<DashboardRoute.Layout />}>
+          <Route path={ROUTES.OVERVIEW} element={<DashboardRoute.Overview />} />
+          <Route path={ROUTES.SYSTEMS} element={<DashboardRoute.Systems />} />
+          <Route path={ROUTES.SHIPS} element={<DashboardRoute.Ships />} />
+          <Route path={ROUTES.LOANS} element={<DashboardRoute.Loans />} />
+          <Route path={ROUTES.MARKETPLACE} element={<DashboardRoute.Marketplace />} />
+
+          <Route element={<LeaderboardRoute.Layout />}>
+            <Route
+              path={ROUTES.LEADERBOARD}
+              element={<LeaderboardRoute.Screen />}
+              loader={LeaderboardRoute.loader(client)}
+            />
+          </Route>
+        </Route>
+      </Route>
+
+      <Route element={<AuthPage />}>
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.REGISTER} element={<Register />} />
-        <Route path="*" element={<Navigate to={ROUTES.AUTH} replace />} />
       </Route>
-      <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+      <Route path="*" element={<NotFound />} />
     </Route>,
   ),
 )
 
-export const App = Sentry.withProfiler(() => {
-  return <RouterProvider router={router} />
-})
+export const App = () => {
+  return (
+    <QueryClientProvider client={client}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  )
+}
