@@ -78,6 +78,7 @@ module.exports = {
         'jest.config.js',
         'styles/**/*.js',
         'tailwind.config.js',
+        'vite.config.js',
         'webpack.config.js',
       ],
       plugins: ['node'],
