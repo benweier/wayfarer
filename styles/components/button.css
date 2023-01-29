@@ -1,13 +1,49 @@
 .btn {
-  @apply rounded-sm bg-blue-500 px-5 py-3 text-sm font-bold leading-none outline-none;
-  @apply focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2;
+  @apply rounded px-4 py-2.5 text-sm font-semibold leading-none;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-100 dark:focus:ring-offset-zinc-800;
   @apply disabled:cursor-not-allowed disabled:opacity-50;
 }
 
+.btn-primary {
+  @apply border-2 border-blue-500 bg-blue-500 text-white;
+
+  &.btn-outline {
+    @apply bg-transparent text-blue-500;
+  }
+}
+
+.btn-confirm {
+  @apply border-2 border-emerald-400 bg-emerald-400 text-emerald-900;
+
+  &.btn-outline {
+    @apply bg-transparent text-emerald-400;
+  }
+}
+
+.btn-warn {
+  @apply border-2 border-amber-400 bg-amber-400 text-amber-900;
+
+  &.btn-outline {
+    @apply bg-transparent text-amber-400;
+  }
+}
+
+.btn-danger {
+  @apply border-2 border-rose-400 bg-rose-400 text-rose-900;
+
+  &.btn-outline {
+    @apply bg-transparent text-rose-400;
+  }
+}
+
+.btn-sm {
+  @apply px-3 py-1.5 text-xs font-bold;
+}
+
 .btn-hero {
-  @apply rounded bg-gradient-to-r from-pink-500 via-fuchsia-500 to-blue-500 disabled:opacity-70;
-  @apply py-3 px-5 text-sm font-bold text-white outline-none ring-zinc-700 ring-offset-2 ring-offset-zinc-100;
-  @apply hover:from-pink-600 hover:via-fuchsia-600 hover:to-blue-600 hover:ring-2;
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70;
+  @apply rounded bg-gradient-to-r from-pink-600 via-fuchsia-600 to-blue-600;
+  @apply py-3 px-5 text-base font-bold text-white outline-none ring-zinc-700 ring-offset-2 ring-offset-zinc-100;
+  @apply hover:from-pink-700 hover:via-fuchsia-700 hover:to-blue-700 hover:ring-2;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
   @apply dark:ring-zinc-200 dark:ring-offset-zinc-800 dark:hover:ring-zinc-400;
 }
