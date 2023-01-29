@@ -1,11 +1,20 @@
 /// <reference types="vite" />
-// const eslint = require('vite-plugin-eslint')
 const baseSSL = require('@vitejs/plugin-basic-ssl')
 const react = require('@vitejs/plugin-react-swc')
 const { defineConfig } = require('vite')
+const eslint = require('vite-plugin-eslint')
 const tsconfigPaths = require('vite-tsconfig-paths')
 
-module.exports = defineConfig(() => {
+module.exports = defineConfig(({ mode }) => {
+  const plugins = []
+
+  if (mode === 'development') {
+    plugins.push(baseSSL(), eslint.default())
+  }
+
+  plugins.push(tsconfigPaths.default())
+  plugins.push(react())
+
   return {
     optimizeDeps: {
       disabled: false,
@@ -22,6 +31,6 @@ module.exports = defineConfig(() => {
       clearMocks: true,
       css: true,
     },
-    plugins: [baseSSL.default(), tsconfigPaths.default(), react()],
+    plugins,
   }
 })
