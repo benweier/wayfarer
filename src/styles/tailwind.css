@@ -5,6 +5,13 @@
 @layer base {
   html,
   body {
-    @apply relative min-h-screen bg-zinc-100 text-base text-zinc-800 antialiased dark:bg-zinc-800 dark:text-zinc-100;
+    @apply relative bg-zinc-100 text-base text-zinc-800 antialiased dark:bg-zinc-800 dark:text-zinc-100;
+  }
+}
+
+@layer components {
+  .loader {
+    @apply absolute block h-1 w-full overflow-hidden;
+    @apply after:absolute after:top-0 after:left-0 after:right-0 after:h-full after:w-1/6 after:animate-indefinite after:bg-red-500;
   }
 }
