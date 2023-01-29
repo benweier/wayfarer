@@ -1,1 +1,1 @@
-export { Leaderboard } from './Leaderboard'
+export { Leaderboard, Skeleton } from './Leaderboard'
