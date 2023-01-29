@@ -1,8 +1,0 @@
-{
-  "public": false,
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    { "source": "/:path*", "destination": "/" }
-  ]
-}
