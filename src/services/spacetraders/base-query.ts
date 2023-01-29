@@ -1,7 +1,7 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { RootState } from '@/store/types'
 
-export const baseQuery = fetchBaseQuery({ baseUrl: 'https://api.spacetraders.io' })
+export const baseQuery = fetchBaseQuery({ baseUrl: import.meta.env.SPACETRADERS_API_URL })
 
 export const baseQueryWithTokenParam: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,
