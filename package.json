@@ -11,7 +11,7 @@
     "node": ">=16.16",
     "npm": ">=8.12"
   },
-  "source": "src/index.html",
+  "source": "index.html",
   "dependencies": {
     "@babel/runtime": "^7.20.13",
     "@floating-ui/react-dom": "^1.2.1",
