@@ -1,26 +1,18 @@
-export interface HttpResponse<T> extends Response {
-  data?: T
-}
+export type HttpError = Response
 
-export interface HttpError extends Response {
-  data: never
-}
-
-export async function http<T>(url: URL | RequestInfo, args: RequestInit): Promise<HttpResponse<T>> {
-  const response: HttpResponse<T> = await fetch(url, args)
+export async function http<T = unknown>(url: URL | RequestInfo, args: RequestInit) {
+  const response = await fetch(url, args)
 
   if (!response.ok) {
     throw response
   }
 
   try {
-    if (response.status === 204) return response
-    response.data = await response.json()
+    if (response.status === 204) return undefined as never
+    return (await response.json()) as T
   } catch (err) {
     throw response
   }
-
-  return response
 }
 
 export function isHttpError(err: any): err is HttpError {
