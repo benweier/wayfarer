@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "module": "es2020",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "removeComments": true,
@@ -16,7 +16,7 @@
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "outDir": "build",
-    "target": "es2020",
+    "target": "ESNext",
     "declaration": false,
     "checkJs": false,
     "sourceMap": false,
@@ -32,7 +32,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "incremental": true
+    "incremental": true,
+    "types": ["vite/client"]
   },
   "files": ["env.d.ts", "css.d.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "cypress.config.ts"],
