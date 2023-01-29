@@ -35,7 +35,7 @@
     "incremental": true,
     "types": ["vite/client"]
   },
-  "files": ["env.d.ts", "css.d.ts"],
+  "files": ["env.d.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "cypress.config.ts"],
   "exclude": ["node_modules", "build", "dist", ".parcel-cache"]
 }
