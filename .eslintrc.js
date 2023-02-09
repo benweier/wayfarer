@@ -98,7 +98,11 @@ module.exports = {
     {
       files: ['src/**/*'],
       plugins: ['react'],
-      extends: ['plugin:react/recommended', 'plugin:react-hooks/recommended'],
+      extends: [
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:@tanstack/eslint-plugin-query/recommended',
+      ],
       env: {
         browser: true,
       },
