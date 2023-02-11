@@ -18,18 +18,30 @@ export const Modal = ({ isOpen, closeModal, closeOnEsc, children }: PropsWithChi
   useEffect(() => {
     if (!ref.current) return
 
-    const trap = createFocusTrap(ref.current)
+    try {
+      const trap = createFocusTrap(ref.current)
 
-    queueMicrotask(() => {
-      if (isOpen) {
-        scrollLock.activate()
-        trap.activate()
+      queueMicrotask(() => {
+        if (isOpen) {
+          try {
+            scrollLock.activate()
+            trap.activate()
+          } catch (err) {
+            return
+          }
+        }
+      })
+
+      return () => {
+        try {
+          scrollLock.deactivate()
+          trap.deactivate()
+        } catch (err) {
+          return
+        }
       }
-    })
-
-    return () => {
-      scrollLock.deactivate()
-      trap.deactivate()
+    } catch (err) {
+      return
     }
   }, [isOpen, scrollLock])
 
