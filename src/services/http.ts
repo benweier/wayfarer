@@ -1,6 +1,6 @@
 export type HttpError = Response
 
-export async function http<T = unknown>(url: URL | RequestInfo, args: RequestInit) {
+export async function http<T = unknown>(url: URL | RequestInfo, args: RequestInit): Promise<T> {
   const response = await fetch(url, args)
 
   if (!response.ok) {
@@ -9,7 +9,7 @@ export async function http<T = unknown>(url: URL | RequestInfo, args: RequestIni
 
   try {
     if (response.status === 204) return undefined as never
-    return (await response.json()) as T
+    return response.json()
   } catch (err) {
     throw response
   }
