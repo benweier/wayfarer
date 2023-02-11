@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useAuthStore } from '@/services/store/auth'
 
-export const AuthenticationRequired = () => {
+export const Required = () => {
   const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {
