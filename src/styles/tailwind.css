@@ -5,7 +5,8 @@
 @layer base {
   html,
   body {
-    @apply relative bg-zinc-100 text-base text-zinc-800 antialiased dark:bg-zinc-800 dark:text-zinc-100;
+    @apply relative bg-zinc-50 text-base text-zinc-800 antialiased dark:bg-zinc-800 dark:text-zinc-100;
+    @apply selection:bg-emerald-200 selection:text-emerald-900 dark:selection:bg-emerald-300;
   }
 }
 
