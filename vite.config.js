@@ -23,12 +23,17 @@ module.exports = defineConfig(({ mode }) => {
       https: true,
       open: true,
     },
-    envPrefix: ['SPACETRADERS_'],
+    envPrefix: ['SENTRY_', 'SPACETRADERS_'],
     test: {
       globals: true,
       environment: 'jsdom',
       clearMocks: true,
       css: true,
+    },
+    css: {
+      modules: {
+        scopeBehaviour: 'local',
+      },
     },
     plugins,
   }
