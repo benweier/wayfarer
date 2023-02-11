@@ -8,6 +8,9 @@ module.exports = {
       animation: {
         indefinite: 'indefinite 2s linear infinite',
       },
+      backdropBlur: {
+        xs: '2px',
+      },
       keyframes: {
         indefinite: {
           '0%': { left: 0, transform: 'translateX(-100%)' },
@@ -16,5 +19,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms'), require('tailwind-apply')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/container-queries'),
+    require('tailwind-apply'),
+  ],
 }
