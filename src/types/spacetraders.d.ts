@@ -1,291 +1,190 @@
-export interface AllFlightsPlan {
-  id: string
-  createdAt: string
-  arrivesAt: string
-  from: string
-  shipId: string
-  to: string
-  username: string
-  shipType: string
-}
-
-export interface AvailableStructure {
-  allowedLocationTypes: string[]
-  consumes: Good[]
-  price: number
-  name: string
-  produces: Good[]
+export type RegisterAgentRequest = {
   symbol: string
+  faction: string
 }
 
-export interface AvailableGoodsResponse {
-  goods: Array<{
+export type AgentResponse = {
+  accountId: string
+  symbol: string
+  headquarters: string
+  credits: number
+}
+
+export type ContractResponse = {
+  id: string
+  factionSymbol: string
+  type: string
+  terms: {
+    deadline: string
+    payment: {
+      onAccepted: number
+      onFulfilled: number
+    }
+    deliver: Array<{
+      tradeSymbol: string
+      destinationSymbol: string
+      unitsRequired: number
+      unitsFulfilled: number
+    }>
+  }
+  accepted: boolean
+  fulfilled: boolean
+  expiration: string
+}
+
+export type FactionResponse = {
+  symbol: string
+  name: string
+  description: string
+  headquarters: string
+  traits: Array<{
+    symbol: string
     name: string
-    symbol: Good
-    volumePerUnit: number
+    description: string
   }>
 }
 
-export interface Cargo {
-  good: Good
-  quantity: number
-  totalVolume?: number
-}
-
-export interface Coordinates {
-  x: number
-  y: number
-}
-
-export interface FlightPlan {
-  arrivesAt: string
-  destination: string
-  distance: number
-  fuelConsumed: number
-  fuelRemaining: number
-  id: string
-  ship: string
-  terminatedAt: string
-  timeRemainingInSeconds: number
-}
-
-export type Good =
-  | 'CHEMICALS'
-  | 'CONSTRUCTION_MATERIALS'
-  | 'CONSUMER_GOODS'
-  | 'ELECTROINICS'
-  | 'FOOD'
-  | 'FUEL'
-  | 'MACHINERY'
-  | 'METALS'
-  | 'RESEARCH'
-  | 'SHIP_PARTS'
-  | 'TEXTILES'
-  | 'WORKERS'
-
-export interface Loan {
-  type: LoanType
-  amount: number
-  collateralRequired: boolean
-  rate: number
-  termInDays: number
-}
-
-export type LoanType = 'STARTUP'
-
-export interface Location extends Coordinates {
-  name: string
+export type ShipResponse = {
   symbol: string
-  type: string
-  allowsConstruction: boolean
-  traits: string[]
-  dockedShips: number
-}
-
-export interface LocationWithMarketplace {
-  marketplace: Marketplace[]
-}
-
-export interface Marketplace {
-  quantityAvailable: number
-  pricePerUnit: number
-  volumePerUnit: number
-  symbol: Good
-  spread: number
-  sellPricePerUnit: number
-  purchasePricePerUnit: number
-}
-
-export interface Order {
-  good: string
-  pricePerUnit: number
-  quantity: number
-  total: number
-}
-
-export interface Ship {
-  type: string
-  class: string
-  manufacturer: string
-  maxCargo: number
-  speed: number
-  loadingSpeed: number
-  plating: number
-  weapons: number
-  purchaseLocations: Array<{
-    location: string
-    price: number
+  nav: {
+    systemSymbol: string
+    waypointSymbol: string
+    route: {
+      departure: {
+        symbol: string
+        type: string
+        systemSymbol: string
+        x: number
+        y: number
+      }
+      destination: {
+        symbol: string
+        type: string
+        systemSymbol: string
+        x: number
+        y: number
+      }
+      arrival: string
+    }
+    status: string
+    flightMode: string
+  }
+  crew: {
+    current: number
+    capacity: number
+    required: number
+    rotation: string
+    morale: number
+    wages: number
+  }
+  fuel: {
+    current: number
+    capacity: number
+    consumed: {
+      amount: number
+      timestamp: string
+    }
+  }
+  frame: {
+    symbol: string
+    name: string
+    description: string
+    moduleSlots: number
+    mountingPoints: number
+    fuelCapacity: number
+    condition: number
+    requirements: {
+      power: number
+      crew: number
+    }
+  }
+  reactor: {
+    symbol: string
+    name: string
+    description: string
+    condition: number
+    powerOutput: number
+    requirements: {
+      crew: number
+    }
+  }
+  engine: {
+    symbol: string
+    name: string
+    description: string
+    condition: number
+    speed: number
+    requirements: {
+      power: number
+      crew: number
+    }
+  }
+  modules: Array<{
+    symbol: string
+    name: string
+    description: string
+    capacity?: number
+    range?: number
+    requirements: {
+      crew: number
+      power: number
+      slots: number
+    }
   }>
-}
-
-export interface StructureDetails {
-  id: string
-  type: string
-  location: string
-  status: string
-  active: boolean
-  ownedBy: {
-    username?: string
-    id?: string
+  mounts: [
+    {
+      symbol: string
+      name: string
+      description: string
+      strength: number
+      requirements: {
+        crew: number
+        power: number
+      }
+    },
+    {
+      symbol: string
+      name: string
+      description: string
+      strength: number
+      requirements: {
+        crew: number
+        power: number
+      }
+    },
+    {
+      symbol: string
+      name: string
+      description: string
+      strength: number
+      deposits: string[]
+      requirements: {
+        crew: number
+        power: number
+      }
+    },
+  ]
+  registration: {
+    name: string
+    factionSymbol: string
+    role: string
   }
-  inventory: Cargo[]
-  consumes: Good[]
-  produces: Good[]
-}
-
-export interface System {
-  symbol: string
-  name: string
-  locations: Location[]
-}
-
-export interface User {
-  username: string
-  credits: number
-  shipCount: number
-}
-
-export interface YourLoan {
-  due: string
-  id: string
-  repaymentAmount: number
-  status: 'CURRENT' | 'PAID'
-  type: LoanType
-}
-
-export interface YourShip {
-  cargo: Cargo[]
-  class: string
-  id: string
-  location?: string
-  manufacturer: string
-  maxCargo: number
-  plating: number
-  spaceAvailable: number
-  speed: number
-  type: string
-  weapons: number
-  x?: number
-  y?: number
-}
-
-export interface AccountResponse {
-  user: User
-}
-
-export interface AvailableLoansResponse {
-  loans: Loan[]
-}
-
-export interface AvailableShipsResponse {
-  shipListings: Ship[]
-}
-
-export interface AvailableStructureResponse {
-  structures: AvailableStructure[]
-}
-
-export interface CreateStructureResponse {
-  structure: StructureDetails
-}
-
-export interface ErrorResponse {
-  error: {
-    code: number
-    message: string
+  cargo: {
+    capacity: number
+    units: number
+    inventory: Array<{
+      symbol: string
+      name: string
+      description: string
+      units: number
+    }>
   }
 }
 
-export interface FlightPlanResponse {
-  flightPlan: FlightPlan
-}
-
-export interface FlightPlansResponse {
-  flightPlans: AllFlightsPlan[]
-}
-
-export interface JettisonResponse {
-  good: Good
-  quantityRemaining: number
-  shipId: string
-}
-
-export interface ListStructuresResponse {
-  structures: StructureDetails[]
-}
-
-export interface LocationResponse {
-  location: Location
-}
-
-export interface LocationShipsResponse {
-  ships: Ship[]
-}
-
-export interface LocationsResponse {
-  locations: Location[]
-}
-
-export interface MarketplaceResponse {
-  marketplace: Marketplace[]
-}
-
-export interface PurchaseShipResponse {
-  credits: number
-  ship: YourShip
-}
-
-export type SellResponse = PurchaseShipResponse & { order: Order }
-
-export interface ShipSellResponse {
-  success: string
-}
-
-export interface ShipResponse {
-  ships: YourShip & { flightPlanId?: string }
-}
-
-export interface ShipsResponse {
-  ships: Array<YourShip & { flightPlanId?: string }>
-}
-
-export interface ShipTransferResponse {
-  fromShip: YourShip
-  toShip: YourShip
-}
-
-export interface SystemsResponse {
-  systems: System[]
-}
-
-export interface StatusResponse {
-  status: string
-}
-
-export interface StructureDepositResponse {
-  deposit: Cargo
-  ship: YourShip
-  structure: StructureDetails
-}
-
-export interface StructureTransferResponse {
-  transfer: Cargo
-  ship: YourShip
-  structure: StructureDetails
-}
-
-export interface TokenResponse {
+export type RegisterAgentResponse = {
   token: string
-  user: User
-}
-
-export interface UserWorth {
-  netWorth: number
-  rank: number
-  username: string
-}
-
-export interface LeaderboardResponse {
-  netWorth: UserWorth[]
-  userNetWorth?: UserWorth
+  agent: AgentResponse
+  contract: ContractResponse
+  faction: FactionResponse
+  ship: ShipResponse
 }
