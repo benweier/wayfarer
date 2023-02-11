@@ -1,19 +1,19 @@
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { Suspense } from 'react'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { QueryErrorBoundaryProps } from './types'
+import { QuerySuspenseBoundaryProps } from './types'
 
-export const QueryErrorBoundary = ({
+export const QuerySuspenseBoundary = ({
   error,
   onError,
-  loading = <></>,
+  fallback = <></>,
   children,
-}: WithChildren<QueryErrorBoundaryProps>) => {
+}: WithChildren<QuerySuspenseBoundaryProps>) => {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary component={error} onReset={reset} onError={onError}>
-          <Suspense fallback={loading}>{children}</Suspense>
+          <Suspense fallback={fallback}>{children}</Suspense>
         </ErrorBoundary>
       )}
     </QueryErrorResetBoundary>
