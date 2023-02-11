@@ -1,13 +1,13 @@
-import { Navigate } from 'react-router'
+import { Navigate } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useAuthStore } from '@/services/store/auth'
 
-export const HomePage = () => {
+export const Home = () => {
   const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {
-    return <Navigate to={ROUTES.LOGIN} replace />
+    return <Navigate to={ROUTES.LOGIN} />
   }
 
-  return <Navigate to={ROUTES.OVERVIEW} replace />
+  return <Navigate to={ROUTES.OVERVIEW} />
 }
