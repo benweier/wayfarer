@@ -1,13 +1,14 @@
 import * as f from '@/services/fetch'
 import { getState } from '@/services/store/auth'
 
-export const get = <T>(
+export const get = async <T = unknown>(
   path: string,
-  { params, headers = new Headers() }: { params?: f.QueryParams; headers?: Headers } = {},
+  { params, headers = new Headers() }: { params?: f.QueryParams; headers?: HeadersInit } = {},
 ) => {
   const { isAuthenticated, token } = getState()
 
   const url = new URL(path, import.meta.env.SPACETRADERS_API_URL)
+  const _headers = new Headers(headers)
 
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
@@ -16,22 +17,27 @@ export const get = <T>(
   }
 
   if (isAuthenticated) {
-    headers.set('Authorization', `Bearer ${token}`)
-
-    return f.get<T>(url, { headers })
+    _headers.set('Authorization', `Bearer ${token}`)
   }
 
-  return f.get<T>(url)
+  if (isAuthenticated && !_headers.has('Authorization')) _headers.set('Authorization', `Bearer ${token}`)
+  if (!_headers.has('Accept')) _headers.set('Accept', 'application/json')
+  if (!_headers.has('Content-Type')) _headers.set('Content-Type', 'application/json')
+
+  const response = await f.get<{ data: T }>(url, { headers: _headers })
+
+  return response?.data
 }
 
-export const post = <T, P extends f.RequestPayload = unknown>(
+export const post = async <T = unknown, P extends f.RequestPayload = unknown>(
   path: string,
-  payload: P,
-  { params, headers = new Headers() }: { params?: f.QueryParams; headers?: Headers } = {},
+  payload?: P,
+  { params, headers = new Headers() }: { params?: f.QueryParams; headers?: HeadersInit } = {},
 ) => {
   const { isAuthenticated, token } = getState()
 
   const url = new URL(path, import.meta.env.SPACETRADERS_API_URL)
+  const _headers = new Headers(headers)
 
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
@@ -39,11 +45,11 @@ export const post = <T, P extends f.RequestPayload = unknown>(
     })
   }
 
-  if (isAuthenticated) {
-    headers.set('Authorization', `Bearer ${token}`)
+  if (isAuthenticated && !_headers.has('Authorization')) _headers.set('Authorization', `Bearer ${token}`)
+  if (!_headers.has('Accept')) _headers.set('Accept', 'application/json')
+  if (!_headers.has('Content-Type')) _headers.set('Content-Type', 'application/json')
 
-    return f.post<T, P>(url, payload, { headers })
-  }
+  const response = await f.post<{ data: T }, P>(url, payload, { headers: _headers })
 
-  return f.post<T, P>(url, payload)
+  return response?.data
 }
