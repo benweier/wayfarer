@@ -52,6 +52,12 @@ module.exports = {
         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
       },
     ],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['@/features/*/*'],
+      },
+    ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
