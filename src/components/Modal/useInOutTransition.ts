@@ -24,12 +24,10 @@ export function useInOutTransition(value: boolean, duration: number) {
   useEffect(() => {
     if (isInitialRun.current) {
       isInitialRun.current = false
-      return () => {
-        // noop
-      }
+      return
     }
 
-    if (value && stage === TransitionStage.exited) {
+    if (value) {
       queueMicrotask(() => {
         startTransition(() => {
           flushSync(() => {
@@ -56,7 +54,7 @@ export function useInOutTransition(value: boolean, duration: number) {
     return () => {
       if (final) clearTimeout(final)
     }
-  }, [stage, value])
+  }, [value])
 
   return { stage }
 }
