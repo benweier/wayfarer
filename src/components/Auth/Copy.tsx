@@ -1,10 +1,10 @@
+import { ClipboardIcon } from '@heroicons/react/24/outline'
 import { ButtonHTMLAttributes } from 'react'
-import { HiOutlineDuplicate } from 'react-icons/hi'
 import { cx } from '@/utilities/cx'
 
 export const Copy = ({
   className,
-  children = <HiOutlineDuplicate size={24} />,
+  children = <ClipboardIcon className="h-5 w-5" />,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
@@ -12,7 +12,7 @@ export const Copy = ({
       {...props}
       type="button"
       className={cx(
-        'cursor-default rounded border-0 p-1.5 text-gray-300 focus:outline-none focus:ring focus:ring-inset focus:ring-blue-500 enabled:hover:cursor-pointer enabled:hover:text-blue-400 disabled:opacity-50',
+        'rounded-full border-0 p-2 focus:outline-none focus:ring focus:ring-blue-500 enabled:hover:text-blue-400 disabled:cursor-default disabled:opacity-50',
         className,
       )}
     >
