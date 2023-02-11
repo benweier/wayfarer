@@ -1,42 +1,40 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
-import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
-import { get } from '@/services/fetch'
+import { get } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/services/store/auth'
-import { AccountResponse } from '@/types/spacetraders'
-
-type LoginFormState = {
-  user: string
-  token: string
-}
+import { AgentResponse } from '@/types/spacetraders'
+import { LoginSchema } from './Login.validation'
 
 export const Login = () => {
-  const location = useLocation<Partial<LoginFormState>>()
+  const location = useLocation<Partial<LoginSchema>>()
   const { setAuth } = useAuthStore()
 
-  const methods = useForm<LoginFormState>({
+  const methods = useForm<LoginSchema>({
     defaultValues: {
-      user: location.state?.user ?? '',
+      symbol: location.state?.symbol ?? '',
       token: location.state?.token ?? '',
     },
   })
-  const { mutateAsync, isLoading } = useMutation((values: LoginFormState) => {
-    const url = new URL('/my/account', import.meta.env.SPACETRADERS_API_URL)
-    const headers = new Headers()
-
-    if (values.token) headers.set('Authorization', `Bearer ${values.token}`)
-
-    return get<AccountResponse>(url, { headers })
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: (values: LoginSchema) => {
+      return get<AgentResponse>('/my/agent', {
+        headers: {
+          Authorization: `Bearer ${values.token}`,
+        },
+      })
+    },
+    cacheTime: 0,
   })
-  const onSubmit = useCallback<SubmitHandler<LoginFormState>>(
+  const onSubmit = useCallback<SubmitHandler<LoginSchema>>(
     (values) => {
       return mutateAsync(values)
-        .then((response) => {
-          setAuth({ user: response.user, token: values.token })
+        .then((data) => {
+          setAuth({ agent: data, token: values.token })
         })
         .catch((err) => {
           if (err.status === 401) {
@@ -50,21 +48,19 @@ export const Login = () => {
     [methods, mutateAsync, setAuth],
   )
 
-  const user = useWatch({ control: methods.control, name: 'user' })
-
   return (
     <div className="grid gap-4">
-      <div className="text-overline text-center">Login</div>
+      <div className="text-overline text-center">Agent Identification</div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 gap-8">
             <div>
-              <label className="label" htmlFor="user">
-                Username
+              <label className="label" htmlFor="symbol">
+                Agent Symbol
               </label>
-              <input {...methods.register('user')} className="input input-lg" type="text" />
+              <input {...methods.register('symbol')} className="input input-lg" type="text" />
               <div className="text-hint mt-1">
-                Your username is not required to login, but may be useful with password managers if you have multiple
+                Your symbol is not required to login, but may be useful with password managers if you have multiple
                 accounts
               </div>
             </div>
@@ -87,12 +83,12 @@ export const Login = () => {
             </div>
             <div className="grid gap-4">
               <button className="btn-hero" type="submit" disabled={isLoading}>
-                Login
+                Log In
               </button>
               <div className="text-caption text-center">
                 Don&apos;t have an access token?&nbsp;
-                <Link className="link" to={ROUTES.REGISTER} state={{ user }}>
-                  Register
+                <Link className="link" to={ROUTES.REGISTER}>
+                  Register a new agent
                 </Link>
               </div>
             </div>

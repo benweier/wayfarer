@@ -1,138 +1,105 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { useCallback } from 'react'
-import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
-import { HiXCircle } from 'react-icons/hi'
-import { Link, useNavigate } from 'react-router-dom'
+import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { Modal, useModalRef } from '@/components/Modal'
+import { SelectField } from '@/components/Select'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
-import { post } from '@/services/fetch'
-import { TokenResponse } from '@/types/spacetraders'
-import { cx } from '@/utilities/cx'
-import { Copy } from './Copy'
-import { useCopy } from './useCopy'
+import { post } from '@/services/api/spacetraders/core'
+import { RegisterAgentRequest, RegisterAgentResponse } from '@/types/spacetraders'
+import { AccessTokenDialog } from './AccessTokenDialog'
+import { RegisterSchema, validation } from './Register.validation'
 
-type RegisterFormState = {
-  user: string
-  token: string
+const AlreadyRegistered = ({ token }: { token?: string }) => {
+  const { control } = useFormContext<RegisterSchema>()
+  const symbol = useWatch({ control, name: 'symbol' })
+
+  return (
+    <div className="text-caption text-center">
+      Already have an access token?&nbsp;
+      <Link className="link" to={ROUTES.LOGIN} state={{ symbol, token }}>
+        Log in
+      </Link>
+    </div>
+  )
 }
 
 export const Register = () => {
-  const location = useLocation<Partial<RegisterFormState>>()
-  const { ref, isCopied, onCopy, reset } = useCopy()
-  const navigate = useNavigate()
-  const methods = useForm<RegisterFormState>({
+  const { ref, openModal } = useModalRef()
+  const location = useLocation<Partial<RegisterSchema>>()
+  const methods = useForm<RegisterSchema>({
     defaultValues: {
-      user: location.state?.user ?? '',
-      token: '',
+      symbol: location.state?.symbol,
     },
+    resolver: zodResolver(validation),
   })
-  const { mutateAsync, isLoading, isSuccess } = useMutation((values: RegisterFormState) => {
-    const url = new URL(`/users/${values.user}/claim`, import.meta.env.SPACETRADERS_API_URL)
-
-    return post<TokenResponse>(url)
-  })
-  const onSubmit = useCallback<SubmitHandler<RegisterFormState>>(
-    (values) => {
-      return mutateAsync(values)
-        .then((response) => {
-          if (!response) return
-
-          reset()
-          methods.setValue('token', response.token)
-          ref.current?.focus()
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+  const { mutateAsync, isLoading, data } = useMutation({
+    mutationFn: (values: RegisterSchema) => {
+      return post<RegisterAgentResponse, RegisterAgentRequest>(`/register`, {
+        symbol: values.symbol,
+        faction: values.faction,
+      })
     },
-    [mutateAsync, reset, methods, ref],
-  )
-
-  const user = useWatch({ control: methods.control, name: 'user' })
-  const token = useWatch({ control: methods.control, name: 'token' })
+    onSuccess: () => {
+      openModal()
+    },
+    cacheTime: 0,
+  })
 
   return (
     <div className="grid gap-4">
-      <div className="text-overline text-center">Register</div>
+      <div className="text-overline text-center">New Agent Registration</div>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
             <div>
-              <label className="label" htmlFor="user">
-                Username
+              <label className="label" htmlFor="symbol">
+                Agent Symbol
               </label>
               <input
-                {...methods.register('user', { required: true })}
+                {...methods.register('symbol', { required: true })}
                 className="input input-lg"
                 type="text"
                 autoComplete="off"
                 autoFocus
               />
             </div>
-            <div ref={ref}>
-              <label className="label" htmlFor="token">
-                Access Token
-              </label>
-              <div className="relative">
-                <input
-                  {...methods.register('token')}
-                  className="input input-lg"
-                  type="text"
-                  onFocus={(node) => node.target.select()}
-                  readOnly
-                  disabled={!token}
-                />
-                <div className="absolute inset-y-0 right-0 flex items-center pr-1">
-                  <Copy
-                    disabled={!token}
-                    onClick={() => {
-                      onCopy(token)
+            <div>
+              <Controller
+                control={methods.control}
+                name="faction"
+                render={({ field }) => (
+                  <SelectField
+                    label="Faction"
+                    selected={{ id: field.value, name: field.value }}
+                    options={[
+                      { id: 'COSMIC', name: 'COSMIC' },
+                      { id: 'DOMINION', name: 'DOMINION' },
+                      { id: 'GALLACTIC', name: 'GALLACTIC' },
+                      { id: 'QUANTUM', name: 'QUANTUM' },
+                      { id: 'VOID', name: 'VOID' },
+                    ]}
+                    onChange={(value) => {
+                      field.onChange(value?.id)
                     }}
                   />
-                </div>
-              </div>
-              <div className="text-hint mt-1 text-gray-300">Register a username to receive your access token</div>
+                )}
+              />
             </div>
 
+            <button className="btn-hero" disabled={isLoading} type="submit">
+              Register
+            </button>
             <div className="grid gap-4">
-              {isSuccess && (
-                <div
-                  className={cx('flex gap-4', {
-                    'text-emerald-600 dark:text-emerald-400': isCopied,
-                    'text-rose-600 dark:text-rose-400': !isCopied,
-                  })}
-                >
-                  <HiXCircle size={20} />
-                  <span className="text-hint whitespace-nowrap">{isCopied ? 'Token Copied!' : 'Token Not Copied'}</span>
-                </div>
-              )}
-              {!isCopied && !token && (
-                <button className="btn-hero" disabled={isLoading} type="submit">
-                  Register
-                </button>
-              )}
-              {!!token && (
-                <button
-                  className="btn-hero"
-                  disabled={!isCopied}
-                  type="button"
-                  onClick={() => {
-                    navigate(ROUTES.LOGIN, { state: { user, token }, replace: true })
-                  }}
-                >
-                  Got it. Let&apos;s go!
-                </button>
-              )}
-              <div className="text-caption text-center">
-                Already have an access token?&nbsp;
-                <Link className="link" to={ROUTES.LOGIN} state={{ user, token }}>
-                  Login
-                </Link>
-              </div>
+              <AlreadyRegistered token={data?.token} />
             </div>
           </div>
         </form>
       </FormProvider>
+      <Modal ref={ref}>
+        <AccessTokenDialog registration={data} />
+      </Modal>
     </div>
   )
 }
