@@ -1,5 +1,5 @@
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { RegisterAgentResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'

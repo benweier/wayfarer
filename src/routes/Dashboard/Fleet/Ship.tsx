@@ -1,4 +1,4 @@
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/QuerySuspenseBoundary'
 import { lazy } from '@/utilities/lazy'
 

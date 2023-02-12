@@ -1,5 +1,5 @@
 import { QueryClient } from '@tanstack/react-query'
-import { LoaderFunction, defer, redirect } from 'react-router'
+import { LoaderFunction, defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getMarket } from '@/services/api/spacetraders'
 import { getState } from '@/services/store/auth'
