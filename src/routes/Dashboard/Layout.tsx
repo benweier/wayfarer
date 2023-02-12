@@ -148,7 +148,7 @@ export const Layout = () => {
                     <NavLink
                       key={item.name}
                       to={item.href}
-                      className="flex items-center gap-4 overflow-hidden rounded-md p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 active:scale-100 @[220px]/side:w-full @[220px]/side:py-2 [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-700"
+                      className="flex items-center gap-4 overflow-hidden rounded-md border-2 border-blue-600 p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full @[220px]/side:py-2 [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-800"
                     >
                       <div>
                         <item.icon className="h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5" aria-hidden />
@@ -171,7 +171,7 @@ export const Layout = () => {
                     }
                     window.localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark')
                   }}
-                  className="flex items-center gap-4 overflow-hidden rounded-md p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
+                  className="flex items-center gap-4 overflow-hidden rounded-md p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
                 >
                   <SunIcon className="hidden h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5 dark:block" aria-hidden />
                   <MoonIcon className="block h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5 dark:hidden" aria-hidden />
@@ -182,7 +182,7 @@ export const Layout = () => {
                 </button>
                 <button
                   onClick={() => setCollapsed((state) => !state)}
-                  className="flex items-center gap-4 overflow-hidden rounded-md p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
+                  className="flex items-center gap-4 overflow-hidden rounded-md p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
                 >
                   {collapse ? (
                     <ChevronDoubleRightIcon className="h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5" aria-hidden />
@@ -199,7 +199,7 @@ export const Layout = () => {
                   onClick={() => {
                     submit(null, { method: 'post', action: ROUTES.LOGOUT })
                   }}
-                  className="flex items-center gap-4 rounded p-4 font-semibold text-rose-200 transition-all duration-100 hover:scale-105 hover:bg-rose-700 active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
+                  className="flex items-center gap-4 rounded p-4 font-semibold text-rose-200 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow-sm active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
                 >
                   <ArrowRightOnRectangleIcon className="h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5" aria-hidden />
                   <span className="sr-only text-sm @[220px]/side:not-sr-only">Log out</span>
