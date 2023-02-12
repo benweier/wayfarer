@@ -5,7 +5,7 @@ export const { Market } = lazy(() => import('./Market'), ['Market'])
 export const { Overview } = lazy(() => import('./Overview'), ['Overview'])
 export const Fleet = lazy(() => import('./Fleet'), ['List', 'Ship'])
 export const { Contracts } = lazy(() => import('./Contracts'), ['Contracts'])
-export const Systems = lazy(() => import('./Systems'), ['List'])
+export const Systems = lazy(() => import('./Systems'), ['List', 'View'])
 
 export * as root from './dashboard.loader'
 export * as market from './Market/market.loader'
