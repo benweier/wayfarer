@@ -8,9 +8,9 @@ export const loader =
   (client: QueryClient): LoaderFunction =>
   ({ params }) => {
     const { isAuthenticated } = getState()
-    const { id } = params
+    const { shipID } = params
 
-    if (!id) {
+    if (!shipID) {
       throw new Response('Not Found', { status: 404 })
     }
 
@@ -20,7 +20,7 @@ export const loader =
     }
 
     try {
-      const ship = client.ensureQueryData({ queryKey: ['ship', id], queryFn: () => getShipById(id) })
+      const ship = client.ensureQueryData({ queryKey: ['ship', shipID], queryFn: () => getShipById(shipID) })
 
       return defer({ ship })
     } catch (err) {
