@@ -13,11 +13,13 @@ import {
   SunIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { Fragment, Suspense, useState } from 'react'
+import { atom, useAtom } from 'jotai'
+import { Fragment, Suspense } from 'react'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-dom'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
+import { sidebarAtom } from '@/services/store/atoms/sidebar'
 import { cx } from '@/utilities/cx'
 
 const menu = [
@@ -28,9 +30,11 @@ const menu = [
   { name: 'Fleet', href: ROUTES.FLEET, icon: RocketLaunchIcon },
 ]
 
+const mobileMenuAtom = atom<boolean>(false)
+
 export const Layout = () => {
-  const [collapse, setCollapsed] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [sidebarState, setSidebarState] = useAtom(sidebarAtom)
+  const [mobileMenuOpen, setMobileMenuOpen] = useAtom(mobileMenuAtom)
   const submit = useSubmit()
   const navigation = useNavigation()
 
@@ -78,7 +82,7 @@ export const Layout = () => {
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <span className="sr-only">Close sidebar</span>
-                        <XMarkIcon className="h-6 w-6 text-white" aria-hidden />
+                        <XMarkIcon className="h-5 w-5 text-white" aria-hidden />
                       </button>
                     </div>
                   </Transition.Child>
@@ -96,7 +100,7 @@ export const Layout = () => {
                             to={item.href}
                             className="group flex items-center rounded-md p-2 text-base font-medium text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 [&.active]:bg-blue-500 [&.active]:text-white"
                           >
-                            <item.icon className="mr-4 h-6 w-6 text-zinc-400 group-hover:text-zinc-500" aria-hidden />
+                            <item.icon className="mr-4 h-5 w-5 text-zinc-400 group-hover:text-zinc-500" aria-hidden />
                             {item.name}
                           </NavLink>
                         ))}
@@ -131,16 +135,17 @@ export const Layout = () => {
         <div className="hidden lg:flex lg:flex-shrink-0">
           <div
             className={cx('flex flex-col transition-all duration-100 ease-in-out @container/side', {
-              'w-20': collapse,
-              'w-60': !collapse,
+              'w-20': sidebarState === 'collapsed',
+              'w-60': sidebarState === 'expanded',
             })}
           >
             <div className="flex min-h-0 flex-1 flex-col bg-blue-600">
               <div className="flex-1">
                 <div className="flex items-center justify-center bg-blue-700 py-4">
                   <Link to="/">
-                    <div className="text-title hidden text-white @[220px]/side:block">Wayfarer</div>
-                    <div className="text-title block text-white @[220px]/side:hidden">W</div>
+                    <div className="text-title text-center text-white">
+                      W<span className="hidden @[220px]:inline">ayfarer</span>
+                    </div>
                   </Link>
                 </div>
                 <nav aria-label="Sidebar" className="flex flex-col items-center justify-center gap-2 p-4">
@@ -148,10 +153,10 @@ export const Layout = () => {
                     <NavLink
                       key={item.name}
                       to={item.href}
-                      className="flex items-center gap-4 overflow-hidden rounded-md border-2 border-blue-600 p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full @[220px]/side:py-2 [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-800"
+                      className="flex w-full items-center gap-4 overflow-hidden rounded-md border-2 border-blue-600 px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-800"
                     >
                       <div>
-                        <item.icon className="h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5" aria-hidden />
+                        <item.icon className="h-5 w-5" aria-hidden />
                       </div>
                       <span className="sr-only text-sm @[220px]/side:not-sr-only">{item.name}</span>
                     </NavLink>
@@ -171,26 +176,32 @@ export const Layout = () => {
                     }
                     window.localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark')
                   }}
-                  className="flex items-center gap-4 overflow-hidden rounded-md p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
+                  className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100"
                 >
-                  <SunIcon className="hidden h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5 dark:block" aria-hidden />
-                  <MoonIcon className="block h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5 dark:hidden" aria-hidden />
+                  <div className="h-6 w-6">
+                    <SunIcon className="hidden h-6 w-6 dark:block" aria-hidden />
+                    <MoonIcon className="block h-6 w-6 dark:hidden" aria-hidden />
+                  </div>
                   <span className="sr-only flex flex-col items-start justify-start text-sm leading-none @[220px]/side:not-sr-only">
-                    <span>Theme</span>
-                    <span className="text-xs leading-none">Auto</span>
+                    Toggle Theme
                   </span>
                 </button>
                 <button
-                  onClick={() => setCollapsed((state) => !state)}
-                  className="flex items-center gap-4 overflow-hidden rounded-md p-3 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
+                  onClick={() => setSidebarState((state) => (state === 'collapsed' ? 'expanded' : 'collapsed'))}
+                  className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100"
                 >
-                  {collapse ? (
-                    <ChevronDoubleRightIcon className="h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5" aria-hidden />
-                  ) : (
-                    <ChevronDoubleLeftIcon className="h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5" aria-hidden />
-                  )}
+                  <div className="h-6 w-6">
+                    <ChevronDoubleLeftIcon
+                      className={cx('h-6 w-6', { hidden: sidebarState === 'collapsed' })}
+                      aria-hidden
+                    />
+                    <ChevronDoubleRightIcon
+                      className={cx('h-6 w-6', { hidden: sidebarState === 'expanded' })}
+                      aria-hidden
+                    />
+                  </div>
                   <span className="sr-only text-sm @[220px]/side:not-sr-only">
-                    Menu: {collapse ? 'Expand' : 'Collapse'}
+                    {sidebarState === 'collapsed' ? 'Expand Menu' : 'Collapse Menu'}
                   </span>
                 </button>
               </div>
@@ -199,9 +210,11 @@ export const Layout = () => {
                   onClick={() => {
                     submit(null, { method: 'post', action: ROUTES.LOGOUT })
                   }}
-                  className="flex items-center gap-4 rounded p-4 font-semibold text-rose-200 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow-sm active:scale-100 @[220px]/side:w-full @[220px]/side:py-2"
+                  className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-rose-200 shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
                 >
-                  <ArrowRightOnRectangleIcon className="h-6 w-6 @[220px]/side:h-5 @[220px]/side:w-5" aria-hidden />
+                  <div className="h-6 w-6">
+                    <ArrowRightOnRectangleIcon className="h-6 w-6" aria-hidden />
+                  </div>
                   <span className="sr-only text-sm @[220px]/side:not-sr-only">Log out</span>
                 </button>
               </div>
@@ -225,7 +238,7 @@ export const Layout = () => {
                   onClick={() => setMobileMenuOpen(true)}
                 >
                   <span className="sr-only">Open sidebar</span>
-                  <Bars3Icon className="h-6 w-6" aria-hidden />
+                  <Bars3Icon className="h-5 w-5" aria-hidden />
                 </button>
               </div>
             </div>
