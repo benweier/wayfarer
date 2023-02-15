@@ -15,7 +15,6 @@ import {
 } from '@heroicons/react/24/outline'
 import { atom, useAtom } from 'jotai'
 import { Fragment, Suspense } from 'react'
-import { GiNorthStarShuriken } from 'react-icons/gi'
 import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-dom'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
@@ -250,8 +249,8 @@ export const Layout = () => {
               {navigation.state !== 'idle' && <span className="loader" />}
               <Suspense
                 fallback={
-                  <div className="grid h-96 animate-pulse items-center justify-center text-zinc-200 dark:text-zinc-700">
-                    <GiNorthStarShuriken size={96} />
+                  <div className="flex h-full w-full animate-pulse items-center justify-center text-5xl font-black text-zinc-900/5 dark:text-zinc-500/10">
+                    <div>Wayfarer</div>
                   </div>
                 }
               >
