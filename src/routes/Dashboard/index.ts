@@ -3,8 +3,8 @@ import { lazy } from '@/utilities/lazy'
 export const { Layout } = lazy(() => import('./Layout'), ['Layout'])
 export const { Market } = lazy(() => import('./Market'), ['Market'])
 export const { Overview } = lazy(() => import('./Overview'), ['Overview'])
-export const Fleet = lazy(() => import('./Fleet'), ['List', 'Ship'])
-export const { Contracts } = lazy(() => import('./Contracts'), ['Contracts'])
+export const Fleet = lazy(() => import('./Fleet'), ['List', 'Ship', 'Modal'])
+export const Contracts = lazy(() => import('./Contracts'), ['List'])
 export const Systems = lazy(() => import('./Systems'), ['List', 'View'])
 
 export * as root from './dashboard.loader'
