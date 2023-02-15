@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/QuerySuspenseBoundary'
+import { ViewSystem } from '@/features/Systems'
 
 export const SystemViewRoute = () => {
   const { systemID } = useParams()
@@ -10,9 +11,7 @@ export const SystemViewRoute = () => {
         System: <span className="font-normal">{systemID}</span>
       </h1>
       <div className="grid gap-12 py-6 px-4">
-        <QuerySuspenseBoundary>
-          <></>
-        </QuerySuspenseBoundary>
+        <QuerySuspenseBoundary>{systemID && <ViewSystem id={systemID} />}</QuerySuspenseBoundary>
       </div>
     </div>
   )
