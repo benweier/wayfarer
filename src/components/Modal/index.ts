@@ -1,1 +1,2 @@
-export { Modal } from './Modal'
+export { Modal } from './Modal.Context'
+export { useModalContext } from './useModalContext.hook'
