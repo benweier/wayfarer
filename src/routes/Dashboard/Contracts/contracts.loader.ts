@@ -4,7 +4,7 @@ import { ROUTES } from '@/config/routes'
 import { getContractsList } from '@/services/api/spacetraders'
 import { getState } from '@/services/store/auth'
 
-export const loader =
+export const list =
   (client: QueryClient): LoaderFunction =>
   () => {
     const { isAuthenticated } = getState()

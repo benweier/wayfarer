@@ -1,6 +1,6 @@
 // import { Tab } from '@headlessui/react'
 // import { cx } from '@/utilities/cx'
-import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary, withQSB } from '@/components/QuerySuspenseBoundary'
 import { MyContracts } from '@/features/Contracts'
 
 // const tabs = [
@@ -109,7 +109,7 @@ import { MyContracts } from '@/features/Contracts'
 //   )
 // }
 
-export const Contracts = () => {
+export const ContractsRoute = () => {
   return (
     <div>
       <h1 className="text-title p-4">Contracts</h1>
@@ -121,3 +121,5 @@ export const Contracts = () => {
     </div>
   )
 }
+
+export const List = withQSB()(ContractsRoute)
