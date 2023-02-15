@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/QuerySuspenseBoundary'
 import { MyShips } from '@/features/Fleet'
 
@@ -10,6 +11,7 @@ export const FleetRoute = () => {
           <MyShips />
         </QuerySuspenseBoundary>
       </div>
+      <Outlet />
     </div>
   )
 }
