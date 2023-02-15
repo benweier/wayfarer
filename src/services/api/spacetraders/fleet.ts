@@ -11,6 +11,8 @@ export const createShipPurchase = (ship: string, waypoint: string) =>
     waypointSymbol: waypoint,
   })
 
+export const createShipScanWaypoint = (ship: string) => st.post<unknown>(`/my/ships/${ship}/scan/waypoints`)
+
 export const createShipOrbit = (ship: string) => st.post<{ nav: NavigationResponse }>(`/my/ships/${ship}/orbit`)
 
 export const createShipChart = (ship: string) =>

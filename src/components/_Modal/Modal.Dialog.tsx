@@ -20,8 +20,8 @@ const Close = () => {
 }
 
 export const Root = ({ size, overlay = <Overlay />, children }: PropsWithChildren<DialogProps>) => {
-  const { isOpen, closeModal, closeOnOutsideClick } = useContext(ModalContext)
-  const transition = useInOutTransition(isOpen, 150)
+  const { isOpen, closeModal, closeOnOutsideClick, onClose, onOpen } = useContext(ModalContext)
+  const transition = useInOutTransition(isOpen, 150, isOpen ? onOpen : onClose)
   const ref = useRef<HTMLDivElement>(null)
 
   useClickOutside(ref, () => {

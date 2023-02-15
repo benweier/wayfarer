@@ -11,7 +11,7 @@ export const TransitionStage = {
   exited: 'exited',
 } as const
 
-export function useInOutTransition(value: boolean, duration: number) {
+export function useInOutTransition(value: boolean, duration: number, cb?: () => void) {
   const [stage, setStage] = useState<Values<typeof TransitionStage>>(() => {
     return value ? TransitionStage.appear : TransitionStage.exited
   })
@@ -47,6 +47,7 @@ export function useInOutTransition(value: boolean, duration: number) {
     const final = setTimeout(() => {
       startTransition(() => {
         const next = value ? TransitionStage.entered : TransitionStage.exited
+        cb?.()
         setStage(next)
       })
     }, durationRef.current)

@@ -16,16 +16,25 @@ export const Modal = ({ isOpen, closeModal, closeOnEsc, children }: PropsWithChi
   })
 
   useEffect(() => {
-    if (!ref.current) return
+    const node = ref.current
+
+    if (!node) return
+
+    const trap = createFocusTrap(node)
 
     try {
-      const trap = createFocusTrap(ref.current)
-
       queueMicrotask(() => {
         if (isOpen) {
           try {
             scrollLock.activate()
             trap.activate()
+          } catch (err) {
+            return
+          }
+        } else {
+          try {
+            scrollLock.deactivate()
+            trap.deactivate()
           } catch (err) {
             return
           }
@@ -41,6 +50,9 @@ export const Modal = ({ isOpen, closeModal, closeOnEsc, children }: PropsWithChi
         }
       }
     } catch (err) {
+      scrollLock.deactivate()
+      trap.deactivate()
+      console.error(err)
       return
     }
   }, [isOpen, scrollLock])
@@ -48,6 +60,7 @@ export const Modal = ({ isOpen, closeModal, closeOnEsc, children }: PropsWithChi
   return (
     <Portal>
       <div ref={ref} className="modal" data-open={String(isOpen)}>
+        <button></button>
         {children}
       </div>
     </Portal>
