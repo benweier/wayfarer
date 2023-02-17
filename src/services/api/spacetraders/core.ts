@@ -1,55 +1,72 @@
 import * as f from '@/services/fetch'
+import { http } from '@/services/http'
 import { getState } from '@/services/store/auth'
 
-export const get = async <T = unknown>(
-  path: string,
-  { params, headers = new Headers() }: { params?: f.QueryParams; headers?: HeadersInit } = {},
-) => {
+const createHeaders = (init?: HeadersInit) => {
   const { isAuthenticated, token } = getState()
+  const headers = new Headers(init)
 
-  const url = new URL(path, import.meta.env.SPACETRADERS_API_URL)
-  const _headers = new Headers(headers)
+  if (isAuthenticated && !headers.has('Authorization')) headers.set('Authorization', `Bearer ${token}`)
+  if (!headers.has('Accept')) headers.set('Accept', 'application/json')
+  if (!headers.has('Content-Type')) headers.set('Content-Type', 'application/json')
 
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) url.searchParams.append(key, String(value))
-    })
-  }
-
-  if (isAuthenticated) {
-    _headers.set('Authorization', `Bearer ${token}`)
-  }
-
-  if (isAuthenticated && !_headers.has('Authorization')) _headers.set('Authorization', `Bearer ${token}`)
-  if (!_headers.has('Accept')) _headers.set('Accept', 'application/json')
-  if (!_headers.has('Content-Type')) _headers.set('Content-Type', 'application/json')
-
-  const response = await f.get<{ data: T }>(url, { headers: _headers })
-
-  return response?.data
+  return headers
 }
 
-export const post = async <T = unknown, P extends f.RequestPayload = unknown>(
-  path: string,
-  payload?: P,
-  { params, headers = new Headers() }: { params?: f.QueryParams; headers?: HeadersInit } = {},
-) => {
-  const { isAuthenticated, token } = getState()
-
-  const url = new URL(path, import.meta.env.SPACETRADERS_API_URL)
-  const _headers = new Headers(headers)
-
+const attachQueryParams = (url: URL, params?: f.QueryParams) => {
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null) url.searchParams.append(key, String(value))
     })
   }
 
-  if (isAuthenticated && !_headers.has('Authorization')) _headers.set('Authorization', `Bearer ${token}`)
-  if (!_headers.has('Accept')) _headers.set('Accept', 'application/json')
-  if (!_headers.has('Content-Type')) _headers.set('Content-Type', 'application/json')
+  return url
+}
 
-  const response = await f.post<{ data: T }, P>(url, payload, { headers: _headers })
+export const queryFnFactory = <R = unknown, T = unknown, Q extends f.QueryParams = f.QueryParams>(
+  fn: (path: T) => string,
+  base: string = import.meta.env.SPACETRADERS_API_URL,
+) => {
+  return async (path: T, params?: Q, req?: RequestInit) => {
+    const url = new URL(fn(path), base)
+    const headers = createHeaders(req?.headers)
 
-  return response?.data
+    attachQueryParams(url, params)
+
+    const response = await http<{ data: R }>(url, {
+      headers,
+      signal: req?.signal,
+      method: req?.method ?? 'GET',
+      credentials: 'same-origin',
+    })
+
+    return response?.data
+  }
+}
+
+export const mutationFnFactory = <
+  R = unknown,
+  T = unknown,
+  P extends f.RequestPayload = f.RequestPayload,
+  Q extends f.QueryParams = f.QueryParams,
+>(
+  fn: (path: T) => string,
+  base: string = import.meta.env.SPACETRADERS_API_URL,
+) => {
+  return async (args: T, payload?: P, params?: Q, req?: RequestInit) => {
+    const url = new URL(fn(args), base)
+    const headers = createHeaders(req?.headers)
+
+    attachQueryParams(url, params)
+
+    const response = await http<{ data: R }>(url, {
+      headers,
+      signal: req?.signal,
+      method: req?.method ?? 'POST',
+      credentials: 'same-origin',
+      body: payload ? JSON.stringify(payload) : undefined,
+    })
+
+    return response?.data
+  }
 }
