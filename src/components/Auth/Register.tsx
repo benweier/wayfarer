@@ -2,14 +2,16 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { Modal, useModalRef } from '@/components/Modal'
+import { Modal } from '@/components/Modal'
 import { SelectField } from '@/components/Select'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
-import { post } from '@/services/api/spacetraders/core'
+import { mutationFnFactory } from '@/services/api/spacetraders/core'
 import { RegisterAgentRequest, RegisterAgentResponse } from '@/types/spacetraders'
 import { AccessTokenDialog } from './AccessTokenDialog'
 import { RegisterSchema, validation } from './Register.validation'
+
+const createMyAgent = mutationFnFactory<RegisterAgentResponse, void, RegisterAgentRequest>(() => '/register')
 
 const AlreadyRegistered = ({ token }: { token?: string }) => {
   const { control } = useFormContext<RegisterSchema>()
@@ -26,7 +28,6 @@ const AlreadyRegistered = ({ token }: { token?: string }) => {
 }
 
 export const Register = () => {
-  const { ref, openModal } = useModalRef()
   const location = useLocation<Partial<RegisterSchema>>()
   const methods = useForm<RegisterSchema>({
     defaultValues: {
@@ -36,13 +37,7 @@ export const Register = () => {
   })
   const { mutateAsync, isLoading, data } = useMutation({
     mutationFn: (values: RegisterSchema) => {
-      return post<RegisterAgentResponse, RegisterAgentRequest>(`/register`, {
-        symbol: values.symbol,
-        faction: values.faction,
-      })
-    },
-    onSuccess: () => {
-      openModal()
+      return createMyAgent(undefined, { symbol: values.symbol, faction: values.faction })
     },
     cacheTime: 0,
   })
@@ -97,7 +92,7 @@ export const Register = () => {
           </div>
         </form>
       </FormProvider>
-      <Modal ref={ref}>
+      <Modal isOpen={!!data}>
         <AccessTokenDialog registration={data} />
       </Modal>
     </div>

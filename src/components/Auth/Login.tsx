@@ -5,10 +5,12 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
-import { get } from '@/services/api/spacetraders/core'
+import { queryFnFactory } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/services/store/auth'
 import { AgentResponse } from '@/types/spacetraders'
 import { LoginSchema } from './Login.validation'
+
+const getMyAgent = queryFnFactory<AgentResponse, void>(() => '/my/agent')
 
 export const Login = () => {
   const location = useLocation<Partial<LoginSchema>>()
@@ -22,7 +24,7 @@ export const Login = () => {
   })
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (values: LoginSchema) => {
-      return get<AgentResponse>('/my/agent', {
+      return getMyAgent(undefined, undefined, {
         headers: {
           Authorization: `Bearer ${values.token}`,
         },
