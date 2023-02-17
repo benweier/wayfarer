@@ -6,7 +6,7 @@ import { createShipOrbit, createShipScanWaypoint, getShipById } from '@/services
 const Orbit = ({ ship }: { ship: string }) => {
   const { mutate, data } = useMutation({
     mutationKey: ['ship-orbit', ship],
-    mutationFn: createShipOrbit,
+    mutationFn: (id: string) => createShipOrbit(id),
   })
 
   return (
@@ -23,7 +23,7 @@ const Orbit = ({ ship }: { ship: string }) => {
 const ScanWaypoints = ({ ship }: { ship: string }) => {
   const { mutate, data } = useMutation({
     mutationKey: ['ship-scan-waypoints', ship],
-    mutationFn: createShipScanWaypoint,
+    mutationFn: (id: string) => createShipScanWaypoint(id),
   })
 
   return (
