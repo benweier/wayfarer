@@ -1,20 +1,26 @@
 import { MarketResponse, SystemsResponse, WaypointResponse } from '@/types/spacetraders'
-import * as st from './core'
+import { queryFnFactory } from './core'
 
-export const getSystemsList = () => st.get<SystemsResponse[]>('/systems')
+export const getSystemsList = queryFnFactory<SystemsResponse[], void>(() => '/systems')
 
-export const getWaypointsListBySystem = (system: string) => st.get<WaypointResponse[]>(`/systems/${system}/waypoints`)
+export const getWaypointsListBySystem = queryFnFactory<WaypointResponse[], string>(
+  (system) => `/systems/${system}/waypoints`,
+)
 
-export const getSystemById = (system: string) => st.get<SystemsResponse>(`/systems/${system}`)
+export const getSystemById = queryFnFactory<SystemsResponse, string>((system) => `/systems/${system}`)
 
-export const getWaypointById = (system: string, waypoint: string) =>
-  st.get<WaypointResponse>(`/systems/${system}/waypoints/${waypoint}`)
+export const getWaypointById = queryFnFactory<WaypointResponse, { system: string; waypoint: string }>(
+  ({ system, waypoint }) => `/systems/${system}/waypoints/${waypoint}`,
+)
 
-export const getMarket = (system: string, waypoint: string) =>
-  st.get<MarketResponse>(`/systems/${system}/waypoints/${waypoint}/market`)
+export const getMarket = queryFnFactory<MarketResponse, { system: string; waypoint: string }>(
+  ({ system, waypoint }) => `/systems/${system}/waypoints/${waypoint}/market`,
+)
 
-export const getShipyard = (system: string, waypoint: string) =>
-  st.get<SystemsResponse>(`/systems/${system}/waypoints/${waypoint}/shipyard`)
+export const getShipyard = queryFnFactory<SystemsResponse, { system: string; waypoint: string }>(
+  ({ system, waypoint }) => `/systems/${system}/waypoints/${waypoint}/shipyard`,
+)
 
-export const getJumpGate = (system: string, waypoint: string) =>
-  st.get<SystemsResponse>(`/systems/${system}/waypoints/${waypoint}/jump-gate`)
+export const getJumpGate = queryFnFactory<SystemsResponse, { system: string; waypoint: string }>(
+  ({ system, waypoint }) => `/systems/${system}/waypoints/${waypoint}/jump-gate`,
+)

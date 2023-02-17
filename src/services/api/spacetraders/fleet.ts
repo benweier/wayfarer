@@ -1,19 +1,22 @@
 import { AgentResponse, ChartResponse, NavigationResponse, ShipResponse, WaypointResponse } from '@/types/spacetraders'
-import * as st from './core'
+import { mutationFnFactory, queryFnFactory } from './core'
 
-export const getShipsList = () => st.get<ShipResponse[]>('/my/ships')
+export const getShipsList = queryFnFactory<ShipResponse[]>(() => '/my/ships')
 
-export const getShipById = (ship: string) => st.get<ShipResponse>(`/my/ships/${ship}`)
+export const getShipById = queryFnFactory<ShipResponse, string>((ship) => `/my/ships/${ship}`)
 
-export const createShipPurchase = (ship: string, waypoint: string) =>
-  st.post<{ agent: AgentResponse; ship: ShipResponse }, { shipType: string; waypointSymbol: string }>('/my/ships', {
-    shipType: ship,
-    waypointSymbol: waypoint,
-  })
+export const createShipPurchase = mutationFnFactory<
+  { agent: AgentResponse; ship: ShipResponse },
+  void,
+  { shipType: string; waypointSymbol: string }
+>(() => '/my/ships')
 
-export const createShipScanWaypoint = (ship: string) => st.post<unknown>(`/my/ships/${ship}/scan/waypoints`)
+export const createShipScanWaypoint = mutationFnFactory((ship: string) => `/my/ships/${ship}/scan/waypoints`)
 
-export const createShipOrbit = (ship: string) => st.post<{ nav: NavigationResponse }>(`/my/ships/${ship}/orbit`)
+export const createShipOrbit = mutationFnFactory<{ nav: NavigationResponse }, string, void>(
+  (ship) => `/my/ships/${ship}/orbit`,
+)
 
-export const createShipChart = (ship: string) =>
-  st.post<{ chart: ChartResponse; waypoint: WaypointResponse }>(`/my/ships/${ship}/chart`)
+export const createShipChart = mutationFnFactory<{ chart: ChartResponse; waypoint: WaypointResponse }, string>(
+  (ship) => `/my/ships/${ship}/chart`,
+)
