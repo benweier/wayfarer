@@ -15,9 +15,6 @@ module.exports = defineConfig(({ mode }) => {
   plugins.push(react())
 
   return {
-    optimizeDeps: {
-      disabled: false,
-    },
     server: {
       port: 8080,
       https: true,
