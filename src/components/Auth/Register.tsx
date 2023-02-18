@@ -35,7 +35,7 @@ export const Register = () => {
     },
     resolver: zodResolver(validation),
   })
-  const { mutateAsync, isLoading, data } = useMutation({
+  const { mutateAsync, isLoading, isSuccess, data } = useMutation({
     mutationFn: (values: RegisterSchema) => {
       return createMyAgent({ payload: { symbol: values.symbol, faction: values.faction } })
     },
@@ -71,7 +71,7 @@ export const Register = () => {
                     options={[
                       { id: 'COSMIC', name: 'COSMIC' },
                       { id: 'DOMINION', name: 'DOMINION' },
-                      { id: 'GALLACTIC', name: 'GALLACTIC' },
+                      { id: 'GALACTIC', name: 'GALACTIC' },
                       { id: 'QUANTUM', name: 'QUANTUM' },
                       { id: 'VOID', name: 'VOID' },
                     ]}
@@ -92,9 +92,7 @@ export const Register = () => {
           </div>
         </form>
       </FormProvider>
-      <Modal isOpen={!!data}>
-        <AccessTokenDialog registration={data} />
-      </Modal>
+      <Modal isOpen={isSuccess}>{isSuccess && <AccessTokenDialog registration={data} />}</Modal>
     </div>
   )
 }
