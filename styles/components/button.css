@@ -1,5 +1,5 @@
 .btn {
-  @apply rounded px-4 py-2.5 text-sm font-semibold leading-none;
+  @apply rounded px-4 py-2 text-sm font-semibold leading-none;
   @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-100 dark:focus:ring-offset-zinc-800;
   @apply disabled:cursor-not-allowed disabled:opacity-50;
 }
@@ -8,15 +8,15 @@
   @apply border-2 border-blue-500 bg-blue-500 text-white;
 
   &.btn-outline {
-    @apply bg-transparent text-blue-500;
+    @apply bg-transparent text-blue-800 dark:text-blue-100;
   }
 }
 
 .btn-confirm {
-  @apply border-2 border-emerald-400 bg-emerald-400 text-emerald-900;
+  @apply border-2 border-emerald-400/50 bg-emerald-300 text-emerald-900 dark:border-emerald-700/50 dark:bg-emerald-600 dark:text-emerald-50;
 
   &.btn-outline {
-    @apply bg-transparent text-emerald-400;
+    @apply bg-emerald-400/10 dark:text-emerald-200;
   }
 }
 
@@ -41,9 +41,9 @@
 }
 
 .btn-hero {
-  @apply rounded bg-gradient-to-r from-pink-600 via-fuchsia-600 to-blue-600;
-  @apply py-3 px-5 text-base font-bold text-white outline-none ring-zinc-700 ring-offset-2 ring-offset-zinc-100;
-  @apply hover:from-pink-700 hover:via-fuchsia-700 hover:to-blue-700 hover:ring-2;
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
-  @apply dark:ring-zinc-200 dark:ring-offset-zinc-800 dark:hover:ring-zinc-400;
+  @apply rounded bg-blue-500 py-3 px-5 text-base font-bold text-white;
+  @apply hover:bg-blue-600;
+  @apply focus:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-zinc-100;
+  @apply disabled:cursor-default disabled:opacity-50;
+  @apply dark:ring-offset-zinc-800;
 }
