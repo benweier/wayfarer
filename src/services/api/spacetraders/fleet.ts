@@ -1,4 +1,11 @@
-import { AgentResponse, ChartResponse, NavigationResponse, ShipResponse, WaypointResponse } from '@/types/spacetraders'
+import {
+  AgentResponse,
+  ChartResponse,
+  CooldownResponse,
+  NavigationResponse,
+  ShipResponse,
+  WaypointResponse,
+} from '@/types/spacetraders'
 import { mutationFnFactory, queryFnFactory } from './core'
 
 export const getShipsList = queryFnFactory<ShipResponse[]>(() => '/my/ships')
@@ -11,7 +18,21 @@ export const createShipPurchase = mutationFnFactory<
   { shipType: string; waypointSymbol: string }
 >(() => '/my/ships')
 
-export const createShipScanWaypoint = mutationFnFactory((ship: string) => `/my/ships/${ship}/scan/waypoints`)
+export const createShipScanWaypoint = mutationFnFactory<unknown, string>((ship) => `/my/ships/${ship}/scan/waypoints`)
+
+export const createShipScanSystems = mutationFnFactory<
+  {
+    cooldown: CooldownResponse
+    systems: Array<{
+      symbol: string
+      sectorSymbol: string
+      type: string
+      x: number
+      y: number
+    }>
+  },
+  string
+>((ship) => `/my/ships/${ship}/scan/systems`)
 
 export const createShipOrbit = mutationFnFactory<{ nav: NavigationResponse }, string, void>(
   (ship) => `/my/ships/${ship}/orbit`,
