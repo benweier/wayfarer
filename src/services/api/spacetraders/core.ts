@@ -2,6 +2,14 @@ import * as f from '@/services/fetch'
 import { http } from '@/services/http'
 import { getState } from '@/services/store/auth'
 
+type RequestPath<T> = T extends void | unknown ? Partial<{ path: T }> : Required<{ path: T }>
+type RequestParams<T> = T extends void | unknown ? Partial<{ params: T }> : Required<{ params: T }>
+type RequestPayload<T> = T extends void | unknown ? Partial<{ payload: T }> : Required<{ payload: T }>
+
+type RequestArguments<T, Q extends f.QueryParams, P extends f.RequestPayload = void> = RequestPath<T> &
+  RequestParams<Q> &
+  RequestPayload<P>
+
 const createHeaders = (init?: HeadersInit) => {
   const { isAuthenticated, token } = getState()
   const headers = new Headers(init)
@@ -15,23 +23,24 @@ const createHeaders = (init?: HeadersInit) => {
 
 const attachQueryParams = (url: URL, params?: f.QueryParams) => {
   if (params) {
-    Object.entries(params).forEach(([key, value]) => {
+    for (const [key, value] of Object.entries(params)) {
       if (value !== undefined && value !== null) url.searchParams.append(key, String(value))
-    })
+    }
   }
 
   return url
 }
 
 export const queryFnFactory = <R = unknown, T = unknown, Q extends f.QueryParams = f.QueryParams>(
-  fn: (path: T) => string,
+  fn: (path: T) => string | URL,
   base: string = import.meta.env.SPACETRADERS_API_URL,
 ) => {
-  return async (path: T, params?: Q, req?: RequestInit) => {
-    const url = new URL(fn(path), base)
+  return async (args?: RequestArguments<T, Q>, req?: RequestInit) => {
+    const path = fn(args?.path as T)
+    const url = path instanceof URL ? path : new URL(path, base)
     const headers = createHeaders(req?.headers)
 
-    attachQueryParams(url, params)
+    attachQueryParams(url, args?.params)
 
     const response = await http<{ data: R }>(url, {
       headers,
@@ -47,24 +56,25 @@ export const queryFnFactory = <R = unknown, T = unknown, Q extends f.QueryParams
 export const mutationFnFactory = <
   R = unknown,
   T = unknown,
-  P extends f.RequestPayload = f.RequestPayload,
+  P extends f.RequestPayload = void,
   Q extends f.QueryParams = f.QueryParams,
 >(
-  fn: (path: T) => string,
-  base: string = import.meta.env.SPACETRADERS_API_URL,
+  fn: (path: T) => string | URL,
+  base: string | URL = import.meta.env.SPACETRADERS_API_URL,
 ) => {
-  return async (args: T, payload?: P, params?: Q, req?: RequestInit) => {
-    const url = new URL(fn(args), base)
+  return async (args?: RequestArguments<T, Q, P>, req?: RequestInit) => {
+    const path = fn(args?.path as T)
+    const url = path instanceof URL ? path : new URL(path, base)
     const headers = createHeaders(req?.headers)
 
-    attachQueryParams(url, params)
+    attachQueryParams(url, args?.params)
 
     const response = await http<{ data: R }>(url, {
       headers,
       signal: req?.signal,
       method: req?.method ?? 'POST',
       credentials: 'same-origin',
-      body: payload ? JSON.stringify(payload) : undefined,
+      body: args?.payload ? JSON.stringify(args.payload) : undefined,
     })
 
     return response?.data
