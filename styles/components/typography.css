@@ -8,10 +8,10 @@
   @apply text-2xl font-light leading-normal tracking-normal;
 }
 .text-headline {
-  @apply text-3xl font-bold leading-tight tracking-tight;
+  @apply text-xl font-semibold leading-tight tracking-tight;
 }
 .text-overline {
-  @apply text-xl font-semibold leading-normal tracking-normal;
+  @apply text-lg font-medium leading-normal tracking-normal;
 }
 .text-body {
   @apply text-base font-normal leading-normal tracking-normal;
