@@ -20,7 +20,10 @@ export const loader =
     }
 
     try {
-      const ship = client.ensureQueryData({ queryKey: ['ship', shipID], queryFn: () => getShipById(shipID) })
+      const ship = client.ensureQueryData({
+        queryKey: ['ship', shipID],
+        queryFn: ({ signal }) => getShipById({ path: shipID }, { signal }),
+      })
 
       return defer({ ship })
     } catch (err) {

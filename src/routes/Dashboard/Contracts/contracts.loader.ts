@@ -15,7 +15,10 @@ export const list =
     }
 
     try {
-      const contracts = client.ensureQueryData({ queryKey: ['contracts'], queryFn: getContractsList })
+      const contracts = client.ensureQueryData({
+        queryKey: ['contracts'],
+        queryFn: ({ signal }) => getContractsList(undefined, { signal }),
+      })
 
       return defer({ contracts })
     } catch (err) {

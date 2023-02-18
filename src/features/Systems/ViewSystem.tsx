@@ -2,7 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import { getSystemById } from '@/services/api/spacetraders'
 
 export const ViewSystem = ({ id }: { id: string }) => {
-  const { data, isSuccess } = useQuery({ queryKey: ['system', id], queryFn: () => getSystemById(id) })
+  const { data, isSuccess } = useQuery({
+    queryKey: ['system', id],
+    queryFn: ({ signal }) => getSystemById({ path: id }, { signal }),
+  })
 
   if (!isSuccess) return null
 

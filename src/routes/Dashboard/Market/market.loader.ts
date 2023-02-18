@@ -22,7 +22,7 @@ export const loader =
     try {
       const market = client.ensureQueryData({
         queryKey: ['market', system, waypoint],
-        queryFn: () => getMarket(system, waypoint),
+        queryFn: ({ signal }) => getMarket({ path: { system, waypoint } }, { signal }),
       })
 
       return defer({ market })

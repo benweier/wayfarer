@@ -6,7 +6,7 @@ import { getSystemsList } from '@/services/api/spacetraders'
 export const ListSystems = () => {
   const { isSuccess, data } = useQuery({
     queryKey: ['systems'],
-    queryFn: getSystemsList,
+    queryFn: ({ signal }) => getSystemsList(undefined, { signal }),
   })
 
   if (!isSuccess) return null

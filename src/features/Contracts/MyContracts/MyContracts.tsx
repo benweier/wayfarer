@@ -51,7 +51,7 @@ export const MyContracts = () => {
   const client = useQueryClient()
   const { data, isSuccess } = useQuery({
     queryKey: ['contracts'],
-    queryFn: getContractsList,
+    queryFn: ({ signal }) => getContractsList(undefined, { signal }),
     select: (response) => {
       return response.reduce(contractReducer, {
         available: [],
@@ -61,7 +61,7 @@ export const MyContracts = () => {
     },
   })
   const acceptContract = useMutation({
-    mutationFn: createContractAccept,
+    mutationFn: (id: string) => createContractAccept({ path: id }),
     onSuccess: () => {
       void client.invalidateQueries(['contracts'])
     },

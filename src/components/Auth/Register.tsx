@@ -37,7 +37,7 @@ export const Register = () => {
   })
   const { mutateAsync, isLoading, data } = useMutation({
     mutationFn: (values: RegisterSchema) => {
-      return createMyAgent(undefined, { symbol: values.symbol, faction: values.faction })
+      return createMyAgent({ payload: { symbol: values.symbol, faction: values.faction } })
     },
     cacheTime: 0,
   })

@@ -24,7 +24,7 @@ export const Login = () => {
   })
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (values: LoginSchema) => {
-      return getMyAgent(undefined, undefined, {
+      return getMyAgent(undefined, {
         headers: {
           Authorization: `Bearer ${values.token}`,
         },

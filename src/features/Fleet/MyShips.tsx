@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 import { getShipsList } from '@/services/api/spacetraders'
 
 export const MyShips = () => {
-  const { isSuccess, data } = useQuery({ queryKey: ['ships'], queryFn: getShipsList })
+  const { isSuccess, data } = useQuery({
+    queryKey: ['ships'],
+    queryFn: ({ signal }) => getShipsList(undefined, { signal }),
+  })
 
   if (!isSuccess) return null
 

@@ -14,7 +14,10 @@ export const list =
       return null
     }
     try {
-      const systems = client.ensureQueryData({ queryKey: ['systems'], queryFn: getSystemsList })
+      const systems = client.ensureQueryData({
+        queryKey: ['systems'],
+        queryFn: ({ signal }) => getSystemsList(undefined, { signal }),
+      })
 
       return defer({ systems })
     } catch (err) {
@@ -39,7 +42,10 @@ export const view =
     }
 
     try {
-      const system = client.ensureQueryData({ queryKey: ['system', systemID], queryFn: () => getSystemById(systemID) })
+      const system = client.ensureQueryData({
+        queryKey: ['system', systemID],
+        queryFn: ({ signal }) => getSystemById({ path: systemID }, { signal }),
+      })
 
       return defer({ system })
     } catch (err) {
