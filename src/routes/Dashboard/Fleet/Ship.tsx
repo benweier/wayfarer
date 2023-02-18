@@ -1,34 +1,53 @@
-import { Dialog } from '@headlessui/react'
-import { Outlet, useNavigate, useParams } from 'react-router-dom'
-import { Modal as ModalRoot } from '@/components/Modal'
+import { ChevronLeftIcon } from '@heroicons/react/20/solid'
+import { Outlet, useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { Modal as ModalRoot, useModalContext } from '@/components/Modal'
 import { QuerySuspenseBoundary, withQSB } from '@/components/QuerySuspenseBoundary'
 import { ROUTES } from '@/config/routes'
-import { lazy } from '@/utilities/lazy'
+import { ViewShip } from '@/features/Fleet'
 
-const { ViewShip } = lazy(() => import('@/features/Fleet'), ['ViewShip'])
+const ShipModalRoute = () => {
+  const closeModal = useModalContext((state) => state.closeModal)
+
+  return (
+    <Outlet
+      context={{
+        action: (
+          <button onClick={closeModal} className="btn btn-primary btn-outline">
+            <ChevronLeftIcon className="h-6 w-6" />
+          </button>
+        ),
+      }}
+    />
+  )
+}
 
 export const Modal = () => {
   const navigate = useNavigate()
+  const { shipID } = useParams()
 
   return (
-    <ModalRoot onClose={() => navigate(ROUTES.FLEET)}>
-      <Outlet />
+    <ModalRoot isOpen={!!shipID} onClose={() => navigate(ROUTES.FLEET)}>
+      <ShipModalRoute />
     </ModalRoot>
   )
 }
 
 const ShipRoute = () => {
   const { shipID } = useParams()
+  const ctx = useOutletContext<{ action?: JSX.Element }>()
 
   return (
-    <Dialog.Panel className="grid w-full max-w-7xl transform gap-4 overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10">
-      <Dialog.Title className="text-title" as="div">
-        Ship: <span className="font-normal">{shipID}</span>
-      </Dialog.Title>
-      <Dialog.Description as="div">
+    <div className="grid gap-4">
+      <div className="flex items-center justify-start gap-6">
+        {ctx?.action && <div>{ctx.action}</div>}
+        <div className="text-title">
+          Ship: <span className="font-normal">{shipID}</span>
+        </div>
+      </div>
+      <div>
         <QuerySuspenseBoundary>{shipID && <ViewShip id={shipID} />}</QuerySuspenseBoundary>
-      </Dialog.Description>
-    </Dialog.Panel>
+      </div>
+    </div>
   )
 }
 
