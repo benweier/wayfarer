@@ -265,6 +265,13 @@ export type MarketResponse = {
   }>
 }
 
+export type CooldownResponse = {
+  shipSymbol: string
+  totalSeconds: number
+  remainingSeconds: number
+  expiration: string
+}
+
 export type RegisterAgentResponse = {
   token: string
   agent: AgentResponse
