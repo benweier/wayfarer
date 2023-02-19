@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query'
 import { LoaderFunction, defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { getSystemById, getSystemsList } from '@/services/api/spacetraders'
+import { getSystemById, getSystemsList, getWaypointById } from '@/services/api/spacetraders'
 import { getState } from '@/services/store/auth'
 
 export const list =
@@ -48,6 +48,34 @@ export const view =
       })
 
       return defer({ system })
+    } catch (err) {
+      return null
+    }
+  }
+
+export const waypoint =
+  (client: QueryClient): LoaderFunction =>
+  ({ params }) => {
+    const { isAuthenticated } = getState()
+    const { systemID, waypointID } = params
+
+    if (!isAuthenticated) {
+      redirect(ROUTES.LOGIN)
+      return null
+    }
+
+    if (!systemID || !waypointID) {
+      redirect(ROUTES.SYSTEMS)
+      return null
+    }
+
+    try {
+      const waypoint = client.ensureQueryData({
+        queryKey: ['waypoint', systemID, waypointID],
+        queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
+      })
+
+      return defer({ waypoint })
     } catch (err) {
       return null
     }

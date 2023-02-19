@@ -117,7 +117,14 @@ const router = sentryCreateBrowserRouter(
 
           <Route path={ROUTES.SYSTEMS}>
             <Route index element={<Dashboard.Systems.List />} loader={Dashboard.systems.list(client)} />
-            <Route path=":systemID" element={<Dashboard.Systems.View />} loader={Dashboard.systems.view(client)} />
+            <Route path=":systemID">
+              <Route index element={<Dashboard.Systems.View />} loader={Dashboard.systems.view(client)} />
+              <Route
+                path="waypoint/:waypointID"
+                element={<Dashboard.Systems.Waypoint />}
+                loader={Dashboard.systems.waypoint(client)}
+              />
+            </Route>
           </Route>
 
           <Route path={ROUTES.FLEET} element={<Dashboard.Fleet.List />} loader={Dashboard.fleet.loader(client)}>
