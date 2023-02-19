@@ -1,41 +1,8 @@
 import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/24/outline'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
-import { createShipOrbit, createShipScanWaypoint, getShipById } from '@/services/api/spacetraders'
-
-const Orbit = ({ ship }: { ship: string }) => {
-  const { mutate, data } = useMutation({
-    mutationKey: ['ship-orbit', ship],
-    mutationFn: (id: string) => createShipOrbit({ path: id }),
-  })
-
-  return (
-    <button
-      onClick={() => {
-        mutate(ship)
-      }}
-    >
-      Orbit
-    </button>
-  )
-}
-
-const ScanWaypoints = ({ ship }: { ship: string }) => {
-  const { mutate, data } = useMutation({
-    mutationKey: ['ship-scan-waypoints', ship],
-    mutationFn: (id: string) => createShipScanWaypoint({ path: id }),
-  })
-
-  return (
-    <button
-      onClick={() => {
-        mutate(ship)
-      }}
-    >
-      Scan
-    </button>
-  )
-}
+import { getShipById } from '@/services/api/spacetraders'
+import { Orbit, ScanWaypoints } from './ShipActions'
 
 export const ViewShip = ({ id }: { id: string }) => {
   const { data, isSuccess } = useQuery({
@@ -64,6 +31,7 @@ export const ViewShip = ({ id }: { id: string }) => {
             </div>
             <div>
               <div className="text-xs font-medium uppercase">System</div>
+              <div className="truncate text-lg font-semibold">{ship.nav.systemSymbol}</div>
             </div>
             <div>
               <div className="text-xs font-medium uppercase">Waypoint</div>
