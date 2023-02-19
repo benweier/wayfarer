@@ -39,6 +39,9 @@ export const createShipScanSystems = mutationFnFactory<
 export const createShipOrbit = mutationFnFactory<SpaceTradersResponse<{ nav: NavigationResponse }>, string, void>(
   (ship) => `/my/ships/${ship}/orbit`,
 )
+export const createShipDock = mutationFnFactory<SpaceTradersResponse<{ nav: NavigationResponse }>, string, void>(
+  (ship) => `/my/ships/${ship}/dock`,
+)
 
 export const createShipChart = mutationFnFactory<
   SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>,
