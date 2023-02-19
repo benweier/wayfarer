@@ -3,12 +3,20 @@ import { http } from '@/services/http'
 import { getState } from '@/services/store/auth'
 
 type RequestPath<T> = T extends void | unknown ? Partial<{ path: T }> : Required<{ path: T }>
-type RequestParams<T> = T extends void | unknown ? Partial<{ params: T }> : Required<{ params: T }>
-type RequestPayload<T> = T extends void | unknown ? Partial<{ payload: T }> : Required<{ payload: T }>
+type RequestParams<Q> = Q extends void | unknown ? Partial<{ params: Q }> : Required<{ params: Q }>
+type RequestPayload<P> = P extends void | unknown ? Partial<{ payload: P }> : Required<{ payload: P }>
 
 type RequestArguments<T, Q extends f.QueryParams, P extends f.RequestPayload = void> = RequestPath<T> &
   RequestParams<Q> &
   RequestPayload<P>
+
+export type Meta = {
+  total: number
+  page: number
+  limit: number
+}
+
+export type SpaceTradersResponse<R = unknown, M = unknown> = { data: R; meta: M }
 
 const createHeaders = (init?: HeadersInit) => {
   const { isAuthenticated, token } = getState()
@@ -34,22 +42,20 @@ const attachQueryParams = (url: URL, params?: f.QueryParams) => {
 export const queryFnFactory = <R = unknown, T = unknown, Q extends f.QueryParams = f.QueryParams>(
   fn: (path: T) => string | URL,
   base: string = import.meta.env.SPACETRADERS_API_URL,
-) => {
-  return async (args?: RequestArguments<T, Q>, req?: RequestInit) => {
+): ((args?: RequestArguments<T, Q>, req?: RequestInit) => Promise<R>) => {
+  return (args, req) => {
     const path = fn(args?.path as T)
     const url = path instanceof URL ? path : new URL(path, base)
     const headers = createHeaders(req?.headers)
 
     attachQueryParams(url, args?.params)
 
-    const response = await http<{ data: R }>(url, {
+    return http(url, {
       headers,
       signal: req?.signal,
       method: req?.method ?? 'GET',
       credentials: 'same-origin',
     })
-
-    return response?.data
   }
 }
 
@@ -61,22 +67,20 @@ export const mutationFnFactory = <
 >(
   fn: (path: T) => string | URL,
   base: string | URL = import.meta.env.SPACETRADERS_API_URL,
-) => {
-  return async (args?: RequestArguments<T, Q, P>, req?: RequestInit) => {
+): ((args?: RequestArguments<T, Q, P>, req?: RequestInit) => Promise<R>) => {
+  return (args, req) => {
     const path = fn(args?.path as T)
     const url = path instanceof URL ? path : new URL(path, base)
     const headers = createHeaders(req?.headers)
 
     attachQueryParams(url, args?.params)
 
-    const response = await http<{ data: R }>(url, {
+    return http(url, {
       headers,
       signal: req?.signal,
       method: req?.method ?? 'POST',
       credentials: 'same-origin',
       body: args?.payload ? JSON.stringify(args.payload) : undefined,
     })
-
-    return response?.data
   }
 }
