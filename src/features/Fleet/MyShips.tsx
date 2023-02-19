@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { Orbit, ScanWaypoints } from '@/features/Fleet/ShipActions'
+import { Dock, Orbit, ScanWaypoints } from '@/features/Fleet/ShipActions'
 import { getShipsList } from '@/services/api/spacetraders'
 
 export const MyShips = () => {
@@ -72,7 +72,7 @@ export const MyShips = () => {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Orbit ship={ship.symbol} />
+                  {ship.nav.status === 'DOCKED' ? <Orbit ship={ship.symbol} /> : <Dock ship={ship.symbol} />}
                   <ScanWaypoints ship={ship.symbol} />
                 </div>
               </div>
