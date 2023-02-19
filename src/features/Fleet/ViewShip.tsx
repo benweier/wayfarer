@@ -45,51 +45,52 @@ export const ViewShip = ({ id }: { id: string }) => {
 
   if (!isSuccess) return null
 
+  const ship = data.data
+
   return (
     <div className="grid">
-      <div key={data.symbol} className="bg-zinc-100 p-3 dark:border-zinc-700 dark:bg-zinc-700/25">
+      <div key={ship.symbol} className="bg-zinc-100 p-3 dark:border-zinc-700 dark:bg-zinc-700/25">
         <div className="flex flex-row items-center justify-start gap-4">
           <div className="rounded bg-black py-1 px-2 text-xs font-bold">
-            {SHIP_NAV_STATUS[data.nav.status] ?? data.nav.status}
+            {SHIP_NAV_STATUS[ship.nav.status] ?? ship.nav.status}
           </div>
           <div className="rounded bg-black py-1 px-2 text-xs font-bold">
-            {SHIP_NAV_FLIGHT_MODE[data.nav.flightMode] ?? data.nav.flightMode}
+            {SHIP_NAV_FLIGHT_MODE[ship.nav.flightMode] ?? ship.nav.flightMode}
           </div>
           <div className="flex flex-1 flex-row items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-medium uppercase">{data.symbol}</div>
-              <div className="truncate text-lg font-semibold">{data.registration.name}</div>
+              <div className="text-xs font-medium uppercase">{ship.symbol}</div>
+              <div className="truncate text-lg font-semibold">{ship.registration.name}</div>
             </div>
             <div>
               <div className="text-xs font-medium uppercase">System</div>
-              <div className="truncate text-lg font-semibold">{data.nav.systemSymbol}</div>
             </div>
             <div>
               <div className="text-xs font-medium uppercase">Waypoint</div>
-              <div className="truncate text-lg font-semibold">{data.nav.waypointSymbol}</div>
+              <div className="truncate text-lg font-semibold">{ship.nav.waypointSymbol}</div>
             </div>
             <div className="flex gap-2">
               <BoltIcon className="h-6 w-6" />
               <div>
-                {data.fuel.current} / {data.fuel.capacity}
+                {ship.fuel.current} / {ship.fuel.capacity}
               </div>
             </div>
             <div className="flex gap-2">
               <CubeIcon className="h-6 w-6" />
               <div>
-                {data.cargo.units} / {data.cargo.capacity}
+                {ship.cargo.units} / {ship.cargo.capacity}
               </div>
             </div>
             <div className="flex gap-2">
               <UserGroupIcon className="h-6 w-6" />
               <div>
-                {data.crew.current} / {data.crew.capacity}
+                {ship.crew.current} / {ship.crew.capacity}
               </div>
             </div>
           </div>
           <div>
-            <Orbit ship={data.symbol} />
-            <ScanWaypoints ship={data.symbol} />
+            <Orbit ship={ship.symbol} />
+            <ScanWaypoints ship={ship.symbol} />
           </div>
         </div>
       </div>

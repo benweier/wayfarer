@@ -14,7 +14,7 @@ export const ListSystems = () => {
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {data.map((system) => {
+        {data.data.map((system) => {
           return (
             <div key={system.symbol} className="bg-zinc-100 p-3 dark:border-zinc-700 dark:bg-zinc-700/25">
               <Link to={`${ROUTES.SYSTEMS}/${system.symbol}`}>{system.symbol}</Link>

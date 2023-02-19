@@ -13,7 +13,7 @@ export const MyShips = () => {
 
   return (
     <div className="grid">
-      {data.map((ship) => {
+      {data.data.map((ship) => {
         return (
           <div key={ship.symbol} className="bg-zinc-100 p-3 dark:border-zinc-700 dark:bg-zinc-700/25">
             <div className="flex flex-row items-center justify-start gap-4">

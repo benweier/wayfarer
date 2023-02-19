@@ -53,7 +53,7 @@ export const MyContracts = () => {
     queryKey: ['contracts'],
     queryFn: ({ signal }) => getContractsList(undefined, { signal }),
     select: (response) => {
-      return response.reduce(contractReducer, {
+      return response.data.reduce(contractReducer, {
         available: [],
         accepted: [],
         completed: [],

@@ -9,18 +9,20 @@ export const ViewSystem = ({ id }: { id: string }) => {
 
   if (!isSuccess) return null
 
+  const system = data.data
+
   return (
     <div className="grid">
-      <div key={data.symbol} className="bg-zinc-100 p-3 dark:border-zinc-700 dark:bg-zinc-700/25">
+      <div key={system.symbol} className="bg-zinc-100 p-3 dark:border-zinc-700 dark:bg-zinc-700/25">
         <div className="flex flex-row items-center justify-start gap-4">
           <div className="flex flex-1 flex-row items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-medium uppercase">{data.symbol}</div>
-              <div className="truncate text-lg font-semibold">{data.type}</div>
+              <div className="text-xs font-medium uppercase">{system.symbol}</div>
+              <div className="truncate text-lg font-semibold">{system.type}</div>
             </div>
             <div>
               <div className="truncate text-lg font-semibold">
-                {data.x}, {data.y}
+                {system.x}, {system.y}
               </div>
             </div>
           </div>

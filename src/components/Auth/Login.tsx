@@ -5,12 +5,12 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
-import { queryFnFactory } from '@/services/api/spacetraders/core'
+import { SpaceTradersResponse, queryFnFactory } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/services/store/auth'
 import { AgentResponse } from '@/types/spacetraders'
 import { LoginSchema } from './Login.validation'
 
-const getMyAgent = queryFnFactory<AgentResponse, void>(() => '/my/agent')
+const getMyAgent = queryFnFactory<SpaceTradersResponse<AgentResponse>, void>(() => '/my/agent')
 
 export const Login = () => {
   const location = useLocation<Partial<LoginSchema>>()
@@ -30,25 +30,20 @@ export const Login = () => {
         },
       })
     },
+    onSuccess: (response, variables) => {
+      setAuth({ agent: response.data, token: variables.token })
+    },
+    onError: (err: any) => {
+      if (err.status === 401) {
+        methods.setError('token', {
+          type: 'manual',
+          message: 'Invalid token',
+        })
+      }
+    },
     cacheTime: 0,
   })
-  const onSubmit = useCallback<SubmitHandler<LoginSchema>>(
-    (values) => {
-      return mutateAsync(values)
-        .then((data) => {
-          setAuth({ agent: data, token: values.token })
-        })
-        .catch((err) => {
-          if (err.status === 401) {
-            methods.setError('token', {
-              type: 'manual',
-              message: 'Invalid token',
-            })
-          }
-        })
-    },
-    [methods, mutateAsync, setAuth],
-  )
+  const onSubmit = useCallback<SubmitHandler<LoginSchema>>((values) => mutateAsync(values), [mutateAsync])
 
   return (
     <div className="grid gap-4">

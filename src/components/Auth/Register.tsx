@@ -6,12 +6,14 @@ import { Modal } from '@/components/Modal'
 import { SelectField } from '@/components/Select'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
-import { mutationFnFactory } from '@/services/api/spacetraders/core'
+import { SpaceTradersResponse, mutationFnFactory } from '@/services/api/spacetraders/core'
 import { RegisterAgentRequest, RegisterAgentResponse } from '@/types/spacetraders'
 import { AccessTokenDialog } from './AccessTokenDialog'
 import { RegisterSchema, validation } from './Register.validation'
 
-const createMyAgent = mutationFnFactory<RegisterAgentResponse, void, RegisterAgentRequest>(() => '/register')
+const createMyAgent = mutationFnFactory<SpaceTradersResponse<RegisterAgentResponse>, void, RegisterAgentRequest>(
+  () => '/register',
+)
 
 const AlreadyRegistered = ({ token }: { token?: string }) => {
   const { control } = useFormContext<RegisterSchema>()
@@ -41,6 +43,8 @@ export const Register = () => {
     },
     cacheTime: 0,
   })
+
+  const agent = isSuccess ? data?.data : undefined
 
   return (
     <div className="grid gap-4">
@@ -87,12 +91,12 @@ export const Register = () => {
               Register
             </button>
             <div className="grid gap-4">
-              <AlreadyRegistered token={data?.token} />
+              <AlreadyRegistered token={agent?.token} />
             </div>
           </div>
         </form>
       </FormProvider>
-      <Modal isOpen={isSuccess}>{isSuccess && <AccessTokenDialog registration={data} />}</Modal>
+      <Modal isOpen={isSuccess}>{isSuccess && <AccessTokenDialog registration={agent} />}</Modal>
     </div>
   )
 }
