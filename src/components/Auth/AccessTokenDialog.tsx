@@ -1,4 +1,5 @@
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { RegisterAgentResponse } from '@/types/spacetraders'
@@ -34,7 +35,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
               <div className="absolute inset-y-0 right-0 flex items-center pr-1.5">
                 <Copy
                   onClick={() => {
-                    onCopy(registration.token)
+                    void onCopy(registration.token)
                   }}
                 />
               </div>
@@ -53,6 +54,16 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
               <span className="text-caption whitespace-nowrap">{isCopied ? 'Token Copied!' : 'Token Not Copied'}</span>
             </div>
           </div>
+        </div>
+        <div className="flex items-center justify-center gap-2 text-amber-600 dark:text-amber-400">
+          <div>
+            <ExclamationTriangleIcon className="h-6 w-6" />
+          </div>
+
+          <span className="text-base font-semibold">
+            Your access token cannot be retrieved if you lose it. Please save it somewhere safe, like a password
+            manager, before proceeding!
+          </span>
         </div>
       </div>
       <div>
