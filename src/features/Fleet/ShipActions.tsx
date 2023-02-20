@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import produce from 'immer'
+import { produce } from 'immer'
 import { createShipDock, createShipOrbit, createShipScanWaypoint } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
@@ -90,7 +90,7 @@ export const Dock = ({ symbol }: { symbol: string }) => {
 export const ScanWaypoints = ({ symbol }: { symbol: string }) => {
   const { mutate } = useMutation({
     mutationKey: ['ship-scan-waypoints', symbol],
-    mutationFn: (id: string) => createShipScanWaypoint({ path: id }),
+    mutationFn: (symbol: string) => createShipScanWaypoint({ path: symbol }),
   })
 
   return <button onClick={() => mutate(symbol)}>Scan</button>
