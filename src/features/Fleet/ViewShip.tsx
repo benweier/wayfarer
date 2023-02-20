@@ -57,8 +57,8 @@ export const ViewShip = ({ id }: { id: string }) => {
             </div>
           </div>
           <div>
-            {ship.nav.status === 'DOCKER' ? <Orbit ship={ship.symbol} /> : <Dock ship={ship.symbol} />}
-            <ScanWaypoints ship={ship.symbol} />
+            {ship.nav.status === 'DOCKER' ? <Orbit symbol={ship.symbol} /> : <Dock symbol={ship.symbol} />}
+            <ScanWaypoints symbol={ship.symbol} />
           </div>
         </div>
       </div>
