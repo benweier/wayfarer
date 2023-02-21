@@ -9,10 +9,14 @@ const errorElements: { [key: number]: ReactNode } = {
   500: <NotFound />,
 }
 
+const isRouteErrorResponse = (error: any): error is Response => {
+  return typeof error === 'object' && Object.hasOwn(error, 'status')
+}
+
 export const RouteErrorElement = () => {
   const error: any = useRouteError()
 
-  if (error) {
+  if (isRouteErrorResponse(error)) {
     return <>{errorElements[error.status]}</> ?? <></>
   }
 
