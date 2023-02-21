@@ -23,9 +23,10 @@ const getPagingRange = ({ current, total, length }: { current: number; total: nu
 
 export const ListSystems = () => {
   const [page, setPage] = useState(1)
+  const [limit] = useState(10)
   const { isSuccess, isFetching, data } = useQuery({
-    queryKey: ['systems', page],
-    queryFn: ({ signal }) => getSystemsList({ params: { page, limit: 10 } }, { signal }),
+    queryKey: ['systems', page, limit],
+    queryFn: ({ signal }) => getSystemsList({ params: { page, limit } }, { signal }),
     keepPreviousData: true,
   })
 
@@ -54,8 +55,26 @@ export const ListSystems = () => {
         </div>
       </div>
       {meta && (
-        <div>
-          <Pagination current={page} total={meta.total / 10} length={5} onChange={(page) => setPage(page)} />
+        <div className="row grid items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-2 text-sm">
+            {isFetching ? (
+              <div>...</div>
+            ) : (
+              <>
+                <div>
+                  {page * limit + 1 - limit} - {page * limit - limit + systems.length}
+                </div>
+                <div className="opacity-50">of</div>
+                <div>{meta.total}</div>
+              </>
+            )}
+          </div>
+          <Pagination
+            current={page}
+            total={Math.ceil(meta.total / limit)}
+            length={5}
+            onChange={(page) => setPage(page)}
+          />
         </div>
       )}
     </>
