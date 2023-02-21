@@ -45,7 +45,7 @@ const ShipRoute = () => {
         </div>
       </div>
       <div>
-        <QuerySuspenseBoundary>{shipID && <ViewShip id={shipID} />}</QuerySuspenseBoundary>
+        <QuerySuspenseBoundary>{shipID && <ViewShip symbol={shipID} />}</QuerySuspenseBoundary>
       </div>
     </div>
   )
