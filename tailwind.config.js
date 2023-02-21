@@ -6,7 +6,7 @@ module.exports = {
     container: { center: true },
     extend: {
       animation: {
-        indefinite: 'indefinite 2s linear infinite',
+        indefinite: 'indefinite 1.5s linear infinite',
       },
       backdropBlur: {
         xs: '2px',
