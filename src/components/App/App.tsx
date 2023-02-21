@@ -17,6 +17,7 @@ import {
 } from 'react-router-dom'
 import { NotFound } from '@/components/NotFound'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { RouteErrorElement } from '@/components/RouteErrorElement'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import * as Auth from '@/routes/Auth'
@@ -99,9 +100,9 @@ const router = sentryCreateBrowserRouter(
 
       <Route element={<Auth.Required />}>
         <Route element={<Dashboard.Layout />} loader={Dashboard.root.loader(client)}>
-          <Route path={ROUTES.OVERVIEW} element={<Dashboard.Overview />} />
+          <Route path={ROUTES.OVERVIEW} errorElement={<RouteErrorElement />} element={<Dashboard.Overview />} />
 
-          <Route path={ROUTES.MARKET} loader={Dashboard.market.loader(client)}>
+          <Route path={ROUTES.MARKET} errorElement={<RouteErrorElement />} loader={Dashboard.market.loader(client)}>
             <Route index element={<Dashboard.Market />} />
 
             <Route
@@ -111,11 +112,11 @@ const router = sentryCreateBrowserRouter(
             />
           </Route>
 
-          <Route path={ROUTES.CONTRACTS}>
+          <Route path={ROUTES.CONTRACTS} errorElement={<RouteErrorElement />}>
             <Route index element={<Dashboard.Contracts.List />} loader={Dashboard.contracts.list(client)} />
           </Route>
 
-          <Route path={ROUTES.SYSTEMS}>
+          <Route path={ROUTES.SYSTEMS} errorElement={<RouteErrorElement />}>
             <Route index element={<Dashboard.Systems.List />} loader={Dashboard.systems.list(client)} />
             <Route path=":systemID">
               <Route index element={<Dashboard.Systems.View />} loader={Dashboard.systems.view(client)} />
@@ -127,7 +128,12 @@ const router = sentryCreateBrowserRouter(
             </Route>
           </Route>
 
-          <Route path={ROUTES.FLEET} element={<Dashboard.Fleet.List />} loader={Dashboard.fleet.loader(client)}>
+          <Route
+            path={ROUTES.FLEET}
+            errorElement={<RouteErrorElement />}
+            element={<Dashboard.Fleet.List />}
+            loader={Dashboard.fleet.loader(client)}
+          >
             <Route
               element={
                 <QuerySuspenseBoundary>
