@@ -2,81 +2,95 @@ import { QueryClient } from '@tanstack/react-query'
 import { LoaderFunction, defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getSystemById, getSystemsList, getWaypointById } from '@/services/api/spacetraders'
+import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/services/store/auth'
 
 export const list =
   (client: QueryClient): LoaderFunction =>
-  () => {
+  async () => {
     const { isAuthenticated } = getState()
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
-      return null
+      throw new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
     }
+
     try {
-      const systems = client.ensureQueryData({
+      const systems = await client.ensureQueryData({
         queryKey: ['systems'],
         queryFn: ({ signal }) => getSystemsList(undefined, { signal }),
       })
 
       return defer({ systems })
     } catch (err) {
-      return null
+      if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
+        throw new Response(STATUS_MESSAGES.NOT_FOUND, { status: STATUS_CODES.NOT_FOUND })
+      }
+
+      throw new Response(STATUS_MESSAGES.INTERNAL_SERVER_ERROR, { status: STATUS_CODES.INTERNAL_SERVER_ERROR })
     }
   }
 
 export const view =
   (client: QueryClient): LoaderFunction =>
-  ({ params }) => {
+  async ({ params }) => {
     const { isAuthenticated } = getState()
     const { systemID } = params
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
-      return null
+      return new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
     }
 
     if (!systemID) {
       redirect(ROUTES.SYSTEMS)
-      return null
+      return new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
     }
 
     try {
-      const system = client.ensureQueryData({
+      const system = await client.ensureQueryData({
         queryKey: ['system', systemID],
         queryFn: ({ signal }) => getSystemById({ path: systemID }, { signal }),
       })
 
       return defer({ system })
     } catch (err) {
-      return null
+      if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
+        throw new Response(STATUS_MESSAGES.NOT_FOUND, { status: STATUS_CODES.NOT_FOUND })
+      }
+
+      throw new Response(STATUS_MESSAGES.INTERNAL_SERVER_ERROR, { status: STATUS_CODES.INTERNAL_SERVER_ERROR })
     }
   }
 
 export const waypoint =
   (client: QueryClient): LoaderFunction =>
-  ({ params }) => {
+  async ({ params }) => {
     const { isAuthenticated } = getState()
     const { systemID, waypointID } = params
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
-      return null
+      throw new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
     }
 
     if (!systemID || !waypointID) {
       redirect(ROUTES.SYSTEMS)
-      return null
+      throw new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
     }
 
     try {
-      const waypoint = client.ensureQueryData({
+      const waypoint = await client.ensureQueryData({
         queryKey: ['waypoint', systemID, waypointID],
         queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
       })
 
       return defer({ waypoint })
     } catch (err) {
-      return null
+      if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
+        throw new Response(STATUS_MESSAGES.NOT_FOUND, { status: STATUS_CODES.NOT_FOUND })
+      }
+
+      throw new Response(STATUS_MESSAGES.INTERNAL_SERVER_ERROR, { status: STATUS_CODES.INTERNAL_SERVER_ERROR })
     }
   }
