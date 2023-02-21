@@ -12,7 +12,7 @@ export const loader =
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
-      return null
+      throw new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
     }
 
     try {
