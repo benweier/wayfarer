@@ -4,10 +4,10 @@ import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { getShipById } from '@/services/api/spacetraders'
 import { Dock, Orbit, ScanWaypoints } from './ShipActions'
 
-export const ViewShip = ({ id }: { id: string }) => {
+export const ViewShip = ({ symbol }: { symbol: string }) => {
   const { data, isSuccess } = useQuery({
-    queryKey: ['ship', id],
-    queryFn: ({ signal }) => getShipById({ path: id }, { signal }),
+    queryKey: ['ship', symbol],
+    queryFn: ({ signal }) => getShipById({ path: symbol }, { signal }),
   })
 
   if (!isSuccess) return null
