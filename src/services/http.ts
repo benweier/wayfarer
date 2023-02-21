@@ -15,8 +15,13 @@ export const http = async <T = unknown>(url: URL | RequestInfo, args: RequestIni
   }
 }
 
-export const isHttpError = (err: any): err is HttpError => {
+export const isHttpError = (err: any, status?: number): err is HttpError => {
   if (!err) return false
 
-  return typeof err === 'object' && (err.ok === false || err.status >= 400)
+  if (typeof err === 'object' && err.ok === false) {
+    if (status && err.status === status) return true
+    return err.status >= 400
+  }
+
+  return false
 }
