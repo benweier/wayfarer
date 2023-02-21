@@ -99,8 +99,12 @@ const router = sentryCreateBrowserRouter(
       </Route>
 
       <Route element={<Auth.Required />}>
-        <Route element={<Dashboard.Layout />} loader={Dashboard.root.loader(client)}>
-          <Route path={ROUTES.OVERVIEW} errorElement={<RouteErrorElement />} element={<Dashboard.Overview />} />
+        <Route
+          element={<Dashboard.Layout />}
+          errorElement={<RouteErrorElement />}
+          loader={Dashboard.root.loader(client)}
+        >
+          <Route path={ROUTES.OVERVIEW} element={<Dashboard.Overview />} />
 
           <Route path={ROUTES.MARKET} errorElement={<RouteErrorElement />} loader={Dashboard.market.loader(client)}>
             <Route index element={<Dashboard.Market />} />
@@ -108,21 +112,38 @@ const router = sentryCreateBrowserRouter(
             <Route
               path=":systemID/:waypointID"
               element={<Dashboard.Market />}
+              errorElement={<RouteErrorElement />}
               loader={Dashboard.market.loader(client)}
             />
           </Route>
 
-          <Route path={ROUTES.CONTRACTS} errorElement={<RouteErrorElement />}>
-            <Route index element={<Dashboard.Contracts.List />} loader={Dashboard.contracts.list(client)} />
+          <Route path={ROUTES.CONTRACTS}>
+            <Route
+              index
+              element={<Dashboard.Contracts.List />}
+              errorElement={<RouteErrorElement />}
+              loader={Dashboard.contracts.list(client)}
+            />
           </Route>
 
-          <Route path={ROUTES.SYSTEMS} errorElement={<RouteErrorElement />}>
-            <Route index element={<Dashboard.Systems.List />} loader={Dashboard.systems.list(client)} />
+          <Route path={ROUTES.SYSTEMS}>
+            <Route
+              index
+              element={<Dashboard.Systems.List />}
+              errorElement={<RouteErrorElement />}
+              loader={Dashboard.systems.list(client)}
+            />
             <Route path=":systemID">
-              <Route index element={<Dashboard.Systems.View />} loader={Dashboard.systems.view(client)} />
+              <Route
+                index
+                element={<Dashboard.Systems.View />}
+                errorElement={<RouteErrorElement />}
+                loader={Dashboard.systems.view(client)}
+              />
               <Route
                 path="waypoint/:waypointID"
                 element={<Dashboard.Systems.Waypoint />}
+                errorElement={<RouteErrorElement />}
                 loader={Dashboard.systems.waypoint(client)}
               />
             </Route>
@@ -130,8 +151,8 @@ const router = sentryCreateBrowserRouter(
 
           <Route
             path={ROUTES.FLEET}
-            errorElement={<RouteErrorElement />}
             element={<Dashboard.Fleet.List />}
+            errorElement={<RouteErrorElement />}
             loader={Dashboard.fleet.loader(client)}
           >
             <Route
@@ -141,7 +162,12 @@ const router = sentryCreateBrowserRouter(
                 </QuerySuspenseBoundary>
               }
             >
-              <Route path="ship/:shipID" element={<Dashboard.Fleet.Ship />} loader={Dashboard.ship.loader(client)} />
+              <Route
+                path="ship/:shipID"
+                element={<Dashboard.Fleet.Ship />}
+                errorElement={<RouteErrorElement />}
+                loader={Dashboard.ship.loader(client)}
+              />
             </Route>
           </Route>
         </Route>
