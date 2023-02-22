@@ -5,8 +5,9 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/20/solid'
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import { SYSTEM_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { getSystemsList } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
@@ -22,13 +23,27 @@ const getPagingRange = ({ current, total, length }: { current: number; total: nu
 }
 
 export const ListSystems = () => {
-  const [page, setPage] = useState(1)
-  const [limit] = useState(10)
+  const [limit] = useState(20)
+  const [params, setParams] = useSearchParams({ page: '1' })
+  const page = parseInt(params.get('page') ?? '1')
+
   const { isSuccess, isFetching, data } = useQuery({
     queryKey: ['systems', page, limit],
     queryFn: ({ signal }) => getSystemsList({ params: { page, limit } }, { signal }),
     keepPreviousData: true,
   })
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [data?.meta.page])
+
+  useEffect(() => {
+    if (data?.meta) {
+      const max = Math.ceil(data.meta.total / limit)
+
+      if (page > max) setParams({ page: max.toString() })
+    }
+  }, [limit, data?.meta, page, setParams])
 
   if (!isSuccess) return null
 
@@ -70,10 +85,10 @@ export const ListSystems = () => {
             )}
           </div>
           <Pagination
-            current={page}
+            current={meta.page}
             total={Math.ceil(meta.total / limit)}
             length={5}
-            onChange={(page) => setPage(page)}
+            onChange={(page) => setParams({ page: String(page) })}
           />
         </div>
       )}
