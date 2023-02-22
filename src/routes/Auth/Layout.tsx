@@ -21,12 +21,16 @@ const Status = () => {
   )
 }
 
+type Redirect = { pathname: string }
+
 export const Layout = () => {
   const { isAuthenticated } = useAuthStore()
-  const location = useLocation<{ origin: string }>()
+  const location = useLocation<{ redirect: Redirect }>()
 
   if (isAuthenticated) {
-    return <Navigate to={location.state?.origin ?? ROUTES.OVERVIEW} replace />
+    const to = location.state?.redirect?.pathname ?? ROUTES.OVERVIEW
+
+    return <Navigate to={to} replace />
   }
 
   return (
