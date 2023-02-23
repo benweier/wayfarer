@@ -104,7 +104,7 @@ export const Pagination = ({
 }: {
   current: number
   total: number
-  length?: 3 | 5 | 10
+  length?: 3 | 5 | 7
   onChange: (page: number) => void
 }) => {
   const pages = getPagingRange({ current, total, length })
@@ -118,8 +118,10 @@ export const Pagination = ({
           if (current > 1) onChange(1)
         }}
         disabled={current <= 1}
+        aria-label="First page"
       >
         <ChevronDoubleLeftIcon className="h-5 w-5" />
+        <span className="sr-only">Page 1</span>
       </button>
       <button
         key="previous"
@@ -128,8 +130,10 @@ export const Pagination = ({
           if (current > 1) onChange(current - 1)
         }}
         disabled={current <= 1}
+        aria-label="Previous page"
       >
         <ChevronLeftIcon className="h-5 w-5" />
+        <span className="sr-only">Page {current - 1}</span>
       </button>
 
       {pages.map((page) => (
@@ -139,6 +143,8 @@ export const Pagination = ({
           onClick={() => {
             if (current !== page) onChange(page)
           }}
+          aria-label={`Page ${page}`}
+          aria-current={page === current ? 'page' : undefined}
         >
           {page}
         </button>
@@ -151,8 +157,10 @@ export const Pagination = ({
           if (current < total) onChange(current + 1)
         }}
         disabled={current >= total}
+        aria-label="Next page"
       >
         <ChevronRightIcon className="h-5 w-5" />
+        <span className="sr-only">Page {current + 1}</span>
       </button>
       <button
         key="last"
@@ -161,8 +169,10 @@ export const Pagination = ({
           if (current < total) onChange(total)
         }}
         disabled={current >= total}
+        aria-label="Last page"
       >
         <ChevronDoubleRightIcon className="h-5 w-5" />
+        <span className="sr-only">Page {total}</span>
       </button>
     </div>
   )
