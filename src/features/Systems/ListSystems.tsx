@@ -34,7 +34,7 @@ export const ListSystems = () => {
   })
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0 })
   }, [data?.meta.page])
 
   useEffect(() => {
@@ -52,25 +52,14 @@ export const ListSystems = () => {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative grid gap-4">
         <div
           className={cx('absolute inset-0 backdrop-blur-xs transition-opacity duration-100 ease-in-out', {
             'pointer-events-none opacity-0': !isFetching,
             'pointer-events-auto opacity-100': isFetching,
           })}
         />
-        <div className={cx('grid gap-4')}>
-          {systems.map((system) => {
-            return (
-              <div key={system.symbol} className="bg-zinc-100 p-3 dark:border-zinc-700 dark:bg-zinc-700/25">
-                <Link to={`${ROUTES.SYSTEMS}/${system.symbol}`}>{system.symbol}</Link>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-      {meta && (
-        <div className="row grid items-center justify-center gap-4">
+        {meta && (
           <div className="flex items-center justify-center gap-2 text-sm">
             {isFetching ? (
               <div>...</div>
@@ -84,14 +73,68 @@ export const ListSystems = () => {
               </>
             )}
           </div>
-          <Pagination
-            current={meta.page}
-            total={Math.ceil(meta.total / limit)}
-            length={5}
-            onChange={(page) => setParams({ page: String(page) })}
-          />
+        )}
+        <div className={cx('grid gap-1 md:grid-cols-2 lg:grid-cols-4')}>
+          {systems.map((system) => {
+            return (
+              <div
+                key={system.symbol}
+                className="flex flex-col gap-2 rounded bg-zinc-200/50 p-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-700/25"
+              >
+                <div className="p-2">
+                  <div className="text-center text-lg font-black">
+                    <Link className="link" to={`${ROUTES.SYSTEMS}/${system.symbol}`}>
+                      {system.symbol}
+                    </Link>
+                  </div>
+                  <div className="text-center text-xs">
+                    <span className="font-medium">{SYSTEM_TYPE[system.type]}</span>{' '}
+                    <span className="font-light">
+                      ({system.x}, {system.y})
+                    </span>
+                  </div>
+                </div>
+                <div className="text-center text-sm font-semibold">Waypoints</div>
+                <ul className="flex flex-col gap-2">
+                  {system.waypoints.map((waypoint) => (
+                    <li key={waypoint.symbol} className="text-center">
+                      <Link
+                        className="link text-sm"
+                        to={`${ROUTES.SYSTEMS}/${system.symbol}/waypoint/${waypoint.symbol}`}
+                      >
+                        {waypoint.symbol}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })}
         </div>
-      )}
+        {meta && (
+          <div className="row grid items-center justify-center gap-4">
+            <div className="flex items-center justify-center gap-2 text-sm">
+              {isFetching ? (
+                <div>...</div>
+              ) : (
+                <>
+                  <div>
+                    {page * limit + 1 - limit} - {page * limit - limit + systems.length}
+                  </div>
+                  <div className="opacity-50">of</div>
+                  <div>{meta.total}</div>
+                </>
+              )}
+            </div>
+            <Pagination
+              current={meta.page}
+              total={Math.ceil(meta.total / limit)}
+              length={5}
+              onChange={(page) => setParams({ page: page.toString() })}
+            />
+          </div>
+        )}
+      </div>
     </>
   )
 }
