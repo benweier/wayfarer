@@ -37,14 +37,14 @@ const ShipRoute = () => {
   const ctx = useOutletContext<{ action?: JSX.Element }>()
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4 p-4">
       <div className="flex items-center justify-start gap-6">
         {ctx?.action && <div>{ctx.action}</div>}
         <div className="text-title">
           Ship: <span className="font-normal">{shipID}</span>
         </div>
       </div>
-      <div>
+      <div className="grid gap-12">
         <QuerySuspenseBoundary>{shipID && <ViewShip symbol={shipID} />}</QuerySuspenseBoundary>
       </div>
     </div>
