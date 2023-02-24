@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { getSystemsList } from '@/services/api/spacetraders'
+import { getShipsList, getSystemsList } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 
 const getPagingRange = ({ current, total, length }: { current: number; total: number; length: number }): number[] => {
@@ -23,45 +23,55 @@ const getPagingRange = ({ current, total, length }: { current: number; total: nu
 }
 
 export const ListSystems = () => {
-  const [limit] = useState(20)
+  const [limit] = useState(24)
   const [params, setParams] = useSearchParams({ page: '1' })
   const page = parseInt(params.get('page') ?? '1')
 
-  const { isSuccess, isFetching, data } = useQuery({
+  const systemsListQuery = useQuery({
     queryKey: ['systems', page, limit],
     queryFn: ({ signal }) => getSystemsList({ params: { page, limit } }, { signal }),
     keepPreviousData: true,
   })
+  const fleetQuery = useQuery({
+    queryKey: ['ships'],
+    queryFn: ({ signal }) => getShipsList(undefined, { signal }),
+    select: (response) => {
+      return response.data.reduce<Map<string, true>>((result, ship) => {
+        result.set(ship.nav.systemSymbol, true)
+        return result
+      }, new Map())
+    },
+  })
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
-  }, [data?.meta.page])
+  }, [systemsListQuery.data?.meta.page])
 
   useEffect(() => {
-    if (data?.meta) {
-      const max = Math.ceil(data.meta.total / limit)
+    if (systemsListQuery.data?.meta) {
+      const max = Math.ceil(systemsListQuery.data?.meta.total / limit)
 
       if (page > max) setParams({ page: max.toString() })
     }
-  }, [limit, data?.meta, page, setParams])
+  }, [limit, systemsListQuery.data?.meta, page, setParams])
 
-  if (!isSuccess) return null
+  if (!systemsListQuery.isSuccess) return null
 
-  const systems = data.data
-  const meta = data?.meta
+  const systems = systemsListQuery.data.data
+  const meta = systemsListQuery.data.meta
 
   return (
     <>
       <div className="relative grid gap-4">
         <div
           className={cx('absolute inset-0 backdrop-blur-xs transition-opacity duration-100 ease-in-out', {
-            'pointer-events-none opacity-0': !isFetching,
-            'pointer-events-auto opacity-100': isFetching,
+            'pointer-events-none opacity-0': !systemsListQuery.isFetching,
+            'pointer-events-auto opacity-100': systemsListQuery.isFetching,
           })}
         />
         {meta && (
           <div className="flex items-center justify-center gap-2 text-sm">
-            {isFetching ? (
+            {systemsListQuery.isFetching ? (
               <div>...</div>
             ) : (
               <>
@@ -79,10 +89,15 @@ export const ListSystems = () => {
             return (
               <div
                 key={system.symbol}
-                className="flex flex-col gap-2 rounded bg-zinc-200/50 p-2 shadow-sm dark:border-zinc-700 dark:bg-zinc-700/25"
+                className={cx(
+                  'flex flex-col gap-2 rounded border-2 border-transparent bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25',
+                  {
+                    'border-blue-500': fleetQuery.data?.has(system.symbol),
+                  },
+                )}
               >
-                <div className="p-2">
-                  <div className="text-center text-lg font-black">
+                <div className="grid gap-1">
+                  <div className="text-center text-lg font-black leading-none">
                     <Link className="link" to={`${ROUTES.SYSTEMS}/${system.symbol}`}>
                       {system.symbol}
                     </Link>
@@ -94,19 +109,6 @@ export const ListSystems = () => {
                     </span>
                   </div>
                 </div>
-                <div className="text-center text-sm font-semibold">Waypoints</div>
-                <ul className="flex flex-col gap-2">
-                  {system.waypoints.map((waypoint) => (
-                    <li key={waypoint.symbol} className="text-center">
-                      <Link
-                        className="link text-sm"
-                        to={`${ROUTES.SYSTEMS}/${system.symbol}/waypoint/${waypoint.symbol}`}
-                      >
-                        {waypoint.symbol}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
               </div>
             )
           })}
@@ -114,7 +116,7 @@ export const ListSystems = () => {
         {meta && (
           <div className="row grid items-center justify-center gap-4">
             <div className="flex items-center justify-center gap-2 text-sm">
-              {isFetching ? (
+              {systemsListQuery.isFetching ? (
                 <div>...</div>
               ) : (
                 <>
