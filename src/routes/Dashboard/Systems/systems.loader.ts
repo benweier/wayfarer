@@ -7,8 +7,11 @@ import { getState } from '@/services/store/auth'
 
 export const list =
   (client: QueryClient): LoaderFunction =>
-  async () => {
+  async ({ request }) => {
     const { isAuthenticated } = getState()
+    const url = new URL(request.url)
+    const page = url.searchParams.get('page') ?? '1'
+    const limit = 24
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
@@ -17,8 +20,8 @@ export const list =
 
     try {
       const systems = await client.ensureQueryData({
-        queryKey: ['systems'],
-        queryFn: ({ signal }) => getSystemsList(undefined, { signal }),
+        queryKey: ['systems', page, limit],
+        queryFn: ({ signal }) => getSystemsList({ params: { page, limit } }, { signal }),
       })
 
       return defer({ systems })
