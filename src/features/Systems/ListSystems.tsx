@@ -36,10 +36,10 @@ export const ListSystems = () => {
     queryKey: ['ships'],
     queryFn: ({ signal }) => getShipsList(undefined, { signal }),
     select: (response) => {
-      return response.data.reduce<Map<string, true>>((result, ship) => {
-        result.set(ship.nav.systemSymbol, true)
+      return response.data.reduce<Set<string>>((result, ship) => {
+        result.add(ship.nav.systemSymbol)
         return result
-      }, new Map())
+      }, new Set())
     },
   })
 
