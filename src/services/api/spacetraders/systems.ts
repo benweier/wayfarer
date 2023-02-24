@@ -1,4 +1,10 @@
-import { MarketResponse, SystemsResponse, WaypointResponse } from '@/types/spacetraders'
+import {
+  JumpGateResponse,
+  MarketResponse,
+  ShipyardResponse,
+  SystemsResponse,
+  WaypointResponse,
+} from '@/types/spacetraders'
 import { Meta, SpaceTradersResponse, queryFnFactory } from './core'
 
 export const getSystemsList = queryFnFactory<SpaceTradersResponse<SystemsResponse[], Meta>>(() => '/systems')
@@ -20,10 +26,10 @@ export const getMarket = queryFnFactory<SpaceTradersResponse<MarketResponse>, { 
   ({ system, waypoint }) => `/systems/${system}/waypoints/${waypoint}/market`,
 )
 
-export const getShipyard = queryFnFactory<SpaceTradersResponse<SystemsResponse>, { system: string; waypoint: string }>(
+export const getShipyard = queryFnFactory<SpaceTradersResponse<ShipyardResponse>, { system: string; waypoint: string }>(
   ({ system, waypoint }) => `/systems/${system}/waypoints/${waypoint}/shipyard`,
 )
 
-export const getJumpGate = queryFnFactory<SpaceTradersResponse<SystemsResponse>, { system: string; waypoint: string }>(
+export const getJumpGate = queryFnFactory<SpaceTradersResponse<JumpGateResponse>, { system: string; waypoint: string }>(
   ({ system, waypoint }) => `/systems/${system}/waypoints/${waypoint}/jump-gate`,
 )

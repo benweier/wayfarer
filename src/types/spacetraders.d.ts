@@ -133,39 +133,18 @@ export type ShipResponse = {
       slots: number
     }
   }>
-  mounts: [
-    {
-      symbol: string
-      name: string
-      description: string
-      strength: number
-      requirements: {
-        crew: number
-        power: number
-      }
-    },
-    {
-      symbol: string
-      name: string
-      description: string
-      strength: number
-      requirements: {
-        crew: number
-        power: number
-      }
-    },
-    {
-      symbol: string
-      name: string
-      description: string
-      strength: number
-      deposits: string[]
-      requirements: {
-        crew: number
-        power: number
-      }
-    },
-  ]
+  mounts: Array<{
+    symbol: string
+    name: string
+    description: string
+    strength: number
+    deposits: string[]
+    requirements: {
+      power: number
+      crew: number
+      slots: number
+    }
+  }>
   registration: {
     name: string
     factionSymbol: string
@@ -251,17 +230,114 @@ export type MarketResponse = {
     shipSymbol: string
     tradeSymbol: string
     type: string
-    units: 1
-    pricePerUnit: 1
-    totalPrice: 1
+    units: number
+    pricePerUnit: number
+    totalPrice: number
     timestamp: string
   }>
   tradeGoods: Array<{
     symbol: string
-    tradeVolume: 1
+    tradeVolume: number
     supply: string
-    purchasePrice: 0
-    sellPrice: 0
+    purchasePrice: number
+    sellPrice: number
+  }>
+}
+
+export type JumpGateResponse = {
+  jumpRange: number
+  factionSymbol: string
+  connectedSystems: Array<{
+    symbol: string
+    sectorSymbol: string
+    type: string
+    factionSymbol: string
+    x: number
+    y: number
+    distance: number
+  }>
+}
+
+export type ShipyardResponse = {
+  symbol: string
+  shipTypes: Array<{
+    type: string
+  }>
+  transactions: Array<{
+    shipSymbol: string
+    price: number
+    agentSymbol: string
+    timestamp: string
+  }>
+  ships: Array<{
+    type: string
+    name: string
+    description: string
+    purchasePrice: number
+    frame: {
+      symbol: string
+      name: string
+      description: string
+      condition: number
+      moduleSlots: number
+      mountingPoints: number
+      fuelCapacity: number
+      requirements: {
+        power: number
+        crew: number
+        slots: number
+      }
+    }
+    reactor: {
+      symbol: string
+      name: string
+      description: string
+      condition: number
+      powerOutput: number
+      requirements: {
+        power: number
+        crew: number
+        slots: number
+      }
+    }
+    engine: {
+      symbol: string
+      name: string
+      description: string
+      condition: number
+      speed: number
+      requirements: {
+        power: number
+        crew: number
+        slots: number
+      }
+    }
+    modules: [
+      {
+        symbol: string
+        capacity: number
+        range: number
+        name: string
+        description: string
+        requirements: {
+          power: number
+          crew: number
+          slots: number
+        }
+      },
+    ]
+    mounts: Array<{
+      symbol: string
+      name: string
+      description: string
+      strength: number
+      deposits: string[]
+      requirements: {
+        power: number
+        crew: number
+        slots: number
+      }
+    }>
   }>
 }
 
