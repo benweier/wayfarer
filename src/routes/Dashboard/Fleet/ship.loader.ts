@@ -1,12 +1,11 @@
-import { QueryClient } from '@tanstack/react-query'
-import { LoaderFunction, defer, redirect } from 'react-router-dom'
+import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getShipById } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/services/store/auth'
 
-export const loader =
-  (client: QueryClient): LoaderFunction =>
+export const loader: QueryClientLoaderFn =
+  (client) =>
   async ({ params }) => {
     const { isAuthenticated } = getState()
     const { shipID } = params

@@ -1,12 +1,11 @@
-import { QueryClient } from '@tanstack/react-query'
-import { LoaderFunction, defer, redirect } from 'react-router-dom'
+import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getSystemById, getSystemsList, getWaypointById } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/services/store/auth'
 
-export const list =
-  (client: QueryClient): LoaderFunction =>
+export const list: QueryClientLoaderFn =
+  (client) =>
   async ({ request }) => {
     const { isAuthenticated } = getState()
     const url = new URL(request.url)
@@ -34,8 +33,8 @@ export const list =
     }
   }
 
-export const view =
-  (client: QueryClient): LoaderFunction =>
+export const view: QueryClientLoaderFn =
+  (client) =>
   async ({ params }) => {
     const { isAuthenticated } = getState()
     const { systemID } = params
@@ -66,8 +65,8 @@ export const view =
     }
   }
 
-export const waypoint =
-  (client: QueryClient): LoaderFunction =>
+export const waypoint: QueryClientLoaderFn =
+  (client) =>
   async ({ params }) => {
     const { isAuthenticated } = getState()
     const { systemID, waypointID } = params

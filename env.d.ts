@@ -1,6 +1,9 @@
-import 'react'
+import React from 'react'
+import type { QueryClient } from '@tanstack/react-query'
+import type { LoaderFunction } from 'react-router-dom'
 
 declare global {
+  type QueryClientLoaderFn = (client: QueryClient) => LoaderFunction
   type WithChildren<T = Record<string, unknown>> = React.PropsWithChildren<T>
 
   type WithClassName<T = Record<string, unknown>> = T & {
