@@ -1,15 +1,19 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { getWaypointById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
+import { WaypointJumpGate } from './WaypointJumpGate'
+import { WaypointMarket } from './WaypointMarket'
+import { WaypointShipyard } from './WaypointShipyard'
 
 const tabs = [
-  { title: 'Fleet', content: <>Fleet</> },
-  { title: 'Market', content: <>Market</> },
-  { title: 'Shipyard', content: <>Shipyard</> },
-  { title: 'Jump Gate', content: <>Jump Gate</> },
+  { title: 'Fleet', content: () => <>Fleet</>, fallback: <></> },
+  { title: 'Market', content: WaypointMarket, fallback: <></> },
+  { title: 'Shipyard', content: WaypointShipyard, fallback: <></> },
+  { title: 'Jump Gate', content: WaypointJumpGate, fallback: <></> },
 ]
 
 export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypointID: string }) => {
@@ -61,7 +65,11 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
         </Tab.List>
         <Tab.Panels>
           {tabs.map((tab) => (
-            <Tab.Panel key={tab.title}>{tab.content}</Tab.Panel>
+            <Tab.Panel key={tab.title}>
+              <QuerySuspenseBoundary fallback={tab.fallback}>
+                <tab.content systemID={systemID} waypointID={waypointID} />
+              </QuerySuspenseBoundary>
+            </Tab.Panel>
           ))}
         </Tab.Panels>
       </Tab.Group>
