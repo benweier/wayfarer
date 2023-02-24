@@ -74,12 +74,10 @@ export const ListSystems = () => {
             return (
               <div
                 key={system.symbol}
-                className={cx(
-                  'flex flex-col gap-2 rounded border-2 border-transparent bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25',
-                  {
-                    'border-blue-500': fleetQuery.data?.has(system.symbol),
-                  },
-                )}
+                className={cx('flex flex-col gap-2 rounded border-2 bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25', {
+                  'border-transparent': !fleetQuery.data?.has(system.symbol),
+                  'border-blue-500': fleetQuery.data?.has(system.symbol),
+                })}
               >
                 <div className="grid gap-1">
                   <div className="text-center text-lg font-black leading-none">
