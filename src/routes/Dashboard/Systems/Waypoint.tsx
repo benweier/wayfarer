@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/QuerySuspenseBoundary'
 
 export const WaypointViewRoute = () => {
@@ -9,11 +9,16 @@ export const WaypointViewRoute = () => {
       <h1 className="text-title">
         Waypoint: <span className="font-normal">{waypointID}</span>
       </h1>
-      <div className="grid gap-12">
+      <div className="grid gap-8">
+        {systemID && (
+          <div>
+            System:{' '}
+            <Link className="link" to={`/systems/${systemID}`}>
+              {systemID}
+            </Link>
+          </div>
+        )}
         <QuerySuspenseBoundary>
-          <>
-            {systemID} {waypointID}
-          </>
           {/*{systemID && waypointID && <ViewWaypoint systemID={systemID} waypointID={waypointID} />}*/}
         </QuerySuspenseBoundary>
       </div>
