@@ -17,7 +17,7 @@ export const MyShips = () => {
   if (!isSuccess) return null
 
   return (
-    <div className="grid">
+    <div className="grid gap-1">
       {data.data.map((ship) => {
         return <Ship key={ship.symbol} ship={ship} />
       })}
@@ -54,13 +54,18 @@ const Ship = ({ ship }: { ship: ShipResponse }) => {
             <div>
               <div className="text-xs font-medium uppercase opacity-60">System</div>
               <div className="font-semibold">
-                <Link to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>{ship.nav.systemSymbol}</Link>
+                <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
+                  {ship.nav.systemSymbol}
+                </Link>
               </div>
             </div>
             <div>
               <div className="text-xs font-medium uppercase opacity-60">Waypoint</div>
               <div className="font-semibold">
-                <Link to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}/waypoint/${ship.nav.waypointSymbol}`}>
+                <Link
+                  className="link"
+                  to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}/waypoint/${ship.nav.waypointSymbol}`}
+                >
                   {ship.nav.waypointSymbol}
                 </Link>
               </div>
