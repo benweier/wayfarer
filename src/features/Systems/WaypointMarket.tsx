@@ -11,5 +11,24 @@ export const WaypointMarket = ({ systemID, waypointID }: { systemID: string; way
 
   const market = data.data
 
-  return <></>
+  return (
+    <div className="grid gap-8">
+      <div>
+        <div className="text-headline">Imports</div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {market.imports.map((item) => {
+            return <div key={item.symbol}>{item.name}</div>
+          })}
+        </div>
+      </div>
+      <div>
+        <div className="text-headline">Exports</div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {market.exports.map((item) => {
+            return <div key={item.symbol}>{item.name}</div>
+          })}
+        </div>
+      </div>
+    </div>
+  )
 }
