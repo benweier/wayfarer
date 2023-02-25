@@ -12,7 +12,7 @@
 
 @layer components {
   .loader {
-    @apply absolute block h-1 w-full overflow-hidden;
+    @apply fixed block h-1 w-full overflow-hidden z-50;
     @apply after:absolute after:top-0 after:left-0 after:right-0 after:h-full after:w-1/6 after:animate-indefinite after:bg-green-600 dark:after:bg-green-400;
   }
 }
