@@ -55,7 +55,7 @@ export const Login = () => {
               <label className="label" htmlFor="symbol">
                 Agent Symbol
               </label>
-              <input {...methods.register('symbol')} className="input input-lg" type="text" />
+              <input id="symbol" {...methods.register('symbol')} className="input input-lg" type="text" />
               <div className="text-hint mt-1">
                 Your symbol is not required to login, but may be useful with password managers if you have multiple
                 accounts
@@ -66,6 +66,7 @@ export const Login = () => {
                 Access Token
               </label>
               <input
+                id="token"
                 {...methods.register('token', { required: true })}
                 className="input input-lg"
                 type="password"

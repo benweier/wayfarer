@@ -57,6 +57,7 @@ export const Register = () => {
                 Agent Symbol
               </label>
               <input
+                id="symbol"
                 {...methods.register('symbol', { required: true })}
                 className="input input-lg"
                 type="text"
