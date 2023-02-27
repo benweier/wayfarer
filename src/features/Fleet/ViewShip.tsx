@@ -2,7 +2,6 @@ import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import { useQuery } from '@tanstack/react-query'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { getShipById } from '@/services/api/spacetraders'
-import { Dock, Orbit, ScanWaypoints } from './ShipActions'
 
 export const ViewShip = ({ symbol }: { symbol: string }) => {
   const { data, isSuccess } = useQuery({
@@ -55,10 +54,6 @@ export const ViewShip = ({ symbol }: { symbol: string }) => {
                 {ship.crew.current} / {ship.crew.capacity}
               </div>
             </div>
-          </div>
-          <div>
-            {ship.nav.status === 'DOCKER' ? <Orbit symbol={ship.symbol} /> : <Dock symbol={ship.symbol} />}
-            <ScanWaypoints symbol={ship.symbol} />
           </div>
         </div>
       </div>
