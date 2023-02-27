@@ -44,6 +44,15 @@ export type FactionResponse = {
   }>
 }
 
+export type FuelResponse = {
+  current: number
+  capacity: number
+  consumed: {
+    amount: number
+    timestamp: string
+  }
+}
+
 export type NavigationResponse = {
   systemSymbol: string
   waypointSymbol: string
