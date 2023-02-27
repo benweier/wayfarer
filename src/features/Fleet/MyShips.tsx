@@ -1,15 +1,16 @@
 import { BoltIcon, CubeIcon, UserGroupIcon, WrenchIcon } from '@heroicons/react/20/solid'
-import { useIsMutating, useQuery } from '@tanstack/react-query'
+import { useIsMutating, useMutation, useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { Modal } from '@/components/Modal'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { getShipsList } from '@/services/api/spacetraders'
+import { createShipScanWaypoint, getShipsList } from '@/services/api/spacetraders'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
-import { Dock, Orbit, ScanWaypoints } from './ShipActions'
+import * as ShipActions from './ShipActions'
 
 export const MyShips = () => {
-  const { isSuccess, data } = useQuery({
+  const { isSuccess, data, isFetching } = useQuery({
     queryKey: ['ships'],
     queryFn: ({ signal }) => getShipsList(undefined, { signal }),
   })
@@ -17,7 +18,13 @@ export const MyShips = () => {
   if (!isSuccess) return null
 
   return (
-    <div className="grid gap-1">
+    <div className={cx('grid gap-1', { 'opacity-30': isFetching })}>
+      <div
+        className={cx('absolute inset-0 backdrop-blur-xs transition-opacity duration-100 ease-in-out', {
+          'pointer-events-none opacity-0': !isFetching,
+          'pointer-events-auto opacity-100': isFetching,
+        })}
+      />
       {data.data.map((ship) => {
         return <Ship key={ship.symbol} ship={ship} />
       })}
@@ -26,7 +33,7 @@ export const MyShips = () => {
 }
 
 const Ship = ({ ship }: { ship: ShipResponse }) => {
-  const mutating = useIsMutating(['ship', ship.symbol])
+  const mutating = useIsMutating(['ship', ship.symbol], { exact: false })
 
   return (
     <div
@@ -91,9 +98,14 @@ const Ship = ({ ship }: { ship: ShipResponse }) => {
               </div>
             </div>
           </div>
-          <div className="flex gap-2">
-            {ship.nav.status === 'DOCKED' ? <Orbit symbol={ship.symbol} /> : <Dock symbol={ship.symbol} />}
-            <ScanWaypoints symbol={ship.symbol} />
+          <div className="flex">
+            {ship.nav.status === 'DOCKED' ? (
+              <ShipActions.Orbit shipID={ship.symbol} />
+            ) : (
+              <ShipActions.Dock shipID={ship.symbol} />
+            )}
+            <ScanWaypoints shipID={ship.symbol} />
+            <ShipActions.Navigate shipID={ship.symbol} waypointID={ship.nav.waypointSymbol} />
           </div>
         </div>
         <div>
@@ -103,5 +115,41 @@ const Ship = ({ ship }: { ship: ShipResponse }) => {
         </div>
       </div>
     </div>
+  )
+}
+
+const ScanWaypoints = ({ shipID }: { shipID: string }) => {
+  const { mutate, isSuccess, data } = useMutation({
+    mutationKey: ['ship', shipID, 'scan-waypoints'],
+    mutationFn: (shipID: string) => createShipScanWaypoint({ path: shipID }),
+  })
+
+  return (
+    <Modal
+      isOpen={isSuccess}
+      trigger={
+        <button className="btn btn-sm" onClick={() => mutate(shipID)}>
+          Scan
+        </button>
+      }
+    >
+      {isSuccess && (
+        <div className="grid gap-4">
+          <div className="text-lg font-bold">
+            Waypoints <span className="font-light">({data.data.waypoints.length})</span>
+          </div>
+
+          <div className="grid gap-2">
+            {data.data.waypoints.map((waypoint) => (
+              <div key={waypoint.symbol}>
+                <Link to={`${ROUTES.SYSTEMS}/${waypoint.systemSymbol}/waypoint/${waypoint.symbol}`}>
+                  {waypoint.symbol}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </Modal>
   )
 }
