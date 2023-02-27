@@ -1,5 +1,4 @@
-import { Path } from 'history'
-import { useLocation as useRouterLocation } from 'react-router-dom'
+import { Path, useLocation as useRouterLocation } from 'react-router-dom'
 
 type LocationState = unknown
 type Key = string
