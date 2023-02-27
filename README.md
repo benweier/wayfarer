@@ -1,6 +1,6 @@
 # [Wayfarer](https://wayfarer.benweier.dev/)
 
-Wayfarer is a browser-based interface for **v2** of the [Spacetraders API](https://spacetraders.stoplight.io/docs/spacetraders). Just as the API itself is a work-in-progress under active development, Wayfarer is a work-in-progress intended for demonstration purposes of a number of key patterns and technologies.
+Wayfarer is a browser-based interface for **v2** of the [SpaceTraders API](https://spacetraders.stoplight.io/docs/spacetraders). Just as the API itself is a work-in-progress under active development, Wayfarer is a work-in-progress intended for demonstration purposes of a number of key patterns and technologies.
 
 ## Tech
 
@@ -18,6 +18,6 @@ Wayfarer is not a framework, a library, or boilerplate. Instead, it embraces and
 
 Next, Gatsby, Remix, et al. have (re)popularised server-side rendering and static generation of late; built and marketed as "batteries included" meta frameworks (or at the very least "batteries npm-installable") for solving the specific challenges of SSR/SSG. This is not an indictment of these tools, but rather the opposite side of the same coin where client-side rendering remains a perfectly suitable approach for many projects.
 
-Wayfarer is not built around documentation or code snippets or app tutorials that can be worked through in a weekend. Rather, it outlines concrete real-world patterns and best practices I have come to rely on that can be applied to projects of any size - whether they are Next, Remix, Create React App, or something custom.
+Wayfarer is not built around documentation or theoretical app tutorials that can be worked through in a weekend. Preferring a concrete, implementation-first outline over isolated, hypothetical code snippets, it is a collection of real-world patterns and best practices I have come to rely on that can be applied to projects of any size - whether they are Next, Remix, Create React App, or something custom.
 
-Because of this, Wayfarer is largely a distillation of my own experiences and opinions on how to build a performant, responsive, and accessible React application. Leveraging some of the best tools of the ecosystem from the ground up, the patterns expressed within should be considered a "production-ready" reference regardless of Wayfarers' actual state of "feature-completeness" with the Spacetraders API. Hopefully, it is a useful resource for others who are interested in learning about these features and how to utilise them in their own projects.
+Because of this, Wayfarer is largely a distillation of my own experiences and opinions on how to build a performant, responsive, and accessible React application. Leveraging some of the best tools of the ecosystem from the ground up, the patterns expressed within should be considered a "production-ready" reference regardless of Wayfarers' actual state of "feature-completeness" with the SpaceTraders API. Hopefully, it is a useful resource for others who are interested in learning about these features and how to utilise them in their own projects.
