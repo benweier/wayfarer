@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { createShipDock, createShipOrbit, createShipScanWaypoint } from '@/services/api/spacetraders'
+import { createShipDock, createShipNavigate, createShipOrbit } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
 
@@ -14,84 +14,85 @@ const updateShipInFleetNavStatus = produce<SpaceTradersResponse<ShipResponse[]>,
   },
 )
 
-export const Orbit = ({ symbol }: { symbol: string }) => {
+export const Orbit = ({ shipID }: { shipID: string }) => {
   const client = useQueryClient()
   const { mutate } = useMutation({
-    mutationKey: ['ship', symbol],
-    mutationFn: (symbol: string) => createShipOrbit({ path: symbol }),
-    onMutate: (symbol) => {
+    mutationKey: ['ship', shipID, 'orbit'],
+    mutationFn: (shipID: string) => createShipOrbit({ path: shipID }),
+    onMutate: (shipID) => {
       void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', symbol] })
+      void client.cancelQueries({ queryKey: ['ship', shipID] })
 
-      // Snapshot the previous value
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', symbol])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((s) => s.symbol === symbol) ?? -1
+      const index = ships?.data.findIndex((s) => s.symbol === shipID) ?? -1
 
-      // Optimistically update to the new value
-      if (ship) client.setQueryData(['ship', symbol], updateShipNavStatus(ship, 'IN_ORBIT'))
+      if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'IN_ORBIT'))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'IN_ORBIT'))
 
-      // Return a context object with the snapshotted value
       return { ship, ships }
     },
-    // If the mutation fails,
-    // use the context returned from onMutate to roll back
-    onError: (_err, symbol, context) => {
+    onError: (_err, shipID, context) => {
       client.setQueryData(['ships'], context?.ships)
-      client.setQueryData(['ship', symbol], context?.ship)
+      client.setQueryData(['ship', shipID], context?.ship)
     },
-    // Always refetch after error or success:
-    onSettled: (symbol) => {
+    onSettled: (shipID) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', symbol] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
     },
   })
 
-  return <button onClick={() => mutate(symbol)}>Orbit</button>
+  return (
+    <button className="btn btn-sm" onClick={() => mutate(shipID)}>
+      Orbit
+    </button>
+  )
 }
 
-export const Dock = ({ symbol }: { symbol: string }) => {
+export const Dock = ({ shipID }: { shipID: string }) => {
   const client = useQueryClient()
   const { mutate } = useMutation({
-    mutationKey: ['ship', symbol],
-    mutationFn: (symbol: string) => createShipDock({ path: symbol }),
-    onMutate: (symbol) => {
-      // Snapshot the previous value
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', symbol])
+    mutationKey: ['ship', shipID, 'dock'],
+    mutationFn: (shipID: string) => createShipDock({ path: shipID }),
+    onMutate: (shipID) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((s) => s.symbol === symbol) ?? -1
+      const index = ships?.data.findIndex((s) => s.symbol === shipID) ?? -1
 
-      // Optimistically update to the new value
-      if (ship) client.setQueryData(['ship', symbol], updateShipNavStatus(ship, 'DOCKED'))
+      if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'DOCKED'))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'DOCKED'))
 
-      // Return a context object with the snapshotted value
       return { ship, ships }
     },
-    // If the mutation fails,
-    // use the context returned from onMutate to roll back
-    onError: (_err, symbol, context) => {
-      client.setQueryData(['ship', symbol], context?.ship)
+    onError: (_err, shipID, context) => {
+      client.setQueryData(['ship', shipID], context?.ship)
       client.setQueryData(['ships'], context?.ships)
     },
-    // Always refetch after error or success:
-    onSettled: (symbol) => {
+    onSettled: (shipID) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', symbol] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
     },
   })
 
-  return <button onClick={() => mutate(symbol)}>Dock</button>
+  return (
+    <button className="btn btn-sm" onClick={() => mutate(shipID)}>
+      Dock
+    </button>
+  )
 }
 
-export const ScanWaypoints = ({ symbol }: { symbol: string }) => {
+export const Navigate = ({ shipID, waypointID }: { shipID: string; waypointID: string }) => {
   const { mutate } = useMutation({
-    mutationKey: ['ship-scan-waypoints', symbol],
-    mutationFn: (symbol: string) => createShipScanWaypoint({ path: symbol }),
+    mutationKey: ['ship', shipID, 'navigate', waypointID],
+    mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
+      createShipNavigate({ path: shipID, payload: { waypointID } }),
   })
 
-  return <button onClick={() => mutate(symbol)}>Scan</button>
+  return (
+    <button className="btn btn-sm" onClick={() => mutate({ shipID, waypointID })}>
+      Navigate
+    </button>
+  )
 }
