@@ -1,8 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { useModalContext } from '@/components/Modal/useModalContext.hook'
+import { cx } from '@/utilities/cx'
 
-export const Root = ({ children }: WithChildren) => {
+export const Root = ({ size = 'md', children }: WithChildren<{ size?: 'sm' | 'md' | 'lg' }>) => {
   const { show, onClose } = useModalContext((state) => ({ show: state.isOpen, onClose: state.closeModal }))
 
   return (
@@ -30,8 +31,17 @@ export const Root = ({ children }: WithChildren) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-90"
           >
-            <div className="flex min-h-full items-center justify-center p-4">
-              <Dialog.Panel className="w-full max-w-7xl transform overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10">
+            <div className="flex min-h-full items-center justify-center px-4 py-16">
+              <Dialog.Panel
+                className={cx(
+                  'w-full transform overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10',
+                  {
+                    'max-w-md': size === 'sm',
+                    'max-w-xl': size === 'md',
+                    'max-w-5xl': size === 'lg',
+                  },
+                )}
+              >
                 {children}
               </Dialog.Panel>
             </div>

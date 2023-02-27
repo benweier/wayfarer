@@ -23,14 +23,15 @@ export const Modal = ({
   trigger,
   isOpen,
   onClose,
+  size,
   children,
-}: PropsWithChildren<{ trigger?: ReactNode; isOpen?: boolean; onClose?: () => void }>) => {
+}: PropsWithChildren<{ trigger?: ReactNode; isOpen?: boolean; onClose?: () => void; size?: 'sm' | 'md' | 'lg' }>) => {
   const store = useModalStoreCreator({ isOpen, onClose })
 
   return (
     <ModalContext.Provider value={store}>
       {trigger}
-      <Root>{children}</Root>
+      <Root size={size}>{children}</Root>
     </ModalContext.Provider>
   )
 }

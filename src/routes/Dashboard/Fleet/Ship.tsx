@@ -26,7 +26,7 @@ export const Modal = () => {
   const { shipID } = useParams()
 
   return (
-    <ModalRoot isOpen={!!shipID} onClose={() => navigate(ROUTES.FLEET)}>
+    <ModalRoot size="lg" isOpen={!!shipID} onClose={() => navigate(ROUTES.FLEET)}>
       <ShipModalRoute />
     </ModalRoot>
   )
