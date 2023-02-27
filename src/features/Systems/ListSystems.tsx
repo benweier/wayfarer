@@ -47,7 +47,7 @@ export const ListSystems = () => {
 
   return (
     <>
-      <div className="relative grid gap-4">
+      <div className={cx('relative grid gap-4', { 'opacity-30': systemsListQuery.isFetching })}>
         <div
           className={cx('absolute inset-0 backdrop-blur-xs transition-opacity duration-100 ease-in-out', {
             'pointer-events-none opacity-0': !systemsListQuery.isFetching,
@@ -69,29 +69,49 @@ export const ListSystems = () => {
             )}
           </div>
         )}
-        <div className={cx('grid gap-1 md:grid-cols-2 lg:grid-cols-4')}>
+        <div className="grid gap-1">
           {systems.map((system) => {
             return (
               <div
                 key={system.symbol}
-                className={cx('flex flex-col gap-2 rounded border-2 bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25', {
-                  'border-transparent': !fleetQuery.data?.has(system.symbol),
-                  'border-blue-500': fleetQuery.data?.has(system.symbol),
-                })}
+                className={cx(
+                  'flex flex-col items-center justify-between gap-2 rounded border-2 bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25 md:flex-row md:flex-wrap',
+                  {
+                    'border-transparent': !fleetQuery.data?.has(system.symbol),
+                    'border-blue-500': fleetQuery.data?.has(system.symbol),
+                  },
+                )}
               >
-                <div className="grid gap-1">
-                  <div className="text-center text-lg font-black leading-none">
+                <div className="flex gap-1">
+                  <div className="text-lg font-black leading-none">
                     <Link className="link" to={`${ROUTES.SYSTEMS}/${system.symbol}`}>
                       {system.symbol}
                     </Link>
-                  </div>
-                  <div className="text-center text-xs">
-                    <span className="font-medium">{SYSTEM_TYPE[system.type]}</span>{' '}
-                    <span className="font-light">
-                      ({system.x}, {system.y})
-                    </span>
+                    <div className="text-base">
+                      <span className="font-medium">{SYSTEM_TYPE[system.type]}</span>{' '}
+                      <span className="font-light">
+                        ({system.x}, {system.y})
+                      </span>
+                    </div>
                   </div>
                 </div>
+                <ul className="flex flex-wrap items-center gap-1">
+                  {system.waypoints.map((waypoint) => {
+                    return (
+                      <li key={waypoint.symbol}>
+                        <Link
+                          className="flex h-8 w-8 items-center justify-center bg-white"
+                          to={`${ROUTES.SYSTEMS}/${system.symbol}/waypoint/${waypoint.symbol}`}
+                        >
+                          <span className="font-black text-black" aria-hidden>
+                            {waypoint.type.charAt(0)}
+                          </span>
+                          <span className="sr-only">{waypoint.symbol}</span>
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
               </div>
             )
           })}
