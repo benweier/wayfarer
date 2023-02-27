@@ -8,7 +8,7 @@ import { getShipsList, getSystemsList } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const ListSystems = () => {
-  const [limit] = useState(24)
+  const [limit] = useState(20)
   const [params, setParams] = useSearchParams({ page: '1' })
   const page = parseInt(params.get('page') ?? '1')
 
