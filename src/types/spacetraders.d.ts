@@ -171,25 +171,23 @@ export type ShipResponse = {
   }
 }
 
+export type SystemWaypoint = {
+  symbol: string
+  type: string
+  x: number
+  y: number
+}
+
+export type SystemFaction = { symbol: string }
+
 export type SystemsResponse = {
   symbol: string
   sectorSymbol: string
   type: string
   x: number
   y: number
-  waypoints: [
-    {
-      symbol: string
-      type: string
-      x: number
-      y: number
-    },
-  ]
-  factions: [
-    {
-      symbol: string
-    },
-  ]
+  waypoints: SystemWaypoint[]
+  factions: SystemFaction[]
 }
 
 export type ChartResponse = {
@@ -198,59 +196,63 @@ export type ChartResponse = {
   submittedOn: string
 }
 
+export type WaypointOrbital = {
+  symbol: string
+}
+
+export type WaypointFaction = {
+  symbol: string
+}
+
+export type WaypointTrait = {
+  symbol: string
+  name: string
+  description: string
+}
+
 export type WaypointResponse = {
   symbol: string
   type: string
   systemSymbol: string
   x: number
   y: number
-  orbitals: Array<{
-    symbol: string
-  }>
-  faction: {
-    symbol: string
-  }
-  traits: Array<{
-    symbol: string
-    name: string
-    description: string
-  }>
+  orbitals: WaypointOrbital[]
+  faction: WaypointFaction
+  traits: WaypointTrait[]
   chart: ChartResponse
+}
+
+export type MarketGood = {
+  symbol: string
+  name: string
+  description: string
+}
+
+export type MarketTradeGood = {
+  symbol: string
+  tradeVolume: number
+  supply: string
+  purchasePrice: number
+  sellPrice: number
+}
+
+export type MarketTransaction = {
+  shipSymbol: string
+  tradeSymbol: string
+  type: string
+  units: number
+  pricePerUnit: number
+  totalPrice: number
+  timestamp: string
 }
 
 export type MarketResponse = {
   symbol: string
-  exports: Array<{
-    symbol: string
-    name: string
-    description: string
-  }>
-  imports: Array<{
-    symbol: string
-    name: string
-    description: string
-  }>
-  exchange: Array<{
-    symbol: string
-    name: string
-    description: string
-  }>
-  transactions: Array<{
-    shipSymbol: string
-    tradeSymbol: string
-    type: string
-    units: number
-    pricePerUnit: number
-    totalPrice: number
-    timestamp: string
-  }>
-  tradeGoods: Array<{
-    symbol: string
-    tradeVolume: number
-    supply: string
-    purchasePrice: number
-    sellPrice: number
-  }>
+  exports: MarketGood[]
+  imports: MarketGood[]
+  exchange: MarketGood[]
+  transactions: MarketTransaction[]
+  tradeGoods: MarketTradeGood[]
 }
 
 export type JumpGateResponse = {
