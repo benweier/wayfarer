@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { SYSTEM_TYPE, WAYPOINT_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { getShipsList, getSystemById } from '@/services/api/spacetraders'
+import { SystemWaypoint } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const ViewSystem = ({ id }: { id: string }) => {
@@ -33,32 +34,53 @@ export const ViewSystem = ({ id }: { id: string }) => {
           ({system.x}, {system.y})
         </div>
       </div>
-      <div className={cx('grid gap-1 md:grid-cols-2 lg:grid-cols-4')}>
+      <div className={cx('grid gap-1')}>
         {system.waypoints.map((waypoint) => {
           return (
-            <div
+            <Waypoint
               key={waypoint.symbol}
-              className={cx('flex flex-col gap-2 rounded border-2 bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25', {
-                'border-transparent': !fleetQuery.data?.has(waypoint.symbol),
-                'border-blue-500': fleetQuery.data?.has(waypoint.symbol),
-              })}
-            >
-              <div className="grid gap-1">
-                <div className="text-center text-lg font-black leading-none">
-                  <Link className="link" to={`${ROUTES.SYSTEMS}/${system.symbol}/waypoint/${waypoint.symbol}`}>
-                    {waypoint.symbol}
-                  </Link>
-                </div>
-                <div className="text-center text-xs">
-                  <span className="font-medium">{WAYPOINT_TYPE[waypoint.type]}</span>{' '}
-                  <span className="font-light">
-                    ({waypoint.x}, {waypoint.y})
-                  </span>
-                </div>
-              </div>
-            </div>
+              systemID={system.symbol}
+              waypoint={waypoint}
+              hasShipPresence={fleetQuery.data?.has(waypoint.symbol)}
+            />
           )
         })}
+      </div>
+    </div>
+  )
+}
+
+const Waypoint = ({
+  systemID,
+  waypoint,
+  hasShipPresence = false,
+}: {
+  systemID: string
+  waypoint: SystemWaypoint
+  hasShipPresence?: boolean
+}) => {
+  return (
+    <div
+      className={cx(
+        'flex flex-col items-center justify-between gap-2 rounded border-2 bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25 md:flex-row md:flex-wrap',
+        {
+          'border-transparent': !hasShipPresence,
+          'border-blue-500': hasShipPresence,
+        },
+      )}
+    >
+      <div className="flex gap-1">
+        <div className="text-lg font-black leading-none">
+          <Link className="link" to={`${ROUTES.SYSTEMS}/${systemID}/waypoint/${waypoint.symbol}`}>
+            {waypoint.symbol}
+          </Link>
+          <div className="text-base">
+            <span className="font-medium">{WAYPOINT_TYPE[waypoint.type]}</span>{' '}
+            <span className="font-light">
+              ({waypoint.x}, {waypoint.y})
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   )

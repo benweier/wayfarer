@@ -5,6 +5,7 @@ import { Pagination } from '@/components/Pagination'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { getShipsList, getSystemsList } from '@/services/api/spacetraders'
+import { SystemWaypoint, SystemsResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const ListSystems = () => {
@@ -23,6 +24,7 @@ export const ListSystems = () => {
     select: (response) => {
       return response.data.reduce<Set<string>>((result, ship) => {
         result.add(ship.nav.systemSymbol)
+        result.add(ship.nav.waypointSymbol)
         return result
       }, new Set())
     },
@@ -33,11 +35,11 @@ export const ListSystems = () => {
   }, [systemsListQuery.data?.meta.page])
 
   useEffect(() => {
-    if (systemsListQuery.data?.meta) {
-      const max = Math.ceil(systemsListQuery.data?.meta.total / limit)
+    if (!systemsListQuery.data?.meta) return
 
-      if (page > max) setParams({ page: max.toString() })
-    }
+    const max = Math.ceil(systemsListQuery.data?.meta.total / limit)
+
+    if (page > max) setParams({ page: max.toString() })
   }, [limit, systemsListQuery.data?.meta, page, setParams])
 
   if (!systemsListQuery.isSuccess) return null
@@ -72,47 +74,21 @@ export const ListSystems = () => {
         <div className="grid gap-1">
           {systems.map((system) => {
             return (
-              <div
-                key={system.symbol}
-                className={cx(
-                  'flex flex-col items-center justify-between gap-2 rounded border-2 bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25 md:flex-row md:flex-wrap',
-                  {
-                    'border-transparent': !fleetQuery.data?.has(system.symbol),
-                    'border-blue-500': fleetQuery.data?.has(system.symbol),
-                  },
-                )}
-              >
-                <div className="flex gap-1">
-                  <div className="text-lg font-black leading-none">
-                    <Link className="link" to={`${ROUTES.SYSTEMS}/${system.symbol}`}>
-                      {system.symbol}
-                    </Link>
-                    <div className="text-base">
-                      <span className="font-medium">{SYSTEM_TYPE[system.type]}</span>{' '}
-                      <span className="font-light">
-                        ({system.x}, {system.y})
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <ul className="flex flex-wrap items-center gap-1">
+              <System key={system.symbol} system={system} hasShipPresence={fleetQuery.data?.has(system.symbol)}>
+                <ul className="relative isolate flex items-center -space-x-2">
                   {system.waypoints.map((waypoint) => {
                     return (
-                      <li key={waypoint.symbol}>
-                        <Link
-                          className="flex h-8 w-8 items-center justify-center bg-white"
-                          to={`${ROUTES.SYSTEMS}/${system.symbol}/waypoint/${waypoint.symbol}`}
-                        >
-                          <span className="font-black text-black" aria-hidden>
-                            {waypoint.type.charAt(0)}
-                          </span>
-                          <span className="sr-only">{waypoint.symbol}</span>
-                        </Link>
+                      <li key={waypoint.symbol} className="hover:z-0">
+                        <Waypoint
+                          systemID={system.symbol}
+                          waypoint={waypoint}
+                          hasShipPresence={fleetQuery.data?.has(waypoint.symbol)}
+                        />
                       </li>
                     )
                   })}
                 </ul>
-              </div>
+              </System>
             )
           })}
         </div>
@@ -141,5 +117,63 @@ export const ListSystems = () => {
         )}
       </div>
     </>
+  )
+}
+
+const System = ({
+  system,
+  hasShipPresence = false,
+  children,
+}: WithChildren<{ system: SystemsResponse; hasShipPresence?: boolean }>) => {
+  return (
+    <div
+      className={cx(
+        'flex flex-col items-center justify-between gap-2 rounded border-2 bg-zinc-200/50 p-4 shadow-sm dark:bg-zinc-700/25 md:flex-row md:flex-wrap',
+        {
+          'border-transparent': !hasShipPresence,
+          'border-blue-500': hasShipPresence,
+        },
+      )}
+    >
+      <div className="flex gap-1">
+        <div className="text-lg font-black leading-none">
+          <Link className="link" to={`${ROUTES.SYSTEMS}/${system.symbol}`}>
+            {system.symbol}
+          </Link>
+          <div className="text-base">
+            <span className="font-medium">{SYSTEM_TYPE[system.type]}</span>{' '}
+            <span className="font-light">
+              ({system.x}, {system.y})
+            </span>
+          </div>
+        </div>
+      </div>
+      {children}
+    </div>
+  )
+}
+
+const Waypoint = ({
+  systemID,
+  waypoint,
+  hasShipPresence = false,
+}: {
+  systemID: string
+  waypoint: SystemWaypoint
+  hasShipPresence?: boolean
+}) => {
+  return (
+    <Link
+      className={cx('flex h-8 w-8 items-center justify-center rounded-full border-2 bg-white', {
+        'border-black': !hasShipPresence,
+        'border-blue-500': hasShipPresence,
+      })}
+      to={`${ROUTES.SYSTEMS}/${systemID}/waypoint/${waypoint.symbol}`}
+    >
+      <span className="font-black text-black" aria-hidden>
+        {waypoint.type.charAt(0)}
+      </span>
+      <span className="sr-only">{waypoint.symbol}</span>
+    </Link>
   )
 }
