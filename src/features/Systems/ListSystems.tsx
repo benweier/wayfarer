@@ -164,13 +164,27 @@ const Waypoint = ({
 }) => {
   return (
     <Link
-      className={cx('flex h-8 w-8 items-center justify-center rounded-full border-2 bg-white', {
-        'border-black': !hasShipPresence,
-        'border-blue-500': hasShipPresence,
-      })}
+      className={cx(
+        'flex h-8 w-8 items-center justify-center rounded-full border-2 transition duration-100 ease-in-out hover:scale-125',
+        {
+          'border-zinc-50 dark:border-zinc-800': !hasShipPresence,
+          'border-blue-500': hasShipPresence,
+        },
+        {
+          'bg-slate-500 text-slate-50': waypoint.type === 'MOON',
+          'bg-orange-500 text-orange-50': waypoint.type === 'GAS_GIANT',
+          'bg-yellow-300 text-yellow-900': waypoint.type === 'NEBULA',
+          'bg-lime-300 text-lime-900': waypoint.type === 'ASTEROID_FIELD',
+          'bg-emerald-500 text-emerald-50': waypoint.type === 'PLANET',
+          'bg-cyan-300 text-cyan-900': waypoint.type === 'DEBRIS_FIELD',
+          'bg-fuchsia-600 text-fuchsia-50': waypoint.type === 'ORBITAL_STATION',
+          'bg-zinc-100 text-zinc-900': waypoint.type === 'JUMP_GATE',
+          'bg-zinc-900 text-zinc-50': waypoint.type === 'GRAVITY_WELL',
+        },
+      )}
       to={`${ROUTES.SYSTEMS}/${systemID}/waypoint/${waypoint.symbol}`}
     >
-      <span className="font-black text-black" aria-hidden>
+      <span className="font-black" aria-hidden>
         {waypoint.type.charAt(0)}
       </span>
       <span className="sr-only">{waypoint.symbol}</span>
