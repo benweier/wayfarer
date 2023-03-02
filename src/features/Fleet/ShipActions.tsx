@@ -1,8 +1,13 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { autoPlacement, autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
+import { Popover, Transition } from '@headlessui/react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { createShipDock, createShipNavigate, createShipOrbit } from '@/services/api/spacetraders'
+import { Fragment } from 'react'
+import { WAYPOINT_TYPE } from '@/config/constants'
+import { createShipDock, createShipNavigate, createShipOrbit, getWaypointsList } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
+import { cx } from '@/utilities/cx'
 
 const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
   draft.data.nav.status = state
@@ -83,16 +88,97 @@ export const Dock = ({ shipID }: { shipID: string }) => {
   )
 }
 
-export const Navigate = ({ shipID, waypointID }: { shipID: string; waypointID: string }) => {
+export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: string }) => {
+  const client = useQueryClient()
   const { mutate } = useMutation({
-    mutationKey: ['ship', shipID, 'navigate', waypointID],
+    mutationKey: ['ship', shipID, 'navigate'],
     mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
-      createShipNavigate({ path: shipID, payload: { waypointID } }),
+      createShipNavigate({ path: shipID, payload: { waypointSymbol: waypointID } }),
+    onSettled: (shipID) => {
+      void client.invalidateQueries({ queryKey: ['ships'] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+    },
+  })
+  const { x, y, refs } = useFloating<HTMLButtonElement>({
+    strategy: 'fixed',
+    placement: 'bottom',
+    middleware: [offset(12), autoPlacement({ allowedPlacements: ['top', 'bottom'] }), shift({ padding: 16 })],
+    whileElementsMounted: (reference, floating, update) => {
+      return autoUpdate(reference, floating, update, {
+        animationFrame: true,
+      })
+    },
   })
 
   return (
-    <button className="btn btn-sm" onClick={() => mutate({ shipID, waypointID })}>
-      Navigate
-    </button>
+    <Popover className="relative">
+      {({ open, close }) => (
+        <>
+          <Popover.Button ref={refs.setReference} className="btn btn-sm">
+            Navigate
+          </Popover.Button>
+          <div
+            ref={refs.setFloating}
+            className={cx('absolute top-0', {
+              'pointer-events-none': !open,
+            })}
+            style={{
+              transform:
+                typeof x === 'number' && typeof y === 'number'
+                  ? `translate(${Math.round(x)}px,${Math.round(y)}px)`
+                  : undefined,
+            }}
+          >
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-200"
+              enterFrom="opacity-0 -translate-y-4"
+              enterTo="opacity-100 translate-y-0"
+              leave="transition ease-in duration-150"
+              leaveFrom="opacity-100 translate-y-0"
+              leaveTo="opacity-0 -translate-y-4"
+            >
+              <Popover.Panel className="relative w-screen max-w-xs overflow-y-auto rounded-xl bg-white bg-opacity-10 p-2 ring ring-black/5 backdrop-blur-md dark:bg-black dark:bg-opacity-10 dark:ring-white/5">
+                <WaypointNavigation
+                  systemID={systemID}
+                  onClick={(waypointID) => {
+                    mutate({ shipID, waypointID })
+                    close()
+                  }}
+                />
+              </Popover.Panel>
+            </Transition>
+          </div>
+        </>
+      )}
+    </Popover>
+  )
+}
+
+const WaypointNavigation = ({ systemID, onClick }: { systemID: string; onClick: (waypointID: string) => void }) => {
+  const { isSuccess, data } = useQuery({
+    queryKey: ['system', systemID, 'waypoints'],
+    queryFn: () => {
+      return getWaypointsList({ path: systemID })
+    },
+  })
+
+  if (!isSuccess) return null
+
+  const waypoints = data.data
+
+  return (
+    <div className="grid gap-2">
+      {waypoints.map((waypoint) => (
+        <div key={waypoint.symbol}>
+          <button className="btn btn-sm flex w-full flex-col gap-1" onClick={() => onClick(waypoint.symbol)}>
+            <span>{waypoint.symbol}</span>
+            <span className="font-light">
+              {WAYPOINT_TYPE[waypoint.type] ?? waypoint.type} ({waypoint.x}, {waypoint.y})
+            </span>
+          </button>
+        </div>
+      ))}
+    </div>
   )
 }
