@@ -9,7 +9,7 @@ import { Meta, SpaceTradersResponse, queryFnFactory } from './core'
 
 export const getSystemsList = queryFnFactory<SpaceTradersResponse<SystemsResponse[], Meta>>(() => '/systems')
 
-export const getWaypointsListBySystem = queryFnFactory<SpaceTradersResponse<WaypointResponse[], Meta>, string>(
+export const getWaypointsList = queryFnFactory<SpaceTradersResponse<WaypointResponse[], Meta>, string>(
   (system) => `/systems/${system}/waypoints`,
 )
 
