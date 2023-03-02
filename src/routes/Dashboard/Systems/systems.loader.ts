@@ -83,7 +83,7 @@ export const waypoint: QueryClientLoaderFn =
 
     try {
       const waypoint = await client.ensureQueryData({
-        queryKey: ['waypoint', systemID, waypointID],
+        queryKey: ['system', systemID, 'waypoint', waypointID],
         queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
       })
 

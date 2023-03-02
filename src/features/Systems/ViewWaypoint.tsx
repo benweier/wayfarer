@@ -20,7 +20,7 @@ const tabs = [
 
 export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypointID: string }) => {
   const { data, isSuccess } = useQuery({
-    queryKey: ['waypoint', systemID, waypointID],
+    queryKey: ['system', systemID, 'waypoint', waypointID],
     queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
   })
 

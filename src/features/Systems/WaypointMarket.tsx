@@ -3,7 +3,7 @@ import { getMarket } from '@/services/api/spacetraders'
 
 export const WaypointMarket = ({ systemID, waypointID }: { systemID: string; waypointID: string }) => {
   const { data, isSuccess } = useQuery({
-    queryKey: ['market', systemID, waypointID],
+    queryKey: ['system', systemID, waypointID, 'market'],
     queryFn: ({ signal }) => getMarket({ path: { system: systemID, waypoint: waypointID } }, { signal }),
   })
 
