@@ -48,7 +48,7 @@ export const createShipDock = mutationFnFactory<SpaceTradersResponse<{ nav: Navi
 export const createShipNavigate = mutationFnFactory<
   SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>,
   string,
-  { waypointID: string }
+  { waypointSymbol: string }
 >((ship) => `/my/ships/${ship}/navigate`)
 
 export const createShipChart = mutationFnFactory<
