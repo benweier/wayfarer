@@ -105,7 +105,7 @@ const Ship = ({ ship }: { ship: ShipResponse }) => {
               <ShipActions.Dock shipID={ship.symbol} />
             )}
             <ScanWaypoints shipID={ship.symbol} />
-            <ShipActions.Navigate shipID={ship.symbol} waypointID={ship.nav.waypointSymbol} />
+            <ShipActions.Navigate shipID={ship.symbol} systemID={ship.nav.systemSymbol} />
           </div>
         </div>
         <div>
