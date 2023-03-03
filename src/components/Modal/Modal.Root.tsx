@@ -3,7 +3,10 @@ import { Fragment } from 'react'
 import { useModalContext } from '@/components/Modal/useModalContext.hook'
 import { cx } from '@/utilities/cx'
 
-export const Root = ({ size = 'md', children }: WithChildren<{ size?: 'sm' | 'md' | 'lg' }>) => {
+export const Root = ({
+  size = 'auto',
+  children,
+}: WithChildren<{ size?: 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto' }>) => {
   const { show, onClose } = useModalContext((state) => ({ show: state.isOpen, onClose: state.closeModal }))
 
   return (
@@ -31,14 +34,17 @@ export const Root = ({ size = 'md', children }: WithChildren<{ size?: 'sm' | 'md
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-90"
           >
-            <div className="flex min-h-full items-center justify-center px-4 py-16">
+            <div className="flex min-h-full items-center justify-center p-4">
               <Dialog.Panel
                 className={cx(
-                  'w-full transform overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10',
+                  'transform overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10',
                   {
-                    'max-w-md': size === 'sm',
-                    'max-w-xl': size === 'md',
-                    'max-w-5xl': size === 'lg',
+                    'w-auto': size === 'auto',
+                    'w-screen': size === 'full',
+                    'w-full max-w-screen-sm': size === 'sm',
+                    'w-full max-w-screen-md': size === 'md',
+                    'w-full max-w-screen-lg': size === 'lg',
+                    'w-full max-w-screen-xl': size === 'xl',
                   },
                 )}
               >

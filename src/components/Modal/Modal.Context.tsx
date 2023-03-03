@@ -25,7 +25,12 @@ export const Modal = ({
   onClose,
   size,
   children,
-}: PropsWithChildren<{ trigger?: ReactNode; isOpen?: boolean; onClose?: () => void; size?: 'sm' | 'md' | 'lg' }>) => {
+}: PropsWithChildren<{
+  trigger?: ReactNode
+  isOpen?: boolean
+  onClose?: () => void
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
+}>) => {
   const store = useModalStoreCreator({ isOpen, onClose })
 
   return (
