@@ -38,19 +38,19 @@ export const ViewShip = ({ symbol }: { symbol: string }) => {
             </div>
             <div className="flex gap-2">
               <BoltIcon className="h-6 w-6" />
-              <div>
+              <div className="text-sm">
                 {ship.fuel.current} / {ship.fuel.capacity}
               </div>
             </div>
             <div className="flex gap-2">
               <CubeIcon className="h-6 w-6" />
-              <div>
+              <div className="text-sm">
                 {ship.cargo.units} / {ship.cargo.capacity}
               </div>
             </div>
             <div className="flex gap-2">
               <UserGroupIcon className="h-6 w-6" />
-              <div>
+              <div className="text-sm">
                 {ship.crew.current} / {ship.crew.capacity}
               </div>
             </div>

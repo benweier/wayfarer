@@ -81,19 +81,19 @@ const Ship = ({ ship }: { ship: ShipResponse }) => {
           <div className="flex gap-8 [width:400px]">
             <div className="flex items-center gap-2">
               <BoltIcon className="h-5 w-5 text-teal-500" />
-              <div className="text-base">
+              <div className="text-sm">
                 {ship.fuel.current} / {ship.fuel.capacity}
               </div>
             </div>
             <div className="flex items-center gap-2">
               <CubeIcon className="h-5 w-5 text-fuchsia-500" />
-              <div className="text-base">
+              <div className="text-sm">
                 {ship.cargo.units} / {ship.cargo.capacity}
               </div>
             </div>
             <div className="flex items-center gap-2">
               <UserGroupIcon className="h-5 w-5 text-amber-500" />
-              <div className="text-base">
+              <div className="text-sm">
                 {ship.crew.current} / {ship.crew.capacity}
               </div>
             </div>
