@@ -3,6 +3,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { Fragment } from 'react'
+import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { createShipDock, createShipNavigate, createShipOrbit, getWaypointsList } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
@@ -139,13 +140,23 @@ export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: strin
               leaveTo="opacity-0 -translate-y-4"
             >
               <Popover.Panel className="relative w-screen max-w-xs overflow-y-auto rounded-xl bg-white bg-opacity-10 p-2 ring ring-black/5 backdrop-blur-md dark:bg-black dark:bg-opacity-10 dark:ring-white/5">
-                <WaypointNavigation
-                  systemID={systemID}
-                  onClick={(waypointID) => {
-                    mutate({ shipID, waypointID })
-                    close()
-                  }}
-                />
+                <QuerySuspenseBoundary
+                  fallback={
+                    <div className="grid">
+                      {Array.from({ length: 3 }).map((_, index) => (
+                        <div key={index} className="my-4 mx-auto h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
+                      ))}
+                    </div>
+                  }
+                >
+                  <WaypointNavigation
+                    systemID={systemID}
+                    onClick={(waypointID) => {
+                      mutate({ shipID, waypointID })
+                      close()
+                    }}
+                  />
+                </QuerySuspenseBoundary>
               </Popover.Panel>
             </Transition>
           </div>
