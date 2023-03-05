@@ -17,6 +17,13 @@ export type Meta = {
 }
 
 export type SpaceTradersResponse<R = unknown, M = unknown> = { data: R; meta: M }
+export type SpaceTradersError<R = unknown> = {
+  error?: {
+    message: string
+    code: number
+    data: R
+  }
+}
 
 const createHeaders = (init?: HeadersInit) => {
   const { isAuthenticated, token } = getState()
