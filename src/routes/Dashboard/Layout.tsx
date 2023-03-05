@@ -31,7 +31,7 @@ const menu = [
 
 const mobileMenuAtom = atom<boolean>(false)
 
-export const Layout = () => {
+export const Layout = ({ children = <Outlet /> }: WithChildren) => {
   const [sidebarState, setSidebarState] = useAtom(sidebarAtom)
   const [mobileMenuOpen, setMobileMenuOpen] = useAtom(mobileMenuAtom)
   const submit = useSubmit()
@@ -254,7 +254,7 @@ export const Layout = () => {
                   </div>
                 }
               >
-                <Outlet />
+                <>{children}</>
               </Suspense>
             </section>
 

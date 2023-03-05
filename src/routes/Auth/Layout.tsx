@@ -23,7 +23,7 @@ const Status = () => {
 
 type Redirect = { pathname: string }
 
-export const Layout = () => {
+export const Layout = ({ children = <Outlet /> }: WithChildren) => {
   const { isAuthenticated } = useAuthStore()
   const location = useLocation<{ redirect: Redirect }>()
 
@@ -51,7 +51,7 @@ export const Layout = () => {
           <div className="mx-auto grid w-full max-w-lg items-center">
             <div className="p-8">
               <Suspense fallback={null}>
-                <Outlet />
+                <>{children}</>
               </Suspense>
             </div>
           </div>
