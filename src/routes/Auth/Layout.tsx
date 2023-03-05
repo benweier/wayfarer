@@ -1,21 +1,33 @@
 import { Suspense } from 'react'
 import { IconContext } from 'react-icons'
 import { GiNorthStarShuriken } from 'react-icons/gi'
+import { HiOutlineStatusOffline, HiOutlineStatusOnline, HiRefresh } from 'react-icons/hi'
 import { VscGithub, VscRocket } from 'react-icons/vsc'
 import { Navigate, Outlet } from 'react-router-dom'
-import { SpaceTradersStatus, useSpaceTradersStatus } from '@/components/SpaceTradersStatus'
+import { useSpaceTradersStatus } from '@/components/SpaceTradersStatus'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { useAuthStore } from '@/services/store/auth'
+import { cx } from '@/utilities/cx'
 
-const Status = () => {
-  const { status } = useSpaceTradersStatus()
+const SpaceTradersStatus = () => {
+  const { status, isChecking } = useSpaceTradersStatus()
 
   return (
     <>
       <span className="text-sm">Status:</span>
-      <SpaceTradersStatus />
+      <div
+        className={cx({
+          'text-emerald-400': status === 'ONLINE',
+          'text-rose-400': status === 'OFFLINE',
+          'text-yellow-400': isChecking,
+        })}
+      >
+        {status === 'UNKNOWN' && <HiRefresh size={20} />}
+        {status === 'ONLINE' && <HiOutlineStatusOnline size={20} />}
+        {status === 'OFFLINE' && <HiOutlineStatusOffline size={20} />}
+      </div>
       <span className="text-sm font-semibold">{status}</span>
     </>
   )
@@ -42,7 +54,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
         <Wayfarer className="text-center text-6xl font-black lg:text-7xl" />
         <div className="text-center text-xl font-semibold text-zinc-500">A SpaceTraders API Interface</div>
         <div className="grid grid-flow-col items-center justify-center gap-2 py-4">
-          <Status />
+          <SpaceTradersStatus />
         </div>
       </div>
 
