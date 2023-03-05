@@ -14,7 +14,7 @@ const getMyAgent = queryFnFactory<SpaceTradersResponse<AgentResponse>, void>(() 
 
 export const Login = () => {
   const location = useLocation<Partial<LoginSchema>>()
-  const { setAuth } = useAuthStore()
+  const { signin } = useAuthStore()
 
   const methods = useForm<LoginSchema>({
     defaultValues: {
@@ -31,7 +31,7 @@ export const Login = () => {
       })
     },
     onSuccess: (response, variables) => {
-      setAuth({ agent: response.data, token: variables.token })
+      signin({ agent: response.data, token: variables.token })
     },
     onError: (err: any) => {
       if (err.status === 401) {

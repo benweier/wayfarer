@@ -80,9 +80,9 @@ const Core = () => {
 }
 
 const logout: ActionFunction = () => {
-  const { setAuth } = getState()
+  const { signout } = getState()
 
-  setAuth(null)
+  signout()
 
   return null
 }
