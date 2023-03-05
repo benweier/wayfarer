@@ -32,18 +32,18 @@ export const Orbit = ({ shipID }: { shipID: string }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((s) => s.symbol === shipID) ?? -1
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
 
       if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'IN_ORBIT'))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'IN_ORBIT'))
 
       return { ship, ships }
     },
-    onError: (_err, shipID, context) => {
-      client.setQueryData(['ships'], context?.ships)
-      client.setQueryData(['ship', shipID], context?.ship)
+    onError: (_err, shipID, ctx) => {
+      client.setQueryData(['ships'], ctx?.ships)
+      client.setQueryData(['ship', shipID], ctx?.ship)
     },
-    onSettled: (shipID) => {
+    onSettled: (_res, _err, shipID) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
       void client.invalidateQueries({ queryKey: ['ship', shipID] })
     },
@@ -65,18 +65,18 @@ export const Dock = ({ shipID }: { shipID: string }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((s) => s.symbol === shipID) ?? -1
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
 
       if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'DOCKED'))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'DOCKED'))
 
       return { ship, ships }
     },
-    onError: (_err, shipID, context) => {
-      client.setQueryData(['ship', shipID], context?.ship)
-      client.setQueryData(['ships'], context?.ships)
+    onError: (_err, shipID, ctx) => {
+      client.setQueryData(['ship', shipID], ctx?.ship)
+      client.setQueryData(['ships'], ctx?.ships)
     },
-    onSettled: (shipID) => {
+    onSettled: (_res, _err, shipID) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
       void client.invalidateQueries({ queryKey: ['ship', shipID] })
     },
@@ -95,13 +95,13 @@ export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: strin
     mutationKey: ['ship', shipID, 'navigate'],
     mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
       createShipNavigate({ path: shipID, payload: { waypointSymbol: waypointID } }),
-    onSettled: (shipID) => {
+    onSettled: (_res, _err, { shipID }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
       void client.invalidateQueries({ queryKey: ['ship', shipID] })
     },
   })
   const { x, y, refs } = useFloating<HTMLButtonElement>({
-    strategy: 'fixed',
+    strategy: 'absolute',
     placement: 'bottom',
     middleware: [offset(12), autoPlacement({ allowedPlacements: ['top', 'bottom'] }), shift({ padding: 16 })],
     whileElementsMounted: (reference, floating, update) => {
