@@ -8,7 +8,7 @@ export const client = new QueryClient({
       cacheTime: 1000 * 60,
       refetchOnWindowFocus: false,
       useErrorBoundary: true,
-      retry: 0,
+      retry: false,
     },
   },
 })
