@@ -16,7 +16,6 @@ import {
   useNavigationType,
 } from 'react-router-dom'
 import { NotFound } from '@/components/NotFound'
-import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { RouteErrorElement } from '@/components/RouteErrorElement'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
@@ -149,26 +148,19 @@ const router = sentryCreateBrowserRouter(
             </Route>
           </Route>
 
-          <Route
-            path={ROUTES.FLEET}
-            element={<Dashboard.Fleet.List />}
-            errorElement={<RouteErrorElement />}
-            loader={Dashboard.fleet.loader(client)}
-          >
+          <Route path={ROUTES.FLEET}>
             <Route
-              element={
-                <QuerySuspenseBoundary>
-                  <Dashboard.Fleet.Modal />
-                </QuerySuspenseBoundary>
-              }
-            >
-              <Route
-                path="ship/:shipID"
-                element={<Dashboard.Fleet.Ship />}
-                errorElement={<RouteErrorElement />}
-                loader={Dashboard.ship.loader(client)}
-              />
-            </Route>
+              index
+              element={<Dashboard.Fleet.List />}
+              errorElement={<RouteErrorElement />}
+              loader={Dashboard.fleet.loader(client)}
+            />
+            <Route
+              path="ship/:shipID"
+              element={<Dashboard.Fleet.Ship />}
+              errorElement={<RouteErrorElement />}
+              loader={Dashboard.ship.loader(client)}
+            />
           </Route>
         </Route>
       </Route>
