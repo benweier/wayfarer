@@ -186,7 +186,7 @@ export type ShipResponse = {
   reactor: ShipReactor
   engine: ShipEngine
   modules: ShipModule[]
-  mounts: ShipMount
+  mounts: ShipMount[]
   registration: ShipRegistration
   cargo: ShipCargo
 }
