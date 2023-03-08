@@ -53,122 +53,142 @@ export type FuelResponse = {
   }
 }
 
+export type NavigationRoute = {
+  departure: {
+    symbol: string
+    type: string
+    systemSymbol: string
+    x: number
+    y: number
+  }
+  destination: {
+    symbol: string
+    type: string
+    systemSymbol: string
+    x: number
+    y: number
+  }
+  arrival: string
+}
+
 export type NavigationResponse = {
   systemSymbol: string
   waypointSymbol: string
-  route: {
-    departure: {
-      symbol: string
-      type: string
-      systemSymbol: string
-      x: number
-      y: number
-    }
-    destination: {
-      symbol: string
-      type: string
-      systemSymbol: string
-      x: number
-      y: number
-    }
-    arrival: string
-  }
+  route: NavigationRoute
   status: string
   flightMode: string
+}
+
+export type ShipCrew = {
+  current: number
+  capacity: number
+  required: number
+  rotation: string
+  morale: number
+  wages: number
+}
+
+export type ShipFuel = {
+  current: number
+  capacity: number
+  consumed: {
+    amount: number
+    timestamp: string
+  }
+}
+
+export type ShipFrame = {
+  symbol: string
+  name: string
+  description: string
+  moduleSlots: number
+  mountingPoints: number
+  fuelCapacity: number
+  condition: number
+  requirements: {
+    power: number
+    crew: number
+  }
+}
+
+export type ShipReactor = {
+  symbol: string
+  name: string
+  description: string
+  condition: number
+  powerOutput: number
+  requirements: {
+    crew: number
+  }
+}
+
+export type ShipEngine = {
+  symbol: string
+  name: string
+  description: string
+  condition: number
+  speed: number
+  requirements: {
+    power: number
+    crew: number
+  }
+}
+
+export type ShipModule = {
+  symbol: string
+  name: string
+  description: string
+  capacity?: number
+  range?: number
+  requirements: {
+    crew: number
+    power: number
+    slots: number
+  }
+}
+
+export type ShipMount = {
+  symbol: string
+  name: string
+  description: string
+  strength: number
+  deposits: string[]
+  requirements: {
+    power: number
+    crew: number
+    slots: number
+  }
+}
+
+export type ShipRegistration = {
+  name: string
+  factionSymbol: string
+  role: string
+}
+
+export type ShipCargo = {
+  capacity: number
+  units: number
+  inventory: Array<{
+    symbol: string
+    name: string
+    description: string
+    units: number
+  }>
 }
 
 export type ShipResponse = {
   symbol: string
   nav: NavigationResponse
-  crew: {
-    current: number
-    capacity: number
-    required: number
-    rotation: string
-    morale: number
-    wages: number
-  }
-  fuel: {
-    current: number
-    capacity: number
-    consumed: {
-      amount: number
-      timestamp: string
-    }
-  }
-  frame: {
-    symbol: string
-    name: string
-    description: string
-    moduleSlots: number
-    mountingPoints: number
-    fuelCapacity: number
-    condition: number
-    requirements: {
-      power: number
-      crew: number
-    }
-  }
-  reactor: {
-    symbol: string
-    name: string
-    description: string
-    condition: number
-    powerOutput: number
-    requirements: {
-      crew: number
-    }
-  }
-  engine: {
-    symbol: string
-    name: string
-    description: string
-    condition: number
-    speed: number
-    requirements: {
-      power: number
-      crew: number
-    }
-  }
-  modules: Array<{
-    symbol: string
-    name: string
-    description: string
-    capacity?: number
-    range?: number
-    requirements: {
-      crew: number
-      power: number
-      slots: number
-    }
-  }>
-  mounts: Array<{
-    symbol: string
-    name: string
-    description: string
-    strength: number
-    deposits: string[]
-    requirements: {
-      power: number
-      crew: number
-      slots: number
-    }
-  }>
-  registration: {
-    name: string
-    factionSymbol: string
-    role: string
-  }
-  cargo: {
-    capacity: number
-    units: number
-    inventory: Array<{
-      symbol: string
-      name: string
-      description: string
-      units: number
-    }>
-  }
+  crew: ShipCrew
+  fuel: ShipFuel
+  frame: ShipFrame
+  reactor: ShipReactor
+  engine: ShipEngine
+  modules: ShipModule[]
+  mounts: ShipMount
+  registration: ShipRegistration
+  cargo: ShipCargo
 }
 
 export type SystemWaypoint = {
