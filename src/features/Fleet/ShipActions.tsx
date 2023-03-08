@@ -1,5 +1,6 @@
 import { autoPlacement, autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Popover, Transition } from '@headlessui/react'
+import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { Fragment } from 'react'
@@ -139,7 +140,7 @@ export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: strin
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 -translate-y-4"
             >
-              <Popover.Panel className="relative w-screen max-w-xs overflow-y-auto rounded-xl bg-white bg-opacity-10 p-2 ring ring-black/5 backdrop-blur-md dark:bg-black dark:bg-opacity-10 dark:ring-white/5">
+              <Popover.Panel className="relative w-screen max-w-xs overflow-y-auto rounded-xl bg-white bg-opacity-10 p-3 ring ring-black/5 backdrop-blur-md dark:bg-black dark:bg-opacity-10 dark:ring-white/5">
                 <QuerySuspenseBoundary
                   fallback={
                     <div className="grid">
@@ -151,7 +152,7 @@ export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: strin
                 >
                   <WaypointNavigation
                     systemID={systemID}
-                    onClick={(waypointID) => {
+                    onNavigate={(waypointID) => {
                       mutate({ shipID, waypointID })
                       close()
                     }}
@@ -166,7 +167,13 @@ export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: strin
   )
 }
 
-const WaypointNavigation = ({ systemID, onClick }: { systemID: string; onClick: (waypointID: string) => void }) => {
+const WaypointNavigation = ({
+  systemID,
+  onNavigate,
+}: {
+  systemID: string
+  onNavigate: (waypointID: string) => void
+}) => {
   const { isSuccess, data } = useQuery({
     queryKey: ['system', systemID, 'waypoints'],
     queryFn: () => {
@@ -179,14 +186,17 @@ const WaypointNavigation = ({ systemID, onClick }: { systemID: string; onClick: 
   const waypoints = data.data
 
   return (
-    <div className="grid gap-2">
+    <div className="grid gap-3">
       {waypoints.map((waypoint) => (
-        <div key={waypoint.symbol}>
-          <button className="btn btn-sm flex w-full flex-col gap-1" onClick={() => onClick(waypoint.symbol)}>
-            <span>{waypoint.symbol}</span>
-            <span className="font-light">
+        <div key={waypoint.symbol} className="flex items-center justify-between gap-4">
+          <div>
+            <div className="text-sm font-semibold">{waypoint.symbol}</div>
+            <div className="text-xs font-light">
               {WAYPOINT_TYPE[waypoint.type] ?? waypoint.type} ({waypoint.x}, {waypoint.y})
-            </span>
+            </div>
+          </div>
+          <button className="btn btn-sm" onClick={() => onNavigate(waypoint.symbol)}>
+            <PaperAirplaneIcon className="h-4 w-4" />
           </button>
         </div>
       ))}
