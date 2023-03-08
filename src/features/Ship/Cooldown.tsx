@@ -35,10 +35,7 @@ export const Cooldown = ({ shipID }: { shipID: string }) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="h-1 w-full rounded-full bg-gray-200">
-        <div
-          className="h-full rounded-full bg-green-500 transition-all duration-1000 ease-linear"
-          style={{ width: `${width}%` }}
-        />
+        <div className="h-full rounded-full bg-green-500" style={{ width: `${width}%` }} />
       </div>
     </div>
   )
