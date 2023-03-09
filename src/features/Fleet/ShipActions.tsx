@@ -6,8 +6,15 @@ import { produce } from 'immer'
 import { Fragment } from 'react'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
-import { createShipDock, createShipNavigate, createShipOrbit, getWaypointsList } from '@/services/api/spacetraders'
+import {
+  createShipDock,
+  createShipNavigate,
+  createShipOrbit,
+  createShipRefuel,
+  getWaypointsList,
+} from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { useAuthStore } from '@/services/store/auth'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
@@ -86,6 +93,29 @@ export const Dock = ({ shipID }: { shipID: string }) => {
   return (
     <button className="btn btn-sm" onClick={() => mutate(shipID)}>
       Dock
+    </button>
+  )
+}
+
+export const Refuel = ({ shipID }: { shipID: string }) => {
+  const { setAgent } = useAuthStore()
+  const client = useQueryClient()
+  const { mutate } = useMutation({
+    mutationKey: ['ship', shipID, 'refuel'],
+    mutationFn: (shipID: string) => createShipRefuel({ path: shipID }),
+    onSettled: (response, _err, shipID) => {
+      void client.invalidateQueries({ queryKey: ['ships'] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+
+      if (response?.data.agent) {
+        setAgent(response.data.agent)
+      }
+    },
+  })
+
+  return (
+    <button className="btn btn-confirm btn-outline btn-sm" onClick={() => mutate(shipID)}>
+      Refuel
     </button>
   )
 }
@@ -195,7 +225,7 @@ const WaypointNavigation = ({
               {WAYPOINT_TYPE[waypoint.type] ?? waypoint.type} ({waypoint.x}, {waypoint.y})
             </div>
           </div>
-          <button className="btn btn-sm" onClick={() => onNavigate(waypoint.symbol)}>
+          <button className="btn btn-confirm btn-outline btn-sm" onClick={() => onNavigate(waypoint.symbol)}>
             <PaperAirplaneIcon className="h-4 w-4" />
           </button>
         </div>
