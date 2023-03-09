@@ -7,6 +7,7 @@ type AuthState =
   | { agent: AgentResponse; token: string; isAuthenticated: true }
 
 type AuthHandlers = {
+  setAgent: (agent: AgentResponse) => void
   signin: (state: { agent: AgentResponse; token: string }) => void
   signout: () => void
 }
@@ -17,6 +18,9 @@ const store = createStore<AuthStore>((set) => ({
   isAuthenticated: false,
   token: null,
   agent: null,
+  setAgent: (agent) => {
+    return set({ agent })
+  },
   signin: (state) => {
     if (state.agent && state.token) {
       return set({ isAuthenticated: true, token: state.token, agent: state.agent })
