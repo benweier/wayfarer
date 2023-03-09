@@ -379,6 +379,16 @@ export type CooldownResponse = {
   expiration: string
 }
 
+export type SurveyResponse = {
+  signature: string
+  symbol: string
+  deposits: Array<{
+    symbol: string
+  }>
+  expiration: string
+  size: string
+}
+
 export type RegisterAgentResponse = {
   token: string
   agent: AgentResponse
