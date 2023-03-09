@@ -5,6 +5,7 @@ import {
   FuelResponse,
   NavigationResponse,
   ShipResponse,
+  SurveyResponse,
   WaypointResponse,
 } from '@/types/spacetraders'
 import { Meta, SpaceTradersResponse, mutationFnFactory, queryFnFactory } from './core'
@@ -50,6 +51,16 @@ export const createShipNavigate = mutationFnFactory<
   string,
   { waypointSymbol: string }
 >((ship) => `/my/ships/${ship}/navigate`)
+
+export const createShipRefuel = mutationFnFactory<
+  SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>,
+  string
+>((ship) => `/my/ships/${ship}/refuel`)
+
+export const createShipSurvey = mutationFnFactory<
+  SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>,
+  string
+>((ship) => `/my/ships/${ship}/survey`)
 
 export const createShipChart = mutationFnFactory<
   SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>,
