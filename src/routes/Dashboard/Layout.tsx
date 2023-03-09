@@ -9,7 +9,6 @@ import {
   HomeIcon,
   MoonIcon,
   RocketLaunchIcon,
-  ScaleIcon,
   SunIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
@@ -23,7 +22,7 @@ import { cx } from '@/utilities/cx'
 
 const menu = [
   { name: 'Overview', href: ROUTES.OVERVIEW, icon: HomeIcon },
-  { name: 'Market', href: ROUTES.MARKET, icon: ScaleIcon },
+  // { name: 'Market', href: ROUTES.MARKET, icon: ScaleIcon },
   { name: 'Contracts', href: ROUTES.CONTRACTS, icon: DocumentTextIcon },
   { name: 'Systems', href: ROUTES.SYSTEMS, icon: GlobeAltIcon },
   { name: 'Fleet', href: ROUTES.FLEET, icon: RocketLaunchIcon },
