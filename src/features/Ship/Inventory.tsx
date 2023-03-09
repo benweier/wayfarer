@@ -1,4 +1,5 @@
 import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
+import { Refuel } from '@/features/Fleet/ShipActions'
 import { ShipResponse } from '@/types/spacetraders'
 
 export const Inventory = ({ ship }: { ship: ShipResponse }) => {
@@ -7,6 +8,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
       <div>
         <div className="text-right text-xs font-medium uppercase opacity-60">Fuel</div>
         <div className="flex items-center gap-2">
+          {ship.fuel.consumed.amount > 0 && <Refuel shipID={ship.symbol} />}
           <BoltIcon className="h-5 w-5 text-teal-500" />
           <div className="text-sm font-medium">
             {ship.fuel.current} / {ship.fuel.capacity}
