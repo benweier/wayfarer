@@ -1,12 +1,12 @@
 import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
 import { useIsMutating } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { ShipActions } from '@/components/Ship'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipStore } from '@/services/store/ship'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
-import * as ShipActions from './ShipActions'
 
 export const Ship = ({ ship }: { ship: ShipResponse }) => {
   const isCoolingDown = useShipStore((state) => !!state.ships[ship.symbol]?.cooldown)
