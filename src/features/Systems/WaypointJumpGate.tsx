@@ -13,19 +13,27 @@ export const WaypointJumpGate = ({ systemID, waypointID }: { systemID: string; w
   const jumpgate = data.data
 
   return (
-    <div className="grid gap-8">
-      <div className="text-headline">Range: {jumpgate.jumpRange}</div>
-      <div>
-        <div className="text-headline">Connected Systems</div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {jumpgate.connectedSystems.map((system) => {
-            return (
-              <Link key={system.symbol} className="link" to={`/systems/${system.symbol}`}>
+    <div className="grid gap-4">
+      <div className="text-headline text-center">Connected Systems</div>
+      <div className="grid grid-cols-1 gap-2 lg:grid-cols-3">
+        {jumpgate.connectedSystems.map((system) => {
+          return (
+            <div
+              key={system.symbol}
+              className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
+            >
+              <Link key={system.symbol} className="link font-semibold" to={`/systems/${system.symbol}`}>
                 {system.symbol}
               </Link>
-            )
-          })}
-        </div>
+              <div className="flex items-center justify-between gap-4">
+                <div className="text-secondary text-sm">Distance: {system.distance}</div>
+                <div className="text-secondary text-sm">
+                  ({system.x}, {system.y})
+                </div>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
