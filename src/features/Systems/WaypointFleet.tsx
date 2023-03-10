@@ -22,6 +22,13 @@ export const WaypointFleet = ({ systemID, waypointID }: { systemID: string; wayp
 
   return (
     <div className="grid grid-cols-1 gap-2">
+      {ships.length === 0 && (
+        <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-6 dark:border-zinc-600">
+          <div className="text-secondary text-center text-sm">
+            You have no ships at <span className="font-black">{waypointID}</span>
+          </div>
+        </div>
+      )}
       {ships.map((ship) => {
         return <Ship key={ship.symbol} ship={ship} />
       })}
