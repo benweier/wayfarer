@@ -48,7 +48,7 @@ export const Cargo = ({ ship }: { ship: ShipResponse }) => {
                 <span className="font-semibold">{item.name}</span>
                 <span>{item.units}</span>
               </div>
-              <div className="text-sm opacity-60">{item.description}</div>
+              <div className="text-secondary text-sm">{item.description}</div>
             </div>
           )
         })}

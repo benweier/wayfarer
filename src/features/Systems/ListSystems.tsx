@@ -65,7 +65,7 @@ export const ListSystems = () => {
                 <div>
                   {page * limit + 1 - limit} - {page * limit - limit + systems.length}
                 </div>
-                <div className="opacity-50">of</div>
+                <div className="text-secondary">of</div>
                 <div>{meta.total}</div>
               </>
             )}
@@ -102,7 +102,7 @@ export const ListSystems = () => {
                   <div>
                     {page * limit + 1 - limit} - {page * limit - limit + systems.length}
                   </div>
-                  <div className="opacity-50">of</div>
+                  <div className="text-secondary">of</div>
                   <div>{meta.total}</div>
                 </>
               )}

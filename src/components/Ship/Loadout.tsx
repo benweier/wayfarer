@@ -12,7 +12,7 @@ export const Loadout = ({ ship }: { ship: ShipResponse }) => {
               className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
             >
               <span className="font-semibold">{module.name}</span>
-              <span className="text-sm opacity-60">{module.description}</span>
+              <span className="text-secondary text-sm">{module.description}</span>
             </div>
           ))}
         </div>
@@ -22,15 +22,15 @@ export const Loadout = ({ ship }: { ship: ShipResponse }) => {
         <div className="flex flex-col gap-2">
           <div className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10">
             <span className="font-semibold">{ship.frame.name}</span>
-            <span className="text-sm opacity-60">{ship.frame.description}</span>
+            <span className="text-secondary text-sm">{ship.frame.description}</span>
           </div>
           <div className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10">
             <span className="font-semibold">{ship.reactor.name}</span>
-            <span className="text-sm opacity-60">{ship.reactor.description}</span>
+            <span className="text-secondary text-sm">{ship.reactor.description}</span>
           </div>
           <div className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10">
             <span className="font-semibold">{ship.engine.name}</span>
-            <span className="text-sm opacity-60">{ship.engine.description}</span>
+            <span className="text-secondary text-sm">{ship.engine.description}</span>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ export const Loadout = ({ ship }: { ship: ShipResponse }) => {
               className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
             >
               <span className="font-semibold">{mount.name}</span>
-              <span className="text-sm opacity-60">{mount.description}</span>
+              <span className="text-secondary text-sm">{mount.description}</span>
             </div>
           ))}
         </div>

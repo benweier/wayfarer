@@ -29,7 +29,7 @@ export const Ship = ({ ship }: { ship: ShipResponse }) => {
             <div className="flex flex-row items-end gap-2 [width:400px]">
               <div className="flex gap-8">
                 <div>
-                  <div className="text-xs font-medium uppercase opacity-60">System</div>
+                  <div className="text-secondary text-xs font-medium uppercase">System</div>
                   <div className="font-semibold leading-snug">
                     <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
                       {ship.nav.systemSymbol}
@@ -37,7 +37,7 @@ export const Ship = ({ ship }: { ship: ShipResponse }) => {
                   </div>
                 </div>
                 <div>
-                  <div className="text-xs font-medium uppercase opacity-60">Waypoint</div>
+                  <div className="text-secondary text-xs font-medium uppercase">Waypoint</div>
                   <div className="font-semibold leading-snug">
                     <Link
                       className="link"
