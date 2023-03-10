@@ -42,7 +42,7 @@ export const Cargo = ({ ship }: { ship: ShipResponse }) => {
               <div
                 className={cx('flex items-center gap-4', {
                   'justify-between': cargoDisplayMode === 'grid',
-                  'justify-start': cargoDisplayMode === 'list',
+                  'justify-between lg:justify-start': cargoDisplayMode === 'list',
                 })}
               >
                 <span className="font-semibold">{item.name}</span>
