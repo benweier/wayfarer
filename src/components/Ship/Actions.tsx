@@ -3,7 +3,16 @@ import { Popover, Transition } from '@headlessui/react'
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { Fragment } from 'react'
+import {
+  ButtonHTMLAttributes,
+  FC,
+  Fragment,
+  PropsWithRef,
+  ReactElement,
+  cloneElement,
+  createElement,
+  isValidElement,
+} from 'react'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import {
@@ -15,7 +24,7 @@ import {
 } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/services/store/auth'
-import { ShipResponse } from '@/types/spacetraders'
+import { FuelResponse, ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
@@ -97,7 +106,21 @@ export const Dock = ({ shipID }: { shipID: string }) => {
   )
 }
 
-export const Refuel = ({ shipID }: { shipID: string }) => {
+export const Refuel = ({
+  shipID,
+  fuel,
+  trigger = (props) => (
+    <button className="btn btn-confirm btn-outline btn-sm" {...props}>
+      Refuel
+    </button>
+  ),
+}: {
+  shipID: string
+  fuel: FuelResponse
+  trigger?:
+    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
+    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
+}) => {
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
   const { mutate } = useMutation({
@@ -113,11 +136,15 @@ export const Refuel = ({ shipID }: { shipID: string }) => {
     },
   })
 
-  return (
-    <button className="btn btn-confirm btn-outline btn-sm" onClick={() => mutate(shipID)}>
-      Refuel
-    </button>
-  )
+  return isValidElement(trigger)
+    ? cloneElement(trigger, {
+        disabled: trigger.props.disabled ?? fuel.consumed.amount === 0,
+        onClick: () => mutate(shipID),
+      })
+    : createElement(trigger, {
+        disabled: !fuel.consumed.amount,
+        onClick: () => mutate(shipID),
+      })
 }
 
 export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: string }) => {
