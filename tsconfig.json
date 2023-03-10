@@ -33,8 +33,7 @@
       "@/*": ["./src/*"]
     },
     "incremental": true,
-    "types": ["vite/client"],
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "types": ["vite/client"]
   },
   "files": ["env.d.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "cypress.config.ts"],
