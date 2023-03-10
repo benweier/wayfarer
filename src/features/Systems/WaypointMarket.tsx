@@ -17,9 +17,9 @@ export const WaypointMarket = ({ systemID, waypointID }: { systemID: string; way
         <div className="text-headline text-center">Imports</div>
         <div className="flex flex-col gap-2">
           {market.imports.length === 0 && (
-            <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-6 dark:border-zinc-600">
+            <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-black">{waypointID}</span> does not list any imports
+                <span className="font-bold">{waypointID}</span> does not list any imports
               </div>
             </div>
           )}
@@ -40,9 +40,9 @@ export const WaypointMarket = ({ systemID, waypointID }: { systemID: string; way
         <div className="text-headline text-center">Exports</div>
         <div className="flex flex-col gap-2">
           {market.exports.length === 0 && (
-            <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-6 dark:border-zinc-600">
+            <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-black">{waypointID}</span> does not list any exports
+                <span className="font-bold">{waypointID}</span> does not list any exports
               </div>
             </div>
           )}
@@ -63,9 +63,9 @@ export const WaypointMarket = ({ systemID, waypointID }: { systemID: string; way
         <div className="text-headline text-center">Exchange</div>
         <div className="flex flex-col gap-2">
           {market.exchange.length === 0 && (
-            <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-6 dark:border-zinc-600">
+            <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-black">{waypointID}</span> does not list any exchanges
+                <span className="font-bold">{waypointID}</span> does not list any exchanges
               </div>
             </div>
           )}
