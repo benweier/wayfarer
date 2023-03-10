@@ -12,20 +12,52 @@ export const WaypointMarket = ({ systemID, waypointID }: { systemID: string; way
   const market = data.data
 
   return (
-    <div className="grid gap-8">
-      <div>
-        <div className="text-headline">Imports</div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="flex flex-col gap-4">
+        <div className="text-headline text-center">Imports</div>
+        <div className="flex flex-col gap-2">
           {market.imports.map((item) => {
-            return <div key={item.symbol}>{item.name}</div>
+            return (
+              <div
+                key={item.symbol}
+                className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
+              >
+                <div className="font-semibold">{item.name}</div>
+                <div className="text-secondary text-sm">{item.description}</div>
+              </div>
+            )
           })}
         </div>
       </div>
-      <div>
-        <div className="text-headline">Exports</div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="flex flex-col gap-4">
+        <div className="text-headline text-center">Exports</div>
+        <div className="flex flex-col gap-2">
           {market.exports.map((item) => {
-            return <div key={item.symbol}>{item.name}</div>
+            return (
+              <div
+                key={item.symbol}
+                className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
+              >
+                <div className="font-semibold">{item.name}</div>
+                <div className="text-secondary text-sm">{item.description}</div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+      <div className="flex flex-col gap-4">
+        <div className="text-headline text-center">Exchange</div>
+        <div className="flex flex-col gap-2">
+          {market.exchange.map((item) => {
+            return (
+              <div
+                key={item.symbol}
+                className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
+              >
+                <div className="font-semibold">{item.name}</div>
+                <div className="text-secondary text-sm">{item.description}</div>
+              </div>
+            )
           })}
         </div>
       </div>
