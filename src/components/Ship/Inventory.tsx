@@ -1,6 +1,6 @@
 import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
-import { ShipActions } from '@/components/Ship'
 import { ShipResponse } from '@/types/spacetraders'
+import * as Actions from './Actions'
 
 export const Inventory = ({ ship }: { ship: ShipResponse }) => {
   return (
@@ -13,7 +13,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
             {ship.fuel.current} / {ship.fuel.capacity}
           </div>
         </div>
-        <ShipActions.Refuel shipID={ship.symbol} fuel={ship.fuel} />
+        <Actions.Refuel shipID={ship.symbol} fuel={ship.fuel} />
       </div>
       <div>
         <div className="text-secondary text-right text-xs uppercase">Cargo</div>
