@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { Modal } from '@/components/Modal'
+import { Ship } from '@/components/Ship'
 import { ROUTES } from '@/config/routes'
 import { createShipScanWaypoint, getShipsList } from '@/services/api/spacetraders'
 import { SpaceTradersError } from '@/services/api/spacetraders/core'
@@ -8,7 +9,6 @@ import { STATUS_CODES, isHttpError } from '@/services/http'
 import { useShipStore } from '@/services/store/ship'
 import { CooldownResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
-import { Ship } from './Ship'
 
 export const MyShips = () => {
   const { isSuccess, data, isFetching } = useQuery({
