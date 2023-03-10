@@ -9,24 +9,26 @@ export const Status = ({ nav }: { nav: NavigationResponse }) => {
     <div className="flex flex-row items-end gap-2">
       <div className="flex gap-8">
         <div>
-          <div className="text-xs font-medium uppercase opacity-60">System</div>
-          <div className="font-semibold">
+          <div className="text-secondary text-xs uppercase">System</div>
+          <div className="font-semibold leading-snug">
             <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.systemSymbol}`}>
               {nav.systemSymbol}
             </Link>
           </div>
         </div>
         <div>
-          <div className="text-xs font-medium uppercase opacity-60">Waypoint</div>
-          <div className="font-semibold">
+          <div className="text-secondary text-xs uppercase">Waypoint</div>
+          <div className="font-semibold leading-snug">
             <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.systemSymbol}/waypoint/${nav.waypointSymbol}`}>
               {nav.waypointSymbol}
             </Link>
           </div>
         </div>
       </div>
-      <div className="rounded bg-black py-1 px-2 text-xs font-bold">{SHIP_NAV_STATUS[nav.status] ?? nav.status}</div>
-      <div className="rounded bg-black py-1 px-2 text-xs font-bold">
+      <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+        {SHIP_NAV_STATUS[nav.status] ?? nav.status}
+      </div>
+      <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
         {SHIP_NAV_FLIGHT_MODE[nav.flightMode] ?? nav.flightMode}
       </div>
     </div>
@@ -39,7 +41,7 @@ export const Route = ({ route }: { route: NavigationRoute }) => {
   return (
     <div className="flex items-start justify-between gap-4">
       <div className="flex flex-col items-start">
-        <div className="text-xs font-medium uppercase opacity-60">Route</div>
+        <div className="text-secondary text-xs uppercase">Route</div>
         <div className="flex items-center gap-2">
           <div className="text-sm font-medium">
             <Link className="link" to={`${ROUTES.SYSTEMS}/${route.departure.systemSymbol}`}>
@@ -54,7 +56,7 @@ export const Route = ({ route }: { route: NavigationRoute }) => {
             </Link>
           </div>
           <div>
-            <ChevronRightIcon className="h-4 w-4 opacity-60" />
+            <ChevronRightIcon className="text-secondary h-4 w-4" />
           </div>
           <div className="text-sm font-medium">
             <Link className="link" to={`${ROUTES.SYSTEMS}/${route.destination.systemSymbol}`}>
@@ -70,13 +72,28 @@ export const Route = ({ route }: { route: NavigationRoute }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-end">
-        <div className="text-xs font-medium uppercase opacity-60">
-          {Date.now() < arrival.getTime() ? 'Arrives' : 'Arrived'}
+      <div className="flex flex-col gap-1">
+        <div className="flex flex-row gap-8">
+          <div className="flex flex-col items-start">
+            <div className="text-secondary text-xs uppercase">Departed</div>
+            <div className="flex items-center gap-2">
+              <div className="text-sm font-medium">---</div>
+            </div>
+          </div>
+          <div className="flex flex-col items-end">
+            <div className="text-secondary text-xs uppercase">
+              {Date.now() < arrival.getTime() ? 'Arriving' : 'Arrived'}
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="text-sm font-medium">
+                {arrival.toLocaleDateString()} {arrival.toLocaleTimeString()}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="text-sm font-medium">
-            {arrival.toLocaleDateString()} {arrival.toLocaleTimeString()}
+        <div>
+          <div className="h-1 w-full rounded-full bg-gray-200">
+            <div className="h-full rounded-full bg-green-500" style={{ width: `${100}%` }} />
           </div>
         </div>
       </div>

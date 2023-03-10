@@ -1,2 +1,7 @@
 export { Ship } from './Ship'
-export * as ShipActions from './Actions'
+export { Cargo } from './Cargo'
+export { Cooldown } from './Cooldown'
+export { Inventory } from './Inventory'
+export { Loadout } from './Loadout'
+export * as Navigation from './Navigation'
+export * as Actions from './Actions'

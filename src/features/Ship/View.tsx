@@ -2,13 +2,9 @@ import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { Cargo, Cooldown, Inventory, Loadout, Navigation } from '@/components/Ship'
 import { getShipById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
-import { Cargo } from './Cargo'
-import { Cooldown } from './Cooldown'
-import { Inventory } from './Inventory'
-import { Loadout } from './Loadout'
-import * as ShipNavigation from './Navigation'
 
 const tabs = [
   { title: 'Cargo', content: Cargo, fallback: Fragment },
@@ -35,12 +31,12 @@ export const View = ({ symbol }: { symbol: string }) => {
       <Cooldown shipID={ship.symbol} />
 
       <div className="flex items-start justify-between gap-4">
-        <ShipNavigation.Status nav={ship.nav} />
+        <Navigation.Status nav={ship.nav} />
         <Inventory ship={ship} />
       </div>
 
       <div>
-        <ShipNavigation.Route route={ship.nav.route} />
+        <Navigation.Route route={ship.nav.route} />
       </div>
 
       <div>
