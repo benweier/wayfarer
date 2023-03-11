@@ -2,18 +2,15 @@ import { Dialog, Transition } from '@headlessui/react'
 import {
   ArrowRightOnRectangleIcon,
   Bars3Icon,
-  ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon,
   GlobeAltIcon,
   HomeIcon,
-  MoonIcon,
   RocketLaunchIcon,
-  SunIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { atom, useAtom } from 'jotai'
 import { Fragment, Suspense } from 'react'
 import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-dom'
+import { Preferences } from '@/components/Preferences'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
 import { sidebarAtom } from '@/services/store/atoms/sidebar'
@@ -30,11 +27,32 @@ const menu = [
 
 const mobileMenuAtom = atom<boolean>(false)
 
-export const Layout = ({ children = <Outlet /> }: WithChildren) => {
-  const [sidebarState, setSidebarState] = useAtom(sidebarAtom)
-  const [mobileMenuOpen, setMobileMenuOpen] = useAtom(mobileMenuAtom)
-  const submit = useSubmit()
+const NavigationLoader = () => {
   const navigation = useNavigation()
+
+  return navigation.state !== 'idle' ? <span className="loader" /> : <></>
+}
+
+const Logout = () => {
+  const submit = useSubmit()
+  return (
+    <button
+      onClick={() => {
+        submit(null, { method: 'post', action: ROUTES.LOGOUT })
+      }}
+      className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-rose-200 shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+    >
+      <div className="h-6 w-6">
+        <ArrowRightOnRectangleIcon className="h-6 w-6" aria-hidden />
+      </div>
+      <span className="sr-only text-sm @[220px]/side:not-sr-only">Log out</span>
+    </button>
+  )
+}
+
+export const Layout = ({ children = <Outlet /> }: WithChildren) => {
+  const [sidebarState] = useAtom(sidebarAtom)
+  const [mobileMenuOpen, setMobileMenuOpen] = useAtom(mobileMenuAtom)
 
   return (
     <>
@@ -105,21 +123,6 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                       </div>
                     </nav>
                   </div>
-                  {/* <div className="flex flex-shrink-0 border-t border-zinc-200 p-4">
-                    <a href="#" className="group block flex-shrink-0">
-                      <div className="flex items-center">
-                        <div>
-                          <img className="inline-block h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-base font-medium text-zinc-700 group-hover:text-zinc-900">{user.name}</p>
-                          <p className="text-sm font-medium text-zinc-500 group-hover:text-zinc-700">
-                            Account Settings
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </div> */}
                 </Dialog.Panel>
               </Transition.Child>
               <div className="w-14 flex-shrink-0" aria-hidden>
@@ -130,7 +133,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:flex lg:flex-shrink-0">
+        <div className="z-10 hidden lg:flex lg:flex-shrink-0">
           <div
             className={cx('flex flex-col transition-all duration-100 ease-in-out @container/side', {
               'w-20': sidebarState === 'collapsed',
@@ -162,59 +165,10 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                 </nav>
               </div>
               <div className="flex flex-col items-center justify-center gap-2 p-4">
-                <button
-                  onClick={() => {
-                    const theme = window.localStorage.getItem('theme')
-                    if (theme === 'dark') {
-                      document.documentElement.classList.add('light')
-                      document.documentElement.classList.remove('dark')
-                    } else {
-                      document.documentElement.classList.add('dark')
-                      document.documentElement.classList.remove('light')
-                    }
-                    window.localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark')
-                  }}
-                  className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100"
-                >
-                  <div className="h-6 w-6">
-                    <SunIcon className="hidden h-6 w-6 dark:block" aria-hidden />
-                    <MoonIcon className="block h-6 w-6 dark:hidden" aria-hidden />
-                  </div>
-                  <span className="sr-only flex flex-col items-start justify-start text-sm leading-none @[220px]/side:not-sr-only">
-                    Toggle Theme
-                  </span>
-                </button>
-                <button
-                  onClick={() => setSidebarState((state) => (state === 'collapsed' ? 'expanded' : 'collapsed'))}
-                  className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100"
-                >
-                  <div className="h-6 w-6">
-                    <ChevronDoubleLeftIcon
-                      className={cx('h-6 w-6', { hidden: sidebarState === 'collapsed' })}
-                      aria-hidden
-                    />
-                    <ChevronDoubleRightIcon
-                      className={cx('h-6 w-6', { hidden: sidebarState === 'expanded' })}
-                      aria-hidden
-                    />
-                  </div>
-                  <span className="sr-only text-sm @[220px]/side:not-sr-only">
-                    {sidebarState === 'collapsed' ? 'Expand Menu' : 'Collapse Menu'}
-                  </span>
-                </button>
+                <Preferences />
               </div>
               <div className="flex flex-shrink items-center justify-center gap-2 bg-rose-600 p-4">
-                <button
-                  onClick={() => {
-                    submit(null, { method: 'post', action: ROUTES.LOGOUT })
-                  }}
-                  className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-rose-200 shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
-                >
-                  <div className="h-6 w-6">
-                    <ArrowRightOnRectangleIcon className="h-6 w-6" aria-hidden />
-                  </div>
-                  <span className="sr-only text-sm @[220px]/side:not-sr-only">Log out</span>
-                </button>
+                <Logout />
               </div>
             </div>
           </div>
@@ -245,7 +199,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
           <main className="flex flex-1 overflow-hidden">
             {/* Primary column */}
             <section className="relative flex h-full min-w-0 flex-1 flex-col overflow-y-auto">
-              {navigation.state !== 'idle' && <span className="loader" />}
+              <NavigationLoader />
               <Suspense
                 fallback={
                   <div className="flex h-full w-full animate-pulse items-center justify-center text-5xl font-black text-zinc-900/5 dark:text-zinc-500/10">
