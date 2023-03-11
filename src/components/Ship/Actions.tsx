@@ -136,7 +136,7 @@ export const Refuel = ({
     },
   })
 
-  const disabled = isLoading || fuel.consumed.amount === 0
+  const disabled = isLoading || fuel.current === fuel.capacity
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
