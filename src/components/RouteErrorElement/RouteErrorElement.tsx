@@ -14,7 +14,7 @@ const isRouteErrorResponse = (error: any): error is Response => {
 }
 
 export const RouteErrorElement = () => {
-  const error: any = useRouteError()
+  const error = useRouteError()
 
   if (isRouteErrorResponse(error)) {
     return (
