@@ -17,6 +17,7 @@ import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-do
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
 import { sidebarAtom } from '@/services/store/atoms/sidebar'
+import { useAuthStore } from '@/services/store/auth'
 import { cx } from '@/utilities/cx'
 
 const menu = [
@@ -259,12 +260,29 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden lg:block lg:flex-shrink-0">
               <div className="relative flex h-full w-96 flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg dark:bg-zinc-900/50">
-                {/* Your content */}
+                <div className="p-4">
+                  <Agent />
+                </div>
               </div>
             </aside>
           </main>
         </div>
       </div>
+    </>
+  )
+}
+
+const Agent = () => {
+  const { agent, isAuthenticated } = useAuthStore()
+
+  if (!isAuthenticated) return null
+
+  const credits = new Intl.NumberFormat('en-US').format(agent.credits)
+
+  return (
+    <>
+      <div className="text-xl font-black">{agent.symbol}</div>
+      <div className="text-sm font-semibold">Credits: {credits}</div>
     </>
   )
 }
