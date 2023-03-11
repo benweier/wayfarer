@@ -1,6 +1,6 @@
 import { autoPlacement, autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Popover, Transition } from '@headlessui/react'
-import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
+import { MapPinIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import {
@@ -147,10 +147,10 @@ export const Refuel = ({
       })
 }
 
-export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: string }) => {
+export const Navigate = ({ ship, systemID }: { ship: ShipResponse; systemID: string }) => {
   const client = useQueryClient()
   const { mutate } = useMutation({
-    mutationKey: ['ship', shipID, 'navigate'],
+    mutationKey: ['ship', ship.symbol, 'navigate'],
     mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
       createShipNavigate({ path: shipID, payload: { waypointSymbol: waypointID } }),
     onSettled: (_res, _err, { shipID }) => {
@@ -209,8 +209,9 @@ export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: strin
                 >
                   <WaypointNavigation
                     systemID={systemID}
+                    ship={ship}
                     onNavigate={(waypointID) => {
-                      mutate({ shipID, waypointID })
+                      mutate({ shipID: ship.symbol, waypointID })
                       close()
                     }}
                   />
@@ -227,9 +228,11 @@ export const Navigate = ({ shipID, systemID }: { shipID: string; systemID: strin
 const WaypointNavigation = ({
   systemID,
   onNavigate,
+  ship,
 }: {
   systemID: string
   onNavigate: (waypointID: string) => void
+  ship: ShipResponse
 }) => {
   const { isSuccess, data } = useQuery({
     queryKey: ['system', systemID, 'waypoints'],
@@ -252,9 +255,21 @@ const WaypointNavigation = ({
               {WAYPOINT_TYPE[waypoint.type] ?? waypoint.type} ({waypoint.x}, {waypoint.y})
             </div>
           </div>
-          <button className="btn btn-confirm btn-outline btn-sm" onClick={() => onNavigate(waypoint.symbol)}>
-            <PaperAirplaneIcon className="h-4 w-4" />
-          </button>
+          {ship.nav.waypointSymbol !== waypoint.symbol ? (
+            <button className="btn btn-confirm btn-outline btn-sm" onClick={() => onNavigate(waypoint.symbol)}>
+              <PaperAirplaneIcon className="h-4 w-4" />
+              <span className="sr-only">
+                Navigate ship {ship.symbol} to waypoint {waypoint.symbol}
+              </span>
+            </button>
+          ) : (
+            <button disabled className="btn btn-sm">
+              <MapPinIcon className="h-5 w-5" />
+              <span className="sr-only">
+                Ship {ship.symbol} is already at waypoint {waypoint.symbol}
+              </span>
+            </button>
+          )}
         </div>
       ))}
     </div>

@@ -81,7 +81,7 @@ export const Ship = ({ ship }: { ship: ShipResponse }) => {
               ) : (
                 <Actions.Dock shipID={ship.symbol} />
               )}
-              <Actions.Navigate shipID={ship.symbol} systemID={ship.nav.systemSymbol} />
+              <Actions.Navigate ship={ship} systemID={ship.nav.systemSymbol} />
             </fieldset>
           </div>
         </div>
