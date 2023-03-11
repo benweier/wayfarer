@@ -123,7 +123,7 @@ export const Refuel = ({
 }) => {
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', shipID, 'refuel'],
     mutationFn: (shipID: string) => createShipRefuel({ path: shipID }),
     onSettled: (response, _err, shipID) => {
@@ -136,13 +136,15 @@ export const Refuel = ({
     },
   })
 
+  const disabled = isLoading || fuel.consumed.amount === 0
+
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        disabled: trigger.props.disabled ?? fuel.consumed.amount === 0,
+        disabled: trigger.props.disabled ?? disabled,
         onClick: () => mutate(shipID),
       })
     : createElement(trigger, {
-        disabled: !fuel.consumed.amount,
+        disabled: disabled,
         onClick: () => mutate(shipID),
       })
 }
