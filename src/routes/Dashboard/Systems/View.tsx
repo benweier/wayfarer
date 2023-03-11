@@ -11,7 +11,7 @@ export const SystemViewRoute = () => {
         System: <span className="font-normal">{systemID}</span>
       </h1>
       <div className="grid gap-12">
-        <QuerySuspenseBoundary>{systemID && <ViewSystem id={systemID} />}</QuerySuspenseBoundary>
+        <QuerySuspenseBoundary>{systemID && <ViewSystem systemID={systemID} />}</QuerySuspenseBoundary>
       </div>
     </div>
   )
