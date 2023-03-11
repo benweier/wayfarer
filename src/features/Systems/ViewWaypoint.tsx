@@ -9,13 +9,13 @@ import { cx } from '@/utilities/cx'
 import { WaypointFleet } from './WaypointFleet'
 import { WaypointJumpGate } from './WaypointJumpGate'
 import { WaypointMarket } from './WaypointMarket'
-import { WaypointShipyard } from './WaypointShipyard'
+import { ShipyardError, WaypointShipyard } from './WaypointShipyard'
 
 const tabs = [
-  { title: 'Fleet', content: WaypointFleet, fallback: Fragment },
-  { title: 'Market', content: WaypointMarket, fallback: Fragment },
-  { title: 'Shipyard', content: WaypointShipyard, fallback: Fragment },
-  { title: 'Jump Gate', content: WaypointJumpGate, fallback: Fragment },
+  { title: 'Fleet', content: WaypointFleet, fallback: Fragment, error: Fragment },
+  { title: 'Market', content: WaypointMarket, fallback: Fragment, error: Fragment },
+  { title: 'Shipyard', content: WaypointShipyard, fallback: Fragment, error: ShipyardError },
+  { title: 'Jump Gate', content: WaypointJumpGate, fallback: Fragment, error: Fragment },
 ]
 
 export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypointID: string }) => {
@@ -68,7 +68,7 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
         <Tab.Panels>
           {tabs.map((tab) => (
             <Tab.Panel key={tab.title}>
-              <QuerySuspenseBoundary fallback={<tab.fallback />}>
+              <QuerySuspenseBoundary fallback={<tab.fallback />} error={<tab.error />}>
                 <tab.content systemID={systemID} waypointID={waypointID} />
               </QuerySuspenseBoundary>
             </Tab.Panel>
