@@ -1,5 +1,6 @@
-import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from '@heroicons/react/24/outline'
-import { useAtom } from 'jotai/index'
+import { RadioGroup } from '@headlessui/react'
+import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from '@heroicons/react/20/solid'
+import { useAtom } from 'jotai'
 import { sidebarAtom } from '@/services/store/atoms/sidebar'
 import { cx } from '@/utilities/cx'
 
@@ -7,30 +8,25 @@ export const Sidebar = () => {
   const [sidebarState, setSidebarState] = useAtom(sidebarAtom)
 
   return (
-    <div className="flex flex-col gap-1">
-      <div className="text-sm font-bold">Menu</div>
+    <RadioGroup value={sidebarState} onChange={setSidebarState} className="flex flex-col gap-1">
+      <RadioGroup.Label className="text-sm font-bold">Menu</RadioGroup.Label>
       <div className="grid grid-cols-2 gap-2">
-        <button
-          className={cx('btn flex w-full flex-col items-center justify-center gap-1', {
-            'hocus:bg-black/5 dark:hocus:bg-white/5': sidebarState === 'expanded',
-            'btn-primary btn-outline': sidebarState === 'collapsed',
-          })}
-          onClick={() => setSidebarState('collapsed')}
-        >
-          <ArrowsPointingInIcon className="h-5 w-5" aria-hidden />
-          <span>Collapsed</span>
-        </button>
-        <button
-          className={cx('btn flex w-full flex-col items-center justify-center gap-1', {
-            'hocus:bg-black/5 dark:hocus:bg-white/5': sidebarState === 'collapsed',
-            'btn-primary btn-outline': sidebarState === 'expanded',
-          })}
-          onClick={() => setSidebarState('expanded')}
-        >
-          <ArrowsPointingOutIcon className="h-5 w-5" aria-hidden />
-          <span>Expanded</span>
-        </button>
+        {[
+          { label: 'Collapsed', value: 'collapsed', icon: ArrowsPointingInIcon },
+          { label: 'Expanded', value: 'expanded', icon: ArrowsPointingOutIcon },
+        ].map((item) => (
+          <RadioGroup.Option
+            key={item.value}
+            value={item.value}
+            className={({ checked }) => cx('btn', { 'btn-primary btn-outline': checked })}
+          >
+            <div className={cx('flex w-full flex-col items-center justify-between gap-1')}>
+              <item.icon className="h5 w-5" />
+              <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
+            </div>
+          </RadioGroup.Option>
+        ))}
       </div>
-    </div>
+    </RadioGroup>
   )
 }
