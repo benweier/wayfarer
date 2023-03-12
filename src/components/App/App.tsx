@@ -19,6 +19,7 @@ import { NotFound } from '@/components/NotFound'
 import { RouteErrorElement } from '@/components/RouteErrorElement'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
+import { useThemeManager } from '@/hooks/useThemeManager'
 import * as Auth from '@/routes/Auth'
 import * as Dashboard from '@/routes/Dashboard'
 import { client } from '@/services/query-client'
@@ -54,6 +55,8 @@ const { Home } = lazy(() => import('@/routes/Home'), ['Home'])
 
 const Core = () => {
   const { reset } = useQueryErrorResetBoundary()
+
+  useThemeManager()
 
   return (
     <Sentry.ErrorBoundary
