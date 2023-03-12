@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import { Actions } from '@/components/Ship'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { useShipStore } from '@/services/store/ship'
+import { useShipCooldownStore } from '@/services/store/ship.cooldown'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const Ship = ({ ship }: { ship: ShipResponse }) => {
-  const isCoolingDown = useShipStore((state) => !!state.ships[ship.symbol]?.cooldown)
+  const isCoolingDown = useShipCooldownStore((state) => !!state.ships[ship.symbol]?.cooldown)
   const isMutating = useIsMutating(['ship', ship.symbol], { exact: false })
 
   return (

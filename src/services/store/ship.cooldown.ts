@@ -2,17 +2,17 @@ import { produce } from 'immer'
 import { create } from 'zustand'
 import { CooldownResponse } from '@/types/spacetraders'
 
-type ShipState = { ships: Record<string, { cooldown: CooldownResponse } | undefined> }
+type ShipCooldownState = { ships: Record<string, { cooldown: CooldownResponse } | undefined> }
 
-type ShipHandlers = {
+type ShipCooldownHandlers = {
   setCooldown: (shipID: string, cooldown: CooldownResponse) => void
   updateRemainingSeconds: (shipID: string) => void
   clearCooldown: (shipID: string) => void
 }
 
-type ShipStore = ShipState & ShipHandlers
+type ShipCooldownStore = ShipCooldownState & ShipCooldownHandlers
 
-export const useShipStore = create<ShipStore>((set, get) => ({
+export const useShipCooldownStore = create<ShipCooldownStore>((set, get) => ({
   ships: {},
   setCooldown: (shipID, cooldown) => {
     return set(

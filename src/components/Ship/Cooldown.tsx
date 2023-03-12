@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { useShipStore } from '@/services/store/ship.cooldown'
+import { useShipCooldownStore } from '@/services/store/ship.cooldown'
 
 export const Cooldown = ({ shipID }: { shipID: string }) => {
-  const { cooldown, updateRemainingSeconds, clearCooldown } = useShipStore((state) => ({
+  const { cooldown, updateRemainingSeconds, clearCooldown } = useShipCooldownStore((state) => ({
     cooldown: state.ships[shipID]?.cooldown,
     updateRemainingSeconds: state.updateRemainingSeconds,
     clearCooldown: state.clearCooldown,

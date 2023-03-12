@@ -6,7 +6,7 @@ import { ROUTES } from '@/config/routes'
 import { createShipScanWaypoint, getShipsList } from '@/services/api/spacetraders'
 import { SpaceTradersError } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, isHttpError } from '@/services/http'
-import { useShipStore } from '@/services/store/ship'
+import { useShipCooldownStore } from '@/services/store/ship.cooldown'
 import { CooldownResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
@@ -36,7 +36,7 @@ export const MyShips = () => {
 }
 
 const ScanWaypoints = ({ shipID }: { shipID: string }) => {
-  const setCooldown = useShipStore((state) => state.setCooldown)
+  const setCooldown = useShipCooldownStore((state) => state.setCooldown)
   const { mutate, isSuccess, data } = useMutation({
     mutationKey: ['ship', shipID, 'scan'],
     mutationFn: (shipID: string) => createShipScanWaypoint({ path: shipID }),
