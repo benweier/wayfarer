@@ -6,11 +6,8 @@ export const Loadout = ({ ship }: { ship: ShipResponse }) => {
       <div className="flex flex-col gap-4">
         <div className="text-overline text-center">Modules</div>
         <div className="flex flex-col gap-2">
-          {ship.modules.map((module) => (
-            <div
-              key={module.symbol}
-              className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
-            >
+          {ship.modules.map((module, index) => (
+            <div key={index} className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10">
               <span className="font-semibold">{module.name}</span>
               <span className="text-secondary text-sm">{module.description}</span>
             </div>
@@ -37,11 +34,8 @@ export const Loadout = ({ ship }: { ship: ShipResponse }) => {
       <div className="flex flex-col gap-4">
         <div className="text-overline text-center">Mounts</div>
         <div className="flex flex-col gap-2">
-          {ship.mounts.map((mount) => (
-            <div
-              key={mount.symbol}
-              className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
-            >
+          {ship.mounts.map((mount, index) => (
+            <div key={index} className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10">
               <span className="font-semibold">{mount.name}</span>
               <span className="text-secondary text-sm">{mount.description}</span>
             </div>
