@@ -13,6 +13,7 @@ import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-do
 import { Preferences } from '@/components/Preferences'
 import { Wayfarer } from '@/components/Wayfarer'
 import { ROUTES } from '@/config/routes'
+import { Navigation } from '@/features/Navigation'
 import { sidebarAtom } from '@/services/store/atoms/sidebar'
 import { useAuthStore } from '@/services/store/auth'
 import { cx } from '@/utilities/cx'
@@ -137,7 +138,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
           <div
             className={cx('flex flex-col transition-all duration-100 ease-in-out @container/side', {
               'w-20': sidebarState === 'collapsed',
-              'w-60': sidebarState === 'expanded',
+              'w-56': sidebarState === 'expanded',
             })}
           >
             <div className="flex min-h-0 flex-1 flex-col bg-blue-600">
@@ -149,20 +150,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                     </div>
                   </Link>
                 </div>
-                <nav aria-label="Sidebar" className="flex flex-col items-center justify-center gap-2 p-4">
-                  {menu.map((item) => (
-                    <NavLink
-                      key={item.name}
-                      to={item.href}
-                      className="flex w-full items-center gap-4 overflow-hidden rounded-md border-2 border-blue-600 px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-800"
-                    >
-                      <div>
-                        <item.icon className="h-5 w-5" aria-hidden />
-                      </div>
-                      <span className="sr-only text-sm @[220px]/side:not-sr-only">{item.name}</span>
-                    </NavLink>
-                  ))}
-                </nav>
+                <Navigation />
               </div>
               <div className="flex flex-col items-center justify-center gap-2 p-4">
                 <Preferences />
