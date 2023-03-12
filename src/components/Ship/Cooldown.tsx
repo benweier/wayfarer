@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useShipStore } from '@/services/store/ship'
+import { useShipStore } from '@/services/store/ship.cooldown'
 
 export const Cooldown = ({ shipID }: { shipID: string }) => {
   const { cooldown, updateRemainingSeconds, clearCooldown } = useShipStore((state) => ({
