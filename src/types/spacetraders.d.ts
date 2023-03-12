@@ -294,13 +294,13 @@ export type ShipyardResponse = {
   shipTypes: Array<{
     type: string
   }>
-  transactions: Array<{
+  transactions?: Array<{
     shipSymbol: string
     price: number
     agentSymbol: string
     timestamp: string
   }>
-  ships: Array<{
+  ships?: Array<{
     type: string
     name: string
     description: string
