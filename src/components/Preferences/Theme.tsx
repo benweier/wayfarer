@@ -1,58 +1,33 @@
+import { RadioGroup } from '@headlessui/react'
 import { LightBulbIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline'
+import { useAtom } from 'jotai'
+import { themeAtom } from '@/services/store/atoms/theme'
+import { cx } from '@/utilities/cx'
 
 export const Theme = () => {
+  const [theme, setTheme] = useAtom(themeAtom)
+
   return (
-    <div className="flex flex-col gap-1">
-      <div className="text-sm font-bold">Theme</div>
+    <RadioGroup value={theme} onChange={setTheme} className="flex flex-col gap-1">
+      <RadioGroup.Label className="text-sm font-bold">Menu</RadioGroup.Label>
       <div className="grid grid-cols-3 gap-2">
-        <button
-          className="btn btn-primary btn-outline flex w-full flex-col items-center justify-center gap-1"
-          onClick={() => {
-            const theme = window.localStorage.getItem('theme')
-
-            if (theme) document.documentElement.classList.remove(theme)
-
-            document.documentElement.classList.add('light')
-
-            window.localStorage.setItem('theme', 'light')
-          }}
-        >
-          <SunIcon className="h-5 w-5" aria-hidden />
-          <span>Light</span>
-        </button>
-        <button
-          className="btn btn-primary btn-outline flex w-full flex-col items-center justify-center gap-1"
-          onClick={() => {
-            const theme = window.localStorage.getItem('theme')
-
-            if (theme) document.documentElement.classList.remove(theme)
-
-            document.documentElement.classList.add('dark')
-
-            window.localStorage.setItem('theme', 'dark')
-          }}
-        >
-          <MoonIcon className="h-5 w-5" aria-hidden />
-          <span>Dark</span>
-        </button>
-        <button
-          className="btn btn-primary btn-outline flex w-full flex-col items-center justify-center gap-1"
-          onClick={() => {
-            const theme = window.localStorage.getItem('theme')
-
-            if (theme) document.documentElement.classList.remove(theme)
-
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-              document.documentElement.classList.add('dark')
-            }
-
-            window.localStorage.removeItem('theme')
-          }}
-        >
-          <LightBulbIcon className="h-5 w-5" aria-hidden />
-          <span>Auto</span>
-        </button>
+        {[
+          { label: 'Light', value: 'light', icon: SunIcon },
+          { label: 'Dark', value: 'dark', icon: MoonIcon },
+          { label: 'Auto', value: 'auto', icon: LightBulbIcon },
+        ].map((item) => (
+          <RadioGroup.Option
+            key={item.value}
+            value={item.value}
+            className={({ checked }) => cx('btn', { 'btn-primary btn-outline': checked })}
+          >
+            <div className={cx('flex w-full flex-col items-center justify-between gap-1')}>
+              <item.icon className="h5 w-5" />
+              <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
+            </div>
+          </RadioGroup.Option>
+        ))}
       </div>
-    </div>
+    </RadioGroup>
   )
 }
