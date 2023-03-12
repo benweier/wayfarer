@@ -91,30 +91,26 @@ const logout: ActionFunction = () => {
 
 const router = sentryCreateBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Core />}>
-      <Route index element={<Home />} />
+    <Route Component={Core}>
+      <Route index Component={Home} />
 
-      <Route element={<Auth.Layout />}>
-        <Route path={ROUTES.LOGIN} element={<Auth.Login />} />
-        <Route path={ROUTES.REGISTER} element={<Auth.Register />} />
+      <Route Component={Auth.Layout}>
+        <Route path={ROUTES.LOGIN} Component={Auth.Login} />
+        <Route path={ROUTES.REGISTER} Component={Auth.Register} />
         <Route path={ROUTES.LOGOUT} element={<Navigate to={ROUTES.LOGIN} replace />} action={logout} />
       </Route>
 
-      <Route element={<Auth.Required />}>
-        <Route
-          element={<Dashboard.Layout />}
-          errorElement={<RouteErrorElement />}
-          loader={Dashboard.root.loader(client)}
-        >
-          <Route path={ROUTES.OVERVIEW} element={<Dashboard.Overview />} />
+      <Route Component={Auth.Required}>
+        <Route Component={Dashboard.Layout} ErrorBoundary={RouteErrorElement} loader={Dashboard.root.loader(client)}>
+          <Route path={ROUTES.OVERVIEW} Component={Dashboard.Overview} />
 
           <Route path={ROUTES.MARKET}>
-            <Route index element={<Dashboard.Market />} />
+            <Route index Component={Dashboard.Market} />
 
             <Route
               path=":systemID/:waypointID"
-              element={<Dashboard.Market />}
-              errorElement={<RouteErrorElement />}
+              Component={Dashboard.Market}
+              ErrorBoundary={RouteErrorElement}
               loader={Dashboard.market.loader(client)}
             />
           </Route>
@@ -122,8 +118,8 @@ const router = sentryCreateBrowserRouter(
           <Route path={ROUTES.CONTRACTS}>
             <Route
               index
-              element={<Dashboard.Contracts.List />}
-              errorElement={<RouteErrorElement />}
+              Component={Dashboard.Contracts.List}
+              ErrorBoundary={RouteErrorElement}
               loader={Dashboard.contracts.list(client)}
             />
           </Route>
@@ -131,21 +127,21 @@ const router = sentryCreateBrowserRouter(
           <Route path={ROUTES.SYSTEMS}>
             <Route
               index
-              element={<Dashboard.Systems.List />}
-              errorElement={<RouteErrorElement />}
+              Component={Dashboard.Systems.List}
+              ErrorBoundary={RouteErrorElement}
               loader={Dashboard.systems.list(client)}
             />
             <Route path=":systemID">
               <Route
                 index
-                element={<Dashboard.Systems.View />}
-                errorElement={<RouteErrorElement />}
+                Component={Dashboard.Systems.View}
+                ErrorBoundary={RouteErrorElement}
                 loader={Dashboard.systems.view(client)}
               />
               <Route
                 path="waypoint/:waypointID"
-                element={<Dashboard.Systems.Waypoint />}
-                errorElement={<RouteErrorElement />}
+                Component={Dashboard.Systems.Waypoint}
+                ErrorBoundary={RouteErrorElement}
                 loader={Dashboard.systems.waypoint(client)}
               />
             </Route>
@@ -154,21 +150,21 @@ const router = sentryCreateBrowserRouter(
           <Route path={ROUTES.FLEET}>
             <Route
               index
-              element={<Dashboard.Fleet.List />}
-              errorElement={<RouteErrorElement />}
+              Component={Dashboard.Fleet.List}
+              ErrorBoundary={RouteErrorElement}
               loader={Dashboard.fleet.loader(client)}
             />
             <Route
               path="ship/:shipID"
-              element={<Dashboard.Fleet.Ship />}
-              errorElement={<RouteErrorElement />}
+              Component={Dashboard.Fleet.Ship}
+              ErrorBoundary={RouteErrorElement}
               loader={Dashboard.ship.loader(client)}
             />
           </Route>
         </Route>
       </Route>
 
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" Component={NotFound} />
     </Route>,
   ),
 )
