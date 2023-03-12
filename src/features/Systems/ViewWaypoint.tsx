@@ -8,12 +8,12 @@ import { getWaypointById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 import { WaypointFleet } from './WaypointFleet'
 import { WaypointJumpGate } from './WaypointJumpGate'
-import { WaypointMarket } from './WaypointMarket'
+import { MarketError, WaypointMarket } from './WaypointMarket'
 import { ShipyardError, WaypointShipyard } from './WaypointShipyard'
 
 const tabs = [
   { title: 'Fleet', content: WaypointFleet, fallback: Fragment, error: Fragment },
-  { title: 'Market', content: WaypointMarket, fallback: Fragment, error: Fragment },
+  { title: 'Market', content: WaypointMarket, fallback: Fragment, error: MarketError },
   { title: 'Shipyard', content: WaypointShipyard, fallback: Fragment, error: ShipyardError },
   { title: 'Jump Gate', content: WaypointJumpGate, fallback: Fragment, error: Fragment },
 ]

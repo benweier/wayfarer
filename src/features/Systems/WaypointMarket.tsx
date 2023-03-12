@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
+import { ErrorComponentProps } from '@/components/ErrorBoundary'
 import { getMarket } from '@/services/api/spacetraders'
+import { isHttpError } from '@/services/http'
 
 export const WaypointMarket = ({ systemID, waypointID }: { systemID: string; waypointID: string }) => {
   const { data, isSuccess } = useQuery({
@@ -84,4 +86,18 @@ export const WaypointMarket = ({ systemID, waypointID }: { systemID: string; way
       </div>
     </div>
   )
+}
+
+export const MarketError = ({ error }: ErrorComponentProps) => {
+  if (!error) return <></>
+
+  if (isHttpError(error)) {
+    return (
+      <div className="rounded border-2 border-transparent px-3 py-9">
+        <div className="text-secondary text-center text-xl font-bold">{error.statusText}</div>
+      </div>
+    )
+  }
+
+  return <></>
 }
