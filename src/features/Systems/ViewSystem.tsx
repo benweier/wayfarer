@@ -35,7 +35,7 @@ export const ViewSystem = ({ systemID }: { systemID: string }) => {
         <Tab.Group as="div" className="tab-group">
           <Tab.List className="tab-list">
             {tabs.map((tab) => (
-              <Tab key={tab.title} className={({ selected }) => cx('tab group', { selected: selected })}>
+              <Tab key={tab.title} className={({ selected }) => cx('group tab', { selected: selected })}>
                 {tab.title}
               </Tab>
             ))}
