@@ -9,7 +9,7 @@ export const Theme = () => {
 
   return (
     <RadioGroup value={theme} onChange={setTheme} className="flex flex-col gap-1">
-      <RadioGroup.Label className="text-sm font-bold">Menu</RadioGroup.Label>
+      <RadioGroup.Label className="text-sm font-bold">Theme</RadioGroup.Label>
       <div className="grid grid-cols-3 gap-2">
         {[
           { label: 'Light', value: 'light', icon: SunIcon },
