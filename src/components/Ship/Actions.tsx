@@ -13,18 +13,24 @@ import {
   createElement,
   isValidElement,
 } from 'react'
+import { Link } from 'react-router-dom'
+import { Modal } from '@/components/Modal'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
+import { ROUTES } from '@/config/routes'
 import {
   createShipDock,
   createShipNavigate,
   createShipOrbit,
   createShipRefuel,
+  createShipScanWaypoint,
   getWaypointsList,
 } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { SpaceTradersError, SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { STATUS_CODES, isHttpError } from '@/services/http'
 import { useAuthStore } from '@/services/store/auth'
-import { FuelResponse, ShipResponse } from '@/types/spacetraders'
+import { useShipCooldownStore } from '@/services/store/ship.cooldown'
+import { CooldownResponse, ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
@@ -37,10 +43,22 @@ export const updateShipInFleetNavStatus = produce<SpaceTradersResponse<ShipRespo
   },
 )
 
-export const Orbit = ({ shipID }: { shipID: string }) => {
+export const Orbit = ({
+  ship,
+  trigger = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Orbit
+    </button>
+  ),
+}: {
+  ship: ShipResponse
+  trigger?:
+    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
+    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
+}) => {
   const client = useQueryClient()
   const { mutate } = useMutation({
-    mutationKey: ['ship', shipID, 'orbit'],
+    mutationKey: ['ship', ship.symbol, 'orbit'],
     mutationFn: (shipID: string) => createShipOrbit({ path: shipID }),
     onMutate: (shipID) => {
       void client.cancelQueries({ queryKey: ['ships'] })
@@ -66,17 +84,33 @@ export const Orbit = ({ shipID }: { shipID: string }) => {
     },
   })
 
-  return (
-    <button className="btn btn-sm" onClick={() => mutate(shipID)}>
-      Orbit
-    </button>
-  )
+  return isValidElement(trigger)
+    ? cloneElement(trigger, {
+        disabled: trigger.props.disabled ?? ship.nav.status !== 'DOCKED',
+        onClick: () => mutate(ship.symbol),
+      })
+    : createElement(trigger, {
+        disabled: ship.nav.status !== 'DOCKED',
+        onClick: () => mutate(ship.symbol),
+      })
 }
 
-export const Dock = ({ shipID }: { shipID: string }) => {
+export const Dock = ({
+  ship,
+  trigger = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Dock
+    </button>
+  ),
+}: {
+  ship: ShipResponse
+  trigger?:
+    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
+    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
+}) => {
   const client = useQueryClient()
   const { mutate } = useMutation({
-    mutationKey: ['ship', shipID, 'dock'],
+    mutationKey: ['ship', ship.symbol, 'dock'],
     mutationFn: (shipID: string) => createShipDock({ path: shipID }),
     onMutate: (shipID) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
@@ -99,24 +133,26 @@ export const Dock = ({ shipID }: { shipID: string }) => {
     },
   })
 
-  return (
-    <button className="btn btn-sm" onClick={() => mutate(shipID)}>
-      Dock
-    </button>
-  )
+  return isValidElement(trigger)
+    ? cloneElement(trigger, {
+        disabled: trigger.props.disabled ?? ship.nav.status !== 'IN_ORBIT',
+        onClick: () => mutate(ship.symbol),
+      })
+    : createElement(trigger, {
+        disabled: ship.nav.status !== 'IN_ORBIT',
+        onClick: () => mutate(ship.symbol),
+      })
 }
 
 export const Refuel = ({
-  shipID,
-  fuel,
+  ship,
   trigger = (props) => (
-    <button className="btn btn-confirm btn-outline btn-sm" {...props}>
+    <button className="btn btn-sm" {...props}>
       Refuel
     </button>
   ),
 }: {
-  shipID: string
-  fuel: FuelResponse
+  ship: ShipResponse
   trigger?:
     | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
     | FC<ButtonHTMLAttributes<HTMLButtonElement>>
@@ -124,7 +160,7 @@ export const Refuel = ({
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
-    mutationKey: ['ship', shipID, 'refuel'],
+    mutationKey: ['ship', ship.symbol, 'refuel'],
     mutationFn: (shipID: string) => createShipRefuel({ path: shipID }),
     onSettled: (response, _err, shipID) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
@@ -136,20 +172,20 @@ export const Refuel = ({
     },
   })
 
-  const disabled = isLoading || fuel.current === fuel.capacity
+  const disabled = isLoading || ship.fuel.current === ship.fuel.capacity
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
         disabled: trigger.props.disabled ?? disabled,
-        onClick: () => mutate(shipID),
+        onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
         disabled: disabled,
-        onClick: () => mutate(shipID),
+        onClick: () => mutate(ship.symbol),
       })
 }
 
-export const Navigate = ({ ship, systemID }: { ship: ShipResponse; systemID: string }) => {
+export const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const client = useQueryClient()
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'navigate'],
@@ -210,7 +246,6 @@ export const Navigate = ({ ship, systemID }: { ship: ShipResponse; systemID: str
                   }
                 >
                   <WaypointNavigation
-                    systemID={systemID}
                     ship={ship}
                     onNavigate={(waypointID) => {
                       mutate({ shipID: ship.symbol, waypointID })
@@ -227,19 +262,11 @@ export const Navigate = ({ ship, systemID }: { ship: ShipResponse; systemID: str
   )
 }
 
-const WaypointNavigation = ({
-  systemID,
-  onNavigate,
-  ship,
-}: {
-  systemID: string
-  onNavigate: (waypointID: string) => void
-  ship: ShipResponse
-}) => {
+const WaypointNavigation = ({ ship, onNavigate }: { onNavigate: (waypointID: string) => void; ship: ShipResponse }) => {
   const { isSuccess, data } = useQuery({
-    queryKey: ['system', systemID, 'waypoints'],
+    queryKey: ['system', ship.nav.systemSymbol, 'waypoints'],
     queryFn: () => {
-      return getWaypointsList({ path: systemID })
+      return getWaypointsList({ path: ship.nav.systemSymbol })
     },
   })
 

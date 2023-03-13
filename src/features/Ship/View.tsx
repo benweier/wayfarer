@@ -30,7 +30,7 @@ export const View = ({ symbol }: { symbol: string }) => {
           {ship.registration.factionSymbol}
         </div>
 
-        <Cooldown shipID={ship.symbol} />
+        <Cooldown ship={ship} />
 
         <div className="flex items-start justify-between gap-4">
           <Navigation.Status nav={ship.nav} />

@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import { useShipCooldownStore } from '@/services/store/ship.cooldown'
+import { ShipResponse } from '@/types/spacetraders'
 
-export const Cooldown = ({ shipID }: { shipID: string }) => {
+export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
   const { cooldown, updateRemainingSeconds, clearCooldown } = useShipCooldownStore((state) => ({
-    cooldown: state.ships[shipID]?.cooldown,
+    cooldown: state.ships[ship.symbol]?.cooldown,
     updateRemainingSeconds: state.updateRemainingSeconds,
     clearCooldown: state.clearCooldown,
   }))
@@ -12,21 +13,21 @@ export const Cooldown = ({ shipID }: { shipID: string }) => {
     if (!cooldown) return
 
     const interval = setInterval(() => {
-      updateRemainingSeconds(shipID)
+      updateRemainingSeconds(ship.symbol)
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [cooldown, shipID, updateRemainingSeconds])
+  }, [cooldown, ship.symbol, updateRemainingSeconds])
 
   useEffect(() => {
     if (!cooldown) return
 
     const timeout = setTimeout(() => {
-      clearCooldown(shipID)
+      clearCooldown(ship.symbol)
     }, 1000 + cooldown.remainingSeconds * 1000)
 
     return () => clearTimeout(timeout)
-  }, [clearCooldown, cooldown, shipID])
+  }, [clearCooldown, cooldown, ship.symbol])
 
   if (!cooldown) return null
 
