@@ -1,8 +1,9 @@
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
+import { CheckCircleIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
+import { useRouteTransit } from '@/components/Ship/Transit'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { NavigationResponse, NavigationRoute } from '@/types/spacetraders'
+import { NavigationResponse } from '@/types/spacetraders'
 
 export const Status = ({ nav }: { nav: NavigationResponse }) => {
   return (
@@ -35,8 +36,8 @@ export const Status = ({ nav }: { nav: NavigationResponse }) => {
   )
 }
 
-export const Route = ({ route }: { route: NavigationRoute }) => {
-  const arrival = new Date(route.arrival)
+export const Route = ({ nav }: { nav: NavigationResponse }) => {
+  const transit = useRouteTransit()
 
   return (
     <div className="flex items-start justify-between gap-4">
@@ -44,30 +45,30 @@ export const Route = ({ route }: { route: NavigationRoute }) => {
         <div className="text-secondary text-xs uppercase">Route</div>
         <div className="flex items-center gap-2">
           <div className="text-sm font-medium">
-            <Link className="link" to={`${ROUTES.SYSTEMS}/${route.departure.systemSymbol}`}>
-              {route.departure.systemSymbol}
+            <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.departure.systemSymbol}`}>
+              {nav.route.departure.systemSymbol}
             </Link>{' '}
             •{' '}
             <Link
               className="link"
-              to={`${ROUTES.SYSTEMS}/${route.departure.systemSymbol}/waypoint/${route.departure.symbol}`}
+              to={`${ROUTES.SYSTEMS}/${nav.route.departure.systemSymbol}/waypoint/${nav.route.departure.symbol}`}
             >
-              {route.departure.symbol}
+              {nav.route.departure.symbol}
             </Link>
           </div>
           <div>
             <ChevronRightIcon className="text-secondary h-4 w-4" />
           </div>
           <div className="text-sm font-medium">
-            <Link className="link" to={`${ROUTES.SYSTEMS}/${route.destination.systemSymbol}`}>
-              {route.destination.systemSymbol}
+            <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.destination.systemSymbol}`}>
+              {nav.route.destination.systemSymbol}
             </Link>{' '}
             •{' '}
             <Link
               className="link"
-              to={`${ROUTES.SYSTEMS}/${route.destination.systemSymbol}/waypoint/${route.destination.symbol}`}
+              to={`${ROUTES.SYSTEMS}/${nav.route.destination.systemSymbol}/waypoint/${nav.route.destination.symbol}`}
             >
-              {route.destination.symbol}
+              {nav.route.destination.symbol}
             </Link>
           </div>
         </div>
@@ -82,18 +83,29 @@ export const Route = ({ route }: { route: NavigationRoute }) => {
           </div>
           <div className="flex flex-col items-end">
             <div className="text-secondary text-xs uppercase">
-              {Date.now() < arrival.getTime() ? 'Arriving' : 'Arrived'}
+              {transit.remainingSeconds > 0 ? 'Arriving' : 'Arrived'}
             </div>
             <div className="flex items-center gap-2">
               <div className="text-sm font-medium">
-                {arrival.toLocaleDateString()} {arrival.toLocaleTimeString()}
+                {transit.arrival.toLocaleDateString()} {transit.arrival.toLocaleTimeString()}
               </div>
             </div>
           </div>
         </div>
-        <div>
-          <div className="h-1 w-full rounded-full bg-gray-200">
-            <div className="h-full rounded-full bg-green-500" style={{ width: `${100}%` }} />
+
+        <div className="flex flex-row items-center gap-2">
+          <div className="h-1 grow rounded-full bg-gray-200">
+            <div
+              className="h-full rounded-full bg-green-500"
+              style={{ width: `${(transit.remainingSeconds / transit.totalSeconds) * 100}%` }}
+            />
+          </div>
+          <div className="text-secondary text-sm">
+            {transit.remainingSeconds === 0 ? (
+              <CheckCircleIcon className="h-5 w-5 text-green-500" />
+            ) : (
+              `${transit.remainingSeconds} s`
+            )}
           </div>
         </div>
       </div>
