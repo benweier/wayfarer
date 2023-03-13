@@ -59,7 +59,7 @@ export const Register = () => {
               <input
                 id="symbol"
                 {...methods.register('symbol', { required: true })}
-                className="input input-lg"
+                className="input"
                 type="text"
                 autoComplete="off"
                 autoFocus

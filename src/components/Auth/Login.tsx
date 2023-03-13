@@ -55,7 +55,7 @@ export const Login = () => {
               <label className="label" htmlFor="symbol">
                 Agent Symbol
               </label>
-              <input id="symbol" {...methods.register('symbol')} className="input input-lg" type="text" />
+              <input id="symbol" {...methods.register('symbol')} className="input" type="text" />
               <div className="text-hint mt-1">
                 Your symbol is not required to login, but may be useful with password managers if you have multiple
                 accounts
@@ -68,7 +68,7 @@ export const Login = () => {
               <input
                 id="token"
                 {...methods.register('token', { required: true })}
-                className="input input-lg"
+                className="input"
                 type="password"
                 onFocus={(node) => node.target.select()}
                 autoFocus
