@@ -76,12 +76,9 @@ export const Ship = ({ ship }: { ship: ShipResponse }) => {
               </div>
             </div>
             <fieldset disabled={isCoolingDown} className="flex">
-              {ship.nav.status === 'DOCKED' ? (
-                <Actions.Orbit shipID={ship.symbol} />
-              ) : (
-                <Actions.Dock shipID={ship.symbol} />
-              )}
-              <Actions.Navigate ship={ship} systemID={ship.nav.systemSymbol} />
+              {ship.nav.status === 'DOCKED' && <Actions.Orbit ship={ship} />}
+              {ship.nav.status === 'IN_ORBIT' && <Actions.Dock ship={ship} />}
+              <Actions.Navigate ship={ship} />
             </fieldset>
           </div>
         </div>
