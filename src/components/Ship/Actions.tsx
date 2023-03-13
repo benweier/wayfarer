@@ -27,11 +27,11 @@ import { useAuthStore } from '@/services/store/auth'
 import { FuelResponse, ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
-const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
+export const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
   draft.data.nav.status = state
 })
 
-const updateShipInFleetNavStatus = produce<SpaceTradersResponse<ShipResponse[]>, [number, string]>(
+export const updateShipInFleetNavStatus = produce<SpaceTradersResponse<ShipResponse[]>, [number, string]>(
   (draft, index, state) => {
     draft.data[index].nav.status = state
   },
