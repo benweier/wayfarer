@@ -175,7 +175,7 @@ const Waypoint = ({
           'bg-orange-600 text-orange-100': waypoint.type === 'GAS_GIANT',
           'bg-yellow-300 text-yellow-900': waypoint.type === 'NEBULA',
           'bg-lime-300 text-lime-900': waypoint.type === 'ASTEROID_FIELD',
-          'bg-emerald-500 text-emerald-50': waypoint.type === 'PLANET',
+          'bg-emerald-600 text-emerald-50': waypoint.type === 'PLANET',
           'bg-cyan-300 text-cyan-900': waypoint.type === 'DEBRIS_FIELD',
           'bg-fuchsia-600 text-fuchsia-100': waypoint.type === 'ORBITAL_STATION',
           'bg-zinc-100 text-zinc-900': waypoint.type === 'JUMP_GATE',
