@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useShipCooldownStore } from '@/services/store/ship.cooldown'
 import { ShipResponse } from '@/types/spacetraders'
+import { cx } from '@/utilities/cx'
 
 export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
   const { cooldown, updateRemainingSeconds, clearCooldown } = useShipCooldownStore((state) => ({
@@ -31,10 +32,10 @@ export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="h-1 w-full rounded-full bg-gray-200">
+      <div className={cx('h-1 w-full rounded-full bg-zinc-300 dark:bg-zinc-500', { 'opacity-50': !cooldown })}>
         {cooldown && (
           <div
-            className="h-full rounded-full bg-green-500"
+            className="h-full rounded-full bg-green-600 dark:bg-green-400"
             style={{ width: `${(cooldown.remainingSeconds / cooldown.totalSeconds) * 100}%` }}
           />
         )}
