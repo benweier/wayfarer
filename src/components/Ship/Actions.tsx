@@ -24,12 +24,14 @@ import {
   createShipOrbit,
   createShipRefuel,
   createShipScanWaypoint,
+  createShipSurvey,
   getWaypointsList,
 } from '@/services/api/spacetraders'
 import { SpaceTradersError, SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, isHttpError } from '@/services/http'
 import { useAuthStore } from '@/services/store/auth'
 import { useShipCooldownStore } from '@/services/store/ship.cooldown'
+import { useShipSurveyStore } from '@/services/store/ship.survey'
 import { CooldownResponse, ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
@@ -181,6 +183,46 @@ export const Refuel = ({
       })
     : createElement(trigger, {
         disabled: disabled,
+        onClick: () => mutate(ship.symbol),
+      })
+}
+
+export const Survey = ({
+  ship,
+  trigger = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Survey
+    </button>
+  ),
+}: {
+  ship: ShipResponse
+  trigger?:
+    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
+    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
+}) => {
+  const addSurvey = useShipSurveyStore((state) => state.addSurvey)
+  const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
+    hasCooldown: !!state.cooldowns[ship.symbol],
+    setCooldown: state.setCooldown,
+  }))
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ['ship', ship.symbol, 'survey'],
+    mutationFn: (shipID: string) => createShipSurvey({ path: shipID }),
+    onSuccess: (response, shipID) => {
+      const [survey] = response.data.surveys
+      const cooldown = response.data.cooldown
+      if (survey) addSurvey(survey)
+      setCooldown(shipID, cooldown)
+    },
+  })
+
+  return isValidElement(trigger)
+    ? cloneElement(trigger, {
+        disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
+        onClick: () => mutate(ship.symbol),
+      })
+    : createElement(trigger, {
+        disabled: hasCooldown || isLoading,
         onClick: () => mutate(ship.symbol),
       })
 }

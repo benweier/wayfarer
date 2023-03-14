@@ -2,13 +2,14 @@ import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
-import { Cargo, Cooldown, Inventory, Loadout, Navigation } from '@/components/Ship'
+import { Actions, Cargo, Inventory, Loadout, Navigation, Survey } from '@/components/Ship'
 import { ShipStore } from '@/context/Ship'
 import { getShipById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 
 const tabs = [
   { title: 'Cargo', content: Cargo, fallback: Fragment },
+  { title: 'Survey', content: Survey, fallback: Fragment },
   { title: 'Loadout', content: Loadout, fallback: Fragment },
 ]
 
@@ -29,8 +30,6 @@ export const View = ({ symbol }: { symbol: string }) => {
           <span className="font-bold">Registration:</span> {ship.registration.name} • {ship.registration.role} •{' '}
           {ship.registration.factionSymbol}
         </div>
-
-        <Cooldown ship={ship} />
 
         <div className="flex items-start justify-between gap-4">
           <Navigation.Status nav={ship.nav} />
