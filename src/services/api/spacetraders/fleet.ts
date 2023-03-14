@@ -70,6 +70,23 @@ export const createShipExtract = mutationFnFactory<
   { survey?: SurveyResponse } | void
 >((ship) => `/my/ships/${ship}/extract`)
 
+export const createShipRefine = mutationFnFactory<
+  SpaceTradersResponse<{
+    cooldown: CooldownResponse
+    cargo: ShipCargo
+    produced: Array<{ tradeSymbol: string; units: 0 }>
+    consumed: Array<{ tradeSymbol: string; units: 0 }>
+  }>,
+  string,
+  { product: string }
+>((ship) => `/my/ships/${ship}/refine`)
+
+export const createShipJettison = mutationFnFactory<
+  SpaceTradersResponse<{ cargo: ShipCargo }>,
+  string,
+  { symbol: string; units: number }
+>((ship) => `/my/ships/${ship}/jettison`)
+
 export const createShipChart = mutationFnFactory<
   SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>,
   string
