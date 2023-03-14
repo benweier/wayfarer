@@ -13,10 +13,10 @@
 }
 
 .btn-confirm {
-  @apply border-2 border-emerald-400/50 bg-emerald-300 text-emerald-900 dark:border-emerald-700/50 dark:bg-emerald-600 dark:text-emerald-50;
+  @apply border-2 border-emerald-400/50 bg-emerald-600 text-emerald-50 dark:border-emerald-700/50 dark:bg-emerald-400 dark:text-emerald-900;
 
   &.btn-outline {
-    @apply bg-emerald-400/10 dark:text-emerald-200;
+    @apply bg-emerald-400/10 text-emerald-900 dark:text-emerald-200;
   }
 }
 
@@ -29,10 +29,10 @@
 }
 
 .btn-danger {
-  @apply border-2 border-rose-400 bg-rose-400 text-rose-900;
+  @apply border-2 border-rose-400 bg-rose-600 text-rose-900 dark:border-rose-500 dark:bg-rose-400 dark:text-rose-50;
 
   &.btn-outline {
-    @apply bg-transparent text-rose-400;
+    @apply bg-rose-400/10 dark:text-rose-200;
   }
 }
 
