@@ -29,14 +29,18 @@ export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
     return () => clearTimeout(timeout)
   }, [clearCooldown, cooldown, ship.symbol])
 
-  if (!cooldown) return null
-
-  const width = (cooldown.remainingSeconds / cooldown.totalSeconds) * 100
-
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       <div className="h-1 w-full rounded-full bg-gray-200">
-        <div className="h-full rounded-full bg-green-500" style={{ width: `${width}%` }} />
+        {cooldown && (
+          <div
+            className="h-full rounded-full bg-green-500"
+            style={{ width: `${(cooldown.remainingSeconds / cooldown.totalSeconds) * 100}%` }}
+          />
+        )}
+      </div>
+      <div className="text-secondary text-sm">
+        {cooldown ? `Cooldown active. ${cooldown.remainingSeconds}s left` : `Cooldown inactive`}
       </div>
     </div>
   )
