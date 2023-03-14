@@ -2,8 +2,10 @@ import {
   AgentResponse,
   ChartResponse,
   CooldownResponse,
+  ExtractResponse,
   FuelResponse,
   NavigationResponse,
+  ShipCargo,
   ShipResponse,
   SurveyResponse,
   WaypointResponse,
@@ -61,6 +63,12 @@ export const createShipSurvey = mutationFnFactory<
   SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>,
   string
 >((ship) => `/my/ships/${ship}/survey`)
+
+export const createShipExtract = mutationFnFactory<
+  SpaceTradersResponse<{ cooldown: CooldownResponse; extraction: ExtractResponse; cargo: ShipCargo }>,
+  string,
+  { survey?: SurveyResponse } | void
+>((ship) => `/my/ships/${ship}/extract`)
 
 export const createShipChart = mutationFnFactory<
   SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>,
