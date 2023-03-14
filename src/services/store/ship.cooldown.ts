@@ -1,8 +1,8 @@
-import { produce } from 'immer'
+import { Draft, produce } from 'immer'
 import { create } from 'zustand'
 import { CooldownResponse } from '@/types/spacetraders'
 
-type ShipCooldownState = { ships: Record<string, { cooldown: CooldownResponse } | undefined> }
+type ShipCooldownState = { cooldowns: { [key: string]: CooldownResponse } }
 
 type ShipCooldownHandlers = {
   setCooldown: (shipID: string, cooldown: CooldownResponse) => void
@@ -13,32 +13,32 @@ type ShipCooldownHandlers = {
 type ShipCooldownStore = ShipCooldownState & ShipCooldownHandlers
 
 export const useShipCooldownStore = create<ShipCooldownStore>((set, get) => ({
-  ships: {},
+  cooldowns: {},
   setCooldown: (shipID, cooldown) => {
     return set(
-      produce((draft) => {
-        draft.ships[shipID] = { cooldown }
+      produce((draft: Draft<ShipCooldownStore>) => {
+        draft.cooldowns[shipID] = cooldown
       }),
     )
   },
   updateRemainingSeconds: (shipID) => {
     return set(
-      produce((draft) => {
-        const ship = get().ships[shipID]
+      produce((draft: Draft<ShipCooldownStore>) => {
+        const cooldown = get().cooldowns[shipID]
 
-        if (ship?.cooldown) {
+        if (cooldown) {
           const now = Date.now()
-          const expiration = new Date(ship.cooldown.expiration)
+          const expiration = new Date(cooldown.expiration)
 
-          draft.ships[shipID].cooldown.remainingSeconds = Math.floor(Math.abs(now - expiration.getTime()) / 1000)
+          draft.cooldowns[shipID].remainingSeconds = Math.floor(Math.abs(now - expiration.getTime()) / 1000)
         }
       }),
     )
   },
   clearCooldown: (shipID) => {
     return set(
-      produce((draft) => {
-        draft.ships[shipID] = undefined
+      produce((draft: Draft<ShipCooldownStore>) => {
+        delete draft.cooldowns[shipID]
       }),
     )
   },

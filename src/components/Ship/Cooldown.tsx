@@ -4,7 +4,7 @@ import { ShipResponse } from '@/types/spacetraders'
 
 export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
   const { cooldown, updateRemainingSeconds, clearCooldown } = useShipCooldownStore((state) => ({
-    cooldown: state.ships[ship.symbol]?.cooldown,
+    cooldown: state.cooldowns[ship.symbol],
     updateRemainingSeconds: state.updateRemainingSeconds,
     clearCooldown: state.clearCooldown,
   }))

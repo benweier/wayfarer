@@ -9,7 +9,7 @@ import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const Ship = ({ ship }: { ship: ShipResponse }) => {
-  const isCoolingDown = useShipCooldownStore((state) => !!state.ships[ship.symbol]?.cooldown)
+  const isCoolingDown = useShipCooldownStore((state) => !!state.cooldowns[ship.symbol])
   const isMutating = useIsMutating(['ship', ship.symbol], { exact: false })
 
   return (
