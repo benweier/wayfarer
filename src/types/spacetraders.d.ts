@@ -389,6 +389,14 @@ export type SurveyResponse = {
   size: string
 }
 
+export type ExtractResponse = {
+  shipSymbol: string
+  yield: {
+    symbol: string
+    units: number
+  }
+}
+
 export type RegisterAgentResponse = {
   token: string
   agent: AgentResponse
