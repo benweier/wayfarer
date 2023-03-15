@@ -304,6 +304,17 @@ export const TRADE_SYMBOL: Record<string, string> = {
   VIRAL_AGENTS: 'Viral Agents',
 } as const
 
+export const REFINE_ITEM_TYPE: Record<string, string> = {
+  ALUMINUM_ORE: 'ALUMINUM',
+  COPPER_ORE: 'COPPER',
+  GOLD_ORE: 'GOLD',
+  IRON_ORE: 'IRON',
+  MERITIUM_ORE: 'MERITIUM',
+  PLATINUM_ORE: 'PLATINUM',
+  SILVER_ORE: 'SILVER',
+  URANITE_ORE: 'URANITE',
+} as const
+
 export const MARKET_TRANSACTION_TYPE: Record<string, string> = {
   PURCHASE: 'Purchase',
   SELL: 'Sell',
