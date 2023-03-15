@@ -166,15 +166,17 @@ export type ShipRegistration = {
   role: string
 }
 
+export type CargoInventory = {
+  symbol: string
+  name: string
+  description: string
+  units: number
+}
+
 export type ShipCargo = {
   capacity: number
   units: number
-  inventory: Array<{
-    symbol: string
-    name: string
-    description: string
-    units: number
-  }>
+  inventory: CargoInventory[]
 }
 
 export type ShipResponse = {
