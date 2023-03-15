@@ -2,6 +2,23 @@
 
 Wayfarer is a browser-based interface for **v2** of the [SpaceTraders API](https://spacetraders.stoplight.io/docs/spacetraders). Just as the API itself is a work-in-progress under active development, Wayfarer is a work-in-progress intended for demonstration purposes of a number of key patterns and technologies.
 
+## Features
+
+Current implementation state of SpaceTraders features:
+
+- [x] Registration and login/logout
+- [x] View System and Waypoint lists
+- [x] View System and Waypoint details
+- [x] View Fleet list
+- [x] View Ship details
+    - [x] cargo / loadout / fuel / crew / navigation state
+- [x] Dock/Orbit at Waypoints
+- [x] Navigate Ship between Waypoints in a System
+- [x] Refuel Ship
+- [x] Survey Waypoints and Extract resources
+- [x] Refine raw materials
+- [x] Jettison cargo
+
 ## Tech
 
 Wayfarer depends on just a handful of open-source projects and is, at its core, a simple client-side rendered [React](https://reactjs.org/) application built with [Vite](https://vitejs.dev/). It uses [React Router](https://reactrouter.com/) for routing, [React Query](https://tanstack.com/query) for data fetching, [TailwindCSS](https://tailwindcss.com/) for styling, [Zustand](https://docs.pmnd.rs/zustand) and [Jotai](https://jotai.org/) for state management, and [React Hook Form](https://react-hook-form.com/) for form handling. It is tested with [Vitest](https://vitest.dev/) and deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
