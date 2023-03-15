@@ -42,8 +42,8 @@ const List = ({ ship }: { ship: ShipResponse }) => {
                 trigger={<button className="btn btn-confirm">Extract</button>}
               />
             </div>
-            <div className="text-secondary p-2 text-center text-sm">
-              {expiration.toLocaleDateString()} {expiration.toLocaleTimeString()}
+            <div className="px-2 text-center text-sm text-amber-600 dark:text-amber-400">
+              Expires: {expiration.toLocaleDateString()} {expiration.toLocaleTimeString()}
             </div>
           </div>
         )
