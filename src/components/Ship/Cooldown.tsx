@@ -23,6 +23,14 @@ export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
   useEffect(() => {
     if (!cooldown) return
 
+    const now = Date.now()
+    const expiration = new Date(cooldown.expiration)
+
+    if (now > expiration.getTime()) {
+      clearCooldown(ship.symbol)
+      return
+    }
+
     const timeout = setTimeout(() => {
       clearCooldown(ship.symbol)
     }, 1000 + cooldown.remainingSeconds * 1000)
