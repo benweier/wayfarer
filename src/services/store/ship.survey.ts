@@ -35,7 +35,12 @@ export const useShipSurveyStore = create<ShipSurveyStore>()(
     {
       version: 0,
       name: 'ship.surveys',
-      partialize: (state) => ({ surveys: state.surveys }),
+      partialize: (state) => ({
+        surveys: state.surveys.filter((survey) => {
+          const expiration = new Date(survey.expiration)
+          return expiration.getTime() > Date.now()
+        }),
+      }),
     },
   ),
 )
