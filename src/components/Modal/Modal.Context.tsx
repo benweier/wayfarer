@@ -1,4 +1,13 @@
-import { PropsWithChildren, ReactNode, createContext, useEffect, useRef } from 'react'
+import {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  createContext,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react'
 import { StoreApi } from 'zustand/vanilla'
 import { Root } from './Modal.Root'
 import { ModalStore, createModalStore } from './Modal.store'
@@ -19,19 +28,27 @@ const useModalStoreCreator = ({ isOpen, onClose }: { isOpen?: boolean; onClose?:
   return store.current
 }
 
-export const Modal = ({
-  trigger,
-  isOpen,
-  onClose,
-  size,
-  children,
-}: PropsWithChildren<{
-  trigger?: ReactNode
-  isOpen?: boolean
-  onClose?: () => void
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
-}>) => {
+export const ModalComponent = (
+  {
+    trigger,
+    isOpen = false,
+    onClose,
+    size,
+    children,
+  }: PropsWithChildren<{
+    trigger?: ReactNode
+    isOpen?: boolean
+    onClose?: () => void
+    size?: 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
+  }>,
+  ref?: ForwardedRef<{ openModal: () => void; closeModal: () => void } | undefined>,
+) => {
   const store = useModalStoreCreator({ isOpen, onClose })
+
+  useImperativeHandle(ref, () => ({
+    openModal: () => store.setState({ isOpen: true }),
+    closeModal: () => store.setState({ isOpen: false }),
+  }))
 
   return (
     <ModalContext.Provider value={store}>
@@ -40,3 +57,5 @@ export const Modal = ({
     </ModalContext.Provider>
   )
 }
+
+export const Modal = forwardRef(ModalComponent)
