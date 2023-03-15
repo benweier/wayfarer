@@ -400,11 +400,11 @@ export const Jettison = ({
   return isValidElement(trigger)
     ? cloneElement(trigger, {
         disabled: trigger.props.disabled ?? isLoading,
-        onClick: () => mutate({ shipID: ship.symbol, symbol: symbol, units }),
+        onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
       })
     : createElement(trigger, {
         disabled: isLoading,
-        onClick: () => mutate({ shipID: ship.symbol, symbol: item }),
+        onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
       })
 }
 
