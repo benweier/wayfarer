@@ -78,7 +78,7 @@ export const createShipRefine = mutationFnFactory<
     consumed: Array<{ tradeSymbol: string; units: 0 }>
   }>,
   string,
-  { product: string }
+  { produce: string }
 >((ship) => `/my/ships/${ship}/refine`)
 
 export const createShipJettison = mutationFnFactory<
