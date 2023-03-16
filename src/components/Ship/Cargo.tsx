@@ -1,5 +1,5 @@
 import { offset, shift, useFloating } from '@floating-ui/react-dom'
-import { Menu, Transition } from '@headlessui/react'
+import { Menu, Switch, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { useAtom } from 'jotai'
 import { Fragment, useRef } from 'react'
@@ -7,27 +7,55 @@ import { Modal } from '@/components/Modal'
 import { Actions } from '@/components/Ship'
 import { REFINE_ITEM_TYPE } from '@/config/constants'
 import { useShipContext } from '@/context/Ship'
-import { cargoDisplayAtom } from '@/services/store/atoms/cargo.display'
+import { cargoDescriptionAtom, cargoDisplayAtom } from '@/services/store/atoms/cargo.display'
 import { CargoInventory, ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const CargoDisplayMode = () => {
   const [cargoDisplayMode, setCargoDisplayMode] = useAtom(cargoDisplayAtom)
+  const [cargoDescription, setCargoDescription] = useAtom(cargoDescriptionAtom)
 
   return (
-    <div className="flex flex-row gap-2">
-      <button
-        className={cx('btn btn-sm', { 'btn-primary btn-outline': cargoDisplayMode === 'list' })}
-        onClick={() => setCargoDisplayMode('list')}
-      >
-        List
-      </button>
-      <button
-        className={cx('btn btn-sm', { 'btn-primary btn-outline': cargoDisplayMode === 'grid' })}
-        onClick={() => setCargoDisplayMode('grid')}
-      >
-        Grid
-      </button>
+    <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-row gap-2">
+        <button
+          className={cx('btn btn-sm', { 'btn-primary btn-outline': cargoDisplayMode === 'list' })}
+          onClick={() => setCargoDisplayMode('list')}
+        >
+          List
+        </button>
+        <button
+          className={cx('btn btn-sm', { 'btn-primary btn-outline': cargoDisplayMode === 'grid' })}
+          onClick={() => setCargoDisplayMode('grid')}
+        >
+          Grid
+        </button>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="text-secondary text-sm">Show item description</span>
+        <Switch
+          checked={cargoDescription}
+          onChange={setCargoDescription}
+          className={cx(
+            'relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 ',
+            {
+              'bg-emerald-500 dark:bg-emerald-600': cargoDescription,
+              'bg-zinc-700 dark:bg-zinc-900': !cargoDescription,
+            },
+          )}
+        >
+          <span
+            aria-hidden="true"
+            className={cx(
+              'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out',
+              {
+                'translate-x-0': !cargoDescription,
+                'translate-x-6': cargoDescription,
+              },
+            )}
+          />
+        </Switch>
+      </div>
     </div>
   )
 }
@@ -82,6 +110,7 @@ const Manage = ({ children }: WithChildren) => {
 const CargoItem = ({ item }: { item: CargoInventory }) => {
   const ship = useShipContext((state) => state)
   const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
+  const [cargoDescription] = useAtom(cargoDescriptionAtom)
   const ref = useRef<{ openModal: () => void; closeModal: () => void }>()
 
   return (
@@ -99,7 +128,7 @@ const CargoItem = ({ item }: { item: CargoInventory }) => {
           <span className="font-medium">{item.name}</span>
           <span className="text-lg font-bold">{item.units}</span>
         </div>
-        <div className="text-secondary text-sm">{item.description}</div>
+        {cargoDescription && <div className="text-secondary text-sm">{item.description}</div>}
       </div>
       <div
         className={cx('flex gap-2', {
@@ -153,7 +182,7 @@ export const Cargo = ({ ship }: { ship: ShipResponse }) => {
 
   return (
     <div className="grid gap-4">
-      <div className="flex items-center justify-between gap-4">
+      <div>
         <CargoDisplayMode />
       </div>
 
