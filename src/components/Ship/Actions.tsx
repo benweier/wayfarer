@@ -22,6 +22,7 @@ import {
   createShipDock,
   createShipExtract,
   createShipJettison,
+  createShipJump,
   createShipNavigate,
   createShipOrbit,
   createShipRefine,
@@ -36,7 +37,14 @@ import { STATUS_CODES, isHttpError } from '@/services/http'
 import { useAuthStore } from '@/services/store/auth'
 import { useShipCooldownStore } from '@/services/store/ship.cooldown'
 import { useShipSurveyStore } from '@/services/store/ship.survey'
-import { CooldownResponse, NavigationResponse, ShipCargo, ShipResponse, SurveyResponse } from '@/types/spacetraders'
+import {
+  CooldownResponse,
+  FuelResponse,
+  NavigationResponse,
+  ShipCargo,
+  ShipResponse,
+  SurveyResponse,
+} from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
@@ -478,6 +486,63 @@ export const Warp = ({
     : createElement(trigger, {
         disabled: isLoading,
         onClick: () => mutate({ shipID: ship.symbol, waypointID }),
+      })
+}
+
+export const Jump = ({
+  ship,
+  systemID,
+  trigger = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Jump
+    </button>
+  ),
+}: {
+  ship: ShipResponse
+  systemID: string
+  trigger?:
+    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
+    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
+}) => {
+  const client = useQueryClient()
+  const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
+    hasCooldown: !!state.cooldowns[ship.symbol],
+    setCooldown: state.setCooldown,
+  }))
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ['ship', ship.symbol, 'extract'],
+    mutationFn: ({ shipID, systemID }: { shipID: string; systemID: string }) =>
+      createShipJump({ path: shipID, payload: { systemSymbol: systemID } }),
+    onMutate: ({ shipID }) => {
+      void client.cancelQueries({ queryKey: ['ships'] })
+      void client.cancelQueries({ queryKey: ['ship', shipID] })
+    },
+    onSuccess: (response, { shipID }) => {
+      const cooldown = response.data.cooldown
+      setCooldown(shipID, cooldown)
+
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+
+      if (ship) client.setQueryData(['ship', shipID], updateShipNav(ship, response.data.nav))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNav(ships, index, response.data.nav))
+    },
+    onSettled: (_res, _err, { shipID }) => {
+      void client.invalidateQueries({ queryKey: ['ships'] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+    },
+  })
+
+  return isValidElement(trigger)
+    ? cloneElement(trigger, {
+        disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
+        onClick: () => mutate({ shipID: ship.symbol, systemID }),
+      })
+    : createElement(trigger, {
+        disabled: hasCooldown || isLoading,
+        onClick: () => mutate({ shipID: ship.symbol, systemID }),
       })
 }
 

@@ -60,6 +60,12 @@ export const createShipWarp = mutationFnFactory<
   { waypointSymbol: string }
 >((ship) => `/my/ships/${ship}/warp`)
 
+export const createShipJump = mutationFnFactory<
+  SpaceTradersResponse<{ nav: NavigationResponse; cooldown: CooldownResponse }>,
+  string,
+  { systemSymbol: string }
+>((ship) => `/my/ships/${ship}/jump`)
+
 export const createShipRefuel = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>,
   string
