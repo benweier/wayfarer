@@ -69,6 +69,16 @@ export const updateShipInFleetCargo = produce<SpaceTradersResponse<ShipResponse[
   },
 )
 
+export const updateShipFuel = produce<SpaceTradersResponse<ShipResponse>, [FuelResponse]>((draft, state) => {
+  draft.data.fuel = state
+})
+
+export const updateShipInFleetFuel = produce<SpaceTradersResponse<ShipResponse[]>, [number, FuelResponse]>(
+  (draft, index, state) => {
+    draft.data[index].fuel = state
+  },
+)
+
 export const Orbit = ({
   ship,
   trigger = (props) => (
@@ -451,6 +461,8 @@ export const Warp = ({
 
       if (ship) client.setQueryData(['ship', shipID], updateShipNav(ship, response.data.nav))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNav(ships, index, response.data.nav))
+      if (ship) client.setQueryData(['ship', shipID], updateShipFuel(ship, response.data.fuel))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetFuel(ships, index, response.data.fuel))
     },
     onSettled: (_res, _err, { shipID }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
