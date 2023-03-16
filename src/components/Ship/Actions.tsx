@@ -28,6 +28,7 @@ import {
   createShipRefuel,
   createShipScanWaypoint,
   createShipSurvey,
+  createShipWarp,
   getWaypointsList,
 } from '@/services/api/spacetraders'
 import { SpaceTradersError, SpaceTradersResponse } from '@/services/api/spacetraders/core'
@@ -35,7 +36,7 @@ import { STATUS_CODES, isHttpError } from '@/services/http'
 import { useAuthStore } from '@/services/store/auth'
 import { useShipCooldownStore } from '@/services/store/ship.cooldown'
 import { useShipSurveyStore } from '@/services/store/ship.survey'
-import { CooldownResponse, ShipCargo, ShipResponse, SurveyResponse } from '@/types/spacetraders'
+import { CooldownResponse, NavigationResponse, ShipCargo, ShipResponse, SurveyResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
@@ -45,6 +46,16 @@ export const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [
 export const updateShipInFleetNavStatus = produce<SpaceTradersResponse<ShipResponse[]>, [number, string]>(
   (draft, index, state) => {
     draft.data[index].nav.status = state
+  },
+)
+
+export const updateShipNav = produce<SpaceTradersResponse<ShipResponse>, [NavigationResponse]>((draft, state) => {
+  draft.data.nav = state
+})
+
+export const updateShipInFleetNav = produce<SpaceTradersResponse<ShipResponse[]>, [number, NavigationResponse]>(
+  (draft, index, state) => {
+    draft.data[index].nav = state
   },
 )
 
@@ -405,6 +416,56 @@ export const Jettison = ({
     : createElement(trigger, {
         disabled: isLoading,
         onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
+      })
+}
+
+export const Warp = ({
+  ship,
+  waypointID,
+  trigger = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Warp
+    </button>
+  ),
+}: {
+  ship: ShipResponse
+  waypointID: string
+  trigger?:
+    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
+    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
+}) => {
+  const client = useQueryClient()
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ['ship', ship.symbol, 'extract'],
+    mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
+      createShipWarp({ path: shipID, payload: { waypointSymbol: waypointID } }),
+    onMutate: ({ shipID }) => {
+      void client.cancelQueries({ queryKey: ['ships'] })
+      void client.cancelQueries({ queryKey: ['ship', shipID] })
+    },
+    onSuccess: (response, { shipID }) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+
+      if (ship) client.setQueryData(['ship', shipID], updateShipNav(ship, response.data.nav))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNav(ships, index, response.data.nav))
+    },
+    onSettled: (_res, _err, { shipID }) => {
+      void client.invalidateQueries({ queryKey: ['ships'] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+    },
+  })
+
+  return isValidElement(trigger)
+    ? cloneElement(trigger, {
+        disabled: trigger.props.disabled ?? isLoading,
+        onClick: () => mutate({ shipID: ship.symbol, waypointID }),
+      })
+    : createElement(trigger, {
+        disabled: isLoading,
+        onClick: () => mutate({ shipID: ship.symbol, waypointID }),
       })
 }
 
