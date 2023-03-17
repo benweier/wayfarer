@@ -1,15 +1,13 @@
 import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
 import { useIsMutating } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { Actions } from '@/components/Ship'
+import { Controls } from '@/components/Ship/Controls'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { useShipCooldownStore } from '@/services/store/ship.cooldown'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const Ship = ({ ship }: { ship: ShipResponse }) => {
-  const isCoolingDown = useShipCooldownStore((state) => !!state.cooldowns[ship.symbol])
   const isMutating = useIsMutating(['ship', ship.symbol], { exact: false })
 
   return (
@@ -75,11 +73,7 @@ export const Ship = ({ ship }: { ship: ShipResponse }) => {
                 </div>
               </div>
             </div>
-            <fieldset disabled={isCoolingDown} className="flex">
-              {ship.nav.status === 'DOCKED' && <Actions.Orbit ship={ship} />}
-              {ship.nav.status === 'IN_ORBIT' && <Actions.Dock ship={ship} />}
-              <Actions.Navigate ship={ship} />
-            </fieldset>
+            <Controls ship={ship} />
           </div>
         </div>
       </div>
