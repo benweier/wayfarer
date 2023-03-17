@@ -4,13 +4,14 @@ import { MapPinIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import {
-  ButtonHTMLAttributes,
+  ComponentPropsWithRef,
   FC,
+  ForwardedRef,
   Fragment,
-  PropsWithRef,
   ReactElement,
   cloneElement,
   createElement,
+  forwardRef,
   isValidElement,
 } from 'react'
 import { Link } from 'react-router-dom'
@@ -87,19 +88,20 @@ export const updateShipInFleetFuel = produce<SpaceTradersResponse<ShipResponse[]
   },
 )
 
-export const Orbit = ({
-  ship,
-  trigger = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Orbit
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+const OrbitComponent = (
+  {
+    ship,
+    trigger = (props, ref) => (
+      <button ref={ref} className="btn btn-sm" {...props}>
+        Orbit
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const client = useQueryClient()
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'orbit'],
@@ -130,28 +132,33 @@ export const Orbit = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? ship.nav.status !== 'DOCKED',
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
+        ref,
         disabled: ship.nav.status !== 'DOCKED',
         onClick: () => mutate(ship.symbol),
       })
 }
 
-export const Dock = ({
-  ship,
-  trigger = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Dock
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+export const Orbit = forwardRef(OrbitComponent)
+
+const DockComponent = (
+  {
+    ship,
+    trigger = (props, ref) => (
+      <button ref={ref} className="btn btn-sm" {...props}>
+        Dock
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const client = useQueryClient()
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'dock'],
@@ -179,28 +186,33 @@ export const Dock = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? ship.nav.status !== 'IN_ORBIT',
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
+        ref,
         disabled: ship.nav.status !== 'IN_ORBIT',
         onClick: () => mutate(ship.symbol),
       })
 }
 
-export const Refuel = ({
-  ship,
-  trigger = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Refuel
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+export const Dock = forwardRef(DockComponent)
+
+export const Refuel = (
+  {
+    ship,
+    trigger = (props, ref) => (
+      <button ref={ref} className="btn btn-sm" {...props}>
+        Refuel
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
@@ -220,28 +232,31 @@ export const Refuel = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? disabled,
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
+        ref,
         disabled: disabled,
         onClick: () => mutate(ship.symbol),
       })
 }
 
-export const Survey = ({
-  ship,
-  trigger = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Survey
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+const SurveyComponent = (
+  {
+    ship,
+    trigger = (props) => (
+      <button className="btn btn-sm" {...props}>
+        Survey
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const addSurvey = useShipSurveyStore((state) => state.addSurvey)
   const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
     hasCooldown: !!state.cooldowns[ship.symbol],
@@ -260,30 +275,35 @@ export const Survey = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
+        ref,
         disabled: hasCooldown || isLoading,
         onClick: () => mutate(ship.symbol),
       })
 }
 
-export const Extract = ({
-  ship,
-  survey,
-  trigger = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Extract
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  survey?: SurveyResponse
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+export const Survey = forwardRef(SurveyComponent)
+
+const ExtractComponent = (
+  {
+    ship,
+    survey,
+    trigger = (props) => (
+      <button className="btn btn-sm" {...props}>
+        Extract
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    survey?: SurveyResponse
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const client = useQueryClient()
   const removeSurvey = useShipSurveyStore((state) => state.removeSurvey)
   const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
@@ -319,30 +339,35 @@ export const Extract = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
         onClick: () => mutate({ shipID: ship.symbol, survey }),
       })
     : createElement(trigger, {
+        ref,
         disabled: hasCooldown || isLoading,
         onClick: () => mutate({ shipID: ship.symbol, survey }),
       })
 }
 
-export const Refine = ({
-  ship,
-  produce,
-  trigger = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Refine
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  produce: string
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+export const Extract = forwardRef(ExtractComponent)
+
+const RefineComponent = (
+  {
+    ship,
+    produce,
+    trigger = (props) => (
+      <button className="btn btn-sm" {...props}>
+        Refine
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    produce: string
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const client = useQueryClient()
   const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
     hasCooldown: !!state.cooldowns[ship.symbol],
@@ -376,32 +401,37 @@ export const Refine = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
         onClick: () => mutate({ shipID: ship.symbol, produce }),
       })
     : createElement(trigger, {
+        ref,
         disabled: hasCooldown || isLoading,
         onClick: () => mutate({ shipID: ship.symbol, produce }),
       })
 }
 
-export const Jettison = ({
-  ship,
-  symbol,
-  units,
-  trigger = (props) => (
-    <button className="btn btn-outline btn-danger btn-sm" {...props}>
-      Jettison
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  symbol: string
-  units: number
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+export const Refine = forwardRef(RefineComponent)
+
+const JettisonComponent = (
+  {
+    ship,
+    symbol,
+    units,
+    trigger = (props) => (
+      <button className="btn btn-outline btn-danger btn-sm" {...props}>
+        Jettison
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    symbol: string
+    units: number
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'extract'],
@@ -428,30 +458,35 @@ export const Jettison = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? isLoading,
         onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
       })
     : createElement(trigger, {
+        ref,
         disabled: isLoading,
         onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
       })
 }
 
-export const Warp = ({
-  ship,
-  waypointID,
-  trigger = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Warp
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  waypointID: string
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+export const Jettison = forwardRef(JettisonComponent)
+
+const WarpComponent = (
+  {
+    ship,
+    waypointID,
+    trigger = (props) => (
+      <button className="btn btn-sm" {...props}>
+        Warp
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    waypointID: string
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'extract'],
@@ -480,30 +515,35 @@ export const Warp = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? isLoading,
         onClick: () => mutate({ shipID: ship.symbol, waypointID }),
       })
     : createElement(trigger, {
+        ref,
         disabled: isLoading,
         onClick: () => mutate({ shipID: ship.symbol, waypointID }),
       })
 }
 
-export const Jump = ({
-  ship,
-  systemID,
-  trigger = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Jump
-    </button>
-  ),
-}: {
-  ship: ShipResponse
-  systemID: string
-  trigger?:
-    | ReactElement<PropsWithRef<ButtonHTMLAttributes<HTMLButtonElement>>>
-    | FC<ButtonHTMLAttributes<HTMLButtonElement>>
-}) => {
+export const Warp = forwardRef(WarpComponent)
+
+const JumpComponent = (
+  {
+    ship,
+    systemID,
+    trigger = (props) => (
+      <button className="btn btn-sm" {...props}>
+        Jump
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    systemID: string
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
   const client = useQueryClient()
   const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
     hasCooldown: !!state.cooldowns[ship.symbol],
@@ -537,14 +577,18 @@ export const Jump = ({
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
+        ref,
         disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
         onClick: () => mutate({ shipID: ship.symbol, systemID }),
       })
     : createElement(trigger, {
+        ref,
         disabled: hasCooldown || isLoading,
         onClick: () => mutate({ shipID: ship.symbol, systemID }),
       })
 }
+
+export const Jump = forwardRef(JumpComponent)
 
 export const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const client = useQueryClient()
@@ -623,7 +667,13 @@ export const Navigate = ({ ship }: { ship: ShipResponse }) => {
   )
 }
 
-const WaypointNavigation = ({ ship, onNavigate }: { onNavigate: (waypointID: string) => void; ship: ShipResponse }) => {
+export const WaypointNavigation = ({
+  ship,
+  onNavigate,
+}: {
+  onNavigate: (waypointID: string) => void
+  ship: ShipResponse
+}) => {
   const { isSuccess, data } = useQuery({
     queryKey: ['system', ship.nav.systemSymbol, 'waypoints'],
     queryFn: () => {
