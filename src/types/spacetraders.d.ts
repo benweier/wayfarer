@@ -274,7 +274,7 @@ export type MarketResponse = {
   imports: MarketGood[]
   exchange: MarketGood[]
   transactions: MarketTransaction[]
-  tradeGoods: MarketTradeGood[]
+  tradeGoods?: MarketTradeGood[]
 }
 
 export type JumpGateResponse = {
