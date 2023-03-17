@@ -48,6 +48,12 @@ import {
 } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
+const isRef = (ref: any) => {
+  if (typeof ref === 'function') return true
+
+  return ref !== null && typeof ref === 'object' && Object.hasOwn(ref, 'current')
+}
+
 export const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
   draft.data.nav.status = state
 })
@@ -91,8 +97,8 @@ export const updateShipInFleetFuel = produce<SpaceTradersResponse<ShipResponse[]
 const OrbitComponent = (
   {
     ship,
-    trigger = (props, ref) => (
-      <button ref={ref} className="btn btn-sm" {...props}>
+    trigger = (props) => (
+      <button className="btn btn-sm" {...props}>
         Orbit
       </button>
     ),
@@ -132,12 +138,12 @@ const OrbitComponent = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? ship.nav.status !== 'DOCKED',
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: ship.nav.status !== 'DOCKED',
         onClick: () => mutate(ship.symbol),
       })
@@ -148,8 +154,8 @@ export const Orbit = forwardRef(OrbitComponent)
 const DockComponent = (
   {
     ship,
-    trigger = (props, ref) => (
-      <button ref={ref} className="btn btn-sm" {...props}>
+    trigger = (props) => (
+      <button className="btn btn-sm" {...props}>
         Dock
       </button>
     ),
@@ -186,12 +192,12 @@ const DockComponent = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? ship.nav.status !== 'IN_ORBIT',
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: ship.nav.status !== 'IN_ORBIT',
         onClick: () => mutate(ship.symbol),
       })
@@ -202,8 +208,8 @@ export const Dock = forwardRef(DockComponent)
 export const Refuel = (
   {
     ship,
-    trigger = (props, ref) => (
-      <button ref={ref} className="btn btn-sm" {...props}>
+    trigger = (props) => (
+      <button className="btn btn-sm" {...props}>
         Refuel
       </button>
     ),
@@ -232,12 +238,12 @@ export const Refuel = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? disabled,
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: disabled,
         onClick: () => mutate(ship.symbol),
       })
@@ -275,12 +281,12 @@ const SurveyComponent = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: hasCooldown || isLoading,
         onClick: () => mutate(ship.symbol),
       })
@@ -339,12 +345,12 @@ const ExtractComponent = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
         onClick: () => mutate({ shipID: ship.symbol, survey }),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: hasCooldown || isLoading,
         onClick: () => mutate({ shipID: ship.symbol, survey }),
       })
@@ -401,12 +407,12 @@ const RefineComponent = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
         onClick: () => mutate({ shipID: ship.symbol, produce }),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: hasCooldown || isLoading,
         onClick: () => mutate({ shipID: ship.symbol, produce }),
       })
@@ -458,12 +464,12 @@ const JettisonComponent = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? isLoading,
         onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: isLoading,
         onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
       })
@@ -515,12 +521,12 @@ const WarpComponent = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? isLoading,
         onClick: () => mutate({ shipID: ship.symbol, waypointID }),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: isLoading,
         onClick: () => mutate({ shipID: ship.symbol, waypointID }),
       })
@@ -577,12 +583,12 @@ const JumpComponent = (
 
   return isValidElement(trigger)
     ? cloneElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
         onClick: () => mutate({ shipID: ship.symbol, systemID }),
       })
     : createElement(trigger, {
-        ref,
+        ref: isRef(ref) ? ref : undefined,
         disabled: hasCooldown || isLoading,
         onClick: () => mutate({ shipID: ship.symbol, systemID }),
       })
