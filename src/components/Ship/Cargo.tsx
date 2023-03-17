@@ -1,4 +1,4 @@
-import { offset, shift, useFloating } from '@floating-ui/react-dom'
+import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Switch, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { useAtom } from 'jotai'
@@ -66,6 +66,11 @@ const Manage = ({ children }: WithChildren) => {
     strategy: 'absolute',
     placement: cargoDisplayMode === 'list' ? 'top-start' : 'top-end',
     middleware: [offset(8), shift({ padding: 4 })],
+    whileElementsMounted: (reference, floating, update) => {
+      return autoUpdate(reference, floating, update, {
+        animationFrame: true,
+      })
+    },
   })
 
   return (
@@ -77,11 +82,7 @@ const Manage = ({ children }: WithChildren) => {
 
       <div
         ref={refs.setFloating}
-        className={cx('absolute bottom-full', {
-          'left-0': cargoDisplayMode === 'list',
-          'right-0': cargoDisplayMode === 'grid',
-          'pointer-events-none': !open,
-        })}
+        className="absolute top-0 left-0"
         style={{
           transform:
             typeof x === 'number' && typeof y === 'number'
@@ -98,7 +99,7 @@ const Manage = ({ children }: WithChildren) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="relative flex w-52 flex-col gap-1 rounded-md bg-zinc-100/75 p-1 backdrop-blur-lg dark:bg-zinc-800/75">
+          <Menu.Items className="relative flex w-52 origin-bottom flex-col gap-1 rounded-md bg-zinc-100/75 p-1 backdrop-blur-lg dark:bg-zinc-800/75">
             {children}
           </Menu.Items>
         </Transition>
@@ -140,7 +141,7 @@ const CargoItem = ({ item }: { item: CargoInventory }) => {
         <Manage>
           <Menu.Item>
             <button
-              className="btn btn-flat btn-danger flex w-full items-center gap-3"
+              className="btn btn-danger btn-flat flex w-full items-center gap-3"
               onClick={() => ref.current?.openModal()}
             >
               <TrashIcon className="h-4 w-4" />
