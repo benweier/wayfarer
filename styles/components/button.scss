@@ -8,11 +8,15 @@
   @apply p-1;
 }
 
+.btn-adornment {
+  @apply flex items-center gap-3;
+}
+
 .btn-primary {
   @apply border-2 border-blue-400 bg-blue-500 text-blue-50 dark:border-blue-400 dark:bg-blue-500 dark:text-blue-50;
 
   &.btn-outline {
-    @apply border-opacity-20 bg-opacity-10 text-blue-900 dark:text-blue-50;
+    @apply border-opacity-40 bg-opacity-20 text-blue-900 dark:text-blue-50;
   }
 
   &.btn-flat {
@@ -24,7 +28,7 @@
   @apply border-2 border-emerald-400 bg-emerald-500 text-emerald-50 dark:border-emerald-500 dark:bg-emerald-600 dark:text-emerald-50;
 
   &.btn-outline {
-    @apply border-opacity-20 bg-opacity-10 text-emerald-900 dark:text-emerald-50;
+    @apply border-opacity-40 bg-opacity-20 text-emerald-900 dark:text-emerald-50;
   }
 
   &.btn-flat {
@@ -36,7 +40,7 @@
   @apply border-2 border-amber-400 bg-amber-500 text-amber-50 dark:border-amber-400 dark:bg-amber-500 dark:text-amber-50;
 
   &.btn-outline {
-    @apply border-opacity-20 bg-opacity-10 text-amber-900 dark:text-amber-50;
+    @apply border-opacity-40 bg-opacity-20 text-amber-900 dark:text-amber-50;
   }
 
   &.btn-flat {
@@ -48,7 +52,7 @@
   @apply border-2 border-rose-400 bg-rose-500 text-rose-50 dark:border-rose-400 dark:bg-rose-500 dark:text-rose-50;
 
   &.btn-outline {
-    @apply border-opacity-20 bg-opacity-10 text-rose-900 dark:text-rose-50;
+    @apply border-opacity-40 bg-opacity-20 text-rose-900 dark:text-rose-50;
   }
 
   &.btn-flat {
