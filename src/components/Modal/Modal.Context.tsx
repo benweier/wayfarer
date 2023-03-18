@@ -10,7 +10,7 @@ import {
 import { StoreApi } from 'zustand/vanilla'
 import { Root } from './Modal.Root'
 import { ModalStore, createModalStore } from './Modal.store'
-import { ModalProps } from './modal.types'
+import { ModalImperativeRef, ModalProps } from './modal.types'
 
 export const ModalContext = createContext<StoreApi<ModalStore> | null>(null)
 
@@ -28,9 +28,9 @@ const useModalStoreCreator = ({ isOpen, onClose }: { isOpen?: boolean; onClose?:
   return store.current
 }
 
-export const ModalComponent = (
+const ModalComponent = (
   { trigger, isOpen = false, onClose, size, children }: PropsWithChildren<ModalProps>,
-  ref?: ForwardedRef<{ openModal: () => void; closeModal: () => void } | undefined>,
+  ref?: ForwardedRef<ModalImperativeRef | undefined>,
 ) => {
   const store = useModalStoreCreator({ isOpen, onClose })
 
