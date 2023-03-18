@@ -1,4 +1,4 @@
-import { offset, shift, useFloating } from '@floating-ui/react-dom'
+import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Popover, Transition } from '@headlessui/react'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
@@ -11,6 +11,11 @@ export const Preferences = () => {
     strategy: 'absolute',
     placement: 'top-start',
     middleware: [offset(8), shift({ padding: 4 })],
+    whileElementsMounted: (reference, floating, update) => {
+      return autoUpdate(reference, floating, update, {
+        animationFrame: true,
+      })
+    },
   })
 
   return (
@@ -19,7 +24,7 @@ export const Preferences = () => {
         <>
           <Popover.Button
             ref={refs.setReference}
-            className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100"
+            className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:bg-blue-50/10 hover:shadow-sm"
           >
             <div className="h-6 w-6">
               <Cog6ToothIcon className={cx('h-6 w-6', { 'animate-spin': open })} aria-hidden />
