@@ -4,6 +4,7 @@ import {
   CooldownResponse,
   ExtractResponse,
   FuelResponse,
+  MarketTransaction,
   NavigationResponse,
   ShipCargo,
   ShipResponse,
@@ -21,6 +22,18 @@ export const createShipPurchase = mutationFnFactory<
   void,
   { shipType: string; waypointSymbol: string }
 >(() => '/my/ships')
+
+export const createShipPurchaseCargo = mutationFnFactory<
+  SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>,
+  string,
+  { symbol: string; units: number }
+>((ship) => `/my/ships/${ship}/purchase`)
+
+export const createShipSellCargo = mutationFnFactory<
+  SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>,
+  string,
+  { symbol: string; units: number }
+>((ship) => `/my/ships/${ship}/sell`)
 
 export const createShipScanWaypoint = mutationFnFactory<
   SpaceTradersResponse<{ waypoints: WaypointResponse[]; cooldown: CooldownResponse }>,
