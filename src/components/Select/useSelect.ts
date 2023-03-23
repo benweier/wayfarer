@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
-import { SelectOption } from './types'
 
-type UseSelectOptions<T = SelectOption> = {
+type UseSelectOptions<T = string> = {
   options: T[]
   selected?: T
   onChange: (value?: T) => void
 }
 
-export const useSelect = <T = SelectOption>(options: T[] = []): UseSelectOptions<T> => {
+export const useSelect = <T = string>(options: T[] = []): UseSelectOptions<T> => {
   const [selected, setSelected] = useState<T | undefined>()
 
   const onChange = useCallback((value?: T) => {

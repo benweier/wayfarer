@@ -1,11 +1,13 @@
-export type SelectOption = { id: string; name: string | JSX.Element }
+import { Key, ReactNode } from 'react'
 
-export type SelectProps<T> = {
-  label: string
-  data: T[]
-  selected?: T | null
-  loading?: JSX.Element
-  onChange: (value?: T) => void
-  getOption: (item: T, index: number, source: T[]) => SelectOption
-  getItemKey: (value?: T) => string | number | undefined
+export type SelectFieldProps<T = string> = {
+  label?: ReactNode
+  selected?: T
+  by?: (keyof T & string) | ((a: T, z: T) => boolean)
+  options: T[]
+  onChange?: (value?: T | null) => void
+  getItemKey: (item: T) => Key | null | undefined
+  getItemLabel: (item?: T) => ReactNode | JSX.Element
+  getItemOption: (item: T) => ReactNode | JSX.Element
+  getItemDisabled?: (item: T) => boolean | undefined
 }

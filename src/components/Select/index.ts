@@ -1,4 +1,4 @@
-export { Select, SelectSkeleton } from './Select'
-export { SelectField } from './Field'
+export { Field } from './Field'
+export { Label } from './Label'
+export { Skeleton } from './Skeleton'
 export { useSelect } from './useSelect'
-export type { SelectOption } from './types'
