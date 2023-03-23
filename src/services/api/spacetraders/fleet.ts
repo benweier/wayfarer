@@ -23,13 +23,13 @@ export const createShipPurchase = mutationFnFactory<
   { shipType: string; waypointSymbol: string }
 >(() => '/my/ships')
 
-export const createShipPurchaseCargo = mutationFnFactory<
+export const createShipCargoPurchase = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>,
   string,
   { symbol: string; units: number }
 >((ship) => `/my/ships/${ship}/purchase`)
 
-export const createShipSellCargo = mutationFnFactory<
+export const createShipCargoSell = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>,
   string,
   { symbol: string; units: number }
