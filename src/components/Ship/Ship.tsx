@@ -47,10 +47,10 @@ export const Ship = ({ ship }: { ship: ShipResponse }) => {
                 </div>
               </div>
               <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-                {SHIP_NAV_STATUS[ship.nav.status] ?? ship.nav.status}
+                {SHIP_NAV_STATUS.get(ship.nav.status) ?? ship.nav.status}
               </div>
               <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-                {SHIP_NAV_FLIGHT_MODE[ship.nav.flightMode] ?? ship.nav.flightMode}
+                {SHIP_NAV_FLIGHT_MODE.get(ship.nav.flightMode) ?? ship.nav.flightMode}
               </div>
             </div>
             <div className="flex gap-8 [width:350px]">

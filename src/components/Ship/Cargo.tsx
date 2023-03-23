@@ -113,6 +113,7 @@ const CargoItem = ({ item }: { item: CargoInventory }) => {
   const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
   const [cargoDescription] = useAtom(cargoDescriptionAtom)
   const ref = useRef<{ openModal: () => void; closeModal: () => void }>()
+  const produce = REFINE_ITEM_TYPE.get(item.symbol)
 
   return (
     <div
@@ -137,7 +138,7 @@ const CargoItem = ({ item }: { item: CargoInventory }) => {
           'justify-end lg:justify-start': cargoDisplayMode === 'list',
         })}
       >
-        {!!REFINE_ITEM_TYPE[item.symbol] && <Actions.Refine ship={ship} produce={REFINE_ITEM_TYPE[item.symbol]} />}
+        {produce && <Actions.Refine ship={ship} produce={produce} />}
         <Manage>
           <Menu.Item>
             <button

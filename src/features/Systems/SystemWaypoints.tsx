@@ -26,7 +26,7 @@ const Waypoint = ({ systemID, waypoint }: { systemID: string; waypoint: SystemWa
             'bg-zinc-900 text-zinc-50': waypoint.type === 'GRAVITY_WELL',
           })}
         >
-          {WAYPOINT_TYPE[waypoint.type]}
+          {WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}
         </span>
 
         <span className="text-secondary text-sm">

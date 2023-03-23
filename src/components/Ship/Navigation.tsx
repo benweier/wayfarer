@@ -27,10 +27,10 @@ export const Status = ({ nav }: { nav: NavigationResponse }) => {
         </div>
       </div>
       <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-        {SHIP_NAV_STATUS[nav.status] ?? nav.status}
+        {SHIP_NAV_STATUS.get(nav.status) ?? nav.status}
       </div>
       <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-        {SHIP_NAV_FLIGHT_MODE[nav.flightMode] ?? nav.flightMode}
+        {SHIP_NAV_FLIGHT_MODE.get(nav.flightMode) ?? nav.flightMode}
       </div>
     </div>
   )

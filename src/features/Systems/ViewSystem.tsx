@@ -26,7 +26,7 @@ export const ViewSystem = ({ systemID }: { systemID: string }) => {
   return (
     <div key={system.symbol} className="grid gap-8">
       <div className="flex flex-row items-center justify-start gap-4">
-        <div className="text-xl font-semibold">{SYSTEM_TYPE[system.type] ?? system.type}</div>
+        <div className="text-xl font-semibold">{SYSTEM_TYPE.get(system.type) ?? system.type}</div>
         <div className="text-lg font-light">
           ({system.x}, {system.y})
         </div>

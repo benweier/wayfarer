@@ -698,7 +698,7 @@ export const WaypointNavigation = ({
           <div>
             <div className="text-sm font-semibold">{waypoint.symbol}</div>
             <div className="text-xs font-light">
-              {WAYPOINT_TYPE[waypoint.type] ?? waypoint.type} ({waypoint.x}, {waypoint.y})
+              {WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type} ({waypoint.x}, {waypoint.y})
             </div>
           </div>
           {ship.nav.waypointSymbol !== waypoint.symbol ? (

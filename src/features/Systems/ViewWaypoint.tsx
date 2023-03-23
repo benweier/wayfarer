@@ -31,7 +31,7 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
   return (
     <div key={waypoint.symbol} className="grid gap-8">
       <div className="flex flex-row items-center justify-start gap-4">
-        <div className="text-xl font-semibold">{WAYPOINT_TYPE[waypoint.type] ?? waypoint.type}</div>
+        <div className="text-xl font-semibold">{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</div>
         <div className="font-light">
           ({waypoint.x}, {waypoint.y})
         </div>

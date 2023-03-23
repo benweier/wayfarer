@@ -141,7 +141,7 @@ const System = ({
             {system.symbol}
           </Link>
           <div className="text-base">
-            <span className="font-medium">{SYSTEM_TYPE[system.type]}</span>{' '}
+            <span className="font-medium">{SYSTEM_TYPE.get(system.type) ?? system.type}</span>{' '}
             <span className="font-light">
               ({system.x}, {system.y})
             </span>
