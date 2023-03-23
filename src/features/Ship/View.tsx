@@ -9,7 +9,7 @@ import { cx } from '@/utilities/cx'
 
 const tabs = [
   { title: 'Cargo', content: Cargo, fallback: Fragment },
-  { title: 'Survey', content: Survey, fallback: Fragment },
+  { title: 'Survey/Extract', content: Survey, fallback: Fragment },
   { title: 'Loadout', content: Loadout, fallback: Fragment },
 ]
 
