@@ -94,7 +94,7 @@ const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => vo
                     })
                   }, new Map())
                 }}
-                onChange={field.onChange}
+                onChange={(value) => field.onChange(value?.symbol)}
                 select={(response) => ({
                   ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointID),
                 })}
