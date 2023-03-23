@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { Modal } from '@/components/Modal'
-import { SelectField } from '@/components/Select'
+import * as Select from '@/components/Select'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { SpaceTradersResponse, mutationFnFactory } from '@/services/api/spacetraders/core'
@@ -70,15 +70,18 @@ export const Register = () => {
                 control={methods.control}
                 name="faction"
                 render={({ field }) => (
-                  <SelectField
-                    label="Faction"
-                    selected={{ id: field.value, name: field.value }}
+                  <Select.Field
+                    label={<Select.Label>Faction</Select.Label>}
+                    by={(a, z) => a?.id === z?.id}
+                    getItemKey={(item) => item.id}
+                    getItemLabel={(item) => item?.name}
+                    getItemOption={(item) => item.name}
                     options={[
-                      { id: 'COSMIC', name: 'COSMIC' },
-                      { id: 'DOMINION', name: 'DOMINION' },
-                      { id: 'GALACTIC', name: 'GALACTIC' },
-                      { id: 'QUANTUM', name: 'QUANTUM' },
-                      { id: 'VOID', name: 'VOID' },
+                      { id: 'COSMIC', name: 'Cosmic' },
+                      { id: 'DOMINION', name: 'Dominion' },
+                      { id: 'GALACTIC', name: 'Galactic' },
+                      { id: 'QUANTUM', name: 'Quantum' },
+                      { id: 'VOID', name: 'Void' },
                     ]}
                     onChange={(value) => {
                       field.onChange(value?.id)
