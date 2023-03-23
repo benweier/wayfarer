@@ -1,15 +1,19 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useRef } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
 import { TradeGood } from '@/components/Market/TradeGood'
-import { Modal } from '@/components/Modal'
+import { Modal, ModalImperativeRef } from '@/components/Modal'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
 import * as ShipSelect from '@/components/Ship/Select'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useMarketTradeGoodContext } from '@/context/MarketTradeGood'
 import { useSystemWaypointContext } from '@/context/SystemWaypoint'
 import { createShipCargoPurchase } from '@/services/api/spacetraders'
+import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/services/store/auth'
+import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { PurchaseCargoSchema, validation } from './Purchase.validation'
 
@@ -127,15 +131,45 @@ const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => vo
 }
 
 export const PurchaseCargo = () => {
+  const ref = useRef<ModalImperativeRef>()
+  const { setAgent } = useAuthStore()
+  const client = useQueryClient()
   const good = useMarketTradeGoodContext((state) => state)
   const { mutateAsync } = useMutation({
     mutationKey: ['cargo', good.symbol, 'purchase'],
     mutationFn: ({ shipID, item, quantity }: { shipID: string; item: string; quantity: number }) =>
       createShipCargoPurchase({ path: shipID, payload: { symbol: item, units: quantity } }),
+    onMutate: ({ shipID }) => {
+      void client.cancelQueries({ queryKey: ['ships'] })
+      void client.cancelQueries({ queryKey: ['ship', shipID] })
+    },
+    onSuccess: (response, { shipID }) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+
+      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
+
+      if (response.data.agent) {
+        setAgent(response.data.agent)
+      }
+    },
+    onSettled: (_res, _err, { shipID }) => {
+      void client.invalidateQueries({ queryKey: ['ships'] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+
+      ref.current?.closeModal()
+    },
   })
 
   return (
-    <Modal size="md" trigger={<Modal.Trigger as={<button className="btn btn-outline btn-danger">Buy</button>} />}>
+    <Modal
+      ref={ref}
+      size="md"
+      trigger={<Modal.Trigger as={<button className="btn btn-outline btn-danger">Buy</button>} />}
+    >
       <div className="grid gap-8">
         <div className="text-title">
           Buy: <span className="font-light">{TRADE_SYMBOL.get(good.symbol) ?? good.symbol}</span>
