@@ -47,12 +47,7 @@ import {
   SurveyResponse,
 } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
-
-const isRef = (ref: any) => {
-  if (typeof ref === 'function') return true
-
-  return ref !== null && typeof ref === 'object' && Object.hasOwn(ref, 'current')
-}
+import { isRef } from '@/utilities/isRef'
 
 export const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
   draft.data.nav.status = state
