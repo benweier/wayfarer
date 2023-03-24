@@ -12,22 +12,22 @@ import { isRef } from '@/utilities/isRef'
 
 export const Trigger = (
   {
-    as,
+    children,
   }: {
-    as?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+    children?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
   },
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
   const openModal = useModalContext((state) => state.openModal)
 
-  if (!as) return null
+  if (!children) return null
 
-  return isValidElement(as)
-    ? cloneElement(as, {
+  return isValidElement(children)
+    ? cloneElement(children, {
         ref: isRef(ref) ? ref : undefined,
         onClick: () => openModal(),
       })
-    : createElement(as, {
+    : createElement(children, {
         ref: isRef(ref) ? ref : undefined,
         onClick: () => openModal(),
       })
