@@ -3,7 +3,7 @@ import { TrashIcon } from '@heroicons/react/20/solid'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { Fragment } from 'react'
-import { CargoForm } from '@/components/Market/SellCargo'
+import { SellCargoForm } from '@/components/Market/SellCargo'
 import { TradeGood } from '@/components/Market/TradeGood'
 import { Modal, useModalContext, useModalImperativeHandle } from '@/components/Modal'
 import { Actions } from '@/components/Ship'
@@ -167,7 +167,7 @@ const SellCargo = () => {
 
         <TradeGood price={good.sellPrice} volume={good.tradeVolume} supply={good.supply} />
 
-        <CargoForm
+        <SellCargoForm
           ship={ship}
           onSubmit={(values) => mutateAsync({ shipID: values.ship, item: values.item, quantity: values.quantity })}
         />

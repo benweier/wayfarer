@@ -13,6 +13,7 @@ import { createShipCargoSell } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/services/store/auth'
 import { ShipResponse } from '@/types/spacetraders'
+import { cx } from '@/utilities/cx'
 import { SellCargoSchema, validation } from './Sell.validation'
 
 const SubmitPurchase = () => {
@@ -40,62 +41,70 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
   )
 }
 
-const CargoForm = ({ onSubmit }: { onSubmit: (values: SellCargoSchema) => void }) => {
+export const SellCargoForm = ({
+  ship,
+  onSubmit,
+}: {
+  ship?: ShipResponse
+  onSubmit: (values: SellCargoSchema) => void
+}) => {
   const waypointID = useSystemWaypointContext((state) => state.waypointID)
   const good = useMarketTradeGoodContext((state) => state)
   const methods = useForm<SellCargoSchema>({
-    defaultValues: { item: good.symbol },
+    defaultValues: { ship: ship?.symbol, item: good.symbol },
     resolver: yupResolver(validation),
   })
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="grid gap-8">
-        <Controller
-          control={methods.control}
-          name="ship"
-          render={({ field }) => (
-            <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
-              <ShipSelect.Field
-                stateReducer={(ships) => {
-                  return ships.reduce<Map<string, ShipSelect.ShipItemState>>((map, ship) => {
-                    const disabled = ship.cargo.inventory.findIndex((item) => item.symbol === good.symbol) === -1
-                    const count = ship.cargo.inventory.reduce((count, item) => {
-                      if (item.symbol === good.symbol) count = count + item.units
+        {!ship && (
+          <Controller
+            control={methods.control}
+            name="ship"
+            render={({ field }) => (
+              <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
+                <ShipSelect.Field
+                  stateReducer={(ships) => {
+                    return ships.reduce<Map<string, ShipSelect.ShipItemState>>((map, ship) => {
+                      const disabled = ship.cargo.inventory.findIndex((item) => item.symbol === good.symbol) === -1
+                      const count = ship.cargo.inventory.reduce((count, item) => {
+                        if (item.symbol === good.symbol) count = count + item.units
 
-                      return count
-                    }, 0)
+                        return count
+                      }, 0)
 
-                    return map.set(ship.symbol, {
-                      ship,
-                      label: (
-                        <div className="flex items-baseline gap-2">
-                          <span className="font-bold">{ship.symbol}</span>
-                          <span className="text-secondary">
-                            ({TRADE_SYMBOL.get(good.symbol) ?? good.symbol}: {count})
-                          </span>
-                        </div>
-                      ),
-                      option: (
-                        <div className="flex flex-col">
-                          <div className="font-bold">{ship.symbol}</div>
-                          <div className="text-secondary text-xs">
-                            {TRADE_SYMBOL.get(good.symbol) ?? good.symbol}: {count}
+                      return map.set(ship.symbol, {
+                        ship,
+                        label: (
+                          <div className="flex items-baseline gap-2">
+                            <span className="font-bold">{ship.symbol}</span>
+                            <span className="text-secondary">
+                              ({TRADE_SYMBOL.get(good.symbol) ?? good.symbol}: {count})
+                            </span>
                           </div>
-                        </div>
-                      ),
-                      disabled,
-                    })
-                  }, new Map())
-                }}
-                onChange={(value) => field.onChange(value?.symbol)}
-                select={(response) => ({
-                  ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointID),
-                })}
-              />
-            </QuerySuspenseBoundary>
-          )}
-        />
+                        ),
+                        option: (
+                          <div className="flex flex-col">
+                            <div className="font-bold">{ship.symbol}</div>
+                            <div className="text-secondary text-xs">
+                              {TRADE_SYMBOL.get(good.symbol) ?? good.symbol}: {count}
+                            </div>
+                          </div>
+                        ),
+                        disabled,
+                      })
+                    }, new Map())
+                  }}
+                  onChange={(value) => field.onChange(value?.symbol)}
+                  select={(response) => ({
+                    ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointID),
+                  })}
+                />
+              </QuerySuspenseBoundary>
+            )}
+          />
+        )}
 
         <div>
           <label className="label">Quantity</label>
@@ -176,7 +185,7 @@ export const SellCargo = () => {
 
         <TradeGood price={good.sellPrice} volume={good.tradeVolume} supply={good.supply} />
 
-        <CargoForm
+        <SellCargoForm
           onSubmit={(values) =>
             mutateAsync({
               shipID: values.ship,
