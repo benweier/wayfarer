@@ -231,7 +231,7 @@ export const TRADE_SYMBOL = new Map([
   ['GRAVITON_EMITTERS', 'Graviton Emitters'],
   ['HOLOGRAPHICS', 'Holographics'],
   ['HYDROCARBON', 'Hydrocarbon'],
-  ['ICE_WATER', 'Ice Water'],
+  ['ICE_WATER', 'Fresh Water'],
   ['IRON_ORE', 'Iron Ore'],
   ['IRON', 'Iron'],
   ['JEWELRY', 'Jewelry'],
