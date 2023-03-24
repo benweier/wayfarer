@@ -61,10 +61,14 @@ export const Survey = ({ ship }: { ship: ShipResponse }) => {
   return (
     <div className="grid gap-4">
       <div className="flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-        <Actions.Survey
-          ship={ship}
-          trigger={<button className="btn btn-primary">Survey {ship.nav.waypointSymbol}</button>}
-        />
+        <div className="flex gap-2">
+          <Actions.Survey
+            ship={ship}
+            trigger={<button className="btn btn-primary">Survey {ship.nav.waypointSymbol}</button>}
+          />
+
+          <Actions.Extract ship={ship} trigger={<button className="btn btn-confirm">Extract without Survey</button>} />
+        </div>
         <div className="w-full max-w-xs">
           <Cooldown ship={ship} />
         </div>
