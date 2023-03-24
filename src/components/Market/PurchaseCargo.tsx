@@ -1,9 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useRef } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
 import { TradeGood } from '@/components/Market/TradeGood'
-import { Modal, ModalImperativeRef } from '@/components/Modal'
+import { Modal, useModalImperativeHandle } from '@/components/Modal'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
 import * as ShipSelect from '@/components/Ship/Select'
@@ -131,7 +130,7 @@ const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => vo
 }
 
 export const PurchaseCargo = () => {
-  const ref = useRef<ModalImperativeRef>()
+  const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
   const good = useMarketTradeGoodContext((state) => state)
@@ -160,7 +159,7 @@ export const PurchaseCargo = () => {
       void client.invalidateQueries({ queryKey: ['ships'] })
       void client.invalidateQueries({ queryKey: ['ship', shipID] })
 
-      ref.current?.closeModal()
+      modal.close()
     },
   })
 
@@ -168,7 +167,11 @@ export const PurchaseCargo = () => {
     <Modal
       ref={ref}
       size="md"
-      trigger={<Modal.Trigger as={<button className="btn btn-outline btn-danger">Buy</button>} />}
+      trigger={
+        <Modal.Trigger>
+          <button className={cx('btn btn-outline btn-danger', { 'grayscale-50': good.tradeVolume === 0 })}>Buy</button>
+        </Modal.Trigger>
+      }
     >
       <div className="grid gap-8">
         <div className="text-title">

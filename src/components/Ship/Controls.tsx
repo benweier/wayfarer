@@ -2,15 +2,15 @@ import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Fragment, useRef } from 'react'
-import { Modal, ModalImperativeRef } from '@/components/Modal'
+import { Fragment } from 'react'
+import { Modal, useModalImperativeHandle } from '@/components/Modal'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { createShipNavigate } from '@/services/api/spacetraders'
 import { ShipResponse } from '@/types/spacetraders'
 import * as Actions from './Actions'
 
 export const Controls = ({ ship }: { ship: ShipResponse }) => {
-  const ref = useRef<ModalImperativeRef>()
+  const { ref, modal } = useModalImperativeHandle()
   const { x, y, refs } = useFloating<HTMLButtonElement>({
     strategy: 'absolute',
     placement: 'bottom-end',
@@ -76,7 +76,7 @@ export const Controls = ({ ship }: { ship: ShipResponse }) => {
               )}
               {ship.nav.status === 'IN_ORBIT' && (
                 <Menu.Item as={Fragment}>
-                  <button className="btn btn-adornment w-full" onClick={() => ref.current?.openModal()}>
+                  <button className="btn btn-adornment w-full" onClick={() => modal.open()}>
                     <span>Navigate</span>
                   </button>
                 </Menu.Item>
