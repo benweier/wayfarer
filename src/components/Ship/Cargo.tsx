@@ -1,19 +1,27 @@
-import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
-import { Menu, Switch, Transition } from '@headlessui/react'
-import { EllipsisVerticalIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { Switch } from '@headlessui/react'
+import { TrashIcon } from '@heroicons/react/20/solid'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
-import { Fragment, useRef } from 'react'
-import { Modal } from '@/components/Modal'
+import { Fragment } from 'react'
+import { CargoForm } from '@/components/Market/SellCargo'
+import { TradeGood } from '@/components/Market/TradeGood'
+import { Modal, useModalContext, useModalImperativeHandle } from '@/components/Modal'
 import { Actions } from '@/components/Ship'
-import { REFINE_ITEM_TYPE } from '@/config/constants'
+import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
+import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
+import { MarketTradeGoodStore, useMarketTradeGoodContext } from '@/context/MarketTradeGood'
 import { useShipContext } from '@/context/Ship'
+import { SystemWaypointStore } from '@/context/SystemWaypoint'
+import { createShipCargoSell, getMarket } from '@/services/api/spacetraders'
+import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { cargoDescriptionAtom, cargoDisplayAtom } from '@/services/store/atoms/cargo.display'
-import { CargoInventory, ShipResponse } from '@/types/spacetraders'
+import { useAuthStore } from '@/services/store/auth'
+import { CargoInventory, MarketTradeGood, ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const CargoDisplayMode = () => {
   const [cargoDisplayMode, setCargoDisplayMode] = useAtom(cargoDisplayAtom)
-  const [cargoDescription, setCargoDescription] = useAtom(cargoDescriptionAtom)
+  const [showCargoDescription, setShowCargoDescription] = useAtom(cargoDescriptionAtom)
 
   return (
     <div className="flex items-center justify-between gap-4">
@@ -34,13 +42,13 @@ export const CargoDisplayMode = () => {
       <div className="flex items-center gap-2">
         <span className="text-secondary text-sm">Show item description</span>
         <Switch
-          checked={cargoDescription}
-          onChange={setCargoDescription}
+          checked={showCargoDescription}
+          onChange={setShowCargoDescription}
           className={cx(
             'relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 ',
             {
-              'bg-emerald-500 dark:bg-emerald-600': cargoDescription,
-              'bg-zinc-700 dark:bg-zinc-900': !cargoDescription,
+              'bg-emerald-500 dark:bg-emerald-600': showCargoDescription,
+              'bg-zinc-700 dark:bg-zinc-900': !showCargoDescription,
             },
           )}
         >
@@ -49,8 +57,8 @@ export const CargoDisplayMode = () => {
             className={cx(
               'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out',
               {
-                'translate-x-0': !cargoDescription,
-                'translate-x-6': cargoDescription,
+                'translate-x-0': !showCargoDescription,
+                'translate-x-6': showCargoDescription,
               },
             )}
           />
@@ -60,127 +68,195 @@ export const CargoDisplayMode = () => {
   )
 }
 
-const Manage = ({ children }: WithChildren) => {
-  const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
-  const { x, y, refs } = useFloating<HTMLButtonElement>({
-    strategy: 'absolute',
-    placement: cargoDisplayMode === 'list' ? 'top-start' : 'top-end',
-    middleware: [offset(8), shift({ padding: 4 })],
-    whileElementsMounted: (reference, floating, update) => {
-      return autoUpdate(reference, floating, update, {
-        animationFrame: true,
-      })
+// const Manage = ({ children }: WithChildren) => {
+//   const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
+//   const { x, y, refs } = useFloating<HTMLButtonElement>({
+//     strategy: 'absolute',
+//     placement: cargoDisplayMode === 'list' ? 'top-start' : 'top-end',
+//     middleware: [offset(8), shift({ padding: 4 })],
+//     whileElementsMounted: (reference, floating, update) => {
+//       return autoUpdate(reference, floating, update, {
+//         animationFrame: true,
+//       })
+//     },
+//   })
+//
+//   return (
+//     <Menu as="div" className="relative">
+//       <Menu.Button ref={refs.setReference} className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-white/5">
+//         <span className="sr-only">Manage</span>
+//         <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+//       </Menu.Button>
+//
+//       <div
+//         ref={refs.setFloating}
+//         className="absolute top-0 left-0"
+//         style={{
+//           transform:
+//             typeof x === 'number' && typeof y === 'number'
+//               ? `translate(${Math.round(x)}px,${Math.round(y)}px)`
+//               : undefined,
+//         }}
+//       >
+//         <Transition
+//           as={Fragment}
+//           enter="transition ease-out duration-100"
+//           enterFrom="transform opacity-0 scale-95"
+//           enterTo="transform opacity-100 scale-100"
+//           leave="transition ease-in duration-75"
+//           leaveFrom="transform opacity-100 scale-100"
+//           leaveTo="transform opacity-0 scale-95"
+//         >
+//           <Menu.Items className="relative flex w-52 origin-bottom flex-col gap-1 rounded-md bg-zinc-100/75 p-1 backdrop-blur-lg dark:bg-zinc-800/75">
+//             {children}
+//           </Menu.Items>
+//         </Transition>
+//       </div>
+//     </Menu>
+//   )
+// }
+
+const SellCargo = () => {
+  const { ref, modal } = useModalImperativeHandle()
+  const { setAgent } = useAuthStore()
+  const client = useQueryClient()
+  const ship = useShipContext((state) => state)
+  const good = useMarketTradeGoodContext((state) => state)
+  const { mutateAsync } = useMutation({
+    mutationKey: ['cargo', good.symbol, 'sell'],
+    mutationFn: ({ shipID, item, quantity }: { shipID: string; item: string; quantity: number }) =>
+      createShipCargoSell({ path: shipID, payload: { symbol: item, units: quantity } }),
+    onMutate: ({ shipID }) => {
+      void client.cancelQueries({ queryKey: ['ships'] })
+      void client.cancelQueries({ queryKey: ['ship', shipID] })
+    },
+    onSuccess: (response, { shipID }) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+
+      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
+
+      if (response.data.agent) {
+        setAgent(response.data.agent)
+      }
+    },
+    onSettled: (_res, _err, { shipID }) => {
+      void client.invalidateQueries({ queryKey: ['ships'] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+
+      modal.close()
     },
   })
 
   return (
-    <Menu as="div" className="relative">
-      <Menu.Button ref={refs.setReference} className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-white/5">
-        <span className="sr-only">Manage</span>
-        <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
-      </Menu.Button>
+    <Modal
+      ref={ref}
+      trigger={
+        <Modal.Trigger>
+          <button className="btn btn-confirm btn-flat btn-sm">Sell {!!good && `(${good.sellPrice})`}</button>
+        </Modal.Trigger>
+      }
+    >
+      <div className="grid gap-8">
+        <div className="text-title">
+          Sell: <span className="font-light">{TRADE_SYMBOL.get(good.symbol) ?? good.symbol}</span>
+        </div>
 
-      <div
-        ref={refs.setFloating}
-        className="absolute top-0 left-0"
-        style={{
-          transform:
-            typeof x === 'number' && typeof y === 'number'
-              ? `translate(${Math.round(x)}px,${Math.round(y)}px)`
-              : undefined,
-        }}
-      >
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="relative flex w-52 origin-bottom flex-col gap-1 rounded-md bg-zinc-100/75 p-1 backdrop-blur-lg dark:bg-zinc-800/75">
-            {children}
-          </Menu.Items>
-        </Transition>
+        <TradeGood price={good.sellPrice} volume={good.tradeVolume} supply={good.supply} />
+
+        <CargoForm
+          ship={ship}
+          onSubmit={(values) => mutateAsync({ shipID: values.ship, item: values.item, quantity: values.quantity })}
+        />
       </div>
-    </Menu>
+    </Modal>
   )
 }
 
-const CargoItem = ({ item }: { item: CargoInventory }) => {
+const JettisonCargo = ({ item }: { item: CargoInventory }) => {
   const ship = useShipContext((state) => state)
-  const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
-  const [cargoDescription] = useAtom(cargoDescriptionAtom)
-  const ref = useRef<{ openModal: () => void; closeModal: () => void }>()
-  const produce = REFINE_ITEM_TYPE.get(item.symbol)
 
   return (
-    <div
-      key={item.symbol}
-      className="flex flex-col justify-between gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
+    <Modal
+      trigger={
+        <Modal.Trigger>
+          <button className="btn btn-flat btn-danger btn-sm">Jettison</button>
+        </Modal.Trigger>
+      }
     >
+      <div className="grid gap-8">
+        <div className="text-title">Are you sure?</div>
+        <div>
+          Destroy {item.name} x{item.units}
+        </div>
+        <div className="flex gap-2">
+          <CancelModal />
+          <Actions.Jettison
+            ship={ship}
+            symbol={item.symbol}
+            units={item.units}
+            trigger={
+              <button className="btn btn-danger flex w-full items-center gap-3">
+                <TrashIcon className="h-5 w-5" />
+                <span>Confirm Jettison</span>
+              </button>
+            }
+          />
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
+const CancelModal = () => {
+  const closeModal = useModalContext((state) => state.closeModal)
+
+  return (
+    <button className="btn" onClick={() => closeModal()}>
+      Cancel
+    </button>
+  )
+}
+
+const CargoItem = ({ item, children }: WithChildren<{ item: CargoInventory; good?: MarketTradeGood }>) => {
+  const [cargoDescription] = useAtom(cargoDescriptionAtom)
+
+  return (
+    <div className="flex flex-col justify-between gap-8 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 @container dark:bg-opacity-10">
       <div className="grid gap-2">
-        <div
-          className={cx('flex items-center gap-4', {
-            'justify-between': cargoDisplayMode === 'grid',
-            'justify-between lg:justify-start': cargoDisplayMode === 'list',
-          })}
-        >
+        <div className={cx('flex items-center justify-between gap-4 @[600px]:justify-start')}>
           <span className="font-medium">{item.name}</span>
           <span className="text-lg font-bold">{item.units}</span>
         </div>
         {cargoDescription && <div className="text-secondary text-sm">{item.description}</div>}
       </div>
-      <div
-        className={cx('flex gap-2', {
-          'justify-end': cargoDisplayMode === 'grid',
-          'justify-end lg:justify-start': cargoDisplayMode === 'list',
-        })}
-      >
-        {produce && <Actions.Refine ship={ship} produce={produce} />}
-        <Manage>
-          <Menu.Item>
-            <button
-              className="btn btn-danger btn-flat flex w-full items-center gap-3"
-              onClick={() => ref.current?.openModal()}
-            >
-              <TrashIcon className="h-4 w-4" />
-              <span>Jettison</span>
-            </button>
-          </Menu.Item>
-        </Manage>
-        <Modal ref={ref}>
-          <div className="grid gap-8">
-            <div className="text-title">Are you sure?</div>
-            <div>
-              Destroy {item.name} x{item.units}
-            </div>
-            <div className="flex gap-2">
-              <button className="btn" onClick={() => ref.current?.closeModal()}>
-                Cancel
-              </button>
-              <Actions.Jettison
-                ship={ship}
-                symbol={item.symbol}
-                units={item.units}
-                trigger={
-                  <button className="btn btn-danger flex w-full items-center gap-3">
-                    <TrashIcon className="h-5 w-5" />
-                    <span>Confirm Jettison</span>
-                  </button>
-                }
-              />
-            </div>
-          </div>
-        </Modal>
-      </div>
+      {children}
     </div>
   )
 }
 
 export const Cargo = ({ ship }: { ship: ShipResponse }) => {
   const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
+  const { data } = useQuery({
+    queryKey: ['system', ship.nav.systemSymbol, ship.nav.waypointSymbol, 'market'],
+    queryFn: ({ signal }) =>
+      getMarket({ path: { system: ship.nav.systemSymbol, waypoint: ship.nav.waypointSymbol } }, { signal }),
+    select: (response) => {
+      const market = [...response.data.imports, ...response.data.exchange]
+      const goods = response.data.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
+        result.set(item.symbol, item)
+        return result
+      }, new Map())
+
+      return {
+        market: new Map(market.map((item) => [item.symbol, item])),
+        goods,
+      }
+    },
+  })
 
   return (
     <div className="grid gap-4">
@@ -195,7 +271,30 @@ export const Cargo = ({ ship }: { ship: ShipResponse }) => {
         })}
       >
         {ship.cargo.inventory.map((item) => {
-          return <CargoItem key={item.symbol} item={item} />
+          const produce = REFINE_ITEM_TYPE.get(item.symbol)
+          const good = data?.market.has(item.symbol) ? data.goods?.get(item.symbol) : undefined
+
+          return (
+            <Fragment key={item.symbol}>
+              <CargoItem item={item}>
+                <div className={cx('flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start')}>
+                  {produce && <Actions.Refine ship={ship} produce={produce} />}
+                  {!good ? (
+                    <button disabled className="btn btn-confirm btn-flat btn-sm grayscale-50">
+                      Sell
+                    </button>
+                  ) : (
+                    <SystemWaypointStore systemID={ship.nav.systemSymbol} waypointID={ship.nav.waypointSymbol}>
+                      <MarketTradeGoodStore good={good}>
+                        <SellCargo />
+                      </MarketTradeGoodStore>
+                    </SystemWaypointStore>
+                  )}
+                  <JettisonCargo item={item} />
+                </div>
+              </CargoItem>
+            </Fragment>
+          )
         })}
       </div>
     </div>
