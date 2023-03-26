@@ -1,36 +1,54 @@
 import { CheckCircleIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
+import { Actions } from '@/components/Ship'
 import { useRouteTransit } from '@/components/Ship/useRouteTransit'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { NavigationResponse } from '@/types/spacetraders'
+import { NavigationResponse, ShipResponse } from '@/types/spacetraders'
 
-export const Status = ({ nav }: { nav: NavigationResponse }) => {
+export const Status = ({ ship }: { ship: ShipResponse }) => {
   return (
     <div className="flex flex-row items-end gap-2">
       <div className="flex gap-8">
         <div>
           <div className="text-secondary text-xs uppercase">System</div>
           <div className="font-semibold leading-snug">
-            <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.systemSymbol}`}>
-              {nav.systemSymbol}
+            <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
+              {ship.nav.systemSymbol}
             </Link>
           </div>
         </div>
         <div>
           <div className="text-secondary text-xs uppercase">Waypoint</div>
-          <div className="font-semibold leading-snug">
-            <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.systemSymbol}/waypoint/${nav.waypointSymbol}`}>
-              {nav.waypointSymbol}
-            </Link>
+          <div className="flex items-center gap-2">
+            <div className="font-semibold leading-snug">
+              <Link
+                className="link"
+                to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}/waypoint/${ship.nav.waypointSymbol}`}
+              >
+                {ship.nav.waypointSymbol}
+              </Link>
+            </div>
+            <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+              {SHIP_NAV_STATUS.get(ship.nav.status) ?? ship.nav.status}
+            </div>
+            <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+              {SHIP_NAV_FLIGHT_MODE.get(ship.nav.flightMode) ?? ship.nav.flightMode}
+            </div>
           </div>
+          {ship.nav.status === 'DOCKED' ? (
+            <Actions.Orbit ship={ship} trigger={<button className="btn btn-primary btn-flat btn-sm">Orbit</button>} />
+          ) : (
+            <Actions.Dock
+              ship={ship}
+              trigger={
+                <button disabled={ship.nav.status === 'IN_TRANSIT'} className="btn btn-primary btn-flat btn-sm">
+                  Dock
+                </button>
+              }
+            />
+          )}
         </div>
-      </div>
-      <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-        {SHIP_NAV_STATUS.get(nav.status) ?? nav.status}
-      </div>
-      <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-        {SHIP_NAV_FLIGHT_MODE.get(nav.flightMode) ?? nav.flightMode}
       </div>
     </div>
   )

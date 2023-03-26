@@ -2,7 +2,7 @@ import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
-import { Actions, Cargo, Inventory, Loadout, Navigation, Survey } from '@/components/Ship'
+import { Cargo, Inventory, Loadout, Navigation, Survey } from '@/components/Ship'
 import { ShipStore } from '@/context/Ship'
 import { getShipById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
@@ -32,7 +32,7 @@ export const View = ({ symbol }: { symbol: string }) => {
         </div>
 
         <div className="flex items-start justify-between gap-4">
-          <Navigation.Status nav={ship.nav} />
+          <Navigation.Status ship={ship} />
           <Inventory ship={ship} />
         </div>
 
