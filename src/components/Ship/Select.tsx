@@ -5,12 +5,19 @@ import { getShipsList } from '@/services/api/spacetraders'
 import { Meta, SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
 
-export type ShipItemState = {
+export type ShipItem = {
   ship: ShipResponse
   label: ReactNode
   option: ReactNode
   disabled?: boolean
 }
+
+export type ShipReducer = (
+  data: Map<string, ShipItem>,
+  ship: ShipResponse,
+  index: number,
+  source: ShipResponse[],
+) => Map<string, ShipItem>
 
 export const Skeleton = () => {
   return (
@@ -25,24 +32,22 @@ export const Skeleton = () => {
   )
 }
 
-const defaultStateReducer = (data: ShipResponse[] = []): Map<string, ShipItemState> => {
-  return data.reduce<Map<string, ShipItemState>>((map, ship) => {
-    return map.set(ship.symbol, {
-      ship,
-      label: ship.symbol,
-      option: ship.symbol,
-    })
-  }, new Map())
+const defaultReducer: ShipReducer = (data, ship, _index, _source) => {
+  return data.set(ship.symbol, {
+    ship,
+    label: ship.symbol,
+    option: ship.symbol,
+  })
 }
 
 export const Field = ({
   select = (response) => ({ ships: response.data }),
   onChange,
-  stateReducer = defaultStateReducer,
+  getShipOption = defaultReducer,
 }: {
   select?: (data: SpaceTradersResponse<ShipResponse[], Meta>) => { ships: ShipResponse[] }
   onChange: (value?: ShipResponse | null) => void
-  stateReducer?: (data: ShipResponse[]) => Map<string, ShipItemState>
+  getShipOption?: ShipReducer
 }) => {
   const { data, isSuccess } = useQuery({
     queryKey: ['ships'],
@@ -50,7 +55,9 @@ export const Field = ({
     select,
   })
 
-  const state = isSuccess ? stateReducer(data.ships) : new Map()
+  const state: Map<string, ShipItem> = isSuccess
+    ? data.ships.reduce<Map<string, ShipItem>>(getShipOption, new Map())
+    : new Map()
 
   return (
     <Select.Field
