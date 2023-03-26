@@ -6,6 +6,7 @@ import { Fragment } from 'react'
 import { SellCargoForm } from '@/components/Market/SellCargo'
 import { TradeGood } from '@/components/Market/TradeGood'
 import { Modal, useModalContext, useModalImperativeHandle } from '@/components/Modal'
+import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
 import { Actions } from '@/components/Ship'
 import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
 import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
@@ -245,6 +246,20 @@ const CargoItem = ({ item, children }: WithChildren<{ item: CargoInventory; good
 }
 
 export const Cargo = ({ ship }: { ship: ShipResponse }) => {
+  return (
+    <div className="grid gap-4">
+      <div>
+        <CargoDisplayMode />
+      </div>
+
+      <QuerySuspenseBoundary>
+        <CargoList ship={ship} />
+      </QuerySuspenseBoundary>
+    </div>
+  )
+}
+
+export const CargoList = ({ ship }: { ship: ShipResponse }) => {
   const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
   const { data } = useQuery({
     queryKey: ['system', ship.nav.systemSymbol, ship.nav.waypointSymbol, 'market'],
@@ -265,44 +280,38 @@ export const Cargo = ({ ship }: { ship: ShipResponse }) => {
   })
 
   return (
-    <div className="grid gap-4">
-      <div>
-        <CargoDisplayMode />
-      </div>
+    <div
+      className={cx('grid grid-cols-1 gap-2', {
+        'lg:grid-cols-1': cargoDisplayMode === 'list',
+        'lg:grid-cols-3': cargoDisplayMode === 'grid',
+      })}
+    >
+      {ship.cargo.inventory.map((item) => {
+        const produce = REFINE_ITEM_TYPE.get(item.symbol)
+        const good = data?.market.has(item.symbol) ? data.goods?.get(item.symbol) : undefined
 
-      <div
-        className={cx('grid grid-cols-1 gap-2', {
-          'lg:grid-cols-1': cargoDisplayMode === 'list',
-          'lg:grid-cols-3': cargoDisplayMode === 'grid',
-        })}
-      >
-        {ship.cargo.inventory.map((item) => {
-          const produce = REFINE_ITEM_TYPE.get(item.symbol)
-          const good = data?.market.has(item.symbol) ? data.goods?.get(item.symbol) : undefined
-
-          return (
-            <Fragment key={item.symbol}>
-              <CargoItem item={item}>
-                <div className={cx('flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start')}>
-                  {produce && <Actions.Refine ship={ship} produce={produce} />}
-                  {!good ? (
-                    <button disabled className="btn btn-confirm btn-flat btn-sm grayscale-50">
-                      Sell
-                    </button>
-                  ) : (
-                    <SystemWaypointStore systemID={ship.nav.systemSymbol} waypointID={ship.nav.waypointSymbol}>
-                      <MarketTradeGoodStore good={good}>
-                        <SellCargo />
-                      </MarketTradeGoodStore>
-                    </SystemWaypointStore>
-                  )}
-                  <JettisonCargo item={item} />
-                </div>
-              </CargoItem>
-            </Fragment>
-          )
-        })}
-      </div>
+        return (
+          <Fragment key={item.symbol}>
+            <CargoItem item={item}>
+              <div className={cx('flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start')}>
+                {produce && <Actions.Refine ship={ship} produce={produce} />}
+                {!good ? (
+                  <button disabled className="btn btn-confirm btn-flat btn-sm grayscale-50">
+                    Sell
+                  </button>
+                ) : (
+                  <SystemWaypointStore systemID={ship.nav.systemSymbol} waypointID={ship.nav.waypointSymbol}>
+                    <MarketTradeGoodStore good={good}>
+                      <SellCargo />
+                    </MarketTradeGoodStore>
+                  </SystemWaypointStore>
+                )}
+                <JettisonCargo item={item} />
+              </div>
+            </CargoItem>
+          </Fragment>
+        )
+      })}
     </div>
   )
 }
