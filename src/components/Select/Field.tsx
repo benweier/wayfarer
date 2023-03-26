@@ -52,7 +52,7 @@ export const Field = <T = string,>({
 
                     {selected ? (
                       <span className="absolute inset-y-0 right-0 flex items-center pr-4">
-                        <CheckCircleIcon aria-hidden="true" className="h-4 w-4 text-emerald-500" />
+                        <CheckCircleIcon aria-hidden="true" className="h-5 w-5 text-emerald-500" />
                       </span>
                     ) : null}
                   </div>
