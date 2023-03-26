@@ -1,4 +1,4 @@
-export const ERROR_CODE = new Map([
+export const ERROR_CODE: ReadonlyMap<string, number> = new Map([
   ['WAYPOINT_ALREADY_CHARTED', 4230],
   ['SURVEY_MUST_BE_DONE_WHILE_ORBITING', 4223],
   ['INSUFFICIENT_FUNDS', 4216],
@@ -6,13 +6,13 @@ export const ERROR_CODE = new Map([
   ['GOOD_NOT_AVAILABLE_AT_MARKET', 4602],
 ])
 
-export const CONTRACT_TYPE = new Map([
+export const CONTRACT_TYPE: ReadonlyMap<string, string> = new Map([
   ['PROCUREMENT', 'Procurement'],
   ['TRANSPORT', 'Transport'],
   ['SHUTTLE', 'Shuttle'],
 ])
 
-export const FACTION_TRAIT_SYMBOL = new Map([
+export const FACTION_TRAIT_SYMBOL: ReadonlyMap<string, string> = new Map([
   ['BUREAUCRATIC', 'Bureaucratic'],
   ['SECRETIVE', 'Secretive'],
   ['CAPITALISTIC', 'Capitalistic'],
@@ -81,20 +81,20 @@ export const FACTION_TRAIT_SYMBOL = new Map([
   ['ENTREPRENEURIAL', 'Entrepreneurial'],
 ])
 
-export const SHIP_NAV_FLIGHT_MODE = new Map([
+export const SHIP_NAV_FLIGHT_MODE: ReadonlyMap<string, string> = new Map([
   ['DRIFT', 'Drift'],
   ['STEALTH', 'Stealth'],
   ['CRUISE', 'Cruise'],
   ['BURN', 'Burn'],
 ])
 
-export const SHIP_NAV_STATUS = new Map([
+export const SHIP_NAV_STATUS: ReadonlyMap<string, string> = new Map([
   ['IN_TRANSIT', 'In Transit'],
   ['IN_ORBIT', 'In Orbit'],
   ['DOCKED', 'Docked'],
 ])
 
-export const SYSTEM_TYPE = new Map([
+export const SYSTEM_TYPE: ReadonlyMap<string, string> = new Map([
   ['NEUTRON_STAR', 'Neutron Star'],
   ['RED_STAR', 'Red Star'],
   ['ORANGE_STAR', 'Orange Star'],
@@ -107,7 +107,7 @@ export const SYSTEM_TYPE = new Map([
   ['UNSTABLE', 'Unstable'],
 ])
 
-export const WAYPOINT_TYPE = new Map([
+export const WAYPOINT_TYPE: ReadonlyMap<string, string> = new Map([
   ['PLANET', 'Planet'],
   ['GAS_GIANT', 'Gas Giant'],
   ['MOON', 'Moon'],
@@ -119,7 +119,7 @@ export const WAYPOINT_TYPE = new Map([
   ['GRAVITY_WELL', 'Gravity Well'],
 ])
 
-export const WAYPOINT_TRAIT_SYMBOL = new Map([
+export const WAYPOINT_TRAIT_SYMBOL: ReadonlyMap<string, string> = new Map([
   ['UNCHARTED', 'Uncharted'],
   ['MARKETPLACE', 'Marketplace'],
   ['SHIPYARD', 'Shipyard'],
@@ -181,7 +181,7 @@ export const WAYPOINT_TRAIT_SYMBOL = new Map([
   ['STRIPPED', 'Stripped'],
 ])
 
-export const SHIP_TYPE = new Map([
+export const SHIP_TYPE: ReadonlyMap<string, string> = new Map([
   ['SHIP_PROBE', 'Ship Probe'],
   ['SHIP_MINING_DRONE', 'Ship Mining Drone'],
   ['SHIP_INTERCEPTOR', 'Ship Interceptor'],
@@ -194,7 +194,7 @@ export const SHIP_TYPE = new Map([
   ['SHIP_REFINING_FREIGHTER', 'Ship Refining Freighter'],
 ])
 
-export const TRADE_SYMBOL = new Map([
+export const TRADE_SYMBOL: ReadonlyMap<string, string> = new Map([
   ['ADVANCED_CIRCUITRY', 'Advanced Circuitry'],
   ['AI_MAINFRAMES', 'Ai Mainframes'],
   ['ALUMINUM_ORE', 'Aluminum Ore'],
@@ -304,7 +304,7 @@ export const TRADE_SYMBOL = new Map([
   ['VIRAL_AGENTS', 'Viral Agents'],
 ])
 
-export const REFINE_ITEM_TYPE = new Map([
+export const REFINE_ITEM_TYPE: ReadonlyMap<string, string> = new Map([
   ['ALUMINUM_ORE', 'ALUMINUM'],
   ['COPPER_ORE', 'COPPER'],
   ['GOLD_ORE', 'GOLD'],
@@ -315,19 +315,19 @@ export const REFINE_ITEM_TYPE = new Map([
   ['URANITE_ORE', 'URANITE'],
 ])
 
-export const MARKET_TRANSACTION_TYPE = new Map([
+export const MARKET_TRANSACTION_TYPE: ReadonlyMap<string, string> = new Map([
   ['PURCHASE', 'Purchase'],
   ['SELL', 'Sell'],
 ])
 
-export const MARKET_TRADE_GOOD_SUPPLY = new Map([
+export const MARKET_TRADE_GOOD_SUPPLY: ReadonlyMap<string, string> = new Map([
   ['SCARCE', 'Scarce'],
   ['LIMITED', 'Limited'],
   ['MODERATE', 'Moderate'],
   ['ABUNDANT', 'Abundant'],
 ])
 
-export const SHIP_MODULE_TYPE = new Map([
+export const SHIP_MODULE_TYPE: ReadonlyMap<string, string> = new Map([
   ['MODULE_MINERAL_PROCESSOR_I', 'Module Mineral Processor I'],
   ['MODULE_CARGO_HOLD_I', 'Module Cargo Hold I'],
   ['MODULE_CREW_QUARTERS_I', 'Module Crew Quarters I'],
@@ -347,7 +347,7 @@ export const SHIP_MODULE_TYPE = new Map([
   ['MODULE_SHIELD_GENERATOR_II', 'Module Shield Generator II'],
 ])
 
-export const SHIP_FRAME_TYPE = new Map([
+export const SHIP_FRAME_TYPE: ReadonlyMap<string, string> = new Map([
   ['FRAME_PROBE', 'Frame Probe'],
   ['FRAME_DRONE', 'Frame Drone'],
   ['FRAME_INTERCEPTOR', 'Frame Interceptor'],
@@ -365,7 +365,7 @@ export const SHIP_FRAME_TYPE = new Map([
   ['FRAME_MINER', 'Frame Miner'],
 ])
 
-export const SHIP_MOUNT_TYPE = new Map([
+export const SHIP_MOUNT_TYPE: ReadonlyMap<string, string> = new Map([
   ['MOUNT_GAS_SIPHON_I', 'Mount Gas Siphon I'],
   ['MOUNT_GAS_SIPHON_II', 'Mount Gas Siphon II'],
   ['MOUNT_GAS_SIPHON_III', 'Mount Gas Siphon III'],
@@ -383,19 +383,19 @@ export const SHIP_MOUNT_TYPE = new Map([
   ['MOUNT_TURRET_I', 'Mount Turret I'],
 ])
 
-export const SHIP_CREW_ROTATION = new Map([
+export const SHIP_CREW_ROTATION: ReadonlyMap<string, string> = new Map([
   ['STRICT', 'Strict'],
   ['RELAXED', 'Relaxed'],
 ])
 
-export const SHIP_ENGINE_TYPE = new Map([
+export const SHIP_ENGINE_TYPE: ReadonlyMap<string, string> = new Map([
   ['ENGINE_IMPULSE_DRIVE_I', 'Engine Impulse Drive I'],
   ['ENGINE_ION_DRIVE_I', 'Engine Ion Drive I'],
   ['ENGINE_ION_DRIVE_II', 'Engine Ion Drive II'],
   ['ENGINE_HYPER_DRIVE_I', 'Engine Hyper Drive I'],
 ])
 
-export const SHIP_REACTOR_TYPE = new Map([
+export const SHIP_REACTOR_TYPE: ReadonlyMap<string, string> = new Map([
   ['REACTOR_SOLAR_I', 'Reactor Solar I'],
   ['REACTOR_FUSION_I', 'Reactor Fusion I'],
   ['REACTOR_FISSION_I', 'Reactor Fission I'],
@@ -403,7 +403,7 @@ export const SHIP_REACTOR_TYPE = new Map([
   ['REACTOR_ANTIMATTER_I', 'Reactor Antimatter I'],
 ])
 
-export const SURVEY_SIZE = new Map([
+export const SURVEY_SIZE: ReadonlyMap<string, string> = new Map([
   ['SMALL', 'Small'],
   ['MODERATE', 'Moderate'],
   ['LARGE', 'Large'],
