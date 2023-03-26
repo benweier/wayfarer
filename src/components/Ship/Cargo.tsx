@@ -169,7 +169,13 @@ const SellCargo = () => {
 
         <SellCargoForm
           ship={ship}
-          onSubmit={(values) => mutateAsync({ shipID: values.ship, item: values.item, quantity: values.quantity })}
+          onSubmit={(values) =>
+            mutateAsync({
+              shipID: values.ship,
+              item: values.item,
+              quantity: values.quantity,
+            })
+          }
         />
       </div>
     </Modal>
