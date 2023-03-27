@@ -1,4 +1,4 @@
-import { Switch } from '@headlessui/react'
+import { RadioGroup, Switch } from '@headlessui/react'
 import { TrashIcon } from '@heroicons/react/20/solid'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
@@ -26,20 +26,24 @@ export const CargoDisplayMode = () => {
 
   return (
     <div className="flex items-center justify-between gap-4">
-      <div className="flex flex-row gap-2">
-        <button
-          className={cx('btn btn-sm', { 'btn-primary btn-outline': cargoDisplayMode === 'list' })}
-          onClick={() => setCargoDisplayMode('list')}
-        >
-          List
-        </button>
-        <button
-          className={cx('btn btn-sm', { 'btn-primary btn-outline': cargoDisplayMode === 'grid' })}
-          onClick={() => setCargoDisplayMode('grid')}
-        >
-          Grid
-        </button>
-      </div>
+      <RadioGroup value={cargoDisplayMode} onChange={setCargoDisplayMode}>
+        <RadioGroup.Label className="sr-only text-sm font-bold">Display as</RadioGroup.Label>
+        <div className="flex items-center gap-2">
+          {[
+            { label: 'List', value: 'list' },
+            { label: 'Grid', value: 'grid' },
+          ].map((item) => (
+            <RadioGroup.Option
+              key={item.value}
+              value={item.value}
+              className={({ checked }) => cx('btn btn-sm', { 'btn-primary btn-outline': checked })}
+            >
+              <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
+            </RadioGroup.Option>
+          ))}
+        </div>
+      </RadioGroup>
+
       <div className="flex items-center gap-2">
         <span className="text-secondary text-sm">Show item description</span>
         <Switch
