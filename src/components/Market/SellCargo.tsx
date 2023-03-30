@@ -77,7 +77,7 @@ export const SellCargoForm = ({
         ),
         option: (
           <div className="flex flex-col">
-            <div className="font-bold">{ship.symbol}</div>
+            <div className="font-semibold">{ship.symbol}</div>
             <div className="text-secondary text-xs">
               {TRADE_SYMBOL.get(good.symbol) ?? good.symbol}: {count}
             </div>
