@@ -9,6 +9,7 @@ Current implementation state of SpaceTraders features:
 - [x] Registration and login/logout
 - [x] View System and Waypoint lists
 - [x] View System and Waypoint details
+- [x] Buy and Sell Cargo at Waypoint Markets
 - [x] View Fleet list
 - [x] View Ship details
     - [x] cargo / loadout / fuel / crew / navigation state
