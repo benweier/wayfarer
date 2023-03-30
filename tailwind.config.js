@@ -7,6 +7,9 @@ module.exports = {
   theme: {
     container: { center: true },
     extend: {
+      grayscale: {
+        50: '50%',
+      },
       animation: {
         indefinite: 'indefinite 1.5s linear infinite',
       },
