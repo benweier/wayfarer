@@ -20,7 +20,7 @@
     "@hookform/resolvers": "^3.0.0",
     "@sentry/react": "^7.46.0",
     "@sentry/tracing": "^7.46.0",
-    "@tailwindcss/container-queries": "^0.1.0",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@tanstack/react-query": "^4.24.4",
@@ -41,7 +41,7 @@
     "use-resize-observer": "^9.1.0",
     "yup": "^1.0.2",
     "zod": "^3.21.4",
-    "zustand": "^4.3.6"
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@headlessui/tailwindcss": "^0.1.2",
@@ -80,10 +80,10 @@
     "postcss-modules": "^6.0.0",
     "postcss-nested": "^6.0.1",
     "postcss-plugin": "^1.0.0",
-    "postcss-preset-env": "^8.2.0",
+    "postcss-preset-env": "^8.3.0",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.6",
-    "stylelint": "^15.3.0",
+    "stylelint": "^15.4.0",
     "stylelint-config-recommended": "^11.0.0",
     "stylelint-config-standard": "^31.0.0",
     "tailwind-apply": "^1.0.1",
