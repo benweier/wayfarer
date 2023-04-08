@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 import { ErrorComponentProps } from '@/components/ErrorBoundary'
 
 export type QuerySuspenseBoundaryProps = {

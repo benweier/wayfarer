@@ -1,7 +1,7 @@
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Suspense } from 'react'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { QuerySuspenseBoundaryProps } from './types'
+import { QuerySuspenseBoundaryProps } from './query-suspense-boundary.types'
 
 export const QuerySuspenseBoundary = ({
   error,
