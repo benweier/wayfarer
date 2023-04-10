@@ -1,4 +1,5 @@
 import { ErrorMessage } from '@hookform/error-message'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
@@ -8,7 +9,7 @@ import { useLocation } from '@/hooks/useLocation'
 import { SpaceTradersResponse, queryFnFactory } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/services/store/auth'
 import { AgentResponse } from '@/types/spacetraders'
-import { LoginSchema } from './Login.validation'
+import { LoginSchema, loginValidation } from './login.validation'
 
 const getMyAgent = queryFnFactory<SpaceTradersResponse<AgentResponse>, void>(() => '/my/agent')
 
@@ -21,6 +22,7 @@ export const Login = () => {
       symbol: location.state?.symbol ?? '',
       token: location.state?.token ?? '',
     },
+    resolver: zodResolver(loginValidation),
   })
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (values: LoginSchema) => {

@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { RegisterAgentResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
-import { Copy } from './Copy'
-import { useCopy } from './useCopy'
+import { Copy } from './copy-button.component'
+import { useCopy } from './use-copy.hook'
 
 export const AccessTokenDialog = ({ registration }: { registration?: RegisterAgentResponse }) => {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
           <div>
             <div className="relative">
               <input
-                className="input input-lg pr-11"
+                className="input-lg input pr-11"
                 name="token"
                 type="text"
                 value={registration.token}

@@ -8,8 +8,8 @@ import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { SpaceTradersResponse, mutationFnFactory } from '@/services/api/spacetraders/core'
 import { RegisterAgentRequest, RegisterAgentResponse } from '@/types/spacetraders'
-import { AccessTokenDialog } from './AccessTokenDialog'
-import { RegisterSchema, validation } from './Register.validation'
+import { AccessTokenDialog } from './access-token-dialog.component'
+import { RegisterSchema, registerValidation } from './register.validation'
 
 const createMyAgent = mutationFnFactory<SpaceTradersResponse<RegisterAgentResponse>, void, RegisterAgentRequest>(
   () => '/register',
@@ -35,7 +35,7 @@ export const Register = () => {
     defaultValues: {
       symbol: location.state?.symbol,
     },
-    resolver: zodResolver(validation),
+    resolver: zodResolver(registerValidation),
   })
   const { mutateAsync, isLoading, isSuccess, data } = useMutation({
     mutationFn: (values: RegisterSchema) => {
