@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useStore } from 'zustand'
-import { ModalContext } from '@/components/Modal/Modal.Context'
-import { ModalStore } from '@/components/Modal/Modal.store'
+import { ModalContext } from './modal.context'
+import { ModalStore } from './modal.store'
 
 export const useModalContext = <T>(
   selector: (state: ModalStore) => T,

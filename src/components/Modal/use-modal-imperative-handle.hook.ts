@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import { ModalImperativeRef } from '@/components/Modal/modal.types'
+import { ModalImperativeRef } from './modal.types'
 
 export const useModalImperativeHandle = () => {
   const modal = useRef<ModalImperativeRef>()

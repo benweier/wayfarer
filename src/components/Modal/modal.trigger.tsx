@@ -7,8 +7,8 @@ import {
   createElement,
   isValidElement,
 } from 'react'
-import { useModalContext } from '@/components/Modal/useModalContext.hook'
 import { isRef } from '@/utilities/isRef'
+import { useModalContext } from './use-modal-context.hook'
 
 export const Trigger = (
   {
