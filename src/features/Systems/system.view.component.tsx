@@ -1,12 +1,12 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
-import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { getSystemById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
-import { SystemFleet } from './SystemFleet'
-import { SystemWaypoints } from './SystemWaypoints'
+import { SystemFleet } from './system.fleet.component'
+import { SystemWaypoints } from './waypoint.list.component'
 
 const tabs = [
   { title: 'Waypoints', content: SystemWaypoints, fallback: Fragment },

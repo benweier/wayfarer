@@ -3,7 +3,7 @@ import { Ship } from '@/components/Ship'
 import { getShipsList } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 
-export const MyShips = () => {
+export const Fleet = () => {
   const { isSuccess, data, isFetching } = useQuery({
     queryKey: ['ships'],
     queryFn: ({ signal }) => getShipsList(undefined, { signal }),

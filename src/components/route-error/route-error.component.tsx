@@ -13,7 +13,7 @@ const isRouteErrorResponse = (error: any): error is Response => {
   return typeof error === 'object' && Object.hasOwn(error, 'status')
 }
 
-export const RouteErrorElement = () => {
+export const RouteError = () => {
   const error = useRouteError()
 
   if (isRouteErrorResponse(error)) {

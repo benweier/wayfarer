@@ -10,8 +10,8 @@ import {
 import { atom, useAtom } from 'jotai'
 import { Fragment, Suspense } from 'react'
 import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-dom'
-import { Preferences } from '@/components/Preferences'
-import { Wayfarer } from '@/components/Wayfarer'
+import { Preferences } from '@/components/preferences'
+import { Wayfarer } from '@/components/wayfarer'
 import { ROUTES } from '@/config/routes'
 import { Navigation } from '@/features/Navigation'
 import { sidebarAtom } from '@/services/store/atoms/sidebar'
@@ -92,7 +92,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <div className="absolute top-0 right-0 -mr-12 pt-3">
+                    <div className="absolute right-0 top-0 -mr-12 pt-3">
                       <button
                         type="button"
                         className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -103,7 +103,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="pt-6 pb-4">
+                  <div className="pb-4 pt-6">
                     <div className="flex flex-shrink-0 items-center px-4">
                       <Link to="/">
                         <Wayfarer className="text-lg text-white" />
@@ -165,7 +165,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           {/* Mobile top navigation */}
           <div className="lg:hidden">
-            <div className="flex items-center justify-between bg-blue-600 py-2 px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between bg-blue-600 px-4 py-2 sm:px-6 lg:px-8">
               <div>
                 <Link to="/">
                   <Wayfarer className="text-lg" />

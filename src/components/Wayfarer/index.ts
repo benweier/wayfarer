@@ -1,1 +1,0 @@
-export { Wayfarer } from './Wayfarer'

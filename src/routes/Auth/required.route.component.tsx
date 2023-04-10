@@ -6,7 +6,7 @@ export const Required = ({ children = <Outlet /> }: WithChildren) => {
   const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {
-    return <Navigate to={ROUTES.LOGIN} replace state={{ redirect: { pathname: window.location.pathname } }} />
+    return <Navigate to={ROUTES.LOGIN} replace state={{ redirect: { destination: window.location.pathname } }} />
   }
 
   return <>{children}</>

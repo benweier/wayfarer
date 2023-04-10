@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { ErrorComponentProps } from '@/components/ErrorBoundary'
+import { ErrorComponentProps } from '@/components/error-boundary'
 import { getShipyard } from '@/services/api/spacetraders'
 import { isHttpError } from '@/services/http'
 
@@ -20,7 +20,7 @@ export const WaypointShipyard = ({ systemID, waypointID }: { systemID: string; w
           return (
             <div
               key={ship.type}
-              className="flex flex-col gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
+              className="flex flex-col gap-2 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 dark:bg-opacity-10"
             >
               <div className="flex items-center justify-between gap-8 lg:justify-start">
                 <span className="font-semibold">{ship.name}</span>

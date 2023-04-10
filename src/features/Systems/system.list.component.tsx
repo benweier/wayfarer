@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Pagination } from '@/components/Pagination'
+import { Pagination } from '@/components/pagination'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { getShipsList, getSystemsList } from '@/services/api/spacetraders'

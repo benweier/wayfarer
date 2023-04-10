@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { ErrorComponentProps } from '@/components/ErrorBoundary'
+import { ErrorComponentProps } from '@/components/error-boundary'
 import { PurchaseCargo, SellCargo } from '@/components/Market'
 import { MarketTradeGoodStore } from '@/context/MarketTradeGood'
 import { SystemWaypointStore } from '@/context/SystemWaypoint'
@@ -9,7 +9,7 @@ import { MarketGood, MarketTradeGood } from '@/types/spacetraders'
 
 const MarketGoodItem = ({ item, available, children }: WithChildren<{ item: MarketGood; available?: number }>) => {
   return (
-    <div key={item.symbol} className="grid gap-4 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10">
+    <div key={item.symbol} className="grid gap-4 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 dark:bg-opacity-10">
       <div className="grid gap-2">
         <div className="flex items-center justify-between gap-2">
           <span className="font-medium">{item.name}</span>

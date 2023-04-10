@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { QuerySuspenseBoundary, withQSB } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
 import { View } from '@/features/Ship'
 
 const ShipRoute = () => {

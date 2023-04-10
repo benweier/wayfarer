@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { App } from '@/components/App'
+import { App } from '@/components/app'
 import './styles/tailwind.css'
 
 export const Root = () => (

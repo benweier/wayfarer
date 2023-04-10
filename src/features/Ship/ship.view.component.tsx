@@ -1,7 +1,7 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
-import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Cargo, Inventory, Loadout, Navigation, Survey } from '@/components/Ship'
 import { ShipStore } from '@/context/Ship'
 import { getShipById } from '@/services/api/spacetraders'

@@ -1,6 +1,6 @@
 import { HiOutlineStatusOffline, HiOutlineStatusOnline, HiRefresh } from 'react-icons/hi'
 import { cx } from '@/utilities/cx'
-import { useSpaceTradersStatus } from './useSpaceTradersStatus'
+import { useSpaceTradersStatus } from './use-space-traders-status.hook'
 
 export const SpaceTradersStatus = () => {
   const { status, isChecking } = useSpaceTradersStatus()

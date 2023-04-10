@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/react'
-import { BrowserTracing } from '@sentry/tracing'
 import { QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Suspense, useEffect } from 'react'
@@ -15,8 +14,8 @@ import {
   matchRoutes,
   useNavigationType,
 } from 'react-router-dom'
-import { NotFound } from '@/components/NotFound'
-import { RouteErrorElement } from '@/components/RouteErrorElement'
+import { NotFound } from '@/components/not-found'
+import { RouteError } from '@/components/route-error'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/useLocation'
 import { useThemeManager } from '@/hooks/useThemeManager'
@@ -30,7 +29,7 @@ Sentry.init({
   dsn: import.meta.env.SENTRY_DSN,
   enabled: import.meta.env.PROD,
   integrations: [
-    new BrowserTracing({
+    new Sentry.BrowserTracing({
       routingInstrumentation: Sentry.reactRouterV6Instrumentation(
         useEffect,
         useLocation,
@@ -94,14 +93,28 @@ const router = sentryCreateBrowserRouter(
     <Route Component={Core}>
       <Route index Component={Home} />
 
-      <Route Component={Auth.Layout}>
-        <Route path={ROUTES.LOGIN} Component={Auth.Login} />
-        <Route path={ROUTES.REGISTER} Component={Auth.Register} />
+      <Route ErrorBoundary={RouteError} Component={Auth.Route}>
+        <Route
+          path={ROUTES.LOGIN}
+          lazy={async () => {
+            const { Login } = await import('@/features/auth')
+
+            return { Component: Login }
+          }}
+        />
+        <Route
+          path={ROUTES.REGISTER}
+          lazy={async () => {
+            const { Register } = await import('@/features/auth')
+
+            return { Component: Register }
+          }}
+        />
         <Route path={ROUTES.LOGOUT} element={<Navigate to={ROUTES.LOGIN} replace />} action={logout} />
       </Route>
 
       <Route Component={Auth.Required}>
-        <Route Component={Dashboard.Layout} ErrorBoundary={RouteErrorElement} loader={Dashboard.root.loader(client)}>
+        <Route Component={Dashboard.Layout} ErrorBoundary={RouteError} loader={Dashboard.root.loader(client)}>
           <Route path={ROUTES.OVERVIEW} Component={Dashboard.Overview} />
 
           <Route path={ROUTES.MARKET}>
@@ -110,7 +123,7 @@ const router = sentryCreateBrowserRouter(
             <Route
               path=":systemID/:waypointID"
               Component={Dashboard.Market}
-              ErrorBoundary={RouteErrorElement}
+              ErrorBoundary={RouteError}
               loader={Dashboard.market.loader(client)}
             />
           </Route>
@@ -119,7 +132,7 @@ const router = sentryCreateBrowserRouter(
             <Route
               index
               Component={Dashboard.Contracts.List}
-              ErrorBoundary={RouteErrorElement}
+              ErrorBoundary={RouteError}
               loader={Dashboard.contracts.list(client)}
             />
           </Route>
@@ -128,20 +141,20 @@ const router = sentryCreateBrowserRouter(
             <Route
               index
               Component={Dashboard.Systems.List}
-              ErrorBoundary={RouteErrorElement}
+              ErrorBoundary={RouteError}
               loader={Dashboard.systems.list(client)}
             />
             <Route path=":systemID">
               <Route
                 index
                 Component={Dashboard.Systems.View}
-                ErrorBoundary={RouteErrorElement}
+                ErrorBoundary={RouteError}
                 loader={Dashboard.systems.view(client)}
               />
               <Route
                 path="waypoint/:waypointID"
                 Component={Dashboard.Systems.Waypoint}
-                ErrorBoundary={RouteErrorElement}
+                ErrorBoundary={RouteError}
                 loader={Dashboard.systems.waypoint(client)}
               />
             </Route>
@@ -151,13 +164,13 @@ const router = sentryCreateBrowserRouter(
             <Route
               index
               Component={Dashboard.Fleet.List}
-              ErrorBoundary={RouteErrorElement}
+              ErrorBoundary={RouteError}
               loader={Dashboard.fleet.loader(client)}
             />
             <Route
               path="ship/:shipID"
               Component={Dashboard.Fleet.Ship}
-              ErrorBoundary={RouteErrorElement}
+              ErrorBoundary={RouteError}
               loader={Dashboard.ship.loader(client)}
             />
           </Route>

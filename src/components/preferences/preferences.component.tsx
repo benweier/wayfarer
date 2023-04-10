@@ -3,8 +3,8 @@ import { Popover, Transition } from '@headlessui/react'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 import { cx } from '@/utilities/cx'
-import { Sidebar } from './Sidebar'
-import { Theme } from './Theme'
+import { Sidebar } from './sidebar.component'
+import { Theme } from './theme.component'
 
 export const Preferences = () => {
   const { x, y, refs } = useFloating<HTMLButtonElement>({
@@ -35,7 +35,7 @@ export const Preferences = () => {
           </Popover.Button>
           <div
             ref={refs.setFloating}
-            className="absolute top-0 left-0 w-max"
+            className="absolute left-0 top-0 w-max"
             style={{
               transform:
                 typeof x === 'number' && typeof y === 'number'

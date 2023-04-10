@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { Root } from './Root'
+import { Root } from './root.component'
 
 const container = document.getElementById('wayfarer')
 

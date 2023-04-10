@@ -1,1 +1,1 @@
-export { MyShips } from './MyShips'
+export { Fleet } from './fleet.component'

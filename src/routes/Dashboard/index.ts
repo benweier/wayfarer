@@ -1,6 +1,6 @@
 import { lazy } from '@/utilities/lazy'
 
-export const { Layout } = lazy(() => import('./Layout'), ['Layout'])
+export const { Layout } = lazy(() => import('./dashboard.layout.component'), ['Layout'])
 export const { Market } = lazy(() => import('./Market'), ['Market'])
 export const { Overview } = lazy(() => import('./Overview'), ['Overview'])
 export const Fleet = lazy(() => import('./Fleet'), ['List', 'Ship'])

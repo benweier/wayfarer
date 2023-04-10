@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 export type OnErrorCaptureHandler = (error: Error, info?: { componentStack: string }) => void
 
