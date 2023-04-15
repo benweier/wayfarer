@@ -1,4 +1,4 @@
-import { AgentResponse, ContractResponse } from '@/types/spacetraders'
+import { AgentResponse, ContractResponse, ShipCargo } from '@/types/spacetraders'
 import { Meta, SpaceTradersResponse, mutationFnFactory, queryFnFactory } from './core'
 
 export const getContractsList = queryFnFactory<SpaceTradersResponse<ContractResponse[], Meta>>(() => `/my/contracts`)
@@ -13,7 +13,7 @@ export const createContractAccept = mutationFnFactory<
 >((id) => `/my/contracts/${id}/accept`)
 
 export const createContractDeliver = mutationFnFactory<
-  SpaceTradersResponse<unknown>,
+  SpaceTradersResponse<{ contract: ContractResponse; cargo: ShipCargo }>,
   string,
   { shipSymbol: string; tradeSymbol: string; units: number }
 >((id) => `/my/contracts/${id}/deliver`)
