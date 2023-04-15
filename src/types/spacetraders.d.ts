@@ -10,23 +10,27 @@ export type AgentResponse = {
   credits: number
 }
 
+export type ContractDelivery = {
+  tradeSymbol: string
+  destinationSymbol: string
+  unitsRequired: number
+  unitsFulfilled: number
+}
+
+export type ContractTerm = {
+  deadline: string
+  payment: {
+    onAccepted: number
+    onFulfilled: number
+  }
+  deliver: ContractDelivery[]
+}
+
 export type ContractResponse = {
   id: string
   factionSymbol: string
   type: string
-  terms: {
-    deadline: string
-    payment: {
-      onAccepted: number
-      onFulfilled: number
-    }
-    deliver: Array<{
-      tradeSymbol: string
-      destinationSymbol: string
-      unitsRequired: number
-      unitsFulfilled: number
-    }>
-  }
+  terms: ContractTerm
   accepted: boolean
   fulfilled: boolean
   expiration: string
