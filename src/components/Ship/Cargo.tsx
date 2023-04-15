@@ -6,7 +6,7 @@ import { Fragment } from 'react'
 import { SellCargoForm } from '@/components/Market/SellCargo'
 import { TradeGood } from '@/components/Market/TradeGood'
 import { Modal, useModalContext, useModalImperativeHandle } from '@/components/Modal'
-import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Actions } from '@/components/Ship'
 import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
 import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
@@ -194,7 +194,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     <Modal
       trigger={
         <Modal.Trigger>
-          <button className="btn btn-flat btn-danger btn-sm">Jettison</button>
+          <button className="btn btn-danger btn-flat btn-sm">Jettison</button>
         </Modal.Trigger>
       }
     >
@@ -236,7 +236,7 @@ const CargoItem = ({ item, children }: WithChildren<{ item: CargoInventory; good
   const [cargoDescription] = useAtom(cargoDescriptionAtom)
 
   return (
-    <div className="flex flex-col justify-between gap-8 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 @container dark:bg-opacity-10">
+    <div className="flex flex-col justify-between gap-8 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 @container dark:bg-opacity-10">
       <div className="grid gap-2">
         <div className={cx('flex items-center justify-between gap-4 @[600px]:justify-start')}>
           <span className="font-medium">{item.name}</span>

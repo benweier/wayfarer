@@ -1,4 +1,4 @@
-import { QuerySuspenseBoundary, withQSB } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
 import { ListSystems } from '@/features/Systems'
 
 export const SystemsListRoute = () => {

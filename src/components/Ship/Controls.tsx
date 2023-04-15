@@ -4,7 +4,7 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { Modal, useModalImperativeHandle } from '@/components/Modal'
-import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { createShipNavigate } from '@/services/api/spacetraders'
 import { ShipResponse } from '@/types/spacetraders'
 import * as Actions from './Actions'
@@ -32,7 +32,7 @@ export const Controls = ({ ship }: { ship: ShipResponse }) => {
 
         <div
           ref={refs.setFloating}
-          className="absolute top-0 left-0 w-max"
+          className="absolute left-0 top-0 w-max"
           style={{
             transform:
               typeof x === 'number' && typeof y === 'number'
@@ -109,7 +109,7 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
       fallback={
         <div className="grid">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="my-4 mx-auto h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
+            <div key={index} className="mx-auto my-4 h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
           ))}
         </div>
       }

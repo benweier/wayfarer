@@ -1,4 +1,4 @@
-import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 
 export const Market = () => {
   return (

@@ -1,4 +1,4 @@
-import { withQSB } from '@/components/QuerySuspenseBoundary'
+import { withQSB } from '@/components/query-suspense-boundary'
 
 export const OverviewRoute = () => {
   return <></>
