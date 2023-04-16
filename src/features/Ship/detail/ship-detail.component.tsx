@@ -13,7 +13,7 @@ const tabs = [
   { title: 'Loadout', content: Loadout, fallback: Fragment },
 ]
 
-export const View = ({ symbol }: { symbol: string }) => {
+export const Detail = ({ symbol }: { symbol: string }) => {
   const { data, isSuccess } = useQuery({
     queryKey: ['ship', symbol],
     queryFn: ({ signal }) => getShipById({ path: symbol }, { signal }),

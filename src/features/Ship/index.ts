@@ -1,1 +1,1 @@
-export { View } from './ship.view.component'
+export * from './detail'
