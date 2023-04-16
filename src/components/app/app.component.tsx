@@ -163,15 +163,25 @@ const router = sentryCreateBrowserRouter(
           <Route path={ROUTES.FLEET}>
             <Route
               index
-              Component={Dashboard.Fleet.List}
+              lazy={async () => {
+                const fleet = await import('@/routes/fleet')
+                return {
+                  Component: fleet.Route,
+                  loader: fleet.loader(client),
+                }
+              }}
               ErrorBoundary={RouteError}
-              loader={Dashboard.fleet.loader(client)}
             />
             <Route
               path="ship/:shipID"
-              Component={Dashboard.Fleet.Ship}
+              lazy={async () => {
+                const ship = await import('src/routes/fleet/ship')
+                return {
+                  Component: ship.Route,
+                  loader: ship.loader(client),
+                }
+              }}
               ErrorBoundary={RouteError}
-              loader={Dashboard.ship.loader(client)}
             />
           </Route>
         </Route>

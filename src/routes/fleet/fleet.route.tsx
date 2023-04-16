@@ -1,7 +1,7 @@
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
 import { Fleet } from '@/features/Fleet'
 
-export const FleetRoute = () => {
+export const FleetRouteComponent = () => {
   return (
     <div className="grid gap-4 p-4">
       <h1 className="text-title">Fleet</h1>
@@ -14,4 +14,4 @@ export const FleetRoute = () => {
   )
 }
 
-export const List = withQSB()(FleetRoute)
+export const Route = withQSB()(FleetRouteComponent)
