@@ -73,7 +73,7 @@ export const mutationFnFactory = <
   Q extends f.QueryParams = f.QueryParams,
 >(
   fn: (path: T) => string | URL,
-  base: string | URL = import.meta.env.SPACETRADERS_API_URL,
+  base: string | URL = import.meta.env.SPACETRADERS_API_BASE_URL,
 ): ((args?: RequestArguments<T, Q, P>, req?: RequestInit) => Promise<R>) => {
   return (args, req) => {
     const path = fn(args?.path as T)
