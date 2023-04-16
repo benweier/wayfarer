@@ -101,7 +101,6 @@ const router = sentryCreateBrowserRouter(
           path={ROUTES.LOGIN}
           lazy={async () => {
             const { Login } = await import('@/features/auth')
-
             return { Component: Login }
           }}
         />
@@ -109,7 +108,6 @@ const router = sentryCreateBrowserRouter(
           path={ROUTES.REGISTER}
           lazy={async () => {
             const { Register } = await import('@/features/auth')
-
             return { Component: Register }
           }}
         />
@@ -117,7 +115,16 @@ const router = sentryCreateBrowserRouter(
       </Route>
 
       <Route Component={Auth.Required}>
-        <Route Component={Dashboard.Layout} ErrorBoundary={RouteError} loader={Dashboard.root.loader(client)}>
+        <Route
+          lazy={async () => {
+            const dashboard = await import('@/routes/Dashboard')
+            return {
+              Component: dashboard.Layout,
+              loader: dashboard.loader(client),
+            }
+          }}
+          ErrorBoundary={RouteError}
+        >
           <Route path={ROUTES.OVERVIEW} Component={Dashboard.Overview} />
 
           <Route path={ROUTES.MARKET}>
