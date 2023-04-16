@@ -1,3 +1,2 @@
-export { ListSystems } from './ListSystems'
-export { ViewSystem } from './ViewSystem'
-export { ViewWaypoint } from './ViewWaypoint'
+export { ListSystems } from './system.list.component'
+export { ViewSystem } from './system.view.component'
