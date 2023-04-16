@@ -11,7 +11,7 @@ import { useAuthStore } from '@/services/store/auth'
 import { AgentResponse } from '@/types/spacetraders'
 import { LoginSchema, loginValidation } from './login.validation'
 
-const getMyAgent = queryFnFactory<SpaceTradersResponse<AgentResponse>, void>(() => '/my/agent')
+const getMyAgent = queryFnFactory<SpaceTradersResponse<AgentResponse>, void>(() => 'my/agent')
 
 export const Login = () => {
   const location = useLocation<Partial<LoginSchema>>()

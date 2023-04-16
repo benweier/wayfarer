@@ -12,7 +12,7 @@ import { AccessTokenDialog } from './access-token-dialog.component'
 import { RegisterSchema, registerValidation } from './register.validation'
 
 const createMyAgent = mutationFnFactory<SpaceTradersResponse<RegisterAgentResponse>, void, RegisterAgentRequest>(
-  () => '/register',
+  () => 'register',
 )
 
 const AlreadyRegistered = ({ token }: { token?: string }) => {

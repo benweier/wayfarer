@@ -48,7 +48,7 @@ const attachQueryParams = (url: URL, params?: f.QueryParams) => {
 
 export const queryFnFactory = <R = unknown, T = unknown, Q extends f.QueryParams = f.QueryParams>(
   fn: (path: T) => string | URL,
-  base: string = import.meta.env.SPACETRADERS_API_URL,
+  base: string = import.meta.env.SPACETRADERS_API_BASE_URL,
 ): ((args?: RequestArguments<T, Q>, req?: RequestInit) => Promise<R>) => {
   return (args, req) => {
     const path = fn(args?.path as T)
