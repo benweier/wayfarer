@@ -15,3 +15,15 @@ export type ModalImperativeRef = {
   openModal: () => void
   closeModal: () => void
 }
+
+export type ModalState = {
+  isOpen: boolean
+  onClose?: () => void
+}
+
+export type ModalActions = {
+  openModal: () => void
+  closeModal: () => void
+}
+
+export type ModalStore = ModalState & { actions: ModalActions }

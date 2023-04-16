@@ -5,7 +5,7 @@ import { ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-context.hook'
 
 export const Root = ({ size = 'auto', children }: WithChildren<ModalDialogProps>) => {
-  const { show, onClose } = useModalContext((state) => ({ show: state.isOpen, onClose: state.closeModal }))
+  const { show, onClose } = useModalContext((state) => ({ show: state.isOpen, onClose: state.actions.closeModal }))
 
   return (
     <Transition appear show={show} as={Fragment} static>

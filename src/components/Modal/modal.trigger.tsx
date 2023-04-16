@@ -8,7 +8,7 @@ import {
   isValidElement,
 } from 'react'
 import { isRef } from '@/utilities/isRef'
-import { useModalContext } from './use-modal-context.hook'
+import { useModalActions } from './use-modal-store.hook'
 
 export const Trigger = (
   {
@@ -18,7 +18,7 @@ export const Trigger = (
   },
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
-  const openModal = useModalContext((state) => state.openModal)
+  const { openModal } = useModalActions()
 
   if (!children) return null
 
