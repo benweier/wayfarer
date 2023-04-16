@@ -20,7 +20,6 @@ import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
 import { useThemeManager } from '@/hooks/use-theme-manager.hook'
 import * as Auth from '@/routes/auth'
-import * as Dashboard from '@/routes/Dashboard'
 import { client } from '@/services/query-client'
 import { getState } from '@/services/store/auth'
 
@@ -130,9 +129,14 @@ const router = sentryCreateBrowserRouter(
           <Route path={ROUTES.CONTRACTS}>
             <Route
               index
-              Component={Dashboard.Contracts.List}
+              lazy={async () => {
+                const contracts = await import('@/routes/contracts')
+                return {
+                  Component: contracts.Route,
+                  loader: contracts.loader(client),
+                }
+              }}
               ErrorBoundary={RouteError}
-              loader={Dashboard.contracts.list(client)}
             />
           </Route>
 
