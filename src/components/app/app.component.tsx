@@ -116,7 +116,7 @@ const router = sentryCreateBrowserRouter(
       <Route Component={Auth.Required}>
         <Route
           lazy={async () => {
-            const dashboard = await import('@/routes/Dashboard')
+            const dashboard = await import('@/routes/dashboard')
             return {
               Component: dashboard.Layout,
               loader: dashboard.loader(client),
