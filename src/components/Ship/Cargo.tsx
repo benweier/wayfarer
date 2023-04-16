@@ -5,7 +5,7 @@ import { useAtom } from 'jotai'
 import { Fragment } from 'react'
 import { SellCargoForm } from '@/components/Market/SellCargo'
 import { TradeGood } from '@/components/Market/TradeGood'
-import { Modal, useModalContext, useModalImperativeHandle } from '@/components/Modal'
+import { Modal, useModalActions, useModalImperativeHandle } from '@/components/Modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Actions } from '@/components/Ship'
 import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
@@ -194,7 +194,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     <Modal
       trigger={
         <Modal.Trigger>
-          <button className="btn btn-danger btn-flat btn-sm">Jettison</button>
+          <button className="btn btn-flat btn-danger btn-sm">Jettison</button>
         </Modal.Trigger>
       }
     >
@@ -223,7 +223,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
 }
 
 const CancelModal = () => {
-  const closeModal = useModalContext((state) => state.closeModal)
+  const { closeModal } = useModalActions()
 
   return (
     <button className="btn" onClick={() => closeModal()}>
