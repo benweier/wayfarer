@@ -1,8 +1,9 @@
 import { Navigate } from 'react-router-dom'
+import { withQSB } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
 import { useAuthStore } from '@/services/store/auth'
 
-export const Home = () => {
+const HomeRouteComponent = () => {
   const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {
@@ -11,3 +12,5 @@ export const Home = () => {
 
   return <Navigate to={ROUTES.OVERVIEW} />
 }
+
+export const Route = withQSB()(HomeRouteComponent)

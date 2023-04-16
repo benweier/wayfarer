@@ -90,8 +90,8 @@ const router = sentryCreateBrowserRouter(
       <Route
         index
         lazy={async () => {
-          const { Home } = await import('@/routes/Home')
-          return { Component: Home }
+          const home = await import('@/routes/home')
+          return { Component: home.Route }
         }}
       />
 
@@ -99,16 +99,18 @@ const router = sentryCreateBrowserRouter(
         <Route
           path={ROUTES.LOGIN}
           lazy={async () => {
-            const { Login } = await import('@/features/auth')
-            return { Component: Login }
+            const auth = await import('@/features/auth')
+            return { Component: auth.Login }
           }}
+          ErrorBoundary={RouteError}
         />
         <Route
           path={ROUTES.REGISTER}
           lazy={async () => {
-            const { Register } = await import('@/features/auth')
-            return { Component: Register }
+            const auth = await import('@/features/auth')
+            return { Component: auth.Register }
           }}
+          ErrorBoundary={RouteError}
         />
         <Route path={ROUTES.LOGOUT} element={<Navigate to={ROUTES.LOGIN} replace />} action={logout} />
       </Route>
