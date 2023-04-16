@@ -127,17 +127,6 @@ const router = sentryCreateBrowserRouter(
         >
           <Route path={ROUTES.OVERVIEW} Component={Dashboard.Overview} />
 
-          <Route path={ROUTES.MARKET}>
-            <Route index Component={Dashboard.Market} />
-
-            <Route
-              path=":systemID/:waypointID"
-              Component={Dashboard.Market}
-              ErrorBoundary={RouteError}
-              loader={Dashboard.market.loader(client)}
-            />
-          </Route>
-
           <Route path={ROUTES.CONTRACTS}>
             <Route
               index
