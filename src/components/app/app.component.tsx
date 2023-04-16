@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react'
 import { QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Suspense, useEffect } from 'react'
+import { Fragment, Suspense, useEffect } from 'react'
 import {
   ActionFunction,
   Navigate,
@@ -125,7 +125,7 @@ const router = sentryCreateBrowserRouter(
           }}
           ErrorBoundary={RouteError}
         >
-          <Route path={ROUTES.OVERVIEW} Component={Dashboard.Overview} />
+          <Route path={ROUTES.OVERVIEW} Component={Fragment} />
 
           <Route path={ROUTES.CONTRACTS}>
             <Route
@@ -139,22 +139,37 @@ const router = sentryCreateBrowserRouter(
           <Route path={ROUTES.SYSTEMS}>
             <Route
               index
-              Component={Dashboard.Systems.List}
+              lazy={async () => {
+                const systems = await import('@/routes/systems')
+                return {
+                  Component: systems.Route,
+                  loader: systems.loader(client),
+                }
+              }}
               ErrorBoundary={RouteError}
-              loader={Dashboard.systems.list(client)}
             />
             <Route path=":systemID">
               <Route
                 index
-                Component={Dashboard.Systems.View}
+                lazy={async () => {
+                  const system = await import('@/routes/systems/system')
+                  return {
+                    Component: system.Route,
+                    loader: system.loader(client),
+                  }
+                }}
                 ErrorBoundary={RouteError}
-                loader={Dashboard.systems.view(client)}
               />
               <Route
                 path="waypoint/:waypointID"
-                Component={Dashboard.Systems.Waypoint}
+                lazy={async () => {
+                  const waypoint = await import('@/routes/systems/waypoint')
+                  return {
+                    Component: waypoint.Route,
+                    loader: waypoint.loader(client),
+                  }
+                }}
                 ErrorBoundary={RouteError}
-                loader={Dashboard.systems.waypoint(client)}
               />
             </Route>
           </Route>
