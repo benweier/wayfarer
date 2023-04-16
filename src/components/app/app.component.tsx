@@ -23,7 +23,6 @@ import * as Auth from '@/routes/Auth'
 import * as Dashboard from '@/routes/Dashboard'
 import { client } from '@/services/query-client'
 import { getState } from '@/services/store/auth'
-import { lazy } from '@/utilities/lazy'
 
 Sentry.init({
   dsn: import.meta.env.SENTRY_DSN,
@@ -49,8 +48,6 @@ const Loading = () => (
     <div>Wayfarer</div>
   </div>
 )
-
-const { Home } = lazy(() => import('@/routes/Home'), ['Home'])
 
 const Core = () => {
   const { reset } = useQueryErrorResetBoundary()
@@ -91,7 +88,13 @@ const logout: ActionFunction = () => {
 const router = sentryCreateBrowserRouter(
   createRoutesFromElements(
     <Route Component={Core}>
-      <Route index Component={Home} />
+      <Route
+        index
+        lazy={async () => {
+          const { Home } = await import('@/routes/Home')
+          return { Component: Home }
+        }}
+      />
 
       <Route ErrorBoundary={RouteError} Component={Auth.Route}>
         <Route
