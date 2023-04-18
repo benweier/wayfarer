@@ -8,7 +8,7 @@ import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const Ship = ({ ship }: { ship: ShipResponse }) => {
-  const isMutating = useIsMutating(['ship', ship.symbol], { exact: false })
+  const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
 
   return (
     <div className="relative">
