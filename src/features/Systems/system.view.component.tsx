@@ -6,7 +6,7 @@ import { SYSTEM_TYPE } from '@/config/constants'
 import { getSystemById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 import { SystemFleet } from './system.fleet.component'
-import { SystemWaypoints } from './waypoint.list.component'
+import { SystemWaypoints } from './system.waypoints.component'
 
 const tabs = [
   { title: 'Waypoints', content: SystemWaypoints, fallback: Fragment },
