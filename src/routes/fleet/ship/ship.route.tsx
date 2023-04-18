@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
-import * as Ship from '@/features/Ship'
+import * as Ship from '@/features/ship'
 
 const ShipRouteComponent = () => {
   const { shipID } = useParams()
