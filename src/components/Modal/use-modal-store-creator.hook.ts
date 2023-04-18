@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { StoreApi } from 'zustand/vanilla'
-import { ModalStore, createModalStore } from './modal.store'
+import { createModalStore } from './modal.store'
+import { ModalStore } from './modal.types'
 
 export const useModalStoreCreator = ({ isOpen, onClose }: { isOpen?: boolean; onClose?: () => void }) => {
   const store = useRef<StoreApi<ModalStore>>()
