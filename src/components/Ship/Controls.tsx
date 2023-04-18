@@ -49,7 +49,7 @@ export const Controls = ({ ship }: { ship: ShipResponse }) => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="relative flex w-52 origin-top-right flex-col gap-1 rounded-md bg-zinc-100/75 p-1 backdrop-blur-lg dark:bg-zinc-800/75">
+            <Menu.Items className="relative flex w-52 origin-top-right flex-col gap-1 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
               {ship.nav.status === 'DOCKED' && (
                 <Menu.Item as={Fragment}>
                   <Actions.Orbit
