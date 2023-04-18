@@ -16,7 +16,7 @@ import {
 } from 'react'
 import { Link } from 'react-router-dom'
 import { Modal } from '@/components/Modal'
-import { QuerySuspenseBoundary } from '@/components/QuerySuspenseBoundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import {
