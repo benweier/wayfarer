@@ -96,7 +96,9 @@ export const Route = ({ nav }: { nav: NavigationResponse }) => {
           <div className="flex flex-col items-start">
             <div className="text-secondary text-xs uppercase">Departed</div>
             <div className="flex items-center gap-2">
-              <div className="text-sm font-medium">---</div>
+              <div className="text-sm font-medium">
+                {transit.departed.toLocaleDateString()} {transit.departed.toLocaleTimeString()}
+              </div>
             </div>
           </div>
           <div className="flex flex-col items-end">

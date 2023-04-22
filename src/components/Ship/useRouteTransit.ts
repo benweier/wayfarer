@@ -12,7 +12,7 @@ export const useRouteTransit = () => {
     nav: ship.nav,
   }))
   const arrival = useMemo(() => new Date(nav.route.arrival), [nav.route.arrival])
-  const departed = useMemo(() => new Date(nav.route.arrival), [nav.route.arrival])
+  const departed = useMemo(() => new Date(nav.route.departureTime), [nav.route.departureTime])
   const totalSeconds = Math.max(0, arrival.getTime() - departed.getTime())
   const [remainingSeconds, setRemainingSeconds] = useState(() => Math.max(0, arrival.getTime() - Date.now()))
 

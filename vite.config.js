@@ -1,4 +1,4 @@
-/// <reference types="vite" />
+const { vanillaExtractPlugin } = require('@vanilla-extract/vite-plugin')
 const baseSSL = require('@vitejs/plugin-basic-ssl')
 const react = require('@vitejs/plugin-react-swc')
 const { defineConfig } = require('vite')
@@ -12,6 +12,7 @@ module.exports = defineConfig(({ mode }) => {
   }
 
   plugins.push(tsconfigPaths.default())
+  plugins.push(vanillaExtractPlugin())
   plugins.push(react())
 
   return {
@@ -24,6 +25,7 @@ module.exports = defineConfig(({ mode }) => {
     test: {
       globals: true,
       environment: 'jsdom',
+      setupFiles: './src/test/vitest.setup.ts',
       clearMocks: true,
       css: true,
     },
