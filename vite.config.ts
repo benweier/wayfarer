@@ -1,17 +1,17 @@
-const { vanillaExtractPlugin } = require('@vanilla-extract/vite-plugin')
-const baseSSL = require('@vitejs/plugin-basic-ssl')
-const react = require('@vitejs/plugin-react-swc')
-const { defineConfig } = require('vite')
-const tsconfigPaths = require('vite-tsconfig-paths')
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
+import baseSSL from '@vitejs/plugin-basic-ssl'
+import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
-module.exports = defineConfig(({ mode }) => {
+export default defineConfig(({ mode }) => {
   const plugins = []
 
   if (mode === 'development') {
     plugins.push(baseSSL())
   }
 
-  plugins.push(tsconfigPaths.default())
+  plugins.push(tsconfigPaths())
   plugins.push(vanillaExtractPlugin())
   plugins.push(react())
 

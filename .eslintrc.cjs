@@ -78,21 +78,17 @@ module.exports = {
   overrides: [
     {
       files: [
-        'babel.config.js',
-        'postcss.config.js',
-        '.eslintrc.js',
-        'jest.config.js',
-        'styles/**/*.js',
-        'tailwind.config.js',
-        'vite.config.js',
-        'webpack.config.js',
+        'postcss.config.cjs',
+        '.eslintrc.cjs',
+        'styles/**/*.cjs',
+        'tailwind.config.cjs',
+        'vite.config.ts',
       ],
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       parserOptions: {
         project: ['tsconfig.json', 'tsconfig.node.json'],
         ecmaVersion: 2020,
-        sourceType: 'module',
       },
       env: {
         node: true,

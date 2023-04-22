@@ -1,20 +1,16 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["@types/node"],
+    "types": ["node"],
     "noEmit": true,
     "allowJs": true
   },
   "include": [
-    "babel.config.js",
-    "postcss.config.js",
-    ".eslintrc.js",
-    ".prettierrc.js",
-    "jest.config.js",
-    "jest.setup.ts",
-    "postcss.config.js",
-    "styles/**/*.js",
-    "tailwind.config.js",
-    "vite.config.js"
+    "postcss.config.cjs",
+    ".eslintrc.cjs",
+    "postcss.config.cjs",
+    "styles/**/*.cjs",
+    "tailwind.config.cjs",
+    "vite.config.ts"
   ]
 }
