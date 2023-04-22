@@ -30,16 +30,30 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
 
   return (
     <div key={waypoint.symbol} className="grid gap-8">
-      <div className="flex flex-row items-center justify-start gap-4">
-        <div className="text-xl font-semibold">{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</div>
-        <div className="font-light">
-          ({waypoint.x}, {waypoint.y})
+      <div>
+        <div className="flex flex-row items-center justify-start gap-4">
+          <div className="text-xl font-semibold">{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</div>
+          <div className="font-light">
+            ({waypoint.x}, {waypoint.y})
+          </div>
+          <div>
+            System:{' '}
+            <Link className="link" to={`/systems/${systemID}`}>
+              {systemID}
+            </Link>
+          </div>
         </div>
-        <div>
-          System:{' '}
-          <Link className="link" to={`/systems/${systemID}`}>
-            {systemID}
-          </Link>
+
+        <div className="flex items-baseline gap-1">
+          Traits:{' '}
+          {waypoint.traits.map((trait) => (
+            <span
+              key={trait.symbol}
+              className="text-primary text-inverse my-0.5 rounded bg-zinc-700 px-2 text-xs font-bold dark:bg-zinc-300"
+            >
+              {trait.name}
+            </span>
+          ))}
         </div>
       </div>
 
