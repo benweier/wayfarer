@@ -1,5 +1,5 @@
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
-import { Fleet } from '@/features/Fleet'
+import { Fleet } from '@/features/fleet'
 
 export const FleetRouteComponent = () => {
   return (
