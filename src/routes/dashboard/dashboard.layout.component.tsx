@@ -13,7 +13,7 @@ import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-do
 import { Preferences } from '@/components/preferences'
 import { Wayfarer } from '@/components/wayfarer'
 import { ROUTES } from '@/config/routes'
-import { Navigation } from '@/features/Navigation'
+import { Navigation } from '@/features/navigation'
 import { sidebarAtom } from '@/services/store/atoms/sidebar'
 import { useAuthStore } from '@/services/store/auth'
 import { cx } from '@/utilities/cx'
