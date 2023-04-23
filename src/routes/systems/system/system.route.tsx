@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
-import { ViewSystem } from '@/features/Systems'
+import { ViewSystem } from '@/features/systems'
 
 export const SystemViewComponent = () => {
   const { systemID } = useParams()
