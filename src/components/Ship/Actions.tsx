@@ -15,7 +15,7 @@ import {
   isValidElement,
 } from 'react'
 import { Link } from 'react-router-dom'
-import { Modal } from '@/components/Modal'
+import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
