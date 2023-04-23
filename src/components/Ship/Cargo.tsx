@@ -73,54 +73,6 @@ export const CargoDisplayMode = () => {
   )
 }
 
-// const Manage = ({ children }: WithChildren) => {
-//   const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
-//   const { x, y, refs } = useFloating<HTMLButtonElement>({
-//     strategy: 'absolute',
-//     placement: cargoDisplayMode === 'list' ? 'top-start' : 'top-end',
-//     middleware: [offset(8), shift({ padding: 4 })],
-//     whileElementsMounted: (reference, floating, update) => {
-//       return autoUpdate(reference, floating, update, {
-//         animationFrame: true,
-//       })
-//     },
-//   })
-//
-//   return (
-//     <Menu as="div" className="relative">
-//       <Menu.Button ref={refs.setReference} className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-white/5">
-//         <span className="sr-only">Manage</span>
-//         <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
-//       </Menu.Button>
-//
-//       <div
-//         ref={refs.setFloating}
-//         className="absolute top-0 left-0"
-//         style={{
-//           transform:
-//             typeof x === 'number' && typeof y === 'number'
-//               ? `translate(${Math.round(x)}px,${Math.round(y)}px)`
-//               : undefined,
-//         }}
-//       >
-//         <Transition
-//           as={Fragment}
-//           enter="transition ease-out duration-100"
-//           enterFrom="transform opacity-0 scale-95"
-//           enterTo="transform opacity-100 scale-100"
-//           leave="transition ease-in duration-75"
-//           leaveFrom="transform opacity-100 scale-100"
-//           leaveTo="transform opacity-0 scale-95"
-//         >
-//           <Menu.Items className="relative flex w-52 origin-bottom flex-col gap-1 rounded-md bg-zinc-100/75 p-1 backdrop-blur-lg dark:bg-zinc-800/75">
-//             {children}
-//           </Menu.Items>
-//         </Transition>
-//       </div>
-//     </Menu>
-//   )
-// }
-
 const SellCargo = () => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore()
@@ -194,7 +146,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     <Modal
       trigger={
         <Modal.Trigger>
-          <button className="btn btn-flat btn-danger btn-sm">Jettison</button>
+          <button className="btn btn-danger btn-flat btn-sm">Jettison</button>
         </Modal.Trigger>
       }
     >
