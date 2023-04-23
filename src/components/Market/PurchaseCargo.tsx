@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
 import { TradeGood } from '@/components/Market/TradeGood'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
@@ -62,6 +63,31 @@ const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => vo
     context: { good },
   })
 
+  const getShipOption: ShipSelect.ShipReducer = useCallback((ships, ship) => {
+    const disabled = ship.cargo.units >= ship.cargo.capacity
+
+    return ships.set(ship.symbol, {
+      ship,
+      label: (
+        <div className="flex items-baseline gap-2">
+          <span className="font-bold">{ship.symbol}</span>
+          <span className="text-secondary">
+            (Cargo: {ship.cargo.units} / {ship.cargo.capacity})
+          </span>
+        </div>
+      ),
+      option: (
+        <div className="flex flex-col">
+          <div className="font-bold">{ship.symbol}</div>
+          <div className="text-secondary text-xs">
+            Cargo: {ship.cargo.units} / {ship.cargo.capacity}
+          </div>
+        </div>
+      ),
+      disabled,
+    })
+  }, [])
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="grid gap-8">
@@ -71,32 +97,7 @@ const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => vo
           render={({ field }) => (
             <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
               <ShipSelect.Field
-                stateReducer={(ships) => {
-                  return ships.reduce<Map<string, ShipSelect.ShipItemState>>((map, ship) => {
-                    const disabled = ship.cargo.units >= ship.cargo.capacity
-
-                    return map.set(ship.symbol, {
-                      ship,
-                      label: (
-                        <div className="flex items-baseline gap-2">
-                          <span className="font-bold">{ship.symbol}</span>
-                          <span className="text-secondary">
-                            (Cargo: {ship.cargo.units} / {ship.cargo.capacity})
-                          </span>
-                        </div>
-                      ),
-                      option: (
-                        <div className="flex flex-col">
-                          <div className="font-bold">{ship.symbol}</div>
-                          <div className="text-secondary text-xs">
-                            Cargo: {ship.cargo.units} / {ship.cargo.capacity}
-                          </div>
-                        </div>
-                      ),
-                      disabled,
-                    })
-                  }, new Map())
-                }}
+                getShipOption={getShipOption}
                 onChange={(value) => field.onChange(value?.symbol)}
                 select={(response) => ({
                   ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointID),
