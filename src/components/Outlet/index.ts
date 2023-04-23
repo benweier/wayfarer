@@ -1,1 +1,1 @@
-export { Outlet } from './Outlet'
+export { Outlet } from './outlet.component'
