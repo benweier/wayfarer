@@ -73,6 +73,7 @@ export type NavigationRoute = {
     y: number
   }
   arrival: string
+  departureTime: string
 }
 
 export type NavigationResponse = {
