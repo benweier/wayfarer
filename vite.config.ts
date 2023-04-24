@@ -2,6 +2,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 import baseSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
+import { warmup } from 'vite-plugin-warmup'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig(({ mode }) => {
@@ -9,6 +10,7 @@ export default defineConfig(({ mode }) => {
 
   if (mode === 'development') {
     plugins.push(baseSSL())
+    plugins.push(warmup({ clientFiles: ['./index.html'] }))
   }
 
   plugins.push(tsconfigPaths())
