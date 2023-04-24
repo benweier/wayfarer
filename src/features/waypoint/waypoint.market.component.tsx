@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { ErrorComponentProps } from '@/components/error-boundary'
-import { PurchaseCargo, SellCargo } from '@/components/Market'
+import { PurchaseCargo, SellCargo } from '@/components/market'
 import { MarketTradeGoodStore } from '@/context/MarketTradeGood'
 import { SystemWaypointStore } from '@/context/SystemWaypoint'
 import { getMarket } from '@/services/api/spacetraders'
