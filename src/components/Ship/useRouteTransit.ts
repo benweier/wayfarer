@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import { updateShipInFleetNavStatus, updateShipNavStatus } from '@/components/Ship/Actions'
-import { useShipContext } from '@/context/Ship'
+import { useShipContext } from '@/context/ship.context'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
 

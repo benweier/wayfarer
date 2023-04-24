@@ -10,9 +10,9 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Actions } from '@/components/Ship'
 import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
 import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
-import { MarketTradeGoodStore, useMarketTradeGoodContext } from '@/context/MarketTradeGood'
-import { useShipContext } from '@/context/Ship'
-import { SystemWaypointStore } from '@/context/SystemWaypoint'
+import { MarketTradeGoodStore, useMarketTradeGoodContext } from '@/context/market-trade-good.context'
+import { useShipContext } from '@/context/ship.context'
+import { SystemWaypointStore } from '@/context/system-waypoint.context'
 import { createShipCargoSell, getMarket } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { cargoDescriptionAtom, cargoDisplayAtom } from '@/services/store/atoms/cargo.display'
@@ -146,7 +146,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     <Modal
       trigger={
         <Modal.Trigger>
-          <button className="btn btn-danger btn-flat btn-sm">Jettison</button>
+          <button className="btn btn-flat btn-danger btn-sm">Jettison</button>
         </Modal.Trigger>
       }
     >

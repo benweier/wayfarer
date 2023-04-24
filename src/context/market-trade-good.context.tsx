@@ -6,10 +6,6 @@ import { MarketTradeGood } from '@/types/spacetraders'
 
 const MarketTradeGoodContext = createContext<StoreApi<MarketTradeGood> | null>(null)
 
-const createMarketTradeGoodStore = (good: MarketTradeGood) => {
-  return createStore<MarketTradeGood>()(() => good)
-}
-
 export const useMarketTradeGoodContext = <T,>(
   selector: (state: MarketTradeGood) => T,
   equalityFn: (a: T, b: T) => boolean = shallow,
@@ -30,7 +26,7 @@ export const MarketTradeGoodStore = ({
   const store = useRef<StoreApi<MarketTradeGood> | undefined>()
 
   if (!store.current && good) {
-    store.current = createMarketTradeGoodStore(good)
+    store.current = createStore<MarketTradeGood>()(() => good)
   }
 
   if (!store.current) return null

@@ -6,10 +6,6 @@ import { ShipResponse } from '@/types/spacetraders'
 
 const ShipContext = createContext<StoreApi<ShipResponse> | null>(null)
 
-const createShipStore = (ship: ShipResponse) => {
-  return createStore<ShipResponse>()(() => ship)
-}
-
 export const useShipContext = <T,>(
   selector: (state: ShipResponse) => T,
   equalityFn: (a: T, b: T) => boolean = shallow,
@@ -30,7 +26,7 @@ export const ShipStore = ({
   const store = useRef<StoreApi<ShipResponse> | undefined>()
 
   if (!store.current && ship) {
-    store.current = createShipStore(ship)
+    store.current = createStore<ShipResponse>()(() => ship)
   }
 
   useEffect(() => {

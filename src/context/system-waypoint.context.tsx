@@ -5,10 +5,6 @@ import { StoreApi } from 'zustand/vanilla'
 
 const SystemWaypointContext = createContext<StoreApi<{ systemID: string; waypointID: string }> | null>(null)
 
-const createSystemWaypointStore = (systemID: string, waypointID: string) => {
-  return createStore<{ systemID: string; waypointID: string }>()(() => ({ systemID, waypointID }))
-}
-
 export const useSystemWaypointContext = <T,>(
   selector: (state: { systemID: string; waypointID: string }) => T,
   equalityFn: (a: T, b: T) => boolean = shallow,
@@ -31,7 +27,7 @@ export const SystemWaypointStore = ({
   const store = useRef<StoreApi<{ systemID: string; waypointID: string }> | undefined>()
 
   if (!store.current && systemID && waypointID) {
-    store.current = createSystemWaypointStore(systemID, waypointID)
+    store.current = createStore<{ systemID: string; waypointID: string }>()(() => ({ systemID, waypointID }))
   }
 
   if (!store.current) return null
