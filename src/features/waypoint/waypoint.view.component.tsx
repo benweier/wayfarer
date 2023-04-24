@@ -44,12 +44,11 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
           </div>
         </div>
 
-        <div className="flex items-baseline gap-1">
-          Traits:{' '}
+        <div className="flex flex-wrap items-baseline gap-1">
           {waypoint.traits.map((trait) => (
             <span
               key={trait.symbol}
-              className="text-primary text-inverse my-0.5 rounded bg-zinc-700 px-2 text-xs font-bold dark:bg-zinc-300"
+              className="text-primary text-inverse my-0.5 rounded-sm bg-zinc-700 px-2 text-xs font-bold dark:bg-zinc-300"
             >
               {trait.name}
             </span>
