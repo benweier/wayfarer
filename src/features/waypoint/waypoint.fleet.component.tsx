@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { Ship } from '@/components/Ship'
+import { Ship } from '@/components/ship'
 import { getShipsList } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'

@@ -20,6 +20,8 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import {
+  createShipCargoPurchase,
+  createShipCargoSell,
   createShipDock,
   createShipExtract,
   createShipJettison,
@@ -487,6 +489,120 @@ const JettisonComponent = (
 
 export const Jettison = forwardRef(JettisonComponent)
 
+const PurchaseComponent = (
+  {
+    ship,
+    symbol,
+    units,
+    trigger = (props) => (
+      <button className="btn btn-confirm btn-outline btn-sm" {...props}>
+        Purchase
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    symbol: string
+    units: number
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
+  const client = useQueryClient()
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ['ship', ship.symbol, 'cargo', 'sell'],
+    mutationFn: ({ shipID, symbol, units }: { shipID: string; symbol: string; units: number }) =>
+      createShipCargoPurchase({ path: shipID, payload: { symbol, units } }),
+    onMutate: ({ shipID }) => {
+      void client.cancelQueries({ queryKey: ['ships'] })
+      void client.cancelQueries({ queryKey: ['ship', shipID] })
+    },
+    onSuccess: (response, { shipID }) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+
+      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
+    },
+    onSettled: (_res, _err, { shipID }) => {
+      void client.invalidateQueries({ queryKey: ['ships'] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+    },
+  })
+
+  return isValidElement(trigger)
+    ? cloneElement(trigger, {
+        ref: isRef(ref) ? ref : undefined,
+        disabled: trigger.props.disabled ?? isLoading,
+        onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
+      })
+    : createElement(trigger, {
+        ref: isRef(ref) ? ref : undefined,
+        disabled: isLoading,
+        onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
+      })
+}
+
+export const Purchase = forwardRef(PurchaseComponent)
+
+const SellComponent = (
+  {
+    ship,
+    symbol,
+    units,
+    trigger = (props) => (
+      <button className="btn btn-confirm btn-outline btn-sm" {...props}>
+        Sell
+      </button>
+    ),
+  }: {
+    ship: ShipResponse
+    symbol: string
+    units: number
+    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+  },
+  ref: ForwardedRef<HTMLButtonElement>,
+) => {
+  const client = useQueryClient()
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ['ship', ship.symbol, 'cargo', 'sell'],
+    mutationFn: ({ shipID, symbol, units }: { shipID: string; symbol: string; units: number }) =>
+      createShipCargoSell({ path: shipID, payload: { symbol, units } }),
+    onMutate: ({ shipID }) => {
+      void client.cancelQueries({ queryKey: ['ships'] })
+      void client.cancelQueries({ queryKey: ['ship', shipID] })
+    },
+    onSuccess: (response, { shipID }) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+
+      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
+    },
+    onSettled: (_res, _err, { shipID }) => {
+      void client.invalidateQueries({ queryKey: ['ships'] })
+      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+    },
+  })
+
+  return isValidElement(trigger)
+    ? cloneElement(trigger, {
+        ref: isRef(ref) ? ref : undefined,
+        disabled: trigger.props.disabled ?? isLoading,
+        onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
+      })
+    : createElement(trigger, {
+        ref: isRef(ref) ? ref : undefined,
+        disabled: isLoading,
+        onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
+      })
+}
+
+export const Sell = forwardRef(SellComponent)
+
 const WarpComponent = (
   {
     ship,
@@ -661,7 +777,7 @@ export const Navigate = ({ ship }: { ship: ShipResponse }) => {
                   fallback={
                     <div className="grid">
                       {Array.from({ length: 3 }).map((_, index) => (
-                        <div key={index} className="my-4 mx-auto h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
+                        <div key={index} className="mx-auto my-4 h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
                       ))}
                     </div>
                   }

@@ -7,8 +7,6 @@ import { TradeGood } from '@/components/market'
 import { SellCargoForm } from '@/components/market/sell-cargo.component'
 import { Modal, useModalActions, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { Actions } from '@/components/Ship'
-import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
 import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
 import { MarketTradeGoodStore, useMarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useShipContext } from '@/context/ship.context'
@@ -19,6 +17,7 @@ import { cargoDescriptionAtom, cargoDisplayAtom } from '@/services/store/atoms/c
 import { useAuthStore } from '@/services/store/auth'
 import { CargoInventory, MarketTradeGood, ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
+import { Jettison, Refine, updateShipCargo, updateShipInFleetCargo } from './actions.component'
 
 export const CargoDisplayMode = () => {
   const [cargoDisplayMode, setCargoDisplayMode] = useAtom(cargoDisplayAtom)
@@ -157,7 +156,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
         </div>
         <div className="flex gap-2">
           <CancelModal />
-          <Actions.Jettison
+          <Jettison
             ship={ship}
             symbol={item.symbol}
             units={item.units}
@@ -250,7 +249,7 @@ export const CargoList = ({ ship }: { ship: ShipResponse }) => {
           <Fragment key={item.symbol}>
             <CargoItem item={item}>
               <div className={cx('flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start')}>
-                {produce && <Actions.Refine ship={ship} produce={produce} />}
+                {produce && <Refine ship={ship} produce={produce} />}
                 {!good ? (
                   <button disabled className="btn btn-confirm btn-flat btn-sm grayscale-50">
                     Sell

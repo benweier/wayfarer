@@ -1,11 +1,11 @@
 import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
 import { useIsMutating } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { Controls } from '@/components/Ship/Controls'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
+import { Controls } from './controls.component'
 
 export const Ship = ({ ship }: { ship: ShipResponse }) => {
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })

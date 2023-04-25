@@ -4,8 +4,8 @@ import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { updateShipCargo, updateShipInFleetCargo } from '@/components/Ship/Actions'
-import * as ShipSelect from '@/components/Ship/Select'
+import { Actions } from '@/components/ship'
+import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useMarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useSystemWaypointContext } from '@/context/system-waypoint.context'
@@ -152,8 +152,9 @@ export const SellCargo = () => {
 
       const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
+      if (ship) client.setQueryData(['ship', shipID], Actions.updateShipCargo(ship, response.data.cargo))
+      if (ships && index > -1)
+        client.setQueryData(['ships'], Actions.updateShipInFleetCargo(ships, index, response.data.cargo))
 
       if (response.data.agent) {
         setAgent(response.data.agent)

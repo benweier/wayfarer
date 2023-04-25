@@ -7,7 +7,7 @@ import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { createShipNavigate } from '@/services/api/spacetraders'
 import { ShipResponse } from '@/types/spacetraders'
-import * as Actions from './Actions'
+import * as Actions from './actions.component'
 
 export const Controls = ({ ship }: { ship: ShipResponse }) => {
   const { ref, modal } = useModalImperativeHandle()

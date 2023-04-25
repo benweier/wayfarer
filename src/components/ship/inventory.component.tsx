@@ -1,6 +1,6 @@
 import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
 import { ShipResponse } from '@/types/spacetraders'
-import * as Actions from './Actions'
+import * as Actions from './actions.component'
 
 export const Inventory = ({ ship }: { ship: ShipResponse }) => {
   return (

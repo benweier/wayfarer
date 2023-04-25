@@ -1,10 +1,10 @@
 import { CheckCircleIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
-import { Actions } from '@/components/Ship'
-import { useRouteTransit } from '@/components/Ship/useRouteTransit'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { NavigationResponse, ShipResponse } from '@/types/spacetraders'
+import * as Actions from './actions.component'
+import { useRouteTransit } from './use-route-transit.hook'
 
 export const Status = ({ ship }: { ship: ShipResponse }) => {
   return (

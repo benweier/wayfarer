@@ -2,7 +2,7 @@ import { ShipResponse } from '@/types/spacetraders'
 
 const LoadoutItem = ({ name, description }: { name: string; description: string }) => {
   return (
-    <div className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10">
+    <div className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 dark:bg-opacity-10">
       <span className="font-semibold">{name}</span>
       <span className="text-secondary text-sm">{description}</span>
     </div>

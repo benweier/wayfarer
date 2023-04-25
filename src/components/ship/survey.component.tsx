@@ -1,7 +1,8 @@
-import { Actions, Cooldown } from '@/components/Ship'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useShipSurveyStore } from '@/services/store/ship.survey'
 import { ShipResponse } from '@/types/spacetraders'
+import * as Actions from './actions.component'
+import { Cooldown } from './cooldown.component'
 
 const List = ({ ship }: { ship: ShipResponse }) => {
   const { surveys, removeSurvey } = useShipSurveyStore((state) => ({
@@ -22,7 +23,7 @@ const List = ({ ship }: { ship: ShipResponse }) => {
         return (
           <div
             key={survey.signature}
-            className="flex flex-col gap-6 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
+            className="flex flex-col gap-6 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 dark:bg-opacity-10"
           >
             <div className="flex items-center justify-between gap-4">
               <div className="font-semibold">{survey.signature}</div>
