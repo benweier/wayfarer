@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { ReactNode } from 'react'
-import * as Select from '@/components/Select'
+import * as Select from '@/components/select'
 import { getShipsList } from '@/services/api/spacetraders'
 import { Meta, SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
