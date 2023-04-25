@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
-import { TradeGood } from '@/components/market'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { updateShipCargo, updateShipInFleetCargo } from '@/components/ship/actions.component'
@@ -16,6 +15,7 @@ import { useAuthStore } from '@/services/store/auth'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { PurchaseCargoSchema, validation } from './purchase.validation'
+import { TradeGood } from './trade-good.component'
 
 const SubmitPurchase = () => {
   const { isSubmitting, isValid } = useFormState()
