@@ -39,14 +39,7 @@ export const Status = ({ ship }: { ship: ShipResponse }) => {
           {ship.nav.status === 'DOCKED' ? (
             <Actions.Orbit ship={ship} trigger={<button className="btn btn-primary btn-flat btn-sm">Orbit</button>} />
           ) : (
-            <Actions.Dock
-              ship={ship}
-              trigger={
-                <button disabled={ship.nav.status === 'IN_TRANSIT'} className="btn btn-primary btn-flat btn-sm">
-                  Dock
-                </button>
-              }
-            />
+            <Actions.Dock ship={ship} trigger={<button className="btn btn-primary btn-flat btn-sm">Dock</button>} />
           )}
         </div>
       </div>
