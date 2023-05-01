@@ -1,7 +1,7 @@
 import { autoPlacement, autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Popover, Transition } from '@headlessui/react'
 import { MapPinIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useIsMutating, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import {
   ComponentPropsWithRef,
@@ -106,6 +106,7 @@ const OrbitComponent = (
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
   const client = useQueryClient()
+  const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'orbit'],
     mutationFn: (shipID: string) => createShipOrbit({ path: shipID }),
@@ -136,7 +137,7 @@ const OrbitComponent = (
   return isValidElement(trigger)
     ? cloneElement(trigger, {
         ref: isRef(ref) ? ref : undefined,
-        disabled: trigger.props.disabled ?? ship.nav.status !== 'DOCKED',
+        disabled: trigger.props.disabled ?? (isMutating > 0 || ship.nav.status !== 'DOCKED'),
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
@@ -163,6 +164,7 @@ const DockComponent = (
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
   const client = useQueryClient()
+  const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'dock'],
     mutationFn: (shipID: string) => createShipDock({ path: shipID }),
@@ -190,7 +192,7 @@ const DockComponent = (
   return isValidElement(trigger)
     ? cloneElement(trigger, {
         ref: isRef(ref) ? ref : undefined,
-        disabled: trigger.props.disabled ?? ship.nav.status !== 'IN_ORBIT',
+        disabled: trigger.props.disabled ?? (isMutating > 0 || ship.nav.status !== 'IN_ORBIT'),
         onClick: () => mutate(ship.symbol),
       })
     : createElement(trigger, {
@@ -438,7 +440,7 @@ const JettisonComponent = (
     symbol,
     units,
     trigger = (props) => (
-      <button className="btn btn-outline btn-danger btn-sm" {...props}>
+      <button className="btn btn-danger btn-outline btn-sm" {...props}>
         Jettison
       </button>
     ),
