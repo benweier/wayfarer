@@ -1,5 +1,4 @@
 export { Ship } from './ship.component'
-export { Cargo } from './cargo.component'
 export { Cooldown } from './cooldown.component'
 export { Inventory } from './inventory.component'
 export { Loadout } from './loadout.component'

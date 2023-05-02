@@ -1,76 +1,21 @@
-import { RadioGroup, Switch } from '@headlessui/react'
 import { TrashIcon } from '@heroicons/react/20/solid'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useAtom } from 'jotai'
 import { Fragment } from 'react'
 import { TradeGood } from '@/components/market'
 import { SellCargoForm } from '@/components/market/sell-cargo.component'
 import { Modal, useModalActions, useModalImperativeHandle } from '@/components/modal'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
 import { MarketTradeGoodStore, useMarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useShipContext } from '@/context/ship.context'
 import { SystemWaypointStore } from '@/context/system-waypoint.context'
 import { createShipCargoSell, getMarket } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { cargoDescriptionAtom, cargoDisplayAtom } from '@/services/store/atoms/cargo.display'
 import { useAuthStore } from '@/services/store/auth'
 import { CargoInventory, MarketTradeGood, ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
-import { Jettison, Refine, updateShipCargo, updateShipInFleetCargo } from './actions.component'
-
-export const CargoDisplayMode = () => {
-  const [cargoDisplayMode, setCargoDisplayMode] = useAtom(cargoDisplayAtom)
-  const [showCargoDescription, setShowCargoDescription] = useAtom(cargoDescriptionAtom)
-
-  return (
-    <div className="flex items-center justify-between gap-4">
-      <RadioGroup value={cargoDisplayMode} onChange={setCargoDisplayMode}>
-        <RadioGroup.Label className="sr-only text-sm font-bold">Display as</RadioGroup.Label>
-        <div className="flex items-center gap-2">
-          {[
-            { label: 'List', value: 'list' },
-            { label: 'Grid', value: 'grid' },
-          ].map((item) => (
-            <RadioGroup.Option
-              key={item.value}
-              value={item.value}
-              className={({ checked }) => cx('btn btn-sm', { 'btn-primary btn-outline': checked })}
-            >
-              <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
-            </RadioGroup.Option>
-          ))}
-        </div>
-      </RadioGroup>
-
-      <div className="flex items-center gap-2">
-        <span className="text-secondary text-sm">Show item description</span>
-        <Switch
-          checked={showCargoDescription}
-          onChange={setShowCargoDescription}
-          className={cx(
-            'relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 ',
-            {
-              'bg-emerald-500 dark:bg-emerald-600': showCargoDescription,
-              'bg-zinc-700 dark:bg-zinc-900': !showCargoDescription,
-            },
-          )}
-        >
-          <span
-            aria-hidden="true"
-            className={cx(
-              'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out',
-              {
-                'translate-x-0': !showCargoDescription,
-                'translate-x-6': showCargoDescription,
-              },
-            )}
-          />
-        </Switch>
-      </div>
-    </div>
-  )
-}
+import { Jettison, Refine, updateShipCargo, updateShipInFleetCargo } from '../actions.component'
+import { Item } from './cargo-item.component'
+import { Layout } from './cargo.layout'
 
 const SellCargo = () => {
   const { ref, modal } = useModalImperativeHandle()
@@ -183,39 +128,8 @@ const CancelModal = () => {
   )
 }
 
-const CargoItem = ({ item, children }: WithChildren<{ item: CargoInventory; good?: MarketTradeGood }>) => {
-  const [cargoDescription] = useAtom(cargoDescriptionAtom)
-
-  return (
-    <div className="flex flex-col justify-between gap-8 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 @container dark:bg-opacity-10">
-      <div className="grid gap-2">
-        <div className={cx('flex items-center justify-between gap-4 @[600px]:justify-start')}>
-          <span className="font-medium">{item.name}</span>
-          <span className="text-lg font-bold">{item.units}</span>
-        </div>
-        {cargoDescription && <div className="text-secondary text-sm">{item.description}</div>}
-      </div>
-      {children}
-    </div>
-  )
-}
-
-export const Cargo = ({ ship }: { ship: ShipResponse }) => {
-  return (
-    <div className="grid gap-4">
-      <div>
-        <CargoDisplayMode />
-      </div>
-
-      <QuerySuspenseBoundary>
-        <CargoList ship={ship} />
-      </QuerySuspenseBoundary>
-    </div>
-  )
-}
-
-export const CargoList = ({ ship }: { ship: ShipResponse }) => {
-  const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
+export const List = () => {
+  const ship = useShipContext((state) => state)
   const { data } = useQuery({
     queryKey: ['system', ship.nav.systemSymbol, ship.nav.waypointSymbol, 'market'],
     queryFn: ({ signal }) =>
@@ -235,19 +149,14 @@ export const CargoList = ({ ship }: { ship: ShipResponse }) => {
   })
 
   return (
-    <div
-      className={cx('grid grid-cols-1 gap-2', {
-        'lg:grid-cols-1': cargoDisplayMode === 'list',
-        'lg:grid-cols-3': cargoDisplayMode === 'grid',
-      })}
-    >
+    <Layout>
       {ship.cargo.inventory.map((item) => {
         const produce = REFINE_ITEM_TYPE.get(item.symbol)
         const good = data?.market.has(item.symbol) ? data.goods?.get(item.symbol) : undefined
 
         return (
           <Fragment key={item.symbol}>
-            <CargoItem item={item}>
+            <Item item={item}>
               <div className={cx('flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start')}>
                 {produce && <Refine ship={ship} produce={produce} />}
                 {!good ? (
@@ -263,10 +172,10 @@ export const CargoList = ({ ship }: { ship: ShipResponse }) => {
                 )}
                 <JettisonCargo item={item} />
               </div>
-            </CargoItem>
+            </Item>
           </Fragment>
         )
       })}
-    </div>
+    </Layout>
   )
 }

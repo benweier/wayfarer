@@ -1,16 +1,30 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
-import { Fragment } from 'react'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { Cargo, Inventory, Loadout, Navigation, Survey } from '@/components/ship'
+import { Inventory, Loadout, Navigation, Survey } from '@/components/ship'
+import * as Cargo from '@/components/ship/cargo'
 import { ShipStore } from '@/context/ship.context'
 import { getShipById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 
 const tabs = [
-  { title: 'Cargo', content: Cargo, fallback: Fragment },
-  { title: 'Survey/Extract', content: Survey, fallback: Fragment },
-  { title: 'Loadout', content: Loadout, fallback: Fragment },
+  {
+    title: 'Cargo',
+    content: (
+      <div className="grid gap-4">
+        <div>
+          <Cargo.Preferences />
+        </div>
+
+        <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={<Cargo.Error />}>
+          <Cargo.List />
+        </QuerySuspenseBoundary>
+      </div>
+    ),
+    fallback: <></>,
+  },
+  { title: 'Survey/Extract', content: <Survey />, fallback: <></> },
+  { title: 'Loadout', content: <Loadout />, fallback: <></> },
 ]
 
 export const Detail = ({ symbol }: { symbol: string }) => {
@@ -52,9 +66,7 @@ export const Detail = ({ symbol }: { symbol: string }) => {
             <Tab.Panels>
               {tabs.map((tab) => (
                 <Tab.Panel key={tab.title}>
-                  <QuerySuspenseBoundary fallback={<tab.fallback />}>
-                    <tab.content ship={ship} />
-                  </QuerySuspenseBoundary>
+                  <QuerySuspenseBoundary fallback={tab.fallback}>{tab.content}</QuerySuspenseBoundary>
                 </Tab.Panel>
               ))}
             </Tab.Panels>
