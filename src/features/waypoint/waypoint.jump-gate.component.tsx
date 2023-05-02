@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { useSystemWaypointContext } from '@/context/system-waypoint.context'
 import { getJumpGate } from '@/services/api/spacetraders'
 
-export const WaypointJumpGate = ({ systemID, waypointID }: { systemID: string; waypointID: string }) => {
+export const WaypointJumpGate = () => {
+  const { systemID, waypointID } = useSystemWaypointContext()
   const { data, isSuccess } = useQuery({
     queryKey: ['jump-gate', systemID, waypointID],
     queryFn: ({ signal }) => getJumpGate({ path: { system: systemID, waypoint: waypointID } }, { signal }),
@@ -20,7 +22,7 @@ export const WaypointJumpGate = ({ systemID, waypointID }: { systemID: string; w
           return (
             <div
               key={system.symbol}
-              className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 py-3 px-4 dark:bg-opacity-10"
+              className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 dark:bg-opacity-10"
             >
               <Link key={system.symbol} className="link font-semibold" to={`/systems/${system.symbol}`}>
                 {system.symbol}

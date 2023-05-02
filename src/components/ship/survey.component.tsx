@@ -1,4 +1,5 @@
 import { TRADE_SYMBOL } from '@/config/constants'
+import { useShipContext } from '@/context/ship.context'
 import { useShipSurveyStore } from '@/services/store/ship.survey'
 import { ShipResponse } from '@/types/spacetraders'
 import * as Actions from './actions.component'
@@ -58,7 +59,9 @@ const List = ({ ship }: { ship: ShipResponse }) => {
   )
 }
 
-export const Survey = ({ ship }: { ship: ShipResponse }) => {
+export const Survey = () => {
+  const ship = useShipContext()
+
   return (
     <div className="grid gap-4">
       <div className="flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">

@@ -2,19 +2,20 @@ import { createContext, useContext, useEffect, useRef } from 'react'
 import { createStore, useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import { StoreApi } from 'zustand/vanilla'
+import { BoundStoreSelector } from '@/services/store/store.types'
 import { ShipResponse } from '@/types/spacetraders'
 
 const ShipContext = createContext<StoreApi<ShipResponse> | null>(null)
 
-export const useShipContext = <T,>(
-  selector: (state: ShipResponse) => T,
-  equalityFn: (a: T, b: T) => boolean = shallow,
-): T => {
+export const useShipContext: BoundStoreSelector<ShipResponse> = (
+  selector = (state: ShipResponse) => state,
+  equals = shallow,
+) => {
   const store = useContext(ShipContext)
 
   if (!store) throw new Error('ShipContext is missing a store value.')
 
-  return useStore(store, selector, equalityFn)
+  return useStore(store, selector, equals)
 }
 
 export const ShipStore = ({

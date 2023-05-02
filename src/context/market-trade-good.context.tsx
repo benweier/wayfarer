@@ -2,19 +2,20 @@ import { createContext, useContext, useRef } from 'react'
 import { createStore, useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import { StoreApi } from 'zustand/vanilla'
+import { BoundStoreSelector } from '@/services/store/store.types'
 import { MarketTradeGood } from '@/types/spacetraders'
 
 const MarketTradeGoodContext = createContext<StoreApi<MarketTradeGood> | null>(null)
 
-export const useMarketTradeGoodContext = <T,>(
-  selector: (state: MarketTradeGood) => T,
-  equalityFn: (a: T, b: T) => boolean = shallow,
-): T => {
+export const useMarketTradeGoodContext: BoundStoreSelector<MarketTradeGood> = (
+  selector = (state: MarketTradeGood) => state,
+  equals = shallow,
+) => {
   const store = useContext(MarketTradeGoodContext)
 
   if (!store) throw new Error('MarketTradeGoodContext is missing a store value.')
 
-  return useStore(store, selector, equalityFn)
+  return useStore(store, selector, equals)
 }
 
 export const MarketTradeGoodStore = ({

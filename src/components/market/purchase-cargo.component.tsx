@@ -56,7 +56,7 @@ const PurchasePrice = ({ perUnit }: { perUnit: number }) => {
 
 const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => void }) => {
   const waypointID = useSystemWaypointContext((state) => state.waypointID)
-  const good = useMarketTradeGoodContext((state) => state)
+  const good = useMarketTradeGoodContext()
   const methods = useForm<PurchaseCargoSchema>({
     defaultValues: { item: good.symbol },
     resolver: yupResolver(validation),
@@ -134,7 +134,7 @@ export const PurchaseCargo = () => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
-  const good = useMarketTradeGoodContext((state) => state)
+  const good = useMarketTradeGoodContext()
   const { mutateAsync } = useMutation({
     mutationKey: ['cargo', good.symbol, 'purchase'],
     mutationFn: ({ shipID, item, quantity }: { shipID: string; item: string; quantity: number }) =>

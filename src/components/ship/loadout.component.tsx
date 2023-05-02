@@ -1,4 +1,4 @@
-import { ShipResponse } from '@/types/spacetraders'
+import { useShipContext } from '@/context/ship.context'
 
 const LoadoutItem = ({ name, description }: { name: string; description: string }) => {
   return (
@@ -9,7 +9,9 @@ const LoadoutItem = ({ name, description }: { name: string; description: string 
   )
 }
 
-export const Loadout = ({ ship }: { ship: ShipResponse }) => {
+export const Loadout = () => {
+  const ship = useShipContext()
+
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
       <div className="flex flex-col gap-4">

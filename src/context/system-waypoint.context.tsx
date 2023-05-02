@@ -2,18 +2,19 @@ import { createContext, useContext, useRef } from 'react'
 import { createStore, useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import { StoreApi } from 'zustand/vanilla'
+import { BoundStoreSelector } from '@/services/store/store.types'
 
 const SystemWaypointContext = createContext<StoreApi<{ systemID: string; waypointID: string }> | null>(null)
 
-export const useSystemWaypointContext = <T,>(
-  selector: (state: { systemID: string; waypointID: string }) => T,
-  equalityFn: (a: T, b: T) => boolean = shallow,
-): T => {
+export const useSystemWaypointContext: BoundStoreSelector<{ systemID: string; waypointID: string }> = (
+  selector = (state: { systemID: string; waypointID: string }) => state,
+  equals = shallow,
+) => {
   const store = useContext(SystemWaypointContext)
 
   if (!store) throw new Error('SystemWaypointContext is missing a store value.')
 
-  return useStore(store, selector, equalityFn)
+  return useStore(store, selector, equals)
 }
 
 export const SystemWaypointStore = ({

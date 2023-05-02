@@ -21,8 +21,8 @@ const SellCargo = () => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
-  const ship = useShipContext((state) => state)
-  const good = useMarketTradeGoodContext((state) => state)
+  const ship = useShipContext()
+  const good = useMarketTradeGoodContext()
   const { mutateAsync } = useMutation({
     mutationKey: ['cargo', good.symbol, 'sell'],
     mutationFn: ({ shipID, item, quantity }: { shipID: string; item: string; quantity: number }) =>
@@ -84,7 +84,7 @@ const SellCargo = () => {
 }
 
 const JettisonCargo = ({ item }: { item: CargoInventory }) => {
-  const ship = useShipContext((state) => state)
+  const ship = useShipContext()
 
   return (
     <Modal
@@ -129,7 +129,7 @@ const CancelModal = () => {
 }
 
 export const List = () => {
-  const ship = useShipContext((state) => state)
+  const ship = useShipContext()
   const { data } = useQuery({
     queryKey: ['system', ship.nav.systemSymbol, ship.nav.waypointSymbol, 'market'],
     queryFn: ({ signal }) =>
