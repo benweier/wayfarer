@@ -37,10 +37,7 @@ export const Preferences = () => {
             ref={refs.setFloating}
             className="absolute left-0 top-0 w-max"
             style={{
-              transform:
-                typeof x === 'number' && typeof y === 'number'
-                  ? `translate(${Math.round(x)}px,${Math.round(y)}px)`
-                  : undefined,
+              transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
             }}
           >
             <Transition

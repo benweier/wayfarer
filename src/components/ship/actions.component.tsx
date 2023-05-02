@@ -440,7 +440,7 @@ const JettisonComponent = (
     symbol,
     units,
     trigger = (props) => (
-      <button className="btn btn-danger btn-outline btn-sm" {...props}>
+      <button className="btn btn-outline btn-danger btn-sm" {...props}>
         Jettison
       </button>
     ),
@@ -759,10 +759,7 @@ export const Navigate = ({ ship }: { ship: ShipResponse }) => {
               'pointer-events-none': !open,
             })}
             style={{
-              transform:
-                typeof x === 'number' && typeof y === 'number'
-                  ? `translate(${Math.round(x)}px,${Math.round(y)}px)`
-                  : undefined,
+              transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
             }}
           >
             <Transition
