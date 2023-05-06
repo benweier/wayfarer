@@ -55,7 +55,7 @@ const PurchasePrice = ({ perUnit }: { perUnit: number }) => {
 }
 
 const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => void }) => {
-  const waypointID = useSystemWaypointContext((state) => state.waypointID)
+  const { waypointID } = useSystemWaypointContext()
   const good = useMarketTradeGoodContext()
   const methods = useForm<PurchaseCargoSchema>({
     defaultValues: { item: good.symbol },
@@ -170,7 +170,7 @@ export const PurchaseCargo = () => {
       size="md"
       trigger={
         <Modal.Trigger>
-          <button className={cx('btn btn-outline btn-danger', { 'grayscale-50': good.tradeVolume === 0 })}>Buy</button>
+          <button className={cx('btn btn-danger btn-outline', { 'grayscale-50': good.tradeVolume === 0 })}>Buy</button>
         </Modal.Trigger>
       }
     >

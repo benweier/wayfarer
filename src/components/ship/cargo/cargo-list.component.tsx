@@ -5,9 +5,9 @@ import { TradeGood } from '@/components/market'
 import { SellCargoForm } from '@/components/market/sell-cargo.component'
 import { Modal, useModalActions, useModalImperativeHandle } from '@/components/modal'
 import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
-import { MarketTradeGoodStore, useMarketTradeGoodContext } from '@/context/market-trade-good.context'
+import { MarketTradeGoodContext, useMarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useShipContext } from '@/context/ship.context'
-import { SystemWaypointStore } from '@/context/system-waypoint.context'
+import { SystemWaypointContext } from '@/context/system-waypoint.context'
 import { createShipCargoSell, getMarket } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/services/store/auth'
@@ -90,7 +90,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     <Modal
       trigger={
         <Modal.Trigger>
-          <button className="btn btn-flat btn-danger btn-sm">Jettison</button>
+          <button className="btn btn-danger btn-flat btn-sm">Jettison</button>
         </Modal.Trigger>
       }
     >
@@ -164,11 +164,13 @@ export const List = () => {
                     Sell
                   </button>
                 ) : (
-                  <SystemWaypointStore systemID={ship.nav.systemSymbol} waypointID={ship.nav.waypointSymbol}>
-                    <MarketTradeGoodStore good={good}>
+                  <SystemWaypointContext.Provider
+                    value={{ systemID: ship.nav.systemSymbol, waypointID: ship.nav.waypointSymbol }}
+                  >
+                    <MarketTradeGoodContext.Provider value={good}>
                       <SellCargo />
-                    </MarketTradeGoodStore>
-                  </SystemWaypointStore>
+                    </MarketTradeGoodContext.Provider>
+                  </SystemWaypointContext.Provider>
                 )}
                 <JettisonCargo item={item} />
               </div>

@@ -22,7 +22,7 @@ export const ShipStore = ({
   ship,
   children,
 }: WithChildren<{
-  ship?: ShipResponse
+  ship: ShipResponse
 }>) => {
   const store = useRef<StoreApi<ShipResponse> | undefined>()
 
@@ -31,8 +31,6 @@ export const ShipStore = ({
   }
 
   useEffect(() => {
-    if (!ship) return
-
     store.current?.setState(ship)
   }, [ship])
 

@@ -49,7 +49,7 @@ export const SellCargoForm = ({
   ship?: ShipResponse
   onSubmit: (values: SellCargoSchema) => void
 }) => {
-  const waypointID = useSystemWaypointContext((state) => state.waypointID)
+  const { waypointID } = useSystemWaypointContext()
   const good = useMarketTradeGoodContext()
   const methods = useForm<SellCargoSchema>({
     defaultValues: { ship: ship?.symbol, item: good.symbol },
