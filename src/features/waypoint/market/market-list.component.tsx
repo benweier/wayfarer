@@ -1,15 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
 import { PurchaseCargo, SellCargo } from '@/components/market'
 import { MarketTradeGoodContext } from '@/context/market-trade-good.context'
-import { useSystemWaypointContext } from '@/context/system-waypoint.context'
+import { useSystemContext } from '@/context/system.context'
+import { useWaypointContext } from '@/context/waypoint.context'
 import { getMarket, getWaypointById } from '@/services/api/spacetraders'
 import { MarketTradeGood } from '@/types/spacetraders'
 import { Item } from './market-item.component'
 import { NotAvailable } from './market-not-available.component'
+import { Layout } from './market.layout'
 
 export const List = () => {
-  const { systemID, waypointID } = useSystemWaypointContext()
-
+  const { systemID } = useSystemContext()
+  const { waypointID } = useWaypointContext()
   const waypointQuery = useQuery({
     queryKey: ['system', systemID, 'waypoint', waypointID],
     queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
@@ -38,10 +40,9 @@ export const List = () => {
   }, new Map())
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-      <div className="flex flex-col gap-4">
-        <div className="text-headline text-center">Imports</div>
-        <div className="flex flex-col gap-2">
+    <Layout
+      imports={
+        <>
           {market.imports.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
@@ -74,11 +75,10 @@ export const List = () => {
               </Item>
             )
           })}
-        </div>
-      </div>
-      <div className="flex flex-col gap-4">
-        <div className="text-headline text-center">Exports</div>
-        <div className="flex flex-col gap-2">
+        </>
+      }
+      exports={
+        <>
           {market.exports.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
@@ -111,11 +111,10 @@ export const List = () => {
               </Item>
             )
           })}
-        </div>
-      </div>
-      <div className="flex flex-col gap-4">
-        <div className="text-headline text-center">Exchange</div>
-        <div className="flex flex-col gap-2">
+        </>
+      }
+      exchange={
+        <>
           {market.exchange.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
@@ -148,8 +147,8 @@ export const List = () => {
               </Item>
             )
           })}
-        </div>
-      </div>
-    </div>
+        </>
+      }
+    />
   )
 }
