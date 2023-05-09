@@ -91,7 +91,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     <Modal
       trigger={
         <Modal.Trigger>
-          <button className="btn btn-danger btn-flat btn-sm">Jettison</button>
+          <button className="btn btn-flat btn-danger btn-sm">Jettison</button>
         </Modal.Trigger>
       }
     >
