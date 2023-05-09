@@ -18,6 +18,15 @@ export default defineConfig(({ mode }) => {
   plugins.push(react())
 
   return {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            react: ['react', 'react-dom', 'react-router', 'react-router-dom'],
+          },
+        },
+      },
+    },
     server: {
       port: 8080,
       https: true,
