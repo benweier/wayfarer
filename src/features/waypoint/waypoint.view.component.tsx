@@ -1,21 +1,23 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
-import { Fragment } from 'react'
+import { FC, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
+import { SystemContext } from '@/context/system.context'
+import { WaypointContext } from '@/context/waypoint.context'
 import { getWaypointById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
+import * as JumpGate from './jumpgate'
+import * as Market from './market'
+import * as Shipyard from './shipyard'
 import { WaypointFleet } from './waypoint.fleet.component'
-import { WaypointJumpGate } from './waypoint.jump-gate.component'
-import { MarketError, WaypointMarket } from './waypoint.market.component'
-import { ShipyardError, WaypointShipyard } from './waypoint.ship-yard.component'
 
-const tabs = [
-  { title: 'Fleet', content: WaypointFleet, fallback: Fragment, error: Fragment },
-  { title: 'Market', content: WaypointMarket, fallback: Fragment, error: MarketError },
-  { title: 'Shipyard', content: WaypointShipyard, fallback: Fragment, error: ShipyardError },
-  { title: 'Jump Gate', content: WaypointJumpGate, fallback: Fragment, error: Fragment },
+const tabs: Array<{ title: string; content: FC; fallback: FC; err: FC }> = [
+  { title: 'Fleet', content: WaypointFleet, fallback: Fragment, err: Fragment },
+  { title: 'Market', content: Market.List, fallback: Market.Fallback, err: Market.Err },
+  { title: 'Shipyard', content: Shipyard.List, fallback: Shipyard.Fallback, err: Shipyard.Err },
+  { title: 'Jump Gate', content: JumpGate.List, fallback: JumpGate.Fallback, err: JumpGate.Err },
 ]
 
 export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypointID: string }) => {
@@ -48,7 +50,7 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
           {waypoint.traits.map((trait) => (
             <span
               key={trait.symbol}
-              className="text-primary text-inverse my-0.5 rounded-sm bg-zinc-700 px-2 text-xs font-bold dark:bg-zinc-300"
+              className="text-inverse text-primary my-0.5 rounded-sm bg-zinc-700 px-2 text-xs font-bold dark:bg-zinc-300"
             >
               {trait.name}
             </span>
@@ -67,9 +69,13 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
         <Tab.Panels>
           {tabs.map((tab) => (
             <Tab.Panel key={tab.title}>
-              <QuerySuspenseBoundary fallback={<tab.fallback />} error={<tab.error />}>
-                <tab.content systemID={systemID} waypointID={waypointID} />
-              </QuerySuspenseBoundary>
+              <SystemContext.Provider value={{ systemID }}>
+                <WaypointContext.Provider value={{ waypointID: waypoint.symbol }}>
+                  <QuerySuspenseBoundary fallback={<tab.fallback />} error={<tab.err />}>
+                    <tab.content />
+                  </QuerySuspenseBoundary>
+                </WaypointContext.Provider>
+              </SystemContext.Provider>
             </Tab.Panel>
           ))}
         </Tab.Panels>
