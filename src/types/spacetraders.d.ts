@@ -282,18 +282,20 @@ export type MarketResponse = {
   tradeGoods?: MarketTradeGood[]
 }
 
+export type JumpGateConnectedSystem = {
+  symbol: string
+  sectorSymbol: string
+  type: string
+  factionSymbol: string
+  x: number
+  y: number
+  distance: number
+}
+
 export type JumpGateResponse = {
   jumpRange: number
   factionSymbol: string
-  connectedSystems: Array<{
-    symbol: string
-    sectorSymbol: string
-    type: string
-    factionSymbol: string
-    x: number
-    y: number
-    distance: number
-  }>
+  connectedSystems: JumpGateConnectedSystem[]
 }
 
 export type ShipyardResponse = {
