@@ -8,7 +8,7 @@ import { Actions } from '@/components/ship'
 import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useMarketTradeGoodContext } from '@/context/market-trade-good.context'
-import { useSystemWaypointContext } from '@/context/system-waypoint.context'
+import { useWaypointContext } from '@/context/waypoint.context'
 import { createShipCargoSell } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
@@ -49,7 +49,7 @@ export const SellCargoForm = ({
   ship?: ShipResponse
   onSubmit: (values: SellCargoSchema) => void
 }) => {
-  const { waypointID } = useSystemWaypointContext()
+  const { waypointID } = useWaypointContext()
   const good = useMarketTradeGoodContext()
   const methods = useForm<SellCargoSchema>({
     defaultValues: { ship: ship?.symbol, item: good.symbol },

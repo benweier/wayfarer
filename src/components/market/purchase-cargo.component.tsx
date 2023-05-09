@@ -8,7 +8,7 @@ import { updateShipCargo, updateShipInFleetCargo } from '@/components/ship/actio
 import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useMarketTradeGoodContext } from '@/context/market-trade-good.context'
-import { useSystemWaypointContext } from '@/context/system-waypoint.context'
+import { useWaypointContext } from '@/context/waypoint.context'
 import { createShipCargoPurchase } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
@@ -55,7 +55,7 @@ const PurchasePrice = ({ perUnit }: { perUnit: number }) => {
 }
 
 const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => void }) => {
-  const { waypointID } = useSystemWaypointContext()
+  const { waypointID } = useWaypointContext()
   const good = useMarketTradeGoodContext()
   const methods = useForm<PurchaseCargoSchema>({
     defaultValues: { item: good.symbol },
@@ -170,7 +170,7 @@ export const PurchaseCargo = () => {
       size="md"
       trigger={
         <Modal.Trigger>
-          <button className={cx('btn btn-outline btn-danger', { 'grayscale-50': good.tradeVolume === 0 })}>Buy</button>
+          <button className={cx('btn btn-danger btn-outline', { 'grayscale-50': good.tradeVolume === 0 })}>Buy</button>
         </Modal.Trigger>
       }
     >

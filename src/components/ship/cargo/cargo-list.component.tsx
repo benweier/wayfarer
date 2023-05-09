@@ -7,7 +7,6 @@ import { Modal, useModalActions, useModalImperativeHandle } from '@/components/m
 import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
 import { MarketTradeGoodContext, useMarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useShipContext } from '@/context/ship.context'
-import { SystemWaypointContext } from '@/context/system-waypoint.context'
 import { createShipCargoSell, getMarket } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
@@ -164,13 +163,9 @@ export const List = () => {
                     Sell
                   </button>
                 ) : (
-                  <SystemWaypointContext.Provider
-                    value={{ systemID: ship.nav.systemSymbol, waypointID: ship.nav.waypointSymbol }}
-                  >
-                    <MarketTradeGoodContext.Provider value={good}>
-                      <SellCargo />
-                    </MarketTradeGoodContext.Provider>
-                  </SystemWaypointContext.Provider>
+                  <MarketTradeGoodContext.Provider value={good}>
+                    <SellCargo />
+                  </MarketTradeGoodContext.Provider>
                 )}
                 <JettisonCargo item={item} />
               </div>
