@@ -14,8 +14,8 @@ import { Preferences } from '@/components/preferences'
 import { Wayfarer } from '@/components/wayfarer'
 import { ROUTES } from '@/config/routes'
 import { Navigation } from '@/features/navigation'
-import { sidebarAtom } from '@/services/store/atoms/sidebar'
-import { useAuthStore } from '@/services/store/auth'
+import { sidebarAtom } from '@/store/atoms/sidebar'
+import { useAuthStore } from '@/store/auth'
 import { cx } from '@/utilities/cx'
 
 const menu = [

@@ -1,6 +1,6 @@
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useShipContext } from '@/context/ship.context'
-import { useShipSurveyStore } from '@/services/store/ship.survey'
+import { useShipSurveyStore } from '@/store/ship'
 import { ShipResponse } from '@/types/spacetraders'
 import * as Actions from './actions.component'
 import { Cooldown } from './cooldown.component'

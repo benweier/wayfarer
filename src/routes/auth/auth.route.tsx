@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { Layout } from '@/features/auth'
 import { useLocation } from '@/hooks/use-location.hook'
-import { useAuthStore } from '@/services/store/auth'
+import { useAuthStore } from '@/store/auth'
 
 type Redirect = { destination: string }
 

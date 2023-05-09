@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { cargoDescriptionAtom } from '@/services/store/atoms/cargo.display'
+import { cargoDescriptionAtom } from '@/store/atoms/cargo.display'
 import { CargoInventory, MarketTradeGood } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 

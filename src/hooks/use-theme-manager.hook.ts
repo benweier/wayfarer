@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
-import { themeAtom } from '@/services/store/atoms/theme'
+import { themeAtom } from '@/store/atoms/theme'
 
 export const useThemeManager = () => {
   const [theme] = useAtom(themeAtom)

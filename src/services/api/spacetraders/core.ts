@@ -1,6 +1,6 @@
 import * as f from '@/services/fetch'
 import { http } from '@/services/http'
-import { getState } from '@/services/store/auth'
+import { getState } from '@/store/auth'
 
 type RequestPath<T> = T extends void | unknown ? Partial<{ path: T }> : Required<{ path: T }>
 type RequestParams<Q> = Q extends void | unknown ? Partial<{ params: Q }> : Required<{ params: Q }>

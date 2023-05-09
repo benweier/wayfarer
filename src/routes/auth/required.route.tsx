@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { useAuthStore } from '@/services/store/auth'
+import { useAuthStore } from '@/store/auth'
 
 export const Required = ({ children = <Outlet /> }: WithChildren) => {
   const { isAuthenticated } = useAuthStore()

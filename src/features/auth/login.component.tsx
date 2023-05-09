@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
 import { SpaceTradersResponse, queryFnFactory } from '@/services/api/spacetraders/core'
-import { useAuthStore } from '@/services/store/auth'
+import { useAuthStore } from '@/store/auth'
 import { AgentResponse } from '@/types/spacetraders'
 import { LoginSchema, loginValidation } from './login.validation'
 

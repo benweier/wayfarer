@@ -21,7 +21,7 @@ import { useLocation } from '@/hooks/use-location.hook'
 import { useThemeManager } from '@/hooks/use-theme-manager.hook'
 import * as Auth from '@/routes/auth'
 import { client } from '@/services/query-client'
-import { getState } from '@/services/store/auth'
+import { getState } from '@/store/auth'
 
 Sentry.init({
   dsn: import.meta.env.SENTRY_DSN,

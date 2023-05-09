@@ -11,7 +11,7 @@ import { useMarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useSystemWaypointContext } from '@/context/system-waypoint.context'
 import { createShipCargoPurchase } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { useAuthStore } from '@/services/store/auth'
+import { useAuthStore } from '@/store/auth'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { PurchaseCargoSchema, validation } from './purchase.validation'
@@ -170,7 +170,7 @@ export const PurchaseCargo = () => {
       size="md"
       trigger={
         <Modal.Trigger>
-          <button className={cx('btn btn-danger btn-outline', { 'grayscale-50': good.tradeVolume === 0 })}>Buy</button>
+          <button className={cx('btn btn-outline btn-danger', { 'grayscale-50': good.tradeVolume === 0 })}>Buy</button>
         </Modal.Trigger>
       }
     >

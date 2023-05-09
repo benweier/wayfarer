@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useShipCooldownStore } from '@/services/store/ship.cooldown'
+import { useShipCooldownStore } from '@/store/ship'
 import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 

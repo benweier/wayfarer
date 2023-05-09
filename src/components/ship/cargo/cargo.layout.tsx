@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { cargoDisplayAtom } from '@/services/store/atoms/cargo.display'
+import { cargoDisplayAtom } from '@/store/atoms/cargo.display'
 import { cx } from '@/utilities/cx'
 
 export const Layout = ({ children }: WithChildren) => {

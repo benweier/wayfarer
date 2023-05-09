@@ -1,7 +1,7 @@
 import { RadioGroup } from '@headlessui/react'
 import { LightBulbIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 import { useAtom } from 'jotai'
-import { themeAtom } from '@/services/store/atoms/theme'
+import { themeAtom } from '@/store/atoms/theme'
 import { cx } from '@/utilities/cx'
 
 export const Theme = () => {

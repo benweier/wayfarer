@@ -1,7 +1,7 @@
 import { RadioGroup } from '@headlessui/react'
 import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from '@heroicons/react/20/solid'
 import { useAtom } from 'jotai'
-import { sidebarAtom } from '@/services/store/atoms/sidebar'
+import { sidebarAtom } from '@/store/atoms/sidebar'
 import { cx } from '@/utilities/cx'
 
 export const Sidebar = () => {

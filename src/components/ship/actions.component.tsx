@@ -37,9 +37,8 @@ import {
 } from '@/services/api/spacetraders'
 import { SpaceTradersError, SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, isHttpError } from '@/services/http'
-import { useAuthStore } from '@/services/store/auth'
-import { useShipCooldownStore } from '@/services/store/ship.cooldown'
-import { useShipSurveyStore } from '@/services/store/ship.survey'
+import { useAuthStore } from '@/store/auth'
+import { useShipCooldownStore, useShipSurveyStore } from '@/store/ship'
 import {
   CooldownResponse,
   FuelResponse,

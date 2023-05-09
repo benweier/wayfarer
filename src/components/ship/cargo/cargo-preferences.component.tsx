@@ -1,6 +1,6 @@
 import { RadioGroup, Switch } from '@headlessui/react'
 import { useAtom } from 'jotai'
-import { cargoDescriptionAtom, cargoDisplayAtom } from '@/services/store/atoms/cargo.display'
+import { cargoDescriptionAtom, cargoDisplayAtom } from '@/store/atoms/cargo.display'
 import { cx } from '@/utilities/cx'
 
 export const Preferences = () => {

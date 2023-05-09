@@ -2,7 +2,7 @@ import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getSystemById } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
-import { getState } from '@/services/store/auth'
+import { getState } from '@/store/auth'
 
 export const loader: QueryClientLoaderFn =
   (client) =>
