@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { Modal } from '@/components/modal'
@@ -7,8 +7,10 @@ import * as Select from '@/components/select'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
 import { SpaceTradersResponse, mutationFnFactory } from '@/services/api/spacetraders/core'
+import { getFactionsList } from '@/services/api/spacetraders/factions'
 import { RegisterAgentRequest, RegisterAgentResponse } from '@/types/spacetraders'
 import { AccessTokenDialog } from './access-token-dialog.component'
+import { FactionInfo } from './faction-info.component'
 import { RegisterSchema, registerValidation } from './register.validation'
 
 const createMyAgent = mutationFnFactory<SpaceTradersResponse<RegisterAgentResponse>, void, RegisterAgentRequest>(
@@ -26,6 +28,45 @@ const AlreadyRegistered = ({ token }: { token?: string }) => {
         Log in
       </Link>
     </div>
+  )
+}
+
+const FactionField = () => {
+  const methods = useFormContext<RegisterSchema>()
+  const { isSuccess, isLoading, data } = useQuery({
+    queryKey: ['factions'],
+    queryFn: ({ signal }) => getFactionsList(undefined, { signal }),
+  })
+
+  if (isLoading) return <Select.Skeleton />
+
+  if (!isSuccess) return null
+
+  const factions = data.data
+    .map((faction) => ({
+      id: faction.symbol,
+      name: faction.name,
+    }))
+    .sort((a, z) => a.name.localeCompare(z.name))
+
+  return (
+    <Controller
+      control={methods.control}
+      name="faction"
+      render={({ field }) => (
+        <Select.Field
+          label={<Select.Label>Faction</Select.Label>}
+          by={(a, z) => a?.id === z?.id}
+          getItemKey={(item) => item.id}
+          getItemLabel={(item) => item?.name}
+          getItemOption={(item) => item.name}
+          options={factions}
+          onChange={(value) => {
+            field.onChange(value?.id)
+          }}
+        />
+      )}
+    />
   )
 }
 
@@ -66,30 +107,10 @@ export const Register = () => {
               />
             </div>
             <div>
-              <Controller
-                control={methods.control}
-                name="faction"
-                render={({ field }) => (
-                  <Select.Field
-                    label={<Select.Label>Faction</Select.Label>}
-                    by={(a, z) => a?.id === z?.id}
-                    getItemKey={(item) => item.id}
-                    getItemLabel={(item) => item?.name}
-                    getItemOption={(item) => item.name}
-                    options={[
-                      { id: 'COSMIC', name: 'Cosmic' },
-                      { id: 'DOMINION', name: 'Dominion' },
-                      { id: 'GALACTIC', name: 'Galactic' },
-                      { id: 'QUANTUM', name: 'Quantum' },
-                      { id: 'VOID', name: 'Void' },
-                    ]}
-                    onChange={(value) => {
-                      field.onChange(value?.id)
-                    }}
-                  />
-                )}
-              />
+              <FactionField />
             </div>
+
+            <FactionInfo />
 
             <button className="btn-hero" disabled={isLoading} type="submit">
               Register

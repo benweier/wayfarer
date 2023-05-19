@@ -1,4 +1,3 @@
-export { Layout } from './auth.layout.component'
-export { AccessTokenDialog } from './access-token-dialog.component'
-export { Login } from './login.component'
-export { Register } from './register.component'
+export { Layout } from './auth.layout'
+export { Login } from './login'
+export { Register } from './register'
