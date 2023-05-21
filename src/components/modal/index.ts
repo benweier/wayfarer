@@ -10,6 +10,7 @@ export type {
   ModalProps,
   ModalState,
   ModalStore,
+  ModalTrigger,
 } from './modal.types'
 
 export const Modal = Object.assign(ModalComponent, { Trigger })

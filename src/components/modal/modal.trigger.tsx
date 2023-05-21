@@ -1,20 +1,14 @@
-import {
-  ComponentPropsWithRef,
-  FC,
-  ForwardedRef,
-  ReactElement,
-  cloneElement,
-  createElement,
-  isValidElement,
-} from 'react'
+import { ButtonHTMLAttributes, ForwardedRef, cloneElement, createElement, isValidElement } from 'react'
+import { ModalTrigger } from '@/components/modal/modal.types'
 import { isRef } from '@/utilities/isRef'
 import { useModalActions } from './use-modal-store.hook'
 
 export const Trigger = (
   {
     children,
-  }: {
-    children?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
+    ...props
+  }: Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> & {
+    children?: ModalTrigger
   },
   ref: ForwardedRef<HTMLButtonElement>,
 ) => {
@@ -25,10 +19,12 @@ export const Trigger = (
   return isValidElement(children)
     ? cloneElement(children, {
         ref: isRef(ref) ? ref : undefined,
+        ...props,
         onClick: () => openModal(),
       })
     : createElement(children, {
         ref: isRef(ref) ? ref : undefined,
+        ...props,
         onClick: () => openModal(),
       })
 }
