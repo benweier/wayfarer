@@ -1,0 +1,40 @@
+.text-hero {
+  @apply text-6xl font-black leading-tight tracking-tight;
+}
+.text-title {
+  @apply text-4xl font-black leading-tight tracking-tight;
+}
+.text-subtitle {
+  @apply text-2xl font-light leading-normal tracking-normal;
+}
+.text-headline {
+  @apply text-xl font-semibold leading-tight tracking-tight;
+}
+.text-overline {
+  @apply text-lg font-medium leading-normal tracking-normal;
+}
+.text-body {
+  @apply text-base font-normal leading-normal tracking-normal;
+}
+.text-caption {
+  @apply text-sm font-normal leading-normal tracking-normal;
+}
+.text-hint {
+  @apply text-xs font-medium leading-normal tracking-normal;
+}
+
+.text-primary {
+  @apply text-zinc-800 dark:text-zinc-100;
+
+  &.text-inverse {
+    @apply text-zinc-100 dark:text-zinc-800;
+  }
+}
+
+.text-secondary {
+  @apply text-zinc-500 dark:text-zinc-400;
+
+  &.text-inverse {
+    @apply text-zinc-400 dark:text-zinc-500;
+  }
+}
