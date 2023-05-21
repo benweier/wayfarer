@@ -182,16 +182,16 @@ export const WAYPOINT_TRAIT_SYMBOL: ReadonlyMap<string, string> = new Map([
 ])
 
 export const SHIP_TYPE: ReadonlyMap<string, string> = new Map([
-  ['SHIP_PROBE', 'Ship Probe'],
-  ['SHIP_MINING_DRONE', 'Ship Mining Drone'],
-  ['SHIP_INTERCEPTOR', 'Ship Interceptor'],
-  ['SHIP_LIGHT_HAULER', 'Ship Light Hauler'],
-  ['SHIP_COMMAND_FRIGATE', 'Ship Command Frigate'],
-  ['SHIP_EXPLORER', 'Ship Explorer'],
-  ['SHIP_HEAVY_FREIGHTER', 'Ship Heavy Freighter'],
-  ['SHIP_LIGHT_SHUTTLE', 'Ship Light Shuttle'],
-  ['SHIP_ORE_HOUND', 'Ship Ore Hound'],
-  ['SHIP_REFINING_FREIGHTER', 'Ship Refining Freighter'],
+  ['SHIP_PROBE', 'Probe Satellite'],
+  ['SHIP_MINING_DRONE', 'Mining Drone'],
+  ['SHIP_INTERCEPTOR', 'Interceptor'],
+  ['SHIP_LIGHT_HAULER', 'Light Hauler'],
+  ['SHIP_COMMAND_FRIGATE', 'Command Frigate'],
+  ['SHIP_EXPLORER', 'Explorer'],
+  ['SHIP_HEAVY_FREIGHTER', 'Heavy Freighter'],
+  ['SHIP_LIGHT_SHUTTLE', 'Light Shuttle'],
+  ['SHIP_ORE_HOUND', 'Ore Hound'],
+  ['SHIP_REFINING_FREIGHTER', 'Refining Freighter'],
 ])
 
 export const TRADE_SYMBOL: ReadonlyMap<string, string> = new Map([
