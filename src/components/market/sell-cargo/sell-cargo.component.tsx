@@ -2,7 +2,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
+import { TradeGood } from '@/components/market'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
+import { ModalTrigger } from '@/components/modal/modal.types'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Actions } from '@/components/ship'
 import * as ShipSelect from '@/components/ship/select.component'
@@ -13,9 +15,7 @@ import { createShipCargoSell } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { ShipResponse } from '@/types/spacetraders'
-import { cx } from '@/utilities/cx'
 import { SellCargoSchema, validation } from './sell.validation'
-import { TradeGood } from './trade-good.component'
 
 const SubmitPurchase = () => {
   const { isSubmitting, isValid } = useFormState()
@@ -133,7 +133,11 @@ export const SellCargoForm = ({
   )
 }
 
-export const SellCargo = () => {
+export const SellCargo = ({
+  action = <button className="btn btn-confirm btn-outline">Sell</button>,
+}: {
+  action?: ModalTrigger
+}) => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
@@ -169,20 +173,7 @@ export const SellCargo = () => {
   })
 
   return (
-    <Modal
-      ref={ref}
-      size="md"
-      trigger={
-        <Modal.Trigger>
-          <button
-            disabled={good.tradeVolume === 0}
-            className={cx('btn btn-confirm btn-outline', { 'grayscale-50': good.tradeVolume === 0 })}
-          >
-            Sell
-          </button>
-        </Modal.Trigger>
-      }
-    >
+    <Modal ref={ref} size="md" trigger={<Modal.Trigger disabled={good.tradeVolume === 0}>{action}</Modal.Trigger>}>
       <div className="grid gap-8">
         <div className="text-title">
           Sell: <span className="font-light">{TRADE_SYMBOL.get(good.symbol) ?? good.symbol}</span>
