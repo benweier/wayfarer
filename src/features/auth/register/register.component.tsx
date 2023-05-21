@@ -80,7 +80,7 @@ export const Register = () => {
   })
   const { mutateAsync, isLoading, isSuccess, data } = useMutation({
     mutationFn: (values: RegisterSchema) => {
-      return createMyAgent({ payload: { symbol: values.symbol, faction: values.faction } })
+      return createMyAgent({ payload: { symbol: values.symbol, faction: values.faction, email: values.email } })
     },
     cacheTime: 0,
   })
@@ -106,6 +106,32 @@ export const Register = () => {
                 autoFocus
               />
             </div>
+
+            <div>
+              <label className="label" htmlFor="email">
+                Email <span className="text-secondary text-xs">(optional)</span>
+              </label>
+              <input
+                id="email"
+                {...methods.register('email', { required: true })}
+                className="input"
+                type="email"
+                autoComplete="off"
+              />
+              <div className="text-hint mt-1">
+                If you have reserved your agent symbol by supporting the{' '}
+                <a
+                  href="https://donate.stripe.com/28o29m5vxcri6OccMM"
+                  target="_blank"
+                  className="link"
+                  rel="noreferrer noopener"
+                >
+                  SpaceTraders project
+                </a>
+                , enter the email address you used to reserve it.
+              </div>
+            </div>
+
             <div>
               <FactionField />
             </div>

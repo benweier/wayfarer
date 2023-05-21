@@ -1,6 +1,7 @@
 export type RegisterAgentRequest = {
   symbol: string
   faction: string
+  email?: string
 }
 
 export type AgentResponse = {
