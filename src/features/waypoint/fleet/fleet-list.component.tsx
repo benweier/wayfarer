@@ -3,8 +3,9 @@ import { Ship } from '@/components/ship'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
 import { getShipsList } from '@/services/api/spacetraders'
+import { Layout } from './fleet.layout'
 
-export const WaypointFleet = () => {
+export const List = () => {
   const { systemID } = useSystemContext()
   const { waypointID } = useWaypointContext()
   const { isSuccess, data } = useQuery({
@@ -23,7 +24,7 @@ export const WaypointFleet = () => {
   const ships = data.data
 
   return (
-    <div className="grid grid-cols-1 gap-2">
+    <Layout>
       {ships.length === 0 && (
         <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
           <div className="text-secondary text-center text-sm">
@@ -34,6 +35,6 @@ export const WaypointFleet = () => {
       {ships.map((ship) => {
         return <Ship key={ship.symbol} ship={ship} />
       })}
-    </div>
+    </Layout>
   )
 }

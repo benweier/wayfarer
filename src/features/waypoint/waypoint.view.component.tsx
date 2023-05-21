@@ -1,20 +1,21 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
-import { FC, Fragment } from 'react'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
+import { Badge } from '@/components/badge'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
 import { getWaypointById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
+import * as Fleet from './fleet'
 import * as JumpGate from './jumpgate'
 import * as Market from './market'
 import * as Shipyard from './shipyard'
-import { WaypointFleet } from './waypoint.fleet.component'
 
 const tabs: Array<{ title: string; content: FC; fallback: FC; err: FC }> = [
-  { title: 'Fleet', content: WaypointFleet, fallback: Fragment, err: Fragment },
+  { title: 'Fleet', content: Fleet.List, fallback: Fleet.Fallback, err: Fleet.Err },
   { title: 'Market', content: Market.List, fallback: Market.Fallback, err: Market.Err },
   { title: 'Shipyard', content: Shipyard.List, fallback: Shipyard.Fallback, err: Shipyard.Err },
   { title: 'Jump Gate', content: JumpGate.List, fallback: JumpGate.Fallback, err: JumpGate.Err },
@@ -48,12 +49,7 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
 
         <div className="flex flex-wrap items-baseline gap-1">
           {waypoint.traits.map((trait) => (
-            <span
-              key={trait.symbol}
-              className="text-inverse text-primary my-0.5 rounded-sm bg-zinc-700 px-2 text-xs font-bold dark:bg-zinc-300"
-            >
-              {trait.name}
-            </span>
+            <Badge key={trait.symbol}>{trait.name}</Badge>
           ))}
         </div>
       </div>
@@ -70,7 +66,7 @@ export const ViewWaypoint = ({ systemID, waypointID }: { systemID: string; waypo
           {tabs.map((tab) => (
             <Tab.Panel key={tab.title}>
               <SystemContext.Provider value={{ systemID }}>
-                <WaypointContext.Provider value={{ waypointID: waypoint.symbol }}>
+                <WaypointContext.Provider value={{ waypointID }}>
                   <QuerySuspenseBoundary fallback={<tab.fallback />} error={<tab.err />}>
                     <tab.content />
                   </QuerySuspenseBoundary>
