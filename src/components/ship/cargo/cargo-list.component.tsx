@@ -89,10 +89,10 @@ export const List = () => {
         return (
           <Fragment key={item.symbol}>
             <Item item={item}>
-              <div className={cx('flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start')}>
+              <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
                 {produce && <Refine ship={ship} produce={produce} />}
                 {!good ? (
-                  <button disabled className="btn btn-confirm btn-flat btn-sm grayscale-50">
+                  <button disabled className="btn btn-confirm btn-flat btn-sm">
                     Sell
                   </button>
                 ) : (
