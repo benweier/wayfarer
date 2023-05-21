@@ -1,88 +1,19 @@
 import { TrashIcon } from '@heroicons/react/20/solid'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
-import { TradeGood } from '@/components/market'
-import { SellCargoForm } from '@/components/market/sell-cargo.component'
-import { Modal, useModalActions, useModalImperativeHandle } from '@/components/modal'
-import { REFINE_ITEM_TYPE, TRADE_SYMBOL } from '@/config/constants'
-import { MarketTradeGoodContext, useMarketTradeGoodContext } from '@/context/market-trade-good.context'
+import { SellCargo } from '@/components/market'
+import { Modal, useModalActions } from '@/components/modal'
+import { REFINE_ITEM_TYPE } from '@/config/constants'
+import { MarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useShipContext } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
-import { createShipCargoSell, getMarket } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { useAuthStore } from '@/store/auth'
-import { CargoInventory, MarketTradeGood, ShipResponse } from '@/types/spacetraders'
+import { getMarket } from '@/services/api/spacetraders'
+import { CargoInventory, MarketTradeGood } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
-import { Jettison, Refine, updateShipCargo, updateShipInFleetCargo } from '../actions.component'
+import { Jettison, Refine } from '../actions.component'
 import { Item } from './cargo-item.component'
 import { Layout } from './cargo.layout'
-
-const SellCargo = () => {
-  const { ref, modal } = useModalImperativeHandle()
-  const { setAgent } = useAuthStore()
-  const client = useQueryClient()
-  const ship = useShipContext()
-  const good = useMarketTradeGoodContext()
-  const { mutateAsync } = useMutation({
-    mutationKey: ['cargo', good.symbol, 'sell'],
-    mutationFn: ({ shipID, item, quantity }: { shipID: string; item: string; quantity: number }) =>
-      createShipCargoSell({ path: shipID, payload: { symbol: item, units: quantity } }),
-    onMutate: ({ shipID }) => {
-      void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipID] })
-    },
-    onSuccess: (response, { shipID }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
-
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
-
-      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
-
-      if (response.data.agent) {
-        setAgent(response.data.agent)
-      }
-    },
-    onSettled: (_res, _err, { shipID }) => {
-      void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
-
-      modal.close()
-    },
-  })
-
-  return (
-    <Modal
-      ref={ref}
-      trigger={
-        <Modal.Trigger>
-          <button className="btn btn-confirm btn-flat btn-sm">Sell {!!good && `(${good.sellPrice})`}</button>
-        </Modal.Trigger>
-      }
-    >
-      <div className="grid gap-8">
-        <div className="text-title">
-          Sell: <span className="font-light">{TRADE_SYMBOL.get(good.symbol) ?? good.symbol}</span>
-        </div>
-
-        <TradeGood price={good.sellPrice} volume={good.tradeVolume} supply={good.supply} />
-
-        <SellCargoForm
-          ship={ship}
-          onSubmit={(values) =>
-            mutateAsync({
-              shipID: values.ship,
-              item: values.item,
-              quantity: values.quantity,
-            })
-          }
-        />
-      </div>
-    </Modal>
-  )
-}
 
 const JettisonCargo = ({ item }: { item: CargoInventory }) => {
   const ship = useShipContext()
@@ -91,7 +22,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     <Modal
       trigger={
         <Modal.Trigger>
-          <button className="btn btn-flat btn-danger btn-sm">Jettison</button>
+          <button className="btn btn-danger btn-flat btn-sm">Jettison</button>
         </Modal.Trigger>
       }
     >
@@ -168,7 +99,13 @@ export const List = () => {
                   <SystemContext.Provider value={{ systemID: ship.nav.systemSymbol }}>
                     <WaypointContext.Provider value={{ waypointID: ship.nav.waypointSymbol }}>
                       <MarketTradeGoodContext.Provider value={good}>
-                        <SellCargo />
+                        <SellCargo
+                          action={
+                            <button className="btn btn-confirm btn-flat btn-sm">
+                              Sell {!!good && `(${good.sellPrice})`}
+                            </button>
+                          }
+                        />
                       </MarketTradeGoodContext.Provider>
                     </WaypointContext.Provider>
                   </SystemContext.Provider>
