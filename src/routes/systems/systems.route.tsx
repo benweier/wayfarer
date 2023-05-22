@@ -1,6 +1,5 @@
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
-import { List } from '@/features/systems'
-import { Fallback } from '@/features/systems/systems-list.fallback'
+import { Fallback, List } from '@/features/systems'
 
 const SystemListComponent = () => {
   return (
