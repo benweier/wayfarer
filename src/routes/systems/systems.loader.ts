@@ -10,7 +10,7 @@ export const loader: QueryClientLoaderFn =
     const { isAuthenticated } = getState()
     const url = new URL(request.url)
     const page = url.searchParams.get('page') ?? '1'
-    const limit = 10
+    const limit = 20
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
