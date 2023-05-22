@@ -134,7 +134,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="z-10 hidden lg:flex lg:flex-shrink-0">
+        <div className="z-10 hidden min-h-screen lg:fixed lg:flex">
           <div
             className={cx('flex flex-col transition-all duration-100 ease-in-out @container/side', {
               'w-20': sidebarState === 'collapsed',
@@ -185,6 +185,12 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
           </div>
 
           <main className="flex flex-1 overflow-hidden">
+            <div
+              className={cx('transition-all duration-100 ease-in-out', {
+                'w-20': sidebarState === 'collapsed',
+                'w-56': sidebarState === 'expanded',
+              })}
+            />
             {/* Primary column */}
             <section className="relative flex h-full min-w-0 flex-1 flex-col overflow-y-auto">
               <NavigationLoader />
