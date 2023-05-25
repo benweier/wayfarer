@@ -1,1 +1,0 @@
-export { MyContracts } from './MyContracts'
