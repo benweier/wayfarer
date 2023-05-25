@@ -140,6 +140,17 @@ const router = sentryCreateBrowserRouter(
               }}
               ErrorBoundary={RouteError}
             />
+            <Route
+              path=":contractID"
+              lazy={async () => {
+                const contract = await import('src/routes/contracts/contract')
+                return {
+                  Component: contract.Route,
+                  loader: contract.loader(client),
+                }
+              }}
+              ErrorBoundary={RouteError}
+            />
           </Route>
 
           <Route path={ROUTES.SYSTEMS}>
