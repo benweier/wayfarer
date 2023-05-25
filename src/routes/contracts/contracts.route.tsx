@@ -1,5 +1,5 @@
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
-import { MyContracts } from '@/features/Contracts'
+import * as Contracts from '@/features/contracts'
 
 export const ContractsRouteComponent = () => {
   return (
@@ -7,7 +7,7 @@ export const ContractsRouteComponent = () => {
       <h1 className="text-title">Contracts</h1>
       <div className="grid gap-12">
         <QuerySuspenseBoundary>
-          <MyContracts />
+          <Contracts.List />
         </QuerySuspenseBoundary>
       </div>
     </div>
