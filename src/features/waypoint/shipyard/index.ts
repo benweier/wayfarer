@@ -1,4 +1,4 @@
-export { WaypointShipyardList } from './shipyard-list.component'
-export { WaypointShipyardItem } from './shipyard-item.component'
-export { WaypointShipyardFallback } from './shipyard.fallback'
-export { WaypointShipyardError } from './shipyard.err'
+export { WaypointShipyardList } from './waypoint-shipyard-list.component'
+export { WaypointShipyardItem } from './waypoint-shipyard-item.component'
+export { WaypointShipyardFallback } from './waypoint-shipyard.fallback'
+export { WaypointShipyardError } from './waypoint-shipyard.err'

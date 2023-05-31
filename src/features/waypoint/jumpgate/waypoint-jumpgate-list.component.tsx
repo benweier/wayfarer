@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
 import { getJumpGate } from '@/services/api/spacetraders'
-import { WaypointJumpGateItem } from './jumpgate-item.component'
-import { WaypointJumpGateLayout } from './jumpgate.layout'
+import { WaypointJumpGateItem } from './waypoint-jumpgate-item.component'
+import { WaypointJumpGateLayout } from './waypoint-jumpgate.layout'
 
 export const WaypointJumpGateList = () => {
   const { systemID } = useSystemContext()
