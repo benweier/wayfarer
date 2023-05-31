@@ -55,7 +55,7 @@ module.exports = {
     'no-restricted-imports': [
       'error',
       {
-        patterns: ['@/features/*/*'],
+        patterns: ['@/features/*/*/*'],
       },
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
