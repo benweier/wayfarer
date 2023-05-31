@@ -18,46 +18,44 @@ export const WaypointRouteComponent = () => {
       </h1>
 
       {systemID && waypointID && (
-        <div className="grid gap-8">
-          <QuerySuspenseBoundary>
-            <WaypointDetail systemID={systemID} waypointID={waypointID}>
-              <Tab.Group as="div" className="tab-group">
-                <Tab.List className="tab-list">
-                  <Tab className={({ selected }) => cx('group tab', { selected })}>Fleet</Tab>
-                  <Tab className={({ selected }) => cx('group tab', { selected })}>Market</Tab>
-                  <Tab className={({ selected }) => cx('group tab', { selected })}>Shipyard</Tab>
-                  <Tab className={({ selected }) => cx('group tab', { selected })}>Jump Gate</Tab>
-                </Tab.List>
+        <QuerySuspenseBoundary>
+          <WaypointDetail systemID={systemID} waypointID={waypointID}>
+            <Tab.Group as="div" className="tab-group">
+              <Tab.List className="tab-list">
+                <Tab className={({ selected }) => cx('group tab', { selected })}>Fleet</Tab>
+                <Tab className={({ selected }) => cx('group tab', { selected })}>Market</Tab>
+                <Tab className={({ selected }) => cx('group tab', { selected })}>Shipyard</Tab>
+                <Tab className={({ selected }) => cx('group tab', { selected })}>Jump Gate</Tab>
+              </Tab.List>
 
-                <Tab.Panels>
-                  <Tab.Panel>
-                    <QuerySuspenseBoundary fallback={<WaypointFleetFallback />} error={<WaypointFleetError />}>
-                      <WaypointFleetList />
-                    </QuerySuspenseBoundary>
-                  </Tab.Panel>
+              <Tab.Panels>
+                <Tab.Panel>
+                  <QuerySuspenseBoundary fallback={<WaypointFleetFallback />} error={<WaypointFleetError />}>
+                    <WaypointFleetList />
+                  </QuerySuspenseBoundary>
+                </Tab.Panel>
 
-                  <Tab.Panel>
-                    <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={<WaypointMarketError />}>
-                      <WaypointMarketList />
-                    </QuerySuspenseBoundary>
-                  </Tab.Panel>
+                <Tab.Panel>
+                  <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={<WaypointMarketError />}>
+                    <WaypointMarketList />
+                  </QuerySuspenseBoundary>
+                </Tab.Panel>
 
-                  <Tab.Panel>
-                    <QuerySuspenseBoundary fallback={<WaypointShipyardFallback />} error={<WaypointShipyardError />}>
-                      <WaypointShipyardList />
-                    </QuerySuspenseBoundary>
-                  </Tab.Panel>
+                <Tab.Panel>
+                  <QuerySuspenseBoundary fallback={<WaypointShipyardFallback />} error={<WaypointShipyardError />}>
+                    <WaypointShipyardList />
+                  </QuerySuspenseBoundary>
+                </Tab.Panel>
 
-                  <Tab.Panel>
-                    <QuerySuspenseBoundary fallback={<WaypointJumpGateFallback />} error={<WaypointJumpGateError />}>
-                      <WaypointJumpGateList />
-                    </QuerySuspenseBoundary>
-                  </Tab.Panel>
-                </Tab.Panels>
-              </Tab.Group>
-            </WaypointDetail>
-          </QuerySuspenseBoundary>
-        </div>
+                <Tab.Panel>
+                  <QuerySuspenseBoundary fallback={<WaypointJumpGateFallback />} error={<WaypointJumpGateError />}>
+                    <WaypointJumpGateList />
+                  </QuerySuspenseBoundary>
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
+          </WaypointDetail>
+        </QuerySuspenseBoundary>
       )}
     </div>
   )

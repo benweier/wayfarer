@@ -16,32 +16,30 @@ export const SystemViewComponent = () => {
       </h1>
 
       {systemID && (
-        <div className="grid gap-8">
-          <QuerySuspenseBoundary>
-            <SystemDetail systemID={systemID}>
-              <Tab.Group as="div" className="tab-group">
-                <Tab.List className="tab-list">
-                  <Tab className={({ selected }) => cx('group tab', { selected })}>Waypoints</Tab>
-                  <Tab className={({ selected }) => cx('group tab', { selected })}>Fleet</Tab>
-                </Tab.List>
+        <QuerySuspenseBoundary>
+          <SystemDetail systemID={systemID}>
+            <Tab.Group as="div" className="tab-group">
+              <Tab.List className="tab-list">
+                <Tab className={({ selected }) => cx('group tab', { selected })}>Waypoints</Tab>
+                <Tab className={({ selected }) => cx('group tab', { selected })}>Fleet</Tab>
+              </Tab.List>
 
-                <Tab.Panels>
-                  <Tab.Panel>
-                    <QuerySuspenseBoundary fallback={<></>} error={<></>}>
-                      <WaypointList />
-                    </QuerySuspenseBoundary>
-                  </Tab.Panel>
+              <Tab.Panels>
+                <Tab.Panel>
+                  <QuerySuspenseBoundary fallback={<></>} error={<></>}>
+                    <WaypointList />
+                  </QuerySuspenseBoundary>
+                </Tab.Panel>
 
-                  <Tab.Panel>
-                    <QuerySuspenseBoundary fallback={<></>} error={<></>}>
-                      <SystemFleet />
-                    </QuerySuspenseBoundary>
-                  </Tab.Panel>
-                </Tab.Panels>
-              </Tab.Group>
-            </SystemDetail>
-          </QuerySuspenseBoundary>
-        </div>
+                <Tab.Panel>
+                  <QuerySuspenseBoundary fallback={<></>} error={<></>}>
+                    <SystemFleet />
+                  </QuerySuspenseBoundary>
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
+          </SystemDetail>
+        </QuerySuspenseBoundary>
       )}
     </div>
   )

@@ -20,7 +20,7 @@ export const ShipDetail = ({ symbol }: ShipDetailProps) => {
 
   return (
     <ShipStore ship={ship}>
-      <div className="grid gap-8">
+      <div className="grid gap-4">
         <div className="headline">
           <span className="font-bold">Registration:</span> {ship.registration.name} • {ship.registration.role} •{' '}
           {ship.registration.factionSymbol}
@@ -42,17 +42,13 @@ export const ShipDetail = ({ symbol }: ShipDetailProps) => {
 
           <Tab.Panels>
             <Tab.Panel>
-              <QuerySuspenseBoundary fallback={<></>}>
-                <div className="grid gap-4">
-                  <div>
-                    <Cargo.Preferences />
-                  </div>
+              <div className="grid gap-4">
+                <Cargo.Preferences />
 
-                  <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={<Cargo.Error />}>
-                    <Cargo.List />
-                  </QuerySuspenseBoundary>
-                </div>
-              </QuerySuspenseBoundary>
+                <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={<Cargo.Error />}>
+                  <Cargo.List />
+                </QuerySuspenseBoundary>
+              </div>
             </Tab.Panel>
 
             <Tab.Panel>
