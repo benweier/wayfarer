@@ -1,1 +1,1 @@
-export { Detail } from './ship-detail.component'
+export { ShipDetail } from './ship-detail.component'

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
-import * as Ship from '@/features/ship'
+import { ShipDetail } from '@/features/ship/detail'
 
 const ShipRouteComponent = () => {
   const { shipID } = useParams()
@@ -13,7 +13,7 @@ const ShipRouteComponent = () => {
         </h1>
       </div>
       <div className="grid gap-12">
-        <QuerySuspenseBoundary>{shipID && <Ship.Detail symbol={shipID} />}</QuerySuspenseBoundary>
+        <QuerySuspenseBoundary>{shipID && <ShipDetail symbol={shipID} />}</QuerySuspenseBoundary>
       </div>
     </div>
   )

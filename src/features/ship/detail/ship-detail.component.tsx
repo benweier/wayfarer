@@ -6,28 +6,9 @@ import * as Cargo from '@/components/ship/cargo'
 import { ShipStore } from '@/context/ship.context'
 import { getShipById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
+import { ShipDetailProps } from './ship-detail.types'
 
-const tabs = [
-  {
-    title: 'Cargo',
-    content: (
-      <div className="grid gap-4">
-        <div>
-          <Cargo.Preferences />
-        </div>
-
-        <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={<Cargo.Error />}>
-          <Cargo.List />
-        </QuerySuspenseBoundary>
-      </div>
-    ),
-    fallback: <></>,
-  },
-  { title: 'Survey/Extract', content: <Survey />, fallback: <></> },
-  { title: 'Loadout', content: <Loadout />, fallback: <></> },
-]
-
-export const Detail = ({ symbol }: { symbol: string }) => {
+export const ShipDetail = ({ symbol }: ShipDetailProps) => {
   const { data, isSuccess } = useQuery({
     queryKey: ['ship', symbol],
     queryFn: ({ signal }) => getShipById({ path: symbol }, { signal }),
@@ -50,28 +31,43 @@ export const Detail = ({ symbol }: { symbol: string }) => {
           <Inventory ship={ship} />
         </div>
 
-        <div>
-          <Navigation.Route nav={ship.nav} />
-        </div>
+        <Navigation.Route nav={ship.nav} />
 
-        <div>
-          <Tab.Group as="div" className="tab-group">
-            <Tab.List className="tab-list">
-              {tabs.map((tab) => (
-                <Tab key={tab.title} className={({ selected }) => cx('group tab', { selected: selected })}>
-                  {tab.title}
-                </Tab>
-              ))}
-            </Tab.List>
-            <Tab.Panels>
-              {tabs.map((tab) => (
-                <Tab.Panel key={tab.title}>
-                  <QuerySuspenseBoundary fallback={tab.fallback}>{tab.content}</QuerySuspenseBoundary>
-                </Tab.Panel>
-              ))}
-            </Tab.Panels>
-          </Tab.Group>
-        </div>
+        <Tab.Group as="div" className="tab-group">
+          <Tab.List className="tab-list">
+            <Tab className={({ selected }) => cx('group tab', { selected: selected })}>Cargo</Tab>
+            <Tab className={({ selected }) => cx('group tab', { selected: selected })}>Survey/Extract</Tab>
+            <Tab className={({ selected }) => cx('group tab', { selected: selected })}>Loadout</Tab>
+          </Tab.List>
+
+          <Tab.Panels>
+            <Tab.Panel>
+              <QuerySuspenseBoundary fallback={<></>}>
+                <div className="grid gap-4">
+                  <div>
+                    <Cargo.Preferences />
+                  </div>
+
+                  <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={<Cargo.Error />}>
+                    <Cargo.List />
+                  </QuerySuspenseBoundary>
+                </div>
+              </QuerySuspenseBoundary>
+            </Tab.Panel>
+
+            <Tab.Panel>
+              <QuerySuspenseBoundary fallback={<></>}>
+                <Survey />
+              </QuerySuspenseBoundary>
+            </Tab.Panel>
+
+            <Tab.Panel>
+              <QuerySuspenseBoundary fallback={<></>}>
+                <Loadout />
+              </QuerySuspenseBoundary>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
       </div>
     </ShipStore>
   )

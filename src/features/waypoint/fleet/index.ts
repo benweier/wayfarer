@@ -1,4 +1,3 @@
-export { List } from './fleet-list.component'
-export { Layout } from './fleet.layout'
-export { Fallback } from './fleet.fallback'
-export { Err } from './fleet.err'
+export { WaypointFleetList } from './waypoint-fleet-list.component'
+export { WaypointFleetFallback } from './waypoint-fleet.fallback'
+export { WaypointFleetError } from './waypoint-fleet.err'
