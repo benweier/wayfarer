@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { Ship } from '@/components/ship'
+import { ShipItem } from '@/features/ship/item'
 import { getShipsList } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 
@@ -22,7 +22,7 @@ export const Fleet = () => {
         })}
       />
       {ships.map((ship) => (
-        <Ship key={ship.symbol} ship={ship} />
+        <ShipItem key={ship.symbol} ship={ship} />
       ))}
     </div>
   )

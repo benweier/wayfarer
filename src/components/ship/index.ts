@@ -1,8 +1,6 @@
-export { Ship } from './ship.component'
 export { Cooldown } from './cooldown.component'
 export { Inventory } from './inventory.component'
 export { Loadout } from './loadout.component'
 export { Survey } from './survey.component'
 export * as Navigation from './navigation.component'
-export * as Actions from './actions.component'
 export { useRouteTransit } from './use-route-transit.hook'
