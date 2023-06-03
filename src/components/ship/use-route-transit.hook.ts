@@ -1,9 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import { useShipContext } from '@/context/ship.context'
+import { updateShipInFleetNavStatus, updateShipNavStatus } from '@/features/ship/actions'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
-import { updateShipInFleetNavStatus, updateShipNavStatus } from './actions.component'
 
 export const useRouteTransit = () => {
   const client = useQueryClient()

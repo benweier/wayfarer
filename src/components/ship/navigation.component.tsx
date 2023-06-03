@@ -2,8 +2,8 @@ import { CheckCircleIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
+import * as ShipActions from '@/features/ship/actions'
 import { NavigationResponse, ShipResponse } from '@/types/spacetraders'
-import * as Actions from './actions.component'
 import { useRouteTransit } from './use-route-transit.hook'
 
 export const Status = ({ ship }: { ship: ShipResponse }) => {
@@ -37,9 +37,12 @@ export const Status = ({ ship }: { ship: ShipResponse }) => {
             </div>
           </div>
           {ship.nav.status === 'DOCKED' ? (
-            <Actions.Orbit ship={ship} trigger={<button className="btn btn-primary btn-flat btn-sm">Orbit</button>} />
+            <ShipActions.Orbit
+              ship={ship}
+              trigger={<button className="btn btn-primary btn-flat btn-sm">Orbit</button>}
+            />
           ) : (
-            <Actions.Dock ship={ship} trigger={<button className="btn btn-primary btn-flat btn-sm">Dock</button>} />
+            <ShipActions.Dock ship={ship} trigger={<button className="btn btn-primary btn-flat btn-sm">Dock</button>} />
           )}
         </div>
       </div>

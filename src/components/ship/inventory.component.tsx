@@ -1,6 +1,6 @@
 import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
+import * as ShipActions from '@/features/ship/actions'
 import { ShipResponse } from '@/types/spacetraders'
-import * as Actions from './actions.component'
 
 export const Inventory = ({ ship }: { ship: ShipResponse }) => {
   return (
@@ -13,7 +13,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
             {ship.fuel.current} / {ship.fuel.capacity}
           </div>
         </div>
-        <Actions.Refuel ship={ship} trigger={<button className="btn btn-confirm btn-flat btn-sm">Refuel</button>} />
+        <ShipActions.Refuel ship={ship} trigger={<button className="btn btn-confirm btn-flat btn-sm">Refuel</button>} />
       </div>
       <div>
         <div className="text-secondary text-right text-xs uppercase">Cargo</div>

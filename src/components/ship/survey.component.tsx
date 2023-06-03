@@ -1,8 +1,8 @@
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useShipContext } from '@/context/ship.context'
+import * as ShipActions from '@/features/ship/actions'
 import { useShipSurveyStore } from '@/store/ship'
 import { ShipResponse } from '@/types/spacetraders'
-import * as Actions from './actions.component'
 import { Cooldown } from './cooldown.component'
 
 const List = ({ ship }: { ship: ShipResponse }) => {
@@ -43,7 +43,7 @@ const List = ({ ship }: { ship: ShipResponse }) => {
               <button className="btn btn-outline btn-danger" onClick={() => removeSurvey(survey.signature)}>
                 Discard
               </button>
-              <Actions.Extract
+              <ShipActions.Extract
                 ship={ship}
                 survey={survey}
                 trigger={<button className="btn btn-confirm">Extract</button>}
@@ -66,12 +66,15 @@ export const Survey = () => {
     <div className="grid gap-4">
       <div className="flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
         <div className="flex gap-2">
-          <Actions.Survey
+          <ShipActions.Survey
             ship={ship}
             trigger={<button className="btn btn-primary">Survey {ship.nav.waypointSymbol}</button>}
           />
 
-          <Actions.Extract ship={ship} trigger={<button className="btn btn-confirm">Extract without Survey</button>} />
+          <ShipActions.Extract
+            ship={ship}
+            trigger={<button className="btn btn-confirm">Extract without Survey</button>}
+          />
         </div>
         <div className="w-full max-w-xs">
           <Cooldown ship={ship} />

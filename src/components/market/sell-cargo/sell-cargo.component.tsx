@@ -6,11 +6,11 @@ import { TradeGood } from '@/components/market'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { ModalTrigger } from '@/components/modal/modal.types'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { Actions } from '@/components/ship'
 import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useMarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useWaypointContext } from '@/context/waypoint.context'
+import { updateShipCargo, updateShipInFleetCargo } from '@/features/ship/actions'
 import { createShipCargoSell } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
@@ -156,9 +156,8 @@ export const SellCargo = ({
 
       const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], Actions.updateShipCargo(ship, response.data.cargo))
-      if (ships && index > -1)
-        client.setQueryData(['ships'], Actions.updateShipInFleetCargo(ships, index, response.data.cargo))
+      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
 
       if (response.data.agent) {
         setAgent(response.data.agent)

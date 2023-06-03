@@ -8,9 +8,9 @@ import { MarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useShipContext } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
+import * as ShipActions from '@/features/ship/actions'
 import { getMarket } from '@/services/api/spacetraders'
 import { CargoInventory, MarketTradeGood } from '@/types/spacetraders'
-import { Jettison, Refine } from '../actions.component'
 import { Item } from './cargo-item.component'
 import { Layout } from './cargo.layout'
 
@@ -32,7 +32,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
         </div>
         <div className="flex gap-2">
           <CancelModal />
-          <Jettison
+          <ShipActions.Jettison
             ship={ship}
             symbol={item.symbol}
             units={item.units}
@@ -89,7 +89,7 @@ export const List = () => {
           <Fragment key={item.symbol}>
             <Item item={item}>
               <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
-                {produce && <Refine ship={ship} produce={produce} />}
+                {produce && <ShipActions.Refine ship={ship} produce={produce} />}
                 {!good ? (
                   <button disabled className="btn btn-confirm btn-flat btn-sm">
                     Sell
