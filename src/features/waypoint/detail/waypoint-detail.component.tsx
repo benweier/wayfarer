@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
+import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
@@ -21,7 +22,7 @@ export const WaypointDetail = ({ systemID, waypointID, children }: WithChildren<
     <div key={waypoint.symbol} className="grid gap-4">
       <div>
         <div className="flex flex-row items-center justify-start gap-4">
-          <div className="text-xl font-semibold">{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</div>
+          <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</WaypointTag>
           <div className="font-light">
             ({waypoint.x}, {waypoint.y})
           </div>
