@@ -35,6 +35,7 @@ export type ContractResponse = {
   accepted: boolean
   fulfilled: boolean
   expiration: string
+  deadlineToAccept: string
 }
 
 export type FactionResponse = {
