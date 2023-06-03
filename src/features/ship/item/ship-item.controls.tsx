@@ -71,7 +71,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
           </Transition>
         </div>
       </Menu>
-      <Modal size="md" ref={ref}>
+      <Modal size="md" ref={ref} closeable>
         <div className="grid gap-8">
           <h3 className="text-title">
             Navigate Ship: <span className="font-normal">{ship.symbol}</span>{' '}

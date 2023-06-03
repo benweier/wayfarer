@@ -1,15 +1,19 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 import { cx } from '@/utilities/cx'
 import { ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
 
-export const Root = ({ size = 'auto', children }: WithChildren<ModalDialogProps>) => {
-  const { show, onClose } = useModalContext((state) => ({ show: state.isOpen, onClose: state.actions.closeModal }))
+export const Root = ({ size = 'auto', closeable = false, children }: WithChildren<ModalDialogProps>) => {
+  const { show, handleClose } = useModalContext((state) => ({
+    show: state.isOpen,
+    handleClose: state.actions.closeModal,
+  }))
 
   return (
     <Transition appear show={show} as={Fragment} static>
-      <Dialog as="div" className="relative z-10" onClose={onClose}>
+      <Dialog as="div" className="relative z-10" onClose={handleClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-150"
@@ -32,7 +36,7 @@ export const Root = ({ size = 'auto', children }: WithChildren<ModalDialogProps>
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-90"
           >
-            <div className="flex min-h-full items-center justify-center p-4">
+            <div className="flex min-h-full items-center justify-center p-5">
               <Dialog.Panel
                 className={cx(
                   'transform overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10',
@@ -46,6 +50,14 @@ export const Root = ({ size = 'auto', children }: WithChildren<ModalDialogProps>
                   },
                 )}
               >
+                {closeable && (
+                  <button
+                    className="btn btn-icon btn-outline btn-danger absolute right-1 top-1 rounded-lg"
+                    onClick={() => handleClose()}
+                  >
+                    <XMarkIcon className="h-4 w-4" />
+                  </button>
+                )}
                 {children}
               </Dialog.Panel>
             </div>
