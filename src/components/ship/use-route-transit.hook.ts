@@ -13,8 +13,10 @@ export const useRouteTransit = () => {
   }))
   const arrival = useMemo(() => new Date(nav.route.arrival), [nav.route.arrival])
   const departed = useMemo(() => new Date(nav.route.departureTime), [nav.route.departureTime])
-  const totalSeconds = Math.max(0, arrival.getTime() - departed.getTime())
-  const [remainingSeconds, setRemainingSeconds] = useState(() => Math.max(0, arrival.getTime() - Date.now()))
+  const totalSeconds = (arrival.getTime() - departed.getTime()) / 1000
+  const [remainingSeconds, setRemainingSeconds] = useState(() =>
+    Math.floor(Math.max(0, arrival.getTime() - Date.now()) / 1000),
+  )
 
   useEffect(() => {
     if (remainingSeconds === 0) return
