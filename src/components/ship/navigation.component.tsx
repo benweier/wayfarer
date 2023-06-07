@@ -113,7 +113,9 @@ export const Route = ({ nav }: { nav: NavigationResponse }) => {
           <div className="h-1 grow rounded-full bg-gray-200">
             <div
               className="h-full rounded-full bg-green-500"
-              style={{ width: `${(transit.remainingSeconds / transit.totalSeconds) * 100}%` }}
+              style={{
+                width: `${(100 / transit.totalSeconds) * (transit.totalSeconds - transit.remainingSeconds)}%`,
+              }}
             />
           </div>
           <div className="text-secondary text-sm">
