@@ -12,7 +12,7 @@ export const QuerySuspenseBoundary = ({
   const { reset } = useQueryErrorResetBoundary()
 
   return (
-    <ErrorBoundary component={error} onReset={reset} onError={onError}>
+    <ErrorBoundary Component={error} onReset={reset} onError={onError}>
       <Suspense fallback={fallback}>{children}</Suspense>
     </ErrorBoundary>
   )

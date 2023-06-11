@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 
 export type OnErrorCaptureHandler = (error: Error, info?: { componentStack: string }) => void
 
@@ -8,7 +8,7 @@ export type ErrorComponentProps = {
 }
 
 export type ErrorBoundaryProps = {
-  component?: ReactNode | FC<ErrorComponentProps>
+  Component?: FC<ErrorComponentProps>
   onReset?: () => void
   onError?: OnErrorCaptureHandler
 }
