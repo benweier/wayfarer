@@ -119,7 +119,7 @@ export const Route = ({ nav }: { nav: NavigationResponse }) => {
         </div>
 
         <div className="flex flex-row items-center gap-2">
-          <div className="h-1 grow rounded-full bg-gray-200">
+          <div className="h-1 grow rounded-full bg-zinc-200 dark:bg-zinc-600">
             <div
               className="h-full rounded-full bg-green-500"
               style={{
