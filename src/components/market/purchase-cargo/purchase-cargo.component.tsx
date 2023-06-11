@@ -169,8 +169,12 @@ export const PurchaseCargo = () => {
       ref={ref}
       size="md"
       trigger={
-        <Modal.Trigger disabled={good.tradeVolume === 0}>
-          <button className="btn btn-outline btn-danger">Buy</button>
+        <Modal.Trigger>
+          {(props) => (
+            <button className="btn btn-outline btn-danger" disabled={good.tradeVolume === 0} {...props}>
+              Buy
+            </button>
+          )}
         </Modal.Trigger>
       }
     >

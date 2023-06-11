@@ -1,10 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useCallback } from 'react'
+import { ButtonHTMLAttributes, ReactNode, useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
 import { TradeGood } from '@/components/market'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
-import { ModalTrigger } from '@/components/modal/modal.types'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
@@ -134,9 +133,13 @@ export const SellCargoForm = ({
 }
 
 export const SellCargo = ({
-  action = <button className="btn btn-confirm btn-outline">Sell</button>,
+  action = (props) => (
+    <button className="btn btn-confirm btn-outline" {...props}>
+      Sell
+    </button>
+  ),
 }: {
-  action?: ModalTrigger
+  action?: (props: ButtonHTMLAttributes<HTMLButtonElement>) => ReactNode
 }) => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore()

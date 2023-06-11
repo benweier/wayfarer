@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, FC, ReactElement, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
 
@@ -28,5 +28,3 @@ export type ModalActions = {
 }
 
 export type ModalStore = ModalState & { actions: ModalActions }
-
-export type ModalTrigger = ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>

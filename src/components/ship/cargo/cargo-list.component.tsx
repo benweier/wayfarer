@@ -21,7 +21,11 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     <Modal
       trigger={
         <Modal.Trigger>
-          <button className="btn btn-danger btn-flat btn-sm">Jettison</button>
+          {(props) => (
+            <button className="btn btn-danger btn-flat btn-sm" {...props}>
+              Jettison
+            </button>
+          )}
         </Modal.Trigger>
       }
     >
@@ -96,11 +100,11 @@ export const List = () => {
                     <WaypointContext.Provider value={{ waypointID: ship.nav.waypointSymbol }}>
                       <MarketTradeGoodContext.Provider value={good}>
                         <SellCargo
-                          action={
-                            <button className="btn btn-confirm btn-flat btn-sm">
+                          action={(props) => (
+                            <button className="btn btn-confirm btn-flat btn-sm" {...props}>
                               Sell {!!good && `(${good.sellPrice})`}
                             </button>
-                          }
+                          )}
                         />
                       </MarketTradeGoodContext.Provider>
                     </WaypointContext.Provider>
