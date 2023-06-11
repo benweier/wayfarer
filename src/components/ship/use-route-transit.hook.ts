@@ -24,7 +24,7 @@ export const useRouteTransit = () => {
     const timeout = setTimeout(() => {
       const seconds = Math.floor(Math.max(0, arrival.getTime() - Date.now()) / 1000)
       setRemainingSeconds(seconds)
-    }, 1000 + remainingSeconds * 1000)
+    }, 1000)
 
     return () => clearTimeout(timeout)
   }, [arrival, remainingSeconds])
