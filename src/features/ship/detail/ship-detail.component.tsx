@@ -45,7 +45,7 @@ export const ShipDetail = ({ symbol }: ShipDetailProps) => {
               <div className="grid gap-4">
                 <Cargo.Preferences />
 
-                <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={<Cargo.Error />}>
+                <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={Cargo.Error}>
                   <Cargo.List />
                 </QuerySuspenseBoundary>
               </div>

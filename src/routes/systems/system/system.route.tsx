@@ -26,13 +26,13 @@ export const SystemViewComponent = () => {
 
               <Tab.Panels>
                 <Tab.Panel>
-                  <QuerySuspenseBoundary fallback={<></>} error={<></>}>
+                  <QuerySuspenseBoundary fallback={<></>}>
                     <WaypointList />
                   </QuerySuspenseBoundary>
                 </Tab.Panel>
 
                 <Tab.Panel>
-                  <QuerySuspenseBoundary fallback={<></>} error={<></>}>
+                  <QuerySuspenseBoundary fallback={<></>}>
                     <SystemFleet />
                   </QuerySuspenseBoundary>
                 </Tab.Panel>
