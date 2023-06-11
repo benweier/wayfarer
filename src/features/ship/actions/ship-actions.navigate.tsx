@@ -1,36 +1,21 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
-import {
-  ComponentPropsWithRef,
-  FC,
-  ForwardedRef,
-  ReactElement,
-  cloneElement,
-  createElement,
-  forwardRef,
-  isValidElement,
-} from 'react'
 import { createShipNavigate } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
-import { isRef } from '@/utilities/isRef'
+import { ShipActionProps } from './ship-actions.types'
 import { updateShipInFleetNavStatus, updateShipNavStatus } from './ship-actions.utilities'
 
-const NavigateComponent = (
-  {
-    ship,
-    waypointID,
-    trigger = (props) => (
-      <button className="btn btn-sm" {...props}>
-        Navigate
-      </button>
-    ),
-  }: {
-    ship: ShipResponse
-    waypointID: string
-    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
-  },
-  ref: ForwardedRef<HTMLButtonElement>,
-) => {
+export const Navigate = ({
+  ship,
+  waypointID,
+  children = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Navigate
+    </button>
+  ),
+}: ShipActionProps<{
+  waypointID: string
+}>) => {
   const client = useQueryClient()
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
@@ -58,17 +43,8 @@ const NavigateComponent = (
     },
   })
 
-  return isValidElement(trigger)
-    ? cloneElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: trigger.props.disabled ?? (isMutating > 0 || ship.nav.status !== 'IN_ORBIT'),
-        onClick: () => mutate({ shipID: ship.symbol, waypointID }),
-      })
-    : createElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: ship.nav.status !== 'IN_ORBIT',
-        onClick: () => mutate({ shipID: ship.symbol, waypointID }),
-      })
+  return children({
+    disabled: isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
+    onClick: () => mutate({ shipID: ship.symbol, waypointID }),
+  })
 }
-
-export const Navigate = forwardRef(NavigateComponent)

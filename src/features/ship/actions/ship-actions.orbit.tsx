@@ -1,34 +1,18 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
-import {
-  ComponentPropsWithRef,
-  FC,
-  ForwardedRef,
-  ReactElement,
-  cloneElement,
-  createElement,
-  forwardRef,
-  isValidElement,
-} from 'react'
 import { createShipOrbit } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
-import { isRef } from '@/utilities/isRef'
+import { ShipActionProps } from './ship-actions.types'
 import { updateShipInFleetNavStatus, updateShipNavStatus } from './ship-actions.utilities'
 
-const OrbitComponent = (
-  {
-    ship,
-    trigger = (props) => (
-      <button className="btn btn-sm" {...props}>
-        Orbit
-      </button>
-    ),
-  }: {
-    ship: ShipResponse
-    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
-  },
-  ref: ForwardedRef<HTMLButtonElement>,
-) => {
+export const Orbit = ({
+  ship,
+  children = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Orbit
+    </button>
+  ),
+}: ShipActionProps) => {
   const client = useQueryClient()
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
@@ -58,17 +42,10 @@ const OrbitComponent = (
     },
   })
 
-  return isValidElement(trigger)
-    ? cloneElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: trigger.props.disabled ?? (isMutating > 0 || ship.nav.status !== 'DOCKED'),
-        onClick: () => mutate(ship.symbol),
-      })
-    : createElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: ship.nav.status !== 'DOCKED',
-        onClick: () => mutate(ship.symbol),
-      })
+  return children({
+    disabled: isMutating > 0 || ship.nav.status !== 'DOCKED',
+    onClick: () => {
+      mutate(ship.symbol)
+    },
+  })
 }
-
-export const Orbit = forwardRef(OrbitComponent)

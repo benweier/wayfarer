@@ -13,7 +13,13 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
             {ship.fuel.current} / {ship.fuel.capacity}
           </div>
         </div>
-        <ShipActions.Refuel ship={ship} trigger={<button className="btn btn-confirm btn-flat btn-sm">Refuel</button>} />
+        <ShipActions.Refuel ship={ship}>
+          {(props) => (
+            <button className="btn btn-confirm btn-flat btn-sm" {...props}>
+              Refuel
+            </button>
+          )}
+        </ShipActions.Refuel>
       </div>
       <div>
         <div className="text-secondary text-right text-xs uppercase">Cargo</div>

@@ -37,12 +37,21 @@ export const Status = ({ ship }: { ship: ShipResponse }) => {
             </div>
           </div>
           {ship.nav.status === 'DOCKED' ? (
-            <ShipActions.Orbit
-              ship={ship}
-              trigger={<button className="btn btn-primary btn-flat btn-sm">Orbit</button>}
-            />
+            <ShipActions.Orbit ship={ship}>
+              {(props) => (
+                <button className="btn btn-primary btn-flat btn-sm" {...props}>
+                  Orbit
+                </button>
+              )}
+            </ShipActions.Orbit>
           ) : (
-            <ShipActions.Dock ship={ship} trigger={<button className="btn btn-primary btn-flat btn-sm">Dock</button>} />
+            <ShipActions.Dock ship={ship}>
+              {(props) => (
+                <button className="btn btn-primary btn-flat btn-sm" {...props}>
+                  Dock
+                </button>
+              )}
+            </ShipActions.Dock>
           )}
         </div>
       </div>
@@ -118,7 +127,7 @@ export const Route = ({ nav }: { nav: NavigationResponse }) => {
               }}
             />
           </div>
-          <div className="text-secondary text-sm">
+          <div className="text-secondary flex w-12 justify-end text-right text-sm">
             {transit.remainingSeconds === 0 ? (
               <CheckCircleIcon className="h-5 w-5 text-green-500" />
             ) : (

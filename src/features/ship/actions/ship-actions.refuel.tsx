@@ -1,34 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import {
-  ComponentPropsWithRef,
-  FC,
-  ForwardedRef,
-  ReactElement,
-  cloneElement,
-  createElement,
-  isValidElement,
-} from 'react'
 import { createShipRefuel } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { ShipResponse } from '@/types/spacetraders'
-import { isRef } from '@/utilities/isRef'
+import { ShipActionProps } from './ship-actions.types'
 import { updateShipFuel, updateShipInFleetFuel } from './ship-actions.utilities'
 
-export const Refuel = (
-  {
-    ship,
-    trigger = (props) => (
-      <button className="btn btn-sm" {...props}>
-        Refuel
-      </button>
-    ),
-  }: {
-    ship: ShipResponse
-    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
-  },
-  ref: ForwardedRef<HTMLButtonElement>,
-) => {
+export const Refuel = ({
+  ship,
+  children = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Refuel
+    </button>
+  ),
+}: ShipActionProps) => {
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
@@ -59,17 +44,8 @@ export const Refuel = (
     },
   })
 
-  const disabled = isLoading || ship.fuel.current === ship.fuel.capacity
-
-  return isValidElement(trigger)
-    ? cloneElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: trigger.props.disabled ?? disabled,
-        onClick: () => mutate(ship.symbol),
-      })
-    : createElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: disabled,
-        onClick: () => mutate(ship.symbol),
-      })
+  return children({
+    disabled: isLoading || ship.fuel.current === ship.fuel.capacity,
+    onClick: () => mutate(ship.symbol),
+  })
 }

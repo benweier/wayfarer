@@ -32,17 +32,14 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
         </div>
         <div className="flex gap-2">
           <CancelModal />
-          <ShipActions.Jettison
-            ship={ship}
-            symbol={item.symbol}
-            units={item.units}
-            trigger={
-              <button className="btn btn-danger flex w-full items-center gap-3">
+          <ShipActions.Jettison ship={ship} symbol={item.symbol} units={item.units}>
+            {(props) => (
+              <button className="btn btn-danger flex w-full items-center gap-3" {...props}>
                 <TrashIcon className="h-5 w-5" />
                 <span>Confirm Jettison</span>
               </button>
-            }
-          />
+            )}
+          </ShipActions.Jettison>
         </div>
       </div>
     </Modal>

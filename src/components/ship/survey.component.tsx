@@ -43,11 +43,13 @@ const List = ({ ship }: { ship: ShipResponse }) => {
               <button className="btn btn-outline btn-danger" onClick={() => removeSurvey(survey.signature)}>
                 Discard
               </button>
-              <ShipActions.Extract
-                ship={ship}
-                survey={survey}
-                trigger={<button className="btn btn-confirm">Extract</button>}
-              />
+              <ShipActions.Extract ship={ship} survey={survey}>
+                {(props) => (
+                  <button className="btn btn-confirm" {...props}>
+                    Extract
+                  </button>
+                )}
+              </ShipActions.Extract>
             </div>
             <div className="px-2 text-center text-sm text-amber-600 dark:text-amber-400">
               Expires: {expiration.toLocaleDateString()} {expiration.toLocaleTimeString()}
@@ -66,15 +68,21 @@ export const Survey = () => {
     <div className="grid gap-4">
       <div className="flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
         <div className="flex gap-2">
-          <ShipActions.Survey
-            ship={ship}
-            trigger={<button className="btn btn-primary">Survey {ship.nav.waypointSymbol}</button>}
-          />
+          <ShipActions.Survey ship={ship}>
+            {(props) => (
+              <button className="btn btn-primary" {...props}>
+                Survey {ship.nav.waypointSymbol}
+              </button>
+            )}
+          </ShipActions.Survey>
 
-          <ShipActions.Extract
-            ship={ship}
-            trigger={<button className="btn btn-confirm">Extract without Survey</button>}
-          />
+          <ShipActions.Extract ship={ship}>
+            {(props) => (
+              <button className="btn btn-confirm" {...props}>
+                Extract without Survey
+              </button>
+            )}
+          </ShipActions.Extract>
         </div>
         <div className="w-full max-w-xs">
           <Cooldown ship={ship} />

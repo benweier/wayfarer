@@ -1,38 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import {
-  ComponentPropsWithRef,
-  FC,
-  ForwardedRef,
-  ReactElement,
-  cloneElement,
-  createElement,
-  forwardRef,
-  isValidElement,
-} from 'react'
 import { createShipCargoSell } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
-import { isRef } from '@/utilities/isRef'
+import { ShipActionProps } from './ship-actions.types'
 import { updateShipCargo, updateShipInFleetCargo } from './ship-actions.utilities'
 
-const SellCargoComponent = (
-  {
-    ship,
-    symbol,
-    units,
-    trigger = (props) => (
-      <button className="btn btn-confirm btn-outline btn-sm" {...props}>
-        Sell
-      </button>
-    ),
-  }: {
-    ship: ShipResponse
-    symbol: string
-    units: number
-    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
-  },
-  ref: ForwardedRef<HTMLButtonElement>,
-) => {
+export const SellCargo = ({
+  ship,
+  symbol,
+  units,
+  children = (props) => (
+    <button className="btn btn-confirm btn-outline btn-sm" {...props}>
+      Sell
+    </button>
+  ),
+}: ShipActionProps<{
+  symbol: string
+  units: number
+}>) => {
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'cargo', 'sell'],
@@ -57,17 +42,8 @@ const SellCargoComponent = (
     },
   })
 
-  return isValidElement(trigger)
-    ? cloneElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: trigger.props.disabled ?? isLoading,
-        onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
-      })
-    : createElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: isLoading,
-        onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
-      })
+  return children({
+    disabled: isLoading,
+    onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
+  })
 }
-
-export const SellCargo = forwardRef(SellCargoComponent)

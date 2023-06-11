@@ -1,36 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import {
-  ComponentPropsWithRef,
-  FC,
-  ForwardedRef,
-  ReactElement,
-  cloneElement,
-  createElement,
-  forwardRef,
-  isValidElement,
-} from 'react'
 import { createShipWarp } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
-import { isRef } from '@/utilities/isRef'
+import { ShipActionProps } from './ship-actions.types'
 import { updateShipFuel, updateShipInFleetFuel, updateShipInFleetNav, updateShipNav } from './ship-actions.utilities'
 
-const WarpComponent = (
-  {
-    ship,
-    waypointID,
-    trigger = (props) => (
-      <button className="btn btn-sm" {...props}>
-        Warp
-      </button>
-    ),
-  }: {
-    ship: ShipResponse
-    waypointID: string
-    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
-  },
-  ref: ForwardedRef<HTMLButtonElement>,
-) => {
+export const Warp = ({
+  ship,
+  waypointID,
+  children = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Warp
+    </button>
+  ),
+}: ShipActionProps<{
+  waypointID: string
+}>) => {
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'extract'],
@@ -57,17 +42,8 @@ const WarpComponent = (
     },
   })
 
-  return isValidElement(trigger)
-    ? cloneElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: trigger.props.disabled ?? isLoading,
-        onClick: () => mutate({ shipID: ship.symbol, waypointID }),
-      })
-    : createElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: isLoading,
-        onClick: () => mutate({ shipID: ship.symbol, waypointID }),
-      })
+  return children({
+    disabled: isLoading,
+    onClick: () => mutate({ shipID: ship.symbol, waypointID }),
+  })
 }
-
-export const Warp = forwardRef(WarpComponent)

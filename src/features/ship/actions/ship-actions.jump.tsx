@@ -1,37 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import {
-  ComponentPropsWithRef,
-  FC,
-  ForwardedRef,
-  ReactElement,
-  cloneElement,
-  createElement,
-  forwardRef,
-  isValidElement,
-} from 'react'
 import { createShipJump } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipCooldownStore } from '@/store/ship'
 import { ShipResponse } from '@/types/spacetraders'
-import { isRef } from '@/utilities/isRef'
+import { ShipActionProps } from './ship-actions.types'
 import { updateShipInFleetNav, updateShipNav } from './ship-actions.utilities'
 
-const JumpComponent = (
-  {
-    ship,
-    systemID,
-    trigger = (props) => (
-      <button className="btn btn-sm" {...props}>
-        Jump
-      </button>
-    ),
-  }: {
-    ship: ShipResponse
-    systemID: string
-    trigger?: ReactElement<ComponentPropsWithRef<'button'>> | FC<ComponentPropsWithRef<'button'>>
-  },
-  ref: ForwardedRef<HTMLButtonElement>,
-) => {
+export const Jump = ({
+  ship,
+  systemID,
+  children = (props) => (
+    <button className="btn btn-sm" {...props}>
+      Jump
+    </button>
+  ),
+}: ShipActionProps<{
+  systemID: string
+}>) => {
   const client = useQueryClient()
   const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
     hasCooldown: !!state.cooldowns[ship.symbol],
@@ -63,17 +48,8 @@ const JumpComponent = (
     },
   })
 
-  return isValidElement(trigger)
-    ? cloneElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: trigger.props.disabled ?? (hasCooldown || isLoading),
-        onClick: () => mutate({ shipID: ship.symbol, systemID }),
-      })
-    : createElement(trigger, {
-        ref: isRef(ref) ? ref : undefined,
-        disabled: hasCooldown || isLoading,
-        onClick: () => mutate({ shipID: ship.symbol, systemID }),
-      })
+  return children({
+    disabled: hasCooldown || isLoading,
+    onClick: () => mutate({ shipID: ship.symbol, systemID }),
+  })
 }
-
-export const Jump = forwardRef(JumpComponent)

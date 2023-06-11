@@ -11,6 +11,7 @@ import { WAYPOINT_TYPE } from '@/config/constants'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointsList } from '@/services/api/spacetraders'
 import { ShipResponse } from '@/types/spacetraders'
+import { cx } from '@/utilities/cx'
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
   const { ref, modal } = useModalImperativeHandle()
@@ -28,14 +29,18 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
   return (
     <>
       <Menu as="div" className="relative">
-        <Menu.Button ref={refs.setReference} className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-white/5">
+        <Menu.Button
+          ref={refs.setReference}
+          disabled={ship.nav.status === 'IN_TRANSIT'}
+          className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-blue-500"
+        >
           <span className="sr-only">Manage</span>
           <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
         </Menu.Button>
 
         <div
           ref={refs.setFloating}
-          className="absolute left-0 top-0 w-max"
+          className="absolute left-0 top-0 z-10 w-max"
           style={{
             transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
           }}
@@ -52,19 +57,40 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
             <Menu.Items className="relative flex w-52 origin-top-right flex-col gap-1 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
               {ship.nav.status === 'DOCKED' && (
                 <Menu.Item as={Fragment}>
-                  <ShipActions.Orbit ship={ship} trigger={<button className="btn w-full text-left">Orbit</button>} />
+                  {({ active }) => (
+                    <ShipActions.Orbit ship={ship}>
+                      {(props) => (
+                        <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
+                          Orbit
+                        </button>
+                      )}
+                    </ShipActions.Orbit>
+                  )}
                 </Menu.Item>
               )}
               {ship.nav.status === 'IN_ORBIT' && (
                 <Menu.Item as={Fragment}>
-                  <ShipActions.Dock ship={ship} trigger={<button className="btn w-full text-left">Dock</button>} />
+                  {({ active }) => (
+                    <ShipActions.Dock ship={ship}>
+                      {(props) => (
+                        <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
+                          Dock
+                        </button>
+                      )}
+                    </ShipActions.Dock>
+                  )}
                 </Menu.Item>
               )}
               {ship.nav.status === 'IN_ORBIT' && (
                 <Menu.Item as={Fragment}>
-                  <button className="btn w-full text-left" onClick={() => modal.open()}>
-                    Navigate
-                  </button>
+                  {({ active }) => (
+                    <button
+                      className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })}
+                      onClick={() => modal.open()}
+                    >
+                      Navigate
+                    </button>
+                  )}
                 </Menu.Item>
               )}
             </Menu.Items>
@@ -74,7 +100,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
       <Modal size="md" ref={ref} closeable>
         <div className="grid gap-8">
           <h3 className="text-title">
-            Navigate Ship: <span className="font-normal">{ship.symbol}</span>{' '}
+            Navigate Ship: <span className="font-normal">{ship.symbol}</span>
           </h3>
           <QuerySuspenseBoundary
             fallback={
@@ -118,27 +144,25 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
               </div>
             </div>
           </div>
-          <ShipActions.Navigate
-            ship={ship}
-            waypointID={waypoint.symbol}
-            trigger={
-              ship.nav.waypointSymbol !== waypoint.symbol ? (
-                <button className="btn btn-confirm btn-outline btn-sm">
-                  <PaperAirplaneIcon className="h-5 w-5" />
-                  <span className="sr-only">
-                    Navigate ship {ship.symbol} to waypoint {waypoint.symbol}
-                  </span>
-                </button>
-              ) : (
-                <button disabled className="btn btn-sm">
-                  <MapPinIcon className="h-5 w-5" />
-                  <span className="sr-only">
-                    Ship {ship.symbol} is already at waypoint {waypoint.symbol}
-                  </span>
-                </button>
-              )
-            }
-          />
+          <ShipActions.Navigate ship={ship} waypointID={waypoint.symbol}>
+            {ship.nav.waypointSymbol !== waypoint.symbol
+              ? (props) => (
+                  <button className="btn btn-confirm btn-outline btn-sm" {...props}>
+                    <PaperAirplaneIcon className="h-5 w-5" />
+                    <span className="sr-only">
+                      Navigate ship {ship.symbol} to waypoint {waypoint.symbol}
+                    </span>
+                  </button>
+                )
+              : (props) => (
+                  <button disabled className="btn btn-sm" {...props}>
+                    <MapPinIcon className="h-5 w-5" />
+                    <span className="sr-only">
+                      Ship {ship.symbol} is already at waypoint {waypoint.symbol}
+                    </span>
+                  </button>
+                )}
+          </ShipActions.Navigate>
         </div>
       ))}
     </div>
