@@ -2,7 +2,7 @@ import { cx } from '@/utilities/cx'
 import { SystemTagProps } from './system-tag.types'
 
 const SYSTEM_TYPE_STYLES: Record<string, string> = {
-  NEUTRON_STAR: 'bg-slate-600 text-slate-50',
+  NEUTRON_STAR: 'bg-slate-500 text-slate-50',
   RED_STAR: 'bg-red-700 text-red-50',
   ORANGE_STAR: 'bg-orange-300 text-orange-950',
   BLUE_STAR: 'bg-cyan-400 text-cyan-950',
