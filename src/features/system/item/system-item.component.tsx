@@ -17,10 +17,12 @@ export const SystemItem = ({ system, hasShipPresence = false, children }: System
       )}
     >
       <div className="flex gap-1">
-        <div>
-          <Link className="link" to={`${ROUTES.SYSTEMS}/${system.symbol}`}>
-            {system.symbol}
-          </Link>
+        <div className="flex flex-col gap-1">
+          <div>
+            <Link className="link text-lg" to={`${ROUTES.SYSTEMS}/${system.symbol}`}>
+              {system.symbol}
+            </Link>
+          </div>
           <div className="flex flex-row items-center justify-start gap-4">
             <SystemTag type={system.type}>{SYSTEM_TYPE.get(system.type)}</SystemTag>{' '}
             <span className="text-sm font-light">
