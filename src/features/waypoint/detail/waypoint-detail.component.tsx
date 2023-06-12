@@ -23,7 +23,7 @@ export const WaypointDetail = ({ systemID, waypointID, children }: WithChildren<
       <div>
         <div className="flex flex-row items-center justify-start gap-4">
           <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</WaypointTag>
-          <div className="font-light">
+          <div className="text-sm font-light">
             ({waypoint.x}, {waypoint.y})
           </div>
           <div>
