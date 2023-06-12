@@ -80,9 +80,21 @@ export const List = () => {
     },
   })
 
+  const inventory = ship.cargo.inventory
+
+  if (!inventory.length) {
+    return (
+      <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+        <div className="text-secondary text-center text-sm">
+          <span className="font-bold">{ship.symbol}</span> has no cargo
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Layout>
-      {ship.cargo.inventory.map((item) => {
+      {inventory.map((item) => {
         const produce = REFINE_ITEM_TYPE.get(item.symbol)
         const good = data?.market.has(item.symbol) ? data.goods?.get(item.symbol) : undefined
 
