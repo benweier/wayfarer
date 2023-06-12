@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { cx } from '@/utilities/cx'
@@ -16,13 +17,13 @@ export const SystemItem = ({ system, hasShipPresence = false, children }: System
       )}
     >
       <div className="flex gap-1">
-        <div className="text-lg font-black leading-none">
+        <div>
           <Link className="link" to={`${ROUTES.SYSTEMS}/${system.symbol}`}>
             {system.symbol}
           </Link>
-          <div className="text-base">
-            <span className="font-medium">{SYSTEM_TYPE.get(system.type) ?? system.type}</span>{' '}
-            <span className="font-light">
+          <div className="flex flex-row items-center justify-start gap-4">
+            <SystemTag type={system.type}>{SYSTEM_TYPE.get(system.type)}</SystemTag>{' '}
+            <span className="text-sm font-light">
               ({system.x}, {system.y})
             </span>
           </div>
