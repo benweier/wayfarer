@@ -38,8 +38,9 @@ export const Root = ({ size = 'auto', closeable = false, children }: WithChildre
           >
             <div className="flex min-h-full items-center justify-center p-5">
               <Dialog.Panel
+                tabIndex={1}
                 className={cx(
-                  'transform overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10',
+                  'transform overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 outline-none ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10',
                   {
                     'w-auto': size === 'auto',
                     'w-screen': size === 'full',
@@ -50,6 +51,8 @@ export const Root = ({ size = 'auto', closeable = false, children }: WithChildre
                   },
                 )}
               >
+                {children}
+
                 {closeable && (
                   <button
                     className="btn btn-icon btn-outline btn-danger absolute right-1 top-1 rounded-lg"
@@ -58,7 +61,6 @@ export const Root = ({ size = 'auto', closeable = false, children }: WithChildre
                     <XMarkIcon className="h-4 w-4" />
                   </button>
                 )}
-                {children}
               </Dialog.Panel>
             </div>
           </Transition.Child>
