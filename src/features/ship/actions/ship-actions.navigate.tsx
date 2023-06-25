@@ -1,9 +1,9 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { createShipNavigate } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
 import { ShipActionProps } from './ship-actions.types'
-import { updateShipInFleetNavStatus, updateShipNavStatus } from './ship-actions.utilities'
 
 export const Navigate = ({
   ship,
@@ -23,15 +23,34 @@ export const Navigate = ({
     mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
       createShipNavigate({ path: shipID, payload: { waypointSymbol: waypointID } }),
     onMutate: ({ shipID }) => {
+      void client.cancelQueries({ queryKey: ['ships'] })
+      void client.cancelQueries({ queryKey: ['ship', shipID] })
+
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
-
-      if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'IN_TRANSIT'))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'IN_TRANSIT'))
-
       return { ship, ships }
+    },
+    onSuccess: (response, { shipID }, ctx) => {
+      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+
+      if (ctx?.ship) {
+        client.setQueryData(
+          ['ship', shipID],
+          produce(ctx.ship, (draft) => {
+            draft.data.nav = response.data.nav
+          }),
+        )
+      }
+
+      if (ctx?.ships && index > -1) {
+        client.setQueryData(
+          ['ships'],
+          produce(ctx.ships, (draft) => {
+            draft.data[index].nav = response.data.nav
+          }),
+        )
+      }
     },
     onError: (_err, shipID, ctx) => {
       client.setQueryData(['ship', shipID], ctx?.ship)

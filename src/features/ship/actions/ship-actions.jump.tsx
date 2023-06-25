@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { createShipJump } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipCooldownStore } from '@/store/ship'
 import { ShipResponse } from '@/types/spacetraders'
 import { ShipActionProps } from './ship-actions.types'
-import { updateShipInFleetNav, updateShipNav } from './ship-actions.utilities'
 
 export const Jump = ({
   ship,
@@ -23,24 +23,41 @@ export const Jump = ({
     setCooldown: state.setCooldown,
   }))
   const { mutate, isLoading } = useMutation({
-    mutationKey: ['ship', ship.symbol, 'extract'],
+    mutationKey: ['ship', ship.symbol, 'jump'],
     mutationFn: ({ shipID, systemID }: { shipID: string; systemID: string }) =>
       createShipJump({ path: shipID, payload: { systemSymbol: systemID } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })
-    },
-    onSuccess: (response, { shipID }) => {
-      const cooldown = response.data.cooldown
-      setCooldown(shipID, cooldown)
 
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+      return { ship, ships }
+    },
+    onSuccess: (response, { shipID }, ctx) => {
+      const cooldown = response.data.cooldown
+      setCooldown(shipID, cooldown)
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipNav(ship, response.data.nav))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNav(ships, index, response.data.nav))
+      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+
+      if (ctx?.ship) {
+        client.setQueryData(
+          ['ship', shipID],
+          produce(ctx.ship, (draft) => {
+            draft.data.nav = response.data.nav
+          }),
+        )
+      }
+
+      if (ctx?.ships && index > -1) {
+        client.setQueryData(
+          ['ships'],
+          produce(ctx.ships, (draft) => {
+            draft.data[index].nav = response.data.nav
+          }),
+        )
+      }
     },
     onSettled: (_res, _err, { shipID }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
