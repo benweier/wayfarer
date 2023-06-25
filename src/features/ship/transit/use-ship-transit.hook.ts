@@ -1,29 +1,24 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { useEffect, useMemo, useState } from 'react'
-import { useShipContext } from '@/context/ship.context'
+import { startTransition, useEffect, useMemo, useState } from 'react'
 import { updateShipInFleetNavStatus, updateShipNavStatus } from '@/features/ship/actions'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
 
-export const useRouteTransit = () => {
+export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const client = useQueryClient()
-  const { symbol, nav } = useShipContext((ship) => ({
-    symbol: ship.symbol,
-    nav: ship.nav,
-  }))
+  const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const arrival = useMemo(() => new Date(nav.route.arrival), [nav.route.arrival])
   const departed = useMemo(() => new Date(nav.route.departureTime), [nav.route.departureTime])
   const totalSeconds = (arrival.getTime() - departed.getTime()) / 1000
-  const [remainingSeconds, setRemainingSeconds] = useState(() =>
-    Math.floor(Math.max(0, arrival.getTime() - Date.now()) / 1000),
-  )
+  const remainingSeconds = Math.floor(Math.max(0, arrival.getTime() - lastUpdate) / 1000)
 
   useEffect(() => {
     if (remainingSeconds === 0) return
 
     const timeout = setTimeout(() => {
-      const seconds = Math.floor(Math.max(0, arrival.getTime() - Date.now()) / 1000)
-      setRemainingSeconds(seconds)
+      startTransition(() => {
+        forceUpdate(Date.now())
+      })
     }, 1000)
 
     return () => clearTimeout(timeout)

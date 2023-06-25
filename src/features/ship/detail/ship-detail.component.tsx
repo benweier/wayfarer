@@ -1,9 +1,14 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { Inventory, Loadout, Navigation, Survey } from '@/components/ship'
+import { Inventory, Loadout, Survey } from '@/components/ship'
 import * as Cargo from '@/components/ship/cargo'
+import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
+import { ROUTES } from '@/config/routes'
 import { ShipStore } from '@/context/ship.context'
+import * as ShipActions from '@/features/ship/actions'
+import { ShipTransit } from '@/features/ship/transit'
 import { getShipById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 import { ShipDetailProps } from './ship-detail.types'
@@ -27,11 +32,59 @@ export const ShipDetail = ({ symbol }: ShipDetailProps) => {
         </div>
 
         <div className="flex items-start justify-between gap-4">
-          <Navigation.Status ship={ship} />
+          <div className="flex flex-row items-end gap-2">
+            <div className="flex gap-8">
+              <div>
+                <div className="text-secondary text-xs uppercase">System</div>
+                <div className="font-semibold leading-snug">
+                  <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
+                    {ship.nav.systemSymbol}
+                  </Link>
+                </div>
+              </div>
+              <div>
+                <div className="text-secondary text-xs uppercase">Waypoint</div>
+                <div className="flex items-center gap-2">
+                  <div className="font-semibold leading-snug">
+                    <Link
+                      className="link"
+                      to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}/waypoint/${ship.nav.waypointSymbol}`}
+                    >
+                      {ship.nav.waypointSymbol}
+                    </Link>
+                  </div>
+                  <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+                    {SHIP_NAV_STATUS.get(ship.nav.status) ?? ship.nav.status}
+                  </div>
+                  <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+                    {SHIP_NAV_FLIGHT_MODE.get(ship.nav.flightMode) ?? ship.nav.flightMode}
+                  </div>
+                </div>
+                {ship.nav.status === 'DOCKED' ? (
+                  <ShipActions.Orbit ship={ship}>
+                    {(props) => (
+                      <button className="btn btn-primary btn-flat btn-sm" {...props}>
+                        Orbit
+                      </button>
+                    )}
+                  </ShipActions.Orbit>
+                ) : (
+                  <ShipActions.Dock ship={ship}>
+                    {(props) => (
+                      <button className="btn btn-primary btn-flat btn-sm" {...props}>
+                        Dock
+                      </button>
+                    )}
+                  </ShipActions.Dock>
+                )}
+              </div>
+            </div>
+          </div>
+
           <Inventory ship={ship} />
         </div>
 
-        <Navigation.Route nav={ship.nav} />
+        <ShipTransit nav={ship.nav} />
 
         <Tab.Group as="div" className="tab-group">
           <Tab.List className="tab-list">
