@@ -2,9 +2,16 @@ import { IconContext } from 'react-icons'
 import { GiNorthStarShuriken } from 'react-icons/gi'
 import { HiOutlineStatusOffline, HiOutlineStatusOnline, HiRefresh } from 'react-icons/hi'
 import { VscGithub, VscRocket } from 'react-icons/vsc'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useSpaceTradersStatus } from '@/components/space-traders-status'
 import { Wayfarer } from '@/components/wayfarer'
 import { cx } from '@/utilities/cx'
+
+const icon = {
+  UNKNOWN: <HiRefresh size={20} />,
+  ONLINE: <HiOutlineStatusOnline size={20} />,
+  OFFLINE: <HiOutlineStatusOffline size={20} />,
+}
 
 const SpaceTradersStatus = () => {
   const { status, isChecking } = useSpaceTradersStatus()
@@ -19,9 +26,7 @@ const SpaceTradersStatus = () => {
           'text-yellow-400': isChecking,
         })}
       >
-        {status === 'UNKNOWN' && <HiRefresh size={20} />}
-        {status === 'ONLINE' && <HiOutlineStatusOnline size={20} />}
-        {status === 'OFFLINE' && <HiOutlineStatusOffline size={20} />}
+        {icon[status]}
       </div>
       <span className="text-sm font-semibold">{status}</span>
     </>
@@ -38,7 +43,9 @@ export const Layout = ({ children }: WithChildren) => {
         <Wayfarer className="text-center text-6xl font-black lg:text-7xl" />
         <div className="text-center text-xl font-semibold text-zinc-500">A SpaceTraders API Interface</div>
         <div className="grid grid-flow-col items-center justify-center gap-2 py-4">
-          <SpaceTradersStatus />
+          <QuerySuspenseBoundary>
+            <SpaceTradersStatus />
+          </QuerySuspenseBoundary>
         </div>
       </div>
 
