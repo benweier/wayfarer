@@ -18,11 +18,9 @@ export const RouteError = () => {
 
   if (isRouteErrorResponse(error)) {
     return (
-      (
-        <div className="flex h-full grow flex-col items-center justify-center p-5">
-          <div className="text-5xl font-black">{messages[error.status]}</div>
-        </div>
-      ) ?? <></>
+      <div className="flex h-full grow flex-col items-center justify-center p-5">
+        <div className="text-5xl font-black">{messages[error.status]}</div>
+      </div>
     )
   }
 
