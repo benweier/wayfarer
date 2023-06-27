@@ -38,18 +38,27 @@ Wayfarer is not a framework, a library, or boilerplate. Instead, it embraces and
 
 Next, Gatsby, Remix, et al. have (re)popularised server-side rendering and static generation of late; built and marketed as "batteries included" meta frameworks (or at the very least "batteries npm-installable") for solving the specific challenges of SSR/SSG. This is not an indictment of these tools, but rather the opposite side of the same coin where React is (still/also) a client-side rendering library and remains a perfectly suitable approach for many projects.
 
-Wayfarer is not built around documentation or theoretical app tutorials that can be worked through in a weekend. Preferring a concrete, implementation-first outline over isolated, hypothetical code snippets, it is a collection of real-world patterns and best practices I have come to rely on that can be applied to projects of any size - whether they are Next, Remix, Create React App, or something custom.
+Wayfarer is not built around documentation or theoretical app tutorials that can be worked through in a weekend. Preferring a concrete, implementation-first approach over isolated, hypothetical code snippets, it is a collection of real-world patterns and best practices I have come to rely on that can be applied to projects of any size - whether they are Next, Remix, Create React App, or something custom.
 
 Because of this, Wayfarer is largely a distillation of my own experiences and opinions on how to build a performant, responsive, and accessible React application. Leveraging some of the best tools of the ecosystem from the ground up, the patterns expressed within should be considered a "production-ready" reference regardless of Wayfarers' actual state of "feature-completeness" with the SpaceTraders API. Hopefully, it is a useful resource for others who are interested in learning about these features and how to utilise them in their own projects.
 
 ## Architecture
 
-At the heart of Wayfarer is an opinionated yet flexible structure that is designed to be easily extensible and maintainable. Since this isn't a framework, there are no conventions set in stone and the application itself is free to be structured in whatever way makes the most sense, but there are a few principles that should be followed (until they aren't, obviously):
+Wayfarer's opinionated architecture is designed to be flexible and maintainable, whether or not I have succeeded probably remains to be proven. Since this isn't a framework, these conventions aren't set in stone and - like any application - can be structured in whatever way makes the most sense. However, there are a few guiding principles that should be followed (until they aren't):
 
-**Routes (aka "pages" / "screens") are _always_ lazy-loaded**
- 
-**Routes _may_ have a `loader` prop that initialises data fetching**
+> **Composition over Inheritance** and **Inversion of Control**
+
+> **Path Routes are _(almost always)_ lazy-loaded**
+
+Routes are considered "pages" in a traditional sense, but they are not necessarily 1:1 with a URL. Route elements do little more than orchestrate the components inside a layout, such as passing around dynamic path segments. The layout is the real page and is responsible for prefetching data, handling errors, and rendering fallback states. This is where Suspense and Error Boundaries are used to their fullest extent.
+
+> **Routes _may_ have a `loader` prop that initiates data prefetching**  
+
+A `loader` in React Router returns a Promise that resolves to some data. In Wayfarer, while it could use the `useLoaderData` hook, the loader is intended to initiate data prefetching using React Query's `ensureQueryData` for the route before it is rendered. The helps to keep the interface feeling snappy and responsive during route transitions (see [perceived performance](https://en.wikipedia.org/wiki/Perceived_performance)).
 
 **React Query is _always_ used to fetch/cache/manage remote server state**
 
+React Query is such an amazing library that I have a hard time letting it go. It is used for all remote data fetching and is the primary source of truth for the application.
+
 **Suspense and Error Boundaries are _always_ used to handle fallback/error states**
+
