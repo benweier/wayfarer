@@ -2,7 +2,7 @@ import { Tab } from '@headlessui/react'
 import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
 import { SystemDetail } from '@/features/system/detail'
-import { SystemFleet } from '@/features/system/fleet'
+import { SystemFleet, SystemFleetFallback } from '@/features/system/fleet'
 import { WaypointList } from '@/features/waypoint/list'
 import { cx } from '@/utilities/cx'
 
@@ -32,7 +32,7 @@ export const SystemViewComponent = () => {
                 </Tab.Panel>
 
                 <Tab.Panel>
-                  <QuerySuspenseBoundary fallback={<></>}>
+                  <QuerySuspenseBoundary fallback={<SystemFleetFallback />}>
                     <SystemFleet />
                   </QuerySuspenseBoundary>
                 </Tab.Panel>
