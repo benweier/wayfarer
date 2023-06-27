@@ -95,6 +95,28 @@ const router = sentryCreateBrowserRouter(
         }}
       />
 
+      <Route
+        lazy={async () => {
+          const leaderboard = await import('@/routes/leaderboard')
+          return {
+            Component: leaderboard.Layout,
+            loader: leaderboard.loader(client),
+          }
+        }}
+        ErrorBoundary={RouteError}
+      >
+        <Route
+          path={ROUTES.LEADERBOARD}
+          lazy={async () => {
+            const leaderboard = await import('@/routes/leaderboard')
+            return {
+              Component: leaderboard.Route,
+            }
+          }}
+          ErrorBoundary={RouteError}
+        />
+      </Route>
+
       <Route ErrorBoundary={RouteError} Component={Auth.Route}>
         <Route
           path={ROUTES.LOGIN}
@@ -226,7 +248,7 @@ const router = sentryCreateBrowserRouter(
 export const App = () => {
   return (
     <QueryClientProvider client={client}>
-      <RouterProvider router={router} fallbackElement={<Loading />} />
+      <RouterProvider router={router} fallbackElement={<Loading />} future={{ v7_startTransition: true }} />
       <ReactQueryDevtools position="bottom-right" />
     </QueryClientProvider>
   )
