@@ -17,7 +17,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
 
       <div>
         <div className="bg-zinc-200/40 dark:bg-zinc-700/20">
-          <div className="mx-auto grid w-full max-w-lg items-start">
+          <div className="mx-auto grid w-full max-w-3xl items-start">
             <div className="p-8">{children}</div>
           </div>
         </div>
