@@ -35,7 +35,7 @@ const FactionField = () => {
   const methods = useFormContext<RegisterSchema>()
   const { isSuccess, isLoading, data } = useQuery({
     queryKey: ['factions'],
-    queryFn: ({ signal }) => getFactionsList(undefined, { signal }),
+    queryFn: ({ signal }) => getFactionsList({ params: { limit: 20 } }, { signal }),
   })
 
   if (isLoading) return <Select.Skeleton />
@@ -62,7 +62,7 @@ const FactionField = () => {
           getItemOption={(item) => item.name}
           options={factions}
           onChange={(value) => {
-            field.onChange(value?.id)
+            if (value) field.onChange(value.id)
           }}
         />
       )}
