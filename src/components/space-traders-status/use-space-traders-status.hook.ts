@@ -1,30 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { get } from '@/services/fetch'
-
-type SpaceTradersStatusResponse = {
-  status: string
-  version: string
-  resetDate: string
-  description: string
-  stats: { agents: number; ships: number; systems: number; waypoints: number }
-  leaderboards: {
-    mostCredits: Array<{ agentSymbol: string; credits: number }>
-    mostSubmittedCharts: Array<{ agentSymbol: string; chartCount: number }>
-  }
-  serverResets: { next: string; frequency: 'weekly' }
-  announcements: Array<{
-    title: string
-    body: string
-  }>
-  links: Array<{ name: string; url: string }>
-}
+import { StatusResponse } from '@/types/spacetraders'
 
 const getSpacetradersStatus = () => {
   const url = new URL(import.meta.env.SPACETRADERS_API_BASE_URL)
-  return get<SpaceTradersStatusResponse>(url)
+  return get<StatusResponse>(url)
 }
 
-const select = (response: SpaceTradersStatusResponse) => ({
+const select = (response: StatusResponse) => ({
   status: response.status === 'SpaceTraders is currently online and available to play',
 })
 
