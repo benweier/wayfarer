@@ -20,7 +20,7 @@ export const Warp = ({
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'warp'],
     mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
-      createShipWarp({ path: shipID, payload: { waypointSymbol: waypointID } }),
+      createShipWarp({ path: { shipID }, payload: { waypointSymbol: waypointID } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

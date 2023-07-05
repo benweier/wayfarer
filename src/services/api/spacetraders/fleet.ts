@@ -15,7 +15,9 @@ import { Meta, SpaceTradersResponse, mutationFnFactory, queryFnFactory } from '.
 
 export const getShipsList = queryFnFactory<SpaceTradersResponse<ShipResponse[], Meta>>(() => 'my/ships')
 
-export const getShipById = queryFnFactory<SpaceTradersResponse<ShipResponse>, string>((ship) => `my/ships/${ship}`)
+export const getShipById = queryFnFactory<SpaceTradersResponse<ShipResponse>, { shipID: string }>(
+  ({ shipID }) => `my/ships/${shipID}`,
+)
 
 export const createShipPurchase = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse }>,
@@ -25,20 +27,20 @@ export const createShipPurchase = mutationFnFactory<
 
 export const createShipCargoPurchase = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>,
-  string,
+  { shipID: string },
   { symbol: string; units: number }
->((ship) => `my/ships/${ship}/purchase`)
+>(({ shipID }) => `my/ships/${shipID}/purchase`)
 
 export const createShipCargoSell = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>,
-  string,
+  { shipID: string },
   { symbol: string; units: number }
->((ship) => `my/ships/${ship}/sell`)
+>(({ shipID }) => `my/ships/${shipID}/sell`)
 
 export const createShipScanWaypoint = mutationFnFactory<
   SpaceTradersResponse<{ waypoints: WaypointResponse[]; cooldown: CooldownResponse }>,
-  string
->((ship) => `my/ships/${ship}/scan/waypoints`)
+  { shipID: string }
+>(({ shipID }) => `my/ships/${shipID}/scan/waypoints`)
 
 export const createShipScanSystems = mutationFnFactory<
   SpaceTradersResponse<{
@@ -51,49 +53,53 @@ export const createShipScanSystems = mutationFnFactory<
       y: number
     }>
   }>,
-  string
->((ship) => `my/ships/${ship}/scan/systems`)
+  { shipID: string }
+>(({ shipID }) => `my/ships/${shipID}/scan/systems`)
 
-export const createShipOrbit = mutationFnFactory<SpaceTradersResponse<{ nav: NavigationResponse }>, string, void>(
-  (ship) => `my/ships/${ship}/orbit`,
-)
-export const createShipDock = mutationFnFactory<SpaceTradersResponse<{ nav: NavigationResponse }>, string, void>(
-  (ship) => `my/ships/${ship}/dock`,
-)
+export const createShipOrbit = mutationFnFactory<
+  SpaceTradersResponse<{ nav: NavigationResponse }>,
+  { shipID: string },
+  void
+>(({ shipID }) => `my/ships/${shipID}/orbit`)
+export const createShipDock = mutationFnFactory<
+  SpaceTradersResponse<{ nav: NavigationResponse }>,
+  { shipID: string },
+  void
+>(({ shipID }) => `my/ships/${shipID}/dock`)
 
 export const createShipNavigate = mutationFnFactory<
   SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>,
-  string,
+  { shipID: string },
   { waypointSymbol: string }
->((ship) => `my/ships/${ship}/navigate`)
+>(({ shipID }) => `my/ships/${shipID}/navigate`)
 
 export const createShipWarp = mutationFnFactory<
   SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>,
-  string,
+  { shipID: string },
   { waypointSymbol: string }
->((ship) => `my/ships/${ship}/warp`)
+>(({ shipID }) => `my/ships/${shipID}/warp`)
 
 export const createShipJump = mutationFnFactory<
   SpaceTradersResponse<{ nav: NavigationResponse; cooldown: CooldownResponse }>,
-  string,
+  { shipID: string },
   { systemSymbol: string }
->((ship) => `my/ships/${ship}/jump`)
+>(({ shipID }) => `my/ships/${shipID}/jump`)
 
 export const createShipRefuel = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>,
-  string
->((ship) => `my/ships/${ship}/refuel`)
+  { shipID: string }
+>(({ shipID }) => `my/ships/${shipID}/refuel`)
 
 export const createShipSurvey = mutationFnFactory<
   SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>,
-  string
->((ship) => `my/ships/${ship}/survey`)
+  { shipID: string }
+>(({ shipID }) => `my/ships/${shipID}/survey`)
 
 export const createShipExtract = mutationFnFactory<
   SpaceTradersResponse<{ cooldown: CooldownResponse; extraction: ExtractResponse; cargo: ShipCargo }>,
-  string,
+  { shipID: string },
   { survey?: SurveyResponse } | void
->((ship) => `my/ships/${ship}/extract`)
+>(({ shipID }) => `my/ships/${shipID}/extract`)
 
 export const createShipRefine = mutationFnFactory<
   SpaceTradersResponse<{
@@ -102,17 +108,17 @@ export const createShipRefine = mutationFnFactory<
     produced: Array<{ tradeSymbol: string; units: 0 }>
     consumed: Array<{ tradeSymbol: string; units: 0 }>
   }>,
-  string,
+  { shipID: string },
   { produce: string }
->((ship) => `my/ships/${ship}/refine`)
+>(({ shipID }) => `my/ships/${shipID}/refine`)
 
 export const createShipJettison = mutationFnFactory<
   SpaceTradersResponse<{ cargo: ShipCargo }>,
-  string,
+  { shipID: string },
   { symbol: string; units: number }
->((ship) => `my/ships/${ship}/jettison`)
+>(({ shipID }) => `my/ships/${shipID}/jettison`)
 
 export const createShipChart = mutationFnFactory<
   SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>,
-  string
->((ship) => `my/ships/${ship}/chart`)
+  { shipID: string }
+>(({ shipID }) => `my/ships/${shipID}/chart`)

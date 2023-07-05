@@ -3,21 +3,21 @@ import { Meta, SpaceTradersResponse, mutationFnFactory, queryFnFactory } from '.
 
 export const getContractsList = queryFnFactory<SpaceTradersResponse<ContractResponse[], Meta>>(() => `my/contracts`)
 
-export const getContractById = queryFnFactory<SpaceTradersResponse<ContractResponse>, string>(
-  (id) => `my/contracts/${id}`,
+export const getContractById = queryFnFactory<SpaceTradersResponse<ContractResponse>, { contractID: string }>(
+  ({ contractID }) => `my/contracts/${contractID}`,
 )
 
 export const createContractAccept = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; contract: ContractResponse }>,
-  string
->((id) => `my/contracts/${id}/accept`)
+  { contractID: string }
+>(({ contractID }) => `my/contracts/${contractID}/accept`)
 
 export const createContractDeliver = mutationFnFactory<
   SpaceTradersResponse<{ contract: ContractResponse; cargo: ShipCargo }>,
-  string,
+  { contractID: string },
   { shipSymbol: string; tradeSymbol: string; units: number }
->((id) => `my/contracts/${id}/deliver`)
+>(({ contractID }) => `my/contracts/${contractID}/deliver`)
 
-export const createContractFulfill = mutationFnFactory<SpaceTradersResponse<unknown>, string>(
-  (id) => `my/contracts/${id}/fulfill`,
+export const createContractFulfill = mutationFnFactory<SpaceTradersResponse<unknown>, { contractID: string }>(
+  ({ contractID }) => `my/contracts/${contractID}/fulfill`,
 )

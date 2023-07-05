@@ -18,7 +18,7 @@ export const Survey = ({
   }))
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'survey'],
-    mutationFn: (shipID: string) => createShipSurvey({ path: shipID }),
+    mutationFn: (shipID: string) => createShipSurvey({ path: { shipID } }),
     onSuccess: (response, shipID) => {
       const [survey] = response.data.surveys
       const cooldown = response.data.cooldown

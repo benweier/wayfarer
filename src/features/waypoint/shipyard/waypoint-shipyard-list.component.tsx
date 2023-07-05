@@ -9,7 +9,7 @@ export const WaypointShipyardList = () => {
   const { waypointID } = useWaypointContext()
   const waypointQuery = useQuery({
     queryKey: ['system', systemID, 'waypoint', waypointID],
-    queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
+    queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
   })
 
   const shipyardEnabled =
@@ -17,7 +17,7 @@ export const WaypointShipyardList = () => {
 
   const shipyardQuery = useQuery({
     queryKey: ['shipyard', systemID, waypointID],
-    queryFn: ({ signal }) => getShipyard({ path: { system: systemID, waypoint: waypointID } }, { signal }),
+    queryFn: ({ signal }) => getShipyard({ path: { systemID, waypointID } }, { signal }),
     enabled: shipyardEnabled,
   })
 

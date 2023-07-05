@@ -23,7 +23,7 @@ export const loader: QueryClientLoaderFn =
     try {
       const system = await client.ensureQueryData({
         queryKey: ['system', systemID],
-        queryFn: ({ signal }) => getSystemById({ path: systemID }, { signal }),
+        queryFn: ({ signal }) => getSystemById({ path: { systemID } }, { signal }),
       })
 
       return defer({ system })

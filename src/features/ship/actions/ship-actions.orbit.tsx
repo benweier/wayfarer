@@ -17,7 +17,7 @@ export const Orbit = ({
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'orbit'],
-    mutationFn: (shipID: string) => createShipOrbit({ path: shipID }),
+    mutationFn: (shipID: string) => createShipOrbit({ path: { shipID } }),
     onMutate: (shipID) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

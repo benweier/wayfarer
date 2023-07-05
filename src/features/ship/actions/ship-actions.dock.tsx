@@ -17,7 +17,7 @@ export const Dock = ({
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'dock'],
-    mutationFn: (shipID: string) => createShipDock({ path: shipID }),
+    mutationFn: (shipID: string) => createShipDock({ path: { shipID } }),
     onMutate: (shipID) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])

@@ -11,7 +11,7 @@ export const WaypointJumpGateList = () => {
 
   const { data, isSuccess } = useQuery({
     queryKey: ['jump-gate', systemID, waypointID],
-    queryFn: ({ signal }) => getJumpGate({ path: { system: systemID, waypoint: waypointID } }, { signal }),
+    queryFn: ({ signal }) => getJumpGate({ path: { systemID, waypointID } }, { signal }),
   })
 
   if (!isSuccess) return null

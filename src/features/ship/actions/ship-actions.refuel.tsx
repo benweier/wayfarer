@@ -18,7 +18,7 @@ export const Refuel = ({
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'refuel'],
-    mutationFn: (shipID: string) => createShipRefuel({ path: shipID }),
+    mutationFn: (shipID: string) => createShipRefuel({ path: { shipID } }),
     onMutate: (shipID) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

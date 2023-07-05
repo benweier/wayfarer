@@ -8,7 +8,7 @@ import { SystemDetailProps } from './system-detail.types'
 export const SystemDetail = ({ systemID, children }: WithChildren<SystemDetailProps>) => {
   const { isSuccess, data } = useQuery({
     queryKey: ['system', systemID],
-    queryFn: ({ signal }) => getSystemById({ path: systemID }, { signal }),
+    queryFn: ({ signal }) => getSystemById({ path: { systemID } }, { signal }),
   })
 
   if (!isSuccess) return null

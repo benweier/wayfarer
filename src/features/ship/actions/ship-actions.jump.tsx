@@ -25,7 +25,7 @@ export const Jump = ({
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'jump'],
     mutationFn: ({ shipID, systemID }: { shipID: string; systemID: string }) =>
-      createShipJump({ path: shipID, payload: { systemSymbol: systemID } }),
+      createShipJump({ path: { shipID }, payload: { systemSymbol: systemID } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

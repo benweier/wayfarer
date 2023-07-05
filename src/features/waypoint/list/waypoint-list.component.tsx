@@ -8,7 +8,7 @@ export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => 
   const { systemID } = useSystemContext()
   const { isSuccess, data } = useQuery({
     queryKey: ['system', systemID],
-    queryFn: ({ signal }) => getSystemById({ path: systemID }, { signal }),
+    queryFn: ({ signal }) => getSystemById({ path: { systemID } }, { signal }),
   })
 
   if (!isSuccess) return null

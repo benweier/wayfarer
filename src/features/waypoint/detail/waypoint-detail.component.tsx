@@ -11,7 +11,7 @@ import { WaypointDetailProps } from './waypoint-detail.types'
 export const WaypointDetail = ({ systemID, waypointID, children }: WithChildren<WaypointDetailProps>) => {
   const { data, isSuccess } = useQuery({
     queryKey: ['system', systemID, 'waypoint', waypointID],
-    queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
+    queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
   })
 
   if (!isSuccess) return null

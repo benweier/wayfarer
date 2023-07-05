@@ -22,7 +22,7 @@ export const Jettison = ({
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'extract'],
     mutationFn: ({ shipID, symbol, units }: { shipID: string; symbol: string; units: number }) =>
-      createShipJettison({ path: shipID, payload: { symbol, units } }),
+      createShipJettison({ path: { shipID }, payload: { symbol, units } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

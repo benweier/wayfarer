@@ -98,7 +98,9 @@ const CargoForm = ({ onSubmit }: { onSubmit: (values: PurchaseCargoSchema) => vo
             <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
               <ShipSelect.Field
                 getShipOption={getShipOption}
-                onChange={(value) => field.onChange(value?.symbol)}
+                onChange={(value) => {
+                  if (value) field.onChange(value?.symbol)
+                }}
                 select={(response) => ({
                   ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointID),
                 })}
@@ -137,8 +139,8 @@ export const PurchaseCargo = () => {
   const good = useMarketTradeGoodContext()
   const { mutateAsync } = useMutation({
     mutationKey: ['cargo', good.symbol, 'purchase'],
-    mutationFn: ({ shipID, item, quantity }: { shipID: string; item: string; quantity: number }) =>
-      createShipCargoPurchase({ path: shipID, payload: { symbol: item, units: quantity } }),
+    mutationFn: ({ shipID, symbol, units }: { shipID: string; symbol: string; units: number }) =>
+      createShipCargoPurchase({ path: { shipID }, payload: { symbol, units } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })
@@ -189,8 +191,8 @@ export const PurchaseCargo = () => {
           onSubmit={(values) =>
             mutateAsync({
               shipID: values.ship,
-              item: values.item,
-              quantity: values.quantity,
+              symbol: values.item,
+              units: values.quantity,
             })
           }
         />

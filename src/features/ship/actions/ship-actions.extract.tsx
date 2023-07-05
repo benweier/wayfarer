@@ -26,7 +26,7 @@ export const Extract = ({
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'extract'],
     mutationFn: ({ shipID, survey }: { shipID: string; survey?: SurveyResponse }) =>
-      createShipExtract({ path: shipID, payload: { survey } }),
+      createShipExtract({ path: { shipID }, payload: { survey } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

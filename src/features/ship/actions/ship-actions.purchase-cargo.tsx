@@ -22,7 +22,7 @@ export const PurchaseCargo = ({
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'cargo', 'sell'],
     mutationFn: ({ shipID, symbol, units }: { shipID: string; symbol: string; units: number }) =>
-      createShipCargoPurchase({ path: shipID, payload: { symbol, units } }),
+      createShipCargoPurchase({ path: { shipID }, payload: { symbol, units } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

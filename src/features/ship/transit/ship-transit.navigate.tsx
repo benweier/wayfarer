@@ -39,7 +39,7 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const { isSuccess, data } = useQuery({
     queryKey: ['system', ship.nav.systemSymbol, 'waypoints'],
     queryFn: () => {
-      return getWaypointsList({ path: ship.nav.systemSymbol })
+      return getWaypointsList({ path: { systemID: ship.nav.systemSymbol } })
     },
   })
 

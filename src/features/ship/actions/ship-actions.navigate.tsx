@@ -21,7 +21,7 @@ export const Navigate = ({
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'navigate'],
     mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
-      createShipNavigate({ path: shipID, payload: { waypointSymbol: waypointID } }),
+      createShipNavigate({ path: { shipID }, payload: { waypointSymbol: waypointID } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

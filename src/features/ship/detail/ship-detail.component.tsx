@@ -16,7 +16,7 @@ import { ShipDetailProps } from './ship-detail.types'
 export const ShipDetail = ({ symbol }: ShipDetailProps) => {
   const { data, isSuccess } = useQuery({
     queryKey: ['ship', symbol],
-    queryFn: ({ signal }) => getShipById({ path: symbol }, { signal }),
+    queryFn: ({ signal }) => getShipById({ path: { shipID: symbol } }, { signal }),
   })
 
   if (!isSuccess) return null

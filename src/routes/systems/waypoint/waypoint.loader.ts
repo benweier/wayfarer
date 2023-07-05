@@ -23,7 +23,7 @@ export const loader: QueryClientLoaderFn =
     try {
       const waypoint = await client.ensureQueryData({
         queryKey: ['system', systemID, 'waypoint', waypointID],
-        queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
+        queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
       })
 
       return defer({ waypoint })

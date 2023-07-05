@@ -22,14 +22,14 @@ export const loader: QueryClientLoaderFn =
     try {
       const ship = await client.ensureQueryData({
         queryKey: ['ship', shipID],
-        queryFn: ({ signal }) => getShipById({ path: shipID }, { signal }),
+        queryFn: ({ signal }) => getShipById({ path: { shipID } }, { signal }),
       })
 
       const market = client.ensureQueryData({
         queryKey: ['system', ship.data.nav.systemSymbol, ship.data.nav.waypointSymbol, 'market'],
         queryFn: ({ signal }) =>
           getMarket(
-            { path: { system: ship.data.nav.systemSymbol, waypoint: ship.data.nav.waypointSymbol } },
+            { path: { systemID: ship.data.nav.systemSymbol, waypointID: ship.data.nav.waypointSymbol } },
             { signal },
           ),
       })

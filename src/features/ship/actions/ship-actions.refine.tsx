@@ -25,7 +25,7 @@ export const Refine = ({
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'extract'],
     mutationFn: ({ shipID, produce }: { shipID: string; produce: string }) =>
-      createShipRefine({ path: shipID, payload: { produce } }),
+      createShipRefine({ path: { shipID }, payload: { produce } }),
     onMutate: ({ shipID }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipID] })

@@ -22,7 +22,7 @@ export const loader: QueryClientLoaderFn =
     try {
       const contract = await client.ensureQueryData({
         queryKey: ['contract', contractID],
-        queryFn: ({ signal }) => getContractById({ path: contractID }, { signal }),
+        queryFn: ({ signal }) => getContractById({ path: { contractID } }, { signal }),
       })
 
       return defer({ contract })

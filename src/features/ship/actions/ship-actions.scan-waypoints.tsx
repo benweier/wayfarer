@@ -12,7 +12,7 @@ export const ScanWaypoints = ({ shipID }: { shipID: string }) => {
   const setCooldown = useShipCooldownStore((state) => state.setCooldown)
   const { mutate, isSuccess, data } = useMutation({
     mutationKey: ['ship', shipID, 'scan'],
-    mutationFn: (shipID: string) => createShipScanWaypoint({ path: shipID }),
+    mutationFn: (shipID: string) => createShipScanWaypoint({ path: { shipID } }),
     onSuccess: (response, shipID) => {
       setCooldown(shipID, response.data.cooldown)
     },

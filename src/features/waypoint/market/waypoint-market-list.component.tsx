@@ -14,7 +14,7 @@ export const WaypointMarketList = () => {
   const { waypointID } = useWaypointContext()
   const waypointQuery = useQuery({
     queryKey: ['system', systemID, 'waypoint', waypointID],
-    queryFn: ({ signal }) => getWaypointById({ path: { system: systemID, waypoint: waypointID } }, { signal }),
+    queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
   })
 
   const marketEnabled =
@@ -23,7 +23,7 @@ export const WaypointMarketList = () => {
 
   const marketQuery = useQuery({
     queryKey: ['system', systemID, waypointID, 'market'],
-    queryFn: ({ signal }) => getMarket({ path: { system: systemID, waypoint: waypointID } }, { signal }),
+    queryFn: ({ signal }) => getMarket({ path: { systemID, waypointID } }, { signal }),
     enabled: marketEnabled,
   })
 

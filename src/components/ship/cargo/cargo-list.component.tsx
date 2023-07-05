@@ -65,7 +65,7 @@ export const List = () => {
   const { data } = useQuery({
     queryKey: ['system', ship.nav.systemSymbol, ship.nav.waypointSymbol, 'market'],
     queryFn: ({ signal }) =>
-      getMarket({ path: { system: ship.nav.systemSymbol, waypoint: ship.nav.waypointSymbol } }, { signal }),
+      getMarket({ path: { systemID: ship.nav.systemSymbol, waypointID: ship.nav.waypointSymbol } }, { signal }),
     select: (response) => {
       const market = [...response.data.imports, ...response.data.exchange]
       const goods = response.data.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
