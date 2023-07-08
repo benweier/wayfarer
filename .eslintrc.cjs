@@ -125,37 +125,13 @@ module.exports = {
       },
     },
     {
-      files: ['cypress/**/*'],
-      plugins: ['cypress', 'testing-library'],
-      extends: ['plugin:cypress/recommended', 'plugin:testing-library/dom'],
-      env: {
-        'cypress/globals': true,
-      },
-      parserOptions: {
-        project: ['tsconfig.json', 'cypress/tsconfig.json'],
-      },
-    },
-    {
-      files: ['src/**/*.stories.tsx'],
-      extends: ['plugin:storybook/recommended'],
-    },
-    {
       files: ['src/**/*.spec.tsx', 'src/**/*.test.tsx', 'test/**/*'],
-      plugins: ['jest', 'testing-library', 'jest-dom'],
+      plugins: ['testing-library', 'jest-dom'],
       extends: [
-        'plugin:jest/recommended',
-        'plugin:jest-dom/recommended',
         'plugin:testing-library/dom',
+        'plugin:jest-dom/recommended',
         'plugin:testing-library/react',
       ],
-      env: {
-        'jest/globals': true,
-      },
-      settings: {
-        jest: {
-          version: 'detect',
-        },
-      },
       rules: {
         'testing-library/prefer-screen-queries': 'off',
       },
