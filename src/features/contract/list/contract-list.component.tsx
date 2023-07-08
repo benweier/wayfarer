@@ -66,32 +66,46 @@ export const ContractList = () => {
     queryKey: ['contracts'],
     queryFn: ({ signal }) => getContractsList(undefined, { signal }),
     select: (response) => {
-      return response.data.reduce(contractsReducer, {
-        available: [],
-        accepted: [],
-        completed: [],
-      })
+      return {
+        data: response.data.reduce(contractsReducer, {
+          available: [],
+          accepted: [],
+          completed: [],
+        }),
+        meta: response.meta,
+      }
     },
   })
 
   if (!isSuccess) return null
 
-  const { accepted, available } = data
+  const contracts = data.data
+  const meta = data.meta
+
+  if (meta.total === 0) {
+    return (
+      <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+        <div className="text-secondary text-center text-sm">
+          <span className="font-bold">No contracts</span> are available
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="grid gap-8">
-      {accepted.length > 0 && (
+      {contracts.accepted.length > 0 && (
         <div className="grid gap-2">
           <div className="text-headline">Accepted Contracts</div>
-          {data.accepted.map((contract) => (
+          {contracts.accepted.map((contract) => (
             <AvailableContract key={contract.id} contract={contract} />
           ))}
         </div>
       )}
-      {available.length > 0 && (
+      {contracts.available.length > 0 && (
         <div className="grid gap-2">
           <div className="text-headline">Available Contracts</div>
-          {data.available.map((contract) => (
+          {contracts.available.map((contract) => (
             <AvailableContract key={contract.id} contract={contract} />
           ))}
         </div>
