@@ -33,9 +33,9 @@
       "@/*": ["./src/*"]
     },
     "incremental": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
   "files": ["env.d.ts"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "cypress.config.ts"],
-  "exclude": ["node_modules", "build", "dist", ".parcel-cache"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "./test/vitest.setup.ts"],
+  "exclude": ["node_modules", "build", "dist"]
 }
