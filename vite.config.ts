@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            react: ['react', 'react-dom', 'react-router', 'react-router-dom'],
+            core: ['react', 'react-dom', 'react-router', 'react-router-dom', '@tanstack/react-query'],
           },
         },
       },
