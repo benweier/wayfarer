@@ -16,7 +16,7 @@ const createUniqueSet = (items: string[]) => {
   return Array.from(set).sort((a, b) => a.localeCompare(b))
 }
 
-export const Item = ({ contract, children }: WithChildren<{ contract: ContractResponse }>) => {
+export const ContractItem = ({ contract, children }: WithChildren<{ contract: ContractResponse }>) => {
   const isMutating = useIsMutating({ mutationKey: ['contract', contract.id], exact: false })
 
   return (

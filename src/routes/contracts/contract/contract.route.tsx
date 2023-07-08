@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
-import * as Contracts from '@/features/contracts'
+import { ContractDetail } from '@/features/contract/detail'
 
 const ContractRouteComponent = () => {
   const { contractID } = useParams()
@@ -13,7 +13,7 @@ const ContractRouteComponent = () => {
         </div>
       </div>
       <div className="grid gap-12">
-        <QuerySuspenseBoundary>{contractID && <Contracts.Detail id={contractID} />}</QuerySuspenseBoundary>
+        <QuerySuspenseBoundary>{contractID && <ContractDetail id={contractID} />}</QuerySuspenseBoundary>
       </div>
     </div>
   )
