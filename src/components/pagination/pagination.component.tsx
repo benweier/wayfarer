@@ -5,28 +5,10 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/20/solid'
 import { cx } from '@/utilities/cx'
+import { PaginationProps } from './pagination.types'
+import { getPagingRange } from './pagination.utils'
 
-const getPagingRange = ({ current, total, length }: { current: number; total: number; length: number }): number[] => {
-  const pages = Math.min(length, total)
-
-  let start = current - Math.floor(pages / 2)
-  start = Math.max(start, 1)
-  start = Math.min(start, 1 + total - length)
-
-  return Array.from({ length: pages }, (_, i) => start + i)
-}
-
-export const Pagination = ({
-  current,
-  total,
-  length = 5,
-  onChange,
-}: {
-  current: number
-  total: number
-  length?: 3 | 5 | 7
-  onChange: (page: number) => void
-}) => {
+export const Pagination = ({ current, total, length = 5, onChange }: PaginationProps) => {
   const pages = getPagingRange({ current, total, length })
 
   return (
@@ -63,7 +45,7 @@ export const Pagination = ({
           onClick={() => {
             if (current !== page) onChange(page)
           }}
-          aria-label={`Page ${page}`}
+          aria-label={`Go to page ${page}`}
           aria-current={page === current ? 'page' : undefined}
         >
           {page}
