@@ -27,8 +27,8 @@ export const Orbit = ({
 
       const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'IN_ORBIT'))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'IN_ORBIT'))
+      if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'UNDOCKING'))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'UNDOCKING'))
 
       return { ship, ships }
     },

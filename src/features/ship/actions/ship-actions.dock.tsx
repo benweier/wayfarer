@@ -24,8 +24,8 @@ export const Dock = ({
 
       const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'DOCKED'))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'DOCKED'))
+      if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'DOCKING'))
+      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'DOCKING'))
 
       return { ship, ships }
     },
