@@ -92,6 +92,8 @@ export const SHIP_NAV_STATUS: ReadonlyMap<string, string> = new Map([
   ['IN_TRANSIT', 'In Transit'],
   ['IN_ORBIT', 'In Orbit'],
   ['DOCKED', 'Docked'],
+  ['DOCKING', 'Docking'],
+  ['UNDOCKING', 'Undocking'],
 ])
 
 export const SYSTEM_TYPE: ReadonlyMap<string, string> = new Map([
