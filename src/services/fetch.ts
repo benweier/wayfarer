@@ -1,6 +1,6 @@
 import { http } from './http'
 
-export type QueryParams = Record<string, any>
+export type QueryParams = Record<string, any> | null | undefined | unknown
 export type RequestPayload = Record<string, any> | null | undefined | unknown
 
 export const get = <T>(url: URL | RequestInfo, args: RequestInit = {}) => {
