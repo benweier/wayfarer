@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => {
     envPrefix: ['SENTRY_', 'SPACETRADERS_'],
     test: {
       globals: true,
-      environment: 'jsdom',
+      environment: 'happy-dom',
       setupFiles: './test/vitest.setup.ts',
       clearMocks: true,
       css: true,
