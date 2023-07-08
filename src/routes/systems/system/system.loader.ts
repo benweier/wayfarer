@@ -21,12 +21,14 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const system = await client.ensureQueryData({
+      const system = client.ensureQueryData({
         queryKey: ['system', systemID],
         queryFn: ({ signal }) => getSystemById({ path: { systemID } }, { signal }),
       })
 
-      return defer({ system })
+      return defer({
+        system: await system,
+      })
     } catch (err) {
       if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
         throw new Response(STATUS_MESSAGES.NOT_FOUND, { status: STATUS_CODES.NOT_FOUND })

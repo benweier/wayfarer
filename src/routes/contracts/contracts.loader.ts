@@ -13,12 +13,14 @@ export const loader: QueryClientLoaderFn = (client) => async () => {
   }
 
   try {
-    const contracts = await client.ensureQueryData({
+    const contracts = client.ensureQueryData({
       queryKey: ['contracts'],
       queryFn: ({ signal }) => getContractsList(undefined, { signal }),
     })
 
-    return defer({ contracts })
+    return defer({
+      contracts: await contracts,
+    })
   } catch (err) {
     if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
       throw new Response(STATUS_MESSAGES.NOT_FOUND, { status: STATUS_CODES.NOT_FOUND })

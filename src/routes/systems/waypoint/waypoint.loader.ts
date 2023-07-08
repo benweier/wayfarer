@@ -21,12 +21,14 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const waypoint = await client.ensureQueryData({
+      const waypoint = client.ensureQueryData({
         queryKey: ['system', systemID, 'waypoint', waypointID],
         queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
       })
 
-      return defer({ waypoint })
+      return defer({
+        waypoint: await waypoint,
+      })
     } catch (err) {
       if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
         throw new Response(STATUS_MESSAGES.NOT_FOUND, { status: STATUS_CODES.NOT_FOUND })
