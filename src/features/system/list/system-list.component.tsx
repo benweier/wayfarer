@@ -20,10 +20,16 @@ const WAYPOINT_TYPE_STYLES: Record<string, string> = {
   GRAVITY_WELL: 'bg-gray-950 text-gray-50',
 }
 
+const getPageNumber = (page: string | null) => {
+  const pageNumber = parseInt(page ?? '1')
+
+  return Number.isNaN(pageNumber) ? 1 : Math.max(1, pageNumber)
+}
+
 export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   const [limit] = useState(20)
   const [params, setParams] = useSearchParams({ page: '1' })
-  const page = parseInt(params.get('page') ?? '1')
+  const page = getPageNumber(params.get('page'))
 
   const systemsListQuery = useQuery({
     queryKey: ['systems', page, limit],
