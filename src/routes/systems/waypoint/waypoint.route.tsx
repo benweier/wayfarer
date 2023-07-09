@@ -22,22 +22,22 @@ export const WaypointRouteComponent = () => {
           <WaypointDetail systemID={systemID} waypointID={waypointID}>
             <Tab.Group as="div" className="tab-group">
               <Tab.List className="tab-list">
-                <Tab className={({ selected }) => cx('group tab', { selected })}>Fleet</Tab>
                 <Tab className={({ selected }) => cx('group tab', { selected })}>Market</Tab>
+                <Tab className={({ selected }) => cx('group tab', { selected })}>Fleet</Tab>
                 <Tab className={({ selected }) => cx('group tab', { selected })}>Shipyard</Tab>
                 <Tab className={({ selected }) => cx('group tab', { selected })}>Jump Gate</Tab>
               </Tab.List>
 
               <Tab.Panels>
                 <Tab.Panel>
-                  <QuerySuspenseBoundary fallback={<WaypointFleetFallback />} error={WaypointFleetError}>
-                    <WaypointFleetList />
+                  <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={WaypointMarketError}>
+                    <WaypointMarketList />
                   </QuerySuspenseBoundary>
                 </Tab.Panel>
 
                 <Tab.Panel>
-                  <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={WaypointMarketError}>
-                    <WaypointMarketList />
+                  <QuerySuspenseBoundary fallback={<WaypointFleetFallback />} error={WaypointFleetError}>
+                    <WaypointFleetList />
                   </QuerySuspenseBoundary>
                 </Tab.Panel>
 
