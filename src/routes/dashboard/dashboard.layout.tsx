@@ -223,8 +223,8 @@ const Agent = () => {
 
   return (
     <>
-      <div className="text-xl font-black">{agent.symbol}</div>
-      <div className="text-sm font-semibold">Credits: {credits}</div>
+      <div className="text-right text-xl font-black">{agent.symbol}</div>
+      <div className="text-right text-sm font-semibold">Credits: {credits}</div>
     </>
   )
 }
