@@ -21,9 +21,9 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
         </h3>
         <QuerySuspenseBoundary
           fallback={
-            <div className="grid">
+            <div className="grid gap-4">
               {Array.from({ length: 3 }).map((_, index) => (
-                <div key={index} className="mx-auto my-4 h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
+                <div key={index} className="mx-auto h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
               ))}
             </div>
           }
