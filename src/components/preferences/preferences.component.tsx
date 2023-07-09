@@ -1,7 +1,7 @@
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Popover, Transition } from '@headlessui/react'
-import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
+import { MenuIcon } from '@/components/icons'
 import { cx } from '@/utilities/cx'
 import { Sidebar } from './sidebar.component'
 import { Theme } from './theme.component'
@@ -27,7 +27,7 @@ export const Preferences = () => {
             className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:bg-blue-50/10 hover:shadow-sm"
           >
             <div className="h-6 w-6">
-              <Cog6ToothIcon className={cx('h-6 w-6', { 'animate-spin': open })} aria-hidden />
+              <MenuIcon id="settings" className={cx('h-6 w-6', { 'animate-spin': open })} aria-hidden />
             </div>
             <span className="sr-only flex flex-col items-start justify-start text-sm leading-none @[220px]/side:not-sr-only">
               Preferences

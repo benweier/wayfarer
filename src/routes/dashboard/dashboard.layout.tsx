@@ -1,15 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react'
-import {
-  ArrowRightOnRectangleIcon,
-  Bars3Icon,
-  GlobeAltIcon,
-  HomeIcon,
-  RocketLaunchIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
+import { Bars3Icon, GlobeAltIcon, HomeIcon, RocketLaunchIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { atom, useAtom } from 'jotai'
 import { Fragment, Suspense } from 'react'
 import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-dom'
+import { MenuIcon } from '@/components/icons'
 import { Preferences } from '@/components/preferences'
 import { Wayfarer } from '@/components/wayfarer'
 import { ROUTES } from '@/config/routes'
@@ -44,7 +38,7 @@ const Logout = () => {
       className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-rose-200 shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
     >
       <div className="h-6 w-6">
-        <ArrowRightOnRectangleIcon className="h-6 w-6" aria-hidden />
+        <MenuIcon id="logout" className="h-6 w-6" aria-hidden />
       </div>
       <span className="sr-only text-sm @[220px]/side:not-sr-only">Log out</span>
     </button>
