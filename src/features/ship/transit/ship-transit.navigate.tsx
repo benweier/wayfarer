@@ -1,5 +1,5 @@
-import { MapPinIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useQuery } from '@tanstack/react-query'
+import { ShipIcon } from '@/components/icons'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WaypointTag } from '@/components/waypoint/tag'
@@ -63,16 +63,16 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
           <ShipActions.Navigate ship={ship} waypointID={waypoint.symbol}>
             {ship.nav.waypointSymbol !== waypoint.symbol
               ? (props) => (
-                  <button className="btn btn-confirm btn-outline btn-sm" {...props}>
-                    <PaperAirplaneIcon className="h-5 w-5" />
+                  <button className="btn btn-icon btn-confirm btn-outline" {...props}>
+                    <ShipIcon id="navigate" className="h-4 w-4" aria-hidden />
                     <span className="sr-only">
                       Navigate ship {ship.symbol} to waypoint {waypoint.symbol}
                     </span>
                   </button>
                 )
               : (props) => (
-                  <button disabled className="btn btn-sm" {...props}>
-                    <MapPinIcon className="h-5 w-5" />
+                  <button className="btn btn-icon" {...props} disabled>
+                    <ShipIcon id="pin" className="h-4 w-4" aria-hidden />
                     <span className="sr-only">
                       Ship {ship.symbol} is already at waypoint {waypoint.symbol}
                     </span>

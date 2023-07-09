@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from '@heroicons/react/20/solid'
+import { ShipIcon } from '@/components/icons'
 import { useShipContext } from '@/context/ship.context'
 import { useShipTransit } from './use-ship-transit.hook'
 
@@ -35,7 +35,7 @@ export const ShipTransitStatus = () => {
         </div>
         <div className="text-secondary flex w-12 justify-end text-right text-sm">
           {transit.remainingSeconds === 0 ? (
-            <CheckCircleIcon className="h-5 w-5 text-green-500" />
+            <ShipIcon id="pin" className="h-5 w-5 text-green-500" />
           ) : (
             `${transit.remainingSeconds} s`
           )}
