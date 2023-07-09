@@ -1,6 +1,6 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { getWaypointById } from '@/services/api/spacetraders'
+import { getMarket, getWaypointById } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/store/auth'
 
@@ -21,13 +21,23 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const waypoint = client.ensureQueryData({
+      const waypoint = await client.ensureQueryData({
         queryKey: ['system', systemID, 'waypoint', waypointID],
         queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
       })
 
+      const marketEnabled = waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
+
+      const market = marketEnabled
+        ? await client.ensureQueryData({
+            queryKey: ['system', systemID, waypointID, 'market'],
+            queryFn: ({ signal }) => getMarket({ path: { systemID, waypointID } }, { signal }),
+          })
+        : undefined
+
       return defer({
-        waypoint: await waypoint,
+        waypoint,
+        market,
       })
     } catch (err) {
       if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
