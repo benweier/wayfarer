@@ -3,9 +3,25 @@ import { useIsMutating } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
+import { useShipTransit } from '@/features/ship/transit'
+import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { ShipControls } from './ship-item.controls'
 import { ShipItemProps } from './ship-item.types'
+
+const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
+  const transit = useShipTransit(ship)
+
+  return (
+    <div
+      className={cx('h-0.5 grow rounded-full bg-zinc-200 dark:bg-zinc-600', {
+        'opacity-30': ship.nav.status !== 'IN_TRANSIT',
+      })}
+    >
+      <div className="h-full rounded-full bg-green-500" style={{ width: `${transit.progress}%` }} />
+    </div>
+  )
+}
 
 export const ShipItem = ({ ship }: ShipItemProps) => {
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
@@ -24,7 +40,7 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
                 {ship.symbol}
               </Link>
             </div>
-            <div className="flex flex-row items-end gap-2 [width:400px]">
+            <div className="flex flex-row flex-wrap items-end gap-x-2 gap-y-1 [width:400px]">
               <div className="flex gap-8">
                 <div>
                   <div className="text-secondary text-xs font-medium uppercase">System</div>
@@ -51,6 +67,9 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
               </div>
               <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
                 {SHIP_NAV_FLIGHT_MODE.get(ship.nav.flightMode) ?? ship.nav.flightMode}
+              </div>
+              <div className="w-full">
+                <TransitStatusPreview ship={ship} />
               </div>
             </div>
             <div className="flex gap-8 [width:350px]">
