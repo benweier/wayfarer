@@ -1,18 +1,22 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
+import { Ref, forwardRef } from 'react'
 import { createShipDock } from '@/services/api/spacetraders'
 import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
 import { ShipActionProps } from './ship-actions.types'
 import { updateShipInFleetNavStatus, updateShipNavStatus } from './ship-actions.utilities'
 
-export const Dock = ({
-  ship,
-  children = (props) => (
-    <button className="btn btn-sm" {...props}>
-      Dock
-    </button>
-  ),
-}: ShipActionProps) => {
+const DockComponent = (
+  {
+    ship,
+    children = (props) => (
+      <button className="btn btn-sm" {...props}>
+        Dock
+      </button>
+    ),
+  }: ShipActionProps,
+  ref: Ref<HTMLButtonElement>,
+) => {
   const client = useQueryClient()
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
@@ -40,7 +44,10 @@ export const Dock = ({
   })
 
   return children({
+    ref,
     disabled: isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
     onClick: () => mutate(ship.symbol),
   })
 }
+
+export const Dock = forwardRef(DockComponent)
