@@ -111,13 +111,7 @@ export const Register = () => {
               <label className="label" htmlFor="email">
                 Email <span className="text-secondary text-xs">(optional)</span>
               </label>
-              <input
-                id="email"
-                {...methods.register('email', { required: true })}
-                className="input"
-                type="email"
-                autoComplete="off"
-              />
+              <input id="email" {...methods.register('email')} className="input" type="email" autoComplete="off" />
               <div className="text-hint mt-1">
                 If you have reserved your agent symbol by supporting the{' '}
                 <a
