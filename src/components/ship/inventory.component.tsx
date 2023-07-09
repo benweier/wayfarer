@@ -1,4 +1,4 @@
-import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
+import { ShipIcon } from '@/components/icons'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipResponse } from '@/types/spacetraders'
 
@@ -8,7 +8,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
       <div className="flex flex-col items-end">
         <div className="text-secondary text-right text-xs uppercase">Fuel</div>
         <div className="flex items-center gap-2">
-          <BoltIcon className="h-5 w-5 text-teal-500" />
+          <ShipIcon id="fuel" className="h-5 w-5 text-teal-500" />
           <div className="text-sm font-semibold leading-snug">
             {ship.fuel.current} / {ship.fuel.capacity}
           </div>
@@ -24,7 +24,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
       <div>
         <div className="text-secondary text-right text-xs uppercase">Cargo</div>
         <div className="flex items-center gap-2">
-          <CubeIcon className="h-5 w-5 text-fuchsia-500" />
+          <ShipIcon id="cargo" className="h-5 w-5 text-fuchsia-500" />
           <div className="text-sm font-semibold leading-snug">
             {ship.cargo.units} / {ship.cargo.capacity}
           </div>
@@ -33,7 +33,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
       <div>
         <div className="text-secondary text-right text-xs uppercase">Crew</div>
         <div className="flex items-center gap-2">
-          <UserGroupIcon className="h-5 w-5 text-amber-500" />
+          <ShipIcon id="crew" className="h-5 w-5 text-amber-500" />
           <div className="text-sm font-semibold leading-snug">
             {ship.crew.current} / {ship.crew.capacity}
           </div>

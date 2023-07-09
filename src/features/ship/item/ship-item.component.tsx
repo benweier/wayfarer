@@ -1,6 +1,6 @@
-import { BoltIcon, CubeIcon, UserGroupIcon } from '@heroicons/react/20/solid'
 import { useIsMutating } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { ShipIcon } from '@/components/icons'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipTransit } from '@/features/ship/transit'
@@ -74,19 +74,19 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
             </div>
             <div className="flex gap-8 [width:350px]">
               <div className="flex items-center gap-2">
-                <BoltIcon className="h-5 w-5 text-teal-500" />
+                <ShipIcon id="fuel" className="h-5 w-5 text-teal-500" />
                 <div className="text-sm leading-snug">
                   {ship.fuel.current} / {ship.fuel.capacity}
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <CubeIcon className="h-5 w-5 text-fuchsia-500" />
+                <ShipIcon id="cargo" className="h-5 w-5 text-fuchsia-500" />
                 <div className="text-sm leading-snug">
                   {ship.cargo.units} / {ship.cargo.capacity}
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <UserGroupIcon className="h-5 w-5 text-amber-500" />
+                <ShipIcon id="crew" className="h-5 w-5 text-amber-500" />
                 <div className="text-sm leading-snug">
                   {ship.crew.current} / {ship.crew.capacity}
                 </div>
