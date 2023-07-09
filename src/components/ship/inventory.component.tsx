@@ -13,7 +13,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
             {ship.fuel.current} / {ship.fuel.capacity}
           </div>
         </div>
-        <ShipActions.Refuel ship={ship}>
+        <ShipActions.Refuel ship={ship} disabled={ship.nav.status !== 'DOCKED'}>
           {(props) => (
             <button className="btn btn-confirm btn-flat btn-sm" {...props}>
               Refuel

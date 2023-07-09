@@ -8,6 +8,7 @@ import { updateShipFuel, updateShipInFleetFuel } from './ship-actions.utilities'
 
 export const Refuel = ({
   ship,
+  disabled,
   children = (props) => (
     <button className="btn btn-sm" {...props}>
       Refuel
@@ -45,7 +46,7 @@ export const Refuel = ({
   })
 
   return children({
-    disabled: isLoading || ship.fuel.current === ship.fuel.capacity,
+    disabled: disabled || isLoading || ship.fuel.current === ship.fuel.capacity,
     onClick: () => mutate(ship.symbol),
   })
 }
