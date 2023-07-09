@@ -2,7 +2,7 @@ import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { MapPinIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
-import { useQuery } from '@tanstack/react-query'
+import { useIsMutating, useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
@@ -14,6 +14,7 @@ import { ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
+  const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol] }) > 0
   const { ref, modal } = useModalImperativeHandle()
   const { x, y, refs } = useFloating<HTMLButtonElement>({
     strategy: 'absolute',
@@ -31,7 +32,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
       <Menu as="div" className="relative">
         <Menu.Button
           ref={refs.setReference}
-          disabled={ship.nav.status === 'IN_TRANSIT'}
+          disabled={ship.nav.status === 'IN_TRANSIT' || isMutating}
           className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-blue-500"
         >
           <span className="sr-only">Manage</span>
