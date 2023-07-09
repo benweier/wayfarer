@@ -1,5 +1,5 @@
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
+import { ShipIcon } from '@/components/icons'
 import { ROUTES } from '@/config/routes'
 import { ShipTransitJump } from './ship-transit.jump'
 import { ShipTransitNavigate } from './ship-transit.navigate'
@@ -26,9 +26,9 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
             </Link>
           </div>
           <div className="flex flex-row flex-nowrap -space-x-2">
-            <ChevronRightIcon className="text-secondary h-4 w-4" />
-            <ChevronRightIcon className="text-secondary h-4 w-4" />
-            <ChevronRightIcon className="text-secondary h-4 w-4" />
+            <ShipIcon id="chevron:right" className="text-secondary h-4 w-4" />
+            <ShipIcon id="chevron:right" className="text-secondary h-4 w-4" />
+            <ShipIcon id="chevron:right" className="text-secondary h-4 w-4" />
           </div>
           <div className="text-sm font-medium">
             <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.destination.systemSymbol}`}>
