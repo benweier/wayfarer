@@ -1,9 +1,9 @@
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
-import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { MapPinIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useIsMutating, useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
+import { AppIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WaypointTag } from '@/components/waypoint/tag'
@@ -36,7 +36,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
           className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-blue-500"
         >
           <span className="sr-only">Manage</span>
-          <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+          <AppIcon id="more:vertical" className="h-5 w-5" aria-hidden="true" />
         </Menu.Button>
 
         <div

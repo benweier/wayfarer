@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
+import { AppIcon } from '@/components/icons'
 import { cx } from '@/utilities/cx'
 import { ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
@@ -58,7 +58,7 @@ export const Root = ({ size = 'auto', closeable = false, children }: WithChildre
                     className="btn btn-icon btn-outline btn-danger absolute right-1 top-1 rounded-lg"
                     onClick={() => handleClose()}
                   >
-                    <XMarkIcon className="h-4 w-4" />
+                    <AppIcon id="x" className="h-4 w-4" />
                   </button>
                 )}
               </Dialog.Panel>
