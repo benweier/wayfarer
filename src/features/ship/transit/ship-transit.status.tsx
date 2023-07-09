@@ -31,12 +31,7 @@ export const ShipTransitStatus = () => {
 
       <div className="flex flex-row items-center gap-2">
         <div className="h-1 grow rounded-full bg-zinc-200 dark:bg-zinc-600">
-          <div
-            className="h-full rounded-full bg-green-500"
-            style={{
-              width: `${(100 / transit.totalSeconds) * (transit.totalSeconds - transit.remainingSeconds)}%`,
-            }}
-          />
+          <div className="h-full rounded-full bg-green-500" style={{ width: `${transit.progress}%` }} />
         </div>
         <div className="text-secondary flex w-12 justify-end text-right text-sm">
           {transit.remainingSeconds === 0 ? (

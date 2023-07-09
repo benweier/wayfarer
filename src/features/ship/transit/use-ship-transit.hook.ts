@@ -11,6 +11,7 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const departed = useMemo(() => new Date(nav.route.departureTime), [nav.route.departureTime])
   const totalSeconds = (arrival.getTime() - departed.getTime()) / 1000
   const remainingSeconds = Math.floor(Math.max(0, arrival.getTime() - lastUpdate) / 1000)
+  const progress = Math.round((100 / totalSeconds) * (totalSeconds - remainingSeconds))
 
   useEffect(() => {
     if (remainingSeconds === 0) return
@@ -39,5 +40,5 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
     }
   }, [client, nav.status, remainingSeconds, symbol])
 
-  return { remainingSeconds, totalSeconds, arrival, departed }
+  return { remainingSeconds, totalSeconds, arrival, departed, progress }
 }
