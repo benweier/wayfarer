@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react'
 import { QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Fragment, Suspense, useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import {
   ActionFunction,
   Navigate,
@@ -148,7 +148,7 @@ const router = sentryCreateBrowserRouter(
           }}
           ErrorBoundary={RouteError}
         >
-          <Route path={ROUTES.OVERVIEW} Component={Fragment} />
+          <Route path={ROUTES.OVERVIEW} element={<Navigate to={ROUTES.FLEET} replace />} />
 
           <Route path={ROUTES.CONTRACTS}>
             <Route
