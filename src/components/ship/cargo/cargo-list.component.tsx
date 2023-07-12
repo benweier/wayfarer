@@ -1,7 +1,7 @@
 import { TrashIcon } from '@heroicons/react/20/solid'
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
-import { SellCargo } from '@/components/market'
+import { SellCargo } from '@/components/market/sell-cargo'
 import { Modal, useModalActions } from '@/components/modal'
 import { REFINE_ITEM_TYPE } from '@/config/constants'
 import { MarketTradeGoodContext } from '@/context/market-trade-good.context'

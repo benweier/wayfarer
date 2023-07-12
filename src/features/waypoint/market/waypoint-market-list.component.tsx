@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { PurchaseCargo, SellCargo } from '@/components/market'
+import { PurchaseCargo } from '@/components/market/purchase-cargo'
+import { SellCargo } from '@/components/market/sell-cargo'
 import { MarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
