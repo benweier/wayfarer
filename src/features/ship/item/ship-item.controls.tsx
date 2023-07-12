@@ -1,3 +1,4 @@
+import { FloatingPortal } from '@floating-ui/react'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { MapPinIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
@@ -29,7 +30,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
 
   return (
     <>
-      <Menu as="div" className="relative">
+      <Menu>
         <Menu.Button
           ref={refs.setReference}
           disabled={ship.nav.status === 'IN_TRANSIT' || isMutating}
@@ -39,64 +40,66 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
           <AppIcon id="more:vertical" className="h-5 w-5" aria-hidden="true" />
         </Menu.Button>
 
-        <div
-          ref={refs.setFloating}
-          className="absolute left-0 top-0 z-10 w-max"
-          style={{
-            transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
-          }}
-        >
-          <Transition
-            as={Fragment}
-            enter="transition ease-out duration-100"
-            enterFrom="transform opacity-0 scale-95"
-            enterTo="transform opacity-100 scale-100"
-            leave="transition ease-in duration-75"
-            leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
+        <FloatingPortal>
+          <div
+            ref={refs.setFloating}
+            className="absolute left-0 top-0 z-10 w-max"
+            style={{
+              transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
+            }}
           >
-            <Menu.Items className="relative flex w-52 origin-top-right flex-col gap-1 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
-              {ship.nav.status === 'DOCKED' && (
-                <Menu.Item as={Fragment}>
-                  {({ active }) => (
-                    <ShipActions.Orbit ship={ship}>
-                      {(props) => (
-                        <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
-                          Orbit
-                        </button>
-                      )}
-                    </ShipActions.Orbit>
-                  )}
-                </Menu.Item>
-              )}
-              {ship.nav.status === 'IN_ORBIT' && (
-                <Menu.Item as={Fragment}>
-                  {({ active }) => (
-                    <ShipActions.Dock ship={ship}>
-                      {(props) => (
-                        <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
-                          Dock
-                        </button>
-                      )}
-                    </ShipActions.Dock>
-                  )}
-                </Menu.Item>
-              )}
-              {ship.nav.status === 'IN_ORBIT' && (
-                <Menu.Item as={Fragment}>
-                  {({ active }) => (
-                    <button
-                      className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })}
-                      onClick={() => modal.open()}
-                    >
-                      Navigate
-                    </button>
-                  )}
-                </Menu.Item>
-              )}
-            </Menu.Items>
-          </Transition>
-        </div>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="flex w-52 origin-top-right flex-col gap-1 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
+                {ship.nav.status === 'DOCKED' && (
+                  <Menu.Item as={Fragment}>
+                    {({ active }) => (
+                      <ShipActions.Orbit ship={ship}>
+                        {(props) => (
+                          <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
+                            Orbit
+                          </button>
+                        )}
+                      </ShipActions.Orbit>
+                    )}
+                  </Menu.Item>
+                )}
+                {ship.nav.status === 'IN_ORBIT' && (
+                  <Menu.Item as={Fragment}>
+                    {({ active }) => (
+                      <ShipActions.Dock ship={ship}>
+                        {(props) => (
+                          <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
+                            Dock
+                          </button>
+                        )}
+                      </ShipActions.Dock>
+                    )}
+                  </Menu.Item>
+                )}
+                {ship.nav.status === 'IN_ORBIT' && (
+                  <Menu.Item as={Fragment}>
+                    {({ active }) => (
+                      <button
+                        className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })}
+                        onClick={() => modal.open()}
+                      >
+                        Navigate
+                      </button>
+                    )}
+                  </Menu.Item>
+                )}
+              </Menu.Items>
+            </Transition>
+          </div>
+        </FloatingPortal>
       </Menu>
       <Modal size="md" ref={ref} closeable>
         <div className="grid gap-8">
