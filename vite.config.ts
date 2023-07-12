@@ -1,4 +1,3 @@
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 import baseSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
@@ -14,7 +13,6 @@ export default defineConfig(({ mode }) => {
   }
 
   plugins.push(tsconfigPaths())
-  plugins.push(vanillaExtractPlugin())
   plugins.push(react())
 
   return {
