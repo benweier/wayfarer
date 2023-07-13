@@ -1,10 +1,13 @@
 export const groupByFn = <T, K extends keyof any>(arr: T[] = [], getKey: (item: T) => K) =>
-  arr.reduce((obj, item) => {
-    const group = getKey(item)
+  arr.reduce(
+    (obj, item) => {
+      const group = getKey(item)
 
-    if (!obj[group]) obj[group] = []
+      if (!obj[group]) obj[group] = []
 
-    obj[group].push(item)
+      obj[group].push(item)
 
-    return obj
-  }, {} as Record<K, T[]>)
+      return obj
+    },
+    {} as Record<K, T[]>,
+  )
