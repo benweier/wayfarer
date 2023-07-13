@@ -180,7 +180,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
 
           <main className="flex flex-1 overflow-hidden">
             <div
-              className={cx('transition-all duration-100 ease-in-out', {
+              className={cx('hidden transition-all duration-100 ease-in-out lg:block', {
                 'w-20': sidebarState === 'collapsed',
                 'w-56': sidebarState === 'expanded',
               })}
@@ -201,7 +201,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
 
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden lg:block lg:flex-shrink-0">
-              <div className="relative flex h-full w-96 flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg dark:bg-zinc-900/50">
+              <div className="relative flex h-full flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg dark:bg-zinc-900/50 md:w-64 lg:w-80 xl:w-96">
                 <div className="p-4">
                   <Agent />
                 </div>
