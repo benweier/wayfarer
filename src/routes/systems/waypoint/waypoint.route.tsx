@@ -14,7 +14,7 @@ export const WaypointRouteComponent = () => {
   return (
     <div className="grid gap-4 p-4">
       <h1 className="text-title">
-        Waypoint: <span className="font-normal">{waypointID}</span>
+        Waypoint: <span className="whitespace-nowrap font-normal">{waypointID}</span>
       </h1>
 
       {systemID && waypointID && (
