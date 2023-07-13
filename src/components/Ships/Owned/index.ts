@@ -1,1 +1,0 @@
-export { OwnedShips } from './Owned'
