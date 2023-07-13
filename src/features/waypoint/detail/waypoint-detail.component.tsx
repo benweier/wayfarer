@@ -19,14 +19,14 @@ export const WaypointDetail = ({ systemID, waypointID, children }: WithChildren<
   const waypoint = data.data
 
   return (
-    <div key={waypoint.symbol} className="grid gap-4">
-      <div>
-        <div className="flex flex-row items-center justify-start gap-4">
+    <div className="grid gap-4">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row flex-wrap items-center justify-start gap-x-4 gap-y-2">
           <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</WaypointTag>
           <div className="text-sm font-light">
             ({waypoint.x}, {waypoint.y})
           </div>
-          <div>
+          <div className="whitespace-nowrap">
             System:{' '}
             <Link className="link" to={`/systems/${systemID}`}>
               {systemID}
@@ -34,7 +34,7 @@ export const WaypointDetail = ({ systemID, waypointID, children }: WithChildren<
           </div>
         </div>
 
-        <div className="flex flex-wrap items-baseline gap-1">
+        <div className="flex flex-wrap gap-1">
           {waypoint.traits.map((trait) => (
             <Badge key={trait.symbol}>{trait.name}</Badge>
           ))}

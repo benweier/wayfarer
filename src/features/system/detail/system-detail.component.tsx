@@ -17,10 +17,9 @@ export const SystemDetail = ({ systemID, children }: WithChildren<SystemDetailPr
 
   return (
     <div key={system.symbol} className="grid gap-4">
-      <div className="flex flex-row items-center justify-start gap-4">
-        <SystemTag type={system.type}>{SYSTEM_TYPE.get(system.type)}</SystemTag>
-        <div className="text-sm font-light">
-          ({system.x}, {system.y})
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row flex-wrap items-center justify-start gap-x-4 gap-y-2">
+          <SystemTag type={system.type}>{SYSTEM_TYPE.get(system.type) ?? system.type}</SystemTag>
         </div>
       </div>
 
