@@ -1,6 +1,6 @@
 # [Wayfarer](https://wayfarer.benweier.dev/)
 
-Wayfarer is a browser-based interface for **v2** of the [SpaceTraders API](https://spacetraders.stoplight.io/docs/spacetraders). Just as the API itself is a work-in-progress under active development, Wayfarer is a work-in-progress intended for demonstration purposes of a number of key patterns and technologies.
+Wayfarer is a browser-based interface for **v2** of the [SpaceTraders API](https://spacetraders.io). Just as the API itself is a work-in-progress under active development, Wayfarer is a work-in-progress intended for demonstration purposes of a number of key patterns and technologies.
 
 ## Features
 
@@ -40,7 +40,7 @@ Wayfarer is not a framework, a library, or boilerplate. Instead, it embraces and
 
 With this in mind, Wayfarer's focus is on building a UI for the SpaceTraders API using React and the ecosystem of tools that have grown around it, and not a framework that abstracts away the underlying technologies. This is not to say that frameworks are bad, but rather that they are not the only way to build a React application. Next, Gatsby, Remix, et al. have (re)popularised server-side rendering and static generation of late; built and marketed as "batteries included" meta-frameworks (or at the very least "batteries npm-installable") for solving the specific challenges of SSR/SSG. This project, however, intentionally presents an opposing stance where React is (still/also) a client-side rendering library and remains a perfectly suitable approach.
 
-Wayfarer is not built around documentation or theoretical app tutorials that can be worked through in a weekend. Preferring a concrete, implementation-first approach over isolated, hypothetical code snippets, or arbitrarily contrived "demo applications". It is a collection of real-world patterns and best practices I have come to rely on that can be applied to projects of any size, and is largely a distillation of my own experiences and opinions on how to build a performant, responsive, and accessible React application.
+Wayfarer is not built around documentation or theoretical app tutorials that can be worked through in a weekend. Preferring a concrete, implementation-first approach over isolated, hypothetical code snippets, or arbitrarily contrived "demo" sandboxes that skip critical tooling or standards for the sake of simplicity. It is a collection of real-world patterns/practices I have come to rely on that can be applied to projects of any size, and is largely a distillation of my own experiences and opinions on how to build a performant, responsive, and accessible React application.
 
 Leveraging some of the best tools of the ecosystem from the ground up, the patterns expressed within may serve as a reference regardless of Wayfarers' actual state of "feature-completeness" with the SpaceTraders API. Hopefully, it is a useful resource for others who are interested in learning about these features and how to utilise them in their own projects.
 
@@ -54,15 +54,15 @@ Wayfarer's most powerful features are built on top of React's composition model 
 
 > **Path Routes are _(almost always)_ lazy-loaded**
 
-Routes are considered "pages" in a traditional sense, but they are not necessarily 1:1 with a URL. Route elements do little more than orchestrate the components inside a layout, such as passing around dynamic path segments. The layout is the real page and is responsible for prefetching data, handling errors, and rendering fallback states. This is where Suspense and Error Boundaries are used to their fullest extent.
+Routes are considered "pages" in a traditional sense, but they are not necessarily 1:1 with a URL. Route elements do little more than orchestrate the components inside a layout, such as passing around dynamic path segments. The page features are responsible for fetching data/consuming prefetched data, handling errors, and rendering fallback states. This is where Suspense and Error Boundaries are used to their fullest extent.
 
 > **Routes _may_ have a `loader` prop that initiates data prefetching**  
 
 A `loader` in React Router returns a Promise that resolves to some data. In Wayfarer, while it could use the `useLoaderData` hook, the loader doesn't handle caching or deduplication of requests so it is used simply to initiate prefetching with React Query's `ensureQueryData`. This helps to keep the interface feeling snappy and responsive during route transitions (see [perceived performance](https://en.wikipedia.org/wiki/Perceived_performance)), 
 
-> **React Query is _always_ used to fetch/cache/manage remote server state**
+> **React Query is _always_ used to fetch/cache/mutate server state**
 
-React Query is such an amazing library that I have a hard time letting it go. It is used for all remote data and is the primary source of truth for the application. It enables [Optimistic Updates](https://tanstack.com/query/v4/docs/react/guides/optimistic-updates), makes Mutations and Query Invalidation a snap, and caches data for reasonable amounts of time.
+Although loaders/actions can achieve similar results, React Query is such an amazing library that I have a hard time letting it go. It is used for all server state and is the primary source of truth for the application. It enables [Optimistic Updates](https://tanstack.com/query/v4/docs/react/guides/optimistic-updates), makes Mutations and Query Invalidation a snap, and caches data for reasonable amounts of time.
 
 > **Suspense and Error Boundaries are _always_ used to handle fallback/error states**
 
