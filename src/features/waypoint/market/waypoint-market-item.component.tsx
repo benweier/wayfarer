@@ -1,3 +1,5 @@
+import { useAtom } from 'jotai'
+import { marketDescriptionAtom } from '@/store/atoms/market.display'
 import { MarketGood } from '@/types/spacetraders'
 
 export const WaypointMarketItem = ({
@@ -5,6 +7,8 @@ export const WaypointMarketItem = ({
   available,
   children,
 }: WithChildren<{ item: MarketGood; available?: number }>) => {
+  const [showDescription] = useAtom(marketDescriptionAtom)
+
   return (
     <div key={item.symbol} className="grid gap-4 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 dark:bg-opacity-10">
       <div className="grid gap-2">
@@ -14,7 +18,7 @@ export const WaypointMarketItem = ({
             <span className="text-lg font-bold">{new Intl.NumberFormat('en-US').format(available)}</span>
           )}
         </div>
-        <div className="text-secondary text-sm">{item.description}</div>
+        {showDescription && <div className="text-secondary text-sm">{item.description}</div>}
       </div>
 
       {children}
