@@ -1,33 +1,50 @@
 import { RadioGroup, Switch } from '@headlessui/react'
 import { useAtom } from 'jotai'
-import { marketDescriptionAtom, marketDisplayAtom } from '@/store/atoms/market.display'
+import { useSearchParams } from 'react-router-dom'
+import { marketDescriptionAtom } from '@/store/atoms/market.display'
 import { cx } from '@/utilities/cx'
 
+const WaypointMarketSortBy = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const value = searchParams.get('sort') ?? 'name'
+
+  return (
+    <RadioGroup
+      value={value}
+      onChange={(value) => {
+        setSearchParams({ sort: value })
+      }}
+      className="flex flex-col gap-1"
+    >
+      <RadioGroup.Label className="text-xs font-bold">Sort By</RadioGroup.Label>
+      <div className="flex gap-2">
+        {[
+          { label: 'Item Name', value: 'name' },
+          { label: 'Buy Price', value: 'buy' },
+          { label: 'Sell Price', value: 'sell' },
+          { label: 'Trade Volume', value: 'volume' },
+        ].map((item) => (
+          <RadioGroup.Option
+            key={item.value}
+            value={item.value}
+            className={({ checked }) => cx('btn btn-sm', { 'btn-primary btn-outline': checked })}
+          >
+            <RadioGroup.Label>{item.label}</RadioGroup.Label>
+          </RadioGroup.Option>
+        ))}
+      </div>
+    </RadioGroup>
+  )
+}
+
 export const WaypointMarketPreferences = () => {
-  const [displayMode, setDisplayMode] = useAtom(marketDisplayAtom)
   const [showDescription, setShowDescription] = useAtom(marketDescriptionAtom)
 
   return (
     <div className="flex items-center justify-between gap-4">
-      <div className="flex items-center justify-start gap-4">
-        <RadioGroup value={displayMode} onChange={setDisplayMode}>
-          <RadioGroup.Label className="sr-only text-sm font-bold">Display as</RadioGroup.Label>
-          <div className="flex items-center gap-2">
-            {[
-              { label: 'List', value: 'list' },
-              { label: 'Grid', value: 'grid' },
-            ].map((item) => (
-              <RadioGroup.Option
-                key={item.value}
-                value={item.value}
-                className={({ checked }) => cx('btn btn-sm', { 'btn-primary btn-outline': checked })}
-              >
-                <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
-              </RadioGroup.Option>
-            ))}
-          </div>
-        </RadioGroup>
-      </div>
+      <WaypointMarketSortBy />
+
       <div className="flex items-center justify-end gap-4">
         <div className="flex items-center gap-2">
           <span className="text-secondary text-sm">Show item description</span>
