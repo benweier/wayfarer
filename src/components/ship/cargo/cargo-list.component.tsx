@@ -4,7 +4,6 @@ import { Fragment } from 'react'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { Modal, useModalActions } from '@/components/modal'
 import { REFINE_ITEM_TYPE } from '@/config/constants'
-import { MarketTradeGoodContext } from '@/context/market-trade-good.context'
 import { useShipContext } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
@@ -103,22 +102,17 @@ export const List = () => {
             <Item item={item}>
               <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
                 {produce && <ShipActions.Refine ship={ship} produce={produce} />}
-                {!good ? (
-                  <button disabled className="btn btn-confirm btn-flat btn-sm">
-                    Sell
-                  </button>
-                ) : (
+                {!!good && (
                   <SystemContext.Provider value={{ systemID: ship.nav.systemSymbol }}>
                     <WaypointContext.Provider value={{ waypointID: ship.nav.waypointSymbol }}>
-                      <MarketTradeGoodContext.Provider value={good}>
-                        <SellCargo
-                          action={(props) => (
-                            <button className="btn btn-confirm btn-flat btn-sm" {...props}>
-                              Sell {!!good && `(${good.sellPrice})`}
-                            </button>
-                          )}
-                        />
-                      </MarketTradeGoodContext.Provider>
+                      <SellCargo
+                        good={good}
+                        action={(props) => (
+                          <button className="btn btn-confirm btn-flat btn-sm" {...props}>
+                            Sell {!!good && `(${good.sellPrice})`}
+                          </button>
+                        )}
+                      />
                     </WaypointContext.Provider>
                   </SystemContext.Provider>
                 )}
