@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
-import { SellCargoFormProps } from './sell-cargo.types'
 import { SellCargoSchema, validation } from '@/components/market/sell-cargo/sell.validation'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useWaypointContext } from '@/context/waypoint.context'
+import { SellCargoFormProps } from './sell-cargo.types'
 
 const SubmitPurchase = () => {
   const { isSubmitting, isValid } = useFormState()
