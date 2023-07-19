@@ -1,18 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { PurchaseCargo } from '@/components/market/purchase-cargo'
-import { SellCargo } from '@/components/market/sell-cargo'
-import { MarketTradeGoodContext } from '@/context/market-trade-good.context'
+import { useSearchParams } from 'react-router-dom'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
 import { getMarket, getWaypointById } from '@/services/api/spacetraders'
 import { MarketTradeGood } from '@/types/spacetraders'
 import { WaypointMarketItem } from './waypoint-market-item.component'
+import { makeSortByTradeAttributeFn } from './waypoint-market-preferences.utilities'
 import { WaypointMarketLayout } from './waypoint-market.layout'
 import { WaypointMarketNotAvailable } from './waypoint-market.not-available'
 
 export const WaypointMarketList = () => {
   const { systemID } = useSystemContext()
   const { waypointID } = useWaypointContext()
+  const [searchParams] = useSearchParams()
   const waypointQuery = useQuery({
     queryKey: ['system', systemID, 'waypoint', waypointID],
     queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
@@ -39,6 +39,7 @@ export const WaypointMarketList = () => {
     result.set(item.symbol, item)
     return result
   }, new Map())
+  const sorter = makeSortByTradeAttributeFn(searchParams.get('sort'), tradeGoods)
 
   return (
     <WaypointMarketLayout
@@ -51,30 +52,10 @@ export const WaypointMarketList = () => {
               </div>
             </div>
           )}
-          {market.imports.map((item) => {
+          {market.imports.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return (
-              <WaypointMarketItem key={item.symbol} item={item} available={good?.tradeVolume}>
-                {!!good && (
-                  <MarketTradeGoodContext.Provider value={good}>
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="text-center text-2xl font-semibold">
-                        {new Intl.NumberFormat('en-US').format(good.purchasePrice)}
-                      </div>
-
-                      <div className="text-center text-2xl font-semibold">
-                        {new Intl.NumberFormat('en-US').format(good.sellPrice)}
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <div />
-                      <SellCargo />
-                    </div>
-                  </MarketTradeGoodContext.Provider>
-                )}
-              </WaypointMarketItem>
-            )
+            return <WaypointMarketItem key={item.symbol} item={item} trade={good} />
           })}
         </>
       }
@@ -87,30 +68,10 @@ export const WaypointMarketList = () => {
               </div>
             </div>
           )}
-          {market.exports.map((item) => {
+          {market.exports.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return (
-              <WaypointMarketItem key={item.symbol} item={item} available={good?.tradeVolume}>
-                {!!good && (
-                  <MarketTradeGoodContext.Provider value={good}>
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="text-center text-2xl font-semibold">
-                        {new Intl.NumberFormat('en-US').format(good.purchasePrice)}
-                      </div>
-
-                      <div className="text-center text-2xl font-semibold">
-                        {new Intl.NumberFormat('en-US').format(good.sellPrice)}
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <PurchaseCargo />
-                      <div />
-                    </div>
-                  </MarketTradeGoodContext.Provider>
-                )}
-              </WaypointMarketItem>
-            )
+            return <WaypointMarketItem key={item.symbol} item={item} trade={good} />
           })}
         </>
       }
@@ -123,30 +84,10 @@ export const WaypointMarketList = () => {
               </div>
             </div>
           )}
-          {market.exchange.map((item) => {
+          {market.exchange.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return (
-              <WaypointMarketItem key={item.symbol} item={item} available={good?.tradeVolume}>
-                {!!good && (
-                  <MarketTradeGoodContext.Provider value={good}>
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="text-center text-2xl font-semibold">
-                        {new Intl.NumberFormat('en-US').format(good.purchasePrice)}
-                      </div>
-
-                      <div className="text-center text-2xl font-semibold">
-                        {new Intl.NumberFormat('en-US').format(good.sellPrice)}
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <PurchaseCargo />
-                      <SellCargo />
-                    </div>
-                  </MarketTradeGoodContext.Provider>
-                )}
-              </WaypointMarketItem>
-            )
+            return <WaypointMarketItem key={item.symbol} item={item} trade={good} />
           })}
         </>
       }
