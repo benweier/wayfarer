@@ -19,25 +19,25 @@ export const Refuel = ({
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'refuel'],
-    mutationFn: (shipID: string) => createShipRefuel({ path: { shipID } }),
-    onMutate: (shipID) => {
+    mutationFn: (shipSymbol: string) => createShipRefuel({ path: { shipSymbol } }),
+    onMutate: (shipSymbol) => {
       void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipID] })
+      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
     },
-    onSuccess: (response, shipID) => {
+    onSuccess: (response, shipSymbol) => {
       const fuel = response.data.fuel
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipFuel(ship, fuel))
+      if (ship) client.setQueryData(['ship', shipSymbol], updateShipFuel(ship, fuel))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetFuel(ships, index, fuel))
     },
-    onSettled: (response, _err, shipID) => {
+    onSettled: (response, _err, shipSymbol) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
 
       if (response?.data.agent) {
         setAgent(response.data.agent)

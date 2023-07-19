@@ -25,33 +25,33 @@ export const Extract = ({
   }))
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'extract'],
-    mutationFn: ({ shipID, survey }: { shipID: string; survey?: SurveyResponse }) =>
-      createShipExtract({ path: { shipID }, payload: { survey } }),
-    onMutate: ({ shipID }) => {
+    mutationFn: ({ shipSymbol, survey }: { shipSymbol: string; survey?: SurveyResponse }) =>
+      createShipExtract({ path: { shipSymbol }, payload: { survey } }),
+    onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipID] })
+      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
     },
-    onSuccess: (response, { shipID, survey }) => {
+    onSuccess: (response, { shipSymbol, survey }) => {
       if (survey) removeSurvey(survey.signature)
       const cooldown = response.data.cooldown
-      setCooldown(shipID, cooldown)
+      setCooldown(shipSymbol, cooldown)
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
+      if (ship) client.setQueryData(['ship', shipSymbol], updateShipCargo(ship, response.data.cargo))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
     },
-    onSettled: (_res, _err, { shipID }) => {
+    onSettled: (_res, _err, { shipSymbol }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
     },
   })
 
   return children({
     disabled: hasCooldown || isLoading,
-    onClick: () => mutate({ shipID: ship.symbol, survey }),
+    onClick: () => mutate({ shipSymbol: ship.symbol, survey }),
   })
 }

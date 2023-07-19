@@ -20,23 +20,23 @@ export const Navigate = ({
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'navigate'],
-    mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
-      createShipNavigate({ path: { shipID }, payload: { waypointSymbol: waypointID } }),
-    onMutate: ({ shipID }) => {
+    mutationFn: ({ shipSymbol, waypointID }: { shipSymbol: string; waypointID: string }) =>
+      createShipNavigate({ path: { shipSymbol }, payload: { waypointSymbol: waypointID } }),
+    onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipID] })
+      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
       return { ship, ships }
     },
-    onSuccess: (response, { shipID }, ctx) => {
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+    onSuccess: (response, { shipSymbol }, ctx) => {
+      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ctx?.ship) {
         client.setQueryData(
-          ['ship', shipID],
+          ['ship', shipSymbol],
           produce(ctx.ship, (draft) => {
             draft.data.nav = response.data.nav
           }),
@@ -52,18 +52,18 @@ export const Navigate = ({
         )
       }
     },
-    onError: (_err, shipID, ctx) => {
-      client.setQueryData(['ship', shipID], ctx?.ship)
+    onError: (_err, shipSymbol, ctx) => {
+      client.setQueryData(['ship', shipSymbol], ctx?.ship)
       client.setQueryData(['ships'], ctx?.ships)
     },
-    onSettled: (_res, _err, shipID) => {
+    onSettled: (_res, _err, shipSymbol) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
     },
   })
 
   return children({
     disabled: isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
-    onClick: () => mutate({ shipID: ship.symbol, waypointID }),
+    onClick: () => mutate({ shipSymbol: ship.symbol, waypointID }),
   })
 }

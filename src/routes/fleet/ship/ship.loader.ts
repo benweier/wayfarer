@@ -8,9 +8,9 @@ export const loader: QueryClientLoaderFn =
   (client) =>
   async ({ params }) => {
     const { isAuthenticated } = getState()
-    const { shipID } = params
+    const { shipSymbol } = params
 
-    if (!shipID) {
+    if (!shipSymbol) {
       throw new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
     }
 
@@ -21,8 +21,8 @@ export const loader: QueryClientLoaderFn =
 
     try {
       const ship = await client.ensureQueryData({
-        queryKey: ['ship', shipID],
-        queryFn: ({ signal }) => getShipById({ path: { shipID } }, { signal }),
+        queryKey: ['ship', shipSymbol],
+        queryFn: ({ signal }) => getShipById({ path: { shipSymbol } }, { signal }),
       })
 
       const market = client.ensureQueryData({

@@ -21,25 +21,25 @@ const DockComponent = (
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'dock'],
-    mutationFn: (shipID: string) => createShipDock({ path: { shipID } }),
-    onMutate: (shipID) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+    mutationFn: (shipSymbol: string) => createShipDock({ path: { shipSymbol } }),
+    onMutate: (shipSymbol) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipNavStatus(ship, 'DOCKING'))
+      if (ship) client.setQueryData(['ship', shipSymbol], updateShipNavStatus(ship, 'DOCKING'))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'DOCKING'))
 
       return { ship, ships }
     },
-    onError: (_err, shipID, ctx) => {
-      client.setQueryData(['ship', shipID], ctx?.ship)
+    onError: (_err, shipSymbol, ctx) => {
+      client.setQueryData(['ship', shipSymbol], ctx?.ship)
       client.setQueryData(['ships'], ctx?.ships)
     },
-    onSettled: (_res, _err, shipID) => {
+    onSettled: (_res, _err, shipSymbol) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
     },
   })
 

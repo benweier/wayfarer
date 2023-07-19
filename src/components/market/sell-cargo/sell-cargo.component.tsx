@@ -23,28 +23,28 @@ export const SellCargo = ({
   const client = useQueryClient()
   const { mutateAsync } = useMutation({
     mutationKey: ['cargo', good.symbol, 'sell'],
-    mutationFn: ({ shipID, symbol, units }: { shipID: string; symbol: string; units: number }) =>
-      createShipCargoSell({ path: { shipID }, payload: { symbol, units } }),
-    onMutate: ({ shipID }) => {
+    mutationFn: ({ shipSymbol, symbol, units }: { shipSymbol: string; symbol: string; units: number }) =>
+      createShipCargoSell({ path: { shipSymbol }, payload: { symbol, units } }),
+    onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipID] })
+      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
     },
-    onSuccess: (response, { shipID }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+    onSuccess: (response, { shipSymbol }) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
+      if (ship) client.setQueryData(['ship', shipSymbol], updateShipCargo(ship, response.data.cargo))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
 
       if (response.data.agent) {
         setAgent(response.data.agent)
       }
     },
-    onSettled: (_res, _err, { shipID }) => {
+    onSettled: (_res, _err, { shipSymbol }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
 
       modal.close()
     },
@@ -70,7 +70,7 @@ export const SellCargo = ({
           good={good}
           onSubmit={(values) =>
             mutateAsync({
-              shipID: values.ship,
+              shipSymbol: values.ship,
               symbol: values.item,
               units: values.quantity,
             })

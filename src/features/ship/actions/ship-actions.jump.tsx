@@ -24,26 +24,26 @@ export const Jump = ({
   }))
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'jump'],
-    mutationFn: ({ shipID, systemID }: { shipID: string; systemID: string }) =>
-      createShipJump({ path: { shipID }, payload: { systemSymbol: systemID } }),
-    onMutate: ({ shipID }) => {
+    mutationFn: ({ shipSymbol, systemID }: { shipSymbol: string; systemID: string }) =>
+      createShipJump({ path: { shipSymbol }, payload: { systemSymbol: systemID } }),
+    onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipID] })
+      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
       return { ship, ships }
     },
-    onSuccess: (response, { shipID }, ctx) => {
+    onSuccess: (response, { shipSymbol }, ctx) => {
       const cooldown = response.data.cooldown
-      setCooldown(shipID, cooldown)
+      setCooldown(shipSymbol, cooldown)
 
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ctx?.ship) {
         client.setQueryData(
-          ['ship', shipID],
+          ['ship', shipSymbol],
           produce(ctx.ship, (draft) => {
             draft.data.nav = response.data.nav
           }),
@@ -59,14 +59,14 @@ export const Jump = ({
         )
       }
     },
-    onSettled: (_res, _err, { shipID }) => {
+    onSettled: (_res, _err, { shipSymbol }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
     },
   })
 
   return children({
     disabled: hasCooldown || isLoading,
-    onClick: () => mutate({ shipID: ship.symbol, systemID }),
+    onClick: () => mutate({ shipSymbol: ship.symbol, systemID }),
   })
 }

@@ -21,29 +21,29 @@ export const SellCargo = ({
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'cargo', 'sell'],
-    mutationFn: ({ shipID, symbol, units }: { shipID: string; symbol: string; units: number }) =>
-      createShipCargoSell({ path: { shipID }, payload: { symbol, units } }),
-    onMutate: ({ shipID }) => {
+    mutationFn: ({ shipSymbol, symbol, units }: { shipSymbol: string; symbol: string; units: number }) =>
+      createShipCargoSell({ path: { shipSymbol }, payload: { symbol, units } }),
+    onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipID] })
+      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
     },
-    onSuccess: (response, { shipID }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+    onSuccess: (response, { shipSymbol }) => {
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipID], updateShipCargo(ship, response.data.cargo))
+      if (ship) client.setQueryData(['ship', shipSymbol], updateShipCargo(ship, response.data.cargo))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
     },
-    onSettled: (_res, _err, { shipID }) => {
+    onSettled: (_res, _err, { shipSymbol }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
     },
   })
 
   return children({
     disabled: isLoading,
-    onClick: () => mutate({ shipID: ship.symbol, symbol, units }),
+    onClick: () => mutate({ shipSymbol: ship.symbol, symbol, units }),
   })
 }

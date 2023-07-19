@@ -226,7 +226,7 @@ const router = sentryCreateBrowserRouter(
               ErrorBoundary={RouteError}
             />
             <Route
-              path="ship/:shipID"
+              path="ship/:shipSymbol"
               lazy={async () => {
                 const ship = await import('src/routes/fleet/ship')
                 return {

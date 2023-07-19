@@ -32,23 +32,23 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
 
   const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'warp'],
-    mutationFn: ({ shipID, waypointID }: { shipID: string; waypointID: string }) =>
-      createShipWarp({ path: { shipID }, payload: { waypointSymbol: waypointID } }),
-    onMutate: ({ shipID }) => {
+    mutationFn: ({ shipSymbol, waypointID }: { shipSymbol: string; waypointID: string }) =>
+      createShipWarp({ path: { shipSymbol }, payload: { waypointSymbol: waypointID } }),
+    onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipID] })
+      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipID])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
 
       return { ship, ships }
     },
-    onSuccess: (response, { shipID }, ctx) => {
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipID) ?? -1
+    onSuccess: (response, { shipSymbol }, ctx) => {
+      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ctx?.ship) {
         client.setQueryData(
-          ['ship', shipID],
+          ['ship', shipSymbol],
           produce(ctx.ship, (draft) => {
             draft.data.nav = response.data.nav
             draft.data.fuel = response.data.fuel
@@ -66,15 +66,17 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
         )
       }
     },
-    onSettled: (_res, _err, { shipID }) => {
+    onSettled: (_res, _err, { shipSymbol }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipID] })
+      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
     },
   })
 
   return (
     <form
-      onSubmit={methods.handleSubmit((values) => mutateAsync({ shipID: ship.symbol, waypointID: values.waypointID }))}
+      onSubmit={methods.handleSubmit((values) =>
+        mutateAsync({ shipSymbol: ship.symbol, waypointID: values.waypointID }),
+      )}
     >
       <fieldset disabled={isLoading || ship.nav.status !== 'IN_ORBIT'} className="grid gap-4">
         <div>

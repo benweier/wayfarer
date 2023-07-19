@@ -5,40 +5,40 @@ import { CooldownResponse } from '@/types/spacetraders'
 type ShipCooldownState = { cooldowns: { [key: string]: CooldownResponse } }
 
 type ShipCooldownHandlers = {
-  setCooldown: (shipID: string, cooldown: CooldownResponse) => void
-  updateRemainingSeconds: (shipID: string) => void
-  clearCooldown: (shipID: string) => void
+  setCooldown: (shipSymbol: string, cooldown: CooldownResponse) => void
+  updateRemainingSeconds: (shipSymbol: string) => void
+  clearCooldown: (shipSymbol: string) => void
 }
 
 type ShipCooldownStore = ShipCooldownState & ShipCooldownHandlers
 
 export const useShipCooldownStore = create<ShipCooldownStore>((set, get) => ({
   cooldowns: {},
-  setCooldown: (shipID, cooldown) => {
+  setCooldown: (shipSymbol, cooldown) => {
     return set(
       produce((draft: Draft<ShipCooldownStore>) => {
-        draft.cooldowns[shipID] = cooldown
+        draft.cooldowns[shipSymbol] = cooldown
       }),
     )
   },
-  updateRemainingSeconds: (shipID) => {
+  updateRemainingSeconds: (shipSymbol) => {
     return set(
       produce((draft: Draft<ShipCooldownStore>) => {
-        const cooldown = get().cooldowns[shipID]
+        const cooldown = get().cooldowns[shipSymbol]
 
         if (cooldown) {
           const now = Date.now()
           const expiration = new Date(cooldown.expiration)
 
-          draft.cooldowns[shipID].remainingSeconds = Math.floor(Math.abs(now - expiration.getTime()) / 1000)
+          draft.cooldowns[shipSymbol].remainingSeconds = Math.floor(Math.abs(now - expiration.getTime()) / 1000)
         }
       }),
     )
   },
-  clearCooldown: (shipID) => {
+  clearCooldown: (shipSymbol) => {
     return set(
       produce((draft: Draft<ShipCooldownStore>) => {
-        delete draft.cooldowns[shipID]
+        delete draft.cooldowns[shipSymbol]
       }),
     )
   },
