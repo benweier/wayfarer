@@ -13,7 +13,7 @@ const WaypointMarketSortBy = () => {
     <RadioGroup
       value={value}
       onChange={(value) => {
-        setSearchParams({ sort: value })
+        setSearchParams({ sort: value }, { replace: true })
       }}
       className="flex flex-col gap-1"
     >
