@@ -3,6 +3,6 @@ import { FactionResponse } from '@/types/spacetraders'
 
 export const getFactionsList = queryFnFactory<SpaceTradersResponse<FactionResponse[], Meta>>(() => 'factions')
 
-export const getFactionById = queryFnFactory<SpaceTradersResponse<FactionResponse>, { factionID: string }>(
-  ({ factionID }) => `factions/${factionID}`,
+export const getFactionById = queryFnFactory<SpaceTradersResponse<FactionResponse>, { factionSymbol: string }>(
+  ({ factionSymbol }) => `factions/${factionSymbol}`,
 )
