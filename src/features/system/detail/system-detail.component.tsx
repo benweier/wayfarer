@@ -5,10 +5,10 @@ import { SystemContext } from '@/context/system.context'
 import { getSystemById } from '@/services/api/spacetraders'
 import { SystemDetailProps } from './system-detail.types'
 
-export const SystemDetail = ({ systemID, children }: WithChildren<SystemDetailProps>) => {
+export const SystemDetail = ({ systemSymbol, children }: WithChildren<SystemDetailProps>) => {
   const { isSuccess, data } = useQuery({
-    queryKey: ['system', systemID],
-    queryFn: ({ signal }) => getSystemById({ path: { systemID } }, { signal }),
+    queryKey: ['system', systemSymbol],
+    queryFn: ({ signal }) => getSystemById({ path: { systemSymbol } }, { signal }),
   })
 
   if (!isSuccess) return null
@@ -23,7 +23,7 @@ export const SystemDetail = ({ systemID, children }: WithChildren<SystemDetailPr
         </div>
       </div>
 
-      {children && <SystemContext.Provider value={{ systemID: system.symbol }}>{children}</SystemContext.Provider>}
+      {children && <SystemContext.Provider value={{ systemSymbol: system.symbol }}>{children}</SystemContext.Provider>}
     </div>
   )
 }

@@ -5,10 +5,10 @@ import { getSystemById } from '@/services/api/spacetraders'
 import { WaypointListProps } from './waypoint-list.types'
 
 export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => {
-  const { systemID } = useSystemContext()
+  const { systemSymbol } = useSystemContext()
   const { isSuccess, data } = useQuery({
-    queryKey: ['system', systemID],
-    queryFn: ({ signal }) => getSystemById({ path: { systemID } }, { signal }),
+    queryKey: ['system', systemSymbol],
+    queryFn: ({ signal }) => getSystemById({ path: { systemSymbol } }, { signal }),
   })
 
   if (!isSuccess) return null
@@ -18,7 +18,7 @@ export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => 
   return (
     <div className="grid grid-cols-1 gap-1 lg:grid-cols-3">
       {system.waypoints.map((waypoint) => (
-        <Waypoint key={waypoint.symbol} systemID={system.symbol} waypoint={waypoint} />
+        <Waypoint key={waypoint.symbol} systemSymbol={system.symbol} waypoint={waypoint} />
       ))}
     </div>
   )

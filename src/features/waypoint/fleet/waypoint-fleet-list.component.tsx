@@ -5,14 +5,14 @@ import { ShipItem } from '@/features/ship/item'
 import { getShipsList } from '@/services/api/spacetraders'
 
 export const WaypointFleetList = () => {
-  const { systemID } = useSystemContext()
+  const { systemSymbol } = useSystemContext()
   const { waypointID } = useWaypointContext()
   const { isSuccess, data } = useQuery({
     queryKey: ['ships'],
     queryFn: ({ signal }) => getShipsList(undefined, { signal }),
     select: (response) => ({
       data: response.data.filter(
-        (ship) => ship.nav.systemSymbol === systemID && ship.nav.waypointSymbol === waypointID,
+        (ship) => ship.nav.systemSymbol === systemSymbol && ship.nav.waypointSymbol === waypointID,
       ),
       meta: response.meta,
     }),

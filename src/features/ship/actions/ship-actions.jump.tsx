@@ -8,14 +8,14 @@ import { ShipActionProps } from './ship-actions.types'
 
 export const Jump = ({
   ship,
-  systemID,
+  systemSymbol,
   children = (props) => (
     <button className="btn btn-sm" {...props}>
       Jump
     </button>
   ),
 }: ShipActionProps<{
-  systemID: string
+  systemSymbol: string
 }>) => {
   const client = useQueryClient()
   const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
@@ -24,8 +24,8 @@ export const Jump = ({
   }))
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'jump'],
-    mutationFn: ({ shipSymbol, systemID }: { shipSymbol: string; systemID: string }) =>
-      createShipJump({ path: { shipSymbol }, payload: { systemSymbol: systemID } }),
+    mutationFn: ({ shipSymbol, systemSymbol }: { shipSymbol: string; systemSymbol: string }) =>
+      createShipJump({ path: { shipSymbol }, payload: { systemSymbol: systemSymbol } }),
     onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
@@ -67,6 +67,6 @@ export const Jump = ({
 
   return children({
     disabled: hasCooldown || isLoading,
-    onClick: () => mutate({ shipSymbol: ship.symbol, systemID }),
+    onClick: () => mutate({ shipSymbol: ship.symbol, systemSymbol }),
   })
 }

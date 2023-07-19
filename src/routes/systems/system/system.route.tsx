@@ -7,17 +7,17 @@ import { WaypointList } from '@/features/waypoint/list'
 import { cx } from '@/utilities/cx'
 
 export const SystemViewComponent = () => {
-  const { systemID } = useParams()
+  const { systemSymbol } = useParams()
 
   return (
     <div className="grid gap-4 p-4">
       <h1 className="text-title">
-        System: <span className="whitespace-nowrap font-normal">{systemID}</span>
+        System: <span className="whitespace-nowrap font-normal">{systemSymbol}</span>
       </h1>
 
-      {systemID && (
+      {systemSymbol && (
         <QuerySuspenseBoundary>
-          <SystemDetail systemID={systemID}>
+          <SystemDetail systemSymbol={systemSymbol}>
             <Tab.Group as="div" className="tab-group">
               <Tab.List className="tab-list">
                 <Tab className={({ selected }) => cx('group tab', { selected })}>Waypoints</Tab>

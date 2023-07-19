@@ -1,1 +1,1 @@
-export type SystemDetailProps = { systemID: string }
+export type SystemDetailProps = { systemSymbol: string }

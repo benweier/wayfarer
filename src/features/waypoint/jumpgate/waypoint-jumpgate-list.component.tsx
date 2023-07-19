@@ -6,12 +6,12 @@ import { WaypointJumpGateItem } from './waypoint-jumpgate-item.component'
 import { WaypointJumpGateLayout } from './waypoint-jumpgate.layout'
 
 export const WaypointJumpGateList = () => {
-  const { systemID } = useSystemContext()
+  const { systemSymbol } = useSystemContext()
   const { waypointID } = useWaypointContext()
 
   const { data, isSuccess } = useQuery({
-    queryKey: ['jump-gate', systemID, waypointID],
-    queryFn: ({ signal }) => getJumpGate({ path: { systemID, waypointID } }, { signal }),
+    queryKey: ['jump-gate', systemSymbol, waypointID],
+    queryFn: ({ signal }) => getJumpGate({ path: { systemSymbol, waypointID } }, { signal }),
   })
 
   if (!isSuccess) return null

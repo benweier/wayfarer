@@ -5,19 +5,19 @@ import { getShipyard, getWaypointById } from '@/services/api/spacetraders'
 import { WaypointShipyardNotAvailable } from './waypoint-shipyard.not-available'
 
 export const WaypointShipyardList = () => {
-  const { systemID } = useSystemContext()
+  const { systemSymbol } = useSystemContext()
   const { waypointID } = useWaypointContext()
   const waypointQuery = useQuery({
-    queryKey: ['system', systemID, 'waypoint', waypointID],
-    queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
+    queryKey: ['system', systemSymbol, 'waypoint', waypointID],
+    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointID } }, { signal }),
   })
 
   const shipyardEnabled =
     waypointQuery.isSuccess && waypointQuery.data.data.traits.findIndex((trait) => trait.symbol === 'SHIPYARD') !== -1
 
   const shipyardQuery = useQuery({
-    queryKey: ['shipyard', systemID, waypointID],
-    queryFn: ({ signal }) => getShipyard({ path: { systemID, waypointID } }, { signal }),
+    queryKey: ['shipyard', systemSymbol, waypointID],
+    queryFn: ({ signal }) => getShipyard({ path: { systemSymbol, waypointID } }, { signal }),
     enabled: shipyardEnabled,
   })
 

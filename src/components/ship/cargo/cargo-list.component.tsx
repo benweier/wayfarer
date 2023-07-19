@@ -21,7 +21,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
       trigger={
         <Modal.Trigger>
           {(props) => (
-            <button className="btn btn-danger btn-flat btn-sm" {...props}>
+            <button className="btn btn-flat btn-danger btn-sm" {...props}>
               Jettison
             </button>
           )}
@@ -64,7 +64,7 @@ export const List = () => {
   const { data } = useQuery({
     queryKey: ['system', ship.nav.systemSymbol, ship.nav.waypointSymbol, 'market'],
     queryFn: ({ signal }) =>
-      getMarket({ path: { systemID: ship.nav.systemSymbol, waypointID: ship.nav.waypointSymbol } }, { signal }),
+      getMarket({ path: { systemSymbol: ship.nav.systemSymbol, waypointID: ship.nav.waypointSymbol } }, { signal }),
     select: (response) => {
       const market = [...response.data.imports, ...response.data.exchange]
       const goods = response.data.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
@@ -103,12 +103,12 @@ export const List = () => {
               <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
                 {produce && <ShipActions.Refine ship={ship} produce={produce} />}
                 {!!good && (
-                  <SystemContext.Provider value={{ systemID: ship.nav.systemSymbol }}>
+                  <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
                     <WaypointContext.Provider value={{ waypointID: ship.nav.waypointSymbol }}>
                       <SellCargo
                         good={good}
                         action={(props) => (
-                          <button className="btn btn-confirm btn-flat btn-sm" {...props}>
+                          <button className="btn btn-flat btn-confirm btn-sm" {...props}>
                             Sell {!!good && `(${good.sellPrice})`}
                           </button>
                         )}

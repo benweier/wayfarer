@@ -39,7 +39,7 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const { isSuccess, data } = useQuery({
     queryKey: ['system', ship.nav.systemSymbol, 'waypoints'],
     queryFn: () => {
-      return getWaypointsList({ path: { systemID: ship.nav.systemSymbol } })
+      return getWaypointsList({ path: { systemSymbol: ship.nav.systemSymbol } })
     },
   })
 
@@ -63,7 +63,7 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
           <ShipActions.Navigate ship={ship} waypointID={waypoint.symbol}>
             {ship.nav.waypointSymbol !== waypoint.symbol
               ? (props) => (
-                  <button className="btn btn-icon btn-confirm btn-outline" {...props}>
+                  <button className="btn btn-icon btn-outline btn-confirm" {...props}>
                     <ShipIcon id="navigate" className="h-4 w-4" aria-hidden />
                     <span className="sr-only">
                       Navigate ship {ship.symbol} to waypoint {waypoint.symbol}

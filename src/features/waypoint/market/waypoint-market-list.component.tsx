@@ -10,12 +10,12 @@ import { WaypointMarketLayout } from './waypoint-market.layout'
 import { WaypointMarketNotAvailable } from './waypoint-market.not-available'
 
 export const WaypointMarketList = () => {
-  const { systemID } = useSystemContext()
+  const { systemSymbol } = useSystemContext()
   const { waypointID } = useWaypointContext()
   const [searchParams] = useSearchParams()
   const waypointQuery = useQuery({
-    queryKey: ['system', systemID, 'waypoint', waypointID],
-    queryFn: ({ signal }) => getWaypointById({ path: { systemID, waypointID } }, { signal }),
+    queryKey: ['system', systemSymbol, 'waypoint', waypointID],
+    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointID } }, { signal }),
   })
 
   const marketEnabled =
@@ -23,8 +23,8 @@ export const WaypointMarketList = () => {
     waypointQuery.data.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
 
   const marketQuery = useQuery({
-    queryKey: ['system', systemID, waypointID, 'market'],
-    queryFn: ({ signal }) => getMarket({ path: { systemID, waypointID } }, { signal }),
+    queryKey: ['system', systemSymbol, waypointID, 'market'],
+    queryFn: ({ signal }) => getMarket({ path: { systemSymbol, waypointID } }, { signal }),
     enabled: marketEnabled,
   })
 

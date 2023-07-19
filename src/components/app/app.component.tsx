@@ -187,7 +187,7 @@ const router = sentryCreateBrowserRouter(
               }}
               ErrorBoundary={RouteError}
             />
-            <Route path=":systemID">
+            <Route path=":systemSymbol">
               <Route
                 index
                 lazy={async () => {

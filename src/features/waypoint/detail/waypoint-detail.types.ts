@@ -1,1 +1,1 @@
-export type WaypointDetailProps = { systemID: string; waypointID: string }
+export type WaypointDetailProps = { systemSymbol: string; waypointID: string }

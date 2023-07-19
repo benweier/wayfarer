@@ -8,22 +8,22 @@ export const loader: QueryClientLoaderFn =
   (client) =>
   async ({ params }) => {
     const { isAuthenticated } = getState()
-    const { systemID } = params
+    const { systemSymbol } = params
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
       return new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
     }
 
-    if (!systemID) {
+    if (!systemSymbol) {
       redirect(ROUTES.SYSTEMS)
       return new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
     }
 
     try {
       const system = client.ensureQueryData({
-        queryKey: ['system', systemID],
-        queryFn: ({ signal }) => getSystemById({ path: { systemID } }, { signal }),
+        queryKey: ['system', systemSymbol],
+        queryFn: ({ signal }) => getSystemById({ path: { systemSymbol } }, { signal }),
       })
 
       return defer({

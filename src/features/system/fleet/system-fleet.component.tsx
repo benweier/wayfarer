@@ -6,12 +6,12 @@ import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { ShipResponse } from '@/types/spacetraders'
 
 export const SystemFleet = () => {
-  const { systemID } = useSystemContext()
+  const { systemSymbol } = useSystemContext()
   const { isSuccess, data } = useQuery({
     queryKey: ['ships'],
     queryFn: ({ signal }) => getShipsList(undefined, { signal }),
     select: (response): SpaceTradersResponse<ShipResponse[]> => ({
-      data: response.data.filter((ship) => ship.nav.systemSymbol === systemID),
+      data: response.data.filter((ship) => ship.nav.systemSymbol === systemSymbol),
       meta: response.meta,
     }),
   })
@@ -24,7 +24,7 @@ export const SystemFleet = () => {
     return (
       <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
         <div className="text-secondary text-center text-sm">
-          You have no ships in <span className="font-bold">{systemID}</span>
+          You have no ships in <span className="font-bold">{systemSymbol}</span>
         </div>
       </div>
     )
