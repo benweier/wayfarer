@@ -6,18 +6,18 @@ import { WaypointShipyardNotAvailable } from './waypoint-shipyard.not-available'
 
 export const WaypointShipyardList = () => {
   const { systemSymbol } = useSystemContext()
-  const { waypointID } = useWaypointContext()
+  const { waypointSymbol } = useWaypointContext()
   const waypointQuery = useQuery({
-    queryKey: ['system', systemSymbol, 'waypoint', waypointID],
-    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointID } }, { signal }),
+    queryKey: ['system', systemSymbol, 'waypoint', waypointSymbol],
+    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointSymbol } }, { signal }),
   })
 
   const shipyardEnabled =
     waypointQuery.isSuccess && waypointQuery.data.data.traits.findIndex((trait) => trait.symbol === 'SHIPYARD') !== -1
 
   const shipyardQuery = useQuery({
-    queryKey: ['shipyard', systemSymbol, waypointID],
-    queryFn: ({ signal }) => getShipyard({ path: { systemSymbol, waypointID } }, { signal }),
+    queryKey: ['shipyard', systemSymbol, waypointSymbol],
+    queryFn: ({ signal }) => getShipyard({ path: { systemSymbol, waypointSymbol } }, { signal }),
     enabled: shipyardEnabled,
   })
 

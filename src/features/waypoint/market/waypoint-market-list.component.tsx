@@ -11,11 +11,11 @@ import { WaypointMarketNotAvailable } from './waypoint-market.not-available'
 
 export const WaypointMarketList = () => {
   const { systemSymbol } = useSystemContext()
-  const { waypointID } = useWaypointContext()
+  const { waypointSymbol } = useWaypointContext()
   const [searchParams] = useSearchParams()
   const waypointQuery = useQuery({
-    queryKey: ['system', systemSymbol, 'waypoint', waypointID],
-    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointID } }, { signal }),
+    queryKey: ['system', systemSymbol, 'waypoint', waypointSymbol],
+    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointSymbol } }, { signal }),
   })
 
   const marketEnabled =
@@ -23,8 +23,8 @@ export const WaypointMarketList = () => {
     waypointQuery.data.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
 
   const marketQuery = useQuery({
-    queryKey: ['system', systemSymbol, waypointID, 'market'],
-    queryFn: ({ signal }) => getMarket({ path: { systemSymbol, waypointID } }, { signal }),
+    queryKey: ['system', systemSymbol, waypointSymbol, 'market'],
+    queryFn: ({ signal }) => getMarket({ path: { systemSymbol, waypointSymbol } }, { signal }),
     enabled: marketEnabled,
   })
 
@@ -48,7 +48,7 @@ export const WaypointMarketList = () => {
           {market.imports.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-bold">{waypointID}</span> does not list any imports
+                <span className="font-bold">{waypointSymbol}</span> does not list any imports
               </div>
             </div>
           )}
@@ -64,7 +64,7 @@ export const WaypointMarketList = () => {
           {market.exports.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-bold">{waypointID}</span> does not list any exports
+                <span className="font-bold">{waypointSymbol}</span> does not list any exports
               </div>
             </div>
           )}
@@ -80,7 +80,7 @@ export const WaypointMarketList = () => {
           {market.exchange.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-bold">{waypointID}</span> does not list any exchanges
+                <span className="font-bold">{waypointSymbol}</span> does not list any exchanges
               </div>
             </div>
           )}

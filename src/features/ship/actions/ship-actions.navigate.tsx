@@ -7,21 +7,21 @@ import { ShipActionProps } from './ship-actions.types'
 
 export const Navigate = ({
   ship,
-  waypointID,
+  waypointSymbol,
   children = (props) => (
     <button className="btn btn-sm" {...props}>
       Navigate
     </button>
   ),
 }: ShipActionProps<{
-  waypointID: string
+  waypointSymbol: string
 }>) => {
   const client = useQueryClient()
   const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
   const { mutate } = useMutation({
     mutationKey: ['ship', ship.symbol, 'navigate'],
-    mutationFn: ({ shipSymbol, waypointID }: { shipSymbol: string; waypointID: string }) =>
-      createShipNavigate({ path: { shipSymbol }, payload: { waypointSymbol: waypointID } }),
+    mutationFn: ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) =>
+      createShipNavigate({ path: { shipSymbol }, payload: { waypointSymbol: waypointSymbol } }),
     onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
@@ -64,6 +64,6 @@ export const Navigate = ({
 
   return children({
     disabled: isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
-    onClick: () => mutate({ shipSymbol: ship.symbol, waypointID }),
+    onClick: () => mutate({ shipSymbol: ship.symbol, waypointSymbol }),
   })
 }

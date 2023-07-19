@@ -20,20 +20,20 @@ export const getSystemById = queryFnFactory<SpaceTradersResponse<SystemsResponse
 
 export const getWaypointById = queryFnFactory<
   SpaceTradersResponse<WaypointResponse>,
-  { systemSymbol: string; waypointID: string }
->(({ systemSymbol, waypointID }) => `systems/${systemSymbol}/waypoints/${waypointID}`)
+  { systemSymbol: string; waypointSymbol: string }
+>(({ systemSymbol, waypointSymbol }) => `systems/${systemSymbol}/waypoints/${waypointSymbol}`)
 
 export const getMarket = queryFnFactory<
   SpaceTradersResponse<MarketResponse>,
-  { systemSymbol: string; waypointID: string }
->(({ systemSymbol, waypointID }) => `systems/${systemSymbol}/waypoints/${waypointID}/market`)
+  { systemSymbol: string; waypointSymbol: string }
+>(({ systemSymbol, waypointSymbol }) => `systems/${systemSymbol}/waypoints/${waypointSymbol}/market`)
 
 export const getShipyard = queryFnFactory<
   SpaceTradersResponse<ShipyardResponse>,
-  { systemSymbol: string; waypointID: string }
->(({ systemSymbol, waypointID }) => `systems/${systemSymbol}/waypoints/${waypointID}/shipyard`)
+  { systemSymbol: string; waypointSymbol: string }
+>(({ systemSymbol, waypointSymbol }) => `systems/${systemSymbol}/waypoints/${waypointSymbol}/shipyard`)
 
 export const getJumpGate = queryFnFactory<
   SpaceTradersResponse<JumpGateResponse>,
-  { systemSymbol: string; waypointID: string }
->(({ systemSymbol, waypointID }) => `systems/${systemSymbol}/waypoints/${waypointID}/jump-gate`)
+  { systemSymbol: string; waypointSymbol: string }
+>(({ systemSymbol, waypointSymbol }) => `systems/${systemSymbol}/waypoints/${waypointSymbol}/jump-gate`)

@@ -200,7 +200,7 @@ const router = sentryCreateBrowserRouter(
                 ErrorBoundary={RouteError}
               />
               <Route
-                path="waypoint/:waypointID"
+                path="waypoint/:waypointSymbol"
                 lazy={async () => {
                   const waypoint = await import('@/routes/systems/waypoint')
                   return {

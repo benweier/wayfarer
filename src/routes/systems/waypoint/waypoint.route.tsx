@@ -14,17 +14,17 @@ import { WaypointShipyardError, WaypointShipyardFallback, WaypointShipyardList }
 import { cx } from '@/utilities/cx'
 
 export const WaypointRouteComponent = () => {
-  const { systemSymbol, waypointID } = useParams()
+  const { systemSymbol, waypointSymbol } = useParams()
 
   return (
     <div className="grid gap-4 p-4">
       <h1 className="text-title">
-        Waypoint: <span className="whitespace-nowrap font-normal">{waypointID}</span>
+        Waypoint: <span className="whitespace-nowrap font-normal">{waypointSymbol}</span>
       </h1>
 
-      {systemSymbol && waypointID && (
+      {systemSymbol && waypointSymbol && (
         <QuerySuspenseBoundary>
-          <WaypointDetail systemSymbol={systemSymbol} waypointID={waypointID}>
+          <WaypointDetail systemSymbol={systemSymbol} waypointSymbol={waypointSymbol}>
             <Tab.Group as="div" className="tab-group">
               <Tab.List className="tab-list">
                 <Tab className={({ selected }) => cx('group tab', { selected })}>Market</Tab>

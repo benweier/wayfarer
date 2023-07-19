@@ -48,7 +48,7 @@ const PurchaseCargoPrice = ({ perUnit }: { perUnit: number }) => {
 }
 
 export const PurchaseCargoForm = ({ good, onSubmit }: PurchaseCargoFormProps) => {
-  const { waypointID } = useWaypointContext()
+  const { waypointSymbol } = useWaypointContext()
   const methods = useForm<PurchaseCargoSchema>({
     defaultValues: { item: good.symbol },
     resolver: yupResolver(validation),
@@ -94,7 +94,7 @@ export const PurchaseCargoForm = ({ good, onSubmit }: PurchaseCargoFormProps) =>
                   if (value) field.onChange(value?.symbol)
                 }}
                 select={(response) => ({
-                  ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointID),
+                  ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointSymbol),
                 })}
               />
             </QuerySuspenseBoundary>

@@ -29,7 +29,7 @@ export const loader: QueryClientLoaderFn =
         queryKey: ['system', ship.data.nav.systemSymbol, ship.data.nav.waypointSymbol, 'market'],
         queryFn: ({ signal }) =>
           getMarket(
-            { path: { systemSymbol: ship.data.nav.systemSymbol, waypointID: ship.data.nav.waypointSymbol } },
+            { path: { systemSymbol: ship.data.nav.systemSymbol, waypointSymbol: ship.data.nav.waypointSymbol } },
             { signal },
           ),
       })

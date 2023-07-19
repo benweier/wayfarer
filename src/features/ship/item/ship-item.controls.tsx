@@ -148,7 +148,7 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
               </div>
             </div>
           </div>
-          <ShipActions.Navigate ship={ship} waypointID={waypoint.symbol}>
+          <ShipActions.Navigate ship={ship} waypointSymbol={waypoint.symbol}>
             {ship.nav.waypointSymbol !== waypoint.symbol
               ? (props) => (
                   <button className="btn btn-outline btn-confirm btn-sm" {...props}>

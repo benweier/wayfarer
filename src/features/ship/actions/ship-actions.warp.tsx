@@ -7,20 +7,20 @@ import { ShipActionProps } from './ship-actions.types'
 
 export const Warp = ({
   ship,
-  waypointID,
+  waypointSymbol,
   children = (props) => (
     <button className="btn btn-sm" {...props}>
       Warp
     </button>
   ),
 }: ShipActionProps<{
-  waypointID: string
+  waypointSymbol: string
 }>) => {
   const client = useQueryClient()
   const { mutate, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'warp'],
-    mutationFn: ({ shipSymbol, waypointID }: { shipSymbol: string; waypointID: string }) =>
-      createShipWarp({ path: { shipSymbol }, payload: { waypointSymbol: waypointID } }),
+    mutationFn: ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) =>
+      createShipWarp({ path: { shipSymbol }, payload: { waypointSymbol: waypointSymbol } }),
     onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
@@ -61,6 +61,6 @@ export const Warp = ({
 
   return children({
     disabled: isLoading,
-    onClick: () => mutate({ shipSymbol: ship.symbol, waypointID }),
+    onClick: () => mutate({ shipSymbol: ship.symbol, waypointSymbol }),
   })
 }

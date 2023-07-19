@@ -8,10 +8,10 @@ import { WaypointContext } from '@/context/waypoint.context'
 import { getWaypointById } from '@/services/api/spacetraders'
 import { WaypointDetailProps } from './waypoint-detail.types'
 
-export const WaypointDetail = ({ systemSymbol, waypointID, children }: WithChildren<WaypointDetailProps>) => {
+export const WaypointDetail = ({ systemSymbol, waypointSymbol, children }: WithChildren<WaypointDetailProps>) => {
   const { data, isSuccess } = useQuery({
-    queryKey: ['system', systemSymbol, 'waypoint', waypointID],
-    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointID } }, { signal }),
+    queryKey: ['system', systemSymbol, 'waypoint', waypointSymbol],
+    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointSymbol } }, { signal }),
   })
 
   if (!isSuccess) return null
@@ -43,7 +43,7 @@ export const WaypointDetail = ({ systemSymbol, waypointID, children }: WithChild
 
       {children && (
         <SystemContext.Provider value={{ systemSymbol: waypoint.systemSymbol }}>
-          <WaypointContext.Provider value={{ waypointID: waypoint.symbol }}>{children}</WaypointContext.Provider>
+          <WaypointContext.Provider value={{ waypointSymbol: waypoint.symbol }}>{children}</WaypointContext.Provider>
         </SystemContext.Provider>
       )}
     </div>

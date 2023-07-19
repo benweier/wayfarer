@@ -8,30 +8,30 @@ export const loader: QueryClientLoaderFn =
   (client) =>
   async ({ params }) => {
     const { isAuthenticated } = getState()
-    const { systemSymbol, waypointID } = params
+    const { systemSymbol, waypointSymbol } = params
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
       throw new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
     }
 
-    if (!systemSymbol || !waypointID) {
+    if (!systemSymbol || !waypointSymbol) {
       redirect(ROUTES.SYSTEMS)
       throw new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
     }
 
     try {
       const waypoint = await client.ensureQueryData({
-        queryKey: ['system', systemSymbol, 'waypoint', waypointID],
-        queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointID } }, { signal }),
+        queryKey: ['system', systemSymbol, 'waypoint', waypointSymbol],
+        queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointSymbol } }, { signal }),
       })
 
       const marketEnabled = waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
 
       const market = marketEnabled
         ? await client.ensureQueryData({
-            queryKey: ['system', systemSymbol, waypointID, 'market'],
-            queryFn: ({ signal }) => getMarket({ path: { systemSymbol, waypointID } }, { signal }),
+            queryKey: ['system', systemSymbol, waypointSymbol, 'market'],
+            queryFn: ({ signal }) => getMarket({ path: { systemSymbol, waypointSymbol } }, { signal }),
           })
         : undefined
 

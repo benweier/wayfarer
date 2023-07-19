@@ -27,13 +27,13 @@ export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
 }
 
 const Warp = ({ ship }: { ship: ShipResponse }) => {
-  const methods = useForm<{ waypointID: string }>()
+  const methods = useForm<{ waypointSymbol: string }>()
   const client = useQueryClient()
 
   const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['ship', ship.symbol, 'warp'],
-    mutationFn: ({ shipSymbol, waypointID }: { shipSymbol: string; waypointID: string }) =>
-      createShipWarp({ path: { shipSymbol }, payload: { waypointSymbol: waypointID } }),
+    mutationFn: ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) =>
+      createShipWarp({ path: { shipSymbol }, payload: { waypointSymbol: waypointSymbol } }),
     onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: ['ships'] })
       void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
@@ -75,13 +75,13 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
   return (
     <form
       onSubmit={methods.handleSubmit((values) =>
-        mutateAsync({ shipSymbol: ship.symbol, waypointID: values.waypointID }),
+        mutateAsync({ shipSymbol: ship.symbol, waypointSymbol: values.waypointSymbol }),
       )}
     >
       <fieldset disabled={isLoading || ship.nav.status !== 'IN_ORBIT'} className="grid gap-4">
         <div>
           <label className="label">Waypoint Symbol</label>
-          <input {...methods.register('waypointID')} className="input" />
+          <input {...methods.register('waypointSymbol')} className="input" />
         </div>
         <div className="flex justify-end">
           <button type="submit" className="btn btn-primary">

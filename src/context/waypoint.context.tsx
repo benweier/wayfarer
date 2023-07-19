@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 
-export const WaypointContext = createContext<{ waypointID: string } | null>(null)
+export const WaypointContext = createContext<{ waypointSymbol: string } | null>(null)
 
 export const useWaypointContext = () => {
   const ctx = useContext(WaypointContext)

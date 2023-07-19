@@ -6,13 +6,13 @@ import { getShipsList } from '@/services/api/spacetraders'
 
 export const WaypointFleetList = () => {
   const { systemSymbol } = useSystemContext()
-  const { waypointID } = useWaypointContext()
+  const { waypointSymbol } = useWaypointContext()
   const { isSuccess, data } = useQuery({
     queryKey: ['ships'],
     queryFn: ({ signal }) => getShipsList(undefined, { signal }),
     select: (response) => ({
       data: response.data.filter(
-        (ship) => ship.nav.systemSymbol === systemSymbol && ship.nav.waypointSymbol === waypointID,
+        (ship) => ship.nav.systemSymbol === systemSymbol && ship.nav.waypointSymbol === waypointSymbol,
       ),
       meta: response.meta,
     }),
@@ -26,7 +26,7 @@ export const WaypointFleetList = () => {
     return (
       <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
         <div className="text-secondary text-center text-sm">
-          You have no ships at <span className="font-bold">{waypointID}</span>
+          You have no ships at <span className="font-bold">{waypointSymbol}</span>
         </div>
       </div>
     )
