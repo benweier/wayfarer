@@ -13,7 +13,9 @@ export const useConfirmAction = (callback: () => void) => {
     callback()
   }
 
-  const onReset = () => setConfirm(false)
+  const onReset = () => {
+    setConfirm(false)
+  }
 
   return { confirm, onClick, onReset }
 }

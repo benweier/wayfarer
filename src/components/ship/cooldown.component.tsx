@@ -31,9 +31,12 @@ export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
       return
     }
 
-    const timeout = setTimeout(() => {
-      clearCooldown(ship.symbol)
-    }, 1000 + cooldown.remainingSeconds * 1000)
+    const timeout = setTimeout(
+      () => {
+        clearCooldown(ship.symbol)
+      },
+      1000 + cooldown.remainingSeconds * 1000,
+    )
 
     return () => clearTimeout(timeout)
   }, [clearCooldown, cooldown, ship.symbol])

@@ -5,5 +5,10 @@ export const useUnmount = (fn: () => void): void => {
 
   ref.current = fn
 
-  useEffect(() => () => ref.current(), [])
+  useEffect(
+    () => () => {
+      ref.current()
+    },
+    [],
+  )
 }
