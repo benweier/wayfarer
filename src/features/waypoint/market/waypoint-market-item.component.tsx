@@ -3,11 +3,11 @@ import { Badge } from '@/components/badge'
 import { PurchaseCargo } from '@/components/market/purchase-cargo'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
+import { type WaypointMarketItemProps } from './waypoint-market.types'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
-import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number'
 
-export const WaypointMarketItem = ({ item, trade }: { item: MarketGood; trade?: MarketTradeGood }) => {
+export const WaypointMarketItem = ({ item, trade }: WaypointMarketItemProps) => {
   const [showDescription] = useAtom(marketDescriptionAtom)
 
   return (

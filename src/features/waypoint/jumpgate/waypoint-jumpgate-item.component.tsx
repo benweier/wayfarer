@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { type JumpGateConnectedSystem } from '@/types/spacetraders'
+import { type WaypointJumpGateItemProps } from './waypoint-jumpgate.types'
 
-export const WaypointJumpGateItem = ({ system }: { system: JumpGateConnectedSystem }) => {
+export const WaypointJumpGateItem = ({ system }: WaypointJumpGateItemProps) => {
   return (
     <div key={system.symbol} className="grid gap-2 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 dark:bg-opacity-10">
       <div>

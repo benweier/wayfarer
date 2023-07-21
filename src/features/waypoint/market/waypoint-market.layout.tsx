@@ -1,14 +1,6 @@
-import { type ReactNode } from 'react'
+import { type WaypointMarketLayoutProps } from './waypoint-market.types'
 
-export const WaypointMarketLayout = ({
-  imports,
-  exports,
-  exchange,
-}: {
-  imports: ReactNode
-  exports: ReactNode
-  exchange: ReactNode
-}) => {
+export const WaypointMarketLayout = ({ imports, exports, exchange }: WaypointMarketLayoutProps) => {
   return (
     <div className="space-y-12">
       <div className="flex flex-col gap-4">
