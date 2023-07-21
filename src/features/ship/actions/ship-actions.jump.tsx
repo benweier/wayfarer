@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipJump } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipCooldownStore } from '@/store/ship'
-import { ShipResponse } from '@/types/spacetraders'
-import { ShipActionProps } from './ship-actions.types'
+import { type ShipResponse } from '@/types/spacetraders'
+import { type ShipActionProps } from './ship-actions.types'
 
 export const Jump = ({
   ship,
@@ -67,6 +67,8 @@ export const Jump = ({
 
   return children({
     disabled: hasCooldown || isLoading,
-    onClick: () => mutate({ shipSymbol: ship.symbol, systemSymbol }),
+    onClick: () => {
+      mutate({ shipSymbol: ship.symbol, systemSymbol })
+    },
   })
 }

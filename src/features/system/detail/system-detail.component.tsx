@@ -3,7 +3,7 @@ import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { SystemContext } from '@/context/system.context'
 import { getSystemById } from '@/services/api/spacetraders'
-import { SystemDetailProps } from './system-detail.types'
+import { type SystemDetailProps } from './system-detail.types'
 
 export const SystemDetail = ({ systemSymbol, children }: WithChildren<SystemDetailProps>) => {
   const { isSuccess, data } = useQuery({

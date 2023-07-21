@@ -1,4 +1,4 @@
-import { Key, ReactNode } from 'react'
+import { type Key, type ReactNode } from 'react'
 
 export type SelectFieldProps<T = string> = {
   label?: ReactNode

@@ -1,17 +1,17 @@
 import {
-  AgentResponse,
-  ChartResponse,
-  CooldownResponse,
-  ExtractResponse,
-  FuelResponse,
-  MarketTransaction,
-  NavigationResponse,
-  ShipCargo,
-  ShipResponse,
-  SurveyResponse,
-  WaypointResponse,
+  type AgentResponse,
+  type ChartResponse,
+  type CooldownResponse,
+  type ExtractResponse,
+  type FuelResponse,
+  type MarketTransaction,
+  type NavigationResponse,
+  type ShipCargo,
+  type ShipResponse,
+  type SurveyResponse,
+  type WaypointResponse,
 } from '@/types/spacetraders'
-import { Meta, SpaceTradersResponse, mutationFnFactory, queryFnFactory } from './core'
+import { type Meta, type SpaceTradersResponse, mutationFnFactory, queryFnFactory } from './core'
 
 export const getShipsList = queryFnFactory<SpaceTradersResponse<ShipResponse[], Meta>>(() => 'my/ships')
 
@@ -21,7 +21,7 @@ export const getShipById = queryFnFactory<SpaceTradersResponse<ShipResponse>, { 
 
 export const createShipPurchase = mutationFnFactory<
   SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse }>,
-  void,
+  undefined,
   { shipType: string; waypointSymbol: string }
 >(() => 'my/ships')
 
@@ -58,13 +58,11 @@ export const createShipScanSystems = mutationFnFactory<
 
 export const createShipOrbit = mutationFnFactory<
   SpaceTradersResponse<{ nav: NavigationResponse }>,
-  { shipSymbol: string },
-  void
+  { shipSymbol: string }
 >(({ shipSymbol }) => `my/ships/${shipSymbol}/orbit`)
 export const createShipDock = mutationFnFactory<
   SpaceTradersResponse<{ nav: NavigationResponse }>,
-  { shipSymbol: string },
-  void
+  { shipSymbol: string }
 >(({ shipSymbol }) => `my/ships/${shipSymbol}/dock`)
 
 export const createShipNavigate = mutationFnFactory<
@@ -98,7 +96,7 @@ export const createShipSurvey = mutationFnFactory<
 export const createShipExtract = mutationFnFactory<
   SpaceTradersResponse<{ cooldown: CooldownResponse; extraction: ExtractResponse; cargo: ShipCargo }>,
   { shipSymbol: string },
-  { survey?: SurveyResponse } | void
+  { survey?: SurveyResponse } | undefined
 >(({ shipSymbol }) => `my/ships/${shipSymbol}/extract`)
 
 export const createShipRefine = mutationFnFactory<

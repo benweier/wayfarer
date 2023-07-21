@@ -3,7 +3,7 @@ import { QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Suspense, useEffect } from 'react'
 import {
-  ActionFunction,
+  type ActionFunction,
   Navigate,
   Outlet,
   Route,
@@ -60,7 +60,12 @@ const Core = () => {
         <div className="flex min-h-screen flex-col items-center justify-center">
           <div className="flex w-full flex-col items-center gap-4 p-3">
             <div className="font-mono text-xl font-bold tracking-tighter text-rose-500">{error.message}</div>
-            <button className="btn btn-primary w-full max-w-xs" onClick={() => resetError()}>
+            <button
+              className="btn btn-primary w-full max-w-xs"
+              onClick={() => {
+                resetError()
+              }}
+            >
               Try again
             </button>
           </div>
@@ -255,5 +260,7 @@ export const App = () => {
 }
 
 if (import.meta.hot) {
-  import.meta.hot.dispose(() => router.dispose())
+  import.meta.hot.dispose(() => {
+    router.dispose()
+  })
 }

@@ -11,7 +11,7 @@ import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointsList } from '@/services/api/spacetraders'
-import { ShipResponse } from '@/types/spacetraders'
+import { type ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
@@ -89,7 +89,9 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                     {({ active }) => (
                       <button
                         className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })}
-                        onClick={() => modal.open()}
+                        onClick={() => {
+                          modal.open()
+                        }}
                       >
                         Navigate
                       </button>

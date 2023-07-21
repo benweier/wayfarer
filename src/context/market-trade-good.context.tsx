@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { MarketTradeGood } from '@/types/spacetraders'
+import { type MarketTradeGood } from '@/types/spacetraders'
 
 export const MarketTradeGoodContext = createContext<MarketTradeGood | null>(null)
 

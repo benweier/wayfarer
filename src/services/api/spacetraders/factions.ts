@@ -1,5 +1,5 @@
-import { Meta, SpaceTradersResponse, queryFnFactory } from '@/services/api/spacetraders/core'
-import { FactionResponse } from '@/types/spacetraders'
+import { type Meta, type SpaceTradersResponse, queryFnFactory } from '@/services/api/spacetraders/core'
+import { type FactionResponse } from '@/types/spacetraders'
 
 export const getFactionsList = queryFnFactory<SpaceTradersResponse<FactionResponse[], Meta>>(() => 'factions')
 

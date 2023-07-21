@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createShipCargoPurchase } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { ShipResponse } from '@/types/spacetraders'
-import { ShipActionProps } from './ship-actions.types'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type ShipResponse } from '@/types/spacetraders'
+import { type ShipActionProps } from './ship-actions.types'
 import { updateShipCargo, updateShipInFleetCargo } from './ship-actions.utilities'
 
 export const PurchaseCargo = ({
@@ -44,6 +44,8 @@ export const PurchaseCargo = ({
 
   return children({
     disabled: isLoading,
-    onClick: () => mutate({ shipSymbol: ship.symbol, symbol, units }),
+    onClick: () => {
+      mutate({ shipSymbol: ship.symbol, symbol, units })
+    },
   })
 }

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createShipExtract } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipCooldownStore, useShipSurveyStore } from '@/store/ship'
-import { ShipResponse, SurveyResponse } from '@/types/spacetraders'
-import { ShipActionProps } from './ship-actions.types'
+import { type ShipResponse, type SurveyResponse } from '@/types/spacetraders'
+import { type ShipActionProps } from './ship-actions.types'
 import { updateShipCargo, updateShipInFleetCargo } from './ship-actions.utilities'
 
 export const Extract = ({
@@ -52,6 +52,8 @@ export const Extract = ({
 
   return children({
     disabled: hasCooldown || isLoading,
-    onClick: () => mutate({ shipSymbol: ship.symbol, survey }),
+    onClick: () => {
+      mutate({ shipSymbol: ship.symbol, survey })
+    },
   })
 }

@@ -1,7 +1,7 @@
 import { useRouteError } from 'react-router-dom'
 import { STATUS_CODES, STATUS_MESSAGES } from '@/services/http'
 
-const messages: { [key: number]: string } = {
+const messages: Record<number, string> = {
   [STATUS_CODES.UNAUTHORIZED]: STATUS_MESSAGES.UNAUTHORIZED,
   [STATUS_CODES.FORBIDDEN]: STATUS_MESSAGES.FORBIDDEN,
   [STATUS_CODES.NOT_FOUND]: STATUS_MESSAGES.NOT_FOUND,

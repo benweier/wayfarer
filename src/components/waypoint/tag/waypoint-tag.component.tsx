@@ -1,5 +1,5 @@
 import { cx } from '@/utilities/cx'
-import { WaypointTagProps } from './waypoint-tag.types'
+import { type WaypointTagProps } from './waypoint-tag.types'
 
 const WAYPOINT_TYPE_STYLES: Record<string, string> = {
   MOON: 'bg-slate-500 text-slate-50',

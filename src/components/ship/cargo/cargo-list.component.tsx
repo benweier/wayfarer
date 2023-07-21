@@ -9,7 +9,7 @@ import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { getMarket } from '@/services/api/spacetraders'
-import { CargoInventory, MarketTradeGood } from '@/types/spacetraders'
+import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
 import { Item } from './cargo-item.component'
 import { Layout } from './cargo.layout'
 
@@ -53,7 +53,12 @@ const CancelModal = () => {
   const { closeModal } = useModalActions()
 
   return (
-    <button className="btn" onClick={() => closeModal()}>
+    <button
+      className="btn"
+      onClick={() => {
+        closeModal()
+      }}
+    >
       Cancel
     </button>
   )
@@ -109,7 +114,7 @@ export const List = () => {
                         good={good}
                         action={(props) => (
                           <button className="btn btn-flat btn-confirm btn-sm" {...props}>
-                            Sell {!!good && `(${good.sellPrice})`}
+                            Sell {`(${good.sellPrice})`}
                           </button>
                         )}
                       />

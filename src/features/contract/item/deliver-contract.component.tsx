@@ -5,8 +5,8 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
 import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
-import { ContractDelivery, ShipResponse } from '@/types/spacetraders'
-import { DeliverContractSchema, validation } from './deliver-contract.validation'
+import { type ContractDelivery, type ShipResponse } from '@/types/spacetraders'
+import { type DeliverContractSchema, validation } from './deliver-contract.validation'
 
 export const DeliverContractForm = ({
   deliver,
@@ -64,7 +64,7 @@ export const DeliverContractForm = ({
             render={({ field }) => (
               <Select.Field
                 label={<Select.Label>Item</Select.Label>}
-                by={(a, z) => a?.symbol === z?.symbol}
+                by={(a, z) => a.symbol === z.symbol}
                 onChange={(value) => {
                   if (value) field.onChange(value.symbol)
                 }}

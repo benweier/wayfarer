@@ -1,10 +1,10 @@
-import { PropsWithChildren, useContext, useRef } from 'react'
+import { type PropsWithChildren, useContext, useRef } from 'react'
 import { cx } from '@/utilities/cx'
 import { ModalContext } from './Modal.Context'
 import { Overlay } from './Modal.Overlay'
+import { type DialogProps } from './modal.types.d'
 import { useClickOutside } from './useClickOutside'
 import { useInOutTransition } from './useInOutTransition'
-import type { DialogProps } from './modal.types.d'
 
 const Close = () => {
   const { closeModal } = useContext(ModalContext)
@@ -68,7 +68,7 @@ export const Root = ({ size, overlay = <Overlay />, children }: PropsWithChildre
   )
 }
 
-const Title = ({ children }: PropsWithChildren<unknown>) => {
+const Title = ({ children }: PropsWithChildren) => {
   return (
     <div className="flex-basis-auto sticky flex-shrink-0 flex-grow-0 bg-zinc-100 p-4 dark:bg-zinc-800/50">
       {children}
@@ -76,11 +76,11 @@ const Title = ({ children }: PropsWithChildren<unknown>) => {
   )
 }
 
-const Content = ({ children }: PropsWithChildren<unknown>) => {
+const Content = ({ children }: PropsWithChildren) => {
   return <div className="flex-grow-1 flex-shrink-1 flex-basis-auto overflow-y-auto p-4">{children}</div>
 }
 
-const Actions = ({ children }: PropsWithChildren<unknown>) => {
+const Actions = ({ children }: PropsWithChildren) => {
   return <div className="flex-basis-auto flex-shrink-0 flex-grow-0 bg-zinc-100 dark:bg-zinc-800/50">{children}</div>
 }
 

@@ -1,6 +1,6 @@
 import { AppIcon } from '@/components/icons'
 import { cx } from '@/utilities/cx'
-import { PaginationProps } from './pagination.types'
+import { type PaginationProps } from './pagination.types'
 import { getPagingRange } from './pagination.utils'
 
 export const Pagination = ({ current, total, length = 5, onChange }: PaginationProps) => {

@@ -1,4 +1,4 @@
-import { FC } from 'react'
-import { SystemItemProps } from '../item'
+import { type FC } from 'react'
+import { type SystemItemProps } from '../item'
 
 export type SystemListProps = { System?: FC<SystemItemProps> }

@@ -6,7 +6,7 @@ import { WAYPOINT_TYPE } from '@/config/constants'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
 import { getWaypointById } from '@/services/api/spacetraders'
-import { WaypointDetailProps } from './waypoint-detail.types'
+import { type WaypointDetailProps } from './waypoint-detail.types'
 
 export const WaypointDetail = ({ systemSymbol, waypointSymbol, children }: WithChildren<WaypointDetailProps>) => {
   const { data, isSuccess } = useQuery({

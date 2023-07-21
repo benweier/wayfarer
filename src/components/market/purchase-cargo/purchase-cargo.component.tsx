@@ -4,11 +4,11 @@ import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { updateShipCargo, updateShipInFleetCargo } from '@/features/ship/actions'
 import { createShipCargoPurchase } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
-import { ShipResponse } from '@/types/spacetraders'
+import { type ShipResponse } from '@/types/spacetraders'
 import { PurchaseCargoForm } from './purchase-cargo.form'
-import { PurchaseCargoProps } from './purchase-cargo.types'
+import { type PurchaseCargoProps } from './purchase-cargo.types'
 
 export const PurchaseCargo = ({
   good,
@@ -38,9 +38,7 @@ export const PurchaseCargo = ({
       if (ship) client.setQueryData(['ship', shipSymbol], updateShipCargo(ship, response.data.cargo))
       if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
 
-      if (response.data.agent) {
-        setAgent(response.data.agent)
-      }
+      setAgent(response.data.agent)
     },
     onSettled: (_res, _err, { shipSymbol }) => {
       void client.invalidateQueries({ queryKey: ['ships'] })
@@ -49,8 +47,6 @@ export const PurchaseCargo = ({
       modal.close()
     },
   })
-
-  if (!good) return null
 
   return (
     <Modal

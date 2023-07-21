@@ -1,6 +1,13 @@
-import { ForwardedRef, PropsWithChildren, createContext, createElement, forwardRef, useImperativeHandle } from 'react'
+import {
+  type ForwardedRef,
+  type PropsWithChildren,
+  createContext,
+  createElement,
+  forwardRef,
+  useImperativeHandle,
+} from 'react'
+import { type ModalContextType, type ModalProps, type ModalRefType } from './modal.types'
 import { useModal } from './useModal.hook'
-import type { ModalContextType, ModalProps, ModalRefType } from './modal.types'
 
 export const ModalContext = createContext<ModalContextType>({
   isOpen: false,

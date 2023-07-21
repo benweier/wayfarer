@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import { Modal } from '@/components/modal'
 import { ROUTES } from '@/config/routes'
 import { createShipScanWaypoint } from '@/services/api/spacetraders'
-import { SpaceTradersError } from '@/services/api/spacetraders/core'
+import { type SpaceTradersError } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, isHttpError } from '@/services/http'
 import { useShipCooldownStore } from '@/store/ship'
-import { CooldownResponse } from '@/types/spacetraders'
+import { type CooldownResponse } from '@/types/spacetraders'
 
 export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
   const setCooldown = useShipCooldownStore((state) => state.setCooldown)
@@ -28,13 +28,18 @@ export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
     },
   })
 
-  const waypoints = isSuccess ? data?.data.waypoints : []
+  const waypoints = isSuccess ? data.data.waypoints : []
 
   return (
     <Modal
       isOpen={isSuccess}
       trigger={
-        <button className="btn btn-sm" onClick={() => mutate(shipSymbol)}>
+        <button
+          className="btn btn-sm"
+          onClick={() => {
+            mutate(shipSymbol)
+          }}
+        >
           Scan
         </button>
       }

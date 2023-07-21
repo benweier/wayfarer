@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
-import { PurchaseCargoFormProps } from '@/components/market/purchase-cargo/purchase-cargo.types'
-import { PurchaseCargoSchema, validation } from '@/components/market/purchase-cargo/purchase.validation'
+import { type PurchaseCargoFormProps } from '@/components/market/purchase-cargo/purchase-cargo.types'
+import { type PurchaseCargoSchema, validation } from '@/components/market/purchase-cargo/purchase.validation'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipSelect from '@/components/ship/select.component'
 import { useWaypointContext } from '@/context/waypoint.context'
@@ -91,7 +91,7 @@ export const PurchaseCargoForm = ({ good, onSubmit }: PurchaseCargoFormProps) =>
               <ShipSelect.Field
                 getShipOption={getShipOption}
                 onChange={(value) => {
-                  if (value) field.onChange(value?.symbol)
+                  if (value) field.onChange(value.symbol)
                 }}
                 select={(response) => ({
                   ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointSymbol),

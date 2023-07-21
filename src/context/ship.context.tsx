@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useRef } from 'react'
 import { createStore, useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
-import { StoreApi } from 'zustand/vanilla'
-import { BoundStoreSelector } from '@/store/store.types'
-import { ShipResponse } from '@/types/spacetraders'
+import { type StoreApi } from 'zustand/vanilla'
+import { type BoundStoreSelector } from '@/store/store.types'
+import { type ShipResponse } from '@/types/spacetraders'
 
 const ShipContext = createContext<StoreApi<ShipResponse> | null>(null)
 

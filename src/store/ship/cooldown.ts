@@ -1,8 +1,8 @@
-import { Draft, produce } from 'immer'
+import { type Draft, produce } from 'immer'
 import { create } from 'zustand'
-import { CooldownResponse } from '@/types/spacetraders'
+import { type CooldownResponse } from '@/types/spacetraders'
 
-type ShipCooldownState = { cooldowns: { [key: string]: CooldownResponse } }
+type ShipCooldownState = { cooldowns: Record<string, CooldownResponse> }
 
 type ShipCooldownHandlers = {
   setCooldown: (shipSymbol: string, cooldown: CooldownResponse) => void
@@ -15,14 +15,14 @@ type ShipCooldownStore = ShipCooldownState & ShipCooldownHandlers
 export const useShipCooldownStore = create<ShipCooldownStore>((set, get) => ({
   cooldowns: {},
   setCooldown: (shipSymbol, cooldown) => {
-    return set(
+    set(
       produce((draft: Draft<ShipCooldownStore>) => {
         draft.cooldowns[shipSymbol] = cooldown
       }),
     )
   },
   updateRemainingSeconds: (shipSymbol) => {
-    return set(
+    set(
       produce((draft: Draft<ShipCooldownStore>) => {
         const cooldown = get().cooldowns[shipSymbol]
 
@@ -36,7 +36,7 @@ export const useShipCooldownStore = create<ShipCooldownStore>((set, get) => ({
     )
   },
   clearCooldown: (shipSymbol) => {
-    return set(
+    set(
       produce((draft: Draft<ShipCooldownStore>) => {
         delete draft.cooldowns[shipSymbol]
       }),

@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import type { ModalRefType } from './modal.types.d'
+import { type ModalRefType } from './modal.types.d'
 
 export const useModalRef = () => {
   const modalRef = useRef<ModalRefType>()

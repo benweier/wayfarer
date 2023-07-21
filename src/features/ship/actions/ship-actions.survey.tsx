@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { createShipSurvey } from '@/services/api/spacetraders'
 import { useShipCooldownStore, useShipSurveyStore } from '@/store/ship'
-import { ShipActionProps } from './ship-actions.types'
+import { type ShipActionProps } from './ship-actions.types'
 
 export const Survey = ({
   ship,
@@ -22,13 +22,15 @@ export const Survey = ({
     onSuccess: (response, shipSymbol) => {
       const [survey] = response.data.surveys
       const cooldown = response.data.cooldown
-      if (survey) addSurvey(survey)
+      addSurvey(survey)
       setCooldown(shipSymbol, cooldown)
     },
   })
 
   return children({
     disabled: hasCooldown || isLoading,
-    onClick: () => mutate(ship.symbol),
+    onClick: () => {
+      mutate(ship.symbol)
+    },
   })
 }

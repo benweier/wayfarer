@@ -6,14 +6,14 @@ import { Modal } from '@/components/modal'
 import * as Select from '@/components/select'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
-import { SpaceTradersResponse, mutationFnFactory } from '@/services/api/spacetraders/core'
+import { type SpaceTradersResponse, mutationFnFactory } from '@/services/api/spacetraders/core'
 import { getFactionsList } from '@/services/api/spacetraders/factions'
-import { RegisterAgentRequest, RegisterAgentResponse } from '@/types/spacetraders'
+import { type RegisterAgentRequest, type RegisterAgentResponse } from '@/types/spacetraders'
 import { AccessTokenDialog } from './access-token-dialog.component'
 import { FactionInfo } from './faction-info.component'
-import { RegisterSchema, registerValidation } from './register.validation'
+import { type RegisterSchema, registerValidation } from './register.validation'
 
-const createMyAgent = mutationFnFactory<SpaceTradersResponse<RegisterAgentResponse>, void, RegisterAgentRequest>(
+const createMyAgent = mutationFnFactory<SpaceTradersResponse<RegisterAgentResponse>, undefined, RegisterAgentRequest>(
   () => 'register',
 )
 
@@ -56,7 +56,7 @@ const FactionField = () => {
       render={({ field }) => (
         <Select.Field
           label={<Select.Label>Faction</Select.Label>}
-          by={(a, z) => a?.id === z?.id}
+          by={(a, z) => a.id === z.id}
           getItemKey={(item) => item.id}
           getItemLabel={(item) => item?.name}
           getItemOption={(item) => item.name}
@@ -85,7 +85,7 @@ export const Register = () => {
     cacheTime: 0,
   })
 
-  const agent = isSuccess ? data?.data : undefined
+  const agent = isSuccess ? data.data : undefined
 
   return (
     <div className="grid gap-4">

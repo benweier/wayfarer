@@ -1,4 +1,4 @@
-import { ErrorComponentProps } from '@/components/error-boundary'
+import { type ErrorComponentProps } from '@/components/error-boundary'
 import { isHttpError } from '@/services/http'
 
 export const WaypointShipyardError = ({ error }: ErrorComponentProps) => {

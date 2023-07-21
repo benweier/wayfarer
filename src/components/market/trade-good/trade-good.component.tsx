@@ -1,6 +1,6 @@
 import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
 import { formatNumber } from '@/utilities/number'
-import { TradeGoodProps } from './trade-good.types'
+import { type TradeGoodProps } from './trade-good.types'
 
 export const TradeGood = ({ price, volume, supply }: TradeGoodProps) => {
   return (

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { WaypointItemProps } from './waypoint-item.types'
+import { type WaypointItemProps } from './waypoint-item.types'
 
 export const WaypointItem = ({ systemSymbol, waypoint }: WaypointItemProps) => {
   return (

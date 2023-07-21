@@ -5,9 +5,9 @@ import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipContext } from '@/context/ship.context'
 import { createShipWarp } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { ShipResponse } from '@/types/spacetraders'
-import { ShipTransitActionProps } from './ship-transit.types'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type ShipResponse } from '@/types/spacetraders'
+import { type ShipTransitActionProps } from './ship-transit.types'
 
 export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
   const ship = useShipContext()

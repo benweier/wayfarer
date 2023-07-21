@@ -1,9 +1,9 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Ref, forwardRef } from 'react'
+import { type Ref, forwardRef } from 'react'
 import { createShipOrbit } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { ShipResponse } from '@/types/spacetraders'
-import { ShipActionProps } from './ship-actions.types'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type ShipResponse } from '@/types/spacetraders'
+import { type ShipActionProps } from './ship-actions.types'
 import { updateShipInFleetNavStatus, updateShipNavStatus } from './ship-actions.utilities'
 
 const OrbitComponent = (

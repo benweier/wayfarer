@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { cx } from '@/utilities/cx'
 import { ModalContext } from './Modal.Context'
-import { OverlayProps } from './modal.types'
+import { type OverlayProps } from './modal.types'
 import { useInOutTransition } from './useInOutTransition'
 
 export const Overlay = ({ variant = 'auto' }: OverlayProps) => {

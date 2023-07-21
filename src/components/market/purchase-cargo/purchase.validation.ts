@@ -1,4 +1,4 @@
-import { InferType, number, object, ref, string } from 'yup'
+import { type InferType, number, object, ref, string } from 'yup'
 
 export const validation = object({
   ship: string().required(),

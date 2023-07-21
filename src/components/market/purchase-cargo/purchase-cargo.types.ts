@@ -1,6 +1,6 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
-import { MarketTradeGood } from '@/types/spacetraders'
-import { PurchaseCargoSchema } from './purchase.validation'
+import { type ButtonHTMLAttributes, type ReactNode } from 'react'
+import { type MarketTradeGood } from '@/types/spacetraders'
+import { type PurchaseCargoSchema } from './purchase.validation'
 
 export type PurchaseCargoProps = {
   good: MarketTradeGood

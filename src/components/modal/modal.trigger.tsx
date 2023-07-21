@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { useModalActions } from './use-modal-store.hook'
 
 export const Trigger = ({
@@ -13,6 +13,8 @@ export const Trigger = ({
 
   return children({
     ...props,
-    onClick: () => openModal(),
+    onClick: () => {
+      openModal()
+    },
   })
 }

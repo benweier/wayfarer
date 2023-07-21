@@ -1,6 +1,6 @@
-import { ComponentType, PropsWithChildren, memo } from 'react'
+import { type ComponentType, type PropsWithChildren, memo } from 'react'
 import { QuerySuspenseBoundary } from './query-suspense-boundary.component'
-import { QuerySuspenseBoundaryProps } from './query-suspense-boundary.types'
+import { type QuerySuspenseBoundaryProps } from './query-suspense-boundary.types'
 
 export const withQSB =
   ({ error, fallback, onError }: QuerySuspenseBoundaryProps = {}) =>
@@ -12,10 +12,9 @@ export const withQSB =
         </QuerySuspenseBoundary>
       )
     })
+    const displayName = Component.displayName ?? (Component.name || 'Component')
 
-    WithQuerySuspenseBoundary.displayName = `WithQuerySuspenseBoundary(${
-      Component.displayName ?? Component.name ?? 'Component'
-    })`
+    WithQuerySuspenseBoundary.displayName = `WithQuerySuspenseBoundary(${displayName})`
 
     return WithQuerySuspenseBoundary
   }

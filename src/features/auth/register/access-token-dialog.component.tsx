@@ -2,7 +2,7 @@ import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { RegisterAgentResponse } from '@/types/spacetraders'
+import { type RegisterAgentResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { Copy } from './copy-button.component'
 import { useCopy } from './use-copy.hook'
@@ -28,7 +28,9 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
                 name="token"
                 type="text"
                 value={registration.token}
-                onFocus={(event) => event.target.select()}
+                onFocus={(event) => {
+                  event.target.select()
+                }}
                 readOnly
                 autoFocus
               />

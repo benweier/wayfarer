@@ -3,7 +3,7 @@ import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { cx } from '@/utilities/cx'
-import { SystemItemProps } from './system-item.types'
+import { type SystemItemProps } from './system-item.types'
 
 export const SystemItem = ({ system, hasShipPresence = false, children }: SystemItemProps) => {
   return (

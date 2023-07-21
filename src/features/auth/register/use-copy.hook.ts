@@ -5,7 +5,7 @@ export const useCopy = () => {
   const [isCopied, setIsCopied] = useState(false)
 
   const onCopy = useCallback(async (value: string) => {
-    return await navigator.clipboard.writeText(value).then(() => {
+    await navigator.clipboard.writeText(value).then(() => {
       setIsCopied(true)
     })
   }, [])

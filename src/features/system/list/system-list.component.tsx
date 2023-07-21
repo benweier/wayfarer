@@ -6,7 +6,7 @@ import { ROUTES } from '@/config/routes'
 import { getShipsList, getSystemsList } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 import { SystemItem } from '../item'
-import { SystemListProps } from './system-list.types'
+import { type SystemListProps } from './system-list.types'
 
 const WAYPOINT_TYPE_STYLES: Record<string, string> = {
   MOON: 'bg-slate-500 text-slate-50',
@@ -55,7 +55,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   useEffect(() => {
     if (!systemsListQuery.data?.meta) return
 
-    const max = Math.ceil(systemsListQuery.data?.meta.total / limit)
+    const max = Math.ceil(systemsListQuery.data.meta.total / limit)
 
     if (page > max) setParams({ page: max.toString() })
   }, [limit, systemsListQuery.data?.meta, page, setParams])
@@ -77,21 +77,21 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
           'pointer-events-auto opacity-100': systemsListQuery.isFetching,
         })}
       />
-      {meta && (
-        <div className="flex items-center justify-center gap-2 text-sm">
-          {systemsListQuery.isFetching ? (
-            <div>...</div>
-          ) : (
-            <>
-              <div>
-                {results.from} - {results.to}
-              </div>
-              <div className="text-secondary">of</div>
-              <div>{meta.total}</div>
-            </>
-          )}
-        </div>
-      )}
+
+      <div className="flex items-center justify-center gap-2 text-sm">
+        {systemsListQuery.isFetching ? (
+          <div>...</div>
+        ) : (
+          <>
+            <div>
+              {results.from} - {results.to}
+            </div>
+            <div className="text-secondary">of</div>
+            <div>{meta.total}</div>
+          </>
+        )}
+      </div>
+
       <div className="grid gap-1">
         {systems.map((system) => {
           return (
@@ -127,29 +127,30 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
           )
         })}
       </div>
-      {meta && (
-        <div className="row grid items-center justify-center gap-4">
-          <div className="flex items-center justify-center gap-2 text-sm">
-            {systemsListQuery.isFetching ? (
-              <div>...</div>
-            ) : (
-              <>
-                <div>
-                  {results.from} - {results.to}
-                </div>
-                <div className="text-secondary">of</div>
-                <div>{meta.total}</div>
-              </>
-            )}
-          </div>
-          <Pagination
-            current={meta.page}
-            total={Math.ceil(meta.total / limit)}
-            length={5}
-            onChange={(page) => setParams({ page: page.toString() })}
-          />
+
+      <div className="row grid items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-2 text-sm">
+          {systemsListQuery.isFetching ? (
+            <div>...</div>
+          ) : (
+            <>
+              <div>
+                {results.from} - {results.to}
+              </div>
+              <div className="text-secondary">of</div>
+              <div>{meta.total}</div>
+            </>
+          )}
         </div>
-      )}
+        <Pagination
+          current={meta.page}
+          total={Math.ceil(meta.total / limit)}
+          length={5}
+          onChange={(page) => {
+            setParams({ page: page.toString() })
+          }}
+        />
+      </div>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react'
 import { useStore } from 'zustand'
 import { ModalContext } from './modal.context'
-import { ModalStore } from './modal.types'
+import { type ModalStore } from './modal.types'
 
 export const useModalContext = <T>(
   selector: (state: ModalStore) => T,

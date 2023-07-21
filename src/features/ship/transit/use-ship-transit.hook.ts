@@ -1,8 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { startTransition, useEffect, useMemo, useState } from 'react'
 import { updateShipInFleetNavStatus, updateShipNavStatus } from '@/features/ship/actions'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { ShipResponse } from '@/types/spacetraders'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type ShipResponse } from '@/types/spacetraders'
 
 export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const client = useQueryClient()
@@ -22,7 +22,9 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
       })
     }, 1000)
 
-    return () => clearTimeout(timeout)
+    return () => {
+      clearTimeout(timeout)
+    }
   }, [arrival, remainingSeconds])
 
   useEffect(() => {

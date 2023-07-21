@@ -4,7 +4,7 @@ import { ROUTES } from '@/config/routes'
 import { ShipTransitJump } from './ship-transit.jump'
 import { ShipTransitNavigate } from './ship-transit.navigate'
 import { ShipTransitStatus } from './ship-transit.status'
-import { ShipTransitProps } from './ship-transit.types'
+import { type ShipTransitProps } from './ship-transit.types'
 import { ShipTransitWarp } from './ship-transit.warp'
 
 export const ShipTransit = ({ nav }: ShipTransitProps) => {

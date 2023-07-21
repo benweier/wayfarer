@@ -2,16 +2,16 @@ import { ErrorMessage } from '@hookform/error-message'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
-import { SpaceTradersResponse, queryFnFactory } from '@/services/api/spacetraders/core'
+import { type SpaceTradersResponse, queryFnFactory } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
-import { AgentResponse } from '@/types/spacetraders'
-import { LoginSchema, loginValidation } from './login.validation'
+import { type AgentResponse } from '@/types/spacetraders'
+import { type LoginSchema, loginValidation } from './login.validation'
 
-const getMyAgent = queryFnFactory<SpaceTradersResponse<AgentResponse>, void>(() => 'my/agent')
+const getMyAgent = queryFnFactory<SpaceTradersResponse<AgentResponse>>(() => 'my/agent')
 
 export const Login = () => {
   const location = useLocation<Partial<LoginSchema>>()
@@ -72,7 +72,9 @@ export const Login = () => {
                 {...methods.register('token', { required: true })}
                 className="input"
                 type="password"
-                onFocus={(node) => node.target.select()}
+                onFocus={(node) => {
+                  node.target.select()
+                }}
                 autoFocus
               />
               <ErrorMessage

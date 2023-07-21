@@ -1,4 +1,4 @@
-import { ContractResponse } from '@/types/spacetraders'
+import { type ContractResponse } from '@/types/spacetraders'
 
 type ContractGroups = {
   available: ContractResponse[]

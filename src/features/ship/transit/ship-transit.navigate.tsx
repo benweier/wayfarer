@@ -7,8 +7,8 @@ import { WAYPOINT_TYPE } from '@/config/constants'
 import { useShipContext } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointsList } from '@/services/api/spacetraders'
-import { ShipResponse } from '@/types/spacetraders'
-import { ShipTransitActionProps } from './ship-transit.types'
+import { type ShipResponse } from '@/types/spacetraders'
+import { type ShipTransitActionProps } from './ship-transit.types'
 
 export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
   const ship = useShipContext()

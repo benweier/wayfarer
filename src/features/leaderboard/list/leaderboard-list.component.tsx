@@ -1,7 +1,7 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
 import { get } from '@/services/fetch'
-import { StatusResponse } from '@/types/spacetraders'
+import { type StatusResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { JumpGateConnectedSystem } from '@/types/spacetraders'
+import { type JumpGateConnectedSystem } from '@/types/spacetraders'
 
 export const WaypointJumpGateItem = ({ system }: { system: JumpGateConnectedSystem }) => {
   return (

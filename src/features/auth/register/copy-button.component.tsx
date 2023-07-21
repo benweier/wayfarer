@@ -1,5 +1,5 @@
 import { ClipboardIcon } from '@heroicons/react/24/outline'
-import { ButtonHTMLAttributes } from 'react'
+import { type ButtonHTMLAttributes } from 'react'
 import { cx } from '@/utilities/cx'
 
 export const Copy = ({

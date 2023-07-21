@@ -1,8 +1,8 @@
 import { useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import { createStore } from 'zustand/vanilla'
-import { AgentResponse } from '@/types/spacetraders'
-import { BoundStoreSelector } from './store.types'
+import { type AgentResponse } from '@/types/spacetraders'
+import { type BoundStoreSelector } from './store.types'
 
 type AuthState =
   | { agent: null; token: null; isAuthenticated: false }
@@ -21,15 +21,14 @@ const store = createStore<AuthStore>((set) => ({
   token: null,
   agent: null,
   setAgent: (agent) => {
-    return set({ agent })
+    set({ agent })
   },
   signin: (state) => {
-    if (state.agent && state.token) {
-      return set({ isAuthenticated: true, token: state.token, agent: state.agent })
-    }
+    set({ isAuthenticated: true, token: state.token, agent: state.agent })
+    return
   },
   signout: () => {
-    return set({ isAuthenticated: false, token: null, agent: null })
+    set({ isAuthenticated: false, token: null, agent: null })
   },
 }))
 

@@ -1,4 +1,4 @@
-import { MarketGood, MarketTradeGood } from '@/types/spacetraders'
+import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
 
 export const sortByTradeAttribute = (
   attr: 'purchasePrice' | 'sellPrice' | 'tradeVolume',

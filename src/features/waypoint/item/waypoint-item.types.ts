@@ -1,3 +1,3 @@
-import { SystemWaypoint } from '@/types/spacetraders'
+import { type SystemWaypoint } from '@/types/spacetraders'
 
 export type WaypointItemProps = { systemSymbol: string; waypoint: SystemWaypoint }

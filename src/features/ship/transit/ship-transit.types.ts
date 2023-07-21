@@ -1,5 +1,5 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
-import { NavigationResponse } from '@/types/spacetraders'
+import { type ButtonHTMLAttributes, type ReactNode } from 'react'
+import { type NavigationResponse } from '@/types/spacetraders'
 
 export type ShipTransitProps = {
   nav: NavigationResponse

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useSystemContext } from '@/context/system.context'
 import { WaypointItem } from '@/features/waypoint/item'
 import { getSystemById } from '@/services/api/spacetraders'
-import { WaypointListProps } from './waypoint-list.types'
+import { type WaypointListProps } from './waypoint-list.types'
 
 export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => {
   const { systemSymbol } = useSystemContext()

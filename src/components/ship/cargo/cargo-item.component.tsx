@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai'
 import { cargoDescriptionAtom } from '@/store/atoms/cargo.display'
-import { CargoInventory, MarketTradeGood } from '@/types/spacetraders'
+import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const Item = ({ item, children }: WithChildren<{ item: CargoInventory; good?: MarketTradeGood }>) => {

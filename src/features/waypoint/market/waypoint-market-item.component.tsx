@@ -4,7 +4,7 @@ import { PurchaseCargo } from '@/components/market/purchase-cargo'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
-import { MarketGood, MarketTradeGood } from '@/types/spacetraders'
+import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number'
 
 export const WaypointMarketItem = ({ item, trade }: { item: MarketGood; trade?: MarketTradeGood }) => {

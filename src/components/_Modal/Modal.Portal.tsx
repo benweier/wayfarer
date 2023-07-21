@@ -1,11 +1,11 @@
 import { createFocusTrap } from 'focus-trap'
-import { PropsWithChildren, useEffect, useRef } from 'react'
+import { type PropsWithChildren, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import { type ModalContextType } from './modal.types.d'
 import { useEscapeKey } from './useEscapeKey'
 import { useScrollLock } from './useScrollLock'
-import type { ModalContextType } from './modal.types.d'
 
-const Portal = ({ children }: PropsWithChildren<unknown>) => createPortal(children, document.body)
+const Portal = ({ children }: PropsWithChildren) => createPortal(children, document.body)
 
 export const Modal = ({ isOpen, closeModal, closeOnEsc, children }: PropsWithChildren<ModalContextType>) => {
   const ref = useRef<HTMLDivElement>(null)

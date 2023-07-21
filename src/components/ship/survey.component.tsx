@@ -2,7 +2,7 @@ import { TRADE_SYMBOL } from '@/config/constants'
 import { useShipContext } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { useShipSurveyStore } from '@/store/ship'
-import { ShipResponse } from '@/types/spacetraders'
+import { type ShipResponse } from '@/types/spacetraders'
 import { Cooldown } from './cooldown.component'
 
 const List = ({ ship }: { ship: ShipResponse }) => {
@@ -40,7 +40,12 @@ const List = ({ ship }: { ship: ShipResponse }) => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <button className="btn btn-outline btn-danger" onClick={() => removeSurvey(survey.signature)}>
+              <button
+                className="btn btn-outline btn-danger"
+                onClick={() => {
+                  removeSurvey(survey.signature)
+                }}
+              >
                 Discard
               </button>
               <ShipActions.Extract ship={ship} survey={survey}>

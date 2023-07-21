@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import * as Select from '@/components/select'
 import { getShipsList } from '@/services/api/spacetraders'
-import { Meta, SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { ShipResponse } from '@/types/spacetraders'
+import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type ShipResponse } from '@/types/spacetraders'
 
 export type ShipItem = {
   ship: ShipResponse
@@ -62,7 +62,7 @@ export const Field = ({
   return (
     <Select.Field
       label={<Select.Label>Ship</Select.Label>}
-      by={(a, z) => a?.symbol === z?.symbol}
+      by={(a, z) => a.symbol === z.symbol}
       onChange={onChange}
       getItemKey={(ship) => ship.symbol}
       getItemLabel={(ship) => (ship ? state.get(ship.symbol)?.label : undefined)}

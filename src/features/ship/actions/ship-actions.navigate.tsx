@@ -1,9 +1,9 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipNavigate } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { ShipResponse } from '@/types/spacetraders'
-import { ShipActionProps } from './ship-actions.types'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type ShipResponse } from '@/types/spacetraders'
+import { type ShipActionProps } from './ship-actions.types'
 
 export const Navigate = ({
   ship,
@@ -64,6 +64,8 @@ export const Navigate = ({
 
   return children({
     disabled: isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
-    onClick: () => mutate({ shipSymbol: ship.symbol, waypointSymbol }),
+    onClick: () => {
+      mutate({ shipSymbol: ship.symbol, waypointSymbol })
+    },
   })
 }

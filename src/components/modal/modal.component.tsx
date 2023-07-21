@@ -1,7 +1,7 @@
-import { ForwardedRef, PropsWithChildren, forwardRef, useImperativeHandle } from 'react'
+import { type ForwardedRef, type PropsWithChildren, forwardRef, useImperativeHandle } from 'react'
 import { ModalContext } from './modal.context'
 import { Root } from './modal.root'
-import { ModalImperativeRef, ModalProps } from './modal.types'
+import { type ModalImperativeRef, type ModalProps } from './modal.types'
 import { useModalStoreCreator } from './use-modal-store-creator.hook'
 
 const ModalProviderComponent = (
@@ -11,8 +11,12 @@ const ModalProviderComponent = (
   const store = useModalStoreCreator({ isOpen, onClose })
 
   useImperativeHandle(ref, () => ({
-    openModal: () => store.setState({ isOpen: true }),
-    closeModal: () => store.setState({ isOpen: false }),
+    openModal: () => {
+      store.setState({ isOpen: true })
+    },
+    closeModal: () => {
+      store.setState({ isOpen: false })
+    },
   }))
 
   return (

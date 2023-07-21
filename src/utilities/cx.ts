@@ -1,4 +1,4 @@
-export type ClassValue = ClassArray | ClassDictionary | string | number | null | boolean | undefined
+export type ClassValue = ClassArray | ClassDictionary | boolean | number | string | null | undefined
 export type ClassDictionary = Record<string, any>
 export type ClassArray = ClassValue[]
 
@@ -21,7 +21,7 @@ function toVal(mix: ClassValue) {
       }
     } else {
       for (const k in mix) {
-        if (mix && mix[k]) {
+        if (mix[k]) {
           str && (str += ' ')
           str += k
         }

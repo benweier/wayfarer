@@ -1,5 +1,5 @@
 import { createStore } from 'zustand'
-import { ModalStore } from './modal.types'
+import { type ModalStore } from './modal.types'
 
 export const createModalStore = ({
   isOpen = false,

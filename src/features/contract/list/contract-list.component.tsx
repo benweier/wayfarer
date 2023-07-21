@@ -3,7 +3,7 @@ import { Badge } from '@/components/badge'
 import { Modal, useModalActions } from '@/components/modal'
 import { CONTRACT_TYPE } from '@/config/constants'
 import { createContractAccept, getContractsList } from '@/services/api/spacetraders'
-import { ContractResponse } from '@/types/spacetraders'
+import { type ContractResponse } from '@/types/spacetraders'
 import { ContractItem } from '../item'
 import { contractsReducer } from './contracts.utilities'
 
@@ -11,7 +11,12 @@ const CloseModal = () => {
   const { closeModal } = useModalActions()
 
   return (
-    <button className="btn" onClick={() => closeModal()}>
+    <button
+      className="btn"
+      onClick={() => {
+        closeModal()
+      }}
+    >
       Cancel
     </button>
   )
@@ -51,7 +56,12 @@ const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
           <div className="grid gap-2"></div>
           <div className="flex justify-end gap-4">
             <CloseModal />
-            <button className="btn btn-confirm" onClick={() => acceptContract.mutate(contract.id)}>
+            <button
+              className="btn btn-confirm"
+              onClick={() => {
+                acceptContract.mutate(contract.id)
+              }}
+            >
               Accept Contract
             </button>
           </div>

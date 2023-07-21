@@ -1,6 +1,6 @@
 import { produce } from 'immer'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { FuelResponse, NavigationResponse, ShipCargo, ShipResponse } from '@/types/spacetraders'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type FuelResponse, type NavigationResponse, type ShipCargo, type ShipResponse } from '@/types/spacetraders'
 
 export const updateShipNavStatus = produce<SpaceTradersResponse<ShipResponse>, [string]>((draft, state) => {
   draft.data.nav.status = state

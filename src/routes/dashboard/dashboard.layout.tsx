@@ -90,7 +90,9 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                       <button
                         type="button"
                         className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={() => {
+                          setMobileMenuOpen(false)
+                        }}
                       >
                         <span className="sr-only">Close sidebar</span>
                         <XMarkIcon className="h-5 w-5 text-white" aria-hidden />
@@ -169,7 +171,9 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                 <button
                   type="button"
                   className="-mr-3 inline-flex h-12 w-12 items-center justify-center rounded-md bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                  onClick={() => setMobileMenuOpen(true)}
+                  onClick={() => {
+                    setMobileMenuOpen(true)
+                  }}
                 >
                   <span className="sr-only">Open sidebar</span>
                   <Bars3Icon className="h-5 w-5" aria-hidden />

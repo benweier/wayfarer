@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { createContractDeliver } from '@/services/api/spacetraders'
-import { ContractResponse } from '@/types/spacetraders'
+import { type ContractResponse } from '@/types/spacetraders'
 
 export const DeliverContract = ({ contract }: { contract: ContractResponse }) => {
   const client = useQueryClient()
@@ -33,7 +33,11 @@ export const DeliverContract = ({ contract }: { contract: ContractResponse }) =>
         size="md"
         trigger={
           <Modal.Trigger>
-            <button className="btn btn-confirm btn-outline">Deliver Contract</button>
+            {(props) => (
+              <button className="btn btn-outline btn-confirm" {...props}>
+                Deliver Contract
+              </button>
+            )}
           </Modal.Trigger>
         }
       >

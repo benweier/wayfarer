@@ -1,7 +1,7 @@
 import { Listbox } from '@headlessui/react'
 import { CheckCircleIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { cx } from '@/utilities/cx'
-import { SelectFieldProps } from './select.types'
+import { type SelectFieldProps } from './select.types'
 
 export const Field = <T = string,>({
   label,

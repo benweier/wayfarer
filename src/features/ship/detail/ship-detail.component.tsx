@@ -11,7 +11,7 @@ import * as ShipActions from '@/features/ship/actions'
 import { ShipTransit } from '@/features/ship/transit'
 import { getShipById } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
-import { ShipDetailProps } from './ship-detail.types'
+import { type ShipDetailProps } from './ship-detail.types'
 
 export const ShipDetail = ({ symbol }: ShipDetailProps) => {
   const { data, isSuccess } = useQuery({

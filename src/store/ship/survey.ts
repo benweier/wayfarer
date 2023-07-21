@@ -1,7 +1,7 @@
 import { produce } from 'immer'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { SurveyResponse } from '@/types/spacetraders'
+import { type SurveyResponse } from '@/types/spacetraders'
 
 type ShipSurveyState = { surveys: SurveyResponse[] }
 
@@ -17,7 +17,7 @@ export const useShipSurveyStore = create<ShipSurveyStore>()(
     (set, get) => ({
       surveys: [],
       addSurvey: (survey) => {
-        return set(
+        set(
           produce((draft) => {
             draft.surveys.push(survey)
           }),
@@ -25,7 +25,7 @@ export const useShipSurveyStore = create<ShipSurveyStore>()(
       },
       removeSurvey: (signature) => {
         const index = get().surveys.findIndex((survey) => survey.signature === signature)
-        return set(
+        set(
           produce((draft) => {
             if (index > -1) draft.surveys.splice(index, 1)
           }),

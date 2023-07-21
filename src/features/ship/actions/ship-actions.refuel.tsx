@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createShipRefuel } from '@/services/api/spacetraders'
-import { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
-import { ShipResponse } from '@/types/spacetraders'
-import { ShipActionProps } from './ship-actions.types'
+import { type ShipResponse } from '@/types/spacetraders'
+import { type ShipActionProps } from './ship-actions.types'
 import { updateShipFuel, updateShipInFleetFuel } from './ship-actions.utilities'
 
 export const Refuel = ({
   ship,
-  disabled,
+  disabled = false,
   children = (props) => (
     <button className="btn btn-sm" {...props}>
       Refuel
@@ -47,6 +47,8 @@ export const Refuel = ({
 
   return children({
     disabled: disabled || isLoading || ship.fuel.current === ship.fuel.capacity,
-    onClick: () => mutate(ship.symbol),
+    onClick: () => {
+      mutate(ship.symbol)
+    },
   })
 }

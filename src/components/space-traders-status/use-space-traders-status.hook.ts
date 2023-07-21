@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { get } from '@/services/fetch'
-import { StatusResponse } from '@/types/spacetraders'
+import { type StatusResponse } from '@/types/spacetraders'
 
 const getSpacetradersStatus = () => {
   const url = new URL(import.meta.env.SPACETRADERS_API_BASE_URL)

@@ -1,5 +1,5 @@
 import { cx } from '@/utilities/cx'
-import { SystemTagProps } from './system-tag.types'
+import { type SystemTagProps } from './system-tag.types'
 
 const SYSTEM_TYPE_STYLES: Record<string, string> = {
   NEUTRON_STAR: 'bg-slate-500 text-slate-50',

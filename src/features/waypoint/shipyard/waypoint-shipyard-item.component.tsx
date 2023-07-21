@@ -1,4 +1,4 @@
-import { MarketGood } from '@/types/spacetraders'
+import { type MarketGood } from '@/types/spacetraders'
 
 export const WaypointShipyardItem = ({
   item,

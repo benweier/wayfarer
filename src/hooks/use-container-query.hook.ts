@@ -1,9 +1,10 @@
 import { useCallback, useState } from 'react'
-import useResizeObserver, { ResizeHandler } from 'use-resize-observer'
+import useResizeObserver from 'use-resize-observer'
+import { type ResizeHandler } from 'use-resize-observer'
 
 type BreakpointKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-export type ContainerBreakpoints = [BreakpointKey, number][]
+export type ContainerBreakpoints = Array<[BreakpointKey, number]>
 
 export const useContainerQuery = (breakpoints: ContainerBreakpoints) => {
   const [breakpoint, setBreakpoint] = useState<BreakpointKey | undefined>(undefined)

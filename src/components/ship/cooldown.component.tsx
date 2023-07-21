@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useShipCooldownStore } from '@/store/ship'
-import { ShipResponse } from '@/types/spacetraders'
+import { type ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
@@ -17,7 +17,9 @@ export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
       updateRemainingSeconds(ship.symbol)
     }, 1000)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+    }
   }, [cooldown, ship.symbol, updateRemainingSeconds])
 
   useEffect(() => {
@@ -38,7 +40,9 @@ export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
       1000 + cooldown.remainingSeconds * 1000,
     )
 
-    return () => clearTimeout(timeout)
+    return () => {
+      clearTimeout(timeout)
+    }
   }, [clearCooldown, cooldown, ship.symbol])
 
   return (

@@ -1,11 +1,11 @@
 import {
-  JumpGateResponse,
-  MarketResponse,
-  ShipyardResponse,
-  SystemsResponse,
-  WaypointResponse,
+  type JumpGateResponse,
+  type MarketResponse,
+  type ShipyardResponse,
+  type SystemsResponse,
+  type WaypointResponse,
 } from '@/types/spacetraders'
-import { Meta, SpaceTradersResponse, queryFnFactory } from './core'
+import { type Meta, type SpaceTradersResponse, queryFnFactory } from './core'
 
 export const getSystemsList = queryFnFactory<SpaceTradersResponse<SystemsResponse[], Meta>>(() => 'systems')
 

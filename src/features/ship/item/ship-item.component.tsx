@@ -4,10 +4,10 @@ import { ShipIcon } from '@/components/icons'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipTransit } from '@/features/ship/transit'
-import { ShipResponse } from '@/types/spacetraders'
+import { type ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { ShipControls } from './ship-item.controls'
-import { ShipItemProps } from './ship-item.types'
+import { type ShipItemProps } from './ship-item.types'
 
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   const transit = useShipTransit(ship)
