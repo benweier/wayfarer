@@ -62,7 +62,7 @@ export const Field = ({
   return (
     <Select.Field
       label={<Select.Label>Ship</Select.Label>}
-      by={(a, z) => a.symbol === z.symbol}
+      by={(a, z) => a?.symbol === z?.symbol}
       onChange={onChange}
       getItemKey={(ship) => ship.symbol}
       getItemLabel={(ship) => (ship ? state.get(ship.symbol)?.label : undefined)}
