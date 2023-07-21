@@ -1,8 +1,13 @@
 import { RadioGroup, Switch } from '@headlessui/react'
+import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
+import { startTransition, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useSystemContext } from '@/context/system.context'
+import { useWaypointContext } from '@/context/waypoint.context'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
 import { cx } from '@/utilities/cx'
+import { relativeDate } from '@/utilities/date'
 
 const WaypointMarketSortBy = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -38,6 +43,42 @@ const WaypointMarketSortBy = () => {
   )
 }
 
+const WaypointMarketRefresh = () => {
+  const [lastUpdate, forceUpdate] = useState(() => Date.now())
+  const client = useQueryClient()
+  const { systemSymbol } = useSystemContext()
+  const { waypointSymbol } = useWaypointContext()
+  const isFetching = useIsFetching(['system', systemSymbol, waypointSymbol, 'market']) > 0
+  const state = client.getQueryState(['system', systemSymbol, waypointSymbol, 'market'])
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      startTransition(() => {
+        forceUpdate(Date.now())
+      })
+    }, 10_000)
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [lastUpdate, state?.dataUpdatedAt])
+
+  return (
+    <div className="flex items-center gap-2">
+      <div className="text-secondary text-right text-sm">
+        {isFetching ? '...' : `Last fetched ${relativeDate(state?.dataUpdatedAt)}`}
+      </div>
+      <button
+        className="btn btn-outline btn-warn btn-sm"
+        disabled={isFetching}
+        onClick={() => client.resetQueries(['system', systemSymbol, waypointSymbol, 'market'])}
+      >
+        Refresh
+      </button>
+    </div>
+  )
+}
+
 export const WaypointMarketPreferences = () => {
   const [showDescription, setShowDescription] = useAtom(marketDescriptionAtom)
 
@@ -46,6 +87,7 @@ export const WaypointMarketPreferences = () => {
       <WaypointMarketSortBy />
 
       <div className="flex items-center justify-end gap-4">
+        <WaypointMarketRefresh />
         <div className="flex items-center gap-2">
           <span className="text-secondary text-sm">Show item description</span>
           <Switch
