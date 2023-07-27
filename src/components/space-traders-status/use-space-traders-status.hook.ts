@@ -1,11 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { get } from '@/services/fetch'
+import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { type StatusResponse } from '@/types/spacetraders'
-
-const getSpacetradersStatus = () => {
-  const url = new URL(import.meta.env.SPACETRADERS_API_BASE_URL)
-  return get<StatusResponse>(url)
-}
 
 const select = (response: StatusResponse) => ({
   status: response.status === 'SpaceTraders is currently online and available to play',
@@ -13,10 +8,9 @@ const select = (response: StatusResponse) => ({
 
 export const useSpaceTradersStatus = (): { status: 'UNKNOWN' | 'ONLINE' | 'OFFLINE'; isChecking: boolean } => {
   const { data, isLoading, isFetching, isSuccess, isError } = useQuery({
-    queryKey: ['status'],
-    queryFn: getSpacetradersStatus,
+    queryKey: getStatusQuery.getQueryKey(),
+    queryFn: getStatusQuery.queryFn,
     refetchInterval: 60_000,
-    staleTime: 60_000,
     select,
   })
 
