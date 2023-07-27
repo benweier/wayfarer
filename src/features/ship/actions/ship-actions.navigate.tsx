@@ -1,6 +1,6 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { createShipNavigate } from '@/services/api/spacetraders'
+import { createShipNavigateMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
@@ -17,17 +17,15 @@ export const Navigate = ({
   waypointSymbol: string
 }>) => {
   const client = useQueryClient()
-  const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
+  const isMutating = useIsMutating({ mutationKey: getShipByIdQuery.getQueryKey({ shipSymbol: ship.symbol }) })
   const { mutate } = useMutation({
-    mutationKey: ['ship', ship.symbol, 'navigate'],
-    mutationFn: ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) =>
-      createShipNavigate({ path: { shipSymbol }, payload: { waypointSymbol: waypointSymbol } }),
+    mutationKey: createShipNavigateMutation.getMutationKey(),
+    mutationFn: createShipNavigateMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
+      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
       return { ship, ships }
     },
@@ -36,7 +34,7 @@ export const Navigate = ({
 
       if (ctx?.ship) {
         client.setQueryData(
-          ['ship', shipSymbol],
+          getShipByIdQuery.getQueryKey({ shipSymbol }),
           produce(ctx.ship, (draft) => {
             draft.data.nav = response.data.nav
           }),
@@ -45,20 +43,19 @@ export const Navigate = ({
 
       if (ctx?.ships && index > -1) {
         client.setQueryData(
-          ['ships'],
+          getShipListQuery.getQueryKey(),
           produce(ctx.ships, (draft) => {
             draft.data[index].nav = response.data.nav
           }),
         )
       }
     },
-    onError: (_err, shipSymbol, ctx) => {
-      client.setQueryData(['ship', shipSymbol], ctx?.ship)
-      client.setQueryData(['ships'], ctx?.ships)
+    onError: (_err, { shipSymbol }, ctx) => {
+      client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), ctx?.ship)
+      client.setQueryData(getShipListQuery.getQueryKey(), ctx?.ships)
     },
-    onSettled: (_res, _err, shipSymbol) => {
-      void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
+    onSettled: (_res, _err) => {
+      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 

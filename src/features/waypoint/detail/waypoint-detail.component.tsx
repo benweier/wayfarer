@@ -5,13 +5,13 @@ import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
-import { getWaypointById } from '@/services/api/spacetraders'
+import { getWaypointByIdQuery } from '@/services/api/spacetraders'
 import { type WaypointDetailProps } from './waypoint-detail.types'
 
 export const WaypointDetail = ({ systemSymbol, waypointSymbol, children }: WithChildren<WaypointDetailProps>) => {
   const { data, isSuccess } = useQuery({
-    queryKey: ['system', systemSymbol, 'waypoint', waypointSymbol],
-    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointSymbol } }, { signal }),
+    queryKey: getWaypointByIdQuery.getQueryKey({ systemSymbol, waypointSymbol }),
+    queryFn: getWaypointByIdQuery.queryFn,
   })
 
   if (!isSuccess) return null

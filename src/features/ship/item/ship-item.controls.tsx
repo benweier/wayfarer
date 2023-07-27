@@ -10,12 +10,13 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import * as ShipActions from '@/features/ship/actions'
-import { getWaypointsList } from '@/services/api/spacetraders'
+import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { type ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
-  const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol] }) > 0
+  const isMutating =
+    useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }] }) > 0
   const { ref, modal } = useModalImperativeHandle()
   const { x, y, refs } = useFloating<HTMLButtonElement>({
     strategy: 'absolute',
@@ -127,10 +128,8 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
 
 const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const { isSuccess, data } = useQuery({
-    queryKey: ['system', ship.nav.systemSymbol, 'waypoints'],
-    queryFn: () => {
-      return getWaypointsList({ path: { systemSymbol: ship.nav.systemSymbol } })
-    },
+    queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: ship.nav.systemSymbol }),
+    queryFn: getWaypointListQuery.queryFn,
   })
 
   if (!isSuccess) return null

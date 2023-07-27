@@ -16,12 +16,6 @@ type StatusResponse = {
   links: Array<{ name: string; url: string }>
 }
 
-export type RegisterAgentRequest = {
-  symbol: string
-  faction: string
-  email?: string
-}
-
 export type AgentResponse = {
   accountId: string
   symbol: string

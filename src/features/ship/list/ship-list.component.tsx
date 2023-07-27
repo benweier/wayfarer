@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { getShipsList } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders'
 import { ShipItem } from '../item'
 
 export const ShipList = () => {
   const { isSuccess, data } = useQuery({
-    queryKey: ['ships'],
-    queryFn: ({ signal }) => getShipsList(undefined, { signal }),
+    queryKey: getShipListQuery.getQueryKey(),
+    queryFn: getShipListQuery.queryFn,
   })
 
   if (!isSuccess) return null

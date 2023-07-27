@@ -1,23 +1,23 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
-import { getShipyard, getWaypointById } from '@/services/api/spacetraders'
+import { getWaypointByIdQuery, getWaypointShipyardQuery } from '@/services/api/spacetraders'
 import { WaypointShipyardNotAvailable } from './waypoint-shipyard.not-available'
 
 export const WaypointShipyardList = () => {
   const { systemSymbol } = useSystemContext()
   const { waypointSymbol } = useWaypointContext()
   const waypointQuery = useQuery({
-    queryKey: ['system', systemSymbol, 'waypoint', waypointSymbol],
-    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointSymbol } }, { signal }),
+    queryKey: getWaypointByIdQuery.getQueryKey({ systemSymbol, waypointSymbol }),
+    queryFn: getWaypointByIdQuery.queryFn,
   })
 
   const shipyardEnabled =
     waypointQuery.isSuccess && waypointQuery.data.data.traits.findIndex((trait) => trait.symbol === 'SHIPYARD') !== -1
 
   const shipyardQuery = useQuery({
-    queryKey: ['shipyard', systemSymbol, waypointSymbol],
-    queryFn: ({ signal }) => getShipyard({ path: { systemSymbol, waypointSymbol } }, { signal }),
+    queryKey: getWaypointShipyardQuery.getQueryKey({ systemSymbol, waypointSymbol }),
+    queryFn: getWaypointShipyardQuery.queryFn,
     enabled: shipyardEnabled,
   })
 

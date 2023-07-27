@@ -2,14 +2,14 @@ import { useQuery } from '@tanstack/react-query'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
 import { ShipItem } from '@/features/ship/item'
-import { getShipsList } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders'
 
 export const WaypointFleetList = () => {
   const { systemSymbol } = useSystemContext()
   const { waypointSymbol } = useWaypointContext()
   const { isSuccess, data } = useQuery({
-    queryKey: ['ships'],
-    queryFn: ({ signal }) => getShipsList(undefined, { signal }),
+    queryKey: getShipListQuery.getQueryKey(),
+    queryFn: getShipListQuery.queryFn,
     select: (response) => ({
       data: response.data.filter(
         (ship) => ship.nav.systemSymbol === systemSymbol && ship.nav.waypointSymbol === waypointSymbol,

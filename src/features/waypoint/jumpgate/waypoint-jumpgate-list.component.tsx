@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
-import { getJumpGate } from '@/services/api/spacetraders'
+import { getWaypointJumpGateQuery } from '@/services/api/spacetraders'
 import { WaypointJumpGateItem } from './waypoint-jumpgate-item.component'
 import { WaypointJumpGateLayout } from './waypoint-jumpgate.layout'
 
@@ -10,8 +10,8 @@ export const WaypointJumpGateList = () => {
   const { waypointSymbol } = useWaypointContext()
 
   const { data, isSuccess } = useQuery({
-    queryKey: ['jump-gate', systemSymbol, waypointSymbol],
-    queryFn: ({ signal }) => getJumpGate({ path: { systemSymbol, waypointSymbol } }, { signal }),
+    queryKey: getWaypointJumpGateQuery.getQueryKey({ systemSymbol, waypointSymbol }),
+    queryFn: getWaypointJumpGateQuery.queryFn,
   })
 
   if (!isSuccess) return null

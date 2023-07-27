@@ -8,7 +8,7 @@ import { useShipContext } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
-import { getMarket } from '@/services/api/spacetraders'
+import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
 import { Item } from './cargo-item.component'
 import { Layout } from './cargo.layout'
@@ -67,9 +67,11 @@ const CancelModal = () => {
 export const List = () => {
   const ship = useShipContext()
   const { data } = useQuery({
-    queryKey: ['system', ship.nav.systemSymbol, ship.nav.waypointSymbol, 'market'],
-    queryFn: ({ signal }) =>
-      getMarket({ path: { systemSymbol: ship.nav.systemSymbol, waypointSymbol: ship.nav.waypointSymbol } }, { signal }),
+    queryKey: getWaypointMarketQuery.getQueryKey({
+      systemSymbol: ship.nav.systemSymbol,
+      waypointSymbol: ship.nav.waypointSymbol,
+    }),
+    queryFn: getWaypointMarketQuery.queryFn,
     select: (response) => {
       const market = [...response.data.imports, ...response.data.exchange]
       const goods = response.data.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {

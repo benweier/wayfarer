@@ -1,10 +1,15 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { type Ref, forwardRef } from 'react'
-import { createShipOrbit } from '@/services/api/spacetraders'
+import { createShipOrbitMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
-import { updateShipInFleetNavStatus, updateShipNavStatus } from './ship-actions.utilities'
+import {
+  updateShipInFleetNav,
+  updateShipInFleetNavStatus,
+  updateShipNav,
+  updateShipNavStatus,
+} from './ship-actions.utilities'
 
 const OrbitComponent = (
   {
@@ -18,31 +23,45 @@ const OrbitComponent = (
   ref: Ref<HTMLButtonElement>,
 ) => {
   const client = useQueryClient()
-  const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
+  const isMutating = useIsMutating({
+    mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }],
+  })
   const { mutate } = useMutation({
-    mutationKey: ['ship', ship.symbol, 'orbit'],
-    mutationFn: (shipSymbol: string) => createShipOrbit({ path: { shipSymbol } }),
-    onMutate: (shipSymbol) => {
-      void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
+    mutationKey: createShipOrbitMutation.getMutationKey({ shipSymbol: ship.symbol }),
+    mutationFn: createShipOrbitMutation.mutationFn,
+    onMutate: ({ shipSymbol }) => {
+      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ship) client.setQueryData(['ship', shipSymbol], updateShipNavStatus(ship, 'UNDOCKING'))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'UNDOCKING'))
+      if (ship) {
+        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), updateShipNavStatus(ship, 'UNDOCKING'))
+      }
+      if (ships && index > -1) {
+        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetNavStatus(ships, index, 'UNDOCKING'))
+      }
 
       return { ship, ships }
     },
-    onError: (_err, shipSymbol, ctx) => {
-      client.setQueryData(['ships'], ctx?.ships)
-      client.setQueryData(['ship', shipSymbol], ctx?.ship)
+    onSuccess: (response, { shipSymbol }, ctx) => {
+      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
+
+      if (ctx?.ship) {
+        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), updateShipNav(ctx.ship, response.data.nav))
+      }
+      if (ctx?.ships && index > -1) {
+        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetNav(ctx.ships, index, response.data.nav))
+      }
     },
-    onSettled: (_res, _err, shipSymbol) => {
-      void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
+    onError: (_err, { shipSymbol }, ctx) => {
+      client.setQueryData(getShipListQuery.getQueryKey(), ctx?.ships)
+      client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), ctx?.ship)
+    },
+    onSettled: (_res, _err) => {
+      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 
@@ -50,7 +69,7 @@ const OrbitComponent = (
     ref,
     disabled: isMutating > 0 || ship.nav.status !== 'DOCKED',
     onClick: () => {
-      mutate(ship.symbol)
+      mutate({ shipSymbol: ship.symbol })
     },
   })
 }

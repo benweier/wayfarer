@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
-import { getMarket, getWaypointById } from '@/services/api/spacetraders'
+import { getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type MarketTradeGood } from '@/types/spacetraders'
 import { WaypointMarketItem } from './waypoint-market-item.component'
 import { makeSortByTradeAttributeFn } from './waypoint-market-preferences.utilities'
@@ -14,8 +14,8 @@ export const WaypointMarketList = () => {
   const { waypointSymbol } = useWaypointContext()
   const [searchParams] = useSearchParams()
   const waypointQuery = useQuery({
-    queryKey: ['system', systemSymbol, 'waypoint', waypointSymbol],
-    queryFn: ({ signal }) => getWaypointById({ path: { systemSymbol, waypointSymbol } }, { signal }),
+    queryKey: getWaypointByIdQuery.getQueryKey({ systemSymbol, waypointSymbol }),
+    queryFn: getWaypointByIdQuery.queryFn,
   })
 
   const marketEnabled =
@@ -23,8 +23,8 @@ export const WaypointMarketList = () => {
     waypointQuery.data.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
 
   const marketQuery = useQuery({
-    queryKey: ['system', systemSymbol, waypointSymbol, 'market'],
-    queryFn: ({ signal }) => getMarket({ path: { systemSymbol, waypointSymbol } }, { signal }),
+    queryKey: getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }),
+    queryFn: getWaypointMarketQuery.queryFn,
     enabled: marketEnabled,
   })
 

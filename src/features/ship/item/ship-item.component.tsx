@@ -22,14 +22,15 @@ const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
 }
 
 export const ShipItem = ({ ship }: ShipItemProps) => {
-  const isMutating = useIsMutating({ mutationKey: ['ship', ship.symbol], exact: false })
+  const isMutating =
+    useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }] }) > 0
 
   return (
     <div
       className={cx(
         'relative z-auto rounded bg-zinc-100 p-4 @container/ship-item dark:border-zinc-700 dark:bg-zinc-700/25',
         {
-          'pointer-events-none opacity-30': isMutating > 0,
+          'pointer-events-none opacity-30': isMutating,
         },
       )}
     >

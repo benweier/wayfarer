@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { type ReactNode } from 'react'
 import * as Select from '@/components/select'
-import { getShipsList } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders'
 import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 
@@ -50,8 +50,8 @@ export const Field = ({
   getShipOption?: ShipReducer
 }) => {
   const { data, isSuccess } = useQuery({
-    queryKey: ['ships'],
-    queryFn: () => getShipsList(),
+    queryKey: getShipListQuery.getQueryKey(),
+    queryFn: getShipListQuery.queryFn,
     select,
   })
 

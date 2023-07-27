@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createShipRefuel } from '@/services/api/spacetraders'
+import { createShipRefuelMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -17,27 +17,31 @@ export const Refuel = ({
 }: ShipActionProps) => {
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
-  const { mutate, isLoading } = useMutation({
-    mutationKey: ['ship', ship.symbol, 'refuel'],
-    mutationFn: (shipSymbol: string) => createShipRefuel({ path: { shipSymbol } }),
-    onMutate: (shipSymbol) => {
-      void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
+  const { mutate, isPending } = useMutation({
+    mutationKey: createShipRefuelMutation.getMutationKey({ shipSymbol: ship.symbol }),
+    mutationFn: createShipRefuelMutation.mutationFn,
+    onMutate: ({ shipSymbol }) => {
+      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
+
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+
+      return { ship, ships }
     },
-    onSuccess: (response, shipSymbol) => {
+    onSuccess: (response, { shipSymbol }, ctx) => {
       const fuel = response.data.fuel
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
-      if (ship) client.setQueryData(['ship', shipSymbol], updateShipFuel(ship, fuel))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetFuel(ships, index, fuel))
+      if (ctx?.ship) {
+        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), updateShipFuel(ctx.ship, fuel))
+      }
+      if (ctx?.ships && index > -1) {
+        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetFuel(ctx.ships, index, fuel))
+      }
     },
-    onSettled: (response, _err, shipSymbol) => {
-      void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
+    onSettled: (response, _err) => {
+      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
 
       if (response?.data.agent) {
         setAgent(response.data.agent)
@@ -46,9 +50,9 @@ export const Refuel = ({
   })
 
   return children({
-    disabled: disabled || isLoading || ship.fuel.current === ship.fuel.capacity,
+    disabled: disabled || isPending || ship.fuel.current === ship.fuel.capacity,
     onClick: () => {
-      mutate(ship.symbol)
+      mutate({ shipSymbol: ship.symbol })
     },
   })
 }

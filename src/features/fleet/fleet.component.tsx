@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { ShipItem } from '@/features/ship/item'
-import { getShipsList } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { cx } from '@/utilities/cx'
 
 export const Fleet = () => {
   const { isSuccess, data, isFetching } = useQuery({
-    queryKey: ['ships'],
-    queryFn: ({ signal }) => getShipsList(undefined, { signal }),
+    queryKey: getShipListQuery.getQueryKey(),
+    queryFn: getShipListQuery.queryFn,
   })
 
   if (!isSuccess) return null

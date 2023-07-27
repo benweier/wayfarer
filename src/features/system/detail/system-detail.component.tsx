@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query'
 import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { SystemContext } from '@/context/system.context'
-import { getSystemById } from '@/services/api/spacetraders'
+import { getSystemByIdQuery } from '@/services/api/spacetraders'
 import { type SystemDetailProps } from './system-detail.types'
 
 export const SystemDetail = ({ systemSymbol, children }: WithChildren<SystemDetailProps>) => {
   const { isSuccess, data } = useQuery({
-    queryKey: ['system', systemSymbol],
-    queryFn: ({ signal }) => getSystemById({ path: { systemSymbol } }, { signal }),
+    queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
+    queryFn: getSystemByIdQuery.queryFn,
   })
 
   if (!isSuccess) return null

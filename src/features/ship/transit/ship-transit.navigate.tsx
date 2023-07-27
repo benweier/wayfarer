@@ -6,7 +6,7 @@ import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { useShipContext } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
-import { getWaypointsList } from '@/services/api/spacetraders'
+import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipTransitActionProps } from './ship-transit.types'
 
@@ -37,15 +37,15 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
 
 const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const { isSuccess, data } = useQuery({
-    queryKey: ['system', ship.nav.systemSymbol, 'waypoints'],
-    queryFn: () => {
-      return getWaypointsList({ path: { systemSymbol: ship.nav.systemSymbol } })
-    },
+    queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: ship.nav.systemSymbol }),
+    queryFn: getWaypointListQuery.queryFn,
   })
 
   if (!isSuccess) return null
 
   const waypoints = data.data
+
+  console.log(waypoints)
 
   return (
     <div className="grid gap-3">

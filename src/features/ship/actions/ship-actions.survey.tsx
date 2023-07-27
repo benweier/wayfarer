@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { createShipSurvey } from '@/services/api/spacetraders'
+import { createShipSurveyMutation } from '@/services/api/spacetraders'
 import { useShipCooldownStore, useShipSurveyStore } from '@/store/ship'
 import { type ShipActionProps } from './ship-actions.types'
 
@@ -16,10 +16,10 @@ export const Survey = ({
     hasCooldown: !!state.cooldowns[ship.symbol],
     setCooldown: state.setCooldown,
   }))
-  const { mutate, isLoading } = useMutation({
-    mutationKey: ['ship', ship.symbol, 'survey'],
-    mutationFn: (shipSymbol: string) => createShipSurvey({ path: { shipSymbol } }),
-    onSuccess: (response, shipSymbol) => {
+  const { mutate, isPending } = useMutation({
+    mutationKey: createShipSurveyMutation.getMutationKey({ shipSymbol: ship.symbol }),
+    mutationFn: createShipSurveyMutation.mutationFn,
+    onSuccess: (response, { shipSymbol }) => {
       const [survey] = response.data.surveys
       const cooldown = response.data.cooldown
       addSurvey(survey)
@@ -28,9 +28,9 @@ export const Survey = ({
   })
 
   return children({
-    disabled: hasCooldown || isLoading,
+    disabled: hasCooldown || isPending,
     onClick: () => {
-      mutate(ship.symbol)
+      mutate({ shipSymbol: ship.symbol })
     },
   })
 }

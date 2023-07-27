@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSystemContext } from '@/context/system.context'
 import { ShipItem } from '@/features/ship/item'
-import { getShipsList } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const SystemFleet = () => {
   const { systemSymbol } = useSystemContext()
   const { isSuccess, data } = useQuery({
-    queryKey: ['ships'],
-    queryFn: ({ signal }) => getShipsList(undefined, { signal }),
+    queryKey: getShipListQuery.getQueryKey(),
+    queryFn: getShipListQuery.queryFn,
     select: (response): SpaceTradersResponse<ShipResponse[]> => ({
       data: response.data.filter((ship) => ship.nav.systemSymbol === systemSymbol),
       meta: response.meta,

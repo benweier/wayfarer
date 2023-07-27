@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipContext } from '@/context/ship.context'
-import { createShipWarp } from '@/services/api/spacetraders'
+import { createShipWarpMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipTransitActionProps } from './ship-transit.types'
@@ -30,16 +30,14 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
   const methods = useForm<{ waypointSymbol: string }>()
   const client = useQueryClient()
 
-  const { mutateAsync, isLoading } = useMutation({
-    mutationKey: ['ship', ship.symbol, 'warp'],
-    mutationFn: ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) =>
-      createShipWarp({ path: { shipSymbol }, payload: { waypointSymbol: waypointSymbol } }),
+  const { mutateAsync, isPending } = useMutation({
+    mutationKey: createShipWarpMutation.getMutationKey({ shipSymbol: ship.symbol }),
+    mutationFn: createShipWarpMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
+      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
       return { ship, ships }
     },
@@ -48,7 +46,7 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
 
       if (ctx?.ship) {
         client.setQueryData(
-          ['ship', shipSymbol],
+          getShipByIdQuery.getQueryKey({ shipSymbol }),
           produce(ctx.ship, (draft) => {
             draft.data.nav = response.data.nav
             draft.data.fuel = response.data.fuel
@@ -58,7 +56,7 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
 
       if (ctx?.ships && index > -1) {
         client.setQueryData(
-          ['ships'],
+          getShipListQuery.getQueryKey(),
           produce(ctx.ships, (draft) => {
             draft.data[index].nav = response.data.nav
             draft.data[index].fuel = response.data.fuel
@@ -66,9 +64,8 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
         )
       }
     },
-    onSettled: (_res, _err, { shipSymbol }) => {
-      void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
+    onSettled: (_res, _err) => {
+      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 
@@ -78,7 +75,7 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
         mutateAsync({ shipSymbol: ship.symbol, waypointSymbol: values.waypointSymbol }),
       )}
     >
-      <fieldset disabled={isLoading || ship.nav.status !== 'IN_ORBIT'} className="grid gap-4">
+      <fieldset disabled={isPending || ship.nav.status !== 'IN_ORBIT'} className="grid gap-4">
         <div>
           <label className="label">Waypoint Symbol</label>
           <input {...methods.register('waypointSymbol')} className="input" />

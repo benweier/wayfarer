@@ -3,7 +3,7 @@ import { TradeGood } from '@/components/market/trade-good'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { updateShipCargo, updateShipInFleetCargo } from '@/features/ship/actions'
-import { createShipCargoSell } from '@/services/api/spacetraders'
+import { createShipCargoSellMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -22,27 +22,34 @@ export const SellCargo = ({
   const { setAgent } = useAuthStore()
   const client = useQueryClient()
   const { mutateAsync } = useMutation({
-    mutationKey: ['cargo', good.symbol, 'sell'],
-    mutationFn: ({ shipSymbol, symbol, units }: { shipSymbol: string; symbol: string; units: number }) =>
-      createShipCargoSell({ path: { shipSymbol }, payload: { symbol, units } }),
+    mutationKey: createShipCargoSellMutation.getMutationKey(),
+    mutationFn: createShipCargoSellMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', shipSymbol] })
+      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
+
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+
+      return { ship, ships }
     },
-    onSuccess: (response, { shipSymbol }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+    onSuccess: (response, { shipSymbol }, ctx) => {
+      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
-      if (ship) client.setQueryData(['ship', shipSymbol], updateShipCargo(ship, response.data.cargo))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetCargo(ships, index, response.data.cargo))
+      if (ctx?.ship)
+        client.setQueryData(
+          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          updateShipCargo(ctx.ship, response.data.cargo),
+        )
+      if (ctx?.ships && index > -1)
+        client.setQueryData(
+          getShipListQuery.getQueryKey(),
+          updateShipInFleetCargo(ctx.ships, index, response.data.cargo),
+        )
 
       setAgent(response.data.agent)
     },
-    onSettled: (_res, _err, { shipSymbol }) => {
-      void client.invalidateQueries({ queryKey: ['ships'] })
-      void client.invalidateQueries({ queryKey: ['ship', shipSymbol] })
+    onSettled: (_res, _err) => {
+      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
 
       modal.close()
     },
@@ -67,7 +74,7 @@ export const SellCargo = ({
           onSubmit={(values) =>
             mutateAsync({
               shipSymbol: values.ship,
-              symbol: values.item,
+              itemSymbol: values.item,
               units: values.quantity,
             })
           }

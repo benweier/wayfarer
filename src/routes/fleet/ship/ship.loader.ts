@@ -1,6 +1,6 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { getMarket, getShipById } from '@/services/api/spacetraders'
+import { getShipByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/store/auth'
 
@@ -21,17 +21,16 @@ export const loader: QueryClientLoaderFn =
 
     try {
       const ship = await client.ensureQueryData({
-        queryKey: ['ship', shipSymbol],
-        queryFn: ({ signal }) => getShipById({ path: { shipSymbol } }, { signal }),
+        queryKey: getShipByIdQuery.getQueryKey({ shipSymbol }),
+        queryFn: getShipByIdQuery.queryFn,
       })
 
       const market = client.ensureQueryData({
-        queryKey: ['system', ship.data.nav.systemSymbol, ship.data.nav.waypointSymbol, 'market'],
-        queryFn: ({ signal }) =>
-          getMarket(
-            { path: { systemSymbol: ship.data.nav.systemSymbol, waypointSymbol: ship.data.nav.waypointSymbol } },
-            { signal },
-          ),
+        queryKey: getWaypointMarketQuery.getQueryKey({
+          systemSymbol: ship.data.nav.systemSymbol,
+          waypointSymbol: ship.data.nav.waypointSymbol,
+        }),
+        queryFn: getWaypointMarketQuery.queryFn,
       })
 
       return defer({ ship, market })

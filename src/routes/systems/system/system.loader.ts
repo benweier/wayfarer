@@ -1,6 +1,6 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { getSystemById } from '@/services/api/spacetraders'
+import { getSystemByIdQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/store/auth'
 
@@ -22,8 +22,8 @@ export const loader: QueryClientLoaderFn =
 
     try {
       const system = client.ensureQueryData({
-        queryKey: ['system', systemSymbol],
-        queryFn: ({ signal }) => getSystemById({ path: { systemSymbol } }, { signal }),
+        queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
+        queryFn: getSystemByIdQuery.queryFn,
       })
 
       return defer({

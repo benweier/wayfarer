@@ -1,3 +1,5 @@
+import { type QueryFunctionContext } from '@tanstack/react-query'
+import { get, post } from '@/services/fetch'
 import {
   type AgentResponse,
   type ChartResponse,
@@ -11,112 +13,249 @@ import {
   type SurveyResponse,
   type WaypointResponse,
 } from '@/types/spacetraders'
-import { type Meta, type SpaceTradersResponse, mutationFnFactory, queryFnFactory } from './core'
+import { type Meta, type SpaceTradersResponse, createHeaders } from './core'
 
-export const getShipsList = queryFnFactory<SpaceTradersResponse<ShipResponse[], Meta>>(() => 'my/ships')
+type MaybeMutationKey<T = never> = [] | [Partial<T>]
 
-export const getShipById = queryFnFactory<SpaceTradersResponse<ShipResponse>, { shipSymbol: string }>(
-  ({ shipSymbol }) => `my/ships/${shipSymbol}`,
-)
+export const FLEET_QUERIES = {
+  shipList: (...params: [] | [{ page?: number; limit?: number }]) =>
+    [{ scope: 'ships', entity: 'list' }, ...params] as const,
+  shipById: (args: { shipSymbol: string }) => [{ scope: 'ships', entity: 'item' }, args] as const,
+}
 
-export const createShipPurchase = mutationFnFactory<
-  SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse }>,
-  undefined,
-  { shipType: string; waypointSymbol: string }
->(() => 'my/ships')
+type FleetQueryKey<T extends keyof typeof FLEET_QUERIES> = ReturnType<(typeof FLEET_QUERIES)[T]>
 
-export const createShipCargoPurchase = mutationFnFactory<
-  SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>,
-  { shipSymbol: string },
-  { symbol: string; units: number }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/purchase`)
+export const getShipListQuery = {
+  getQueryKey: FLEET_QUERIES.shipList,
+  queryFn: async ({ signal }: QueryFunctionContext<FleetQueryKey<'shipList'>>) => {
+    const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
+    return get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
+  },
+}
 
-export const createShipCargoSell = mutationFnFactory<
-  SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>,
-  { shipSymbol: string },
-  { symbol: string; units: number }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/sell`)
+export const getShipByIdQuery = {
+  getQueryKey: FLEET_QUERIES.shipById,
+  queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<FleetQueryKey<'shipById'>>) => {
+    const url = new URL(`my/ships/${args.shipSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+    return get<SpaceTradersResponse<ShipResponse>>(url, { signal, headers: createHeaders() })
+  },
+}
 
-export const createShipScanWaypoint = mutationFnFactory<
-  SpaceTradersResponse<{ waypoints: WaypointResponse[]; cooldown: CooldownResponse }>,
-  { shipSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/scan/waypoints`)
+export const createShipPurchaseMutation = {
+  getMutationKey: () => [{ scope: 'ships', entity: 'item', action: 'purchase' }] as const,
+  mutationFn: async ({ shipType, waypointSymbol }: { shipType: string; waypointSymbol: string }) => {
+    const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-export const createShipScanSystems = mutationFnFactory<
-  SpaceTradersResponse<{
-    cooldown: CooldownResponse
-    systems: Array<{
-      symbol: string
-      sectorSymbol: string
-      type: string
-      x: number
-      y: number
-    }>
-  }>,
-  { shipSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/scan/systems`)
+    return get<SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse }>>(url, {
+      headers: createHeaders(),
+      body: JSON.stringify({ shipType, waypointSymbol }),
+    })
+  },
+}
 
-export const createShipOrbit = mutationFnFactory<
-  SpaceTradersResponse<{ nav: NavigationResponse }>,
-  { shipSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/orbit`)
-export const createShipDock = mutationFnFactory<
-  SpaceTradersResponse<{ nav: NavigationResponse }>,
-  { shipSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/dock`)
+export const createShipCargoPurchaseMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'purchase-cargo' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
+    const url = new URL(`my/ships/${shipSymbol}/purchase`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-export const createShipNavigate = mutationFnFactory<
-  SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>,
-  { shipSymbol: string },
-  { waypointSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/navigate`)
+    return get<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>>(url, {
+      headers: createHeaders(),
+      body: JSON.stringify({ symbol: itemSymbol, units }),
+    })
+  },
+}
 
-export const createShipWarp = mutationFnFactory<
-  SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>,
-  { shipSymbol: string },
-  { waypointSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/warp`)
+export const createShipCargoSellMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'sell-cargo' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
+    const url = new URL(`my/ships/${shipSymbol}/sell`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-export const createShipJump = mutationFnFactory<
-  SpaceTradersResponse<{ nav: NavigationResponse; cooldown: CooldownResponse }>,
-  { shipSymbol: string },
-  { systemSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/jump`)
+    return get<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>>(url, {
+      headers: createHeaders(),
+      body: JSON.stringify({ symbol: itemSymbol, units }),
+    })
+  },
+}
 
-export const createShipRefuel = mutationFnFactory<
-  SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>,
-  { shipSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/refuel`)
+export const createShipScanWaypointsMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'scan-waypoints' }, ...args] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/scan/waypoints`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-export const createShipSurvey = mutationFnFactory<
-  SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>,
-  { shipSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/survey`)
+    return post<SpaceTradersResponse<{ waypoints: WaypointResponse[]; cooldown: CooldownResponse }>>(url, undefined, {
+      headers: createHeaders(),
+    })
+  },
+}
 
-export const createShipExtract = mutationFnFactory<
-  SpaceTradersResponse<{ cooldown: CooldownResponse; extraction: ExtractResponse; cargo: ShipCargo }>,
-  { shipSymbol: string },
-  { survey?: SurveyResponse } | undefined
->(({ shipSymbol }) => `my/ships/${shipSymbol}/extract`)
+export const createShipScanSystemsMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'scan-systems' }, ...args] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/scan/systems`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-export const createShipRefine = mutationFnFactory<
-  SpaceTradersResponse<{
-    cooldown: CooldownResponse
-    cargo: ShipCargo
-    produced: Array<{ tradeSymbol: string; units: 0 }>
-    consumed: Array<{ tradeSymbol: string; units: 0 }>
-  }>,
-  { shipSymbol: string },
-  { produce: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/refine`)
+    return post<
+      SpaceTradersResponse<{
+        cooldown: CooldownResponse
+        systems: Array<{
+          symbol: string
+          sectorSymbol: string
+          type: string
+          x: number
+          y: number
+        }>
+      }>
+    >(url, undefined, {
+      headers: createHeaders(),
+    })
+  },
+}
 
-export const createShipJettison = mutationFnFactory<
-  SpaceTradersResponse<{ cargo: ShipCargo }>,
-  { shipSymbol: string },
-  { symbol: string; units: number }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/jettison`)
+export const createShipOrbitMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol?: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'orbit' }, ...args] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/orbit`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-export const createShipChart = mutationFnFactory<
-  SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>,
-  { shipSymbol: string }
->(({ shipSymbol }) => `my/ships/${shipSymbol}/chart`)
+    return post<SpaceTradersResponse<{ nav: NavigationResponse }>>(url, undefined, {
+      headers: createHeaders(),
+    })
+  },
+}
+
+export const createShipDockMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'dock' }, ...args] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/dock`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ nav: NavigationResponse }>>(url, undefined, {
+      headers: createHeaders(),
+    })
+  },
+}
+
+export const createShipNavigateMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'navigate' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/navigate`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>>(
+      url,
+      { waypointSymbol },
+      { headers: createHeaders() },
+    )
+  },
+}
+
+export const createShipWarpMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'warp' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/warp`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>>(
+      url,
+      { waypointSymbol },
+      { headers: createHeaders() },
+    )
+  },
+}
+
+export const createShipJumpMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'jump' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, systemSymbol }: { shipSymbol: string; systemSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/jump`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ nav: NavigationResponse; cooldown: CooldownResponse }>>(
+      url,
+      { systemSymbol },
+      { headers: createHeaders() },
+    )
+  },
+}
+
+export const createShipRefuelMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'refuel' }, ...args] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/refuel`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>>(url, {
+      headers: createHeaders(),
+    })
+  },
+}
+
+export const createShipSurveyMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'survey' }, ...args] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/survey`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>>(url, {
+      headers: createHeaders(),
+    })
+  },
+}
+
+export const createShipExtractMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'extract' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, survey }: { shipSymbol: string; survey?: SurveyResponse }) => {
+    const url = new URL(`my/ships/${shipSymbol}/extract`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ cooldown: CooldownResponse; extraction: ExtractResponse; cargo: ShipCargo }>>(
+      url,
+      { survey },
+      { headers: createHeaders() },
+    )
+  },
+}
+
+export const createShipRefineMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'refine' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, produce }: { shipSymbol: string; produce: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/refine`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<
+      SpaceTradersResponse<{
+        cooldown: CooldownResponse
+        cargo: ShipCargo
+        produced: Array<{ tradeSymbol: string; units: number }>
+        consumed: Array<{ tradeSymbol: string; units: number }>
+      }>
+    >(url, { produce }, { headers: createHeaders() })
+  },
+}
+
+export const createShipJettisonMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'jettison' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
+    const url = new URL(`my/ships/${shipSymbol}/jettison`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ cargo: ShipCargo }>>(
+      url,
+      { symbol: itemSymbol, units },
+      { headers: createHeaders() },
+    )
+  },
+}
+
+export const createShipChartMutation = {
+  getMutationKey: () => [{ scope: 'ships', entity: 'item', action: 'chart' }] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/chart`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>>(url, undefined, {
+      headers: createHeaders(),
+    })
+  },
+}

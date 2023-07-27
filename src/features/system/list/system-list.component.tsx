@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Pagination } from '@/components/pagination'
 import { ROUTES } from '@/config/routes'
-import { getShipsList, getSystemsList } from '@/services/api/spacetraders'
+import { getShipListQuery, getSystemListQuery } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
 import { SystemItem } from '../item'
 import { type SystemListProps } from './system-list.types'
@@ -32,13 +32,13 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   const page = getPageNumber(params.get('page'))
 
   const systemsListQuery = useQuery({
-    queryKey: ['systems', page, limit],
-    queryFn: ({ signal }) => getSystemsList({ params: { page, limit } }, { signal }),
-    keepPreviousData: true,
+    queryKey: getSystemListQuery.getQueryKey({ page, limit }),
+    queryFn: getSystemListQuery.queryFn,
+    placeholderData: (data) => data,
   })
   const fleetQuery = useQuery({
-    queryKey: ['ships'],
-    queryFn: ({ signal }) => getShipsList(undefined, { signal }),
+    queryKey: getShipListQuery.getQueryKey(),
+    queryFn: getShipListQuery.queryFn,
     select: (response) => {
       return response.data.reduce<Set<string>>((result, ship) => {
         result.add(ship.nav.systemSymbol)

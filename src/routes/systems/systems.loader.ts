@@ -1,6 +1,6 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { getSystemsList } from '@/services/api/spacetraders'
+import { getSystemListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/store/auth'
 
@@ -25,8 +25,8 @@ export const loader: QueryClientLoaderFn =
 
     try {
       const systems = client.ensureQueryData({
-        queryKey: ['systems', page, limit],
-        queryFn: ({ signal }) => getSystemsList({ params: { page, limit } }, { signal }),
+        queryKey: getSystemListQuery.getQueryKey({ page, limit }),
+        queryFn: getSystemListQuery.queryFn,
       })
 
       return defer({

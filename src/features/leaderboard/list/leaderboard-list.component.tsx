@@ -1,16 +1,13 @@
 import { Tab } from '@headlessui/react'
 import { useQuery } from '@tanstack/react-query'
-import { get } from '@/services/fetch'
-import { type StatusResponse } from '@/types/spacetraders'
+import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 
-const url = new URL(import.meta.env.SPACETRADERS_API_BASE_URL)
-
 export const LeaderboardList = () => {
   const { data, isSuccess } = useQuery({
-    queryKey: ['status'],
-    queryFn: ({ signal }) => get<StatusResponse>(url, { signal }),
+    queryKey: getStatusQuery.getQueryKey(),
+    queryFn: getStatusQuery.queryFn,
   })
 
   if (!isSuccess) return null
