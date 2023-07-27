@@ -6,16 +6,11 @@ import { Modal } from '@/components/modal'
 import * as Select from '@/components/select'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
-import { type SpaceTradersResponse, mutationFnFactory } from '@/services/api/spacetraders/core'
-import { getFactionsList } from '@/services/api/spacetraders/factions'
-import { type RegisterAgentRequest, type RegisterAgentResponse } from '@/types/spacetraders'
+import { createAgentMutation } from '@/services/api/spacetraders/auth'
+import { getFactionListQuery } from '@/services/api/spacetraders/factions'
 import { AccessTokenDialog } from './access-token-dialog.component'
 import { FactionInfo } from './faction-info.component'
 import { type RegisterSchema, registerValidation } from './register.validation'
-
-const createMyAgent = mutationFnFactory<SpaceTradersResponse<RegisterAgentResponse>, undefined, RegisterAgentRequest>(
-  () => 'register',
-)
 
 const AlreadyRegistered = ({ token }: { token?: string }) => {
   const { control } = useFormContext<RegisterSchema>()
@@ -33,12 +28,12 @@ const AlreadyRegistered = ({ token }: { token?: string }) => {
 
 const FactionField = () => {
   const methods = useFormContext<RegisterSchema>()
-  const { isSuccess, isLoading, data } = useQuery({
-    queryKey: ['factions'],
-    queryFn: ({ signal }) => getFactionsList({ params: { limit: 20 } }, { signal }),
+  const { isSuccess, isPending, data } = useQuery({
+    queryKey: getFactionListQuery.getQueryKey(),
+    queryFn: getFactionListQuery.queryFn,
   })
 
-  if (isLoading) return <Select.Skeleton />
+  if (isPending) return <Select.Skeleton />
 
   if (!isSuccess) return null
 
@@ -56,7 +51,7 @@ const FactionField = () => {
       render={({ field }) => (
         <Select.Field
           label={<Select.Label>Faction</Select.Label>}
-          by={(a, z) => a.id === z.id}
+          by={(a, z) => a?.id === z?.id}
           getItemKey={(item) => item.id}
           getItemLabel={(item) => item?.name}
           getItemOption={(item) => item.name}
@@ -78,11 +73,9 @@ export const Register = () => {
     },
     resolver: zodResolver(registerValidation),
   })
-  const { mutateAsync, isLoading, isSuccess, data } = useMutation({
-    mutationFn: (values: RegisterSchema) => {
-      return createMyAgent({ payload: { symbol: values.symbol, faction: values.faction, email: values.email } })
-    },
-    cacheTime: 0,
+  const { mutateAsync, isPending, isSuccess, data } = useMutation({
+    mutationKey: createAgentMutation.getMutationKey(),
+    mutationFn: createAgentMutation.mutationFn,
   })
 
   const agent = isSuccess ? data.data : undefined
@@ -132,7 +125,7 @@ export const Register = () => {
 
             <FactionInfo />
 
-            <button className="btn-hero" disabled={isLoading} type="submit">
+            <button className="btn-hero" disabled={isPending} type="submit">
               Register
             </button>
             <div className="grid gap-4">

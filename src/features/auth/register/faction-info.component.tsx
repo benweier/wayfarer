@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useFormContext, useWatch } from 'react-hook-form'
 import { Badge } from '@/components/badge'
-import { getFactionsList } from '@/services/api/spacetraders/factions'
+import { getFactionListQuery } from '@/services/api/spacetraders/factions'
 import { type FactionResponse } from '@/types/spacetraders'
 import { type RegisterSchema } from './register.validation'
 
@@ -9,8 +9,8 @@ export const FactionInfo = () => {
   const { control } = useFormContext<RegisterSchema>()
   const faction = useWatch({ control, name: 'faction' })
   const { isSuccess, data } = useQuery({
-    queryKey: ['factions'],
-    queryFn: ({ signal }) => getFactionsList(undefined, { signal }),
+    queryKey: getFactionListQuery.getQueryKey(),
+    queryFn: getFactionListQuery.queryFn,
     select: (response) => {
       const factions = new Map<string, FactionResponse>()
       response.data.forEach((faction) => factions.set(faction.symbol, faction))

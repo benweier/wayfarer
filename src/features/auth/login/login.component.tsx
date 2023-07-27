@@ -6,12 +6,9 @@ import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
-import { type SpaceTradersResponse, queryFnFactory } from '@/services/api/spacetraders/core'
+import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import { useAuthStore } from '@/store/auth'
-import { type AgentResponse } from '@/types/spacetraders'
 import { type LoginSchema, loginValidation } from './login.validation'
-
-const getMyAgent = queryFnFactory<SpaceTradersResponse<AgentResponse>>(() => 'my/agent')
 
 export const Login = () => {
   const location = useLocation<Partial<LoginSchema>>()
@@ -24,16 +21,11 @@ export const Login = () => {
     },
     resolver: zodResolver(loginValidation),
   })
-  const { mutateAsync, isLoading } = useMutation({
-    mutationFn: (values: LoginSchema) => {
-      return getMyAgent(undefined, {
-        headers: {
-          Authorization: `Bearer ${values.token}`,
-        },
-      })
-    },
-    onSuccess: (response, variables) => {
-      signin({ agent: response.data, token: variables.token })
+  const { mutateAsync, isPending } = useMutation({
+    mutationKey: getAgentMutation.getMutationKey(),
+    mutationFn: getAgentMutation.mutationFn,
+    onSuccess: (response, { token }) => {
+      signin({ agent: response.data, token: token })
     },
     onError: (err: any) => {
       if (err.status === 401) {
@@ -43,7 +35,6 @@ export const Login = () => {
         })
       }
     },
-    cacheTime: 0,
   })
   const onSubmit = useCallback<SubmitHandler<LoginSchema>>((values) => mutateAsync(values), [mutateAsync])
 
@@ -84,7 +75,7 @@ export const Login = () => {
               />
             </div>
             <div className="grid gap-4">
-              <button className="btn-hero" type="submit" disabled={isLoading}>
+              <button className="btn-hero" type="submit" disabled={isPending}>
                 Log In
               </button>
               <div className="text-caption text-center">
