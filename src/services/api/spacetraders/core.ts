@@ -16,7 +16,7 @@ export type Meta = {
   limit: number
 }
 
-export type SpaceTradersResponse<R = unknown, M = unknown> = { data: R; meta: M }
+export type SpaceTradersResponse<R = unknown, M = never> = { data: R; meta: M }
 export type SpaceTradersError<R = unknown> = {
   error?: {
     message: string
@@ -25,7 +25,7 @@ export type SpaceTradersError<R = unknown> = {
   }
 }
 
-const createHeaders = (init?: HeadersInit) => {
+export const createHeaders = (init?: HeadersInit) => {
   const { isAuthenticated, token } = getState()
   const headers = new Headers(init)
 
@@ -36,7 +36,7 @@ const createHeaders = (init?: HeadersInit) => {
   return headers
 }
 
-const attachQueryParams = (url: URL, params?: f.QueryParams) => {
+export const attachQueryParams = (url: URL, params?: f.QueryParams) => {
   if (params) {
     for (const [key, value] of Object.entries(params)) {
       if (value !== undefined && value !== null) url.searchParams.append(key, String(value))
