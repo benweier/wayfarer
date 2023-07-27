@@ -5,9 +5,9 @@ export const client = new QueryClient({
     queries: {
       suspense: true,
       staleTime: 60_000,
-      cacheTime: 60_000,
+      gcTime: 10_000,
       refetchOnWindowFocus: false,
-      useErrorBoundary: true,
+      throwOnError: true,
       retry: false,
     },
   },
