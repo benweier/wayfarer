@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     build: {
+      cssMinify: 'lightningcss',
       rollupOptions: {
         output: {
           manualChunks: {
