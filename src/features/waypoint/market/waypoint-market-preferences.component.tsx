@@ -5,6 +5,7 @@ import { startTransition, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useSystemContext } from '@/context/system.context'
 import { useWaypointContext } from '@/context/waypoint.context'
+import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
 import { cx } from '@/utilities/cx'
 import { relativeDate } from '@/utilities/date'
@@ -48,8 +49,9 @@ const WaypointMarketRefresh = () => {
   const client = useQueryClient()
   const { systemSymbol } = useSystemContext()
   const { waypointSymbol } = useWaypointContext()
-  const isFetching = useIsFetching(['system', systemSymbol, waypointSymbol, 'market']) > 0
-  const state = client.getQueryState(['system', systemSymbol, waypointSymbol, 'market'])
+  const isFetching =
+    useIsFetching({ queryKey: getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }) }) > 0
+  const state = client.getQueryState(getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }))
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -71,7 +73,9 @@ const WaypointMarketRefresh = () => {
       <button
         className="btn btn-outline btn-warn btn-sm"
         disabled={isFetching}
-        onClick={() => client.resetQueries(['system', systemSymbol, waypointSymbol, 'market'])}
+        onClick={() =>
+          client.resetQueries({ queryKey: getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }) })
+        }
       >
         Refresh
       </button>
