@@ -254,7 +254,7 @@ export const App = () => {
   return (
     <QueryClientProvider client={client}>
       <RouterProvider router={router} fallbackElement={<Loading />} future={{ v7_startTransition: true }} />
-      <ReactQueryDevtools position="bottom-right" />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   )
 }
