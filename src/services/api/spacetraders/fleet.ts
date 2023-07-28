@@ -189,7 +189,7 @@ export const createShipRefuelMutation = {
   mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol}/refuel`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return post<SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>>(url, {
+    return post<SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>>(url, undefined, {
       headers: createHeaders(),
     })
   },
@@ -201,7 +201,7 @@ export const createShipSurveyMutation = {
   mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol}/survey`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return post<SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>>(url, {
+    return post<SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>>(url, undefined, {
       headers: createHeaders(),
     })
   },
