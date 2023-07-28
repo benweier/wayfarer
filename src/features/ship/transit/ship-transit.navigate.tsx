@@ -45,8 +45,6 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
 
   const waypoints = data.data
 
-  console.log(waypoints)
-
   return (
     <div className="grid gap-3">
       {waypoints.map((waypoint) => (
