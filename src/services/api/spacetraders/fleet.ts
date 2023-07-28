@@ -46,10 +46,11 @@ export const createShipPurchaseMutation = {
   mutationFn: async ({ shipType, waypointSymbol }: { shipType: string; waypointSymbol: string }) => {
     const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return get<SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse }>>(url, {
-      headers: createHeaders(),
-      body: JSON.stringify({ shipType, waypointSymbol }),
-    })
+    return post<SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse }>>(
+      url,
+      { shipType, waypointSymbol },
+      { headers: createHeaders() },
+    )
   },
 }
 
@@ -59,10 +60,11 @@ export const createShipCargoPurchaseMutation = {
   mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
     const url = new URL(`my/ships/${shipSymbol}/purchase`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return get<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>>(url, {
-      headers: createHeaders(),
-      body: JSON.stringify({ symbol: itemSymbol, units }),
-    })
+    return post<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>>(
+      url,
+      { symbol: itemSymbol, units },
+      { headers: createHeaders() },
+    )
   },
 }
 
@@ -72,10 +74,11 @@ export const createShipCargoSellMutation = {
   mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
     const url = new URL(`my/ships/${shipSymbol}/sell`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return get<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>>(url, {
-      headers: createHeaders(),
-      body: JSON.stringify({ symbol: itemSymbol, units }),
-    })
+    return post<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>>(
+      url,
+      { symbol: itemSymbol, units },
+      { headers: createHeaders() },
+    )
   },
 }
 
