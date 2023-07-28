@@ -16,14 +16,15 @@ export default defineConfig(({ mode }) => {
   plugins.push(tsconfigPaths())
   plugins.push(react())
 
-  plugins.push(
-    sentryVitePlugin({
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-      org: process.env.SENTRY_ORG_NAME,
-      project: process.env.SENTRY_PROJECT_NAME,
-    }),
-  )
-
+  if (mode === 'production') {
+    plugins.push(
+      sentryVitePlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        org: process.env.SENTRY_ORG_NAME,
+        project: process.env.SENTRY_PROJECT_NAME,
+      }),
+    )
+  }
   return {
     build: {
       sourcemap: true,
