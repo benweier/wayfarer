@@ -4,14 +4,14 @@ import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
-import { useShipContext } from '@/context/ship.context'
+import { useShipStore } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipTransitActionProps } from './ship-transit.types'
 
 export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
-  const ship = useShipContext()
+  const ship = useShipStore()
 
   return (
     <Modal size="md" closeable trigger={<Modal.Trigger>{trigger}</Modal.Trigger>}>

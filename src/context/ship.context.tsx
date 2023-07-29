@@ -1,44 +1,44 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { createContext, useContext, useEffect, useRef } from 'react'
 import { createStore, useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import { type StoreApi } from 'zustand/vanilla'
+import { getShipByIdQuery } from '@/services/api/spacetraders'
 import { type BoundStoreSelector } from '@/store/store.types'
 import { type ShipResponse } from '@/types/spacetraders'
 
-const ShipContext = createContext<StoreApi<ShipResponse> | null>(null)
+const ShipStoreContext = createContext<StoreApi<ShipResponse> | null>(null)
 
-export const useShipContext: BoundStoreSelector<ShipResponse> = (
+export const useShipStore: BoundStoreSelector<ShipResponse> = (
   selector = (state: ShipResponse) => state,
   equals = shallow,
 ) => {
-  const store = useContext(ShipContext)
+  const store = useContext(ShipStoreContext)
 
-  if (!store) throw new Error('ShipContext is missing a store value.')
+  if (!store) throw new Error('ShipStoreContext is missing a store value.')
 
   return useStore(store, selector, equals)
 }
 
 export const ShipStore = ({
-  ship,
+  shipSymbol,
   children,
 }: WithChildren<{
-  ship?: ShipResponse
+  shipSymbol: string
 }>) => {
+  const { data } = useSuspenseQuery({
+    queryKey: getShipByIdQuery.getQueryKey({ shipSymbol }),
+    queryFn: getShipByIdQuery.queryFn,
+  })
   const store = useRef<StoreApi<ShipResponse> | null>(null)
 
-  if (!store.current && ship) {
-    store.current = createStore<ShipResponse>()(() => ship)
+  if (!store.current) {
+    store.current = createStore<ShipResponse>()(() => data.data)
   }
 
   useEffect(() => {
-    if (ship) {
-      store.current?.setState(ship)
-    } else {
-      store.current = null
-    }
-  }, [ship])
+    store.current?.setState(data.data)
+  }, [data.data])
 
-  if (!store.current) return null
-
-  return <ShipContext.Provider value={store.current}>{children}</ShipContext.Provider>
+  return <ShipStoreContext.Provider value={store.current}>{children}</ShipStoreContext.Provider>
 }

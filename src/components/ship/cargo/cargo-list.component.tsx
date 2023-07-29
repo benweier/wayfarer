@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { Modal, useModalActions } from '@/components/modal'
 import { REFINE_ITEM_TYPE } from '@/config/constants'
-import { useShipContext } from '@/context/ship.context'
+import { useShipStore } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
@@ -14,7 +14,7 @@ import { Item } from './cargo-item.component'
 import { Layout } from './cargo.layout'
 
 const JettisonCargo = ({ item }: { item: CargoInventory }) => {
-  const ship = useShipContext()
+  const ship = useShipStore()
 
   return (
     <Modal
@@ -65,7 +65,7 @@ const CancelModal = () => {
 }
 
 export const List = () => {
-  const ship = useShipContext()
+  const ship = useShipStore()
   const { data } = useQuery({
     queryKey: getWaypointMarketQuery.getQueryKey({
       systemSymbol: ship.nav.systemSymbol,

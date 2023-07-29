@@ -1,5 +1,5 @@
 import { TRADE_SYMBOL } from '@/config/constants'
-import { useShipContext } from '@/context/ship.context'
+import { useShipStore } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { useShipSurveyStore } from '@/store/ship'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -67,7 +67,7 @@ const List = ({ ship }: { ship: ShipResponse }) => {
 }
 
 export const Survey = () => {
-  const ship = useShipContext()
+  const ship = useShipStore()
 
   return (
     <div className="grid gap-4">

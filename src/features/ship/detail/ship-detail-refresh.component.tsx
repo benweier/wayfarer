@@ -1,13 +1,13 @@
 import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 import { startTransition, useEffect, useState } from 'react'
-import { useShipContext } from '@/context/ship.context'
+import { useShipStore } from '@/context/ship.context'
 import { getShipByIdQuery } from '@/services/api/spacetraders'
 import { relativeDate } from '@/utilities/date'
 
 export const ShipDetailRefresh = () => {
   const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const client = useQueryClient()
-  const ship = useShipContext()
+  const ship = useShipStore()
   const isFetching = useIsFetching({ queryKey: getShipByIdQuery.getQueryKey({ shipSymbol: ship.symbol }) }) > 0
   const state = client.getQueryState(getShipByIdQuery.getQueryKey({ shipSymbol: ship.symbol }))
 

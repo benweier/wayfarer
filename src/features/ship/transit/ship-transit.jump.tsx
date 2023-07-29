@@ -1,10 +1,10 @@
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { useShipContext } from '@/context/ship.context'
+import { useShipStore } from '@/context/ship.context'
 import { type ShipTransitActionProps } from './ship-transit.types'
 
 export const ShipTransitJump = ({ trigger }: ShipTransitActionProps) => {
-  const ship = useShipContext()
+  const ship = useShipStore()
 
   return (
     <Modal size="md" closeable trigger={<Modal.Trigger>{trigger}</Modal.Trigger>}>

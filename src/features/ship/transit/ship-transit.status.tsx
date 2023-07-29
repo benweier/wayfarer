@@ -1,9 +1,9 @@
 import { ShipIcon } from '@/components/icons'
-import { useShipContext } from '@/context/ship.context'
+import { useShipStore } from '@/context/ship.context'
 import { useShipTransit } from './use-ship-transit.hook'
 
 export const ShipTransitStatus = () => {
-  const ship = useShipContext()
+  const ship = useShipStore()
   const transit = useShipTransit(ship)
 
   return (

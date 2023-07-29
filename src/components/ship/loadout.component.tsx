@@ -1,4 +1,4 @@
-import { useShipContext } from '@/context/ship.context'
+import { useShipStore } from '@/context/ship.context'
 
 const LoadoutItem = ({ name, description }: { name: string; description: string }) => {
   return (
@@ -10,7 +10,7 @@ const LoadoutItem = ({ name, description }: { name: string; description: string 
 }
 
 export const Loadout = () => {
-  const ship = useShipContext()
+  const ship = useShipStore()
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">

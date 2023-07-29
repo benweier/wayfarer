@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { ShipStore } from '@/context/ship.context'
 import { ShipDetail } from '@/features/ship/detail'
 
 const ShipRouteComponent = () => {
@@ -13,7 +14,13 @@ const ShipRouteComponent = () => {
         </h1>
       </div>
       <div className="grid gap-12">
-        <QuerySuspenseBoundary>{shipSymbol && <ShipDetail symbol={shipSymbol} />}</QuerySuspenseBoundary>
+        {shipSymbol !== undefined && (
+          <QuerySuspenseBoundary>
+            <ShipStore shipSymbol={shipSymbol}>
+              <ShipDetail />
+            </ShipStore>
+          </QuerySuspenseBoundary>
+        )}
       </div>
     </div>
   )
