@@ -11,6 +11,7 @@ import * as ShipActions from '@/features/ship/actions'
 import { ShipTransit } from '@/features/ship/transit'
 import { getShipByIdQuery } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
+import { ShipDetailRefresh } from './ship-detail-refresh.component'
 import { type ShipDetailProps } from './ship-detail.types'
 
 export const ShipDetail = ({ symbol }: ShipDetailProps) => {
@@ -26,9 +27,12 @@ export const ShipDetail = ({ symbol }: ShipDetailProps) => {
   return (
     <ShipStore ship={ship}>
       <div className="grid gap-4">
-        <div className="headline">
-          <span className="font-bold">Registration:</span> {ship.registration.name} • {ship.registration.role} •{' '}
-          {ship.registration.factionSymbol}
+        <div className="flex items-center justify-between gap-2">
+          <div className="headline">
+            <span className="font-bold">Registration:</span> {ship.registration.name} • {ship.registration.role} •{' '}
+            {ship.registration.factionSymbol}
+          </div>
+          <ShipDetailRefresh />
         </div>
 
         <div className="flex items-start justify-between gap-4">
