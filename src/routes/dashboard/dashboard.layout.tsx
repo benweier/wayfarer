@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Bars3Icon, GlobeAltIcon, HomeIcon, RocketLaunchIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { atom, useAtom } from 'jotai'
 import { Fragment, Suspense } from 'react'
-import { Link, NavLink, Outlet, useNavigation, useSubmit } from 'react-router-dom'
+import { Link, NavLink, Outlet, useSubmit } from 'react-router-dom'
 import { MenuIcon } from '@/components/icons'
 import { Preferences } from '@/components/preferences'
 import { Wayfarer } from '@/components/wayfarer'
@@ -21,12 +21,6 @@ const menu = [
 ]
 
 const mobileMenuAtom = atom<boolean>(false)
-
-const NavigationLoader = () => {
-  const navigation = useNavigation()
-
-  return navigation.state !== 'idle' ? <span className="loader" /> : <></>
-}
 
 const Logout = () => {
   const submit = useSubmit()
@@ -191,7 +185,6 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
             />
             {/* Primary column */}
             <section className="relative flex h-full min-w-0 flex-1 flex-col overflow-y-auto">
-              <NavigationLoader />
               <Suspense
                 fallback={
                   <div className="flex h-full w-full animate-pulse items-center justify-center text-5xl font-black text-zinc-900/5 dark:text-zinc-500/10">

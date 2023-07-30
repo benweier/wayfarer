@@ -12,6 +12,7 @@ import {
   createRoutesFromChildren,
   createRoutesFromElements,
   matchRoutes,
+  useNavigation,
   useNavigationType,
 } from 'react-router-dom'
 import { NotFound } from '@/components/not-found'
@@ -73,7 +74,8 @@ const Core = () => {
       )}
     >
       <Suspense fallback={<Loading />}>
-        <div className="flex min-h-screen flex-col">
+        <div className="min-h-screen">
+          <NavigationLoader />
           <Outlet />
         </div>
       </Suspense>
@@ -87,6 +89,12 @@ const logout: ActionFunction = () => {
   signout()
 
   return null
+}
+
+const NavigationLoader = () => {
+  const navigation = useNavigation()
+
+  return navigation.state !== 'idle' ? <span className="loader" /> : <></>
 }
 
 const router = sentryCreateBrowserRouter(
