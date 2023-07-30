@@ -1,18 +1,17 @@
 import { Tab } from '@headlessui/react'
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 
 export const LeaderboardList = () => {
-  const { data, isSuccess } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: getStatusQuery.getQueryKey(),
     queryFn: getStatusQuery.queryFn,
   })
 
-  if (!isSuccess) return null
-
-  const leaderboard = data.leaderboards
+  const leaderboards = data.leaderboards
 
   return (
     <>
@@ -25,13 +24,17 @@ export const LeaderboardList = () => {
         <Tab.Panels>
           <Tab.Panel>
             <div className="grid gap-2">
-              {leaderboard.mostCredits.map((item) => {
+              {leaderboards.mostCredits.map((item) => {
                 return (
                   <div
                     key={item.agentSymbol}
                     className="flex flex-col items-center justify-between gap-2 rounded bg-zinc-500 bg-opacity-5 px-5 py-3 dark:bg-opacity-10 sm:flex-row"
                   >
-                    <div className="text-lg font-semibold">{item.agentSymbol}</div>
+                    <div className="text-lg font-semibold">
+                      <Link to={`/leaderboard/agent/${item.agentSymbol}`} className="link">
+                        {item.agentSymbol}
+                      </Link>
+                    </div>
                     <div>{formatNumber(item.credits)}</div>
                   </div>
                 )
@@ -41,13 +44,17 @@ export const LeaderboardList = () => {
 
           <Tab.Panel>
             <div className="grid gap-2">
-              {leaderboard.mostSubmittedCharts.map((item) => {
+              {leaderboards.mostSubmittedCharts.map((item) => {
                 return (
                   <div
                     key={item.agentSymbol}
                     className="flex flex-col items-center justify-between gap-2 rounded bg-zinc-500 bg-opacity-5 px-5 py-3 dark:bg-opacity-10 sm:flex-row"
                   >
-                    <div className="text-lg font-semibold">{item.agentSymbol}</div>
+                    <div className="text-lg font-semibold">
+                      <Link to={`/leaderboard/agent/${item.agentSymbol}`} className="link">
+                        {item.agentSymbol}
+                      </Link>
+                    </div>
                     <div>{formatNumber(item.chartCount)}</div>
                   </div>
                 )
