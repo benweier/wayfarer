@@ -11,7 +11,7 @@ module.exports = {
         50: '50%',
       },
       animation: {
-        indefinite: 'indefinite 1.5s linear infinite',
+        indefinite: 'indefinite 1s linear infinite',
       },
       backdropBlur: {
         xs: '2px',
