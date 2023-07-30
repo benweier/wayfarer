@@ -1,10 +1,10 @@
-import { ClipboardIcon } from '@heroicons/react/24/outline'
 import { type ButtonHTMLAttributes } from 'react'
+import { AppIcon } from '@/components/icons'
 import { cx } from '@/utilities/cx'
 
 export const Copy = ({
   className,
-  children = <ClipboardIcon className="h-5 w-5" />,
+  children = <AppIcon id="clipboard" className="h-5 w-5" />,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (

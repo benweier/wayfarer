@@ -1,6 +1,5 @@
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/solid'
 import { useNavigate } from 'react-router-dom'
+import { AppIcon } from '@/components/icons'
 import { ROUTES } from '@/config/routes'
 import { type RegisterAgentResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
@@ -51,7 +50,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
                 'text-rose-600 dark:text-rose-400': !isCopied,
               })}
             >
-              {isCopied ? <CheckCircleIcon className="h-5 w-5" /> : <XCircleIcon className="h-5 w-5" />}
+              {isCopied ? <AppIcon id="check" className="h-5 w-5" /> : <AppIcon id="cancel" className="h-5 w-5" />}
 
               <span className="text-caption whitespace-nowrap">{isCopied ? 'Token Copied!' : 'Token Not Copied'}</span>
             </div>
@@ -59,7 +58,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
         </div>
         <div className="flex items-center justify-center gap-2 text-amber-600 dark:text-amber-400">
           <div>
-            <ExclamationTriangleIcon className="h-6 w-6" />
+            <AppIcon id="alert" className="h-6 w-6" />
           </div>
 
           <span className="text-base font-semibold">

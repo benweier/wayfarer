@@ -1,10 +1,9 @@
 import { FloatingPortal } from '@floating-ui/react'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
-import { MapPinIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useIsMutating, useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
-import { AppIcon } from '@/components/icons'
+import { AppIcon, ShipIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WaypointTag } from '@/components/waypoint/tag'
@@ -153,7 +152,7 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
             {ship.nav.waypointSymbol !== waypoint.symbol
               ? (props) => (
                   <button className="btn btn-outline btn-confirm btn-sm" {...props}>
-                    <PaperAirplaneIcon className="h-5 w-5" />
+                    <ShipIcon id="navigate" className="h-5 w-5" />
                     <span className="sr-only">
                       Navigate ship {ship.symbol} to waypoint {waypoint.symbol}
                     </span>
@@ -161,7 +160,7 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
                 )
               : (props) => (
                   <button disabled className="btn btn-sm" {...props}>
-                    <MapPinIcon className="h-5 w-5" />
+                    <ShipIcon id="pin" className="h-5 w-5" />
                     <span className="sr-only">
                       Ship {ship.symbol} is already at waypoint {waypoint.symbol}
                     </span>

@@ -1,9 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Bars3Icon, GlobeAltIcon, HomeIcon, RocketLaunchIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { atom, useAtom } from 'jotai'
 import { Fragment, Suspense } from 'react'
 import { Link, NavLink, Outlet, useSubmit } from 'react-router-dom'
-import { MenuIcon } from '@/components/icons'
+import { AppIcon, MenuIcon } from '@/components/icons'
 import { Preferences } from '@/components/preferences'
 import { Wayfarer } from '@/components/wayfarer'
 import { ROUTES } from '@/config/routes'
@@ -13,11 +12,8 @@ import { useAuthStore } from '@/store/auth'
 import { cx } from '@/utilities/cx'
 
 const menu = [
-  { name: 'Overview', href: ROUTES.OVERVIEW, icon: HomeIcon },
-  // { name: 'Market', href: ROUTES.MARKET, icon: ScaleIcon },
-  // { name: 'Contracts', href: ROUTES.CONTRACTS, icon: DocumentTextIcon },
-  { name: 'Systems', href: ROUTES.SYSTEMS, icon: GlobeAltIcon },
-  { name: 'Fleet', href: ROUTES.FLEET, icon: RocketLaunchIcon },
+  { name: 'Fleet', href: ROUTES.FLEET, icon: 'fleet' },
+  { name: 'Systems', href: ROUTES.SYSTEMS, icon: 'systems' },
 ]
 
 const mobileMenuAtom = atom<boolean>(false)
@@ -89,7 +85,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                         }}
                       >
                         <span className="sr-only">Close sidebar</span>
-                        <XMarkIcon className="h-5 w-5 text-white" aria-hidden />
+                        <AppIcon id="x" className="h-5 w-5 text-white" aria-hidden />
                       </button>
                     </div>
                   </Transition.Child>
@@ -107,7 +103,11 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                             to={item.href}
                             className="group flex items-center rounded-md p-2 text-base font-medium text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 [&.active]:bg-blue-500 [&.active]:text-white"
                           >
-                            <item.icon className="mr-4 h-5 w-5 text-zinc-400 group-hover:text-zinc-500" aria-hidden />
+                            <MenuIcon
+                              id={item.icon}
+                              className="mr-4 h-5 w-5 text-zinc-400 group-hover:text-zinc-500"
+                              aria-hidden
+                            />
                             {item.name}
                           </NavLink>
                         ))}
@@ -170,7 +170,7 @@ export const Layout = ({ children = <Outlet /> }: WithChildren) => {
                   }}
                 >
                   <span className="sr-only">Open sidebar</span>
-                  <Bars3Icon className="h-5 w-5" aria-hidden />
+                  <AppIcon id="hamburger" className="h-5 w-5" aria-hidden />
                 </button>
               </div>
             </div>

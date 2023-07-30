@@ -1,6 +1,6 @@
-import { TrashIcon } from '@heroicons/react/20/solid'
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
+import { AppIcon } from '@/components/icons'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { Modal, useModalActions } from '@/components/modal'
 import { REFINE_ITEM_TYPE } from '@/config/constants'
@@ -38,7 +38,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
           <ShipActions.Jettison ship={ship} symbol={item.symbol} units={item.units}>
             {(props) => (
               <button className="btn btn-danger flex w-full items-center gap-3" {...props}>
-                <TrashIcon className="h-5 w-5" />
+                <AppIcon id="trash" className="h-5 w-5" />
                 <span>Confirm Jettison</span>
               </button>
             )}
