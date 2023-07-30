@@ -101,21 +101,33 @@ const router = sentryCreateBrowserRouter(
       />
 
       <Route
+        path={ROUTES.LEADERBOARD}
         lazy={async () => {
           const leaderboard = await import('@/routes/leaderboard')
           return {
             Component: leaderboard.Layout,
-            loader: leaderboard.loader(client),
           }
         }}
         ErrorBoundary={RouteError}
       >
         <Route
-          path={ROUTES.LEADERBOARD}
+          index
           lazy={async () => {
             const leaderboard = await import('@/routes/leaderboard')
             return {
               Component: leaderboard.Route,
+              loader: leaderboard.loader(client),
+            }
+          }}
+          ErrorBoundary={RouteError}
+        />
+        <Route
+          path="agent/:agentSymbol"
+          lazy={async () => {
+            const agent = await import('@/routes/leaderboard/agent')
+            return {
+              Component: agent.Route,
+              loader: agent.loader(client),
             }
           }}
           ErrorBoundary={RouteError}
