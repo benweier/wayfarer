@@ -2,7 +2,7 @@ import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 import { startTransition, useEffect, useState } from 'react'
 import { useShipStore } from '@/context/ship.context'
 import { getShipByIdQuery } from '@/services/api/spacetraders'
-import { relativeDate } from '@/utilities/date'
+import { relativeTime } from '@/utilities/date'
 
 export const ShipDetailRefresh = () => {
   const [lastUpdate, forceUpdate] = useState(() => Date.now())
@@ -23,10 +23,12 @@ export const ShipDetailRefresh = () => {
     }
   }, [lastUpdate, state?.dataUpdatedAt])
 
+  if (!state?.dataUpdatedAt) return null
+
   return (
     <div className="flex items-center gap-2">
       <div className="text-secondary text-right text-sm">
-        {isFetching ? '...' : `Last fetched ${relativeDate(state?.dataUpdatedAt)}`}
+        {isFetching ? '...' : `Last fetched ${relativeTime(new Date(state.dataUpdatedAt))}`}
       </div>
       <button
         className="btn btn-outline btn-warn btn-sm"

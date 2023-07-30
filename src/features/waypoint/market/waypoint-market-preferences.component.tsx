@@ -8,7 +8,7 @@ import { useWaypointContext } from '@/context/waypoint.context'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
 import { cx } from '@/utilities/cx'
-import { relativeDate } from '@/utilities/date'
+import { relativeTime } from '@/utilities/date'
 
 const WaypointMarketSortBy = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -70,7 +70,7 @@ const WaypointMarketRefresh = () => {
   return (
     <div className="flex items-center gap-2">
       <div className="text-secondary text-right text-sm">
-        {isFetching ? '...' : `Last fetched ${relativeDate(state.dataUpdatedAt)}`}
+        {isFetching ? '...' : `Last fetched ${relativeTime(new Date(state.dataUpdatedAt))}`}
       </div>
       <button
         className="btn btn-outline btn-warn btn-sm"
