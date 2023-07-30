@@ -29,10 +29,11 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: true,
       cssMinify: 'lightningcss',
+      modulePreload: { polyfill: false },
       rollupOptions: {
         output: {
           manualChunks: {
-            core: ['react', 'react-dom', 'react-router', 'react-router-dom', '@tanstack/react-query'],
+            core: ['react', 'react-dom', 'react-router-dom', '@tanstack/react-query'],
           },
         },
       },
