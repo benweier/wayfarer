@@ -1,5 +1,5 @@
 import { type QueryFunctionContext } from '@tanstack/react-query'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type SpaceTradersResponse, createHeaders } from '@/services/api/spacetraders/core'
 import { get } from '@/services/fetch'
 
 const AGENT_QUERIES = {
@@ -21,6 +21,6 @@ export const getAgentBySymbolQuery = {
         startingFaction: string
         shipCount: number
       }>
-    >(url, { signal })
+    >(url, { signal, headers: createHeaders() })
   },
 }
