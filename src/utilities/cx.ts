@@ -8,42 +8,44 @@ function toVal(mix: ClassValue) {
 
   if (typeof mix === 'string' || typeof mix === 'number') {
     str += mix
-  } else if (typeof mix === 'object') {
-    if (Array.isArray(mix)) {
-      const len = mix.length
-      for (let k = 0; k < len; k++) {
-        if (mix[k]) {
-          if ((y = toVal(mix[k]))) {
-            str && (str += ' ')
-            str += y
-          }
-        }
+    return str
+  }
+
+  if (typeof mix !== 'object') {
+    return str
+  }
+
+  if (Array.isArray(mix)) {
+    for (const k of mix) {
+      y = toVal(mix[k])
+      if (y) {
+        str && (str += ' ')
+        str += y
       }
-    } else {
-      for (const k in mix) {
-        if (mix[k]) {
-          str && (str += ' ')
-          str += k
-        }
-      }
+    }
+
+    return str
+  }
+
+  for (const k in mix) {
+    if (mix[k]) {
+      str && (str += ' ')
+      str += k
     }
   }
 
   return str
 }
 
-export function cx(...args: ClassValue[]) {
-  let tmp
+export const cx = (...args: ClassValue[]) => {
   let x
   let str = ''
-  const len = args.length
 
-  for (let i = 0; i < len; i++) {
-    if ((tmp = args[i])) {
-      if ((x = toVal(tmp))) {
-        str && (str += ' ')
-        str += x
-      }
+  for (const i of args) {
+    x = toVal(i)
+    if (x) {
+      str && (str += ' ')
+      str += x
     }
   }
 
