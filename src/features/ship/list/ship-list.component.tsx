@@ -1,14 +1,12 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { ShipItem } from '../item'
 
 export const ShipList = () => {
-  const { isSuccess, data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
   })
-
-  if (!isSuccess) return null
 
   const ships = data.data
 

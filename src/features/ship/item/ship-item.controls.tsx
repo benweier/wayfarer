@@ -1,7 +1,7 @@
 import { FloatingPortal } from '@floating-ui/react'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
-import { useIsMutating, useQuery } from '@tanstack/react-query'
+import { useIsMutating, useSuspenseQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
@@ -126,12 +126,10 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
 }
 
 const Navigate = ({ ship }: { ship: ShipResponse }) => {
-  const { isSuccess, data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: ship.nav.systemSymbol }),
     queryFn: getWaypointListQuery.queryFn,
   })
-
-  if (!isSuccess) return null
 
   const waypoints = data.data
 

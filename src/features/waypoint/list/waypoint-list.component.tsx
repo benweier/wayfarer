@@ -1,19 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
-import { useSystemContext } from '@/context/system.context'
+import { useSystemResponse } from '@/context/system.context'
 import { WaypointItem } from '@/features/waypoint/item'
-import { getSystemByIdQuery } from '@/services/api/spacetraders'
 import { type WaypointListProps } from './waypoint-list.types'
 
 export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => {
-  const { systemSymbol } = useSystemContext()
-  const { isSuccess, data } = useQuery({
-    queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
-    queryFn: getSystemByIdQuery.queryFn,
-  })
-
-  if (!isSuccess) return null
-
-  const system = data.data
+  const system = useSystemResponse()
 
   return (
     <div className="grid grid-cols-1 gap-1 lg:grid-cols-3">

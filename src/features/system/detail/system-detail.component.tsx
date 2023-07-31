@@ -1,19 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
 import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
-import { SystemContext } from '@/context/system.context'
-import { getSystemByIdQuery } from '@/services/api/spacetraders'
-import { type SystemDetailProps } from './system-detail.types'
+import { useSystemResponse } from '@/context/system.context'
 
-export const SystemDetail = ({ systemSymbol, children }: WithChildren<SystemDetailProps>) => {
-  const { isSuccess, data } = useQuery({
-    queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
-    queryFn: getSystemByIdQuery.queryFn,
-  })
-
-  if (!isSuccess) return null
-
-  const system = data.data
+export const SystemDetail = ({ children }: WithChildren) => {
+  const system = useSystemResponse()
 
   return (
     <div key={system.symbol} className="grid gap-4">
@@ -23,7 +13,7 @@ export const SystemDetail = ({ systemSymbol, children }: WithChildren<SystemDeta
         </div>
       </div>
 
-      {children && <SystemContext.Provider value={{ systemSymbol: system.symbol }}>{children}</SystemContext.Provider>}
+      {children}
     </div>
   )
 }

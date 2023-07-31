@@ -1,22 +1,20 @@
-import { useQuery } from '@tanstack/react-query'
-import { useSystemContext } from '@/context/system.context'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useSystemResponse } from '@/context/system.context'
 import { ShipItem } from '@/features/ship/item'
 import { getShipListQuery } from '@/services/api/spacetraders'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const SystemFleet = () => {
-  const { systemSymbol } = useSystemContext()
-  const { isSuccess, data } = useQuery({
+  const system = useSystemResponse()
+  const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
-    select: (response): SpaceTradersResponse<ShipResponse[]> => ({
-      data: response.data.filter((ship) => ship.nav.systemSymbol === systemSymbol),
+    select: (response): SpaceTradersResponse<ShipResponse[], Meta> => ({
+      data: response.data.filter((ship) => ship.nav.systemSymbol === system.symbol),
       meta: response.meta,
     }),
   })
-
-  if (!isSuccess) return null
 
   const ships = data.data
 
@@ -24,7 +22,7 @@ export const SystemFleet = () => {
     return (
       <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
         <div className="text-secondary text-center text-sm">
-          You have no ships in <span className="font-bold">{systemSymbol}</span>
+          You have no ships in <span className="font-bold">{system.symbol}</span>
         </div>
       </div>
     )

@@ -1,22 +1,12 @@
-import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { SystemContext } from '@/context/system.context'
-import { WaypointContext } from '@/context/waypoint.context'
-import { getWaypointByIdQuery } from '@/services/api/spacetraders'
-import { type WaypointDetailProps } from './waypoint-detail.types'
+import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
 
-export const WaypointDetail = ({ systemSymbol, waypointSymbol, children }: WithChildren<WaypointDetailProps>) => {
-  const { data, isSuccess } = useQuery({
-    queryKey: getWaypointByIdQuery.getQueryKey({ systemSymbol, waypointSymbol }),
-    queryFn: getWaypointByIdQuery.queryFn,
-  })
-
-  if (!isSuccess) return null
-
-  const waypoint = data.data
+export const WaypointDetail = ({ children }: WithChildren) => {
+  const waypoint = useWaypointResponse()
 
   return (
     <div className="grid gap-4">
@@ -28,8 +18,8 @@ export const WaypointDetail = ({ systemSymbol, waypointSymbol, children }: WithC
           </div>
           <div className="whitespace-nowrap">
             System:{' '}
-            <Link className="link" to={`/systems/${systemSymbol}`}>
-              {systemSymbol}
+            <Link className="link" to={`/systems/${waypoint.systemSymbol}`}>
+              {waypoint.systemSymbol}
             </Link>
           </div>
         </div>

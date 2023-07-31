@@ -1,24 +1,20 @@
-import { useQuery } from '@tanstack/react-query'
-import { useSystemContext } from '@/context/system.context'
-import { useWaypointContext } from '@/context/waypoint.context'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipItem } from '@/features/ship/item'
 import { getShipListQuery } from '@/services/api/spacetraders'
 
 export const WaypointFleetList = () => {
-  const { systemSymbol } = useSystemContext()
-  const { waypointSymbol } = useWaypointContext()
-  const { isSuccess, data } = useQuery({
+  const waypoint = useWaypointResponse()
+  const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
     select: (response) => ({
       data: response.data.filter(
-        (ship) => ship.nav.systemSymbol === systemSymbol && ship.nav.waypointSymbol === waypointSymbol,
+        (ship) => ship.nav.systemSymbol === waypoint.systemSymbol && ship.nav.waypointSymbol === waypoint.symbol,
       ),
       meta: response.meta,
     }),
   })
-
-  if (!isSuccess) return null
 
   const ships = data.data
 
@@ -26,7 +22,7 @@ export const WaypointFleetList = () => {
     return (
       <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
         <div className="text-secondary text-center text-sm">
-          You have no ships at <span className="font-bold">{waypointSymbol}</span>
+          You have no ships at <span className="font-bold">{waypoint.symbol}</span>
         </div>
       </div>
     )

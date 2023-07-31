@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { type ReactNode } from 'react'
 import * as Select from '@/components/select'
 import { getShipListQuery } from '@/services/api/spacetraders'
@@ -49,15 +49,13 @@ export const Field = ({
   onChange: (value?: ShipResponse | null) => void
   getShipOption?: ShipReducer
 }) => {
-  const { data, isSuccess } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
     select,
   })
 
-  const state: Map<string, ShipItem> = isSuccess
-    ? data.ships.reduce<Map<string, ShipItem>>(getShipOption, new Map())
-    : new Map()
+  const state: Map<string, ShipItem> = data.ships.reduce<Map<string, ShipItem>>(getShipOption, new Map())
 
   return (
     <Select.Field
@@ -68,7 +66,7 @@ export const Field = ({
       getItemLabel={(ship) => (ship ? state.get(ship.symbol)?.label : undefined)}
       getItemOption={(ship) => state.get(ship.symbol)?.option}
       getItemDisabled={(ship) => state.get(ship.symbol)?.disabled}
-      options={isSuccess ? data.ships : []}
+      options={data.ships}
     />
   )
 }

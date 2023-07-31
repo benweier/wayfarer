@@ -3,8 +3,7 @@ import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import { startTransition, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useSystemContext } from '@/context/system.context'
-import { useWaypointContext } from '@/context/waypoint.context'
+import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
 import { cx } from '@/utilities/cx'
@@ -47,11 +46,17 @@ const WaypointMarketSortBy = () => {
 const WaypointMarketRefresh = () => {
   const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const client = useQueryClient()
-  const { systemSymbol } = useSystemContext()
-  const { waypointSymbol } = useWaypointContext()
+  const waypoint = useWaypointResponse()
   const isFetching =
-    useIsFetching({ queryKey: getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }) }) > 0
-  const state = client.getQueryState(getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }))
+    useIsFetching({
+      queryKey: getWaypointMarketQuery.getQueryKey({
+        systemSymbol: waypoint.systemSymbol,
+        waypointSymbol: waypoint.symbol,
+      }),
+    }) > 0
+  const state = client.getQueryState(
+    getWaypointMarketQuery.getQueryKey({ systemSymbol: waypoint.systemSymbol, waypointSymbol: waypoint.symbol }),
+  )
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -76,7 +81,12 @@ const WaypointMarketRefresh = () => {
         className="btn btn-outline btn-warn btn-sm"
         disabled={isFetching}
         onClick={() =>
-          client.resetQueries({ queryKey: getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }) })
+          client.invalidateQueries({
+            queryKey: getWaypointMarketQuery.getQueryKey({
+              systemSymbol: waypoint.systemSymbol,
+              waypointSymbol: waypoint.symbol,
+            }),
+          })
         }
       >
         Refresh

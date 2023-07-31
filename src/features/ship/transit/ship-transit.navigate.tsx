@@ -1,17 +1,17 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { ShipIcon } from '@/components/icons'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
-import { useShipStore } from '@/context/ship.context'
+import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipTransitActionProps } from './ship-transit.types'
 
 export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
-  const ship = useShipStore()
+  const ship = useShipResponse()
 
   return (
     <Modal size="md" closeable trigger={<Modal.Trigger>{trigger}</Modal.Trigger>}>
@@ -36,12 +36,10 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
 }
 
 const Navigate = ({ ship }: { ship: ShipResponse }) => {
-  const { isSuccess, data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: ship.nav.systemSymbol }),
     queryFn: getWaypointListQuery.queryFn,
   })
-
-  if (!isSuccess) return null
 
   const waypoints = data.data
 

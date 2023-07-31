@@ -5,14 +5,14 @@ import { Inventory, Loadout, Survey } from '@/components/ship'
 import * as Cargo from '@/components/ship/cargo'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
-import { useShipStore } from '@/context/ship.context'
+import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipTransit } from '@/features/ship/transit'
 import { cx } from '@/utilities/cx'
 import { ShipDetailRefresh } from './ship-detail-refresh.component'
 
 export const ShipDetail = () => {
-  const ship = useShipStore()
+  const ship = useShipResponse()
 
   return (
     <div className="grid gap-4">

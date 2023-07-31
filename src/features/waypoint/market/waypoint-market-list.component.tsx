@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
-import { useSystemContext } from '@/context/system.context'
-import { useWaypointContext } from '@/context/waypoint.context'
-import { getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
+import { useWaypointResponse } from '@/context/waypoint.context'
+import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type MarketTradeGood } from '@/types/spacetraders'
 import { WaypointMarketItem } from './waypoint-market-item.component'
 import { makeSortByTradeAttributeFn } from './waypoint-market-preferences.utilities'
@@ -10,20 +9,16 @@ import { WaypointMarketLayout } from './waypoint-market.layout'
 import { WaypointMarketNotAvailable } from './waypoint-market.not-available'
 
 export const WaypointMarketList = () => {
-  const { systemSymbol } = useSystemContext()
-  const { waypointSymbol } = useWaypointContext()
+  const waypoint = useWaypointResponse()
   const [searchParams] = useSearchParams()
-  const waypointQuery = useQuery({
-    queryKey: getWaypointByIdQuery.getQueryKey({ systemSymbol, waypointSymbol }),
-    queryFn: getWaypointByIdQuery.queryFn,
-  })
 
-  const marketEnabled =
-    waypointQuery.isSuccess &&
-    waypointQuery.data.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
+  const marketEnabled = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
 
   const marketQuery = useQuery({
-    queryKey: getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }),
+    queryKey: getWaypointMarketQuery.getQueryKey({
+      systemSymbol: waypoint.systemSymbol,
+      waypointSymbol: waypoint.symbol,
+    }),
     queryFn: getWaypointMarketQuery.queryFn,
     enabled: marketEnabled,
   })
@@ -48,7 +43,7 @@ export const WaypointMarketList = () => {
           {market.imports.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-bold">{waypointSymbol}</span> does not list any imports
+                <span className="font-bold">{waypoint.symbol}</span> does not list any imports
               </div>
             </div>
           )}
@@ -64,7 +59,7 @@ export const WaypointMarketList = () => {
           {market.exports.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-bold">{waypointSymbol}</span> does not list any exports
+                <span className="font-bold">{waypoint.symbol}</span> does not list any exports
               </div>
             </div>
           )}
@@ -80,7 +75,7 @@ export const WaypointMarketList = () => {
           {market.exchange.length === 0 && (
             <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
               <div className="text-secondary text-center text-sm">
-                <span className="font-bold">{waypointSymbol}</span> does not list any exchanges
+                <span className="font-bold">{waypoint.symbol}</span> does not list any exchanges
               </div>
             </div>
           )}

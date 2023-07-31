@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useFormContext, useWatch } from 'react-hook-form'
 import { Badge } from '@/components/badge'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
@@ -8,7 +8,7 @@ import { type RegisterSchema } from './register.validation'
 export const FactionInfo = () => {
   const { control } = useFormContext<RegisterSchema>()
   const faction = useWatch({ control, name: 'faction' })
-  const { isSuccess, data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: getFactionListQuery.getQueryKey(),
     queryFn: getFactionListQuery.queryFn,
     select: (response) => {
@@ -17,8 +17,6 @@ export const FactionInfo = () => {
       return { factions }
     },
   })
-
-  if (!isSuccess) return null
 
   const info = data.factions.get(faction)
 

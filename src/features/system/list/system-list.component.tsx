@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Pagination } from '@/components/pagination'
@@ -31,12 +31,11 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   const [params, setParams] = useSearchParams({ page: '1' })
   const page = getPageNumber(params.get('page'))
 
-  const systemsListQuery = useQuery({
+  const systemsListQuery = useSuspenseQuery({
     queryKey: getSystemListQuery.getQueryKey({ page, limit }),
     queryFn: getSystemListQuery.queryFn,
-    placeholderData: (data) => data,
   })
-  const fleetQuery = useQuery({
+  const fleetQuery = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
     select: (response) => {
@@ -50,17 +49,13 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
-  }, [systemsListQuery.data?.meta.page])
+  }, [systemsListQuery.data.meta.page])
 
   useEffect(() => {
-    if (!systemsListQuery.data?.meta) return
-
     const max = Math.ceil(systemsListQuery.data.meta.total / limit)
 
     if (page > max) setParams({ page: max.toString() })
-  }, [limit, systemsListQuery.data?.meta, page, setParams])
-
-  if (!systemsListQuery.isSuccess) return null
+  }, [limit, systemsListQuery.data.meta, page, setParams])
 
   const systems = systemsListQuery.data.data
   const meta = systemsListQuery.data.meta
@@ -98,7 +93,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
             <System key={system.symbol} system={system}>
               <ul className="relative isolate flex items-center -space-x-2">
                 {system.waypoints.map((waypoint) => {
-                  const hasShipPresence = fleetQuery.data?.has(waypoint.symbol)
+                  const hasShipPresence = fleetQuery.data.has(waypoint.symbol)
                   return (
                     <li
                       key={waypoint.symbol}

@@ -1,10 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { AppIcon } from '@/components/icons'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { Modal, useModalActions } from '@/components/modal'
 import { REFINE_ITEM_TYPE } from '@/config/constants'
-import { useShipStore } from '@/context/ship.context'
+import { useShipResponse } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
@@ -14,7 +14,7 @@ import { Item } from './cargo-item.component'
 import { Layout } from './cargo.layout'
 
 const JettisonCargo = ({ item }: { item: CargoInventory }) => {
-  const ship = useShipStore()
+  const ship = useShipResponse()
 
   return (
     <Modal
@@ -65,15 +65,15 @@ const CancelModal = () => {
 }
 
 export const List = () => {
-  const ship = useShipStore()
-  const { data } = useQuery({
+  const ship = useShipResponse()
+  const { data } = useSuspenseQuery({
     queryKey: getWaypointMarketQuery.getQueryKey({
       systemSymbol: ship.nav.systemSymbol,
       waypointSymbol: ship.nav.waypointSymbol,
     }),
     queryFn: getWaypointMarketQuery.queryFn,
     select: (response) => {
-      const market = [...response.data.imports, ...response.data.exchange]
+      const market = [...response.data.imports, ...response.data.exports, ...response.data.exchange]
       const goods = response.data.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
         result.set(item.symbol, item)
         return result
@@ -102,7 +102,7 @@ export const List = () => {
     <Layout>
       {inventory.map((item) => {
         const produce = REFINE_ITEM_TYPE.get(item.symbol)
-        const good = data?.market.has(item.symbol) ? data.goods?.get(item.symbol) : undefined
+        const good = data.market.has(item.symbol) ? data.goods?.get(item.symbol) : undefined
 
         return (
           <Fragment key={item.symbol}>
