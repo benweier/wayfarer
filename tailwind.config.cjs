@@ -13,6 +13,9 @@ module.exports = {
       animation: {
         indefinite: 'indefinite 1s linear infinite',
       },
+      blur: {
+        xs: '2px',
+      },
       backdropBlur: {
         xs: '2px',
       },
