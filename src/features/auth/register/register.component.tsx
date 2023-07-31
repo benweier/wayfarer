@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { Modal } from '@/components/modal'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
@@ -31,9 +32,12 @@ const FactionField = () => {
   const { isSuccess, isPending, data } = useQuery({
     queryKey: getFactionListQuery.getQueryKey(),
     queryFn: getFactionListQuery.queryFn,
+    suspense: false,
   })
 
-  if (isPending) return <Select.Skeleton />
+  if (isPending) {
+    return <Select.Skeleton label={<label className="label">Faction</label>} />
+  }
 
   if (!isSuccess) return null
 
@@ -123,7 +127,9 @@ export const Register = () => {
               <FactionField />
             </div>
 
-            <FactionInfo />
+            <QuerySuspenseBoundary>
+              <FactionInfo />
+            </QuerySuspenseBoundary>
 
             <button className="btn-hero" disabled={isPending} type="submit">
               Register
