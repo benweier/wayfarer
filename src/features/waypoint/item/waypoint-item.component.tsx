@@ -14,7 +14,7 @@ export const WaypointItem = ({ systemSymbol, waypoint }: WaypointItemProps) => {
       </div>
       <div className="flex items-center justify-between gap-1">
         <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type)}</WaypointTag>
-        <div className="text-sm font-light">
+        <div className="text-secondary text-sm font-light">
           ({waypoint.x}, {waypoint.y})
         </div>
       </div>
