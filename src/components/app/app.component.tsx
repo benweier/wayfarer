@@ -21,6 +21,7 @@ import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
 import { useThemeManager } from '@/hooks/use-theme-manager.hook'
 import * as Auth from '@/routes/auth'
+import * as Home from '@/routes/home'
 import { client } from '@/services/query-client'
 import { getState } from '@/store/auth'
 
@@ -100,13 +101,7 @@ const NavigationLoader = () => {
 const router = sentryCreateBrowserRouter(
   createRoutesFromElements(
     <Route Component={Core}>
-      <Route
-        index
-        lazy={async () => {
-          const home = await import('@/routes/home')
-          return { Component: home.Route }
-        }}
-      />
+      <Route index Component={Home.Route} />
 
       <Route
         path={ROUTES.LEADERBOARD}
