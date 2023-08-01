@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
@@ -6,30 +6,20 @@ import { type MarketTradeGood } from '@/types/spacetraders'
 import { WaypointMarketItem } from './waypoint-market-item.component'
 import { makeSortByTradeAttributeFn } from './waypoint-market-preferences.utilities'
 import { WaypointMarketLayout } from './waypoint-market.layout'
-import { WaypointMarketNotAvailable } from './waypoint-market.not-available'
 
 export const WaypointMarketList = () => {
   const waypoint = useWaypointResponse()
   const [searchParams] = useSearchParams()
 
-  const marketEnabled = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
-
-  const marketQuery = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: getWaypointMarketQuery.getQueryKey({
       systemSymbol: waypoint.systemSymbol,
       waypointSymbol: waypoint.symbol,
     }),
     queryFn: getWaypointMarketQuery.queryFn,
-    enabled: marketEnabled,
   })
 
-  if (!marketEnabled) {
-    return <WaypointMarketNotAvailable />
-  }
-
-  if (!marketQuery.isSuccess) return null
-
-  const market = marketQuery.data.data
+  const market = data.data
   const tradeGoods = market.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
     result.set(item.symbol, item)
     return result

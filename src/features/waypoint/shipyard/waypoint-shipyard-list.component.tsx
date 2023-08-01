@@ -1,33 +1,19 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointShipyardQuery } from '@/services/api/spacetraders'
-import { WaypointShipyardNotAvailable } from './waypoint-shipyard.not-available'
 
 export const WaypointShipyardList = () => {
   const waypoint = useWaypointResponse()
 
-  const shipyardEnabled = waypoint.traits.findIndex((trait) => trait.symbol === 'SHIPYARD') !== -1
-
-  const shipyardQuery = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: getWaypointShipyardQuery.getQueryKey({
       systemSymbol: waypoint.systemSymbol,
       waypointSymbol: waypoint.symbol,
     }),
     queryFn: getWaypointShipyardQuery.queryFn,
-    enabled: shipyardEnabled,
   })
 
-  if (!shipyardEnabled) {
-    return (
-      <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-        <WaypointShipyardNotAvailable />
-      </div>
-    )
-  }
-
-  if (!shipyardQuery.isSuccess) return null
-
-  const ships = shipyardQuery.data.data.ships ?? []
+  const ships = data.data.ships ?? []
 
   return (
     <div className="grid gap-4">
