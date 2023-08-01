@@ -19,7 +19,7 @@ export const SellCargo = ({
   ),
 }: SellCargoProps) => {
   const { ref, modal } = useModalImperativeHandle()
-  const { setAgent } = useAuthStore()
+  const { setAgent } = useAuthStore((state) => state.actions)
   const client = useQueryClient()
   const { mutateAsync } = useMutation({
     mutationKey: createShipCargoSellMutation.getMutationKey(),

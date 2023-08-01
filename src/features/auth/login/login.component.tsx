@@ -12,7 +12,7 @@ import { type LoginSchema, loginValidation } from './login.validation'
 
 export const Login = () => {
   const location = useLocation<Partial<LoginSchema>>()
-  const { signin } = useAuthStore()
+  const { signin } = useAuthStore((state) => state.actions)
 
   const methods = useForm<LoginSchema>({
     defaultValues: {

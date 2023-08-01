@@ -1,5 +1,4 @@
 import { useStore } from 'zustand'
-import { shallow } from 'zustand/shallow'
 import { createStore } from 'zustand/vanilla'
 import { type AgentResponse } from '@/types/spacetraders'
 import { type BoundStoreSelector } from './store.types'
@@ -14,25 +13,26 @@ type AuthHandlers = {
   signout: () => void
 }
 
-type AuthStore = AuthState & AuthHandlers
+type AuthStore = AuthState & { actions: AuthHandlers }
 
 const store = createStore<AuthStore>((set) => ({
   isAuthenticated: false,
   token: null,
   agent: null,
-  setAgent: (agent) => {
-    set({ agent })
-  },
-  signin: (state) => {
-    set({ isAuthenticated: true, token: state.token, agent: state.agent })
-    return
-  },
-  signout: () => {
-    set({ isAuthenticated: false, token: null, agent: null })
+  actions: {
+    setAgent: (agent) => {
+      set({ agent })
+    },
+    signin: (state) => {
+      set({ isAuthenticated: true, token: state.token, agent: state.agent })
+    },
+    signout: () => {
+      set({ isAuthenticated: false, token: null, agent: null })
+    },
   },
 }))
 
 export const { getState, setState, subscribe } = store
 
-export const useAuthStore: BoundStoreSelector<AuthStore> = (selector = (state: AuthStore) => state, equals = shallow) =>
-  useStore(store, selector, equals)
+export const useAuthStore: BoundStoreSelector<AuthStore> = (selector = (state: AuthStore) => state) =>
+  useStore(store, selector)
