@@ -318,6 +318,7 @@ export type ShipyardResponse = {
     type: string
   }>
   transactions?: Array<{
+    waypointSymbol: string
     shipSymbol: string
     price: number
     agentSymbol: string
@@ -366,20 +367,18 @@ export type ShipyardResponse = {
         slots: number
       }
     }
-    modules: [
-      {
-        symbol: string
-        capacity: number
-        range: number
-        name: string
-        description: string
-        requirements: {
-          power: number
-          crew: number
-          slots: number
-        }
-      },
-    ]
+    modules: Array<{
+      symbol: string
+      capacity: number
+      range: number
+      name: string
+      description: string
+      requirements: {
+        power: number
+        crew: number
+        slots: number
+      }
+    }>
     mounts: Array<{
       symbol: string
       name: string
