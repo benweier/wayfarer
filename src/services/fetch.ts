@@ -8,7 +8,7 @@ export const get = <T>(url: URL | RequestInfo, args: RequestInit = {}) => {
   return http<T>(url, { ...args, method: 'GET', credentials: DEFAULT_CREDENTIALS })
 }
 
-export const post = <T = unknown, P extends RequestPayload = undefined>(
+export const post = <T = unknown, P extends RequestPayload = any>(
   url: URL | RequestInfo,
   payload?: P,
   args: RequestInit = {},
@@ -21,7 +21,7 @@ export const post = <T = unknown, P extends RequestPayload = undefined>(
   })
 }
 
-export const patch = <T = unknown, P extends RequestPayload = undefined>(
+export const patch = <T = unknown, P extends RequestPayload = any>(
   url: URL | RequestInfo,
   payload?: P,
   args: RequestInit = {},
@@ -38,7 +38,7 @@ export const put = <T>(url: URL | RequestInfo, payload: BodyInit, args: RequestI
   return http<T>(url, { ...args, method: 'POST', credentials: DEFAULT_CREDENTIALS, body: payload })
 }
 
-export const remove = <T = unknown, P extends RequestPayload = undefined>(
+export const remove = <T = unknown, P extends RequestPayload = any>(
   url: URL | RequestInfo,
   payload: P,
   args: RequestInit = {},
