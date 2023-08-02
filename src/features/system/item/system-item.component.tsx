@@ -1,3 +1,4 @@
+import { type PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
 import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
@@ -5,7 +6,7 @@ import { ROUTES } from '@/config/routes'
 import { cx } from '@/utilities/cx'
 import { type SystemItemProps } from './system-item.types'
 
-export const SystemItem = ({ system, hasShipPresence = false, children }: SystemItemProps) => {
+export const SystemItem = ({ system, hasShipPresence = false, children }: PropsWithChildren<SystemItemProps>) => {
   return (
     <div
       className={cx(

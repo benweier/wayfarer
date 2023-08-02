@@ -1,8 +1,9 @@
+import { type PropsWithChildren } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { useAuthStore } from '@/store/auth'
 
-export const Required = ({ children = <Outlet /> }: WithChildren) => {
+export const Required = ({ children = <Outlet /> }: PropsWithChildren) => {
   const { isAuthenticated } = useAuthStore()
 
   if (!isAuthenticated) {

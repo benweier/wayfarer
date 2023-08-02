@@ -1,7 +1,12 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { createContext, useContext } from 'react'
+import { type PropsWithChildren, createContext, useContext } from 'react'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders'
 import { type WaypointResponse } from '@/types/spacetraders'
+
+export type WaypointStoreProps = {
+  systemSymbol: string
+  waypointSymbol: string
+}
 
 export const WaypointContext = createContext<{ waypointSymbol: string } | null>(null)
 
@@ -23,14 +28,7 @@ export const useWaypointResponse = () => {
   return waypoint
 }
 
-export const WaypointStore = ({
-  systemSymbol,
-  waypointSymbol,
-  children,
-}: WithChildren<{
-  systemSymbol: string
-  waypointSymbol: string
-}>) => {
+export const WaypointStore = ({ systemSymbol, waypointSymbol, children }: PropsWithChildren<WaypointStoreProps>) => {
   const { data } = useSuspenseQuery({
     queryKey: getWaypointByIdQuery.getQueryKey({ systemSymbol, waypointSymbol }),
     queryFn: getWaypointByIdQuery.queryFn,

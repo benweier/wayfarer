@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { atom, useAtom } from 'jotai'
-import { Fragment, Suspense } from 'react'
+import { Fragment, type PropsWithChildren, Suspense } from 'react'
 import { Link, NavLink, Outlet, useSubmit } from 'react-router-dom'
 import { AppIcon, MenuIcon } from '@/components/icons'
 import { Preferences } from '@/components/preferences'
@@ -35,7 +35,7 @@ const Logout = () => {
   )
 }
 
-export const Layout = ({ children = <Outlet /> }: WithChildren) => {
+export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
   const [sidebarState] = useAtom(sidebarAtom)
   const [mobileMenuOpen, setMobileMenuOpen] = useAtom(mobileMenuAtom)
 

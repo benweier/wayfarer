@@ -1,6 +1,7 @@
+import { type PropsWithChildren } from 'react'
 import { type WaypointShipyardItemProps } from './waypoint-shipyard.types'
 
-export const WaypointShipyardItem = ({ item, available, children }: WithChildren<WaypointShipyardItemProps>) => {
+export const WaypointShipyardItem = ({ item, available, children }: PropsWithChildren<WaypointShipyardItemProps>) => {
   return (
     <div key={item.symbol} className="grid gap-4 rounded bg-zinc-500 bg-opacity-5 px-4 py-3 dark:bg-opacity-10">
       <div className="grid gap-2">

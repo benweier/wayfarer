@@ -1,3 +1,3 @@
 import { type SystemsResponse } from '@/types/spacetraders'
 
-export type SystemItemProps = WithChildren<{ system: SystemsResponse; hasShipPresence?: boolean }>
+export type SystemItemProps = { system: SystemsResponse; hasShipPresence?: boolean }

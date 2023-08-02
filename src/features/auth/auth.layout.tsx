@@ -1,3 +1,4 @@
+import { type PropsWithChildren } from 'react'
 import { AppIcon } from '@/components/icons'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Wayfarer } from '@/components/wayfarer'
@@ -30,7 +31,7 @@ const SpaceTradersStatus = () => {
   )
 }
 
-export const Layout = ({ children }: WithChildren) => {
+export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="grid min-h-screen w-full auto-rows-min items-center gap-6 [grid-template-rows:auto_1fr_auto]">
       <div className="grid grid-flow-row items-center justify-center py-12">

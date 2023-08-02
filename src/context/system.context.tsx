@@ -1,8 +1,11 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { createContext, useContext } from 'react'
+import { type PropsWithChildren, createContext, useContext } from 'react'
 import { getSystemByIdQuery } from '@/services/api/spacetraders'
 import { type SystemsResponse } from '@/types/spacetraders'
 
+export type SystemStoreProps = {
+  systemSymbol: string
+}
 export const SystemContext = createContext<{ systemSymbol: string } | null>(null)
 
 export const useSystemContext = () => {
@@ -23,12 +26,7 @@ export const useSystemResponse = () => {
   return system
 }
 
-export const SystemStore = ({
-  systemSymbol,
-  children,
-}: WithChildren<{
-  systemSymbol: string
-}>) => {
+export const SystemStore = ({ systemSymbol, children }: PropsWithChildren<SystemStoreProps>) => {
   const { data } = useSuspenseQuery({
     queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
     queryFn: getSystemByIdQuery.queryFn,

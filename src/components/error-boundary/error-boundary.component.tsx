@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { type FC, type PropsWithChildren } from 'react'
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
 import { type ErrorBoundaryProps, type ErrorComponentProps } from './error-boundary.types'
 
@@ -9,7 +9,7 @@ export const ErrorBoundary = ({
   onReset,
   onError,
   children,
-}: WithChildren<ErrorBoundaryProps>) => (
+}: PropsWithChildren<ErrorBoundaryProps>) => (
   <ReactErrorBoundary
     onReset={onReset}
     onError={onError}

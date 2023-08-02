@@ -1,11 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, type PropsWithChildren } from 'react'
 import { AppIcon } from '@/components/icons'
 import { cx } from '@/utilities/cx'
 import { type ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
 
-export const Root = ({ size = 'auto', closeable = false, children }: WithChildren<ModalDialogProps>) => {
+export const Root = ({ size = 'auto', closeable = false, children }: PropsWithChildren<ModalDialogProps>) => {
   const { show, handleClose } = useModalContext((state) => ({
     show: state.isOpen,
     handleClose: state.actions.closeModal,

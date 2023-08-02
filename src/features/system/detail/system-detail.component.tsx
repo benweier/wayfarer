@@ -1,8 +1,9 @@
+import { type PropsWithChildren } from 'react'
 import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { useSystemResponse } from '@/context/system.context'
 
-export const SystemDetail = ({ children }: WithChildren) => {
+export const SystemDetail = ({ children }: PropsWithChildren) => {
   const system = useSystemResponse()
 
   return (

@@ -1,10 +1,12 @@
 import { useIsMutating } from '@tanstack/react-query'
+import { type PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
 import { CONTRACT_TYPE, TRADE_SYMBOL } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { type ContractResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
+import { type ContractItemProps } from './contract-item.types'
 
 export const getDestinationLabels = (contract: ContractResponse) => {
   return createUniqueSet(contract.terms.deliver.map((item) => item.destinationSymbol))
@@ -16,7 +18,7 @@ const createUniqueSet = (items: string[]) => {
   return Array.from(set).sort((a, b) => a.localeCompare(b))
 }
 
-export const ContractItem = ({ contract, children }: WithChildren<{ contract: ContractResponse }>) => {
+export const ContractItem = ({ contract, children }: PropsWithChildren<ContractItemProps>) => {
   const isMutating = useIsMutating({ mutationKey: ['contract', contract.id], exact: false })
 
   return (

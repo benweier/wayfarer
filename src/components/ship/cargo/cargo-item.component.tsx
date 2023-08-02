@@ -1,9 +1,10 @@
 import { useAtom } from 'jotai'
+import { type PropsWithChildren } from 'react'
 import { cargoDescriptionAtom } from '@/store/atoms/cargo.display'
-import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
+import { type CargoItemProps } from './cargo-item.types'
 
-export const Item = ({ item, children }: WithChildren<{ item: CargoInventory; good?: MarketTradeGood }>) => {
+export const Item = ({ item, children }: PropsWithChildren<CargoItemProps>) => {
   const [cargoDescription] = useAtom(cargoDescriptionAtom)
 
   return (

@@ -4,11 +4,6 @@ import type React from 'react'
 
 declare global {
   type QueryClientLoaderFn = (client: QueryClient) => LoaderFunction
-  type WithChildren<T = Record<string, unknown>> = React.PropsWithChildren<T>
-
-  type WithClassName<T = Record<string, unknown>> = T & {
-    className?: string
-  }
 }
 
 declare module 'react' {

@@ -1,3 +1,4 @@
+import { type PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { WaypointTag } from '@/components/waypoint/tag'
@@ -5,7 +6,7 @@ import { WAYPOINT_TYPE } from '@/config/constants'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
 
-export const WaypointDetail = ({ children }: WithChildren) => {
+export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const waypoint = useWaypointResponse()
 
   return (

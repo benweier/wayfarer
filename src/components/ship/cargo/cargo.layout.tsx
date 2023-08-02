@@ -1,8 +1,9 @@
 import { useAtom } from 'jotai'
+import { type PropsWithChildren } from 'react'
 import { cargoDisplayAtom } from '@/store/atoms/cargo.display'
 import { cx } from '@/utilities/cx'
 
-export const Layout = ({ children }: WithChildren) => {
+export const Layout = ({ children }: PropsWithChildren) => {
   const [cargoDisplayMode] = useAtom(cargoDisplayAtom)
 
   return (

@@ -1,8 +1,9 @@
+import { type PropsWithChildren } from 'react'
 import { Outlet } from 'react-router-dom'
 import { AppIcon } from '@/components/icons'
 import { Wayfarer } from '@/components/wayfarer'
 
-export const Layout = ({ children = <Outlet /> }: WithChildren) => {
+export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
   return (
     <div className="grid min-h-screen w-full items-start gap-6 [grid-template-rows:auto_1fr_auto]">
       <div className="grid grid-flow-row items-center justify-center py-12">
