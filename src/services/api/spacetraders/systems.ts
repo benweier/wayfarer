@@ -10,8 +10,9 @@ import {
 import { type Meta, type SpaceTradersResponse, attachQueryParams, createHeaders } from './core'
 
 const SYSTEM_QUERIES = {
-  systemList: (params?: { page?: number; limit?: number }) => [{ scope: 'systems' }, params] as const,
-  systemById: ({ systemSymbol }: { systemSymbol: string }) => [{ scope: 'systems' }, { systemSymbol }] as const,
+  systemList: (params?: { page?: number; limit?: number }) => [{ scope: 'systems', entity: 'list' }, params] as const,
+  systemById: ({ systemSymbol }: { systemSymbol: string }) =>
+    [{ scope: 'systems', entity: 'item' }, { systemSymbol }] as const,
 }
 
 const WAYPOINT_QUERIES = {
