@@ -1,14 +1,5 @@
-import { http } from '@/services/http'
 import { getState } from '@/store/auth'
 import type * as f from '@/services/fetch'
-
-type RequestPath<T> = T extends unknown ? Partial<{ path: T }> : Required<{ path: T }>
-type RequestParams<Q> = Q extends unknown ? Partial<{ params: Q }> : Required<{ params: Q }>
-type RequestPayload<P> = P extends unknown ? Partial<{ payload: P }> : Required<{ payload: P }>
-
-type RequestArguments<T, Q extends f.QueryParams, P extends f.RequestPayload = void> = RequestPath<T> &
-  RequestParams<Q> &
-  RequestPayload<P>
 
 export type Meta = {
   total: number
@@ -44,50 +35,4 @@ export const attachQueryParams = (url: URL, params?: f.QueryParams) => {
   }
 
   return url
-}
-
-export const queryFnFactory = <R = unknown, T = unknown, Q extends f.QueryParams = f.QueryParams>(
-  fn: (path: T) => string | URL,
-  base: string = import.meta.env.SPACETRADERS_API_BASE_URL,
-): ((args?: RequestArguments<T, Q>, req?: RequestInit) => Promise<R>) => {
-  return (args, req) => {
-    const path = fn(args?.path as T)
-    const url = path instanceof URL ? path : new URL(path, base)
-    const headers = createHeaders(req?.headers)
-
-    attachQueryParams(url, args?.params)
-
-    return http(url, {
-      headers,
-      signal: req?.signal,
-      method: req?.method ?? 'GET',
-      credentials: 'same-origin',
-    })
-  }
-}
-
-export const mutationFnFactory = <
-  R = unknown,
-  T = unknown,
-  P extends f.RequestPayload = void,
-  Q extends f.QueryParams = f.QueryParams,
->(
-  fn: (path: T) => string | URL,
-  base: string | URL = import.meta.env.SPACETRADERS_API_BASE_URL,
-): ((args?: RequestArguments<T, Q, P>, req?: RequestInit) => Promise<R>) => {
-  return (args, req) => {
-    const path = fn(args?.path as T)
-    const url = path instanceof URL ? path : new URL(path, base)
-    const headers = createHeaders(req?.headers)
-
-    attachQueryParams(url, args?.params)
-
-    return http(url, {
-      headers,
-      signal: req?.signal,
-      method: req?.method ?? 'POST',
-      credentials: 'same-origin',
-      body: args?.payload ? JSON.stringify(args.payload) : undefined,
-    })
-  }
 }
