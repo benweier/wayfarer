@@ -42,7 +42,8 @@ export const getShipByIdQuery = {
 }
 
 export const createShipPurchaseMutation = {
-  getMutationKey: () => [{ scope: 'ships', entity: 'item', action: 'purchase' }] as const,
+  getMutationKey: (...args: MaybeMutationKey<{ shipType: string; waypointSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'purchase' }, args] as const,
   mutationFn: async ({ shipType, waypointSymbol }: { shipType: string; waypointSymbol: string }) => {
     const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
