@@ -312,6 +312,75 @@ export type JumpGateResponse = {
   connectedSystems: JumpGateConnectedSystem[]
 }
 
+export type ShipyardShip = {
+  type: string
+  name: string
+  description: string
+  purchasePrice: number
+  frame: {
+    symbol: string
+    name: string
+    description: string
+    condition: number
+    moduleSlots: number
+    mountingPoints: number
+    fuelCapacity: number
+    requirements: {
+      power: number
+      crew: number
+      slots: number
+    }
+  }
+  reactor: {
+    symbol: string
+    name: string
+    description: string
+    condition: number
+    powerOutput: number
+    requirements: {
+      power: number
+      crew: number
+      slots: number
+    }
+  }
+  engine: {
+    symbol: string
+    name: string
+    description: string
+    condition: number
+    speed: number
+    requirements: {
+      power: number
+      crew: number
+      slots: number
+    }
+  }
+  modules: Array<{
+    symbol: string
+    capacity: number
+    range: number
+    name: string
+    description: string
+    requirements: {
+      power: number
+      crew: number
+      slots: number
+    }
+  }>
+  mounts: Array<{
+    symbol: string
+    name: string
+    description: string
+    strength: number
+    deposits: string[]
+    requirements: {
+      power: number
+      crew: number
+      slots: number
+    }
+  }>
+}
+
 export type ShipyardResponse = {
   symbol: string
   shipTypes: Array<{
@@ -324,74 +393,7 @@ export type ShipyardResponse = {
     agentSymbol: string
     timestamp: string
   }>
-  ships?: Array<{
-    type: string
-    name: string
-    description: string
-    purchasePrice: number
-    frame: {
-      symbol: string
-      name: string
-      description: string
-      condition: number
-      moduleSlots: number
-      mountingPoints: number
-      fuelCapacity: number
-      requirements: {
-        power: number
-        crew: number
-        slots: number
-      }
-    }
-    reactor: {
-      symbol: string
-      name: string
-      description: string
-      condition: number
-      powerOutput: number
-      requirements: {
-        power: number
-        crew: number
-        slots: number
-      }
-    }
-    engine: {
-      symbol: string
-      name: string
-      description: string
-      condition: number
-      speed: number
-      requirements: {
-        power: number
-        crew: number
-        slots: number
-      }
-    }
-    modules: Array<{
-      symbol: string
-      capacity: number
-      range: number
-      name: string
-      description: string
-      requirements: {
-        power: number
-        crew: number
-        slots: number
-      }
-    }>
-    mounts: Array<{
-      symbol: string
-      name: string
-      description: string
-      strength: number
-      deposits: string[]
-      requirements: {
-        power: number
-        crew: number
-        slots: number
-      }
-    }>
-  }>
+  ships?: ShipyardShip[]
 }
 
 export type CooldownResponse = {
