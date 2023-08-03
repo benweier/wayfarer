@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Badge } from '@/components/badge'
 import { Modal, useModalActions } from '@/components/modal'
 import { CONTRACT_TYPE } from '@/config/constants'
-import { createContractAccept, getContractsList } from '@/services/api/spacetraders'
+import { createContractAcceptMutation, getContractListQuery } from '@/services/api/spacetraders'
 import { type ContractResponse } from '@/types/spacetraders'
 import { ContractItem } from '../item'
 import { contractsReducer } from './contracts.utilities'
@@ -25,9 +25,10 @@ const CloseModal = () => {
 const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
   const client = useQueryClient()
   const acceptContract = useMutation({
-    mutationFn: (contractID: string) => createContractAccept({ path: { contractID } }),
+    mutationKey: createContractAcceptMutation.getMutationKey({ contractId: contract.id }),
+    mutationFn: createContractAcceptMutation.mutationFn,
     onSuccess: () => {
-      void client.invalidateQueries(['contracts'])
+      void client.invalidateQueries({ queryKey: getContractListQuery.getQueryKey() })
     },
   })
 
@@ -59,7 +60,7 @@ const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
             <button
               className="btn btn-confirm"
               onClick={() => {
-                acceptContract.mutate(contract.id)
+                acceptContract.mutate({ contractId: contract.id })
               }}
             >
               Accept Contract
@@ -73,8 +74,8 @@ const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
 
 export const ContractList = () => {
   const { data, isSuccess } = useQuery({
-    queryKey: ['contracts'],
-    queryFn: ({ signal }) => getContractsList(undefined, { signal }),
+    queryKey: getContractListQuery.getQueryKey(),
+    queryFn: getContractListQuery.queryFn,
     select: (response) => {
       return {
         data: response.data.reduce(contractsReducer, {

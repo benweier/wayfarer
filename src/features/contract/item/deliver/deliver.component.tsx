@@ -1,26 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
-import { createContractDeliver } from '@/services/api/spacetraders'
+import { createContractDeliverMutation } from '@/services/api/spacetraders'
 import { type ContractResponse } from '@/types/spacetraders'
 
 export const DeliverContract = ({ contract }: { contract: ContractResponse }) => {
   const client = useQueryClient()
   const { ref, modal } = useModalImperativeHandle()
   const deliverContract = useMutation({
-    mutationFn: ({
-      contractID,
-      shipSymbol,
-      itemID,
-      units,
-    }: {
-      contractID: string
-      shipSymbol: string
-      itemID: string
-      units: number
-    }) =>
-      createContractDeliver({ path: { contractID }, payload: { shipSymbol: shipSymbol, tradeSymbol: itemID, units } }),
+    mutationKey: createContractDeliverMutation.getMutationKey({ contractId: contract.id }),
+    mutationFn: createContractDeliverMutation.mutationFn,
     onSuccess: () => {
-      void client.invalidateQueries(['contracts'])
+      void client.invalidateQueries({ queryKey: [{ scope: 'contracts' }] })
 
       modal.close()
     },
@@ -48,9 +38,9 @@ export const DeliverContract = ({ contract }: { contract: ContractResponse }) =>
             deliver={contract.terms.deliver}
             onSubmit={(values) =>
               deliverContract.mutateAsync({
-                contractID: contract.id,
+                contractId: contract.id,
                 shipSymbol: values.ship,
-                itemID: values.item,
+                tradeSymbol: values.item,
                 units: values.quantity,
               })
             }
