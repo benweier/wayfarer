@@ -1,6 +1,6 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { getContractById } from '@/services/api/spacetraders'
+import { getContractByIdQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/store/auth'
 
@@ -21,8 +21,8 @@ export const loader: QueryClientLoaderFn =
 
     try {
       const contract = await client.ensureQueryData({
-        queryKey: ['contract', contractID],
-        queryFn: ({ signal }) => getContractById({ path: { contractID } }, { signal }),
+        queryKey: getContractByIdQuery.getQueryKey({ contractId: contractID }),
+        queryFn: getContractByIdQuery.queryFn,
       })
 
       return defer({ contract })
