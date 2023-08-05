@@ -20,7 +20,7 @@ export const Extract = ({
   const client = useQueryClient()
   const removeSurvey = useShipSurveyStore((state) => state.removeSurvey)
   const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
-    hasCooldown: !!state.cooldowns[ship.symbol],
+    hasCooldown: state.cooldowns.has(ship.symbol),
     setCooldown: state.setCooldown,
   }))
   const { mutate, isPending } = useMutation({

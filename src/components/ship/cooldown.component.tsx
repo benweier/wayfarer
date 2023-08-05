@@ -5,7 +5,7 @@ import { cx } from '@/utilities/cx'
 
 export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
   const { cooldown, updateRemainingSeconds, clearCooldown } = useShipCooldownStore((state) => ({
-    cooldown: state.cooldowns[ship.symbol],
+    cooldown: state.cooldowns.get(ship.symbol),
     updateRemainingSeconds: state.updateRemainingSeconds,
     clearCooldown: state.clearCooldown,
   }))

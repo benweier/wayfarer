@@ -13,7 +13,7 @@ export const Survey = ({
 }: ShipActionProps) => {
   const addSurvey = useShipSurveyStore((state) => state.addSurvey)
   const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
-    hasCooldown: !!state.cooldowns[ship.symbol],
+    hasCooldown: state.cooldowns.has(ship.symbol),
     setCooldown: state.setCooldown,
   }))
   const { mutate, isPending } = useMutation({
