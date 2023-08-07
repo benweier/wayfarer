@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { FleetStore } from '@/context/fleet.context'
 import { SystemStore } from '@/context/system.context'
 import { SystemDetail } from '@/features/system/detail'
 import { SystemTabs } from '@/features/system/tabs'
@@ -15,11 +16,13 @@ export const SystemViewComponent = () => {
 
       {systemSymbol && (
         <QuerySuspenseBoundary>
-          <SystemStore systemSymbol={systemSymbol}>
-            <SystemDetail>
-              <SystemTabs />
-            </SystemDetail>
-          </SystemStore>
+          <FleetStore>
+            <SystemStore systemSymbol={systemSymbol}>
+              <SystemDetail>
+                <SystemTabs />
+              </SystemDetail>
+            </SystemStore>
+          </FleetStore>
         </QuerySuspenseBoundary>
       )}
     </div>
