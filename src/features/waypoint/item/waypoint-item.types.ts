@@ -1,3 +1,3 @@
 import { type SystemWaypoint } from '@/types/spacetraders'
 
-export type WaypointItemProps = { systemSymbol: string; waypoint: SystemWaypoint }
+export type WaypointItemProps = { systemSymbol: string; waypoint: SystemWaypoint; hasShipPresence?: boolean }
