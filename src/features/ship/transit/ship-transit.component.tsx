@@ -46,21 +46,21 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
         <div className="flex items-center gap-2">
           <ShipTransitNavigate
             trigger={(props) => (
-              <button className="btn btn-warn btn-flat btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <button className="btn btn-flat btn-warn btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 Navigate
               </button>
             )}
           />
           <ShipTransitWarp
             trigger={(props) => (
-              <button className="btn btn-warn btn-flat btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <button className="btn btn-flat btn-warn btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 Warp
               </button>
             )}
           />
           <ShipTransitJump
             trigger={(props) => (
-              <button className="btn btn-warn btn-flat btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <button className="btn btn-flat btn-warn btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 Jump
               </button>
             )}

@@ -64,10 +64,10 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
               </div>
             </div>
             <div className="flex gap-x-1">
-              <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+              <div className="text-inverse text-primary my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
                 {SHIP_NAV_STATUS.get(ship.nav.status) ?? ship.nav.status}
               </div>
-              <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+              <div className="text-inverse text-primary my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
                 {SHIP_NAV_FLIGHT_MODE.get(ship.nav.flightMode) ?? ship.nav.flightMode}
               </div>
               <div className="absolute inset-x-0 -bottom-1">
