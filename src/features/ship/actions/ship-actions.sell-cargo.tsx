@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createShipCargoSellMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 import { updateShipCargo, updateShipInFleetCargo } from './ship-actions.utilities'
@@ -18,6 +19,7 @@ export const SellCargo = ({
   symbol: string
   units: number
 }>) => {
+  const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const { mutate, isPending } = useMutation({
     mutationKey: createShipCargoSellMutation.getMutationKey(),
@@ -37,6 +39,8 @@ export const SellCargo = ({
       if (ships && index > -1) {
         client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetCargo(ships, index, response.data.cargo))
       }
+
+      setAgent(response.data.agent)
     },
     onSettled: (_res, _err) => {
       void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })

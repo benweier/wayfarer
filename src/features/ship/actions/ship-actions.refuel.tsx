@@ -15,7 +15,7 @@ export const Refuel = ({
     </button>
   ),
 }: ShipActionProps) => {
-  const { setAgent } = useAuthStore()
+  const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const { mutate, isPending } = useMutation({
     mutationKey: createShipRefuelMutation.getMutationKey({ shipSymbol: ship.symbol }),

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 import { updateShipCargo, updateShipInFleetCargo } from './ship-actions.utilities'
@@ -18,6 +19,7 @@ export const PurchaseCargo = ({
   symbol: string
   units: number
 }>) => {
+  const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const { mutate, isPending } = useMutation({
     mutationKey: createShipCargoPurchaseMutation.getMutationKey(),
@@ -45,6 +47,8 @@ export const PurchaseCargo = ({
           updateShipInFleetCargo(ctx.ships, index, response.data.cargo),
         )
       }
+
+      setAgent(response.data.agent)
     },
     onSettled: (_res, _err) => {
       void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })

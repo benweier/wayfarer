@@ -16,14 +16,17 @@ const PurchaseShipComponent = (
   }: ShipyardPurchaseShipProps,
   ref: Ref<HTMLButtonElement>,
 ) => {
+  const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const credits = useAuthStore((state) => state.agent?.credits ?? 0)
 
   const { mutate, isPending } = useMutation({
     mutationKey: createShipPurchaseMutation.getMutationKey({ shipType: ship.type, waypointSymbol }),
     mutationFn: createShipPurchaseMutation.mutationFn,
-    onSuccess: (_res, _err) => {
+    onSuccess: (response, _err) => {
       void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
+
+      setAgent(response.data.agent)
     },
   })
 
