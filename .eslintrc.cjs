@@ -46,6 +46,24 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'import/namespace': ['error', { allowComputed: true }],
+    'padding-line-between-statements': [
+      'error',
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: 'return',
+      },
+      {
+        blankLine: 'always',
+        prev: ['const', 'let', 'var'],
+        next: '*',
+      },
+      {
+        blankLine: 'never',
+        prev: ['const', 'let', 'var'],
+        next: ['const', 'let', 'var'],
+      },
+    ],
     'sort-imports': [
       'error',
       {
@@ -64,7 +82,10 @@ module.exports = {
     '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/consistent-type-exports': 'error',
-    '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports', prefer: 'type-imports' }],
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      { fixStyle: 'inline-type-imports', prefer: 'type-imports' },
+    ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
@@ -85,13 +106,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: [
-        'postcss.config.cjs',
-        '.eslintrc.cjs',
-        'styles/**/*.cjs',
-        'tailwind.config.cjs',
-        'vite.config.ts',
-      ],
+      files: ['postcss.config.cjs', '.eslintrc.cjs', 'styles/**/*.cjs', 'tailwind.config.cjs', 'vite.config.ts'],
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       parserOptions: {
@@ -135,11 +150,7 @@ module.exports = {
     {
       files: ['src/**/*.spec.tsx', 'src/**/*.test.tsx', 'test/**/*'],
       plugins: ['testing-library', 'jest-dom'],
-      extends: [
-        'plugin:testing-library/dom',
-        'plugin:jest-dom/recommended',
-        'plugin:testing-library/react',
-      ],
+      extends: ['plugin:testing-library/dom', 'plugin:jest-dom/recommended', 'plugin:testing-library/react'],
       rules: {
         'testing-library/prefer-screen-queries': 'off',
       },
