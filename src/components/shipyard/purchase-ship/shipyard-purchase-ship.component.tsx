@@ -19,7 +19,6 @@ const PurchaseShipComponent = (
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const credits = useAuthStore((state) => state.agent?.credits ?? 0)
-
   const { mutate, isPending } = useMutation({
     mutationKey: createShipPurchaseMutation.getMutationKey({ shipType: ship.type, waypointSymbol }),
     mutationFn: createShipPurchaseMutation.mutationFn,

@@ -29,7 +29,6 @@ export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
 const Warp = ({ ship }: { ship: ShipResponse }) => {
   const methods = useForm<{ waypointSymbol: string }>()
   const client = useQueryClient()
-
   const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipWarpMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipWarpMutation.mutationFn,

@@ -54,7 +54,6 @@ export const Field = ({
     queryFn: getShipListQuery.queryFn,
     select,
   })
-
   const state: Map<string, ShipItem> = data.ships.reduce<Map<string, ShipItem>>(getShipOption, new Map())
 
   return (

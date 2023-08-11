@@ -9,11 +9,13 @@ type ContractGroups = {
 export const contractsReducer = (result: ContractGroups, contract: ContractResponse) => {
   if (contract.fulfilled) {
     result.completed.push(contract)
+
     return result
   }
 
   if (contract.accepted) {
     result.accepted.push(contract)
+
     return result
   }
 

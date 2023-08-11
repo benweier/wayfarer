@@ -19,11 +19,9 @@ const SubmitPurchase = () => {
     </button>
   )
 }
-
 const PurchaseCargoPrice = ({ perUnit }: { perUnit: number }) => {
   const { isAuthenticated, agent } = useAuthStore()
   const quantity = useWatch<{ quantity?: number }>({ name: 'quantity' }) ?? 0
-
   const credits = isAuthenticated ? agent.credits : 0
 
   return (
@@ -54,7 +52,6 @@ export const PurchaseCargoForm = ({ good, onSubmit }: PurchaseCargoFormProps) =>
     resolver: yupResolver(validation),
     context: { good },
   })
-
   const getShipOption: ShipSelect.ShipReducer = useCallback((ships, ship) => {
     const disabled = ship.cargo.units >= ship.cargo.capacity
 

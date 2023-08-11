@@ -6,7 +6,6 @@ const isiOS = () => {
 
 export const useScrollLock = () => {
   const scrollOffset = useRef(0)
-
   const activate = useCallback(() => {
     document.body.dataset.scrollLock = 'true'
     document.body.style.overflow = 'hidden'
@@ -19,7 +18,6 @@ export const useScrollLock = () => {
       document.body.style.width = '100%'
     }
   }, [])
-
   const deactivate = useCallback(() => {
     document.body.style.overflow = ''
     document.body.style.paddingRight = ''
@@ -36,6 +34,7 @@ export const useScrollLock = () => {
 
   useLayoutEffect(() => {
     const scrollBarCompensation = window.innerWidth - document.body.offsetWidth
+
     document.body.style.setProperty('--scrollbar-compensation', `${scrollBarCompensation}px`)
   }, [])
 

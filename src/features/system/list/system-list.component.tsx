@@ -19,7 +19,6 @@ const WAYPOINT_TYPE_STYLES: Record<string, string> = {
   JUMP_GATE: 'bg-gray-50 text-gray-950',
   GRAVITY_WELL: 'bg-gray-950 text-gray-50',
 }
-
 const getPageNumber = (page: string | null) => {
   const pageNumber = parseInt(page ?? '1')
 
@@ -30,7 +29,6 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   const [limit] = useState(20)
   const [params, setParams] = useSearchParams({ page: '1' })
   const page = getPageNumber(params.get('page'))
-
   const systemsListQuery = useSuspenseQuery({
     queryKey: getSystemListQuery.getQueryKey({ page, limit }),
     queryFn: getSystemListQuery.queryFn,
@@ -42,6 +40,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
       return response.data.reduce<Set<string>>((result, ship) => {
         result.add(ship.nav.systemSymbol)
         result.add(ship.nav.waypointSymbol)
+
         return result
       }, new Set())
     },
@@ -94,6 +93,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
               <ul className="relative isolate flex items-center -space-x-2">
                 {system.waypoints.map((waypoint) => {
                   const hasShipPresence = fleetQuery.data.has(waypoint.symbol)
+
                   return (
                     <li
                       key={waypoint.symbol}

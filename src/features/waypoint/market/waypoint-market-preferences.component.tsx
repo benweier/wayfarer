@@ -11,7 +11,6 @@ import { relativeTime } from '@/utilities/date'
 
 const WaypointMarketSortBy = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-
   const value = searchParams.get('sort') ?? 'name'
 
   return (
@@ -42,7 +41,6 @@ const WaypointMarketSortBy = () => {
     </RadioGroup>
   )
 }
-
 const WaypointMarketRefresh = () => {
   const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const client = useQueryClient()

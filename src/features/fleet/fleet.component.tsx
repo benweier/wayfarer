@@ -8,7 +8,6 @@ export const Fleet = () => {
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
   })
-
   const ships = data.data
 
   return (

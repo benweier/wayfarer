@@ -30,6 +30,7 @@ export const Cooldown = ({ ship }: { ship: ShipResponse }) => {
 
     if (now > expiration.getTime()) {
       clearCooldown(ship.symbol)
+
       return
     }
 

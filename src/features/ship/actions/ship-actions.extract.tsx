@@ -37,6 +37,7 @@ export const Extract = ({
     onSuccess: (response, { shipSymbol, survey }, ctx) => {
       if (survey) removeSurvey(survey.signature)
       const cooldown = response.data.cooldown
+
       setCooldown(shipSymbol, cooldown)
 
       const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1

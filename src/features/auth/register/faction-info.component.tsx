@@ -13,11 +13,12 @@ export const FactionInfo = () => {
     queryFn: getFactionListQuery.queryFn,
     select: (response) => {
       const factions = new Map<string, FactionResponse>()
+
       response.data.forEach((faction) => factions.set(faction.symbol, faction))
+
       return { factions }
     },
   })
-
   const info = data.factions.get(faction)
 
   if (!info) return null

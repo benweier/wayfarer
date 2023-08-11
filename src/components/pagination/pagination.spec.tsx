@@ -163,7 +163,6 @@ describe('pagination.component', () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
     const { getByLabelText, rerender } = render(<Pagination current={1} total={10} onChange={handleChange} />)
-
     const firstPage = getByLabelText(/first page/i)
 
     expect(firstPage).toBeDisabled()
@@ -181,7 +180,6 @@ describe('pagination.component', () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
     const { getByLabelText, rerender } = render(<Pagination current={1} total={10} onChange={handleChange} />)
-
     const previousPage = getByLabelText(/previous page/i)
 
     expect(previousPage).toBeDisabled()
@@ -199,7 +197,6 @@ describe('pagination.component', () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
     const { getByLabelText, rerender } = render(<Pagination current={1} total={10} onChange={handleChange} />)
-
     const nextPage = getByLabelText(/next page/i)
 
     expect(nextPage).toBeEnabled()
@@ -217,7 +214,6 @@ describe('pagination.component', () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
     const { getByLabelText, rerender } = render(<Pagination current={1} total={10} onChange={handleChange} />)
-
     const lastPage = getByLabelText(/last page/i)
 
     expect(lastPage).toBeEnabled()

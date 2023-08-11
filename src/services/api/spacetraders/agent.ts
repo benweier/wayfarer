@@ -13,6 +13,7 @@ export const getAgentBySymbolQuery = {
     signal,
   }: QueryFunctionContext<ReturnType<(typeof AGENT_QUERIES)['agentBySymbol']>>) => {
     const url = new URL(`agents/${args.agentSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
     return get<
       SpaceTradersResponse<{
         symbol: string

@@ -12,11 +12,13 @@ export const loader: QueryClientLoaderFn =
 
     if (!isAuthenticated) {
       redirect(ROUTES.LOGIN)
+
       return new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
     }
 
     if (!systemSymbol) {
       redirect(ROUTES.SYSTEMS)
+
       return new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
     }
 
@@ -25,7 +27,6 @@ export const loader: QueryClientLoaderFn =
         queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
         queryFn: getSystemByIdQuery.queryFn,
       })
-
       const ships = client.ensureQueryData({
         queryKey: getShipListQuery.getQueryKey(),
         queryFn: getShipListQuery.queryFn,

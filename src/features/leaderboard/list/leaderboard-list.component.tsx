@@ -10,7 +10,6 @@ export const LeaderboardList = () => {
     queryKey: getStatusQuery.getQueryKey(),
     queryFn: getStatusQuery.queryFn,
   })
-
   const leaderboards = data.leaderboards
 
   return (

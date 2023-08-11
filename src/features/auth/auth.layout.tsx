@@ -10,7 +10,6 @@ const icon = {
   ONLINE: 'connection:online',
   OFFLINE: 'connection:offline',
 }
-
 const SpaceTradersStatus = () => {
   const { status, isChecking } = useSpaceTradersStatus()
 

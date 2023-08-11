@@ -29,6 +29,7 @@ export const getShipListQuery = {
   getQueryKey: FLEET_QUERIES.shipList,
   queryFn: async ({ signal }: QueryFunctionContext<FleetQueryKey<'shipList'>>) => {
     const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
     return get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
   },
 }
@@ -37,6 +38,7 @@ export const getShipByIdQuery = {
   getQueryKey: FLEET_QUERIES.shipById,
   queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<FleetQueryKey<'shipById'>>) => {
     const url = new URL(`my/ships/${args.shipSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
     return get<SpaceTradersResponse<ShipResponse>>(url, { signal, headers: createHeaders() })
   },
 }

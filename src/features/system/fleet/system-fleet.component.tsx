@@ -15,7 +15,6 @@ export const SystemFleet = () => {
       meta: response.meta,
     }),
   })
-
   const ships = data.data
 
   if (ships.length === 0) {

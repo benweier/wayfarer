@@ -18,6 +18,7 @@ export const getContractListQuery = {
   getQueryKey: CONTRACT_QUERIES.contractList,
   queryFn: async ({ signal }: QueryFunctionContext<ContractQueryKey<'contractList'>>) => {
     const url = new URL(`my/contracts`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
     return get<SpaceTradersResponse<ContractResponse[], Meta>>(url, { signal, headers: createHeaders() })
   },
 }
@@ -26,6 +27,7 @@ export const getContractByIdQuery = {
   getQueryKey: CONTRACT_QUERIES.contractById,
   queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<ContractQueryKey<'contractById'>>) => {
     const url = new URL(`my/contracts/${args.contractId}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
     return get<SpaceTradersResponse<ContractResponse>>(url, { signal, headers: createHeaders() })
   },
 }

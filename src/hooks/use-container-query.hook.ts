@@ -8,11 +8,11 @@ export type ContainerBreakpoints = Array<[BreakpointKey, number]>
 
 export const useContainerQuery = (breakpoints: ContainerBreakpoints) => {
   const [breakpoint, setBreakpoint] = useState<BreakpointKey | undefined>(undefined)
-
   const onResize = useCallback<ResizeHandler>(
     ({ width }) => {
       for (let i = 0; i < breakpoints.length; i = i + 1) {
         const [key, value] = breakpoints[i]
+
         if (width !== undefined && width <= value) {
           setBreakpoint(key)
           break
@@ -21,7 +21,6 @@ export const useContainerQuery = (breakpoints: ContainerBreakpoints) => {
     },
     [breakpoints],
   )
-
   const { ref } = useResizeObserver({ onResize })
 
   return { ref, breakpoint }

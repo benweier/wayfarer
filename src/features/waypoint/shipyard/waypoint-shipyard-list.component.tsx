@@ -6,7 +6,6 @@ import { type WaypointShipyardListProps } from './waypoint-shipyard.types'
 
 export const WaypointShipyardList = ({ ShipyardItem = WaypointShipyardItem }: WaypointShipyardListProps) => {
   const waypoint = useWaypointResponse()
-
   const { data } = useSuspenseQuery({
     queryKey: getWaypointShipyardQuery.getQueryKey({
       systemSymbol: waypoint.systemSymbol,
@@ -14,7 +13,6 @@ export const WaypointShipyardList = ({ ShipyardItem = WaypointShipyardItem }: Wa
     }),
     queryFn: getWaypointShipyardQuery.queryFn,
   })
-
   const ships = data.data.ships ?? []
 
   return (

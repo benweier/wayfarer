@@ -75,11 +75,9 @@ const Title = ({ children }: PropsWithChildren) => {
     </div>
   )
 }
-
 const Content = ({ children }: PropsWithChildren) => {
   return <div className="flex-grow-1 flex-shrink-1 flex-basis-auto overflow-y-auto p-4">{children}</div>
 }
-
 const Actions = ({ children }: PropsWithChildren) => {
   return <div className="flex-basis-auto flex-shrink-0 flex-grow-0 bg-zinc-100 dark:bg-zinc-800/50">{children}</div>
 }

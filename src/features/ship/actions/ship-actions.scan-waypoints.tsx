@@ -21,13 +21,13 @@ export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
 
       try {
         const cooldown: SpaceTradersError<{ cooldown: CooldownResponse }> = await err.json()
+
         if (cooldown.error?.data.cooldown) setCooldown(shipSymbol, cooldown.error.data.cooldown)
       } catch (err) {
         //
       }
     },
   })
-
   const waypoints = isSuccess ? data.data.waypoints : []
 
   return (

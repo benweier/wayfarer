@@ -24,7 +24,6 @@ export const loader: QueryClientLoaderFn =
         queryKey: getShipByIdQuery.getQueryKey({ shipSymbol }),
         queryFn: getShipByIdQuery.queryFn,
       })
-
       const market = client.ensureQueryData({
         queryKey: getWaypointMarketQuery.getQueryKey({
           systemSymbol: ship.data.nav.systemSymbol,

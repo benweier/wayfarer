@@ -6,7 +6,6 @@ export const LeaderboardAgent = ({ agentSymbol }: { agentSymbol: string }) => {
     queryKey: getAgentBySymbolQuery.getQueryKey({ agentSymbol }),
     queryFn: getAgentBySymbolQuery.queryFn,
   })
-
   const agent = data.data
 
   return (

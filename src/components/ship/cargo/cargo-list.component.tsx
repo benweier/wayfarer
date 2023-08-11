@@ -48,7 +48,6 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
     </Modal>
   )
 }
-
 const CancelModal = () => {
   const { closeModal } = useModalActions()
 
@@ -76,6 +75,7 @@ export const List = () => {
       const market = [...response.data.imports, ...response.data.exports, ...response.data.exchange]
       const goods = response.data.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
         result.set(item.symbol, item)
+
         return result
       }, new Map())
 
@@ -85,7 +85,6 @@ export const List = () => {
       }
     },
   })
-
   const inventory = ship.cargo.inventory
 
   if (!inventory.length) {

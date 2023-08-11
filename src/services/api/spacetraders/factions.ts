@@ -7,6 +7,7 @@ export const getFactionListQuery = {
   getQueryKey: () => [{ scope: 'factions', entity: 'list' }] as const,
   queryFn: async ({ signal }: QueryFunctionContext) => {
     const url = new URL('factions', import.meta.env.SPACETRADERS_API_BASE_URL)
+
     return get<SpaceTradersResponse<FactionResponse[], Meta>>(url, { signal, headers: createHeaders() })
   },
 }
@@ -18,6 +19,7 @@ export const getFactionByIdQuery = {
     signal,
   }: QueryFunctionContext<[{ scope: 'factions' }, { factionSymbol: string }]>) => {
     const url = new URL(`factions/${args.factionSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
     return get<SpaceTradersResponse<FactionResponse>>(url, { signal, headers: createHeaders() })
   },
 }

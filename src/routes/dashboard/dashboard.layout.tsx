@@ -15,11 +15,10 @@ const menu = [
   { name: 'Fleet', href: ROUTES.FLEET, icon: 'fleet' },
   { name: 'Systems', href: ROUTES.SYSTEMS, icon: 'systems' },
 ]
-
 const mobileMenuAtom = atom<boolean>(false)
-
 const Logout = () => {
   const submit = useSubmit()
+
   return (
     <button
       onClick={() => {

@@ -53,6 +53,7 @@ export const Modal = ({ isOpen, closeModal, closeOnEsc, children }: PropsWithChi
       scrollLock.deactivate()
       trap.deactivate()
       console.error(err)
+
       return
     }
   }, [isOpen, scrollLock])

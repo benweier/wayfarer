@@ -22,6 +22,7 @@ export const Survey = ({
     onSuccess: (response, { shipSymbol }) => {
       const [survey] = response.data.surveys
       const cooldown = response.data.cooldown
+
       addSurvey(survey)
       setCooldown(shipSymbol, cooldown)
     },

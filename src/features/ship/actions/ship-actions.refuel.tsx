@@ -30,7 +30,6 @@ export const Refuel = ({
     },
     onSuccess: (response, { shipSymbol }, ctx) => {
       const fuel = response.data.fuel
-
       const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ctx?.ship) {

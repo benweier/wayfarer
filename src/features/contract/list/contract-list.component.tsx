@@ -21,7 +21,6 @@ const CloseModal = () => {
     </button>
   )
 }
-
 const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
   const client = useQueryClient()
   const acceptContract = useMutation({

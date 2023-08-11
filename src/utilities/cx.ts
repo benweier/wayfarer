@@ -8,6 +8,7 @@ function toVal(mix: ClassValue) {
 
   if (typeof mix === 'string' || typeof mix === 'number') {
     str += mix
+
     return str
   }
 

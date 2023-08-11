@@ -17,7 +17,6 @@ const SubmitPurchase = () => {
     </button>
   )
 }
-
 const SellPrice = ({ perUnit }: { perUnit: number }) => {
   const quantity = useWatch<{ quantity?: number }>({ name: 'quantity' }) ?? 0
 
@@ -39,7 +38,6 @@ export const SellCargoForm = ({ ship, good, onSubmit }: SellCargoFormProps) => {
     defaultValues: { ship: ship?.symbol, item: good.symbol },
     resolver: yupResolver(validation),
   })
-
   const getShipOption: ShipSelect.ShipReducer = useCallback(
     (ships, ship) => {
       const disabled = ship.cargo.inventory.findIndex((item) => item.symbol === good.symbol) === -1

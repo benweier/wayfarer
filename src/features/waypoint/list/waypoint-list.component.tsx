@@ -6,7 +6,6 @@ import { type WaypointListProps } from './waypoint-list.types'
 export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => {
   const system = useSystemResponse()
   const ships = useFleetResponse()
-
   const presence = new Set(ships.map((ship) => ship.nav.waypointSymbol))
 
   return (

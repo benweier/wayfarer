@@ -7,7 +7,6 @@ export const ShipList = () => {
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
   })
-
   const ships = data.data
 
   if (ships.length === 0) {

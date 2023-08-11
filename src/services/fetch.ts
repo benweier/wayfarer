@@ -4,6 +4,7 @@ export type QueryParams = Record<string, any> | null | undefined
 export type RequestPayload = Record<string, any> | null | undefined
 
 const DEFAULT_CREDENTIALS = 'same-origin'
+
 export const get = <T>(url: URL | RequestInfo, args: RequestInit = {}) => {
   return http<T>(url, { ...args, method: 'GET', credentials: DEFAULT_CREDENTIALS })
 }

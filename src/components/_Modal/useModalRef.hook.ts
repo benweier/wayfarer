@@ -3,7 +3,6 @@ import { type ModalRefType } from './modal.types.d'
 
 export const useModalRef = () => {
   const modalRef = useRef<ModalRefType>()
-
   const openModal = useCallback(() => {
     if (modalRef.current) modalRef.current.openModal()
   }, [])

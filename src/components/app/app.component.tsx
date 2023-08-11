@@ -43,13 +43,11 @@ Sentry.init({
 })
 
 const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouter(createBrowserRouter)
-
 const Loading = () => (
   <div className="flex h-screen w-screen animate-pulse items-center justify-center text-5xl font-black text-zinc-900/20 dark:text-zinc-500/40">
     <div>Wayfarer</div>
   </div>
 )
-
 const Core = () => {
   const { reset } = useQueryErrorResetBoundary()
 
@@ -83,7 +81,6 @@ const Core = () => {
     </Sentry.ErrorBoundary>
   )
 }
-
 const logout: ActionFunction = () => {
   const { actions } = getState()
 
@@ -91,13 +88,11 @@ const logout: ActionFunction = () => {
 
   return null
 }
-
 const NavigationLoader = () => {
   const navigation = useNavigation()
 
   return navigation.state !== 'idle' ? <span className="loader" /> : <></>
 }
-
 const router = sentryCreateBrowserRouter(
   createRoutesFromElements(
     <Route Component={Core}>
@@ -107,6 +102,7 @@ const router = sentryCreateBrowserRouter(
         path={ROUTES.LEADERBOARD}
         lazy={async () => {
           const leaderboard = await import('@/routes/leaderboard')
+
           return {
             Component: leaderboard.Layout,
           }
@@ -117,6 +113,7 @@ const router = sentryCreateBrowserRouter(
           index
           lazy={async () => {
             const leaderboard = await import('@/routes/leaderboard')
+
             return {
               Component: leaderboard.Route,
               loader: leaderboard.loader(client),
@@ -128,6 +125,7 @@ const router = sentryCreateBrowserRouter(
           path="agent/:agentSymbol"
           lazy={async () => {
             const agent = await import('@/routes/leaderboard/agent')
+
             return {
               Component: agent.Route,
               loader: agent.loader(client),
@@ -142,6 +140,7 @@ const router = sentryCreateBrowserRouter(
           path={ROUTES.LOGIN}
           lazy={async () => {
             const auth = await import('@/features/auth')
+
             return { Component: auth.Login }
           }}
           ErrorBoundary={RouteError}
@@ -150,6 +149,7 @@ const router = sentryCreateBrowserRouter(
           path={ROUTES.REGISTER}
           lazy={async () => {
             const auth = await import('@/features/auth')
+
             return { Component: auth.Register }
           }}
           ErrorBoundary={RouteError}
@@ -161,6 +161,7 @@ const router = sentryCreateBrowserRouter(
         <Route
           lazy={async () => {
             const dashboard = await import('@/routes/dashboard')
+
             return {
               Component: dashboard.Layout,
               loader: dashboard.loader(client),
@@ -175,6 +176,7 @@ const router = sentryCreateBrowserRouter(
               index
               lazy={async () => {
                 const contracts = await import('@/routes/contracts')
+
                 return {
                   Component: contracts.Route,
                   loader: contracts.loader(client),
@@ -186,6 +188,7 @@ const router = sentryCreateBrowserRouter(
               path=":contractID"
               lazy={async () => {
                 const contract = await import('src/routes/contracts/contract')
+
                 return {
                   Component: contract.Route,
                   loader: contract.loader(client),
@@ -200,6 +203,7 @@ const router = sentryCreateBrowserRouter(
               index
               lazy={async () => {
                 const systems = await import('@/routes/systems')
+
                 return {
                   Component: systems.Route,
                   loader: systems.loader(client),
@@ -212,6 +216,7 @@ const router = sentryCreateBrowserRouter(
                 index
                 lazy={async () => {
                   const system = await import('@/routes/systems/system')
+
                   return {
                     Component: system.Route,
                     loader: system.loader(client),
@@ -223,6 +228,7 @@ const router = sentryCreateBrowserRouter(
                 path="waypoint/:waypointSymbol"
                 lazy={async () => {
                   const waypoint = await import('@/routes/systems/waypoint')
+
                   return {
                     Component: waypoint.Route,
                     loader: waypoint.loader(client),
@@ -238,6 +244,7 @@ const router = sentryCreateBrowserRouter(
               index
               lazy={async () => {
                 const fleet = await import('@/routes/fleet')
+
                 return {
                   Component: fleet.Route,
                   loader: fleet.loader(client),
@@ -249,6 +256,7 @@ const router = sentryCreateBrowserRouter(
               path="ship/:shipSymbol"
               lazy={async () => {
                 const ship = await import('src/routes/fleet/ship')
+
                 return {
                   Component: ship.Route,
                   loader: ship.loader(client),

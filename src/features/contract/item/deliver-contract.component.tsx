@@ -19,7 +19,6 @@ export const DeliverContractForm = ({
   const methods = useForm<DeliverContractSchema>({
     resolver: yupResolver(validation),
   })
-
   const getShipOption: ShipSelect.ShipReducer = useCallback((ships, ship) => {
     return ships.set(ship.symbol, {
       ship,

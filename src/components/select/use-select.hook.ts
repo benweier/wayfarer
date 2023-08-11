@@ -8,7 +8,6 @@ type UseSelectOptions<T = string> = {
 
 export const useSelect = <T = string>(options: T[] = []): UseSelectOptions<T> => {
   const [selected, setSelected] = useState<T | undefined>()
-
   const onChange = useCallback((value?: T) => {
     setSelected(value)
   }, [])

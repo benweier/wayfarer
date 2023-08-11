@@ -11,6 +11,7 @@ const List = ({ ship }: { ship: ShipResponse }) => {
       .filter((survey) => survey.signature.includes(ship.nav.waypointSymbol))
       .filter((survey) => {
         const expiration = new Date(survey.expiration)
+
         return expiration.getTime() > Date.now()
       }),
     removeSurvey: state.removeSurvey,

@@ -34,7 +34,6 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
 
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', symbol])
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
-
       const index = ships?.data.findIndex((ship) => ship.symbol === symbol) ?? -1
 
       if (ship) client.setQueryData(['ship', symbol], updateShipNavStatus(ship, 'IN_ORBIT'))

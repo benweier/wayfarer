@@ -130,7 +130,6 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
     queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: ship.nav.systemSymbol }),
     queryFn: getWaypointListQuery.queryFn,
   })
-
   const waypoints = data.data
 
   return (

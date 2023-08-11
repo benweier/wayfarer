@@ -25,6 +25,7 @@ export const useShipSurveyStore = create<ShipSurveyStore>()(
       },
       removeSurvey: (signature) => {
         const index = get().surveys.findIndex((survey) => survey.signature === signature)
+
         set(
           produce((draft) => {
             if (index > -1) draft.surveys.splice(index, 1)
@@ -38,6 +39,7 @@ export const useShipSurveyStore = create<ShipSurveyStore>()(
       partialize: (state) => ({
         surveys: state.surveys.filter((survey) => {
           const expiration = new Date(survey.expiration)
+
           return expiration.getTime() > Date.now()
         }),
       }),

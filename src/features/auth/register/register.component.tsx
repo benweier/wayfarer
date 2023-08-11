@@ -26,7 +26,6 @@ const AlreadyRegistered = ({ token }: { token?: string }) => {
     </div>
   )
 }
-
 const FactionField = () => {
   const methods = useFormContext<RegisterSchema>()
   const { isSuccess, isPending, data } = useQuery({
@@ -81,7 +80,6 @@ export const Register = () => {
     mutationKey: createAgentMutation.getMutationKey(),
     mutationFn: createAgentMutation.mutationFn,
   })
-
   const agent = isSuccess ? data.data : undefined
 
   return (

@@ -24,6 +24,7 @@ export function useInOutTransition(value: boolean, duration: number, cb?: () => 
   useEffect(() => {
     if (isInitialRun.current) {
       isInitialRun.current = false
+
       return
     }
 
@@ -40,6 +41,7 @@ export function useInOutTransition(value: boolean, duration: number, cb?: () => 
     queueMicrotask(() => {
       startTransition(() => {
         const next = value ? TransitionStage.entering : TransitionStage.exiting
+
         setStage(next)
       })
     })
@@ -47,6 +49,7 @@ export function useInOutTransition(value: boolean, duration: number, cb?: () => 
     const final = setTimeout(() => {
       startTransition(() => {
         const next = value ? TransitionStage.entered : TransitionStage.exited
+
         cb?.()
         setStage(next)
       })

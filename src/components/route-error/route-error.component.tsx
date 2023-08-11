@@ -8,7 +8,6 @@ const messages: Record<number, string> = {
   [STATUS_CODES.UNPROCESSABLE_ENTITY]: STATUS_MESSAGES.UNPROCESSABLE_ENTITY,
   [STATUS_CODES.INTERNAL_SERVER_ERROR]: STATUS_MESSAGES.INTERNAL_SERVER_ERROR,
 }
-
 const isRouteErrorResponse = (error: any): error is Response => {
   return typeof error === 'object' && Object.hasOwn(error, 'status')
 }

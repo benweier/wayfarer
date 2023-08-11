@@ -35,6 +35,7 @@ export const Jump = ({
     },
     onSuccess: (response, { shipSymbol }, ctx) => {
       const cooldown = response.data.cooldown
+
       setCooldown(shipSymbol, cooldown)
 
       const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1

@@ -1,6 +1,5 @@
 export const relativeTime = (date: Date) => {
   const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
-
   const now = new Date().getTime()
   const diffMs = now - date.getTime()
   const diffSec = Math.floor(diffMs / 1000)

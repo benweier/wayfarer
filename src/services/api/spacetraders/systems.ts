@@ -14,7 +14,6 @@ const SYSTEM_QUERIES = {
   systemById: ({ systemSymbol }: { systemSymbol: string }) =>
     [{ scope: 'systems', entity: 'item' }, { systemSymbol }] as const,
 }
-
 const WAYPOINT_QUERIES = {
   waypointList: (args: { systemSymbol: string }, params?: { page?: number; limit?: number }) =>
     [{ scope: 'waypoints', entity: 'list' }, args, params] as const,
@@ -58,6 +57,7 @@ export const getSystemByIdQuery = {
   getQueryKey: SYSTEM_QUERIES.systemById,
   queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<SystemQueryKey<'systemById'>>) => {
     const url = new URL(`systems/${args.systemSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
     return get<SpaceTradersResponse<SystemsResponse>>(url, { signal, headers: createHeaders() })
   },
 }
@@ -80,6 +80,7 @@ export const getWaypointByIdQuery = {
       `systems/${args.systemSymbol}/waypoints/${args.waypointSymbol}`,
       import.meta.env.SPACETRADERS_API_BASE_URL,
     )
+
     return get<SpaceTradersResponse<WaypointResponse>>(url, { signal, headers: createHeaders() })
   },
 }
@@ -91,6 +92,7 @@ export const getWaypointMarketQuery = {
       `systems/${args.systemSymbol}/waypoints/${args.waypointSymbol}/market`,
       import.meta.env.SPACETRADERS_API_BASE_URL,
     )
+
     return get<SpaceTradersResponse<MarketResponse>>(url, { signal, headers: createHeaders() })
   },
 }
@@ -102,6 +104,7 @@ export const getWaypointShipyardQuery = {
       `systems/${args.systemSymbol}/waypoints/${args.waypointSymbol}/shipyard`,
       import.meta.env.SPACETRADERS_API_BASE_URL,
     )
+
     return get<SpaceTradersResponse<ShipyardResponse>>(url, { signal, headers: createHeaders() })
   },
 }
@@ -113,6 +116,7 @@ export const getWaypointJumpGateQuery = {
       `systems/${args.systemSymbol}/waypoints/${args.waypointSymbol}/jump-gate`,
       import.meta.env.SPACETRADERS_API_BASE_URL,
     )
+
     return get<SpaceTradersResponse<JumpGateResponse>>(url, { signal, headers: createHeaders() })
   },
 }

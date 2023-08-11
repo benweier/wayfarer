@@ -10,7 +10,6 @@ import { WaypointMarketLayout } from './waypoint-market.layout'
 export const WaypointMarketList = () => {
   const waypoint = useWaypointResponse()
   const [searchParams] = useSearchParams()
-
   const { data } = useSuspenseQuery({
     queryKey: getWaypointMarketQuery.getQueryKey({
       systemSymbol: waypoint.systemSymbol,
@@ -18,10 +17,10 @@ export const WaypointMarketList = () => {
     }),
     queryFn: getWaypointMarketQuery.queryFn,
   })
-
   const market = data.data
   const tradeGoods = market.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
     result.set(item.symbol, item)
+
     return result
   }, new Map())
   const sorter = makeSortByTradeAttributeFn(searchParams.get('sort'), tradeGoods)
