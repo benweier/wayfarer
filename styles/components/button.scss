@@ -2,6 +2,10 @@
   @apply rounded px-4 py-2 text-sm font-semibold leading-none border-2 border-transparent;
   @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-100 dark:focus:ring-offset-zinc-800;
   @apply disabled:cursor-not-allowed disabled:opacity-30 disabled:grayscale-50;
+
+  &.btn-disabled {
+    @apply cursor-not-allowed opacity-30 grayscale-50;
+  }
 }
 
 .btn-icon {

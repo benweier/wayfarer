@@ -65,13 +65,13 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
                     </span>
                   </button>
                 )
-              : (props) => (
-                  <button className="btn btn-icon" {...props} disabled>
+              : () => (
+                  <div className="btn btn-disabled btn-icon">
                     <ShipIcon id="pin" className="h-4 w-4" aria-hidden />
                     <span className="sr-only">
                       Ship {ship.symbol} is already at waypoint {waypoint.symbol}
                     </span>
-                  </button>
+                  </div>
                 )}
           </ShipActions.Navigate>
         </div>
