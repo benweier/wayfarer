@@ -1,12 +1,12 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import baseSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
-import { defineConfig } from 'vite'
+import { type PluginOption, defineConfig } from 'vite'
 import { warmup } from 'vite-plugin-warmup'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig(({ mode }) => {
-  const plugins = []
+  const plugins: PluginOption[] = []
 
   if (mode === 'development') {
     plugins.push(baseSSL())
