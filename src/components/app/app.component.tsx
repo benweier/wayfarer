@@ -187,7 +187,7 @@ const router = sentryCreateBrowserRouter(
             <Route
               path=":contractID"
               lazy={async () => {
-                const contract = await import('src/routes/contracts/contract')
+                const contract = await import('@/routes/contracts/contract')
 
                 return {
                   Component: contract.Route,
@@ -255,7 +255,7 @@ const router = sentryCreateBrowserRouter(
             <Route
               path="ship/:shipSymbol"
               lazy={async () => {
-                const ship = await import('src/routes/fleet/ship')
+                const ship = await import('@/routes/fleet/ship')
 
                 return {
                   Component: ship.Route,
