@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
       https: true,
       open: true,
     },
-    envPrefix: ['SENTRY_', 'SPACETRADERS_'],
+    envPrefix: ['SENTRY_', 'SPACETRADERS_', 'REACT_'],
     test: {
       globals: true,
       environment: 'happy-dom',
