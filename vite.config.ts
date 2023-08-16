@@ -1,5 +1,5 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin'
-import baseSSL from '@vitejs/plugin-basic-ssl'
+import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
 import { type PluginOption, defineConfig } from 'vite'
 import { warmup } from 'vite-plugin-warmup'
@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   const plugins: PluginOption[] = []
 
   if (mode === 'development') {
-    plugins.push(baseSSL())
+    plugins.push(basicSSL())
     plugins.push(warmup({ clientFiles: ['./index.html'] }))
   }
 
