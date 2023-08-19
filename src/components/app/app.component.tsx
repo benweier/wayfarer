@@ -29,6 +29,7 @@ Sentry.init({
   dsn: import.meta.env.SENTRY_DSN,
   enabled: import.meta.env.PROD,
   integrations: [
+    new Sentry.BrowserProfilingIntegration(),
     new Sentry.BrowserTracing({
       routingInstrumentation: Sentry.reactRouterV6Instrumentation(
         useEffect,
@@ -39,7 +40,7 @@ Sentry.init({
       ),
     }),
   ],
-  tracesSampleRate: 1,
+  tracesSampleRate: 0.1,
 })
 
 const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouter(createBrowserRouter)
