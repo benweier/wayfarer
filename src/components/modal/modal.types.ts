@@ -8,9 +8,10 @@ export type ModalProps = {
   onClose?: () => void
   size?: DialogSize
   closeable?: boolean
+  disableExternalClose?: boolean
 }
 
-export type ModalDialogProps = { size?: DialogSize; closeable?: boolean }
+export type ModalDialogProps = { size?: DialogSize; closeable?: boolean; disableExternalClose?: boolean }
 
 export type ModalImperativeRef = {
   openModal: () => void

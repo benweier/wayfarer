@@ -5,7 +5,12 @@ import { cx } from '@/utilities/cx'
 import { type ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
 
-export const Root = ({ size = 'auto', closeable = false, children }: PropsWithChildren<ModalDialogProps>) => {
+export const Root = ({
+  size = 'auto',
+  closeable = false,
+  disableExternalClose = false,
+  children,
+}: PropsWithChildren<ModalDialogProps>) => {
   const { show, handleClose } = useModalContext((state) => ({
     show: state.isOpen,
     handleClose: state.actions.closeModal,
@@ -13,7 +18,15 @@ export const Root = ({ size = 'auto', closeable = false, children }: PropsWithCh
 
   return (
     <Transition appear show={show} as={Fragment} static>
-      <Dialog as="div" className="relative z-10" onClose={handleClose}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        static
+        onClose={() => {
+          if (disableExternalClose) return
+          handleClose()
+        }}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-150"
