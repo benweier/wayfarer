@@ -16,6 +16,7 @@ import {
   useNavigationType,
 } from 'react-router-dom'
 import { NotFound } from '@/components/not-found'
+import { OverlayOutlet } from '@/components/overlay-outlet'
 import { RouteError } from '@/components/route-error'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
@@ -105,7 +106,7 @@ const router = sentryCreateBrowserRouter(
           const leaderboard = await import('@/routes/leaderboard')
 
           return {
-            Component: leaderboard.Layout,
+            element: <leaderboard.Layout />,
           }
         }}
         ErrorBoundary={RouteError}
@@ -116,7 +117,7 @@ const router = sentryCreateBrowserRouter(
             const leaderboard = await import('@/routes/leaderboard')
 
             return {
-              Component: leaderboard.Route,
+              element: <leaderboard.Route />,
               loader: leaderboard.loader(client),
             }
           }}
@@ -128,7 +129,7 @@ const router = sentryCreateBrowserRouter(
             const agent = await import('@/routes/leaderboard/agent')
 
             return {
-              Component: agent.Route,
+              element: <agent.Route />,
               loader: agent.loader(client),
             }
           }}
@@ -142,7 +143,7 @@ const router = sentryCreateBrowserRouter(
           lazy={async () => {
             const auth = await import('@/features/auth')
 
-            return { Component: auth.Login }
+            return { element: <auth.Login /> }
           }}
           ErrorBoundary={RouteError}
         />
@@ -151,7 +152,7 @@ const router = sentryCreateBrowserRouter(
           lazy={async () => {
             const auth = await import('@/features/auth')
 
-            return { Component: auth.Register }
+            return { element: <auth.Register /> }
           }}
           ErrorBoundary={RouteError}
         />
@@ -164,7 +165,7 @@ const router = sentryCreateBrowserRouter(
             const dashboard = await import('@/routes/dashboard')
 
             return {
-              Component: dashboard.Layout,
+              element: <dashboard.Layout />,
               loader: dashboard.loader(client),
             }
           }}
@@ -179,7 +180,7 @@ const router = sentryCreateBrowserRouter(
                 const contracts = await import('@/routes/contracts')
 
                 return {
-                  Component: contracts.Route,
+                  element: <contracts.Route />,
                   loader: contracts.loader(client),
                 }
               }}
@@ -191,7 +192,7 @@ const router = sentryCreateBrowserRouter(
                 const contract = await import('@/routes/contracts/contract')
 
                 return {
-                  Component: contract.Route,
+                  element: <contract.Route />,
                   loader: contract.loader(client),
                 }
               }}
@@ -206,7 +207,7 @@ const router = sentryCreateBrowserRouter(
                 const systems = await import('@/routes/systems')
 
                 return {
-                  Component: systems.Route,
+                  element: <systems.Route />,
                   loader: systems.loader(client),
                 }
               }}
@@ -219,7 +220,7 @@ const router = sentryCreateBrowserRouter(
                   const system = await import('@/routes/systems/system')
 
                   return {
-                    Component: system.Route,
+                    element: <system.Route />,
                     loader: system.loader(client),
                   }
                 }}
@@ -231,7 +232,7 @@ const router = sentryCreateBrowserRouter(
                   const waypoint = await import('@/routes/systems/waypoint')
 
                   return {
-                    Component: waypoint.Route,
+                    element: <waypoint.Route />,
                     loader: waypoint.loader(client),
                   }
                 }}
@@ -247,7 +248,7 @@ const router = sentryCreateBrowserRouter(
                 const fleet = await import('@/routes/fleet')
 
                 return {
-                  Component: fleet.Route,
+                  element: <fleet.Route />,
                   loader: fleet.loader(client),
                 }
               }}
@@ -259,12 +260,17 @@ const router = sentryCreateBrowserRouter(
                 const ship = await import('@/routes/fleet/ship')
 
                 return {
-                  Component: ship.Route,
+                  element: <ship.Route />,
                   loader: ship.loader(client),
                 }
               }}
               ErrorBoundary={RouteError}
-            />
+            >
+              <Route element={<OverlayOutlet isOpen size="lg" closeable disableExternalClose />}>
+                <Route path="market" element={<>Ship Market</>} ErrorBoundary={RouteError} />
+                <Route path="mounts" element={<>Ship Mounts</>} ErrorBoundary={RouteError} />
+              </Route>
+            </Route>
           </Route>
         </Route>
       </Route>
