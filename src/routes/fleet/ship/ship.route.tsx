@@ -1,10 +1,9 @@
-import { Outlet, useNavigate, useParams } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
 import { ShipStore } from '@/context/ship.context'
 import { ShipDetail } from '@/features/ship/detail'
 
 const ShipRouteComponent = () => {
-  const navigate = useNavigate()
   const { shipSymbol } = useParams()
 
   return (
@@ -19,20 +18,12 @@ const ShipRouteComponent = () => {
           <QuerySuspenseBoundary>
             <ShipStore shipSymbol={shipSymbol}>
               <ShipDetail />
+
+              <Outlet />
             </ShipStore>
           </QuerySuspenseBoundary>
         )}
       </div>
-
-      {shipSymbol && (
-        <Outlet
-          context={{
-            onOverlayClose: () => {
-              navigate(`/fleet/ship/${shipSymbol}`)
-            },
-          }}
-        />
-      )}
     </div>
   )
 }
