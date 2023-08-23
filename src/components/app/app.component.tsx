@@ -16,7 +16,6 @@ import {
   useNavigationType,
 } from 'react-router-dom'
 import { NotFound } from '@/components/not-found'
-import { OverlayOutlet } from '@/components/overlay-outlet'
 import { RouteError } from '@/components/route-error'
 import { ROUTES } from '@/config/routes'
 import { useLocation } from '@/hooks/use-location.hook'
@@ -266,9 +265,38 @@ const router = sentryCreateBrowserRouter(
               }}
               ErrorBoundary={RouteError}
             >
-              <Route element={<OverlayOutlet isOpen size="lg" closeable disableExternalClose />}>
-                <Route path="market" element={<>Ship Market</>} ErrorBoundary={RouteError} />
-                <Route path="mounts" element={<>Ship Mounts</>} ErrorBoundary={RouteError} />
+              <Route
+                lazy={async () => {
+                  const overlay = await import('@/routes/fleet/ship/overlay')
+
+                  return {
+                    element: <overlay.Route isOpen size="lg" closeable disableExternalClose />,
+                  }
+                }}
+              >
+                <Route
+                  path="market"
+                  lazy={async () => {
+                    const market = await import('@/routes/fleet/ship/market')
+
+                    return {
+                      element: <market.Route />,
+                      loader: market.loader(client),
+                    }
+                  }}
+                  ErrorBoundary={RouteError}
+                />
+                <Route
+                  path="mounts"
+                  lazy={async () => {
+                    const mounts = await import('@/routes/fleet/ship/mounts')
+
+                    return {
+                      element: <mounts.Route />,
+                    }
+                  }}
+                  ErrorBoundary={RouteError}
+                />
               </Route>
             </Route>
           </Route>
