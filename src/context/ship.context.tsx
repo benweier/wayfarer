@@ -7,12 +7,12 @@ export type ShipStoreProps = {
   shipSymbol: string
 }
 
-const ShipStoreContext = createContext<ShipResponse | null>(null)
+export const ShipContext = createContext<ShipResponse | undefined>(undefined)
 
 export const useShipResponse = () => {
-  const ship = useContext(ShipStoreContext)
+  const ship = useContext(ShipContext)
 
-  if (!ship) throw new Error('ShipStoreContext is missing a ship value.')
+  if (!ship) throw new Error('ShipContext is missing a ship value.')
 
   return ship
 }
@@ -23,5 +23,5 @@ export const ShipStore = ({ shipSymbol, children }: PropsWithChildren<ShipStoreP
     queryFn: getShipByIdQuery.queryFn,
   })
 
-  return <ShipStoreContext.Provider value={data.data}>{children}</ShipStoreContext.Provider>
+  return <ShipContext.Provider value={data.data}>{children}</ShipContext.Provider>
 }
