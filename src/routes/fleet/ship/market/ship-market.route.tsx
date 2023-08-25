@@ -1,7 +1,12 @@
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
 import { WaypointStore } from '@/context/waypoint.context'
-import { WaypointMarketList } from '@/features/waypoint/market'
+import {
+  WaypointMarketError,
+  WaypointMarketFallback,
+  WaypointMarketList,
+  WaypointMarketPreferences,
+} from '@/features/waypoint/market'
 
 const ShipMarketRouteComponent = () => {
   const ship = useShipResponse()
@@ -14,11 +19,15 @@ const ShipMarketRouteComponent = () => {
         </h1>
       </div>
       <div className="grid gap-12">
-        <QuerySuspenseBoundary>
-          <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
-            <WaypointMarketList />
-          </WaypointStore>
-        </QuerySuspenseBoundary>
+        <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
+          <div className="space-y-4">
+            <WaypointMarketPreferences />
+
+            <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={WaypointMarketError}>
+              <WaypointMarketList />
+            </QuerySuspenseBoundary>
+          </div>
+        </WaypointStore>
       </div>
     </div>
   )
