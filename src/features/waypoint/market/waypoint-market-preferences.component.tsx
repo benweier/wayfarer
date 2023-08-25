@@ -72,7 +72,7 @@ const WaypointMarketRefresh = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="text-secondary text-right text-sm">
+      <div className="text-secondary text-right text-xs">
         {isFetching ? '...' : `Last updated ${relativeTime(new Date(state.dataUpdatedAt))}`}
       </div>
       <button
@@ -97,7 +97,7 @@ export const WaypointMarketPreferences = () => {
   const [showDescription, setShowDescription] = useAtom(marketDescriptionAtom)
 
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className="flex items-end justify-between gap-4">
       <WaypointMarketSortBy />
 
       <div className="flex items-center justify-end gap-4">
