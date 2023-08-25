@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useContext } from 'react'
 import { TradeGood } from '@/components/market/trade-good'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { TRADE_SYMBOL } from '@/config/constants'
+import { ShipContext } from '@/context/ship.context'
 import { updateShipCargo, updateShipInFleetCargo } from '@/features/ship/actions'
 import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
@@ -20,6 +22,7 @@ export const PurchaseCargo = ({
 }: PurchaseCargoProps) => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore((state) => state.actions)
+  const ship = useContext(ShipContext)
   const client = useQueryClient()
   const { mutateAsync } = useMutation({
     mutationKey: createShipCargoPurchaseMutation.getMutationKey(),
@@ -71,6 +74,7 @@ export const PurchaseCargo = ({
         <TradeGood price={good.purchasePrice} volume={good.tradeVolume} supply={good.supply} />
 
         <PurchaseCargoForm
+          ship={ship}
           good={good}
           onSubmit={(values) =>
             mutateAsync({

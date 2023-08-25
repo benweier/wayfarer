@@ -1,5 +1,5 @@
 import { type ButtonHTMLAttributes, type ReactNode } from 'react'
-import { type MarketTradeGood } from '@/types/spacetraders'
+import { type MarketTradeGood, type ShipResponse } from '@/types/spacetraders'
 import { type PurchaseCargoSchema } from './purchase.validation'
 
 export type PurchaseCargoProps = {
@@ -8,6 +8,7 @@ export type PurchaseCargoProps = {
 }
 
 export type PurchaseCargoFormProps = {
+  ship?: ShipResponse
   good: MarketTradeGood
   onSubmit: (values: PurchaseCargoSchema) => void
 }

@@ -5,7 +5,7 @@ import { type PurchaseCargoFormProps } from '@/components/market/purchase-cargo/
 import { type PurchaseCargoSchema, validation } from '@/components/market/purchase-cargo/purchase.validation'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipSelect from '@/components/ship/select.component'
-import { useWaypointContext } from '@/context/waypoint.context'
+import { useWaypointResponse } from '@/context/waypoint.context'
 import { useAuthStore } from '@/store/auth'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
@@ -45,10 +45,10 @@ const PurchaseCargoPrice = ({ perUnit }: { perUnit: number }) => {
   )
 }
 
-export const PurchaseCargoForm = ({ good, onSubmit }: PurchaseCargoFormProps) => {
-  const { waypointSymbol } = useWaypointContext()
+export const PurchaseCargoForm = ({ ship, good, onSubmit }: PurchaseCargoFormProps) => {
+  const waypoint = useWaypointResponse()
   const methods = useForm<PurchaseCargoSchema>({
-    defaultValues: { item: good.symbol },
+    defaultValues: { ship: ship?.symbol, item: good.symbol },
     resolver: yupResolver(validation),
     context: { good },
   })
@@ -80,23 +80,25 @@ export const PurchaseCargoForm = ({ good, onSubmit }: PurchaseCargoFormProps) =>
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="grid gap-8">
-        <Controller
-          control={methods.control}
-          name="ship"
-          render={({ field }) => (
-            <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
-              <ShipSelect.Field
-                getShipOption={getShipOption}
-                onChange={(value) => {
-                  if (value) field.onChange(value.symbol)
-                }}
-                select={(response) => ({
-                  ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointSymbol),
-                })}
-              />
-            </QuerySuspenseBoundary>
-          )}
-        />
+        {ship === undefined && (
+          <Controller
+            control={methods.control}
+            name="ship"
+            render={({ field }) => (
+              <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
+                <ShipSelect.Field
+                  getShipOption={getShipOption}
+                  onChange={(value) => {
+                    if (value) field.onChange(value.symbol)
+                  }}
+                  select={(response) => ({
+                    ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
+                  })}
+                />
+              </QuerySuspenseBoundary>
+            )}
+          />
+        )}
 
         <div>
           <label className="label">Quantity</label>
