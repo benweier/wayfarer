@@ -53,7 +53,7 @@ export const SellCargoForm = ({ ship, good, onSubmit }: SellCargoFormProps) => {
           <div className="flex items-baseline gap-2">
             <span className="font-bold">{ship.symbol}</span>
             <span className="text-secondary">
-              ({TRADE_SYMBOL.get(good.symbol) ?? good.symbol}: {count})
+              ({TRADE_SYMBOL.get(good.symbol)}: {count})
             </span>
           </div>
         ),
@@ -61,7 +61,7 @@ export const SellCargoForm = ({ ship, good, onSubmit }: SellCargoFormProps) => {
           <div className="flex flex-col">
             <div className="font-semibold">{ship.symbol}</div>
             <div className="text-secondary text-xs">
-              {TRADE_SYMBOL.get(good.symbol) ?? good.symbol}: {count}
+              {TRADE_SYMBOL.get(good.symbol)}: {count}
             </div>
           </div>
         ),

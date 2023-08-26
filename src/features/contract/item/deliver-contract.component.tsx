@@ -63,7 +63,7 @@ export const DeliverContractForm = ({
             render={({ field }) => (
               <Select.Field
                 label={<Select.Label>Item</Select.Label>}
-                by={(a, z) => a.symbol === z.symbol}
+                by={(a, z) => a?.symbol === z?.symbol}
                 onChange={(value) => {
                   if (value) field.onChange(value.symbol)
                 }}

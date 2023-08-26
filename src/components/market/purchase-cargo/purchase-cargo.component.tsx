@@ -68,7 +68,7 @@ export const PurchaseCargo = ({
     >
       <div className="grid gap-8">
         <div className="text-title">
-          Buy: <span className="font-light">{TRADE_SYMBOL.get(good.symbol) ?? good.symbol}</span>
+          Buy: <span className="font-light">{TRADE_SYMBOL.get(good.symbol)}</span>
         </div>
 
         <TradeGood price={good.purchasePrice} volume={good.tradeVolume} supply={good.supply} />

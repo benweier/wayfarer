@@ -35,7 +35,7 @@ const List = ({ ship }: { ship: ShipResponse }) => {
             <div className="grid grid-cols-2 gap-2">
               {survey.deposits.map((deposit, index) => (
                 <div key={index} className="text-sm">
-                  {TRADE_SYMBOL.get(deposit.symbol) ?? deposit.symbol}
+                  {TRADE_SYMBOL.get(deposit.symbol)}
                 </div>
               ))}
             </div>

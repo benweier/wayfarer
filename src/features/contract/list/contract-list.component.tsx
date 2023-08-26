@@ -50,7 +50,7 @@ const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
             <div className="text-title">Accept Contract</div>
             <div className="flex gap-2">
               <div className="text-secondary text-sm">{contract.id}</div>
-              <Badge>{CONTRACT_TYPE.get(contract.type) ?? contract.type}</Badge>
+              <Badge>{CONTRACT_TYPE.get(contract.type)}</Badge>
             </div>
           </div>
           <div className="grid gap-2"></div>

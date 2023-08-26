@@ -45,14 +45,14 @@ export const ContractItem = ({ contract, children }: PropsWithChildren<ContractI
             </div>
             <div>
               <div className="text-secondary text-xs font-medium uppercase">Type</div>
-              <div className="text-sm">{CONTRACT_TYPE.get(contract.type) ?? contract.type}</div>
+              <div className="text-sm">{CONTRACT_TYPE.get(contract.type)}</div>
             </div>
             {contract.type === 'PROCUREMENT' && (
               <div>
                 <div className="text-secondary text-xs font-medium uppercase">Deliver</div>
                 {contract.terms.deliver.map((delivery) => (
                   <div key={delivery.tradeSymbol} className="text-sm">
-                    {TRADE_SYMBOL.get(delivery.tradeSymbol) ?? delivery.tradeSymbol} x{delivery.unitsRequired}
+                    {TRADE_SYMBOL.get(delivery.tradeSymbol)} x{delivery.unitsRequired}
                   </div>
                 ))}
               </div>

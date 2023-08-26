@@ -139,7 +139,7 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
           <div>
             <div className="font-semibold">{waypoint.symbol}</div>
             <div className="flex flex-row gap-2">
-              <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</WaypointTag>
+              <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type)}</WaypointTag>
               <div className="text-xs font-light">
                 ({waypoint.x}, {waypoint.y})
               </div>

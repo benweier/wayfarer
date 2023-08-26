@@ -13,7 +13,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
     <div className="grid gap-4">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row flex-wrap items-center justify-start gap-x-4 gap-y-2">
-          <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type) ?? waypoint.type}</WaypointTag>
+          <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type)}</WaypointTag>
           <div className="text-sm font-light">
             ({waypoint.x}, {waypoint.y})
           </div>

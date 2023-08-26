@@ -101,7 +101,7 @@ export const List = () => {
     <Layout>
       {inventory.map((item) => {
         const produce = REFINE_ITEM_TYPE.get(item.symbol)
-        const good = data.market.has(item.symbol) ? data.goods?.get(item.symbol) : undefined
+        const good = data.goods?.get(item.symbol)
 
         return (
           <Fragment key={item.symbol}>
