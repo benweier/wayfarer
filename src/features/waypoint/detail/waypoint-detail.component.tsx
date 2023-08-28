@@ -32,11 +32,9 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
         </div>
       </div>
 
-      {children && (
-        <SystemContext.Provider value={{ systemSymbol: waypoint.systemSymbol }}>
-          <WaypointContext.Provider value={{ waypointSymbol: waypoint.symbol }}>{children}</WaypointContext.Provider>
-        </SystemContext.Provider>
-      )}
+      <SystemContext.Provider value={{ systemSymbol: waypoint.systemSymbol }}>
+        <WaypointContext.Provider value={{ waypointSymbol: waypoint.symbol }}>{children}</WaypointContext.Provider>
+      </SystemContext.Provider>
     </div>
   )
 }
