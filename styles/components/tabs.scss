@@ -3,7 +3,7 @@
 }
 
 .tab-list {
-  @apply isolate flex divide-x divide-zinc-200 rounded border border-zinc-200 dark:divide-zinc-700 dark:border-zinc-700;
+  @apply isolate flex rounded border border-zinc-200 dark:border-zinc-700;
 }
 
 .tab {
