@@ -1,17 +1,14 @@
-import { Tab } from '@headlessui/react'
+import { type PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { Inventory, Loadout, Survey } from '@/components/ship'
-import * as Cargo from '@/components/ship/cargo'
+import { Inventory } from '@/components/ship'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipTransit } from '@/features/ship/transit'
-import { cx } from '@/utilities/cx'
 import { ShipDetailRefresh } from './ship-detail-refresh.component'
 
-export const ShipDetail = () => {
+export const ShipDetail = ({ children }: PropsWithChildren) => {
   const ship = useShipResponse()
 
   return (
@@ -79,37 +76,7 @@ export const ShipDetail = () => {
 
       <ShipTransit nav={ship.nav} />
 
-      <Tab.Group as="div" className="tab-group">
-        <Tab.List className="tab-list">
-          <Tab className={({ selected }) => cx('group tab', { selected: selected })}>Cargo</Tab>
-          <Tab className={({ selected }) => cx('group tab', { selected: selected })}>Survey/Extract</Tab>
-          <Tab className={({ selected }) => cx('group tab', { selected: selected })}>Loadout</Tab>
-        </Tab.List>
-
-        <Tab.Panels>
-          <Tab.Panel>
-            <div className="grid gap-4">
-              <Cargo.Preferences />
-
-              <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={Cargo.Error}>
-                <Cargo.List />
-              </QuerySuspenseBoundary>
-            </div>
-          </Tab.Panel>
-
-          <Tab.Panel>
-            <QuerySuspenseBoundary fallback={<></>}>
-              <Survey />
-            </QuerySuspenseBoundary>
-          </Tab.Panel>
-
-          <Tab.Panel>
-            <QuerySuspenseBoundary fallback={<></>}>
-              <Loadout />
-            </QuerySuspenseBoundary>
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+      {children}
     </div>
   )
 }
