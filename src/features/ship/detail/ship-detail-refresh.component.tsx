@@ -27,7 +27,7 @@ export const ShipDetailRefresh = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="text-secondary text-right text-sm">
+      <div className="text-secondary text-right text-xs">
         {isFetching ? '...' : `Last updated ${relativeTime(new Date(state.dataUpdatedAt))}`}
       </div>
       <button
