@@ -7,6 +7,8 @@ import { ShipTabs } from '@/features/ship/tabs'
 const ShipRouteComponent = () => {
   const { shipSymbol } = useParams()
 
+  if (!shipSymbol) return null
+
   return (
     <div className="grid gap-4 p-4">
       <div className="flex items-center justify-start gap-6">
@@ -15,17 +17,15 @@ const ShipRouteComponent = () => {
         </h1>
       </div>
       <div className="grid gap-12">
-        {shipSymbol !== undefined && (
-          <QuerySuspenseBoundary>
-            <ShipStore shipSymbol={shipSymbol}>
-              <ShipDetail>
-                <ShipTabs />
-              </ShipDetail>
+        <QuerySuspenseBoundary>
+          <ShipStore shipSymbol={shipSymbol}>
+            <ShipDetail>
+              <ShipTabs />
+            </ShipDetail>
 
-              <Outlet />
-            </ShipStore>
-          </QuerySuspenseBoundary>
-        )}
+            <Outlet />
+          </ShipStore>
+        </QuerySuspenseBoundary>
       </div>
     </div>
   )
