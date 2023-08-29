@@ -1,10 +1,14 @@
+import { Tab } from '@headlessui/react'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Loadout, Survey } from '@/components/ship'
 import * as Cargo from '@/components/ship/cargo'
+import { useShipResponse } from '@/context/ship.context'
+import { WaypointStore } from '@/context/waypoint.context'
 import { cx } from '@/utilities/cx'
-import { Tab } from '@headlessui/react'
 
 export const ShipTabs = () => {
+  const ship = useShipResponse()
+
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
@@ -19,7 +23,9 @@ export const ShipTabs = () => {
             <Cargo.Preferences />
 
             <QuerySuspenseBoundary fallback={<Cargo.Fallback />} error={Cargo.Error}>
-              <Cargo.List />
+              <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
+                <Cargo.List />
+              </WaypointStore>
             </QuerySuspenseBoundary>
           </div>
         </Tab.Panel>
