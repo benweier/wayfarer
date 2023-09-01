@@ -6,8 +6,9 @@ import { type MarketTradeGood } from '@/types/spacetraders'
 import { WaypointMarketItem } from './waypoint-market-item.component'
 import { makeSortByTradeAttributeFn } from './waypoint-market-preferences.utilities'
 import { WaypointMarketLayout } from './waypoint-market.layout'
+import { type WaypointMarketListProps } from './waypoint-market.types'
 
-export const WaypointMarketList = () => {
+export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarketListProps) => {
   const waypoint = useWaypointResponse()
   const [searchParams] = useSearchParams()
   const { data } = useSuspenseQuery({
@@ -39,7 +40,7 @@ export const WaypointMarketList = () => {
           {market.imports.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return <WaypointMarketItem key={item.symbol} item={item} trade={good} />
+            return <Item key={item.symbol} item={item} trade={good} />
           })}
         </>
       }
@@ -55,7 +56,7 @@ export const WaypointMarketList = () => {
           {market.exports.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return <WaypointMarketItem key={item.symbol} item={item} trade={good} />
+            return <Item key={item.symbol} item={item} trade={good} />
           })}
         </>
       }
@@ -71,7 +72,7 @@ export const WaypointMarketList = () => {
           {market.exchange.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return <WaypointMarketItem key={item.symbol} item={item} trade={good} />
+            return <Item key={item.symbol} item={item} trade={good} />
           })}
         </>
       }
