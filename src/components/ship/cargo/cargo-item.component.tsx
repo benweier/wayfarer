@@ -4,7 +4,7 @@ import { cargoDescriptionAtom } from '@/store/atoms/cargo.display'
 import { cx } from '@/utilities/cx'
 import { type CargoItemProps } from './cargo-item.types'
 
-export const Item = ({ item, children }: PropsWithChildren<CargoItemProps>) => {
+export const CargoItem = ({ item, children }: PropsWithChildren<CargoItemProps>) => {
   const [cargoDescription] = useAtom(cargoDescriptionAtom)
 
   return (

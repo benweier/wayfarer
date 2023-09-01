@@ -10,7 +10,7 @@ import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
-import { Item } from './cargo-item.component'
+import { CargoItem } from './cargo-item.component'
 import { Layout } from './cargo.layout'
 
 const JettisonCargo = ({ item }: { item: CargoInventory }) => {
@@ -105,7 +105,7 @@ export const List = () => {
 
         return (
           <Fragment key={item.symbol}>
-            <Item item={item}>
+            <CargoItem item={item}>
               <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
                 {produce && <ShipActions.Refine ship={ship} produce={produce} />}
                 {!!good && (
@@ -124,7 +124,7 @@ export const List = () => {
                 )}
                 <JettisonCargo item={item} />
               </div>
-            </Item>
+            </CargoItem>
           </Fragment>
         )
       })}
