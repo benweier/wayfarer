@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { AppIcon } from '@/components/icons'
 import { SellCargo } from '@/components/market/sell-cargo'
@@ -6,7 +6,7 @@ import { Modal, useModalActions } from '@/components/modal'
 import { REFINE_ITEM_TYPE } from '@/config/constants'
 import { useShipResponse } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
-import { WaypointContext } from '@/context/waypoint.context'
+import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
@@ -65,7 +65,9 @@ const CancelModal = () => {
 
 export const List = () => {
   const ship = useShipResponse()
-  const { data } = useSuspenseQuery({
+  const waypoint = useWaypointResponse()
+  const hasMarketplace = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
+  const { data } = useQuery({
     queryKey: getWaypointMarketQuery.getQueryKey({
       systemSymbol: ship.nav.systemSymbol,
       waypointSymbol: ship.nav.waypointSymbol,
@@ -84,6 +86,7 @@ export const List = () => {
         goods,
       }
     },
+    enabled: hasMarketplace,
   })
   const inventory = ship.cargo.inventory
 
@@ -101,14 +104,14 @@ export const List = () => {
     <Layout>
       {inventory.map((item) => {
         const produce = REFINE_ITEM_TYPE.get(item.symbol)
-        const good = data.goods?.get(item.symbol)
+        const good = data?.goods?.get(item.symbol)
 
         return (
           <Fragment key={item.symbol}>
             <CargoItem item={item}>
               <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
                 {produce && <ShipActions.Refine ship={ship} produce={produce} />}
-                {!!good && (
+                {good !== undefined && (
                   <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
                     <WaypointContext.Provider value={{ waypointSymbol: ship.nav.waypointSymbol }}>
                       <SellCargo
