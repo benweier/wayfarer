@@ -2,8 +2,9 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipItem } from '@/features/ship/item'
 import { getShipListQuery } from '@/services/api/spacetraders'
+import { type WaypointFleetListProps } from './waypoint-fleet-list.types'
 
-export const WaypointFleetList = () => {
+export const WaypointFleetList = ({ Item = ShipItem }: WaypointFleetListProps) => {
   const waypoint = useWaypointResponse()
   const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
@@ -30,7 +31,7 @@ export const WaypointFleetList = () => {
   return (
     <div className="grid grid-cols-1 gap-2">
       {ships.map((ship) => (
-        <ShipItem key={ship.symbol} ship={ship} />
+        <Item key={ship.symbol} ship={ship} />
       ))}
     </div>
   )
