@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { startTransition, useEffect, useMemo, useState } from 'react'
 import { updateShipInFleetNavStatus, updateShipNavStatus } from '@/features/ship/actions'
+import { getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 
@@ -29,15 +30,20 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
 
   useEffect(() => {
     if (remainingSeconds === 0 && nav.status === 'IN_TRANSIT') {
-      void client.cancelQueries({ queryKey: ['ships'] })
-      void client.cancelQueries({ queryKey: ['ship', symbol] })
+      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', symbol])
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(
+        getShipByIdQuery.getQueryKey({ shipSymbol: symbol }),
+      )
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
       const index = ships?.data.findIndex((ship) => ship.symbol === symbol) ?? -1
 
-      if (ship) client.setQueryData(['ship', symbol], updateShipNavStatus(ship, 'IN_ORBIT'))
-      if (ships && index > -1) client.setQueryData(['ships'], updateShipInFleetNavStatus(ships, index, 'IN_ORBIT'))
+      if (ship) {
+        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol: symbol }), updateShipNavStatus(ship, 'IN_ORBIT'))
+      }
+      if (ships && index !== -1) {
+        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetNavStatus(ships, index, 'IN_ORBIT'))
+      }
     }
   }, [client, nav.status, remainingSeconds, symbol])
 
