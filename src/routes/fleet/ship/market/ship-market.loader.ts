@@ -33,7 +33,7 @@ export const loader: QueryClientLoaderFn =
       })
 
       if (waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') === -1) {
-        return defer({ ship, waypoint })
+        return redirect(`/fleet/ship/${shipSymbol}`)
       }
 
       const market = client.ensureQueryData({
