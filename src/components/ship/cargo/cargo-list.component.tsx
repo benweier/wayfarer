@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AppIcon } from '@/components/icons'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { Modal, useModalActions } from '@/components/modal'
@@ -64,6 +65,7 @@ const CancelModal = () => {
 }
 
 export const List = () => {
+  const navigate = useNavigate()
   const ship = useShipResponse()
   const waypoint = useWaypointResponse()
   const hasMarketplace = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
@@ -92,9 +94,20 @@ export const List = () => {
 
   if (!inventory.length) {
     return (
-      <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+      <div className="flex flex-col gap-2 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
         <div className="text-secondary text-center text-sm">
           <span className="font-bold">{ship.symbol}</span> has no cargo
+        </div>
+        <div className="text-center">
+          <button
+            className="btn btn-primary"
+            disabled={!hasMarketplace}
+            onClick={() => {
+              navigate(`/fleet/ship/${ship.symbol}/market`)
+            }}
+          >
+            View Market
+          </button>
         </div>
       </div>
     )
@@ -117,7 +130,7 @@ export const List = () => {
                       <SellCargo
                         good={good}
                         action={(props) => (
-                          <button className="btn btn-flat btn-confirm btn-sm" {...props}>
+                          <button className="btn btn-confirm btn-flat btn-sm" {...props}>
                             Sell {`(${good.sellPrice})`}
                           </button>
                         )}
