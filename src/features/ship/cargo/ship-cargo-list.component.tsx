@@ -11,8 +11,9 @@ import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
-import { CargoItem } from './cargo-item.component'
-import { Layout } from './cargo.layout'
+import { ShipCargoItem } from './ship-cargo-item.component'
+import { ShipCargoLayout } from './ship-cargo.layout'
+import { type ShipCargoListProps } from './ship-cargo.types'
 
 const JettisonCargo = ({ item }: { item: CargoInventory }) => {
   const ship = useShipResponse()
@@ -64,7 +65,7 @@ const CancelModal = () => {
   )
 }
 
-export const List = () => {
+export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
   const navigate = useNavigate()
   const ship = useShipResponse()
   const waypoint = useWaypointResponse()
@@ -89,6 +90,7 @@ export const List = () => {
       }
     },
     enabled: hasMarketplace,
+    suspense: false,
   })
   const inventory = ship.cargo.inventory
 
@@ -114,14 +116,14 @@ export const List = () => {
   }
 
   return (
-    <Layout>
+    <ShipCargoLayout>
       {inventory.map((item) => {
         const produce = REFINE_ITEM_TYPE.get(item.symbol)
         const good = data?.goods?.get(item.symbol)
 
         return (
           <Fragment key={item.symbol}>
-            <CargoItem item={item}>
+            <Item item={item}>
               <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
                 {produce && <ShipActions.Refine ship={ship} produce={produce} />}
                 {good !== undefined && (
@@ -140,10 +142,10 @@ export const List = () => {
                 )}
                 <JettisonCargo item={item} />
               </div>
-            </CargoItem>
+            </Item>
           </Fragment>
         )
       })}
-    </Layout>
+    </ShipCargoLayout>
   )
 }
