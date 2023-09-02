@@ -1,4 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { Badge } from '@/components/badge'
 import { ShipIcon } from '@/components/icons'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
@@ -45,14 +46,19 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
   return (
     <div className="grid gap-3">
       {waypoints.map((waypoint) => (
-        <div key={waypoint.symbol} className="flex items-center justify-between gap-4">
-          <div>
+        <div key={waypoint.symbol} className="flex items-start justify-between gap-4">
+          <div className="grid gap-1">
             <div className="font-semibold">{waypoint.symbol}</div>
             <div className="flex flex-row gap-2">
               <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type)}</WaypointTag>
-              <div className="text-xs font-light">
+              <div className="text-secondary text-xs">
                 ({waypoint.x}, {waypoint.y})
               </div>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {waypoint.traits.map((trait) => (
+                <Badge key={trait.symbol}>{trait.name}</Badge>
+              ))}
             </div>
           </div>
           <ShipActions.Navigate ship={ship} waypointSymbol={waypoint.symbol}>
