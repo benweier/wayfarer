@@ -39,6 +39,13 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
           </div>
         </div>
       </div>
+      <div>
+        <div className="text-secondary text-right text-xs uppercase">Condition</div>
+        <div className="flex items-center gap-2">
+          <ShipIcon id="condition" className="h-5 w-5 text-rose-500" />
+          <div className="text-sm font-semibold leading-snug">{ship.frame.condition}%</div>
+        </div>
+      </div>
     </div>
   )
 }
