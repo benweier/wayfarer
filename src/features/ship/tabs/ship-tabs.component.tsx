@@ -1,9 +1,10 @@
 import { Tab } from '@headlessui/react'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { Loadout, Survey } from '@/components/ship'
+import { Survey } from '@/components/ship'
 import { useShipResponse } from '@/context/ship.context'
 import { WaypointStore } from '@/context/waypoint.context'
 import { ShipCargoError, ShipCargoFallback, ShipCargoList, ShipCargoPreferences } from '@/features/ship/cargo'
+import { ShipLoadoutList } from '@/features/ship/loadout'
 import { cx } from '@/utilities/cx'
 
 export const ShipTabs = () => {
@@ -38,7 +39,7 @@ export const ShipTabs = () => {
 
         <Tab.Panel>
           <QuerySuspenseBoundary fallback={<></>}>
-            <Loadout />
+            <ShipLoadoutList />
           </QuerySuspenseBoundary>
         </Tab.Panel>
       </Tab.Panels>
