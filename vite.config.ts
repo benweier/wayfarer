@@ -42,7 +42,6 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 8080,
       https: true,
-      open: true,
     },
     envPrefix: ['SENTRY_', 'SPACETRADERS_', 'REACT_'],
     test: {
