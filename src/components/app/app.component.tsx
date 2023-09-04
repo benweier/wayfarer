@@ -303,6 +303,7 @@ const router = sentryCreateBrowserRouter(
 
                     return {
                       element: <loadout.Route />,
+                      loader: loadout.loader(client),
                     }
                   }}
                   ErrorBoundary={RouteError}
