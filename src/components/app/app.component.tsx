@@ -286,13 +286,23 @@ const router = sentryCreateBrowserRouter(
                   }}
                   ErrorBoundary={RouteError}
                 />
+              </Route>
+              <Route
+                lazy={async () => {
+                  const overlay = await import('@/routes/fleet/ship/overlay')
+
+                  return {
+                    element: <overlay.Route isOpen size="full" closeable disableExternalClose />,
+                  }
+                }}
+              >
                 <Route
-                  path="mounts"
+                  path="loadout"
                   lazy={async () => {
-                    const mounts = await import('@/routes/fleet/ship/mounts')
+                    const loadout = await import('@/routes/fleet/ship/loadout')
 
                     return {
-                      element: <mounts.Route />,
+                      element: <loadout.Route />,
                     }
                   }}
                   ErrorBoundary={RouteError}
