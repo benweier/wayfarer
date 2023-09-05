@@ -108,7 +108,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
               navigate(`/fleet/ship/${ship.symbol}/market`)
             }}
           >
-            View Market
+            {hasMarketplace ? `View Market at ${ship.nav.waypointSymbol}` : `No Market at ${ship.nav.waypointSymbol}`}
           </button>
         </div>
       </div>
