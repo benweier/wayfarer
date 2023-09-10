@@ -170,12 +170,12 @@ export type ShipMount = {
   symbol: string
   name: string
   description: string
-  strength: number
+  strength?: number
   deposits: string[]
   requirements: {
     power: number
     crew: number
-    slots: number
+    slots?: number
   }
 }
 
