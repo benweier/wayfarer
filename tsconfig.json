@@ -33,7 +33,8 @@
       "@/*": ["./src/*"]
     },
     "incremental": true,
-    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "files": ["env.d.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "./test/vitest.setup.ts"],
