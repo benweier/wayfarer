@@ -6,6 +6,14 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}', './public/index.html'],
   theme: {
     container: { center: true },
+    fontFamily: {
+      'space-grotesk': [
+        "'Space Grotesk', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+        {
+          fontFeatureSettings: '"ss01", "ss03"',
+        },
+      ],
+    },
     extend: {
       grayscale: {
         50: '50%',

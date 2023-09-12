@@ -5,14 +5,14 @@
 @layer base {
   html,
   body {
-    @apply relative bg-zinc-50 text-base text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100;
+    @apply relative bg-zinc-50 font-space-grotesk text-base slashed-zero tracking-wide text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100;
     @apply selection:bg-emerald-200 selection:text-emerald-900 dark:selection:bg-emerald-300;
   }
 }
 
 @layer components {
   .loader {
-    @apply fixed block h-1 w-full overflow-hidden z-50;
-    @apply after:absolute after:top-0 after:left-0 after:right-0 after:h-full after:w-1/6 after:animate-indefinite after:bg-green-600 dark:after:bg-green-400;
+    @apply fixed z-50 block h-1 w-full overflow-hidden;
+    @apply after:absolute after:left-0 after:right-0 after:top-0 after:h-full after:w-1/6 after:animate-indefinite after:bg-green-600 dark:after:bg-green-400;
   }
 }
