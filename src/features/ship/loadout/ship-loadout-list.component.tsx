@@ -1,6 +1,6 @@
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
-import { RemoveMount } from '@/features/ship/actions/ship-actions.remove-mount'
+import { RemoveMount } from '@/features/ship/actions'
 import { ShipLoadoutItem } from './ship-loadout-item.component'
 import { type ShipLoadoutListProps } from './ship-loadout.types'
 
