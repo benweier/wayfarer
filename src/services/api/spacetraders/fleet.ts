@@ -9,6 +9,7 @@ import {
   type MarketTransaction,
   type NavigationResponse,
   type ShipCargo,
+  type ShipMount,
   type ShipResponse,
   type SurveyResponse,
   type WaypointResponse,
@@ -261,6 +262,30 @@ export const createShipChartMutation = {
     const url = new URL(`my/ships/${shipSymbol}/chart`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>>(url, undefined, {
+      headers: createHeaders(),
+    })
+  },
+}
+
+export const createShipInstallMountMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'install-mount' }, ...args] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/mounts/install`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; mounts: ShipMount[] }>>(url, undefined, {
+      headers: createHeaders(),
+    })
+  },
+}
+
+export const createShipRemoveMountMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'remove-mount' }, ...args] as const,
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/mounts/remove`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; mounts: ShipMount[] }>>(url, undefined, {
       headers: createHeaders(),
     })
   },
