@@ -1,7 +1,7 @@
-import { type FC } from 'react'
+import { type FC, type PropsWithChildren } from 'react'
 
 export type ShipLoadoutListProps = {
-  Item?: FC<ShipLoadoutItemProps>
+  Item?: FC<PropsWithChildren<ShipLoadoutItemProps>>
 }
 
 export type ShipLoadoutItemProps = {
