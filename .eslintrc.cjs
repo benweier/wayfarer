@@ -73,12 +73,6 @@ module.exports = {
         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
       },
     ],
-    'no-restricted-imports': [
-      'error',
-      {
-        patterns: ['@/features/*/*/*'],
-      },
-    ],
     '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/consistent-type-exports': 'error',
