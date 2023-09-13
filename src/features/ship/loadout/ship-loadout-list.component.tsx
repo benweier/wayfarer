@@ -1,11 +1,9 @@
-import { useNavigate } from 'react-router-dom'
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
 import { ShipLoadoutItem } from './ship-loadout-item.component'
 import { type ShipLoadoutListProps } from './ship-loadout.types'
 
 export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps) => {
-  const navigate = useNavigate()
   const ship = useShipResponse()
 
   return (
@@ -41,15 +39,6 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
               <div className="text-secondary text-xs uppercase">Power Required</div>
             </div>
           </div>
-
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              navigate(`/fleet/ship/${ship.symbol}/loadout`)
-            }}
-          >
-            Manage Loadout
-          </button>
         </div>
 
         <div className="space-y-6">
