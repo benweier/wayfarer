@@ -1,5 +1,6 @@
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
+import { RemoveMount } from '@/features/ship/actions/ship-actions.remove-mount'
 import { ShipLoadoutItem } from './ship-loadout-item.component'
 import { type ShipLoadoutListProps } from './ship-loadout.types'
 
@@ -104,7 +105,20 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
           </div>
           <div className="grid grid-cols-3 gap-2">
             {ship.mounts.map((mount, index) => (
-              <Item key={index} name={mount.name} description={mount.description}>
+              <Item
+                key={index}
+                name={mount.name}
+                description={mount.description}
+                action={
+                  <RemoveMount ship={ship} mountSymbol={mount.symbol}>
+                    {(props) => (
+                      <button className="btn btn-outline btn-danger btn-sm" {...props}>
+                        Remove
+                      </button>
+                    )}
+                  </RemoveMount>
+                }
+              >
                 <div className="grid grid-cols-2 gap-2">
                   <div className="flex items-center justify-center gap-2">
                     <ShipIcon id="crew" className="h-4 w-4 text-amber-500" />
