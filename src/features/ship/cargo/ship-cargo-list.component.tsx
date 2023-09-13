@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { AppIcon } from '@/components/icons'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { Modal, useModalActions } from '@/components/modal'
-import { REFINE_ITEM_TYPE } from '@/config/constants'
+import { REFINE_ITEM_TYPE, SHIP_MOUNT_TYPE } from '@/config/constants'
 import { useShipResponse } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
@@ -90,7 +90,6 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
       }
     },
     enabled: hasMarketplace,
-    suspense: false,
   })
   const inventory = ship.cargo.inventory
 
@@ -118,6 +117,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
   return (
     <ShipCargoLayout>
       {inventory.map((item) => {
+        const mount = SHIP_MOUNT_TYPE.has(item.symbol)
         const produce = REFINE_ITEM_TYPE.get(item.symbol)
         const good = data?.goods?.get(item.symbol)
 
@@ -125,6 +125,15 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
           <Fragment key={item.symbol}>
             <Item item={item}>
               <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
+                {mount && (
+                  <ShipActions.InstallMount ship={ship} mountSymbol={item.symbol}>
+                    {(props) => (
+                      <button className="btn btn-primary btn-sm" {...props}>
+                        Install
+                      </button>
+                    )}
+                  </ShipActions.InstallMount>
+                )}
                 {produce && <ShipActions.Refine ship={ship} produce={produce} />}
                 {good !== undefined && (
                   <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
