@@ -51,7 +51,7 @@ export const Jump = ({
 
       if (ctx?.ships && index > -1) {
         client.setQueryData(
-          ['ships'],
+          getShipListQuery.getQueryKey(),
           produce(ctx.ships, (draft) => {
             draft.data[index].nav = response.data.nav
           }),

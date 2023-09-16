@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createShipExtractMutation } from '@/services/api/spacetraders'
+import { createShipExtractMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipCooldownStore, useShipSurveyStore } from '@/store/ship'
 import { type ShipResponse, type SurveyResponse } from '@/types/spacetraders'
@@ -29,8 +29,8 @@ export const Extract = ({
     onMutate: ({ shipSymbol }) => {
       void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(['ship', shipSymbol])
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(['ships'])
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
       return { ship, ships }
     },
@@ -43,10 +43,16 @@ export const Extract = ({
       const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ctx?.ship) {
-        client.setQueryData(['ship', shipSymbol], updateShipCargo(ctx.ship, response.data.cargo))
+        client.setQueryData(
+          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          updateShipCargo(ctx.ship, response.data.cargo),
+        )
       }
       if (ctx?.ships && index > -1) {
-        client.setQueryData(['ships'], updateShipInFleetCargo(ctx.ships, index, response.data.cargo))
+        client.setQueryData(
+          getShipListQuery.getQueryKey(),
+          updateShipInFleetCargo(ctx.ships, index, response.data.cargo),
+        )
       }
     },
     onSettled: (_res, _err) => {
