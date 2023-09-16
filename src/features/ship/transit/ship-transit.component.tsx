@@ -43,7 +43,7 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
             </Link>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <ShipTransitNavigate
             trigger={(props) => (
               <button className="btn btn-flat btn-warn btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
