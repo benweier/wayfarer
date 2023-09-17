@@ -29,7 +29,7 @@ export const Preferences = () => {
             <div className="h-6 w-6">
               <MenuIcon id="settings" className={cx('h-6 w-6', { 'animate-spin': open })} aria-hidden />
             </div>
-            <span className="sr-only flex flex-col items-start justify-start text-sm leading-none @[220px]/side:not-sr-only">
+            <span className="sr-only flex flex-col items-start justify-start text-sm @[220px]/side:not-sr-only">
               Preferences
             </span>
           </Popover.Button>

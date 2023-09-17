@@ -10,7 +10,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
           <div className="text-secondary text-right text-xs uppercase">Fuel</div>
           <div className="flex items-center gap-2">
             <ShipIcon id="fuel" className="h-4 w-4 text-teal-500" />
-            <div className="text-sm font-semibold leading-snug">
+            <div className="text-sm font-semibold">
               {ship.fuel.current} / {ship.fuel.capacity}
             </div>
           </div>
@@ -27,7 +27,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
         <div className="text-secondary text-right text-xs uppercase">Cargo</div>
         <div className="flex items-center gap-2">
           <ShipIcon id="cargo" className="h-4 w-4 text-fuchsia-500" />
-          <div className="text-sm font-semibold leading-snug">
+          <div className="text-sm font-semibold">
             {ship.cargo.units} / {ship.cargo.capacity}
           </div>
         </div>
@@ -36,7 +36,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
         <div className="text-secondary text-right text-xs uppercase">Crew</div>
         <div className="flex items-center gap-2">
           <ShipIcon id="crew" className="h-4 w-4 text-amber-500" />
-          <div className="text-sm font-semibold leading-snug">
+          <div className="text-sm font-semibold">
             {ship.crew.current} / {ship.crew.capacity}
           </div>
         </div>
@@ -45,7 +45,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
         <div className="text-secondary text-right text-xs uppercase">Condition</div>
         <div className="flex items-center gap-2">
           <ShipIcon id="condition" className="h-4 w-4 text-rose-500" />
-          <div className="text-sm font-semibold leading-snug">{ship.frame.condition}%</div>
+          <div className="text-sm font-semibold">{ship.frame.condition}%</div>
         </div>
       </div>
     </div>

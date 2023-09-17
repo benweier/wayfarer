@@ -8,7 +8,7 @@ describe('waypoint-tag', () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
-          class="bg- rounded-sm px-2 py-1 text-xs font-bold uppercase leading-none tracking-wide bg-gray-950 text-gray-50"
+          class="rounded-sm px-2 py-0.5 text-xs font-bold uppercase bg-gray-950 text-gray-50"
         >
           Tag Content
         </div>

@@ -26,7 +26,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
           <div className="flex gap-8">
             <div>
               <div className="text-secondary text-xs uppercase">System</div>
-              <div className="font-semibold leading-snug">
+              <div className="font-semibold">
                 <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
                   {ship.nav.systemSymbol}
                 </Link>
@@ -35,7 +35,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
             <div>
               <div className="text-secondary text-xs uppercase">Waypoint</div>
               <div className="flex items-center gap-2">
-                <div className="font-semibold leading-snug">
+                <div className="font-semibold">
                   <Link
                     className="link"
                     to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}/waypoint/${ship.nav.waypointSymbol}`}

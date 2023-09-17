@@ -15,12 +15,7 @@ const WAYPOINT_TYPE_STYLES: Record<string, string> = {
 
 export const WaypointTag = ({ type, children }: WaypointTagProps) => {
   return (
-    <div
-      className={cx(
-        'rounded-sm px-2 py-1 text-xs font-bold uppercase leading-none tracking-wide',
-        WAYPOINT_TYPE_STYLES[type],
-      )}
-    >
+    <div className={cx('rounded-sm px-2 py-0.5 text-xs font-bold uppercase', WAYPOINT_TYPE_STYLES[type])}>
       {children}
     </div>
   )
