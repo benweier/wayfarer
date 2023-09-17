@@ -215,7 +215,10 @@ export const createShipExtractMutation = {
   getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string }>) =>
     [{ scope: 'ships', entity: 'item', action: 'extract' }, ...args] as const,
   mutationFn: async ({ shipSymbol, survey }: { shipSymbol: string; survey?: SurveyResponse }) => {
-    const url = new URL(`my/ships/${shipSymbol}/extract`, import.meta.env.SPACETRADERS_API_BASE_URL)
+    const url =
+      survey === undefined
+        ? new URL(`my/ships/${shipSymbol}/extract`, import.meta.env.SPACETRADERS_API_BASE_URL)
+        : new URL(`my/ships/${shipSymbol}/extract/survey`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ cooldown: CooldownResponse; extraction: ExtractResponse; cargo: ShipCargo }>>(
       url,
