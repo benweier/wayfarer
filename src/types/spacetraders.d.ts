@@ -72,7 +72,7 @@ export type FuelResponse = {
 }
 
 export type NavigationRoute = {
-  departure: {
+  origin: {
     symbol: string
     type: string
     systemSymbol: string

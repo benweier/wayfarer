@@ -14,15 +14,15 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
         <div className="text-secondary text-xs uppercase">Route</div>
         <div className="flex items-center gap-2">
           <div className="text-sm font-medium">
-            <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.departure.systemSymbol}`}>
-              {nav.route.departure.systemSymbol}
+            <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.origin.systemSymbol}`}>
+              {nav.route.origin.systemSymbol}
             </Link>{' '}
             •{' '}
             <Link
               className="link"
-              to={`${ROUTES.SYSTEMS}/${nav.route.departure.systemSymbol}/waypoint/${nav.route.departure.symbol}`}
+              to={`${ROUTES.SYSTEMS}/${nav.route.origin.systemSymbol}/waypoint/${nav.route.origin.symbol}`}
             >
-              {nav.route.departure.symbol}
+              {nav.route.origin.symbol}
             </Link>
           </div>
           <div className="flex flex-row flex-nowrap -space-x-2">
