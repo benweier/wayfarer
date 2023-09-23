@@ -17,7 +17,7 @@ export const useShipCooldownStore = create<ShipCooldownStore>((set, get) => ({
   setCooldown: (shipSymbol, cooldown) => {
     set(
       produce((draft: Draft<ShipCooldownStore>) => {
-        draft.cooldowns.set(shipSymbol, cooldown)
+        draft.cooldowns = new Map(get().cooldowns).set(shipSymbol, cooldown)
       }),
     )
   },
@@ -31,7 +31,7 @@ export const useShipCooldownStore = create<ShipCooldownStore>((set, get) => ({
           const expiration = new Date(cooldown.expiration)
           const remainingSeconds = Math.floor(Math.abs(now - expiration.getTime()) / 1000)
 
-          draft.cooldowns.set(shipSymbol, { ...cooldown, remainingSeconds })
+          draft.cooldowns = new Map(get().cooldowns).set(shipSymbol, { ...cooldown, remainingSeconds })
         }
       }),
     )
