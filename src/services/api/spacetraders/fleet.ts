@@ -222,7 +222,7 @@ export const createShipExtractMutation = {
 
     return post<SpaceTradersResponse<{ cooldown: CooldownResponse; extraction: ExtractResponse; cargo: ShipCargo }>>(
       url,
-      { survey },
+      survey,
       { headers: createHeaders() },
     )
   },
