@@ -41,8 +41,8 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
       </div>
 
       {waypoint.orbitals.length > 0 && (
-        <div className="flex flex-col gap-2">
-          <div className="text-sm font-light">Orbitals:</div>
+        <div className="space-y-1">
+          <div className="text-sm">Orbitals</div>
           <div className="flex flex-wrap gap-1">
             {waypoint.orbitals.map((orbital) => (
               <div key={orbital.symbol} className="rounded bg-zinc-200/50 px-4 py-2 shadow-sm dark:bg-zinc-700/25">
