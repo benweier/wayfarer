@@ -45,7 +45,7 @@ const List = ({ ship }: { ship: ShipResponse }) => {
 
             <div className="grid grid-cols-2 gap-4">
               <button
-                className="btn btn-outline btn-danger"
+                className="btn btn-flat btn-danger"
                 onClick={() => {
                   removeSurvey(survey.signature)
                 }}
