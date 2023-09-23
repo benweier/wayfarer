@@ -23,6 +23,14 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
               {waypoint.systemSymbol}
             </Link>
           </div>
+          {!!waypoint.orbits && (
+            <div className="whitespace-nowrap">
+              Orbits:{' '}
+              <Link className="link" to={`/systems/${waypoint.systemSymbol}/waypoint/${waypoint.orbits}`}>
+                {waypoint.orbits}
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-wrap gap-1">
@@ -31,6 +39,21 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
           ))}
         </div>
       </div>
+
+      {waypoint.orbitals.length > 0 && (
+        <div className="flex flex-col gap-2">
+          <div className="text-sm font-light">Orbitals:</div>
+          <div className="flex flex-wrap gap-1">
+            {waypoint.orbitals.map((orbital) => (
+              <div key={orbital.symbol} className="rounded bg-zinc-200/50 px-4 py-2 shadow-sm dark:bg-zinc-700/25">
+                <Link className="link" to={`/systems/${waypoint.systemSymbol}/waypoint/${orbital.symbol}`}>
+                  {orbital.symbol}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <SystemContext.Provider value={{ systemSymbol: waypoint.systemSymbol }}>
         <WaypointContext.Provider value={{ waypointSymbol: waypoint.symbol }}>{children}</WaypointContext.Provider>

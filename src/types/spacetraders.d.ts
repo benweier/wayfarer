@@ -206,6 +206,7 @@ export type ShipResponse = {
   frame: ShipFrame
   reactor: ShipReactor
   engine: ShipEngine
+  cooldown: CooldownResponse
   modules: ShipModule[]
   mounts: ShipMount[]
   registration: ShipRegistration
@@ -258,6 +259,7 @@ export type WaypointResponse = {
   x: number
   y: number
   orbitals: WaypointOrbital[]
+  orbits?: string
   faction: WaypointFaction
   traits: WaypointTrait[]
   chart: ChartResponse
