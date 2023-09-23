@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/react'
 import { QueryClientProvider, useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { enableMapSet } from 'immer'
 import { Suspense, useEffect } from 'react'
 import {
   type ActionFunction,
@@ -24,6 +25,8 @@ import * as Auth from '@/routes/auth'
 import * as Home from '@/routes/home'
 import { client } from '@/services/query-client'
 import { getState } from '@/store/auth'
+
+enableMapSet()
 
 Sentry.init({
   dsn: import.meta.env.SENTRY_DSN,
