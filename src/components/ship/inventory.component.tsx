@@ -14,6 +14,12 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
               {ship.fuel.current} / {ship.fuel.capacity}
             </div>
           </div>
+          <div className="h-1 rounded-full bg-teal-900/20 dark:bg-teal-900/40">
+            <div
+              className="h-1 rounded-full bg-teal-500/80"
+              style={{ width: `${(ship.fuel.current / ship.fuel.capacity) * 100}%` }}
+            />
+          </div>
         </div>
         <ShipActions.Refuel ship={ship} disabled={ship.nav.status !== 'DOCKED'}>
           {(props) => (
@@ -31,14 +37,11 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
             {ship.cargo.units} / {ship.cargo.capacity}
           </div>
         </div>
-      </div>
-      <div className="rounded-sm bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
-        <div className="text-secondary text-right text-xs uppercase">Crew</div>
-        <div className="flex items-center gap-2">
-          <ShipIcon id="crew" className="h-4 w-4 text-amber-500" />
-          <div className="text-sm font-semibold">
-            {ship.crew.current} / {ship.crew.capacity}
-          </div>
+        <div className="h-1 rounded-full bg-fuchsia-900/20 dark:bg-fuchsia-900/40">
+          <div
+            className="h-1 rounded-full bg-fuchsia-500/80"
+            style={{ width: `${(ship.cargo.units / ship.cargo.capacity) * 100}%` }}
+          />
         </div>
       </div>
       <div className="rounded-sm rounded-r-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
@@ -46,6 +49,9 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
         <div className="flex items-center gap-2">
           <ShipIcon id="condition" className="h-4 w-4 text-rose-500" />
           <div className="text-sm font-semibold">{ship.frame.condition}%</div>
+        </div>
+        <div className="h-1 rounded-full bg-rose-900/20 dark:bg-rose-900/40">
+          <div className="h-1 rounded-full bg-rose-500/80" style={{ width: `${ship.frame.condition}%` }} />
         </div>
       </div>
     </div>
