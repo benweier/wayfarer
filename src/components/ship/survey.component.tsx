@@ -32,12 +32,15 @@ const List = ({ ship }: { ship: ShipResponse }) => {
               <div className="text-secondary text-sm">{survey.size}</div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              {survey.deposits.map((deposit, index) => (
-                <div key={index} className="text-sm">
-                  {TRADE_SYMBOL.get(deposit.symbol)}
-                </div>
-              ))}
+            <div className="space-y-1">
+              <div className="text-sm">Survey Results</div>
+              <div className="grid grid-cols-2 gap-1 rounded bg-zinc-950/5 px-3 py-2 dark:bg-zinc-950/20">
+                {survey.deposits.map((deposit, index) => (
+                  <div key={index} className="text-sm">
+                    {TRADE_SYMBOL.get(deposit.symbol)}
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
