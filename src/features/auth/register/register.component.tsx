@@ -31,7 +31,6 @@ const FactionField = () => {
   const { isSuccess, isPending, data } = useQuery({
     queryKey: getFactionListQuery.getQueryKey(),
     queryFn: getFactionListQuery.queryFn,
-    suspense: false,
   })
 
   if (isPending) {

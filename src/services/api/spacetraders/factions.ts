@@ -8,6 +8,8 @@ export const getFactionListQuery = {
   queryFn: async ({ signal }: QueryFunctionContext) => {
     const url = new URL('factions', import.meta.env.SPACETRADERS_API_BASE_URL)
 
+    url.searchParams.set('limit', '20')
+
     return get<SpaceTradersResponse<FactionResponse[], Meta>>(url, { signal, headers: createHeaders() })
   },
 }
