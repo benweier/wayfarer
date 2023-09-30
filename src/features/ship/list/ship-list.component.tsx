@@ -1,9 +1,11 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { getShipListQuery } from '@/services/api/spacetraders'
+import { cx } from '@/utilities/cx'
 import { ShipItem } from '../item'
+import { ShipListRefresh } from './ship-list-refresh.component'
 
 export const ShipList = () => {
-  const { data } = useSuspenseQuery({
+  const { data, isFetching } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
   })
@@ -18,10 +20,16 @@ export const ShipList = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-2">
-      {ships.map((ship) => (
-        <ShipItem key={ship.symbol} ship={ship} />
-      ))}
+    <div className="space-y-4">
+      <div className="flex items-center justify-end gap-2">
+        <ShipListRefresh />
+      </div>
+
+      <div className={cx('grid grid-cols-1 gap-2', { 'pointer-events-none opacity-50': isFetching })}>
+        {ships.map((ship) => (
+          <ShipItem key={ship.symbol} ship={ship} />
+        ))}
+      </div>
     </div>
   )
 }
