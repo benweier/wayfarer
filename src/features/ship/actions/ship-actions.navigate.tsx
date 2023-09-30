@@ -22,8 +22,6 @@ export const Navigate = ({
     mutationKey: createShipNavigateMutation.getMutationKey(),
     mutationFn: createShipNavigateMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
@@ -53,9 +51,6 @@ export const Navigate = ({
     onError: (_err, { shipSymbol }, ctx) => {
       client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), ctx?.ship)
       client.setQueryData(getShipListQuery.getQueryKey(), ctx?.ships)
-    },
-    onSettled: (_res, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 

@@ -22,8 +22,6 @@ export const RemoveMount = ({
     mutationKey: createShipRemoveMountMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRemoveMountMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
@@ -52,6 +50,8 @@ export const RemoveMount = ({
           }),
         )
       }
+
+      setAgent(response.data.agent)
     },
     onError: (_err, { shipSymbol }, ctx) => {
       const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -77,13 +77,6 @@ export const RemoveMount = ({
             draft.data[index].mounts = ctx.ships.data[index].mounts
           }),
         )
-      }
-    },
-    onSettled: (response, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
-
-      if (response?.data.agent) {
-        setAgent(response.data.agent)
       }
     },
   })

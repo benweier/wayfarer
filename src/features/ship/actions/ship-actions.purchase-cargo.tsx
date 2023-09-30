@@ -25,8 +25,6 @@ export const PurchaseCargo = ({
     mutationKey: createShipCargoPurchaseMutation.getMutationKey(),
     mutationFn: createShipCargoPurchaseMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
@@ -49,9 +47,6 @@ export const PurchaseCargo = ({
       }
 
       setAgent(response.data.agent)
-    },
-    onSettled: (_res, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 

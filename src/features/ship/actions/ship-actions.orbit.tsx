@@ -30,8 +30,6 @@ const OrbitComponent = (
     mutationKey: createShipOrbitMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipOrbitMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -58,9 +56,6 @@ const OrbitComponent = (
     onError: (_err, { shipSymbol }, ctx) => {
       client.setQueryData(getShipListQuery.getQueryKey(), ctx?.ships)
       client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), ctx?.ship)
-    },
-    onSettled: (_res, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 

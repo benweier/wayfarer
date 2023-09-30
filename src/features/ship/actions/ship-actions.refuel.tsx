@@ -21,8 +21,6 @@ export const Refuel = ({
     mutationKey: createShipRefuelMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefuelMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
@@ -38,13 +36,8 @@ export const Refuel = ({
       if (ctx?.ships && index > -1) {
         client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetFuel(ctx.ships, index, fuel))
       }
-    },
-    onSettled: (response, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
 
-      if (response?.data.agent) {
-        setAgent(response.data.agent)
-      }
+      setAgent(response.data.agent)
     },
   })
 

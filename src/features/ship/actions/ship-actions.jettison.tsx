@@ -23,8 +23,6 @@ export const Jettison = ({
     mutationKey: createShipJettisonMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipJettisonMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
@@ -45,9 +43,6 @@ export const Jettison = ({
           updateShipInFleetCargo(ctx.ships, index, response.data.cargo),
         )
       }
-    },
-    onSettled: (_res, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 

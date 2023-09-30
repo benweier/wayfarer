@@ -32,39 +32,30 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
   const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipWarpMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipWarpMutation.mutationFn,
-    onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
+    onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      return { ship, ships }
-    },
-    onSuccess: (response, { shipSymbol }, ctx) => {
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
-      if (ctx?.ship) {
+      if (ship) {
         client.setQueryData(
           getShipByIdQuery.getQueryKey({ shipSymbol }),
-          produce(ctx.ship, (draft) => {
+          produce(ship, (draft) => {
             draft.data.nav = response.data.nav
             draft.data.fuel = response.data.fuel
           }),
         )
       }
 
-      if (ctx?.ships && index > -1) {
+      if (ships && index > -1) {
         client.setQueryData(
           getShipListQuery.getQueryKey(),
-          produce(ctx.ships, (draft) => {
+          produce(ships, (draft) => {
             draft.data[index].nav = response.data.nav
             draft.data[index].fuel = response.data.fuel
           }),
         )
       }
-    },
-    onSettled: (_res, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 

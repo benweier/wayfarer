@@ -24,9 +24,6 @@ export const SellCargo = ({
   const { mutate, isPending } = useMutation({
     mutationKey: createShipCargoSellMutation.getMutationKey(),
     mutationFn: createShipCargoSellMutation.mutationFn,
-    onMutate: () => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-    },
     onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
@@ -40,9 +37,6 @@ export const SellCargo = ({
       }
 
       setAgent(response.data.agent)
-    },
-    onSettled: (_res, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 

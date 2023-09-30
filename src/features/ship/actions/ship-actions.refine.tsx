@@ -26,8 +26,6 @@ export const Refine = ({
     mutationKey: createShipRefineMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefineMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
 
@@ -52,9 +50,6 @@ export const Refine = ({
           updateShipInFleetCargo(ctx.ships, index, response.data.cargo),
         )
       }
-    },
-    onSettled: (_res, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
     },
   })
 

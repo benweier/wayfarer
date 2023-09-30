@@ -57,9 +57,6 @@ const DockComponent = (
       client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), ctx?.ship)
       client.setQueryData(getShipListQuery.getQueryKey(), ctx?.ships)
     },
-    onSettled: (_res, _err) => {
-      void client.invalidateQueries({ queryKey: [{ scope: 'ships' }] })
-    },
   })
 
   return children({

@@ -30,8 +30,6 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
 
   useEffect(() => {
     if (remainingSeconds === 0 && nav.status === 'IN_TRANSIT') {
-      void client.cancelQueries({ queryKey: [{ scope: 'ships' }] })
-
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(
         getShipByIdQuery.getQueryKey({ shipSymbol: symbol }),
       )
