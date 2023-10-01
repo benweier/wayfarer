@@ -120,7 +120,7 @@ module.exports = {
       extends: [
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
-        // 'plugin:@tanstack/eslint-plugin-query/recommended',
+        'plugin:@tanstack/eslint-plugin-query/recommended',
       ],
       env: {
         browser: true,
