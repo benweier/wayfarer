@@ -1,9 +1,9 @@
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
+import { ShipCooldown } from '@/features/ship/cooldown'
 import { useShipSurveyStore } from '@/store/ship'
 import { type ShipResponse } from '@/types/spacetraders'
-import { Cooldown } from './cooldown.component'
 
 const List = ({ ship }: { ship: ShipResponse }) => {
   const { surveys, removeSurvey } = useShipSurveyStore((state) => ({
@@ -94,7 +94,7 @@ export const Survey = () => {
           </ShipActions.Extract>
         </div>
         <div className="w-full max-w-xs">
-          <Cooldown ship={ship} />
+          <ShipCooldown ship={ship} />
         </div>
       </div>
 

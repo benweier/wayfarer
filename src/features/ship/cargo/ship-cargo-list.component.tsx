@@ -134,7 +134,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                     )}
                   </ShipActions.InstallMount>
                 )}
-                {produce && <ShipActions.Refine ship={ship} produce={produce} />}
+                {produce && <ShipActions.Refine ship={ship} item={produce} />}
                 {good !== undefined && (
                   <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
                     <WaypointContext.Provider value={{ waypointSymbol: ship.nav.waypointSymbol }}>

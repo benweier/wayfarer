@@ -402,7 +402,7 @@ export type CooldownResponse = {
   shipSymbol: string
   totalSeconds: number
   remainingSeconds: number
-  expiration: string
+  expiration?: string
 }
 
 export type SurveyResponse = {

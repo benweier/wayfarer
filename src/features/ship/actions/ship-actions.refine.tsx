@@ -1,27 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { createShipRefineMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { useShipCooldownStore } from '@/store/ship'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
-import { updateShipCargo, updateShipInFleetCargo } from './ship-actions.utilities'
 
 export const Refine = ({
   ship,
-  produce,
+  item,
   children = (props) => (
     <button className="btn btn-sm" {...props}>
       Refine
     </button>
   ),
 }: ShipActionProps<{
-  produce: string
+  item: string
 }>) => {
   const client = useQueryClient()
-  const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
-    hasCooldown: state.cooldowns.has(ship.symbol),
-    setCooldown: state.setCooldown,
-  }))
+  const hasCooldown = ship.cooldown.remainingSeconds > 0
   const { mutate, isPending } = useMutation({
     mutationKey: createShipRefineMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefineMutation.mutationFn,
@@ -32,22 +28,24 @@ export const Refine = ({
       return { ship, ships }
     },
     onSuccess: (response, { shipSymbol }, ctx) => {
-      const cooldown = response.data.cooldown
-
-      setCooldown(shipSymbol, cooldown)
-
       const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ctx?.ship) {
         client.setQueryData(
           getShipByIdQuery.getQueryKey({ shipSymbol }),
-          updateShipCargo(ctx.ship, response.data.cargo),
+          produce(ctx.ship, (draft) => {
+            draft.data.cargo = response.data.cargo
+            draft.data.cooldown = response.data.cooldown
+          }),
         )
       }
       if (ctx?.ships && index > -1) {
         client.setQueryData(
           getShipListQuery.getQueryKey(),
-          updateShipInFleetCargo(ctx.ships, index, response.data.cargo),
+          produce(ctx.ships, (draft) => {
+            draft.data[index].cooldown = response.data.cooldown
+            draft.data[index].cargo = response.data.cargo
+          }),
         )
       }
     },
@@ -56,7 +54,7 @@ export const Refine = ({
   return children({
     disabled: hasCooldown || isPending,
     onClick: () => {
-      mutate({ shipSymbol: ship.symbol, produce })
+      mutate({ shipSymbol: ship.symbol, produce: item })
     },
   })
 }

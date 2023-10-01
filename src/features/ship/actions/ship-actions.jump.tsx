@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipJumpMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { useShipCooldownStore } from '@/store/ship'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
@@ -18,10 +17,7 @@ export const Jump = ({
   systemSymbol: string
 }>) => {
   const client = useQueryClient()
-  const { hasCooldown, setCooldown } = useShipCooldownStore((state) => ({
-    hasCooldown: state.cooldowns.has(ship.symbol),
-    setCooldown: state.setCooldown,
-  }))
+  const hasCooldown = ship.cooldown.remainingSeconds > 0
   const { mutate, isPending } = useMutation({
     mutationKey: createShipJumpMutation.getMutationKey(),
     mutationFn: createShipJumpMutation.mutationFn,
@@ -32,10 +28,6 @@ export const Jump = ({
       return { ship, ships }
     },
     onSuccess: (response, { shipSymbol }, ctx) => {
-      const cooldown = response.data.cooldown
-
-      setCooldown(shipSymbol, cooldown)
-
       const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ctx?.ship) {
@@ -43,6 +35,7 @@ export const Jump = ({
           getShipByIdQuery.getQueryKey({ shipSymbol }),
           produce(ctx.ship, (draft) => {
             draft.data.nav = response.data.nav
+            draft.data.cooldown = response.data.cooldown
           }),
         )
       }
@@ -52,6 +45,7 @@ export const Jump = ({
           getShipListQuery.getQueryKey(),
           produce(ctx.ships, (draft) => {
             draft.data[index].nav = response.data.nav
+            draft.data[index].cooldown = response.data.cooldown
           }),
         )
       }

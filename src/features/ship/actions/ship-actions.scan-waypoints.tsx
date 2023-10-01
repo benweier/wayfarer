@@ -3,30 +3,11 @@ import { Link } from 'react-router-dom'
 import { Modal } from '@/components/modal'
 import { ROUTES } from '@/config/routes'
 import { createShipScanWaypointsMutation } from '@/services/api/spacetraders'
-import { type SpaceTradersError } from '@/services/api/spacetraders/core'
-import { STATUS_CODES, isHttpError } from '@/services/http'
-import { useShipCooldownStore } from '@/store/ship'
-import { type CooldownResponse } from '@/types/spacetraders'
 
 export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
-  const setCooldown = useShipCooldownStore((state) => state.setCooldown)
   const { mutate, isSuccess, data } = useMutation({
     mutationKey: createShipScanWaypointsMutation.getMutationKey({ shipSymbol }),
     mutationFn: createShipScanWaypointsMutation.mutationFn,
-    onSuccess: (response, { shipSymbol }) => {
-      setCooldown(shipSymbol, response.data.cooldown)
-    },
-    onError: async (err, { shipSymbol }) => {
-      if (!isHttpError(err, STATUS_CODES.CONFLICT)) return
-
-      try {
-        const cooldown: SpaceTradersError<{ cooldown: CooldownResponse }> = await err.json()
-
-        if (cooldown.error?.data.cooldown) setCooldown(shipSymbol, cooldown.error.data.cooldown)
-      } catch (err) {
-        //
-      }
-    },
   })
   const waypoints = isSuccess ? data.data.waypoints : []
 
