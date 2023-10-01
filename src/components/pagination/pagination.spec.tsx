@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '@testing-library/user-event'
 import { expect } from 'vitest'
 import { Pagination } from './pagination.component'
 import { getPagingRange } from './pagination.utils'
