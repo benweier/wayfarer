@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { createShipCargoSellMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
-import { updateShipCargo, updateShipInFleetCargo } from './ship-actions.utilities'
 
 export const SellCargo = ({
   ship,
@@ -30,10 +30,20 @@ export const SellCargo = ({
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
-        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), updateShipCargo(ship, response.data.cargo))
+        client.setQueryData(
+          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          produce(ship, (draft) => {
+            draft.data.cargo = response.data.cargo
+          }),
+        )
       }
       if (ships && index > -1) {
-        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetCargo(ships, index, response.data.cargo))
+        client.setQueryData(
+          getShipListQuery.getQueryKey(),
+          produce(ships, (draft) => {
+            draft.data[index].cargo = response.data.cargo
+          }),
+        )
       }
 
       setAgent(response.data.agent)

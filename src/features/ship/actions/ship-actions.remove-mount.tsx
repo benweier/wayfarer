@@ -21,63 +21,31 @@ export const RemoveMount = ({
   const { mutate, isPending } = useMutation({
     mutationKey: createShipRemoveMountMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRemoveMountMutation.mutationFn,
-    onMutate: ({ shipSymbol }) => {
+    onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      return { ship, ships }
-    },
-    onSuccess: (response, { shipSymbol }, ctx) => {
-      const cargo = response.data.cargo
-      const mounts = response.data.mounts
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
-      if (ctx?.ship) {
+      if (ship) {
         client.setQueryData(
           getShipByIdQuery.getQueryKey({ shipSymbol }),
-          produce<SpaceTradersResponse<ShipResponse>>((draft) => {
-            draft.data.cargo = cargo
-            draft.data.mounts = mounts
+          produce<SpaceTradersResponse<ShipResponse>>(ship, (draft) => {
+            draft.data.cargo = response.data.cargo
+            draft.data.mounts = response.data.mounts
           }),
         )
       }
-      if (ctx?.ships && index > -1) {
+      if (ships && index > -1) {
         client.setQueryData(
           getShipListQuery.getQueryKey(),
-          produce<SpaceTradersResponse<ShipResponse[]>>((draft) => {
-            draft.data[index].cargo = cargo
-            draft.data[index].mounts = mounts
+          produce<SpaceTradersResponse<ShipResponse[]>>(ships, (draft) => {
+            draft.data[index].cargo = response.data.cargo
+            draft.data[index].mounts = response.data.mounts
           }),
         )
       }
 
       setAgent(response.data.agent)
-    },
-    onError: (_err, { shipSymbol }, ctx) => {
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
-      if (ctx?.ship) {
-        client.setQueryData(
-          getShipByIdQuery.getQueryKey({ shipSymbol }),
-          produce<SpaceTradersResponse<ShipResponse>>((draft) => {
-            if (!ctx.ship?.data) return
-
-            draft.data.cargo = ctx.ship.data.cargo
-            draft.data.mounts = ctx.ship.data.mounts
-          }),
-        )
-      }
-      if (ctx?.ships && index > -1) {
-        client.setQueryData(
-          getShipListQuery.getQueryKey(),
-          produce<SpaceTradersResponse<ShipResponse[]>>((draft) => {
-            if (!ctx.ships?.data[index]) return
-
-            draft.data[index].cargo = ctx.ships.data[index].cargo
-            draft.data[index].mounts = ctx.ships.data[index].mounts
-          }),
-        )
-      }
     },
   })
 

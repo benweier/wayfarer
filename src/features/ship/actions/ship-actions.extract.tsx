@@ -23,32 +23,28 @@ export const Extract = ({
   const { mutate, isPending } = useMutation({
     mutationKey: createShipExtractMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipExtractMutation.mutationFn,
-    onMutate: ({ shipSymbol }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
-
-      return { ship, ships }
-    },
-    onSuccess: (response, { shipSymbol, survey }, ctx) => {
+    onSuccess: (response, { shipSymbol, survey }) => {
       if (survey) removeSurvey(survey.signature)
 
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
+      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
+      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ctx?.ship) {
+      if (ship) {
         client.setQueryData(
           getShipByIdQuery.getQueryKey({ shipSymbol }),
-          produce(ctx.ship, (draft) => {
-            draft.data.cooldown = response.data.cooldown
+          produce(ship, (draft) => {
             draft.data.cargo = response.data.cargo
+            draft.data.cooldown = response.data.cooldown
           }),
         )
       }
-      if (ctx?.ships && index > -1) {
+      if (ships && index > -1) {
         client.setQueryData(
           getShipListQuery.getQueryKey(),
-          produce(ctx.ships, (draft) => {
-            draft.data[index].cooldown = response.data.cooldown
+          produce(ships, (draft) => {
             draft.data[index].cargo = response.data.cargo
+            draft.data[index].cooldown = response.data.cooldown
           }),
         )
       }

@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { createShipRefuelMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
-import { updateShipFuel, updateShipInFleetFuel } from './ship-actions.utilities'
 
 export const Refuel = ({
   ship,
@@ -20,21 +20,26 @@ export const Refuel = ({
   const { mutate, isPending } = useMutation({
     mutationKey: createShipRefuelMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefuelMutation.mutationFn,
-    onMutate: ({ shipSymbol }) => {
+    onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      return { ship, ships }
-    },
-    onSuccess: (response, { shipSymbol }, ctx) => {
-      const fuel = response.data.fuel
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
-      if (ctx?.ship) {
-        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), updateShipFuel(ctx.ship, fuel))
+      if (ship) {
+        client.setQueryData(
+          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          produce(ship, (draft) => {
+            draft.data.fuel = response.data.fuel
+          }),
+        )
       }
-      if (ctx?.ships && index > -1) {
-        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetFuel(ctx.ships, index, fuel))
+      if (ships && index > -1) {
+        client.setQueryData(
+          getShipListQuery.getQueryKey(),
+          produce(ships, (draft) => {
+            draft.data[index].fuel = response.data.fuel
+          }),
+        )
       }
 
       setAgent(response.data.agent)

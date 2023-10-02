@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { createShipJettisonMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
-import { updateShipCargo, updateShipInFleetCargo } from './ship-actions.utilities'
 
 export const Jettison = ({
   ship,
@@ -22,25 +22,25 @@ export const Jettison = ({
   const { mutate, isPending } = useMutation({
     mutationKey: createShipJettisonMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipJettisonMutation.mutationFn,
-    onMutate: ({ shipSymbol }) => {
+    onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      return { ship, ships }
-    },
-    onSuccess: (response, { shipSymbol }, ctx) => {
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
-      if (ctx?.ship) {
+      if (ship) {
         client.setQueryData(
           getShipByIdQuery.getQueryKey({ shipSymbol }),
-          updateShipCargo(ctx.ship, response.data.cargo),
+          produce(ship, (draft) => {
+            draft.data.cargo = response.data.cargo
+          }),
         )
       }
-      if (ctx?.ships && index > -1) {
+      if (ships && index > -1) {
         client.setQueryData(
           getShipListQuery.getQueryKey(),
-          updateShipInFleetCargo(ctx.ships, index, response.data.cargo),
+          produce(ships, (draft) => {
+            draft.data[index].cargo = response.data.cargo
+          }),
         )
       }
     },

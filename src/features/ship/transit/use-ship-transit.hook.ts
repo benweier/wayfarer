@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { startTransition, useEffect, useMemo, useState } from 'react'
-import { updateShipInFleetNavStatus, updateShipNavStatus } from '@/features/ship/actions'
 import { getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -37,10 +37,20 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
       const index = ships?.data.findIndex((ship) => ship.symbol === symbol) ?? -1
 
       if (ship) {
-        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol: symbol }), updateShipNavStatus(ship, 'IN_ORBIT'))
+        client.setQueryData(
+          getShipByIdQuery.getQueryKey({ shipSymbol: symbol }),
+          produce(ship, (draft) => {
+            draft.data.nav.status = 'IN_ORBIT'
+          }),
+        )
       }
       if (ships && index !== -1) {
-        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetNavStatus(ships, index, 'IN_ORBIT'))
+        client.setQueryData(
+          getShipListQuery.getQueryKey(),
+          produce(ships, (draft) => {
+            draft.data[index].nav.status = 'IN_ORBIT'
+          }),
+        )
       }
     }
   }, [client, nav.status, remainingSeconds, symbol])

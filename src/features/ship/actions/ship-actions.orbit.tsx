@@ -1,15 +1,10 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { type Ref, forwardRef } from 'react'
 import { createShipOrbitMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
-import {
-  updateShipInFleetNav,
-  updateShipInFleetNavStatus,
-  updateShipNav,
-  updateShipNavStatus,
-} from './ship-actions.utilities'
 
 const OrbitComponent = (
   {
@@ -35,10 +30,20 @@ const OrbitComponent = (
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
-        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), updateShipNavStatus(ship, 'UNDOCKING'))
+        client.setQueryData(
+          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          produce(ship, (draft) => {
+            draft.data.nav.status = 'UNDOCKING'
+          }),
+        )
       }
       if (ships && index > -1) {
-        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetNavStatus(ships, index, 'UNDOCKING'))
+        client.setQueryData(
+          getShipListQuery.getQueryKey(),
+          produce(ships, (draft) => {
+            draft.data[index].nav.status = 'UNDOCKING'
+          }),
+        )
       }
 
       return { ship, ships }
@@ -47,10 +52,20 @@ const OrbitComponent = (
       const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ctx?.ship) {
-        client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), updateShipNav(ctx.ship, response.data.nav))
+        client.setQueryData(
+          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          produce(ctx.ship, (draft) => {
+            draft.data.nav = response.data.nav
+          }),
+        )
       }
       if (ctx?.ships && index > -1) {
-        client.setQueryData(getShipListQuery.getQueryKey(), updateShipInFleetNav(ctx.ships, index, response.data.nav))
+        client.setQueryData(
+          getShipListQuery.getQueryKey(),
+          produce(ctx.ships, (draft) => {
+            draft.data[index].nav = response.data.nav
+          }),
+        )
       }
     },
     onError: (_err, { shipSymbol }, ctx) => {

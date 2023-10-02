@@ -21,29 +21,25 @@ export const Jump = ({
   const { mutate, isPending } = useMutation({
     mutationKey: createShipJumpMutation.getMutationKey(),
     mutationFn: createShipJumpMutation.mutationFn,
-    onMutate: ({ shipSymbol }) => {
+    onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      return { ship, ships }
-    },
-    onSuccess: (response, { shipSymbol }, ctx) => {
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
-      if (ctx?.ship) {
+      if (ship) {
         client.setQueryData(
           getShipByIdQuery.getQueryKey({ shipSymbol }),
-          produce(ctx.ship, (draft) => {
+          produce(ship, (draft) => {
             draft.data.nav = response.data.nav
             draft.data.cooldown = response.data.cooldown
           }),
         )
       }
 
-      if (ctx?.ships && index > -1) {
+      if (ships && index > -1) {
         client.setQueryData(
           getShipListQuery.getQueryKey(),
-          produce(ctx.ships, (draft) => {
+          produce(ships, (draft) => {
             draft.data[index].nav = response.data.nav
             draft.data[index].cooldown = response.data.cooldown
           }),
