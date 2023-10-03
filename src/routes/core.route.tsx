@@ -3,7 +3,7 @@ import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Suspense } from 'react'
 import { Outlet, useNavigation } from 'react-router-dom'
 import { useThemeManager } from '@/hooks/use-theme-manager.hook'
-import { Loading } from './routes.fallback'
+import { Fallback } from './routes.fallback'
 
 const NavigationLoader = () => {
   const navigation = useNavigation()
@@ -35,7 +35,7 @@ export const Core = () => {
         </div>
       )}
     >
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Fallback />}>
         <div className="min-h-screen">
           <NavigationLoader />
           <Outlet />

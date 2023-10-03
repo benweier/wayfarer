@@ -12,7 +12,7 @@ import {
 } from 'react-router-dom'
 import { useLocation } from '@/hooks/use-location.hook'
 import { routes } from '@/routes/routes.conf'
-import { Loading } from '@/routes/routes.fallback'
+import { Fallback } from '@/routes/routes.fallback'
 import { client } from '@/services/query-client'
 
 enableMapSet()
@@ -41,7 +41,7 @@ const router = sentryCreateBrowserRouter(routes)
 export const App = () => {
   return (
     <QueryClientProvider client={client}>
-      <RouterProvider router={router} fallbackElement={<Loading />} future={{ v7_startTransition: true }} />
+      <RouterProvider router={router} fallbackElement={<Fallback />} future={{ v7_startTransition: true }} />
       <ReactQueryDevtools />
     </QueryClientProvider>
   )
