@@ -105,6 +105,7 @@ export const routes: RouteObject[] = [
             children: [
               {
                 path: '/overview',
+                errorElement: <RouteError />,
                 element: <Navigate to="/fleet" replace />,
               },
 
@@ -137,6 +138,7 @@ export const routes: RouteObject[] = [
 
               {
                 path: '/fleet',
+                errorElement: <RouteError />,
                 children: [
                   {
                     index: true,
