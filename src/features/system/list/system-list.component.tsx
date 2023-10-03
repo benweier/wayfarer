@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { Pagination } from '@/components/pagination'
+import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Pagination, usePagination } from '@/components/pagination'
 import { ROUTES } from '@/config/routes'
 import { getShipListQuery, getSystemListQuery } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
@@ -19,16 +19,9 @@ const WAYPOINT_TYPE_STYLES: Record<string, string> = {
   JUMP_GATE: 'bg-gray-50 text-gray-950',
   GRAVITY_WELL: 'bg-gray-950 text-gray-50',
 }
-const getPageNumber = (page: string | null) => {
-  const pageNumber = parseInt(page ?? '1')
-
-  return Number.isNaN(pageNumber) ? 1 : Math.max(1, pageNumber)
-}
 
 export const SystemList = ({ System = SystemItem }: SystemListProps) => {
-  const [limit] = useState(20)
-  const [params, setParams] = useSearchParams({ page: '1' })
-  const page = getPageNumber(params.get('page'))
+  const { page, limit, setPage } = usePagination()
   const systemsListQuery = useSuspenseQuery({
     queryKey: getSystemListQuery.getQueryKey({ page, limit }),
     queryFn: getSystemListQuery.queryFn,
@@ -53,8 +46,8 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   useEffect(() => {
     const max = Math.ceil(systemsListQuery.data.meta.total / limit)
 
-    if (page > max) setParams({ page: max.toString() })
-  }, [limit, systemsListQuery.data.meta, page, setParams])
+    if (page > max) setPage(page)
+  }, [limit, systemsListQuery.data.meta, page, setPage])
 
   const systems = systemsListQuery.data.data
   const meta = systemsListQuery.data.meta
@@ -137,14 +130,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
             </>
           )}
         </div>
-        <Pagination
-          current={meta.page}
-          total={Math.ceil(meta.total / limit)}
-          length={5}
-          onChange={(page) => {
-            setParams({ page: page.toString() })
-          }}
-        />
+        <Pagination current={meta.page} total={Math.ceil(meta.total / limit)} length={5} onChange={setPage} />
       </div>
     </div>
   )
