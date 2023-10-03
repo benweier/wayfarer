@@ -15,8 +15,7 @@ export const loader: QueryClientLoaderFn =
     }
 
     if (!isAuthenticated) {
-      redirect(ROUTES.LOGIN)
-      throw new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
+      return redirect(ROUTES.LOGIN)
     }
 
     try {

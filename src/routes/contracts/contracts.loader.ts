@@ -8,8 +8,7 @@ export const loader: QueryClientLoaderFn = (client) => async () => {
   const { isAuthenticated } = getState()
 
   if (!isAuthenticated) {
-    redirect(ROUTES.LOGIN)
-    throw new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
+    return redirect(ROUTES.LOGIN)
   }
 
   try {

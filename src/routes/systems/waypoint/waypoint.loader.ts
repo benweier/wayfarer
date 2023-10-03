@@ -11,8 +11,7 @@ export const loader: QueryClientLoaderFn =
     const { systemSymbol, waypointSymbol } = params
 
     if (!isAuthenticated) {
-      redirect(ROUTES.LOGIN)
-      throw new Response(STATUS_MESSAGES.UNAUTHORIZED, { status: STATUS_CODES.UNAUTHORIZED })
+      return redirect(ROUTES.LOGIN)
     }
 
     if (!systemSymbol || !waypointSymbol) {
