@@ -7,6 +7,10 @@ export const ShipCooldown = ({ ship }: { ship: ShipResponse }) => {
 
   return (
     <div className="flex flex-col gap-1 ">
+      <div className="text-secondary flex justify-between text-sm">
+        <div>{remainingSeconds > 0 ? `Cooldown active` : `Cooldown inactive`}</div>
+        <div>{remainingSeconds > 0 && `${remainingSeconds}s left`}</div>
+      </div>
       <div className={cx('h-1 w-full rounded-full bg-zinc-300 dark:bg-zinc-500', { 'opacity-50': !hasCooldown })}>
         {remainingSeconds > 0 && (
           <div
@@ -14,10 +18,6 @@ export const ShipCooldown = ({ ship }: { ship: ShipResponse }) => {
             style={{ width: `${(remainingSeconds / totalSeconds) * 100}%` }}
           />
         )}
-      </div>
-      <div className="text-secondary flex justify-between text-sm">
-        <div>{remainingSeconds > 0 ? `Cooldown active` : `Cooldown inactive`}</div>
-        <div>{remainingSeconds > 0 && `${remainingSeconds}s left`}</div>
       </div>
     </div>
   )
