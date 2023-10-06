@@ -14,13 +14,13 @@ import {
   type SurveyResponse,
   type WaypointResponse,
 } from '@/types/spacetraders'
+import { getPageList } from '@/utilities/get-page-list.helper'
 import { type Meta, type SpaceTradersResponse, createHeaders } from './core'
 
 type MaybeMutationKey<T = never> = [] | [Partial<T>]
 
 export const FLEET_QUERIES = {
-  shipList: (...params: [] | [{ page?: number; limit?: number }]) =>
-    [{ scope: 'ships', entity: 'list' }, ...params] as const,
+  shipList: () => [{ scope: 'ships', entity: 'list' }] as const,
   shipById: (args: { shipSymbol: string }) => [{ scope: 'ships', entity: 'item' }, args] as const,
 }
 
@@ -31,7 +31,22 @@ export const getShipListQuery = {
   queryFn: async ({ signal }: QueryFunctionContext<FleetQueryKey<'shipList'>>) => {
     const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
+    url.searchParams.set('page', '1')
+    url.searchParams.set('limit', '20')
+
+    const initial = await get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
+    const pages = getPageList(Math.floor(initial.meta.total / initial.meta.limit), 1)
+    const remaining = await Promise.all(
+      pages.map((page) => {
+        url.searchParams.set('page', String(page))
+
+        return get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
+      }),
+    )
+
+    return {
+      data: initial.data.concat(...remaining.map((page) => page.data)),
+    }
   },
 }
 

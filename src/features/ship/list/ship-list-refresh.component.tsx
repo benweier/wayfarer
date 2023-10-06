@@ -32,7 +32,7 @@ export const ShipListRefresh = () => {
         className="btn btn-outline btn-warn btn-sm"
         disabled={isFetching}
         onClick={() => {
-          client.invalidateQueries({ queryKey: getShipListQuery.getQueryKey() })
+          void client.invalidateQueries({ queryKey: getShipListQuery.getQueryKey() })
         }}
       >
         Refresh
