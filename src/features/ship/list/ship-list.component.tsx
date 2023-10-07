@@ -8,6 +8,8 @@ export const ShipList = () => {
   const { data, isFetching } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
+    staleTime: Infinity,
+    gcTime: Infinity,
   })
   const ships = data.data
 

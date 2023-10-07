@@ -10,6 +10,8 @@ export const SystemFleet = () => {
   const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
+    staleTime: Infinity,
+    gcTime: Infinity,
     select: (response): SpaceTradersResponse<ShipResponse[], Meta> => ({
       data: response.data.filter((ship) => ship.nav.systemSymbol === system.symbol),
       meta: response.meta,

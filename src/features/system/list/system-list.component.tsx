@@ -29,6 +29,8 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   const fleetQuery = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
+    staleTime: Infinity,
+    gcTime: Infinity,
     select: (response) => {
       return response.data.reduce<Set<string>>((result, ship) => {
         result.add(ship.nav.systemSymbol)

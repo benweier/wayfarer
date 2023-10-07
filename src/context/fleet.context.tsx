@@ -13,6 +13,8 @@ export const FleetStore = ({ children }: PropsWithChildren) => {
   const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
+    staleTime: Infinity,
+    gcTime: Infinity,
   })
 
   return <FleetStoreContext.Provider value={data.data}>{children}</FleetStoreContext.Provider>

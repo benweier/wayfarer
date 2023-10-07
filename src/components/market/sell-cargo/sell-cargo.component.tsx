@@ -27,7 +27,6 @@ export const SellCargo = ({
   const { mutateAsync } = useMutation({
     mutationKey: createShipCargoSellMutation.getMutationKey(),
     mutationFn: createShipCargoSellMutation.mutationFn,
-
     onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
       const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())

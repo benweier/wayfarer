@@ -15,6 +15,8 @@ export const WaypointFleetList = ({ Item = ShipItem }: WaypointFleetListProps) =
       ),
       meta: response.meta,
     }),
+    staleTime: Infinity,
+    gcTime: Infinity,
   })
   const ships = data.data
 
