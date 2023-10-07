@@ -28,7 +28,9 @@ type FleetQueryKey<T extends keyof typeof FLEET_QUERIES> = ReturnType<(typeof FL
 
 export const getShipListQuery = {
   getQueryKey: FLEET_QUERIES.shipList,
-  queryFn: async ({ signal }: QueryFunctionContext<FleetQueryKey<'shipList'>>) => {
+  queryFn: async ({
+    signal,
+  }: QueryFunctionContext<FleetQueryKey<'shipList'>>): Promise<SpaceTradersResponse<ShipResponse[], Meta>> => {
     const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     url.searchParams.set('page', '1')
@@ -43,10 +45,10 @@ export const getShipListQuery = {
         return get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
       }),
     )
+    const data = initial.data.concat(...remaining.map((page) => page.data))
+    const meta = { page: 1, total: data.length, limit: data.length }
 
-    return {
-      data: initial.data.concat(...remaining.map((page) => page.data)),
-    }
+    return { data, meta }
   },
 }
 
