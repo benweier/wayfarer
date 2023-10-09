@@ -1,22 +1,17 @@
 import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
-
-const getPageNumber = (page: string | null) => {
-  const pageNumber = parseInt(page ?? '1')
-
-  return Number.isNaN(pageNumber) ? 1 : Math.max(1, pageNumber)
-}
+import { getRequestPagination } from '@/utilities/get-request-pagination.helper'
 
 export const usePagination = () => {
-  const [params, setParams] = useSearchParams({ page: '1' })
-  const page = getPageNumber(params.get('page'))
+  const [params, setParams] = useSearchParams()
+  const { page, limit } = getRequestPagination(params)
 
   return {
     page,
-    limit: 20,
+    limit,
     setPage: useCallback(
       (page: number) => {
-        setParams({ page: page.toString() })
+        setParams({ page })
       },
       [setParams],
     ),
