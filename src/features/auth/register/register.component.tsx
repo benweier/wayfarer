@@ -1,14 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
 import { ROUTES } from '@/config/routes'
-import { useLocation } from '@/hooks/use-location.hook'
 import { createAgentMutation } from '@/services/api/spacetraders/auth'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
+import { registerSchema } from '@/validators/register.schema'
 import { AccessTokenDialog } from './access-token-dialog.component'
 import { FactionInfo } from './faction-info.component'
 import { type RegisterSchema, registerValidation } from './register.validation'
@@ -68,11 +68,10 @@ const FactionField = () => {
 }
 
 export const Register = () => {
-  const location = useLocation<Partial<RegisterSchema>>()
+  const loc = useLocation()
+  const result = registerSchema.safeParse(loc.state)
   const methods = useForm<RegisterSchema>({
-    defaultValues: {
-      symbol: location.state?.symbol,
-    },
+    defaultValues: result.success ? result.data : undefined,
     resolver: zodResolver(registerValidation),
   })
   const { mutateAsync, isPending, isSuccess, data } = useMutation({

@@ -3,21 +3,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { useLocation } from '@/hooks/use-location.hook'
 import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import { useAuthStore } from '@/store/auth'
 import { type LoginSchema, loginValidation } from './login.validation'
 
 export const Login = () => {
-  const loc = useLocation<Partial<LoginSchema>>()
+  const loc = useLocation()
   const { signin } = useAuthStore((state) => state.actions)
+  const result = loginValidation.safeParse(loc.state)
   const methods = useForm<LoginSchema>({
-    defaultValues: {
-      symbol: loc.state?.symbol ?? '',
-      token: loc.state?.token ?? '',
-    },
+    defaultValues: result.success ? result.data : undefined,
     resolver: zodResolver(loginValidation),
   })
   const { mutateAsync, isPending } = useMutation({
