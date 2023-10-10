@@ -1,16 +1,8 @@
-import { defer, redirect } from 'react-router-dom'
-import { ROUTES } from '@/config/routes'
+import { defer } from 'react-router-dom'
 import { getContractListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
-import { getState } from '@/store/auth'
 
 export const loader: QueryClientLoaderFn = (client) => async () => {
-  const { isAuthenticated } = getState()
-
-  if (!isAuthenticated) {
-    return redirect(ROUTES.LOGIN)
-  }
-
   try {
     const contracts = client.ensureQueryData({
       queryKey: getContractListQuery.getQueryKey(),

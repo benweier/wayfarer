@@ -1,13 +1,5 @@
-import { type LoaderFunction, redirect } from 'react-router-dom'
-import { ROUTES } from '@/config/routes'
-import { getState } from '@/store/auth'
+import { type LoaderFunction } from 'react-router-dom'
 
 export const loader: LoaderFunction = () => {
-  const { isAuthenticated } = getState()
-
-  if (!isAuthenticated) {
-    return redirect(ROUTES.LOGIN)
-  }
-
   return null
 }

@@ -1,21 +1,14 @@
-import { defer, redirect } from 'react-router-dom'
-import { ROUTES } from '@/config/routes'
+import { defer } from 'react-router-dom'
 import { getContractByIdQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
-import { getState } from '@/store/auth'
 
 export const loader: QueryClientLoaderFn =
   (client) =>
   async ({ params }) => {
-    const { isAuthenticated } = getState()
     const { contractID } = params
 
     if (!contractID) {
       throw new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
-    }
-
-    if (!isAuthenticated) {
-      return redirect(ROUTES.LOGIN)
     }
 
     try {

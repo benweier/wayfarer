@@ -2,17 +2,11 @@ import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
-import { getState } from '@/store/auth'
 
 export const loader: QueryClientLoaderFn =
   (client) =>
   async ({ params }) => {
-    const { isAuthenticated } = getState()
     const { systemSymbol, waypointSymbol } = params
-
-    if (!isAuthenticated) {
-      return redirect(ROUTES.LOGIN)
-    }
 
     if (!systemSymbol || !waypointSymbol) {
       redirect(ROUTES.SYSTEMS)

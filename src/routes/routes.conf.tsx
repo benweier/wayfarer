@@ -3,6 +3,7 @@ import { NotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
 import { client } from '@/services/query-client'
 import { getState } from '@/store/auth'
+import { withAuth } from '@/utilities/with-auth.loader'
 import * as auth from './auth'
 import { Core } from './core.route'
 import * as home from './home'
@@ -92,7 +93,7 @@ export const routes: RouteObject[] = [
 
       {
         element: <auth.Required />,
-        loader: auth.loader,
+        loader: withAuth(() => null),
         children: [
           {
             async lazy() {
@@ -100,7 +101,7 @@ export const routes: RouteObject[] = [
 
               return {
                 element: <mod.Layout />,
-                loader: mod.loader(client),
+                loader: withAuth(mod.loader(client)),
               }
             },
             children: [
@@ -118,7 +119,7 @@ export const routes: RouteObject[] = [
 
                   return {
                     element: <mod.Route />,
-                    loader: mod.loader(client),
+                    loader: withAuth(mod.loader(client)),
                   }
                 },
                 children: [
@@ -130,7 +131,7 @@ export const routes: RouteObject[] = [
 
                       return {
                         element: <mod.Route />,
-                        loader: mod.loader(client),
+                        loader: withAuth(mod.loader(client)),
                       }
                     },
                   },
@@ -148,7 +149,7 @@ export const routes: RouteObject[] = [
 
                       return {
                         element: <mod.Route />,
-                        loader: mod.loader(client),
+                        loader: withAuth(mod.loader(client)),
                       }
                     },
                   },
@@ -161,7 +162,7 @@ export const routes: RouteObject[] = [
 
                       return {
                         element: <mod.Route />,
-                        loader: mod.loader(client),
+                        loader: withAuth(mod.loader(client)),
                       }
                     },
                     children: [
@@ -183,7 +184,7 @@ export const routes: RouteObject[] = [
 
                               return {
                                 element: <mod.Route />,
-                                loader: mod.loader(client),
+                                loader: withAuth(mod.loader(client)),
                               }
                             },
                           },
@@ -208,7 +209,7 @@ export const routes: RouteObject[] = [
 
                               return {
                                 element: <mod.Route />,
-                                loader: mod.loader(client),
+                                loader: withAuth(mod.loader(client)),
                               }
                             },
                           },
@@ -230,7 +231,7 @@ export const routes: RouteObject[] = [
 
                       return {
                         element: <mod.Route />,
-                        loader: mod.loader(client),
+                        loader: withAuth(mod.loader(client)),
                       }
                     },
                   },
@@ -246,7 +247,7 @@ export const routes: RouteObject[] = [
 
                           return {
                             element: <mod.Route />,
-                            loader: mod.loader(client),
+                            loader: withAuth(mod.loader(client)),
                           }
                         },
                       },
@@ -259,7 +260,7 @@ export const routes: RouteObject[] = [
 
                           return {
                             element: <mod.Route />,
-                            loader: mod.loader(client),
+                            loader: withAuth(mod.loader(client)),
                           }
                         },
                       },
