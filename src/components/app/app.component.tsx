@@ -8,9 +8,9 @@ import {
   createBrowserRouter,
   createRoutesFromChildren,
   matchRoutes,
+  useLocation,
   useNavigationType,
 } from 'react-router-dom'
-import { useLocation } from '@/hooks/use-location.hook'
 import { routes } from '@/routes/routes.conf'
 import { Fallback } from '@/routes/routes.fallback'
 import { client } from '@/services/query-client'

@@ -1,16 +1,13 @@
 import { Suspense } from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { Layout } from '@/features/auth'
-import { useLocation } from '@/hooks/use-location.hook'
 import { useAuthStore } from '@/store/auth'
 import { redirectSchema } from '@/validators/redirect.schema'
 
-type Redirect = { destination: string }
-
 export const Route = () => {
   const { isAuthenticated } = useAuthStore()
-  const loc = useLocation<{ redirect: Redirect }>()
+  const loc = useLocation()
 
   if (isAuthenticated) {
     const result = redirectSchema.safeParse(loc.state)
