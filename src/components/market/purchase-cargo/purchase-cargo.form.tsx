@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
-import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
+import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { type PurchaseCargoFormProps } from '@/components/market/purchase-cargo/purchase-cargo.types'
 import { type PurchaseCargoSchema, validation } from '@/components/market/purchase-cargo/purchase.validation'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
@@ -20,8 +20,9 @@ const SubmitPurchase = () => {
   )
 }
 const PurchaseCargoPrice = ({ perUnit }: { perUnit: number }) => {
+  const { control } = useFormContext<PurchaseCargoSchema>()
   const { isAuthenticated, agent } = useAuthStore()
-  const quantity = useWatch<{ quantity?: number }>({ name: 'quantity' }) ?? 0
+  const quantity = useWatch({ control, name: 'quantity' })
   const credits = isAuthenticated ? agent.credits : 0
 
   return (
@@ -32,9 +33,7 @@ const PurchaseCargoPrice = ({ perUnit }: { perUnit: number }) => {
         })}
       >
         <div className="text-secondary text-sm">Purchase Price</div>
-        <div className="truncate text-xl font-bold">
-          {Number.isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}
-        </div>
+        <div className="truncate text-xl font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
       </div>
 
       <div>

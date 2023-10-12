@@ -1,11 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
-import { Controller, FormProvider, useForm, useFormState, useWatch } from 'react-hook-form'
+import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { type SellCargoSchema, validation } from '@/components/market/sell-cargo/sell.validation'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
-import { useWaypointContext } from '@/context/waypoint.context'
+import { useWaypointResponse } from '@/context/waypoint.context'
 import { type SellCargoFormProps } from './sell-cargo.types'
 
 const SubmitPurchase = () => {
@@ -18,14 +18,15 @@ const SubmitPurchase = () => {
   )
 }
 const SellPrice = ({ perUnit }: { perUnit: number }) => {
-  const quantity = useWatch<{ quantity?: number }>({ name: 'quantity' }) ?? 0
+  const { control } = useFormContext<SellCargoSchema>()
+  const quantity = useWatch({ control, name: 'quantity' })
 
   return (
     <div className="flex flex-wrap items-center gap-12">
       <div className="[max-width:50%]">
         <div className="text-secondary text-sm">Sell Price</div>
         <div className="truncate text-xl font-bold">
-          {Number.isNaN(quantity) ? 0 : new Intl.NumberFormat('en-US').format(quantity * perUnit)}
+          {isNaN(quantity) ? 0 : new Intl.NumberFormat('en-US').format(quantity * perUnit)}
         </div>
       </div>
     </div>
@@ -33,7 +34,7 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
 }
 
 export const SellCargoForm = ({ ship, good, onSubmit }: SellCargoFormProps) => {
-  const { waypointSymbol } = useWaypointContext()
+  const waypoint = useWaypointResponse()
   const methods = useForm<SellCargoSchema>({
     defaultValues: { ship: ship?.symbol, item: good.symbol },
     resolver: yupResolver(validation),
@@ -86,7 +87,7 @@ export const SellCargoForm = ({ ship, good, onSubmit }: SellCargoFormProps) => {
                     if (value) field.onChange(value.symbol)
                   }}
                   select={(response) => ({
-                    ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypointSymbol),
+                    ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
                   })}
                 />
               </QuerySuspenseBoundary>
