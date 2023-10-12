@@ -1,14 +1,22 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useContext } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { Badge } from '@/components/badge'
+import { PurchaseCargo } from '@/components/market/purchase-cargo'
+import { SellCargo } from '@/components/market/sell-cargo'
+import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
+import { ShipContext } from '@/context/ship.context'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type MarketTradeGood } from '@/types/spacetraders'
+import { formatNumber } from '@/utilities/number'
 import { WaypointMarketItem } from './waypoint-market-item.component'
 import { makeSortByTradeAttributeFn } from './waypoint-market-preferences.utilities'
 import { WaypointMarketLayout } from './waypoint-market.layout'
 import { type WaypointMarketListProps } from './waypoint-market.types'
 
 export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarketListProps) => {
+  const ship = useContext(ShipContext)
   const waypoint = useWaypointResponse()
   const [searchParams] = useSearchParams()
   const { data } = useSuspenseQuery({
@@ -40,7 +48,51 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
           {market.imports.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return <Item key={item.symbol} item={item} trade={good} />
+            return (
+              <Item
+                key={item.symbol}
+                item={item}
+                trade={
+                  good !== undefined && (
+                    <div className="flex flex-col items-end justify-end">
+                      <span className="font-bold">{formatNumber(good.tradeVolume)}</span>
+                      <Badge>{MARKET_TRADE_GOOD_SUPPLY.get(good.supply)}</Badge>
+                    </div>
+                  )
+                }
+              >
+                {!!good && (
+                  <div className="min-w-[280px]">
+                    <div className="grid grid-cols-2 gap-2">
+                      <PurchaseCargo
+                        ship={ship}
+                        good={good}
+                        action={(props) => (
+                          <button className="btn btn-outline btn-danger" {...props}>
+                            <span className="flex flex-col">
+                              <span className="text-xs uppercase">Buy</span>
+                              <span className="text-base font-bold">{formatNumber(good.purchasePrice)}</span>
+                            </span>
+                          </button>
+                        )}
+                      />
+                      <SellCargo
+                        ship={ship}
+                        good={good}
+                        action={(props) => (
+                          <button className="btn btn-outline btn-confirm" {...props}>
+                            <span className="flex flex-col">
+                              <span className="text-xs uppercase">Sell</span>
+                              <span className="text-base font-bold">{formatNumber(good.sellPrice)}</span>
+                            </span>
+                          </button>
+                        )}
+                      />
+                    </div>
+                  </div>
+                )}
+              </Item>
+            )
           })}
         </>
       }
@@ -56,7 +108,51 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
           {market.exports.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return <Item key={item.symbol} item={item} trade={good} />
+            return (
+              <Item
+                key={item.symbol}
+                item={item}
+                trade={
+                  good !== undefined && (
+                    <div className="flex flex-col items-end justify-end">
+                      <span className="font-bold">{formatNumber(good.tradeVolume)}</span>
+                      <Badge>{MARKET_TRADE_GOOD_SUPPLY.get(good.supply)}</Badge>
+                    </div>
+                  )
+                }
+              >
+                {!!good && (
+                  <div className="min-w-[280px]">
+                    <div className="grid grid-cols-2 gap-2">
+                      <PurchaseCargo
+                        ship={ship}
+                        good={good}
+                        action={(props) => (
+                          <button className="btn btn-outline btn-danger" {...props}>
+                            <span className="flex flex-col">
+                              <span className="text-xs uppercase">Buy</span>
+                              <span className="text-base font-bold">{formatNumber(good.purchasePrice)}</span>
+                            </span>
+                          </button>
+                        )}
+                      />
+                      <SellCargo
+                        ship={ship}
+                        good={good}
+                        action={(props) => (
+                          <button className="btn btn-outline btn-confirm" {...props}>
+                            <span className="flex flex-col">
+                              <span className="text-xs uppercase">Sell</span>
+                              <span className="text-base font-bold">{formatNumber(good.sellPrice)}</span>
+                            </span>
+                          </button>
+                        )}
+                      />
+                    </div>
+                  </div>
+                )}
+              </Item>
+            )
           })}
         </>
       }
@@ -72,7 +168,51 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
           {market.exchange.sort(sorter).map((item) => {
             const good = tradeGoods?.get(item.symbol)
 
-            return <Item key={item.symbol} item={item} trade={good} />
+            return (
+              <Item
+                key={item.symbol}
+                item={item}
+                trade={
+                  good !== undefined && (
+                    <div className="flex flex-col items-end justify-end">
+                      <span className="font-bold">{formatNumber(good.tradeVolume)}</span>
+                      <Badge>{MARKET_TRADE_GOOD_SUPPLY.get(good.supply)}</Badge>
+                    </div>
+                  )
+                }
+              >
+                {!!good && (
+                  <div className="min-w-[280px]">
+                    <div className="grid grid-cols-2 gap-2">
+                      <PurchaseCargo
+                        ship={ship}
+                        good={good}
+                        action={(props) => (
+                          <button className="btn btn-outline btn-danger" {...props}>
+                            <span className="flex flex-col">
+                              <span className="text-xs uppercase">Buy</span>
+                              <span className="text-base font-bold">{formatNumber(good.purchasePrice)}</span>
+                            </span>
+                          </button>
+                        )}
+                      />
+                      <SellCargo
+                        ship={ship}
+                        good={good}
+                        action={(props) => (
+                          <button className="btn btn-outline btn-confirm" {...props}>
+                            <span className="flex flex-col">
+                              <span className="text-xs uppercase">Sell</span>
+                              <span className="text-base font-bold">{formatNumber(good.sellPrice)}</span>
+                            </span>
+                          </button>
+                        )}
+                      />
+                    </div>
+                  </div>
+                )}
+              </Item>
+            )
           })}
         </>
       }
