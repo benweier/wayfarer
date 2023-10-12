@@ -1,14 +1,17 @@
 import { useAtom } from 'jotai'
+import { useContext } from 'react'
 import { Badge } from '@/components/badge'
 import { PurchaseCargo } from '@/components/market/purchase-cargo'
 import { SellCargo } from '@/components/market/sell-cargo'
 import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
+import { ShipContext } from '@/context/ship.context'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
 import { formatNumber } from '@/utilities/number'
 import { type WaypointMarketItemProps } from './waypoint-market.types'
 
 export const WaypointMarketItem = ({ item, trade }: WaypointMarketItemProps) => {
   const [showDescription] = useAtom(marketDescriptionAtom)
+  const ship = useContext(ShipContext)
 
   return (
     <div className="relative @container/market-item">
@@ -30,6 +33,7 @@ export const WaypointMarketItem = ({ item, trade }: WaypointMarketItemProps) => 
           <div className="min-w-[280px]">
             <div className="grid grid-cols-2 gap-2">
               <PurchaseCargo
+                ship={ship}
                 good={trade}
                 action={(props) => (
                   <button className="btn btn-outline btn-danger" {...props}>
@@ -41,6 +45,7 @@ export const WaypointMarketItem = ({ item, trade }: WaypointMarketItemProps) => 
                 )}
               />
               <SellCargo
+                ship={ship}
                 good={trade}
                 action={(props) => (
                   <button className="btn btn-outline btn-confirm" {...props}>

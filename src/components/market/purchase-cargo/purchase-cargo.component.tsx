@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { useContext } from 'react'
 import { TradeGood } from '@/components/market/trade-good'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { TRADE_SYMBOL } from '@/config/constants'
-import { ShipContext } from '@/context/ship.context'
 import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
@@ -13,6 +11,7 @@ import { PurchaseCargoForm } from './purchase-cargo.form'
 import { type PurchaseCargoProps } from './purchase-cargo.types'
 
 export const PurchaseCargo = ({
+  ship,
   good,
   action = (props) => (
     <button className="btn btn-outline btn-danger" {...props}>
@@ -22,7 +21,6 @@ export const PurchaseCargo = ({
 }: PurchaseCargoProps) => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore((state) => state.actions)
-  const ship = useContext(ShipContext)
   const client = useQueryClient()
   const { mutateAsync } = useMutation({
     mutationKey: createShipCargoPurchaseMutation.getMutationKey(),
@@ -60,7 +58,7 @@ export const PurchaseCargo = ({
     <Modal
       ref={ref}
       size="md"
-      trigger={<Modal.Trigger disabled={good.tradeVolume === 0}>{action}</Modal.Trigger>}
+      trigger={<Modal.Trigger disabled={good.tradeVolume === 0 || ship?.cargo.capacity === 0}>{action}</Modal.Trigger>}
       closeable
     >
       <div className="grid gap-8">

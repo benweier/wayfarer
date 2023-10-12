@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { useContext } from 'react'
 import { TradeGood } from '@/components/market/trade-good'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { TRADE_SYMBOL } from '@/config/constants'
-import { ShipContext } from '@/context/ship.context'
 import { createShipCargoSellMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
@@ -13,6 +11,7 @@ import { SellCargoForm } from './sell-cargo.form'
 import { type SellCargoProps } from './sell-cargo.types'
 
 export const SellCargo = ({
+  ship,
   good,
   action = (props) => (
     <button className="btn btn-outline btn-confirm" {...props}>
@@ -22,7 +21,6 @@ export const SellCargo = ({
 }: SellCargoProps) => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore((state) => state.actions)
-  const ship = useContext(ShipContext)
   const client = useQueryClient()
   const { mutateAsync } = useMutation({
     mutationKey: createShipCargoSellMutation.getMutationKey(),

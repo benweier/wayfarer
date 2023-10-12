@@ -3,6 +3,7 @@ import { type MarketTradeGood, type ShipResponse } from '@/types/spacetraders'
 import { type PurchaseCargoSchema } from './purchase.validation'
 
 export type PurchaseCargoProps = {
+  ship?: ShipResponse
   good: MarketTradeGood
   action?: (props: ButtonHTMLAttributes<HTMLButtonElement>) => ReactNode
 }
