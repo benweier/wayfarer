@@ -139,6 +139,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                   <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
                     <WaypointContext.Provider value={{ waypointSymbol: ship.nav.waypointSymbol }}>
                       <SellCargo
+                        ship={ship}
                         good={good}
                         action={(props) => (
                           <button className="btn btn-confirm btn-flat btn-sm" {...props}>
