@@ -2,11 +2,11 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Badge } from '@/components/badge'
-import { PurchaseCargo } from '@/components/market/purchase-cargo'
-import { SellCargo } from '@/components/market/sell-cargo'
 import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
 import { ShipContext } from '@/context/ship.context'
 import { useWaypointResponse } from '@/context/waypoint.context'
+import { TradeGoodBuy } from '@/features/trade-good/buy'
+import { TradeGoodSell } from '@/features/trade-good/sell'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type MarketTradeGood } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number'
@@ -64,7 +64,7 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                 {!!good && (
                   <div className="min-w-[280px]">
                     <div className="grid grid-cols-2 gap-2">
-                      <PurchaseCargo
+                      <TradeGoodBuy
                         ship={ship}
                         good={good}
                         action={(props) => (
@@ -76,7 +76,7 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                           </button>
                         )}
                       />
-                      <SellCargo
+                      <TradeGoodSell
                         ship={ship}
                         good={good}
                         action={(props) => (
@@ -124,7 +124,7 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                 {!!good && (
                   <div className="min-w-[280px]">
                     <div className="grid grid-cols-2 gap-2">
-                      <PurchaseCargo
+                      <TradeGoodBuy
                         ship={ship}
                         good={good}
                         action={(props) => (
@@ -136,7 +136,7 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                           </button>
                         )}
                       />
-                      <SellCargo
+                      <TradeGoodSell
                         ship={ship}
                         good={good}
                         action={(props) => (
@@ -184,7 +184,7 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                 {!!good && (
                   <div className="min-w-[280px]">
                     <div className="grid grid-cols-2 gap-2">
-                      <PurchaseCargo
+                      <TradeGoodBuy
                         ship={ship}
                         good={good}
                         action={(props) => (
@@ -196,7 +196,7 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                           </button>
                         )}
                       />
-                      <SellCargo
+                      <TradeGoodSell
                         ship={ship}
                         good={good}
                         action={(props) => (

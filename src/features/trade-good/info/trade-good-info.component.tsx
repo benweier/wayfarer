@@ -1,8 +1,8 @@
 import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
 import { formatNumber } from '@/utilities/number'
-import { type TradeGoodProps } from './trade-good.types'
+import { type TradeGoodInfoProps } from './trade-good-info.types'
 
-export const TradeGood = ({ price, volume, supply }: TradeGoodProps) => {
+export const TradeGoodInfo = ({ price, volume, supply }: TradeGoodInfoProps) => {
   return (
     <div className="flex items-center gap-12">
       <div>

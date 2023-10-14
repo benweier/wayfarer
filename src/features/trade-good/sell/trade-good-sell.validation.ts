@@ -6,4 +6,4 @@ export const validation = object({
   quantity: number().min(1).required(),
 })
 
-export type SellCargoSchema = InferType<typeof validation>
+export type TradeGoodSellSchema = InferType<typeof validation>

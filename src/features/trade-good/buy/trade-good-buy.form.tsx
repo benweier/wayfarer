@@ -1,16 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
-import { type PurchaseCargoFormProps } from '@/components/market/purchase-cargo/purchase-cargo.types'
-import { type PurchaseCargoSchema, validation } from '@/components/market/purchase-cargo/purchase.validation'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipSelect from '@/components/ship/select.component'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { useAuthStore } from '@/store/auth'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
+import { type TradeGoodBuyFormProps } from './trade-good-buy.types'
+import { type TradeGoodBuySchema, validation } from './trade-good-buy.validation'
 
-const SubmitPurchase = () => {
+const TradeGoodBuySubmit = () => {
   const { isSubmitting, isValid } = useFormState()
 
   return (
@@ -19,8 +19,8 @@ const SubmitPurchase = () => {
     </button>
   )
 }
-const PurchaseCargoPrice = ({ perUnit }: { perUnit: number }) => {
-  const { control } = useFormContext<PurchaseCargoSchema>()
+const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {
+  const { control } = useFormContext<TradeGoodBuySchema>()
   const { isAuthenticated, agent } = useAuthStore()
   const quantity = useWatch({ control, name: 'quantity' })
   const credits = isAuthenticated ? agent.credits : 0
@@ -44,9 +44,9 @@ const PurchaseCargoPrice = ({ perUnit }: { perUnit: number }) => {
   )
 }
 
-export const PurchaseCargoForm = ({ ship, good, onSubmit }: PurchaseCargoFormProps) => {
+export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps) => {
   const waypoint = useWaypointResponse()
-  const methods = useForm<PurchaseCargoSchema>({
+  const methods = useForm<TradeGoodBuySchema>({
     defaultValues: { ship: ship?.symbol, item: good.symbol },
     resolver: yupResolver(validation),
     context: { good },
@@ -114,9 +114,9 @@ export const PurchaseCargoForm = ({ ship, good, onSubmit }: PurchaseCargoFormPro
           />
         </div>
 
-        <PurchaseCargoPrice perUnit={good.purchasePrice} />
+        <TradeGoodBuyPrice perUnit={good.purchasePrice} />
 
-        <SubmitPurchase />
+        <TradeGoodBuySubmit />
       </form>
     </FormProvider>
   )

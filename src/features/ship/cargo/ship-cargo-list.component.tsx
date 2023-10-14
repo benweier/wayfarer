@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppIcon } from '@/components/icons'
-import { SellCargo } from '@/components/market/sell-cargo'
 import { Modal, useModalActions } from '@/components/modal'
 import { REFINE_ITEM_TYPE, SHIP_MOUNT_TYPE } from '@/config/constants'
 import { useShipResponse } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
+import { TradeGoodSell } from '@/features/trade-good/sell'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
 import { ShipCargoItem } from './ship-cargo-item.component'
@@ -138,7 +138,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                 {good !== undefined && (
                   <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
                     <WaypointContext.Provider value={{ waypointSymbol: ship.nav.waypointSymbol }}>
-                      <SellCargo
+                      <TradeGoodSell
                         ship={ship}
                         good={good}
                         action={(props) => (

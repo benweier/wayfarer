@@ -6,4 +6,4 @@ export const validation = object({
   quantity: number().min(1).max(ref('$good.tradeVolume')).required(),
 })
 
-export type PurchaseCargoSchema = InferType<typeof validation>
+export type TradeGoodBuySchema = InferType<typeof validation>

@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
-import { type SellCargoSchema, validation } from '@/components/market/sell-cargo/sell.validation'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { type SellCargoFormProps } from './sell-cargo.types'
+import { type TradeGoodSellFormProps } from './trade-good-sell.types'
+import { type TradeGoodSellSchema, validation } from './trade-good-sell.validation'
 
 const SubmitPurchase = () => {
   const { isSubmitting, isValid } = useFormState()
@@ -18,7 +18,7 @@ const SubmitPurchase = () => {
   )
 }
 const SellPrice = ({ perUnit }: { perUnit: number }) => {
-  const { control } = useFormContext<SellCargoSchema>()
+  const { control } = useFormContext<TradeGoodSellSchema>()
   const quantity = useWatch({ control, name: 'quantity' })
 
   return (
@@ -33,9 +33,9 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
   )
 }
 
-export const SellCargoForm = ({ ship, good, onSubmit }: SellCargoFormProps) => {
+export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormProps) => {
   const waypoint = useWaypointResponse()
-  const methods = useForm<SellCargoSchema>({
+  const methods = useForm<TradeGoodSellSchema>({
     defaultValues: { ship: ship?.symbol, item: good.symbol },
     resolver: yupResolver(validation),
   })
