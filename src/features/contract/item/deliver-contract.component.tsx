@@ -1,12 +1,27 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useCallback } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
-import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
+import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type ContractDelivery, type ShipResponse } from '@/types/spacetraders'
 import { type DeliverContractSchema, validation } from './deliver-contract.validation'
+
+const getShipOption: ShipSelectItemReducer = (ships, ship) => {
+  return ships.set(ship.symbol, {
+    ship,
+    label: (
+      <div className="flex items-baseline gap-2">
+        <span className="font-bold">{ship.symbol}</span>
+      </div>
+    ),
+    option: (
+      <div className="flex flex-col">
+        <div className="font-semibold">{ship.symbol}</div>
+      </div>
+    ),
+  })
+}
 
 export const DeliverContractForm = ({
   deliver,
@@ -19,21 +34,6 @@ export const DeliverContractForm = ({
   const methods = useForm<DeliverContractSchema>({
     resolver: yupResolver(validation),
   })
-  const getShipOption: ShipSelect.ShipReducer = useCallback((ships, ship) => {
-    return ships.set(ship.symbol, {
-      ship,
-      label: (
-        <div className="flex items-baseline gap-2">
-          <span className="font-bold">{ship.symbol}</span>
-        </div>
-      ),
-      option: (
-        <div className="flex flex-col">
-          <div className="font-semibold">{ship.symbol}</div>
-        </div>
-      ),
-    })
-  }, [])
 
   return (
     <FormProvider {...methods}>
@@ -42,13 +42,13 @@ export const DeliverContractForm = ({
           control={methods.control}
           name="ship"
           render={({ field }) => (
-            <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
-              <ShipSelect.Field
-                getShipOption={getShipOption}
+            <QuerySuspenseBoundary fallback={<ShipSelectFallback />}>
+              <ShipSelectField
+                getShipItem={getShipOption}
                 onChange={(value) => {
                   if (value) field.onChange(value.symbol)
                 }}
-                select={(response) => ({
+                getShipList={(response) => ({
                   ships: response.data,
                 })}
               />
