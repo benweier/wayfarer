@@ -2,9 +2,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import * as ShipSelect from '@/components/ship/select.component'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useWaypointResponse } from '@/context/waypoint.context'
+import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type TradeGoodSellFormProps } from './trade-good-sell.types'
 import { type TradeGoodSellSchema, validation } from './trade-good-sell.validation'
 
@@ -39,7 +39,7 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
     defaultValues: { ship: ship?.symbol, item: good.symbol },
     resolver: yupResolver(validation),
   })
-  const getShipOption: ShipSelect.ShipReducer = useCallback(
+  const getShipItem: ShipSelectItemReducer = useCallback(
     (ships, ship) => {
       const disabled = ship.cargo.inventory.findIndex((item) => item.symbol === good.symbol) === -1
       const count = ship.cargo.inventory.reduce((count, item) => {
@@ -80,13 +80,13 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
             control={methods.control}
             name="ship"
             render={({ field }) => (
-              <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
-                <ShipSelect.Field
-                  getShipOption={getShipOption}
+              <QuerySuspenseBoundary fallback={<ShipSelectFallback />}>
+                <ShipSelectField
+                  getShipItem={getShipItem}
                   onChange={(value) => {
                     if (value) field.onChange(value.symbol)
                   }}
-                  select={(response) => ({
+                  getShipList={(response) => ({
                     ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
                   })}
                 />

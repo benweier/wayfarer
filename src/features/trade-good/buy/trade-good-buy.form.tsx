@@ -1,15 +1,38 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import * as ShipSelect from '@/components/ship/select.component'
 import { useWaypointResponse } from '@/context/waypoint.context'
+import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { useAuthStore } from '@/store/auth'
 import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 import { type TradeGoodBuyFormProps } from './trade-good-buy.types'
 import { type TradeGoodBuySchema, validation } from './trade-good-buy.validation'
 
+const getShipItem: ShipSelectItemReducer = (ships, ship) => {
+  const disabled = ship.cargo.units >= ship.cargo.capacity
+
+  return ships.set(ship.symbol, {
+    ship,
+    label: (
+      <div className="flex items-baseline gap-2">
+        <span className="font-bold">{ship.symbol}</span>
+        <span className="text-secondary">
+          (Cargo: {ship.cargo.units} / {ship.cargo.capacity})
+        </span>
+      </div>
+    ),
+    option: (
+      <div className="flex flex-col">
+        <div className="font-bold">{ship.symbol}</div>
+        <div className="text-secondary text-xs">
+          Cargo: {ship.cargo.units} / {ship.cargo.capacity}
+        </div>
+      </div>
+    ),
+    disabled,
+  })
+}
 const TradeGoodBuySubmit = () => {
   const { isSubmitting, isValid } = useFormState()
 
@@ -51,30 +74,6 @@ export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps
     resolver: yupResolver(validation),
     context: { good },
   })
-  const getShipOption: ShipSelect.ShipReducer = useCallback((ships, ship) => {
-    const disabled = ship.cargo.units >= ship.cargo.capacity
-
-    return ships.set(ship.symbol, {
-      ship,
-      label: (
-        <div className="flex items-baseline gap-2">
-          <span className="font-bold">{ship.symbol}</span>
-          <span className="text-secondary">
-            (Cargo: {ship.cargo.units} / {ship.cargo.capacity})
-          </span>
-        </div>
-      ),
-      option: (
-        <div className="flex flex-col">
-          <div className="font-bold">{ship.symbol}</div>
-          <div className="text-secondary text-xs">
-            Cargo: {ship.cargo.units} / {ship.cargo.capacity}
-          </div>
-        </div>
-      ),
-      disabled,
-    })
-  }, [])
 
   return (
     <FormProvider {...methods}>
@@ -84,13 +83,13 @@ export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps
             control={methods.control}
             name="ship"
             render={({ field }) => (
-              <QuerySuspenseBoundary fallback={<ShipSelect.Skeleton />}>
-                <ShipSelect.Field
-                  getShipOption={getShipOption}
+              <QuerySuspenseBoundary fallback={<ShipSelectFallback />}>
+                <ShipSelectField
+                  getShipItem={getShipItem}
                   onChange={(value) => {
                     if (value) field.onChange(value.symbol)
                   }}
-                  select={(response) => ({
+                  getShipList={(response) => ({
                     ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
                   })}
                 />

@@ -7,18 +7,11 @@ import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } f
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
+import { formatNumber } from '@/utilities/number'
 import { TradeGoodBuyForm } from './trade-good-buy.form'
 import { type TradeGoodBuyProps } from './trade-good-buy.types'
 
-export const TradeGoodBuy = ({
-  ship,
-  good,
-  action = (props) => (
-    <button className="btn btn-outline btn-danger" {...props}>
-      Buy
-    </button>
-  ),
-}: TradeGoodBuyProps) => {
+export const TradeGoodBuy = ({ ship, good }: TradeGoodBuyProps) => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore((state) => state.actions)
   const client = useQueryClient()
@@ -53,15 +46,27 @@ export const TradeGoodBuy = ({
       modal.close()
     },
   })
+  const noCargo = Boolean(ship && ship.cargo.units === ship.cargo.capacity)
 
   return (
     <Modal
       ref={ref}
       size="md"
-      trigger={<Modal.Trigger disabled={good.tradeVolume === 0 || ship?.cargo.capacity === 0}>{action}</Modal.Trigger>}
+      trigger={
+        <Modal.Trigger disabled={good.tradeVolume === 0 || noCargo}>
+          {(props) => (
+            <button className="btn btn-outline btn-danger" {...props}>
+              <span className="flex flex-col">
+                <span className="text-xs uppercase">Buy</span>
+                <span className="text-base font-bold">{formatNumber(good.purchasePrice)}</span>
+              </span>
+            </button>
+          )}
+        </Modal.Trigger>
+      }
       closeable
     >
-      <div className="grid gap-8">
+      <div className="space-y-8">
         <div className="text-title">
           Buy: <span className="font-light">{TRADE_SYMBOL.get(good.symbol)}</span>
         </div>

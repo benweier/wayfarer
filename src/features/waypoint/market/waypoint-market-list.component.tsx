@@ -64,30 +64,8 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                 {!!good && (
                   <div className="min-w-[280px]">
                     <div className="grid grid-cols-2 gap-2">
-                      <TradeGoodBuy
-                        ship={ship}
-                        good={good}
-                        action={(props) => (
-                          <button className="btn btn-outline btn-danger" {...props}>
-                            <span className="flex flex-col">
-                              <span className="text-xs uppercase">Buy</span>
-                              <span className="text-base font-bold">{formatNumber(good.purchasePrice)}</span>
-                            </span>
-                          </button>
-                        )}
-                      />
-                      <TradeGoodSell
-                        ship={ship}
-                        good={good}
-                        action={(props) => (
-                          <button className="btn btn-outline btn-confirm" {...props}>
-                            <span className="flex flex-col">
-                              <span className="text-xs uppercase">Sell</span>
-                              <span className="text-base font-bold">{formatNumber(good.sellPrice)}</span>
-                            </span>
-                          </button>
-                        )}
-                      />
+                      <TradeGoodBuy ship={ship} good={good} />
+                      <TradeGoodSell ship={ship} good={good} />
                     </div>
                   </div>
                 )}
@@ -124,30 +102,8 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                 {!!good && (
                   <div className="min-w-[280px]">
                     <div className="grid grid-cols-2 gap-2">
-                      <TradeGoodBuy
-                        ship={ship}
-                        good={good}
-                        action={(props) => (
-                          <button className="btn btn-outline btn-danger" {...props}>
-                            <span className="flex flex-col">
-                              <span className="text-xs uppercase">Buy</span>
-                              <span className="text-base font-bold">{formatNumber(good.purchasePrice)}</span>
-                            </span>
-                          </button>
-                        )}
-                      />
-                      <TradeGoodSell
-                        ship={ship}
-                        good={good}
-                        action={(props) => (
-                          <button className="btn btn-outline btn-confirm" {...props}>
-                            <span className="flex flex-col">
-                              <span className="text-xs uppercase">Sell</span>
-                              <span className="text-base font-bold">{formatNumber(good.sellPrice)}</span>
-                            </span>
-                          </button>
-                        )}
-                      />
+                      <TradeGoodBuy ship={ship} good={good} />
+                      <TradeGoodSell ship={ship} good={good} />
                     </div>
                   </div>
                 )}
@@ -184,30 +140,8 @@ export const WaypointMarketList = ({ Item = WaypointMarketItem }: WaypointMarket
                 {!!good && (
                   <div className="min-w-[280px]">
                     <div className="grid grid-cols-2 gap-2">
-                      <TradeGoodBuy
-                        ship={ship}
-                        good={good}
-                        action={(props) => (
-                          <button className="btn btn-outline btn-danger" {...props}>
-                            <span className="flex flex-col">
-                              <span className="text-xs uppercase">Buy</span>
-                              <span className="text-base font-bold">{formatNumber(good.purchasePrice)}</span>
-                            </span>
-                          </button>
-                        )}
-                      />
-                      <TradeGoodSell
-                        ship={ship}
-                        good={good}
-                        action={(props) => (
-                          <button className="btn btn-outline btn-confirm" {...props}>
-                            <span className="flex flex-col">
-                              <span className="text-xs uppercase">Sell</span>
-                              <span className="text-base font-bold">{formatNumber(good.sellPrice)}</span>
-                            </span>
-                          </button>
-                        )}
-                      />
+                      <TradeGoodBuy ship={ship} good={good} />
+                      <TradeGoodSell ship={ship} good={good} />
                     </div>
                   </div>
                 )}
