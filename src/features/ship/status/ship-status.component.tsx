@@ -2,7 +2,7 @@ import { ShipIcon } from '@/components/icons'
 import * as ShipActions from '@/features/ship/actions'
 import { type ShipResponse } from '@/types/spacetraders'
 
-export const Inventory = ({ ship }: { ship: ShipResponse }) => {
+export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
   return (
     <div className="flex items-start gap-0.5">
       <div className="flex flex-col items-end gap-0.5">
@@ -23,7 +23,7 @@ export const Inventory = ({ ship }: { ship: ShipResponse }) => {
         </div>
         <ShipActions.Refuel ship={ship} disabled={ship.nav.status !== 'DOCKED'}>
           {(props) => (
-            <button className="btn btn-flat btn-confirm btn-sm rounded-t-sm" {...props}>
+            <button className="btn btn-confirm btn-flat btn-sm rounded-t-sm" {...props}>
               Refuel
             </button>
           )}

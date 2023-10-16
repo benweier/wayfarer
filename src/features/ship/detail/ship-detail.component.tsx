@@ -1,10 +1,10 @@
 import { type PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
-import { Inventory } from '@/components/ship'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
+import { ShipStatus } from '@/features/ship/status'
 import { ShipTransit } from '@/features/ship/transit'
 import { ShipDetailRefresh } from './ship-detail-refresh.component'
 
@@ -12,7 +12,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
   const ship = useShipResponse()
 
   return (
-    <div className="grid gap-4">
+    <div className="space-y-4">
       <div className="flex items-center justify-between gap-2">
         <div className="headline">
           <span className="font-bold">Registration:</span> {ship.registration.name} • {ship.registration.role} •{' '}
@@ -71,7 +71,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
           </div>
         </div>
 
-        <Inventory ship={ship} />
+        <ShipStatus ship={ship} />
       </div>
 
       <ShipTransit nav={ship.nav} />
