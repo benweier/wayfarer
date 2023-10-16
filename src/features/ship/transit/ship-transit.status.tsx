@@ -2,6 +2,21 @@ import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
 import { useShipTransit } from './use-ship-transit.hook'
 
+const formatter = new Intl.DateTimeFormat('en-gb', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+  hour: '2-digit',
+  hourCycle: 'h23',
+  minute: '2-digit',
+  second: '2-digit',
+})
+const formatDate = (date: Date) => {
+  const [day, , month, , year, , hour, , minute, , second] = formatter.formatToParts(date)
+
+  return `${year.value}.${month.value}.${day.value} ${hour.value}:${minute.value}:${second.value}`
+}
+
 export const ShipTransitStatus = () => {
   const ship = useShipResponse()
   const transit = useShipTransit(ship)
@@ -12,9 +27,7 @@ export const ShipTransitStatus = () => {
         <div className="flex flex-col items-start">
           <div className="text-secondary text-xs uppercase">Departed</div>
           <div className="flex items-center gap-2">
-            <div className="text-sm font-medium">
-              {transit.departed.toLocaleDateString()} {transit.departed.toLocaleTimeString()}
-            </div>
+            <div className="text-sm font-medium">{formatDate(transit.departed)}</div>
           </div>
         </div>
         <div className="flex flex-col items-end">
@@ -22,9 +35,7 @@ export const ShipTransitStatus = () => {
             {transit.remainingSeconds > 0 ? 'Arriving' : 'Arrived'}
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-sm font-medium">
-              {transit.arrival.toLocaleDateString()} {transit.arrival.toLocaleTimeString()}
-            </div>
+            <div className="text-sm font-medium">{formatDate(transit.arrival)}</div>
           </div>
         </div>
       </div>
