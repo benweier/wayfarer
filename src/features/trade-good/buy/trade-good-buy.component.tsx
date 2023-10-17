@@ -11,7 +11,18 @@ import { formatNumber } from '@/utilities/number'
 import { TradeGoodBuyForm } from './trade-good-buy.form'
 import { type TradeGoodBuyProps } from './trade-good-buy.types'
 
-export const TradeGoodBuy = ({ ship, good }: TradeGoodBuyProps) => {
+export const TradeGoodBuy = ({
+  ship,
+  good,
+  action = (props) => (
+    <button className="btn btn-outline btn-danger" {...props}>
+      <div>
+        <div className="text-xs uppercase">Buy</div>
+        <div className="text-base font-bold">{formatNumber(good.purchasePrice)}</div>
+      </div>
+    </button>
+  ),
+}: TradeGoodBuyProps) => {
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore((state) => state.actions)
   const client = useQueryClient()
@@ -52,18 +63,7 @@ export const TradeGoodBuy = ({ ship, good }: TradeGoodBuyProps) => {
     <Modal
       ref={ref}
       size="md"
-      trigger={
-        <Modal.Trigger disabled={good.tradeVolume === 0 || noCargo}>
-          {(props) => (
-            <button className="btn btn-outline btn-danger" {...props}>
-              <span className="flex flex-col">
-                <span className="text-xs uppercase">Buy</span>
-                <span className="text-base font-bold">{formatNumber(good.purchasePrice)}</span>
-              </span>
-            </button>
-          )}
-        </Modal.Trigger>
-      }
+      trigger={<Modal.Trigger disabled={good.tradeVolume === 0 || noCargo}>{action}</Modal.Trigger>}
       closeable
     >
       <div className="space-y-8">
