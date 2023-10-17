@@ -1,4 +1,5 @@
 import { type PropsWithChildren } from 'react'
+import { Card } from '@/components/card'
 import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { formatNumber } from '@/utilities/number'
@@ -8,8 +9,8 @@ export const WaypointShipyardItem = ({ ship }: PropsWithChildren<WaypointShipyar
   const waypoint = useWaypointResponse()
 
   return (
-    <div className="relative @container/market-item">
-      <div className="flex flex-col flex-wrap justify-between gap-4 rounded bg-zinc-500 bg-opacity-5 p-4 @lg/market-item:flex-row dark:bg-opacity-10">
+    <Card className="relative @container/market-item">
+      <div className="flex flex-col flex-wrap justify-between gap-4 @lg/market-item:flex-row">
         <div className="min-w-[280px] flex-1 space-y-2">
           <div className="flex flex-row justify-between gap-8">
             <div className="text-lg font-medium">{ship.name}</div>
@@ -30,6 +31,6 @@ export const WaypointShipyardItem = ({ ship }: PropsWithChildren<WaypointShipyar
           </ShipyardPurchaseShip>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }

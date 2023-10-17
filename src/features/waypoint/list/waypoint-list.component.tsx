@@ -9,7 +9,7 @@ export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => 
   const presence = new Set(ships.map((ship) => ship.nav.waypointSymbol))
 
   return (
-    <ul className="grid grid-cols-1 gap-1 lg:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-2 lg:grid-cols-3">
       {system.waypoints.map((waypoint) => (
         <li key={waypoint.symbol}>
           <Waypoint systemSymbol={system.symbol} waypoint={waypoint} hasShipPresence={presence.has(waypoint.symbol)} />

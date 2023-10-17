@@ -81,7 +81,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
         )}
       </div>
 
-      <div className="grid gap-1">
+      <div className="space-y-2">
         {systems.map((system) => {
           return (
             <System key={system.symbol} system={system}>

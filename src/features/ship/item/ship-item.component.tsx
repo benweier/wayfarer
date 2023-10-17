@@ -1,5 +1,6 @@
 import { useIsMutating } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { Card } from '@/components/card'
 import { ShipIcon } from '@/components/icons'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
@@ -26,13 +27,10 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
     useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }] }) > 0
 
   return (
-    <div
-      className={cx(
-        'relative z-auto rounded bg-zinc-100 p-4 @container/ship-item dark:border-zinc-700 dark:bg-zinc-700/25',
-        {
-          'pointer-events-none opacity-30': isMutating,
-        },
-      )}
+    <Card
+      className={cx('@container/ship-item', {
+        'pointer-events-none opacity-30': isMutating,
+      })}
     >
       <div className="flex flex-row flex-wrap items-center justify-between gap-x-8 gap-y-2">
         <div className="flex w-full flex-1 flex-row flex-wrap items-center justify-start gap-x-4 gap-y-2 @md/ship-item:max-w-[700px]">
@@ -100,6 +98,6 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
           <ShipControls ship={ship} />
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
