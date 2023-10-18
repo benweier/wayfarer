@@ -16,7 +16,7 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
 
   return (
     <Modal size="md" closeable trigger={<Modal.Trigger>{trigger}</Modal.Trigger>}>
-      <div className="grid gap-8">
+      <div className="space-y-8">
         <h3 className="text-title">
           Navigate Ship: <span className="font-normal">{ship.symbol}</span>
         </h3>
@@ -44,10 +44,10 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const waypoints = data.data
 
   return (
-    <div className="grid gap-3">
+    <div className="space-y-4">
       {waypoints.map((waypoint) => (
         <div key={waypoint.symbol} className="flex items-start justify-between gap-4">
-          <div className="grid gap-1">
+          <div className="space-y-1">
             <div className="font-semibold">{waypoint.symbol}</div>
             <div className="flex flex-row gap-2">
               <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type)}</WaypointTag>

@@ -81,11 +81,11 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
         )}
       </div>
 
-      <div className="space-y-2">
+      <div className="grid gap-2">
         {systems.map((system) => {
           return (
             <System key={system.symbol} system={system}>
-              <ul className="relative isolate flex items-center -space-x-2">
+              <div className="relative isolate flex items-center -space-x-2">
                 {system.waypoints.map((waypoint) => {
                   const hasShipPresence = fleetQuery.data.has(waypoint.symbol)
 
@@ -112,7 +112,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
                     </li>
                   )
                 })}
-              </ul>
+              </div>
             </System>
           )
         })}

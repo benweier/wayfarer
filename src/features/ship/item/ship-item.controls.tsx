@@ -2,7 +2,7 @@ import { FloatingPortal } from '@floating-ui/react'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { useIsMutating, useSuspenseQuery } from '@tanstack/react-query'
-import { Fragment } from 'react'
+import { type ComponentPropsWithRef, Fragment } from 'react'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
@@ -12,6 +12,12 @@ import * as ShipActions from '@/features/ship/actions'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { type ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx'
+
+const MenuActionButton = ({ active, children, ...props }: ComponentPropsWithRef<'button'> & { active: boolean }) => (
+  <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
+    {children}
+  </button>
+)
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
   const isMutating =
@@ -63,9 +69,9 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                     {({ active }) => (
                       <ShipActions.Orbit ship={ship}>
                         {(props) => (
-                          <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
+                          <MenuActionButton active={active} {...props}>
                             Orbit
-                          </button>
+                          </MenuActionButton>
                         )}
                       </ShipActions.Orbit>
                     )}
@@ -76,9 +82,9 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                     {({ active }) => (
                       <ShipActions.Dock ship={ship}>
                         {(props) => (
-                          <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
+                          <MenuActionButton active={active} {...props}>
                             Dock
-                          </button>
+                          </MenuActionButton>
                         )}
                       </ShipActions.Dock>
                     )}
@@ -87,14 +93,14 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                 {ship.nav.status === 'IN_ORBIT' && (
                   <Menu.Item as={Fragment}>
                     {({ active }) => (
-                      <button
-                        className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })}
+                      <MenuActionButton
+                        active={active}
                         onClick={() => {
                           modal.open()
                         }}
                       >
                         Navigate
-                      </button>
+                      </MenuActionButton>
                     )}
                   </Menu.Item>
                 )}
@@ -104,7 +110,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
         </FloatingPortal>
       </Menu>
       <Modal size="md" ref={ref} closeable>
-        <div className="grid gap-8">
+        <div className="space-y-8">
           <h3 className="text-title">
             Navigate Ship: <span className="font-normal">{ship.symbol}</span>
           </h3>
@@ -133,14 +139,14 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const waypoints = data.data
 
   return (
-    <div className="grid gap-3">
+    <div className="space-y-4">
       {waypoints.map((waypoint) => (
-        <div key={waypoint.symbol} className="flex items-center justify-between gap-4">
-          <div>
+        <div key={waypoint.symbol} className="flex items-start justify-between gap-4">
+          <div className="space-y-1">
             <div className="font-semibold">{waypoint.symbol}</div>
             <div className="flex flex-row gap-2">
               <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type)}</WaypointTag>
-              <div className="text-xs font-light">
+              <div className="text-secondary text-xs">
                 ({waypoint.x}, {waypoint.y})
               </div>
             </div>
@@ -148,20 +154,20 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
           <ShipActions.Navigate ship={ship} waypointSymbol={waypoint.symbol}>
             {ship.nav.waypointSymbol !== waypoint.symbol
               ? (props) => (
-                  <button className="btn btn-outline btn-confirm btn-sm" {...props}>
-                    <ShipIcon id="navigate" className="h-5 w-5" />
+                  <button className="btn btn-icon btn-outline btn-confirm" {...props}>
+                    <ShipIcon id="navigate" className="h-4 w-4" aria-hidden />
                     <span className="sr-only">
                       Navigate ship {ship.symbol} to waypoint {waypoint.symbol}
                     </span>
                   </button>
                 )
-              : (props) => (
-                  <button disabled className="btn btn-sm" {...props}>
-                    <ShipIcon id="pin" className="h-5 w-5" />
+              : () => (
+                  <div className="btn btn-disabled btn-icon">
+                    <ShipIcon id="pin" className="h-4 w-4" aria-hidden />
                     <span className="sr-only">
                       Ship {ship.symbol} is already at waypoint {waypoint.symbol}
                     </span>
-                  </button>
+                  </div>
                 )}
           </ShipActions.Navigate>
         </div>
