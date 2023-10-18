@@ -1,6 +1,6 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
-import { getShipListQuery, getSystemByIdQuery } from '@/services/api/spacetraders'
+import { getShipListQuery, getSystemByIdQuery, getWaypointListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 
 export const loader: QueryClientLoaderFn =
@@ -19,6 +19,10 @@ export const loader: QueryClientLoaderFn =
         queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
         queryFn: getSystemByIdQuery.queryFn,
       })
+      const waypoints = client.ensureQueryData({
+        queryKey: getWaypointListQuery.getQueryKey({ systemSymbol }),
+        queryFn: getWaypointListQuery.queryFn,
+      })
       const ships = client.ensureQueryData({
         queryKey: getShipListQuery.getQueryKey(),
         queryFn: getShipListQuery.queryFn,
@@ -28,6 +32,7 @@ export const loader: QueryClientLoaderFn =
 
       return defer({
         system: await system,
+        waypoints: await waypoints,
         ships,
       })
     } catch (err) {

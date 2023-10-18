@@ -218,6 +218,8 @@ export type SystemWaypoint = {
   type: string
   x: number
   y: number
+  orbits?: string
+  orbitals: WaypointOrbital[]
 }
 
 export type SystemFaction = { symbol: string }
@@ -232,8 +234,7 @@ export type SystemsResponse = {
   factions: SystemFaction[]
 }
 
-export type ChartResponse = {
-  waypointSymbol: string
+export type WaypointChart = {
   submittedBy: string
   submittedOn: string
 }
@@ -262,7 +263,7 @@ export type WaypointResponse = {
   orbits?: string
   faction: WaypointFaction
   traits: WaypointTrait[]
-  chart: ChartResponse
+  chart?: WaypointChart
 }
 
 export type MarketGood = {

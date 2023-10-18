@@ -3,6 +3,7 @@ import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { useIsMutating, useSuspenseQuery } from '@tanstack/react-query'
 import { type ComponentPropsWithRef, Fragment } from 'react'
+import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
@@ -149,6 +150,11 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
               <div className="text-secondary text-xs">
                 ({waypoint.x}, {waypoint.y})
               </div>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {waypoint.traits.map((trait) => (
+                <Badge key={trait.symbol}>{trait.name}</Badge>
+              ))}
             </div>
           </div>
           <ShipActions.Navigate ship={ship} waypointSymbol={waypoint.symbol}>
