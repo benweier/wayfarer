@@ -47,26 +47,26 @@ export const WaypointTabs = () => {
           <div className="space-y-4">
             <WaypointMarketPreferences />
 
-            <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={WaypointMarketError}>
+            <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={<WaypointMarketError />}>
               {hasMarket ? <WaypointMarketList /> : <WaypointMarketNotAvailable />}
             </QuerySuspenseBoundary>
           </div>
         </Tab.Panel>
 
         <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<WaypointFleetFallback />} error={WaypointFleetError}>
+          <QuerySuspenseBoundary fallback={<WaypointFleetFallback />} error={<WaypointFleetError />}>
             <WaypointFleetList />
           </QuerySuspenseBoundary>
         </Tab.Panel>
 
         <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<WaypointShipyardFallback />} error={WaypointShipyardError}>
+          <QuerySuspenseBoundary fallback={<WaypointShipyardFallback />} error={<WaypointShipyardError />}>
             {hasShipyard ? <WaypointShipyardList /> : <WaypointShipyardNotAvailable />}
           </QuerySuspenseBoundary>
         </Tab.Panel>
 
         <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<WaypointJumpGateFallback />} error={WaypointJumpGateError}>
+          <QuerySuspenseBoundary fallback={<WaypointJumpGateFallback />} error={<WaypointJumpGateError />}>
             <WaypointJumpGateList />
           </QuerySuspenseBoundary>
         </Tab.Panel>

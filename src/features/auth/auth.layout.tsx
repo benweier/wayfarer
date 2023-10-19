@@ -39,7 +39,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
         <div className="grid grid-flow-col items-center justify-center gap-2 py-4">
           <QuerySuspenseBoundary
             fallback={<AppIcon id="connection:unknown" className="h-6 w-6 animate-spin text-yellow-400" aria-hidden />}
-            error={() => <AppIcon id="connection:offline" className="h-6 w-6 text-rose-400" aria-hidden />}
+            error={<AppIcon id="connection:offline" className="h-6 w-6 text-rose-400" aria-hidden />}
           >
             <SpaceTradersStatus />
           </QuerySuspenseBoundary>

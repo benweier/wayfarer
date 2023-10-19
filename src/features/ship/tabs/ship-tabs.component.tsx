@@ -23,7 +23,7 @@ export const ShipTabs = () => {
           <div className="grid gap-4">
             <ShipCargoPreferences />
 
-            <QuerySuspenseBoundary fallback={<ShipCargoFallback />} error={ShipCargoError}>
+            <QuerySuspenseBoundary fallback={<ShipCargoFallback />} error={<ShipCargoError />}>
               <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
                 <ShipCargoList />
               </WaypointStore>

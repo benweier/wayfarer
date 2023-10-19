@@ -23,7 +23,7 @@ const ShipMarketRouteComponent = () => {
           <div className="space-y-4">
             <WaypointMarketPreferences />
 
-            <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={WaypointMarketError}>
+            <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={<WaypointMarketError />}>
               <WaypointMarketList />
             </QuerySuspenseBoundary>
           </div>

@@ -1,8 +1,7 @@
-import { type FC, type ReactNode } from 'react'
-import { type ErrorComponentProps } from '@/components/error-boundary'
+import { type ReactNode } from 'react'
 
 export type QuerySuspenseBoundaryProps = {
-  error?: FC<ErrorComponentProps>
+  error?: ReactNode
   onError?: (error: Error) => void
   fallback?: ReactNode
 }

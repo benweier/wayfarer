@@ -1,11 +1,11 @@
 import { type FC, type PropsWithChildren } from 'react'
-import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
+import { ErrorBoundaryContext, ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
 import { type ErrorBoundaryProps, type ErrorComponentProps } from './error-boundary.types'
 
 const DefaultErrorFallback: FC<ErrorComponentProps> = () => <></>
 
 export const ErrorBoundary = ({
-  Component = DefaultErrorFallback,
+  component = <DefaultErrorFallback />,
   onReset,
   onError,
   children,
@@ -14,7 +14,11 @@ export const ErrorBoundary = ({
     onReset={onReset}
     onError={onError}
     fallbackRender={({ error, resetErrorBoundary }) => {
-      return <Component error={error} onReset={resetErrorBoundary} />
+      return (
+        <ErrorBoundaryContext.Provider value={{ didCatch: true, error, resetErrorBoundary }}>
+          {component}
+        </ErrorBoundaryContext.Provider>
+      )
     }}
   >
     {children}
