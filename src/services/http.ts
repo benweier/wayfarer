@@ -22,7 +22,7 @@ export const http = async <T = unknown>(url: URL | RequestInfo, args: RequestIni
 export const isHttpError = (err: any, status?: Values<typeof STATUS_CODES>): err is HttpError => {
   if (!err) return false
 
-  if (typeof err === 'object' && err.ok === false) {
+  if (typeof err === 'object' && !err.ok) {
     if (status && err.status === status) return true
 
     return err.status >= 400
