@@ -22,7 +22,7 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
         </h3>
         <QuerySuspenseBoundary
           fallback={
-            <div className="grid gap-4">
+            <div className="space-y-6">
               {Array.from({ length: 3 }).map((_, index) => (
                 <div key={index} className="mx-auto h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
               ))}
@@ -44,9 +44,9 @@ const Navigate = ({ ship }: { ship: ShipResponse }) => {
   const waypoints = data.data
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {waypoints.map((waypoint) => (
-        <div key={waypoint.symbol} className="flex items-start justify-between gap-4">
+        <div key={waypoint.symbol} className="flex items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="font-semibold">{waypoint.symbol}</div>
             <div className="flex flex-row gap-2">
