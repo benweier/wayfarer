@@ -32,15 +32,11 @@ export const ShipTabs = () => {
         </Tab.Panel>
 
         <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<></>}>
-            <ShipSurveyExtract />
-          </QuerySuspenseBoundary>
+          <ShipSurveyExtract />
         </Tab.Panel>
 
         <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<></>}>
-            <ShipLoadoutList />
-          </QuerySuspenseBoundary>
+          <ShipLoadoutList />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>
