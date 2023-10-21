@@ -27,7 +27,7 @@ export const ShipList = () => {
         <ShipListRefresh />
       </div>
 
-      <div className={cx('grid grid-cols-1 gap-2', { 'pointer-events-none opacity-50': isFetching })}>
+      <div className={cx('grid gap-2', { 'pointer-events-none opacity-50': isFetching })}>
         {ships.map((ship) => (
           <ShipItem key={ship.symbol} ship={ship} />
         ))}
