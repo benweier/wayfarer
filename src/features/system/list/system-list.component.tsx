@@ -5,6 +5,7 @@ import { Pagination, usePagination } from '@/components/pagination'
 import { ROUTES } from '@/config/routes'
 import { getShipListQuery, getSystemListQuery } from '@/services/api/spacetraders'
 import { cx } from '@/utilities/cx'
+import { formatNumber } from '@/utilities/number'
 import { SystemItem } from '../item'
 import { type SystemListProps } from './system-list.types'
 
@@ -54,8 +55,9 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   const systems = systemsListQuery.data.data
   const meta = systemsListQuery.data.meta
   const results = {
-    from: page * limit + 1 - limit,
-    to: page * limit - limit + systems.length,
+    from: formatNumber(page * limit + 1 - limit),
+    to: formatNumber(page * limit - limit + systems.length),
+    total: formatNumber(meta.total),
   }
 
   return (
@@ -76,7 +78,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
               {results.from} - {results.to}
             </div>
             <div className="text-secondary">of</div>
-            <div>{meta.total}</div>
+            <div>{results.total}</div>
           </>
         )}
       </div>
@@ -128,7 +130,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
                 {results.from} - {results.to}
               </div>
               <div className="text-secondary">of</div>
-              <div>{meta.total}</div>
+              <div>{results.total}</div>
             </>
           )}
         </div>
