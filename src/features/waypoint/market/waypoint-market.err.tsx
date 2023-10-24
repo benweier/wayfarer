@@ -1,16 +1,40 @@
+import { useContext } from 'react'
+import { ErrorBoundaryContext } from 'react-error-boundary'
 import { type ErrorComponentProps } from '@/components/error-boundary'
-import { isHttpError } from '@/services/http'
+import { STATUS_CODES, isHttpError } from '@/services/http'
 
-export const WaypointMarketError = ({ error }: ErrorComponentProps) => {
-  if (!error) return <></>
-
-  if (isHttpError(error)) {
-    return (
-      <div className="rounded border-2 border-transparent px-3 py-9">
-        <div className="text-secondary text-center text-xl font-bold">{error.statusText}</div>
-      </div>
-    )
+const Message = ({ error, onReset }: ErrorComponentProps) => {
+  if (isHttpError(error, STATUS_CODES.NOT_FOUND)) {
+    return <>Market is not available for this waypoint</>
   }
 
-  return <></>
+  return (
+    <div className="flex flex-col items-center justify-center gap-4">
+      <div>An error occurred while displaying this market</div>
+      {onReset !== undefined && (
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            onReset()
+          }}
+        >
+          Try again
+        </button>
+      )}
+    </div>
+  )
+}
+
+export const WaypointMarketError = () => {
+  const ctx = useContext(ErrorBoundaryContext)
+
+  if (!ctx?.error) return <></>
+
+  return (
+    <div className="px-3 py-9">
+      <div className="text-secondary text-center text-lg">
+        <Message error={ctx.error} onReset={ctx.resetErrorBoundary} />
+      </div>
+    </div>
+  )
 }
