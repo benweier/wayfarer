@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { Link, useLocation } from 'react-router-dom'
+import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
@@ -127,9 +128,9 @@ export const Register = () => {
               <FactionInfo />
             </QuerySuspenseBoundary>
 
-            <button className="btn-hero" disabled={isPending} type="submit">
+            <Button intent="hero" disabled={isPending} type="submit">
               Register
-            </button>
+            </Button>
             <div className="grid gap-4">
               <AlreadyRegistered token={agent?.token} />
             </div>

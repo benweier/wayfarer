@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useLocation } from 'react-router-dom'
+import { Button } from '@/components/button'
 import { ROUTES } from '@/config/routes'
 import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import { useAuthStore } from '@/store/auth'
@@ -71,9 +72,9 @@ export const Login = () => {
               />
             </div>
             <div className="grid gap-4">
-              <button className="btn-hero" type="submit" disabled={isPending}>
+              <Button intent="hero" type="submit" disabled={isPending}>
                 Log In
-              </button>
+              </Button>
               <div className="text-caption text-center">
                 Don&apos;t have an access token?&nbsp;
                 <Link className="link" to={ROUTES.REGISTER}>
