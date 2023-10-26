@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 import { ROUTES } from '@/config/routes'
 import { createShipScanWaypointsMutation } from '@/services/api/spacetraders'
@@ -15,14 +16,14 @@ export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
     <Modal
       isOpen={isSuccess}
       trigger={
-        <button
-          className="btn btn-sm"
+        <Button
+          size="small"
           onClick={() => {
             mutate({ shipSymbol })
           }}
         >
           Scan
-        </button>
+        </Button>
       }
     >
       <div className="grid gap-4">

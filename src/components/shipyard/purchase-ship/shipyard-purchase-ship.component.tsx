@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { type Ref, forwardRef } from 'react'
+import { Button } from '@/components/button'
 import { type ShipyardPurchaseShipProps } from '@/components/shipyard/purchase-ship/shipyard-purchase-ship.types'
 import { createShipPurchaseMutation } from '@/services/api/spacetraders'
 import { useAuthStore } from '@/store/auth'
@@ -9,9 +10,9 @@ const PurchaseShipComponent = (
     ship,
     waypointSymbol,
     children = (props) => (
-      <button className="btn btn-sm" {...props}>
+      <Button size="small" {...props}>
         Buy Ship
-      </button>
+      </Button>
     ),
   }: ShipyardPurchaseShipProps,
   ref: Ref<HTMLButtonElement>,

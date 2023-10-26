@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { ErrorBoundaryContext } from 'react-error-boundary'
+import { Button } from '@/components/button'
 import { type ErrorComponentProps } from '@/components/error-boundary'
 import { STATUS_CODES, isHttpError } from '@/services/http'
 
@@ -12,14 +13,14 @@ const Message = ({ error, onReset }: ErrorComponentProps) => {
     <div className="flex flex-col items-center justify-center gap-4">
       <div>An error occurred while displaying this market</div>
       {onReset !== undefined && (
-        <button
-          className="btn btn-primary"
+        <Button
+          intent="primary"
           onClick={() => {
             onReset()
           }}
         >
           Try again
-        </button>
+        </Button>
       )}
     </div>
   )

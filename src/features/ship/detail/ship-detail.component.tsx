@@ -1,5 +1,6 @@
 import { type PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from '@/components/button'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipResponse } from '@/context/ship.context'
@@ -53,17 +54,17 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
               {ship.nav.status === 'DOCKED' ? (
                 <ShipActions.Orbit ship={ship}>
                   {(props) => (
-                    <button className="btn btn-primary btn-flat btn-sm" {...props}>
+                    <Button intent="primary" kind="outline" size="small" {...props}>
                       Orbit
-                    </button>
+                    </Button>
                   )}
                 </ShipActions.Orbit>
               ) : (
                 <ShipActions.Dock ship={ship}>
                   {(props) => (
-                    <button className="btn btn-primary btn-flat btn-sm" {...props}>
+                    <Button intent="primary" kind="flat" size="small" {...props}>
                       Dock
-                    </button>
+                    </Button>
                   )}
                 </ShipActions.Dock>
               )}

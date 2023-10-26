@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { ROUTES } from '@/config/routes'
 import { ShipTransitJump } from './ship-transit.jump'
@@ -46,23 +47,23 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
         <div className="flex items-center gap-1">
           <ShipTransitNavigate
             trigger={(props) => (
-              <button className="btn btn-flat btn-warn btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 Navigate
-              </button>
+              </Button>
             )}
           />
           <ShipTransitWarp
             trigger={(props) => (
-              <button className="btn btn-flat btn-warn btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 Warp
-              </button>
+              </Button>
             )}
           />
           <ShipTransitJump
             trigger={(props) => (
-              <button className="btn btn-flat btn-warn btn-sm" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 Jump
-              </button>
+              </Button>
             )}
           />
         </div>

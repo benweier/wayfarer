@@ -1,3 +1,4 @@
+import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
 import { RemoveMount } from '@/features/ship/actions'
@@ -112,9 +113,9 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
                 action={
                   <RemoveMount ship={ship} mountSymbol={mount.symbol}>
                     {(props) => (
-                      <button className="btn btn-outline btn-danger btn-sm" {...props}>
+                      <Button intent="danger" kind="outline" size="small" {...props}>
                         Remove
-                      </button>
+                      </Button>
                     )}
                   </RemoveMount>
                 }

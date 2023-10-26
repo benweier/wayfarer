@@ -4,6 +4,7 @@ import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
 import { startTransition, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { Button } from '@/components/button'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
@@ -75,8 +76,10 @@ const WaypointMarketRefresh = () => {
       <div className="text-secondary text-right text-xs">
         {isFetching ? '...' : `Last updated ${relativeTime(new Date(state.dataUpdatedAt))}`}
       </div>
-      <button
-        className="btn btn-outline btn-warn btn-sm"
+      <Button
+        intent="warn"
+        kind="outline"
+        size="small"
         disabled={isFetching}
         onClick={() =>
           client.invalidateQueries({
@@ -88,7 +91,7 @@ const WaypointMarketRefresh = () => {
         }
       >
         Refresh
-      </button>
+      </Button>
     </div>
   )
 }

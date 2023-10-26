@@ -1,4 +1,5 @@
 import { type PropsWithChildren } from 'react'
+import { Button } from '@/components/button'
 import { Card } from '@/components/card'
 import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
 import { useWaypointResponse } from '@/context/waypoint.context'
@@ -21,12 +22,12 @@ export const WaypointShipyardItem = ({ ship }: PropsWithChildren<WaypointShipyar
         <div>
           <ShipyardPurchaseShip ship={ship} waypointSymbol={waypoint.symbol}>
             {(props) => (
-              <button className="btn btn-outline btn-danger w-40" {...props}>
+              <Button intent="danger" kind="outline" className="w-40" {...props}>
                 <span className="flex flex-col">
                   <span className="text-xs uppercase">Buy</span>
                   <span className="font-bold">{formatNumber(ship.purchasePrice)}</span>
                 </span>
-              </button>
+              </Button>
             )}
           </ShipyardPurchaseShip>
         </div>

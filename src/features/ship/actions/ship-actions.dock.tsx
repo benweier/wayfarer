@@ -1,6 +1,7 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { type Ref, forwardRef } from 'react'
+import { Button } from '@/components/button'
 import { createShipDockMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -10,9 +11,9 @@ const DockComponent = (
   {
     ship,
     children = (props) => (
-      <button className="btn btn-sm" {...props}>
+      <Button size="small" {...props}>
         Dock
-      </button>
+      </Button>
     ),
   }: ShipActionProps,
   ref: Ref<HTMLButtonElement>,

@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
+import { Button } from '@/components/button'
 import { createShipWarpMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -9,9 +10,9 @@ export const Warp = ({
   ship,
   waypointSymbol,
   children = (props) => (
-    <button className="btn btn-sm" {...props}>
+    <Button size="small" {...props}>
       Warp
-    </button>
+    </Button>
   ),
 }: ShipActionProps<{
   waypointSymbol: string

@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
+import { Button } from '@/components/button'
 import { createShipInstallMountMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
@@ -11,9 +12,9 @@ export const InstallMount = ({
   mountSymbol,
   disabled = false,
   children = (props) => (
-    <button className="btn btn-sm" {...props}>
+    <Button size="small" {...props}>
       Install
-    </button>
+    </Button>
   ),
 }: ShipActionProps<{ mountSymbol: string }>) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)

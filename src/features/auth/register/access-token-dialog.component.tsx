@@ -1,5 +1,6 @@
 import { cx } from 'class-variance-authority'
 import { useNavigate } from 'react-router-dom'
+import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { ROUTES } from '@/config/routes'
 import { type RegisterAgentResponse } from '@/types/spacetraders'
@@ -68,8 +69,9 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
         </div>
       </div>
       <div>
-        <button
-          className="btn btn-primary w-full"
+        <Button
+          intent="primary"
+          className="w-full"
           disabled={!isCopied}
           type="button"
           onClick={() => {
@@ -77,7 +79,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
           }}
         >
           Got it. Let&apos;s go!
-        </button>
+        </Button>
       </div>
     </div>
   )

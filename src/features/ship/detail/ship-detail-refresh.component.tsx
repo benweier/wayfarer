@@ -1,5 +1,6 @@
 import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 import { startTransition, useEffect, useState } from 'react'
+import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
 import { getShipByIdQuery } from '@/services/api/spacetraders'
 import { relativeTime } from '@/utilities/date'
@@ -30,15 +31,17 @@ export const ShipDetailRefresh = () => {
       <div className="text-secondary text-right text-xs">
         {isFetching ? '...' : `Last updated ${relativeTime(new Date(state.dataUpdatedAt))}`}
       </div>
-      <button
-        className="btn btn-outline btn-warn btn-sm"
+      <Button
+        intent="warn"
+        kind="outline"
+        size="small"
         disabled={isFetching}
         onClick={() =>
           client.invalidateQueries({ queryKey: getShipByIdQuery.getQueryKey({ shipSymbol: ship.symbol }) })
         }
       >
         Refresh
-      </button>
+      </Button>
     </div>
   )
 }

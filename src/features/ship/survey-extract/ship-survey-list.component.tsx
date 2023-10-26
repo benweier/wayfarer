@@ -1,3 +1,4 @@
+import { Button } from '@/components/button'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipSurveyItem } from '@/features/ship/survey-extract/ship-survey-item.component'
 import { useShipSurveyStore } from '@/store/ship'
@@ -19,19 +20,20 @@ export const ShipSurveyList = ({ ship }: { ship: ShipResponse }) => {
             <div className="grid gap-2">
               <ShipActions.Extract ship={ship} survey={survey}>
                 {(props) => (
-                  <button className="btn btn-confirm" {...props}>
+                  <Button intent="confirm" {...props}>
                     Extract
-                  </button>
+                  </Button>
                 )}
               </ShipActions.Extract>
-              <button
-                className="btn btn-flat btn-danger"
+              <Button
+                intent="danger"
+                kind="flat"
                 onClick={() => {
                   removeSurvey(survey.signature)
                 }}
               >
                 Discard
-              </button>
+              </Button>
             </div>
           </ShipSurveyItem>
         )

@@ -1,3 +1,4 @@
+import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import * as ShipActions from '@/features/ship/actions'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -23,9 +24,9 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         </div>
         <ShipActions.Refuel ship={ship} disabled={ship.nav.status !== 'DOCKED'}>
           {(props) => (
-            <button className="btn btn-confirm btn-flat btn-sm rounded-t-sm" {...props}>
+            <Button intent="primary" kind="flat" size="small" {...props}>
               Refuel
-            </button>
+            </Button>
           )}
         </ShipActions.Refuel>
       </div>

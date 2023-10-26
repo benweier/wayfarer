@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
+import { Button } from '@/components/button'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { useWaypointResponse } from '@/context/waypoint.context'
@@ -12,9 +13,9 @@ const SubmitPurchase = () => {
   const { isSubmitting, isValid } = useFormState()
 
   return (
-    <button type="submit" className="btn btn-primary uppercase" disabled={isSubmitting || !isValid}>
+    <Button intent="primary" type="submit" className="uppercase" disabled={isSubmitting || !isValid}>
       Sell
-    </button>
+    </Button>
   )
 }
 const SellPrice = ({ perUnit }: { perUnit: number }) => {

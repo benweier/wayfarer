@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { cx } from 'class-variance-authority'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
+import { Button } from '@/components/button'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
@@ -37,9 +38,9 @@ const TradeGoodBuySubmit = () => {
   const { isSubmitting, isValid } = useFormState()
 
   return (
-    <button type="submit" className="btn btn-primary uppercase" disabled={isSubmitting || !isValid}>
+    <Button intent="primary" type="submit" className="uppercase" disabled={isSubmitting || !isValid}>
       Buy
-    </button>
+    </Button>
   )
 }
 const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {

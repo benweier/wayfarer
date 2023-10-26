@@ -1,6 +1,7 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { type Ref, forwardRef } from 'react'
+import { Button } from '@/components/button'
 import { createShipOrbitMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -10,9 +11,9 @@ const OrbitComponent = (
   {
     ship,
     children = (props) => (
-      <button className="btn btn-sm" {...props}>
+      <Button size="small" {...props}>
         Orbit
-      </button>
+      </Button>
     ),
   }: ShipActionProps,
   ref: Ref<HTMLButtonElement>,

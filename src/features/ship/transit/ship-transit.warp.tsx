@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { useForm } from 'react-hook-form'
+import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
@@ -71,9 +72,9 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
           <input {...methods.register('waypointSymbol')} className="input" />
         </div>
         <div className="flex justify-end">
-          <button type="submit" className="btn btn-primary">
+          <Button intent="primary" type="submit">
             Warp
-          </button>
+          </Button>
         </div>
       </fieldset>
     </form>

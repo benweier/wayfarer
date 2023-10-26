@@ -1,20 +1,23 @@
 import { RadioGroup, Switch } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
+import { Button } from '@/components/button'
 import { cargoDescriptionAtom, cargoDisplayAtom } from '@/store/atoms/cargo.display'
 
 export const CargoPreferencesMarket = () => {
   return (
     <div className="flex items-center gap-2">
-      <button
-        className="btn btn-outline btn-warn btn-sm"
+      <Button
+        intent="warn"
+        size="small"
+        kind="outline"
         disabled
         onClick={() => {
           //
         }}
       >
         Refresh
-      </button>
+      </Button>
     </div>
   )
 }

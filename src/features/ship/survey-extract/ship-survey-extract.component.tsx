@@ -1,3 +1,4 @@
+import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipCooldown } from '@/features/ship/cooldown'
@@ -12,17 +13,17 @@ export const ShipSurveyExtract = () => {
         <div className="flex gap-2">
           <ShipActions.Survey ship={ship}>
             {(props) => (
-              <button className="btn btn-primary" {...props}>
+              <Button intent="primary" {...props}>
                 Survey {ship.nav.waypointSymbol}
-              </button>
+              </Button>
             )}
           </ShipActions.Survey>
 
           <ShipActions.Extract ship={ship}>
             {(props) => (
-              <button className="btn btn-confirm" {...props}>
+              <Button intent="confirm" {...props}>
                 Extract without Survey
-              </button>
+              </Button>
             )}
           </ShipActions.Extract>
         </div>

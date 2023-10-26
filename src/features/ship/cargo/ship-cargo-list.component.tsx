@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { Modal, useModalActions } from '@/components/modal'
 import { REFINE_ITEM_TYPE, SHIP_MOUNT_TYPE } from '@/config/constants'
@@ -23,9 +24,9 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
       trigger={
         <Modal.Trigger>
           {(props) => (
-            <button className="btn btn-flat btn-danger btn-sm" {...props}>
+            <Button intent="danger" kind="flat" size="small" {...props}>
               Jettison
-            </button>
+            </Button>
           )}
         </Modal.Trigger>
       }
@@ -54,14 +55,13 @@ const CancelModal = () => {
   const { closeModal } = useModalActions()
 
   return (
-    <button
-      className="btn"
+    <Button
       onClick={() => {
         closeModal()
       }}
     >
       Cancel
-    </button>
+    </Button>
   )
 }
 
@@ -100,15 +100,15 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
           <span className="font-bold">{ship.symbol}</span> has no cargo
         </div>
         <div className="text-center">
-          <button
-            className="btn btn-primary"
+          <Button
+            intent="primary"
             disabled={!hasMarketplace}
             onClick={() => {
               navigate(`/fleet/ship/${ship.symbol}/market`)
             }}
           >
             {hasMarketplace ? `View Market at ${ship.nav.waypointSymbol}` : `No Market at ${ship.nav.waypointSymbol}`}
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -128,9 +128,9 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                 {mount && (
                   <ShipActions.InstallMount ship={ship} mountSymbol={item.symbol}>
                     {(props) => (
-                      <button className="btn btn-primary btn-sm" {...props}>
+                      <Button intent="primary" size="small" {...props}>
                         Install
-                      </button>
+                      </Button>
                     )}
                   </ShipActions.InstallMount>
                 )}
@@ -142,9 +142,9 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                         ship={ship}
                         good={good}
                         action={(props) => (
-                          <button className="btn btn-confirm btn-flat btn-sm" {...props}>
+                          <Button intent="confirm" kind="flat" size="small" {...props}>
                             Sell {`(${good.sellPrice})`}
-                          </button>
+                          </Button>
                         )}
                       />
                     </WaypointContext.Provider>

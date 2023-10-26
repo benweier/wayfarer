@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
+import { Button } from '@/components/button'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { TRADE_SYMBOL } from '@/config/constants'
 import { TradeGoodInfo } from '@/features/trade-good/info'
@@ -15,12 +16,12 @@ export const TradeGoodBuy = ({
   ship,
   good,
   action = (props) => (
-    <button className="btn btn-outline btn-danger" {...props}>
+    <Button intent="danger" kind="outline" {...props}>
       <div>
         <div className="text-xs uppercase">Buy</div>
         <div className="text-base font-bold">{formatNumber(good.purchasePrice)}</div>
       </div>
-    </button>
+    </Button>
   ),
 }: TradeGoodBuyProps) => {
   const { ref, modal } = useModalImperativeHandle()
