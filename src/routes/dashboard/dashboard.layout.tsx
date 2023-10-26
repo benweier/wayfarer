@@ -1,4 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { atom, useAtom } from 'jotai'
 import { Fragment, type PropsWithChildren, Suspense } from 'react'
 import { Link, NavLink, Outlet, useSubmit } from 'react-router-dom'
@@ -9,7 +10,6 @@ import { ROUTES } from '@/config/routes'
 import { Navigation } from '@/features/navigation'
 import { sidebarAtom } from '@/store/atoms/sidebar'
 import { useAuthStore } from '@/store/auth'
-import { cx } from '@/utilities/cx'
 
 const menu = [
   { name: 'Fleet', href: ROUTES.FLEET, icon: 'fleet' },

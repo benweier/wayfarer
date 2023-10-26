@@ -1,7 +1,7 @@
+import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
 import { type PropsWithChildren } from 'react'
 import { cargoDisplayAtom } from '@/store/atoms/cargo.display'
-import { cx } from '@/utilities/cx'
 
 export const ShipCargoLayout = ({ children }: PropsWithChildren) => {
   const [cargoDisplayMode] = useAtom(cargoDisplayAtom)

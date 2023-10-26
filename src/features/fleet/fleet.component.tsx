@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { cx } from 'class-variance-authority'
 import { ShipItem } from '@/features/ship/item'
 import { getShipListQuery } from '@/services/api/spacetraders/fleet'
-import { cx } from '@/utilities/cx'
 
 export const Fleet = () => {
   const { data, isFetching } = useSuspenseQuery({

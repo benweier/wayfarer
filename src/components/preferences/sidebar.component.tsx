@@ -1,8 +1,8 @@
 import { RadioGroup } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
 import { MenuIcon } from '@/components/icons'
 import { sidebarAtom } from '@/store/atoms/sidebar'
-import { cx } from '@/utilities/cx'
 
 export const Sidebar = () => {
   const [sidebarState, setSidebarState] = useAtom(sidebarAtom)

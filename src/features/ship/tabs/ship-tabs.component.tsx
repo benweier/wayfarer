@@ -1,11 +1,11 @@
 import { Tab } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
 import { WaypointStore } from '@/context/waypoint.context'
 import { ShipCargoError, ShipCargoFallback, ShipCargoList, ShipCargoPreferences } from '@/features/ship/cargo'
 import { ShipLoadoutList } from '@/features/ship/loadout'
 import { ShipSurveyExtract } from '@/features/ship/survey-extract'
-import { cx } from '@/utilities/cx'
 
 export const ShipTabs = () => {
   const ship = useShipResponse()

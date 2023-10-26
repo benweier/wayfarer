@@ -1,5 +1,5 @@
 import { Listbox } from '@headlessui/react'
-import { cx } from '@/utilities/cx'
+import { cx } from 'class-variance-authority'
 import { AppIcon } from '../icons'
 import { type SelectFieldProps } from './select.types'
 

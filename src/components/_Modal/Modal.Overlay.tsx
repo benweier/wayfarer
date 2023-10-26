@@ -1,5 +1,5 @@
+import { cx } from 'class-variance-authority'
 import { useContext } from 'react'
-import { cx } from '@/utilities/cx'
 import { ModalContext } from './Modal.Context'
 import { type OverlayProps } from './modal.types'
 import { useInOutTransition } from './useInOutTransition'

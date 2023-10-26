@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { Fragment, type PropsWithChildren } from 'react'
 import { AppIcon } from '@/components/icons'
-import { cx } from '@/utilities/cx'
 import { type ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
 

@@ -1,4 +1,5 @@
 import { Tab } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { WaypointFleetError, WaypointFleetFallback, WaypointFleetList } from '@/features/waypoint/fleet'
@@ -16,7 +17,6 @@ import {
   WaypointShipyardList,
   WaypointShipyardNotAvailable,
 } from '@/features/waypoint/shipyard'
-import { cx } from '@/utilities/cx'
 
 export const WaypointTabs = () => {
   const waypoint = useWaypointResponse()

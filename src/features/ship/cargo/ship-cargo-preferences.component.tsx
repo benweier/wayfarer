@@ -1,7 +1,7 @@
 import { RadioGroup, Switch } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
 import { cargoDescriptionAtom, cargoDisplayAtom } from '@/store/atoms/cargo.display'
-import { cx } from '@/utilities/cx'
 
 export const CargoPreferencesMarket = () => {
   return (

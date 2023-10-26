@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { cx } from 'class-variance-authority'
 import { getShipListQuery } from '@/services/api/spacetraders'
-import { cx } from '@/utilities/cx'
 import { ShipItem } from '../item'
 import { ShipListRefresh } from './ship-list-refresh.component'
 

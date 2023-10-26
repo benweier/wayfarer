@@ -1,8 +1,8 @@
 import { Tab } from '@headlessui/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { cx } from 'class-variance-authority'
 import { Link } from 'react-router-dom'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
-import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 
 export const LeaderboardList = () => {

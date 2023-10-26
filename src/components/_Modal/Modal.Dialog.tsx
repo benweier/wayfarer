@@ -1,5 +1,5 @@
+import { cx } from 'class-variance-authority'
 import { type PropsWithChildren, useContext, useRef } from 'react'
-import { cx } from '@/utilities/cx'
 import { ModalContext } from './Modal.Context'
 import { Overlay } from './Modal.Overlay'
 import { type DialogProps } from './modal.types.d'

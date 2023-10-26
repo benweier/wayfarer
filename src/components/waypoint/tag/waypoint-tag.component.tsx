@@ -1,4 +1,4 @@
-import { cx } from '@/utilities/cx'
+import { cx } from 'class-variance-authority'
 import { type WaypointTagProps } from './waypoint-tag.types'
 
 const WAYPOINT_TYPE_STYLES: Record<string, string> = {

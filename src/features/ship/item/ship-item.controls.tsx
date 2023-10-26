@@ -2,6 +2,7 @@ import { FloatingPortal } from '@floating-ui/react'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { useIsMutating, useSuspenseQuery } from '@tanstack/react-query'
+import { cx } from 'class-variance-authority'
 import { type ComponentPropsWithRef, Fragment } from 'react'
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
@@ -12,7 +13,6 @@ import { WAYPOINT_TYPE } from '@/config/constants'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { type ShipResponse } from '@/types/spacetraders'
-import { cx } from '@/utilities/cx'
 
 const MenuActionButton = ({ active, children, ...props }: ComponentPropsWithRef<'button'> & { active: boolean }) => (
   <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>

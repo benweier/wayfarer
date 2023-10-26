@@ -1,8 +1,8 @@
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Popover, Transition } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { Fragment } from 'react'
 import { MenuIcon } from '@/components/icons'
-import { cx } from '@/utilities/cx'
 import { Sidebar } from './sidebar.component'
 import { Theme } from './theme.component'
 

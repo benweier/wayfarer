@@ -1,12 +1,12 @@
 import { RadioGroup, Switch } from '@headlessui/react'
 import { useIsFetching, useQueryClient } from '@tanstack/react-query'
+import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
 import { startTransition, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { marketDescriptionAtom } from '@/store/atoms/market.display'
-import { cx } from '@/utilities/cx'
 import { relativeTime } from '@/utilities/date'
 
 const WaypointMarketSortBy = () => {

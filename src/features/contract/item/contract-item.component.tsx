@@ -1,10 +1,10 @@
 import { useIsMutating } from '@tanstack/react-query'
+import { cx } from 'class-variance-authority'
 import { type PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
 import { CONTRACT_TYPE, TRADE_SYMBOL } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { type ContractResponse } from '@/types/spacetraders'
-import { cx } from '@/utilities/cx'
 import { formatNumber } from '@/utilities/number'
 import { type ContractItemProps } from './contract-item.types'
 

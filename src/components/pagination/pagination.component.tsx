@@ -1,5 +1,5 @@
+import { cx } from 'class-variance-authority'
 import { AppIcon } from '@/components/icons'
-import { cx } from '@/utilities/cx'
 import { type PaginationProps } from './pagination.types'
 import { getPagingRange } from './pagination.utils'
 

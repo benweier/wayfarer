@@ -1,5 +1,5 @@
+import { cx } from 'class-variance-authority'
 import { type ShipResponse } from '@/types/spacetraders'
-import { cx } from '@/utilities/cx'
 import { useShipCooldown } from './use-ship-cooldown.hook'
 
 export const ShipCooldown = ({ ship }: { ship: ShipResponse }) => {

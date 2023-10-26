@@ -1,9 +1,9 @@
+import { cx } from 'class-variance-authority'
 import { type PropsWithChildren } from 'react'
 import { AppIcon } from '@/components/icons'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Wayfarer } from '@/components/wayfarer'
 import { useSpaceTradersStatus } from '@/hooks/use-space-traders-status.hook'
-import { cx } from '@/utilities/cx'
 
 const icon = {
   UNKNOWN: 'connection:unknown',

@@ -1,6 +1,6 @@
+import { cx } from 'class-variance-authority'
 import { type ButtonHTMLAttributes } from 'react'
 import { AppIcon } from '@/components/icons'
-import { cx } from '@/utilities/cx'
 
 export const Copy = ({
   className,

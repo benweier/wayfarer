@@ -1,8 +1,8 @@
 import { Tab } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { SystemFleet, SystemFleetFallback } from '@/features/system/fleet'
 import { WaypointList } from '@/features/waypoint/list'
-import { cx } from '@/utilities/cx'
 
 export const SystemTabs = () => {
   return (

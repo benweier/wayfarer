@@ -1,4 +1,5 @@
 import { useIsMutating } from '@tanstack/react-query'
+import { cx } from 'class-variance-authority'
 import { Link } from 'react-router-dom'
 import { Card } from '@/components/card'
 import { ShipIcon } from '@/components/icons'
@@ -6,7 +7,6 @@ import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
-import { cx } from '@/utilities/cx'
 import { ShipControls } from './ship-item.controls'
 import { type ShipItemProps } from './ship-item.types'
 

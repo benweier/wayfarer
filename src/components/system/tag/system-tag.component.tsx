@@ -1,4 +1,4 @@
-import { cx } from '@/utilities/cx'
+import { cx } from 'class-variance-authority'
 import { type SystemTagProps } from './system-tag.types'
 
 const SYSTEM_TYPE_STYLES: Record<string, string> = {

@@ -1,8 +1,8 @@
+import { cx } from 'class-variance-authority'
 import { useNavigate } from 'react-router-dom'
 import { AppIcon } from '@/components/icons'
 import { ROUTES } from '@/config/routes'
 import { type RegisterAgentResponse } from '@/types/spacetraders'
-import { cx } from '@/utilities/cx'
 import { Copy } from './copy-button.component'
 import { useCopy } from './use-copy.hook'
 

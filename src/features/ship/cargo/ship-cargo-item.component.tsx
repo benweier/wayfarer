@@ -1,7 +1,7 @@
+import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
 import { type PropsWithChildren } from 'react'
 import { cargoDescriptionAtom } from '@/store/atoms/cargo.display'
-import { cx } from '@/utilities/cx'
 import { type ShipCargoItemProps } from './ship-cargo.types'
 
 export const ShipCargoItem = ({ item, children }: PropsWithChildren<ShipCargoItemProps>) => {

@@ -1,8 +1,8 @@
 import { RadioGroup } from '@headlessui/react'
+import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
 import { MenuIcon } from '@/components/icons'
 import { themeAtom } from '@/store/atoms/theme'
-import { cx } from '@/utilities/cx'
 
 export const Theme = () => {
   const [theme, setTheme] = useAtom(themeAtom)
