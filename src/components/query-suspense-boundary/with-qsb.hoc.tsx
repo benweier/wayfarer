@@ -5,7 +5,7 @@ import { type QuerySuspenseBoundaryProps } from './query-suspense-boundary.types
 export const withQSB =
   ({ error, fallback, onError }: QuerySuspenseBoundaryProps = {}) =>
   <T,>(Component: ComponentType<T>) => {
-    const WithQuerySuspenseBoundary = memo((props: PropsWithChildren<T & JSX.IntrinsicAttributes>) => {
+    const WithQuerySuspenseBoundary = memo((props: PropsWithChildren<T>) => {
       return (
         <QuerySuspenseBoundary error={error} fallback={fallback} onError={onError}>
           <Component {...props} />
