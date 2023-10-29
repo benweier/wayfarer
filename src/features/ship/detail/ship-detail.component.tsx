@@ -54,7 +54,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
               {ship.nav.status === 'DOCKED' ? (
                 <ShipActions.Orbit ship={ship}>
                   {(props) => (
-                    <Button intent="primary" kind="outline" size="small" {...props}>
+                    <Button intent="primary" kind="flat" size="small" {...props}>
                       Orbit
                     </Button>
                   )}

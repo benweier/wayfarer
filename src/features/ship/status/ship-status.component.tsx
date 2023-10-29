@@ -24,7 +24,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         </div>
         <ShipActions.Refuel ship={ship} disabled={ship.nav.status !== 'DOCKED'}>
           {(props) => (
-            <Button intent="primary" kind="flat" size="small" {...props}>
+            <Button intent="confirm" kind="flat" size="small" {...props}>
               Refuel
             </Button>
           )}
