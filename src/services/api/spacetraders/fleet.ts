@@ -37,7 +37,7 @@ export const getShipListQuery = {
     url.searchParams.set('limit', '20')
 
     const initial = await get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
-    const pages = getPageList(Math.floor(initial.meta.total / initial.meta.limit), 1)
+    const pages = getPageList(Math.ceil(initial.meta.total / initial.meta.limit), 1)
     const remaining = await Promise.all(
       pages.map((page) => {
         url.searchParams.set('page', String(page))

@@ -71,7 +71,7 @@ export const getWaypointListQuery = {
     url.searchParams.set('limit', '20')
 
     const initial = await get<SpaceTradersResponse<WaypointResponse[], Meta>>(url, { signal, headers: createHeaders() })
-    const pages = getPageList(Math.floor(initial.meta.total / initial.meta.limit), 1)
+    const pages = getPageList(Math.ceil(initial.meta.total / initial.meta.limit), 1)
     const remaining = await Promise.all(
       pages.map((page) => {
         url.searchParams.set('page', String(page))
