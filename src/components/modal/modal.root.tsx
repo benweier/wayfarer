@@ -53,7 +53,7 @@ export const Root = ({
               <Dialog.Panel
                 tabIndex={1}
                 className={cx(
-                  'transform overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 outline-none ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-800 dark:ring-zinc-50/10',
+                  'transform overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-6 outline-none ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-900 dark:ring-zinc-50/10',
                   {
                     'w-auto': size === 'auto',
                     'w-screen': size === 'full',
