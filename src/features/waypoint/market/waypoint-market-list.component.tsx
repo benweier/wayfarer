@@ -1,5 +1,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useWaypointResponse } from '@/context/waypoint.context'
+import { TradeGoodBuy } from '@/features/trade-good/buy'
+import { TradeGoodContext } from '@/features/trade-good/context'
+import { TradeGoodSell } from '@/features/trade-good/sell'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { type MarketTradeGood } from '@/types/spacetraders'
 import { WaypointMarketTable } from './waypoint-market-table.component'
@@ -23,9 +26,21 @@ export const WaypointMarketList = () => {
 
   return (
     <WaypointMarketLayout
-      imports={<WaypointMarketTable goods={market.imports} trade={tradeGoods} />}
-      exports={<WaypointMarketTable goods={market.exports} trade={tradeGoods} />}
-      exchange={<WaypointMarketTable goods={market.exchange} trade={tradeGoods} />}
+      imports={
+        <TradeGoodContext.Provider value={{ Sell: TradeGoodSell }}>
+          <WaypointMarketTable data={market.imports.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
+        </TradeGoodContext.Provider>
+      }
+      exports={
+        <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy }}>
+          <WaypointMarketTable data={market.exports.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
+        </TradeGoodContext.Provider>
+      }
+      exchange={
+        <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy, Sell: TradeGoodSell }}>
+          <WaypointMarketTable data={market.exchange.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
+        </TradeGoodContext.Provider>
+      }
     />
   )
 }

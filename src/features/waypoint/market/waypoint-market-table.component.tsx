@@ -6,13 +6,12 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
-import { TradeGoodBuy } from '@/features/trade-good/buy'
-import { TradeGoodSell } from '@/features/trade-good/sell'
+import { TradeGoodContext } from '@/features/trade-good/context'
 import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number'
 
@@ -46,7 +45,7 @@ const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-right text-sm">{value !== undefined && formatNumber(value)}</div>
+      return <div className="text-right text-sm">{value === undefined ? '-' : formatNumber(value)}</div>
     },
     enableSorting: false,
   }),
@@ -57,7 +56,9 @@ const columns = [
       const value = getValue()
 
       return (
-        <div className="text-right">{value !== undefined && <Badge>{MARKET_TRADE_GOOD_SUPPLY.get(value)}</Badge>}</div>
+        <div className="text-right text-sm">
+          {value === undefined ? '-' : <Badge>{MARKET_TRADE_GOOD_SUPPLY.get(value)}</Badge>}
+        </div>
       )
     },
     enableSorting: false,
@@ -82,10 +83,20 @@ const columns = [
     cell: ({ row, getValue }) => {
       const value = getValue()
 
+      if (value === undefined) {
+        return <div className="text-right text-sm">-</div>
+      }
+
       return (
         <div className="flex items-center justify-end gap-2">
-          {value !== undefined && <div className="text-sm">{formatNumber(value)}</div>}
-          {row.original.trade && <TradeGoodBuy good={row.original.trade} />}
+          <div className="text-sm">{formatNumber(value)}</div>
+          <TradeGoodContext.Consumer>
+            {(ctx) => {
+              if (!ctx.Buy || !row.original.trade) return null
+
+              return <ctx.Buy good={row.original.trade} />
+            }}
+          </TradeGoodContext.Consumer>
         </div>
       )
     },
@@ -112,10 +123,20 @@ const columns = [
     cell: ({ row, getValue }) => {
       const value = getValue()
 
+      if (value === undefined) {
+        return <div className="text-right text-sm">-</div>
+      }
+
       return (
         <div className="flex items-center justify-end gap-2">
-          {value !== undefined && <div className="text-sm">{formatNumber(value)}</div>}
-          {row.original.trade && <TradeGoodSell good={row.original.trade} />}
+          <div className="text-sm">{formatNumber(value)}</div>
+          <TradeGoodContext.Consumer>
+            {(ctx) => {
+              if (!ctx.Sell || !row.original.trade) return null
+
+              return <ctx.Sell good={row.original.trade} />
+            }}
+          </TradeGoodContext.Consumer>
         </div>
       )
     },
@@ -124,17 +145,8 @@ const columns = [
   }),
 ]
 
-export const WaypointMarketTable = ({
-  goods,
-  trade,
-}: {
-  goods: MarketGood[]
-  trade?: Map<string, MarketTradeGood>
-}) => {
+export const WaypointMarketTable = ({ data }: { data: Array<{ good: MarketGood; trade?: MarketTradeGood }> }) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: false }])
-  const data = useMemo(() => {
-    return goods.map((good) => ({ good, trade: trade?.get(good.symbol) }))
-  }, [goods, trade])
   const table = useReactTable({
     data,
     columns,
