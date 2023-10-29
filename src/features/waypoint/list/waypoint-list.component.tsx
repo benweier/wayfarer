@@ -1,11 +1,10 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useFleetResponse } from '@/context/fleet.context'
 import { useSystemResponse } from '@/context/system.context'
-import { WaypointItem } from '@/features/waypoint/item'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
-import { type WaypointListProps } from './waypoint-list.types'
+import { WaypointListTable } from './waypoint-table.component'
 
-export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => {
+export const WaypointList = () => {
   const system = useSystemResponse()
   const ships = useFleetResponse()
   const { data } = useSuspenseQuery({
@@ -16,15 +15,6 @@ export const WaypointList = ({ Waypoint = WaypointItem }: WaypointListProps) => 
   const presence = new Set(ships.map((ship) => ship.nav.waypointSymbol))
 
   return (
-    <div className="grid grid-cols-1 gap-2 lg:grid-cols-3">
-      {waypoints.map((waypoint) => (
-        <Waypoint
-          key={waypoint.symbol}
-          systemSymbol={system.symbol}
-          waypoint={waypoint}
-          hasShipPresence={presence.has(waypoint.symbol)}
-        />
-      ))}
-    </div>
+    <WaypointListTable data={waypoints.map((waypoint) => ({ waypoint, presence: presence.has(waypoint.symbol) }))} />
   )
 }
