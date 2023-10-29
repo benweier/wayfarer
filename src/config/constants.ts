@@ -127,6 +127,7 @@ export const WAYPOINT_TYPE: ReadonlyMap<string, string> = new Map([
 
 export const WAYPOINT_TRAIT_SYMBOL: ReadonlyMap<string, string> = new Map([
   ['UNCHARTED', 'Uncharted'],
+  ['UNDER_CONSTRUCTION', 'Under Construction'],
   ['MARKETPLACE', 'Marketplace'],
   ['SHIPYARD', 'Shipyard'],
   ['OUTPOST', 'Outpost'],
@@ -175,6 +176,7 @@ export const WAYPOINT_TRAIT_SYMBOL: ReadonlyMap<string, string> = new Map([
   ['TOXIC_ATMOSPHERE', 'Toxic Atmosphere'],
   ['CORROSIVE_ATMOSPHERE', 'Corrosive Atmosphere'],
   ['BREATHABLE_ATMOSPHERE', 'Breathable Atmosphere'],
+  ['THIN_ATMOSPHERE', 'Thin Atmosphere'],
   ['JOVIAN', 'Jovian'],
   ['ROCKY', 'Rocky'],
   ['VOLCANIC', 'Volcanic'],
@@ -184,6 +186,13 @@ export const WAYPOINT_TRAIT_SYMBOL: ReadonlyMap<string, string> = new Map([
   ['TEMPERATE', 'Temperate'],
   ['JUNGLE', 'Jungle'],
   ['OCEAN', 'Ocean'],
+  ['RADIOACTIVE', 'Radioactive'],
+  ['MICRO_GRAVITY_ANOMALIES', 'Micro Gravity Anomalies'],
+  ['DEBRIS_CLUSTER', 'Debris Cluster'],
+  ['DEEP_CRATERS', 'Deep Craters'],
+  ['SHALLOW_CRATERS', 'Shallow Craters'],
+  ['UNSTABLE_COMPOSITION', 'Unstable Composition'],
+  ['HOLLOWED_INTERIOR', 'Hollowed Interior'],
   ['STRIPPED', 'Stripped'],
 ])
 
