@@ -157,7 +157,7 @@ export const WaypointMarketTable = ({ data }: { data: Array<{ good: MarketGood; 
   })
 
   return (
-    <div className="overflow-hidden ring-1 ring-black ring-opacity-10 sm:rounded-lg">
+    <div className="overflow-hidden rounded-xl">
       <table className="min-w-full divide-y divide-zinc-200 dark:divide-zinc-950">
         <thead className="bg-zinc-100 dark:bg-zinc-800">
           {table.getHeaderGroups().map((headerGroup) => (
