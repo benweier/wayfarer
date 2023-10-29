@@ -253,6 +253,12 @@ export type WaypointTrait = {
   description: string
 }
 
+export type WaypointModifier = {
+  symbol: string
+  name: string
+  description: string
+}
+
 export type WaypointResponse = {
   symbol: string
   type: string
@@ -263,7 +269,9 @@ export type WaypointResponse = {
   orbits?: string
   faction: WaypointFaction
   traits: WaypointTrait[]
+  modifiers: WaypointModifier[]
   chart?: WaypointChart
+  isUnderConstruction: boolean
 }
 
 export type MarketGood = {

@@ -116,9 +116,13 @@ export const WAYPOINT_TYPE: ReadonlyMap<string, string> = new Map([
   ['ORBITAL_STATION', 'Orbital Station'],
   ['JUMP_GATE', 'Jump Gate'],
   ['ASTEROID', 'Asteroid'],
+  ['ASTEROID_BASE', 'Asteroid Base'],
+  ['ENGINEERED_ASTEROID', 'Engineered Asteroid'],
+  ['FUEL_STATION', 'Fuel Station'],
   ['NEBULA', 'Nebula'],
   ['DEBRIS_FIELD', 'Debris Field'],
   ['GRAVITY_WELL', 'Gravity Well'],
+  ['ARTIFICIAL_GRAVITY_WELL', 'Artificial Gravity Well'],
 ])
 
 export const WAYPOINT_TRAIT_SYMBOL: ReadonlyMap<string, string> = new Map([
@@ -181,6 +185,14 @@ export const WAYPOINT_TRAIT_SYMBOL: ReadonlyMap<string, string> = new Map([
   ['JUNGLE', 'Jungle'],
   ['OCEAN', 'Ocean'],
   ['STRIPPED', 'Stripped'],
+])
+
+export const WAYPOINT_MODIFIER_SYMBOL: ReadonlyMap<string, string> = new Map([
+  ['STRIPPED', 'Stripped'],
+  ['UNSTABLE', 'Unstable'],
+  ['RADIATION_LEAK', 'Radiation Leak'],
+  ['CRITICAL_LIMIT', 'Critical Limit'],
+  ['CIVIL_UNREST', 'Civil Unrest'],
 ])
 
 export const SHIP_TYPE: ReadonlyMap<string, string> = new Map([
