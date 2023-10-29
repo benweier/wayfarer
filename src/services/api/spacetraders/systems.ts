@@ -7,6 +7,7 @@ import {
   type SystemsResponse,
   type WaypointResponse,
 } from '@/types/spacetraders'
+import { getPageList } from '@/utilities/get-page-list.helper'
 import { type Meta, type SpaceTradersResponse, attachQueryParams, createHeaders } from './core'
 
 const SYSTEM_QUERIES = {
@@ -15,8 +16,7 @@ const SYSTEM_QUERIES = {
     [{ scope: 'systems', entity: 'item' }, { systemSymbol }] as const,
 }
 const WAYPOINT_QUERIES = {
-  waypointList: (args: { systemSymbol: string }, params?: { page?: number; limit?: number }) =>
-    [{ scope: 'waypoints', entity: 'list' }, args, params] as const,
+  waypointList: (args: { systemSymbol: string }) => [{ scope: 'waypoints', entity: 'list' }, args] as const,
   waypointById: ({ systemSymbol, waypointSymbol }: { systemSymbol: string; waypointSymbol: string }) =>
     [
       { scope: 'waypoints', entity: 'item' },
@@ -64,12 +64,25 @@ export const getSystemByIdQuery = {
 
 export const getWaypointListQuery = {
   getQueryKey: WAYPOINT_QUERIES.waypointList,
-  queryFn: async ({ queryKey: [, args, params], signal }: QueryFunctionContext<WaypointQueryKey<'waypointList'>>) => {
+  queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<WaypointQueryKey<'waypointList'>>) => {
     const url = new URL(`systems/${args.systemSymbol}/waypoints`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    if (params) attachQueryParams(url, params)
+    url.searchParams.set('page', '1')
+    url.searchParams.set('limit', '20')
 
-    return get<SpaceTradersResponse<WaypointResponse[], Meta>>(url, { signal, headers: createHeaders() })
+    const initial = await get<SpaceTradersResponse<WaypointResponse[], Meta>>(url, { signal, headers: createHeaders() })
+    const pages = getPageList(Math.floor(initial.meta.total / initial.meta.limit), 1)
+    const remaining = await Promise.all(
+      pages.map((page) => {
+        url.searchParams.set('page', String(page))
+
+        return get<SpaceTradersResponse<WaypointResponse[], Meta>>(url, { signal, headers: createHeaders() })
+      }),
+    )
+    const data = initial.data.concat(...remaining.map((page) => page.data))
+    const meta = { page: 1, total: data.length, limit: data.length }
+
+    return { data, meta }
   },
 }
 
