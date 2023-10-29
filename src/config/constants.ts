@@ -115,7 +115,7 @@ export const WAYPOINT_TYPE: ReadonlyMap<string, string> = new Map([
   ['MOON', 'Moon'],
   ['ORBITAL_STATION', 'Orbital Station'],
   ['JUMP_GATE', 'Jump Gate'],
-  ['ASTEROID_FIELD', 'Asteroid Field'],
+  ['ASTEROID', 'Asteroid'],
   ['NEBULA', 'Nebula'],
   ['DEBRIS_FIELD', 'Debris Field'],
   ['GRAVITY_WELL', 'Gravity Well'],
