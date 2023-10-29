@@ -13,7 +13,7 @@ const WAYPOINT_TYPE_STYLES: Record<string, string> = {
   MOON: 'bg-slate-500 text-slate-50',
   GAS_GIANT: 'bg-orange-700 text-orange-50',
   NEBULA: 'bg-amber-400 text-amber-950',
-  ASTEROID: 'bg-lime-300 text-lime-950',
+  FUEL_STATION: 'bg-lime-300 text-lime-950',
   PLANET: 'bg-emerald-600 text-emerald-50',
   DEBRIS_FIELD: 'bg-teal-300 text-teal-950',
   ORBITAL_STATION: 'bg-fuchsia-600 text-fuchsia-50',
@@ -88,32 +88,37 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
           return (
             <System key={system.symbol} system={system}>
               <div className="relative isolate flex items-center -space-x-2">
-                {system.waypoints.map((waypoint) => {
-                  const hasShipPresence = fleetQuery.data.has(waypoint.symbol)
+                {system.waypoints
+                  .filter((waypoint) => !waypoint.type.includes('ASTEROID'))
+                  .map((waypoint) => {
+                    const hasShipPresence = fleetQuery.data.has(waypoint.symbol)
 
-                  return (
-                    <li
-                      key={waypoint.symbol}
-                      className={cx(
-                        'overflow-hidden rounded-full border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125',
-                        {
-                          'border-zinc-50 dark:border-zinc-800': !hasShipPresence,
-                          'border-blue-500': hasShipPresence,
-                        },
-                      )}
-                    >
-                      <Link
-                        className={cx('flex h-8 w-8 items-center justify-center', WAYPOINT_TYPE_STYLES[waypoint.type])}
-                        to={`${ROUTES.SYSTEMS}/${system.symbol}/waypoint/${waypoint.symbol}`}
+                    return (
+                      <li
+                        key={waypoint.symbol}
+                        className={cx(
+                          'overflow-hidden rounded-full border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125',
+                          {
+                            'border-zinc-50 dark:border-zinc-800': !hasShipPresence,
+                            'border-blue-500': hasShipPresence,
+                          },
+                        )}
                       >
-                        <span className="font-black" aria-hidden>
-                          {waypoint.type.charAt(0)}
-                        </span>
-                        <span className="sr-only">{waypoint.symbol}</span>
-                      </Link>
-                    </li>
-                  )
-                })}
+                        <Link
+                          className={cx(
+                            'flex h-8 w-8 items-center justify-center',
+                            WAYPOINT_TYPE_STYLES[waypoint.type],
+                          )}
+                          to={`${ROUTES.SYSTEMS}/${system.symbol}/waypoint/${waypoint.symbol}`}
+                        >
+                          <span className="font-black" aria-hidden>
+                            {waypoint.type.charAt(0)}
+                          </span>
+                          <span className="sr-only">{waypoint.symbol}</span>
+                        </Link>
+                      </li>
+                    )
+                  })}
               </div>
             </System>
           )
