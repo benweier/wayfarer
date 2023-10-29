@@ -347,6 +347,7 @@ export const MARKET_TRADE_GOOD_SUPPLY: ReadonlyMap<string, string> = new Map([
   ['SCARCE', 'Scarce'],
   ['LIMITED', 'Limited'],
   ['MODERATE', 'Moderate'],
+  ['HIGH', 'High'],
   ['ABUNDANT', 'Abundant'],
 ])
 
