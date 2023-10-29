@@ -1,29 +1,27 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
+import { useContext } from 'react'
 import { Button } from '@/components/button'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { TRADE_SYMBOL } from '@/config/constants'
+import { ShipContext } from '@/context/ship.context'
 import { TradeGoodInfo } from '@/features/trade-good/info'
 import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
-import { formatNumber } from '@/utilities/number'
 import { TradeGoodBuyForm } from './trade-good-buy.form'
 import { type TradeGoodBuyProps } from './trade-good-buy.types'
 
 export const TradeGoodBuy = ({
-  ship,
   good,
   action = (props) => (
-    <Button intent="danger" kind="outline" {...props}>
-      <div>
-        <div className="text-xs uppercase">Buy</div>
-        <div className="text-base font-bold">{formatNumber(good.purchasePrice)}</div>
-      </div>
+    <Button intent="danger" kind="outline" size="small" {...props}>
+      Buy
     </Button>
   ),
 }: TradeGoodBuyProps) => {
+  const ship = useContext(ShipContext)
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore((state) => state.actions)
   const client = useQueryClient()
