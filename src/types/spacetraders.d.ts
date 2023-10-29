@@ -299,6 +299,12 @@ export type MarketResponse = {
   tradeGoods?: MarketTradeGood[]
 }
 
+export type ChartResponse = {
+  waypointSymbol: string
+  submittedBy: string
+  submittedOn: string
+}
+
 export type JumpGateConnectedSystem = {
   symbol: string
   sectorSymbol: string
