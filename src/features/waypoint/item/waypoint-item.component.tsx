@@ -8,6 +8,10 @@ import { ROUTES } from '@/config/routes'
 import { type WaypointItemProps } from './waypoint-item.types'
 
 export const WaypointItem = ({ systemSymbol, waypoint, hasShipPresence }: WaypointItemProps) => {
+  const traits = waypoint.traits?.filter((trait) => {
+    return trait.symbol === 'MARKETPLACE' || trait.symbol === 'SHIPYARD'
+  })
+
   return (
     <Card className="@container/waypoint-item">
       <div className="h-full space-y-1">
@@ -27,9 +31,9 @@ export const WaypointItem = ({ systemSymbol, waypoint, hasShipPresence }: Waypoi
             ({waypoint.x}, {waypoint.y})
           </div>
         </div>
-        {waypoint.traits !== undefined && (
+        {traits !== undefined && (
           <div className="flex flex-wrap gap-1">
-            {waypoint.traits.map((trait) => (
+            {traits.map((trait) => (
               <Badge key={trait.symbol}>{trait.name}</Badge>
             ))}
           </div>
