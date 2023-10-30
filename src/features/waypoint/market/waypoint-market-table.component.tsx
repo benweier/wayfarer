@@ -176,7 +176,7 @@ export const WaypointMarketTable = ({ data }: { data: Array<{ good: MarketGood; 
   return (
     <div className="overflow-hidden rounded-xl">
       <table className="min-w-full divide-y divide-zinc-200 dark:divide-zinc-950">
-        <thead className="bg-zinc-100 dark:bg-zinc-800">
+        <thead className="bg-zinc-200/50 dark:bg-zinc-700/50">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -189,7 +189,7 @@ export const WaypointMarketTable = ({ data }: { data: Array<{ good: MarketGood; 
         </thead>
         <tbody className="divide-y divide-zinc-200 bg-zinc-100/50 dark:divide-zinc-950 dark:bg-zinc-800/50">
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr key={row.id} className="even:bg-zinc-300/10 dark:even:bg-zinc-700/10">
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="text-primary whitespace-nowrap p-3">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
