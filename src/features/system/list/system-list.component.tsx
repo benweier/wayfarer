@@ -87,7 +87,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
         {systems.map((system) => {
           return (
             <System key={system.symbol} system={system}>
-              <div className="relative isolate flex items-center -space-x-2">
+              <ul className="relative isolate flex items-center -space-x-2">
                 {system.waypoints
                   .filter((waypoint) => !waypoint.type.includes('ASTEROID'))
                   .map((waypoint) => {
@@ -97,7 +97,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
                       <li
                         key={waypoint.symbol}
                         className={cx(
-                          'overflow-hidden rounded-full border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125',
+                          'list-none overflow-hidden rounded-full border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125',
                           {
                             'border-zinc-50 dark:border-zinc-800': !hasShipPresence,
                             'border-blue-500': hasShipPresence,
@@ -119,7 +119,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
                       </li>
                     )
                   })}
-              </div>
+              </ul>
             </System>
           )
         })}
