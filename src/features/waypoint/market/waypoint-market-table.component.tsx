@@ -6,6 +6,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { cx } from 'class-variance-authority'
 import { useState } from 'react'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
@@ -40,12 +41,16 @@ const columns = [
     enableSorting: true,
   }),
   columnHelper.accessor((row) => row.trade?.tradeVolume, {
-    id: 'tradeVolume',
+    id: 'trade_volume',
     header: () => <div className="text-right">Trade Volume</div>,
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-right text-sm">{value === undefined ? '-' : formatNumber(value)}</div>
+      if (value === undefined) {
+        return <div className="text-secondary text-right text-sm">-</div>
+      }
+
+      return <div className="text-right text-sm">{formatNumber(value)}</div>
     },
     enableSorting: false,
   }),
@@ -55,16 +60,20 @@ const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
+      if (value === undefined) {
+        return <div className="text-secondary text-right text-sm">-</div>
+      }
+
       return (
-        <div className="text-right text-sm">
-          {value === undefined ? '-' : <Badge>{MARKET_TRADE_GOOD_SUPPLY.get(value)}</Badge>}
+        <div className="text-right">
+          <Badge>{MARKET_TRADE_GOOD_SUPPLY.get(value)}</Badge>
         </div>
       )
     },
     enableSorting: false,
   }),
   columnHelper.accessor((row) => row.trade?.purchasePrice, {
-    id: 'buy',
+    id: 'purchase_price',
     header: ({ column }) => (
       <div className="flex items-center justify-end gap-2 text-right">
         <div>Purchase Price</div>
@@ -84,17 +93,21 @@ const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-right text-sm">-</div>
+        return <div className="text-secondary text-right text-sm">-</div>
       }
 
       return (
         <div className="flex items-center justify-end gap-2">
-          <div className="text-sm">{formatNumber(value)}</div>
           <TradeGoodContext.Consumer>
             {(ctx) => {
-              if (!ctx.Buy || !row.original.trade) return null
-
-              return <ctx.Buy good={row.original.trade} />
+              return (
+                <>
+                  <div className={cx('text-sm', { 'text-secondary': !ctx.Buy })}>{formatNumber(value)}</div>
+                  {ctx.Buy !== undefined && row.original.trade !== undefined ? (
+                    <ctx.Buy good={row.original.trade} />
+                  ) : null}
+                </>
+              )
             }}
           </TradeGoodContext.Consumer>
         </div>
@@ -104,7 +117,7 @@ const columns = [
     sortDescFirst: false,
   }),
   columnHelper.accessor((row) => row.trade?.sellPrice, {
-    id: 'sell',
+    id: 'sell_price',
     header: ({ column }) => (
       <div className="flex items-center justify-end gap-2 text-right">
         <div>Sell Price</div>
@@ -124,17 +137,21 @@ const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-right text-sm">-</div>
+        return <div className="text-secondary text-right text-sm">-</div>
       }
 
       return (
         <div className="flex items-center justify-end gap-2">
-          <div className="text-sm">{formatNumber(value)}</div>
           <TradeGoodContext.Consumer>
             {(ctx) => {
-              if (!ctx.Sell || !row.original.trade) return null
-
-              return <ctx.Sell good={row.original.trade} />
+              return (
+                <>
+                  <div className={cx('text-sm', { 'text-secondary': !ctx.Sell })}>{formatNumber(value)}</div>
+                  {ctx.Sell !== undefined && row.original.trade !== undefined ? (
+                    <ctx.Sell good={row.original.trade} />
+                  ) : null}
+                </>
+              )
             }}
           </TradeGoodContext.Consumer>
         </div>
