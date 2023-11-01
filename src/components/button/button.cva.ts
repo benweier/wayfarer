@@ -8,6 +8,7 @@ export const button = cva('btn', {
       success: ['btn-success'],
       warn: ['btn-warn'],
       danger: ['btn-danger'],
+      dim: ['btn-dim'],
       hero: ['btn-hero'],
     },
     size: {

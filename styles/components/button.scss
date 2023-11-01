@@ -64,12 +64,8 @@
   }
 }
 
-.btn-light {
-   @apply border-2 border-zinc-200 bg-zinc-200/50 text-zinc-900;
-}
-
-.btn-dark {
-  @apply border-2 border-zinc-800 bg-zinc-900/50 text-zinc-50;
+.btn-dim {
+  @apply bg-zinc-300 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-50;
 }
 
 .btn-sm {
