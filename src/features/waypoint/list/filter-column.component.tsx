@@ -5,13 +5,16 @@ import { cx } from 'class-variance-authority'
 import { Fragment, type PropsWithChildren } from 'react'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
-import { WAYPOINT_TYPE } from '@/config/constants'
 
 export const FilterColumn = ({
   selected = [],
   options = [],
   onChange,
-}: PropsWithChildren<{ selected?: string[]; options?: string[]; onChange: (value?: string[]) => void }>) => {
+}: PropsWithChildren<{
+  selected?: Array<{ id: string; value: string }>
+  options?: Array<{ id: string; value: string }>
+  onChange: (value?: Array<{ id: string; value: string }>) => void
+}>) => {
   const { x, y, refs } = useFloating<HTMLButtonElement>({
     strategy: 'absolute',
     placement: 'bottom',
@@ -25,7 +28,7 @@ export const FilterColumn = ({
 
   return (
     <>
-      <Listbox value={selected} onChange={onChange} multiple>
+      <Listbox value={selected} by="id" onChange={onChange} multiple>
         <Listbox.Button as={Fragment}>
           <Button intent={selected.length > 0 ? 'primary' : 'dim'} kind="flat" size="small" ref={refs.setReference}>
             <span className="sr-only">Filter</span>
@@ -52,7 +55,7 @@ export const FilterColumn = ({
             >
               <Listbox.Options className="mt-1 max-h-64 w-full overflow-auto rounded-md border-2 border-zinc-100 bg-white/90 text-sm outline-none backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90">
                 {options.map((option) => (
-                  <Listbox.Option key={option} value={option} className="relative">
+                  <Listbox.Option key={option.id} value={option} className="relative">
                     {({ selected, active, disabled }) => {
                       return (
                         <div className="relative p-1">
@@ -62,7 +65,7 @@ export const FilterColumn = ({
                               { 'bg-zinc-900/5 dark:bg-zinc-100/10': active, 'opacity-50': disabled },
                             )}
                           >
-                            {WAYPOINT_TYPE.get(option)}
+                            {option.value}
                           </span>
 
                           {selected ? (
