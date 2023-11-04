@@ -20,7 +20,7 @@ import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
-import { type WaypointResponse } from '@/types/spacetraders'
+import { type WaypointResponse, type WaypointTrait } from '@/types/spacetraders'
 import { FilterColumn } from './filter-column.component'
 
 const FILTERED_TRAITS = new Set([
@@ -79,7 +79,12 @@ const columns = [
   columnHelper.accessor((row) => row.waypoint.type, {
     id: 'type',
     header: ({ column }) => {
-      const values: string[] = Array.from(column.getFacetedUniqueValues().keys()).sort()
+      const facets: string[] = Array.from(column.getFacetedUniqueValues().keys()).sort()
+      const selected = column.getFilterValue() as Array<{ id: string; value: string }> | undefined
+      const options = facets.map((value) => ({
+        id: value,
+        value: WAYPOINT_TYPE.get(value) ?? value,
+      }))
 
       return (
         <div className="flex items-center justify-start gap-2 text-right">
@@ -96,8 +101,8 @@ const columns = [
           </div>
           <div>
             <FilterColumn
-              selected={column.getFilterValue() as string[] | undefined}
-              options={values}
+              selected={selected}
+              options={options}
               onChange={(value) => {
                 column.setFilterValue(value)
               }}
@@ -115,23 +120,46 @@ const columns = [
         </div>
       )
     },
-    filterFn: 'arrIncludesSome',
+    filterFn: (row, _id, filterValue: Array<{ id: string; value: string }> = []) => {
+      if (filterValue.length === 0) return true
+
+      return filterValue.findIndex((value) => row.original.waypoint.type === value.id) > -1
+    },
     enableSorting: true,
     enableHiding: true,
     enableColumnFilter: true,
   }),
   columnHelper.accessor((row) => row.waypoint.traits, {
     id: 'traits',
-    header: ({ column }) => (
-      <div className="flex items-center justify-end gap-2 text-right">
-        <div>Traits</div>
-        <div>
-          <Button intent={column.getIsFiltered() ? 'primary' : 'dim'} kind="flat" size="small">
-            <AppIcon id="filter" className="h-4 w-4" />
-          </Button>
+    header: ({ column }) => {
+      const facets: WaypointTrait[] = Array.from(column.getFacetedUniqueValues().keys()).flat()
+      const filterValues = column.getFilterValue() as WaypointTrait[] | undefined
+      const selected = filterValues?.map((value) => ({
+        id: value.symbol,
+        value: value.name,
+      }))
+      const options = facets
+        .filter((value, index, self) => index === self.findIndex((trait) => trait.symbol === value.symbol))
+        .map((value) => ({
+          id: value.symbol,
+          value: value.name,
+        }))
+
+      return (
+        <div className="flex items-center justify-end gap-2 text-right">
+          <div>Traits</div>
+          <div>
+            <FilterColumn
+              selected={selected}
+              options={options}
+              onChange={(value) => {
+                column.setFilterValue(value)
+              }}
+            />
+          </div>
         </div>
-      </div>
-    ),
+      )
+    },
     cell: ({ getValue }) => {
       const traits = getValue().filter((trait) => {
         return FILTERED_TRAITS.has(trait.symbol)
@@ -145,26 +173,36 @@ const columns = [
         </div>
       )
     },
-    enableSorting: false,
-    enableHiding: true,
-  }),
-  columnHelper.accessor((row) => row.waypoint.modifiers, {
-    id: 'modifiers',
-    header: () => <div className="text-right">Modifiers</div>,
-    cell: ({ getValue }) => {
-      const modifiers = getValue()
+    filterFn: (row, _id, filterValue: Array<{ id: string; value: string }> = []) => {
+      if (filterValue.length === 0) return true
 
-      return (
-        <div className="flex flex-wrap items-center justify-end gap-2">
-          {modifiers.map((modifier) => (
-            <Badge key={modifier.symbol}>{modifier.name}</Badge>
-          ))}
-        </div>
+      const matchedTraits = filterValue.filter((value) =>
+        row.original.waypoint.traits.some((trait) => trait.symbol === value.id),
       )
+
+      return matchedTraits.length > 0
     },
     enableSorting: false,
     enableHiding: true,
+    enableGlobalFilter: true,
   }),
+  // columnHelper.accessor((row) => row.waypoint.modifiers, {
+  //   id: 'modifiers',
+  //   header: () => <div className="text-right">Modifiers</div>,
+  //   cell: ({ getValue }) => {
+  //     const modifiers = getValue()
+  //
+  //     return (
+  //       <div className="flex flex-wrap items-center justify-end gap-2">
+  //         {modifiers.map((modifier) => (
+  //           <Badge key={modifier.symbol}>{modifier.name}</Badge>
+  //         ))}
+  //       </div>
+  //     )
+  //   },
+  //   enableSorting: false,
+  //   enableHiding: true,
+  // }),
 ]
 
 export const WaypointListTable = ({ data }: { data: Array<{ waypoint: WaypointResponse; presence?: boolean }> }) => {
@@ -186,6 +224,7 @@ export const WaypointListTable = ({ data }: { data: Array<{ waypoint: WaypointRe
     enableHiding: true,
     enableFilters: true,
     enableColumnFilters: true,
+    enableGlobalFilter: true,
   })
 
   return (
