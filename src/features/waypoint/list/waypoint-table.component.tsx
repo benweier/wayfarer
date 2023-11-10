@@ -1,4 +1,4 @@
-import { Menu, Transition } from '@headlessui/react'
+import { Listbox } from '@headlessui/react'
 import {
   type ColumnFiltersState,
   type SortingState,
@@ -13,7 +13,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
@@ -120,10 +120,10 @@ const columns = [
         </div>
       )
     },
-    filterFn: (row, _id, filterValue: Array<{ id: string; value: string }> = []) => {
+    filterFn: (row, _id, filterValue: string[] = []) => {
       if (filterValue.length === 0) return true
 
-      return filterValue.findIndex((value) => row.original.waypoint.type === value.id) > -1
+      return filterValue.includes(row.original.waypoint.type)
     },
     enableSorting: true,
     enableHiding: true,
@@ -204,6 +204,12 @@ const columns = [
   //   enableHiding: true,
   // }),
 ]
+const COLUMN_FILTERS: Record<string, string> = {
+  coordinates: 'Coordinates',
+  type: 'Type',
+  traits: 'Traits',
+  // 'modifiers': 'Modifiers',
+}
 
 export const WaypointListTable = ({ data }: { data: Array<{ waypoint: WaypointResponse; presence?: boolean }> }) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])
@@ -226,69 +232,123 @@ export const WaypointListTable = ({ data }: { data: Array<{ waypoint: WaypointRe
     enableColumnFilters: true,
     enableGlobalFilter: true,
   })
+  const columnVisibilityOptions = table.getAllColumns().filter((column) => column.getCanHide())
+  const types = table.getColumn('type')
+  const facetedValues: Map<string, number> | undefined = types?.getFacetedUniqueValues()
+  const filterValues = (types?.getFilterValue() as string[] | undefined) ?? []
+  const filterOptions: string[] = facetedValues === undefined ? [] : Array.from(facetedValues.keys()).sort()
 
   return (
-    <div className="max-w-screen space-y-4 overflow-x-scroll">
-      <div>
-        <Menu as="div" className="relative inline-block text-left">
-          <div>
-            <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
-              Columns
-              <AppIcon
-                id="chevron:up-down"
-                className="-mr-1 ml-2 h-5 w-5 text-violet-200 hover:text-violet-100"
-                aria-hidden="true"
-              />
-            </Menu.Button>
-          </div>
-          <Transition
-            as={Fragment}
-            enter="transition ease-out duration-100"
-            enterFrom="transform opacity-0 scale-95"
-            enterTo="transform opacity-100 scale-100"
-            leave="transition ease-in duration-75"
-            leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
-          >
-            <Menu.Items className="absolute left-0 mt-2 w-56 origin-top-left divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-              <div className="px-1 py-1 ">
-                {table
-                  .getAllColumns()
-                  .filter((column) => column.getCanHide())
-                  .map((column) => {
-                    return (
-                      <Menu.Item key={column.id}>
-                        {({ active }) => (
-                          <button
-                            className={cx('group flex w-full items-center rounded-md px-2 py-2 text-sm', {
-                              'bg-violet-500 text-white': active,
-                              'text-gray-900': !active,
-                            })}
-                            onClick={() => {
-                              column.toggleVisibility(!column.getIsVisible())
-                            }}
+    <div className="max-w-screen space-y-4">
+      <div className="flex gap-4">
+        <Listbox
+          as="div"
+          className="relative"
+          value={filterValues}
+          onChange={(value) => {
+            table.getColumn('type')?.setFilterValue(value)
+          }}
+          multiple
+        >
+          <Listbox.Button className="select pr-8">
+            <>
+              <label className="block truncate">
+                Type {`(${filterValues.length === 0 ? 'All' : filterValues.length})`}
+              </label>
+              <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                <AppIcon id="chevron:up-down" className="h-4 w-4 text-zinc-400" aria-hidden="true" />
+              </span>
+            </>
+          </Listbox.Button>
+
+          {filterOptions.length > 0 && (
+            <Listbox.Options className="absolute z-10 mt-1 max-h-48 w-auto overflow-auto rounded-md border-2 border-zinc-100 bg-white/90 text-sm outline-none backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90">
+              {filterOptions.map((option) => {
+                return (
+                  <Listbox.Option key={option} value={option}>
+                    {({ selected }) => {
+                      return (
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-0 flex items-center px-4">
+                            <AppIcon
+                              id="check"
+                              aria-hidden="true"
+                              className={cx('h-5 w-5', {
+                                'text-emerald-500': selected,
+                                'text-zinc-500': !selected,
+                              })}
+                            />
+                          </span>
+                          <span
+                            className={cx(
+                              'relative block cursor-default select-none truncate rounded py-2 pl-12 pr-4 transition-colors duration-100 ease-in-out',
+                            )}
                           >
-                            {column.id}
-                          </button>
+                            {WAYPOINT_TYPE.get(option)} {`(${facetedValues?.get(option) ?? 0})`}
+                          </span>
+                        </div>
+                      )
+                    }}
+                  </Listbox.Option>
+                )
+              })}
+            </Listbox.Options>
+          )}
+        </Listbox>
+        <Listbox
+          as="div"
+          className="relative"
+          value={Object.keys(columnVisibility)}
+          onChange={(value) => {
+            table.setColumnVisibility(value.reduce((acc, key) => ({ ...acc, [key]: false }), {}))
+          }}
+          multiple
+        >
+          <Listbox.Button className="select pr-8">
+            <>
+              <label className="block truncate">Columns</label>
+              <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                <AppIcon id="chevron:up-down" className="h-4 w-4 text-zinc-400" aria-hidden="true" />
+              </span>
+            </>
+          </Listbox.Button>
+
+          {columnVisibilityOptions.length > 0 && (
+            <Listbox.Options className="absolute z-10 mt-1 max-h-48 w-auto overflow-auto rounded-md border-2 border-zinc-100 bg-white/90 text-sm outline-none backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90">
+              {columnVisibilityOptions.map((column) => {
+                return (
+                  <Listbox.Option key={column.id} value={column.id}>
+                    <div className="relative p-1">
+                      {table.getColumn(column.id)?.getIsVisible() && (
+                        <span className="absolute inset-y-0 left-0 flex items-center px-4">
+                          <AppIcon id="check" aria-hidden="true" className="h-5 w-5 text-emerald-500" />
+                        </span>
+                      )}
+                      <span
+                        className={cx(
+                          'relative block cursor-default select-none truncate rounded py-2 pl-12 pr-4 transition-colors duration-100 ease-in-out',
                         )}
-                      </Menu.Item>
-                    )
-                  })}
-              </div>
-            </Menu.Items>
-          </Transition>
-        </Menu>
+                      >
+                        {COLUMN_FILTERS[column.id]}
+                      </span>
+                    </div>
+                  </Listbox.Option>
+                )
+              })}
+            </Listbox.Options>
+          )}
+        </Listbox>
       </div>
       <div className="overflow-hidden rounded-xl">
         <table className="min-w-full divide-y divide-zinc-200 dark:divide-zinc-950">
           <thead className="bg-zinc-100 dark:bg-zinc-800">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
+            {table.getHeaderGroups().map((group) => (
+              <tr key={group.id}>
+                {group.headers.map((header) => (
                   <th
                     key={header.id}
                     className="text-primary px-3 py-3.5 text-sm font-semibold"
-                    style={{ width: `${100 / headerGroup.headers.length}%` }}
+                    style={{ width: `${100 / group.headers.length}%` }}
                   >
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </th>
