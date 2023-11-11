@@ -27,19 +27,39 @@ export const WaypointMarketList = () => {
   return (
     <WaypointMarketLayout
       imports={
-        <TradeGoodContext.Provider value={{ Sell: TradeGoodSell }}>
-          <WaypointMarketTable data={market.imports.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
-        </TradeGoodContext.Provider>
+        market.imports.length === 0 ? (
+          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+            <div className="text-overline text-center">No Market Imports Available</div>
+          </div>
+        ) : (
+          <TradeGoodContext.Provider value={{ Sell: TradeGoodSell }}>
+            <WaypointMarketTable data={market.imports.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
+          </TradeGoodContext.Provider>
+        )
       }
       exports={
-        <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy }}>
-          <WaypointMarketTable data={market.exports.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
-        </TradeGoodContext.Provider>
+        market.exports.length === 0 ? (
+          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+            <div className="text-overline text-center">No Market Exports Available</div>
+          </div>
+        ) : (
+          <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy }}>
+            <WaypointMarketTable data={market.exports.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
+          </TradeGoodContext.Provider>
+        )
       }
       exchange={
-        <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy, Sell: TradeGoodSell }}>
-          <WaypointMarketTable data={market.exchange.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
-        </TradeGoodContext.Provider>
+        market.exchange.length === 0 ? (
+          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+            <div className="text-overline text-center">No Market Exchanges Available</div>
+          </div>
+        ) : (
+          <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy, Sell: TradeGoodSell }}>
+            <WaypointMarketTable
+              data={market.exchange.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))}
+            />
+          </TradeGoodContext.Provider>
+        )
       }
     />
   )
