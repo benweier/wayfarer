@@ -4,22 +4,11 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Pagination, usePagination } from '@/components/pagination'
 import { ROUTES } from '@/config/routes'
+import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
 import { getShipListQuery, getSystemListQuery } from '@/services/api/spacetraders'
 import { formatNumber } from '@/utilities/number'
 import { SystemItem } from '../item'
 import { type SystemListProps } from './system-list.types'
-
-const WAYPOINT_TYPE_STYLES: Record<string, string> = {
-  MOON: 'bg-slate-500 text-slate-50',
-  GAS_GIANT: 'bg-orange-700 text-orange-50',
-  NEBULA: 'bg-amber-400 text-amber-950',
-  FUEL_STATION: 'bg-lime-300 text-lime-950',
-  PLANET: 'bg-emerald-600 text-emerald-50',
-  DEBRIS_FIELD: 'bg-teal-300 text-teal-950',
-  ORBITAL_STATION: 'bg-fuchsia-600 text-fuchsia-50',
-  JUMP_GATE: 'bg-gray-50 text-gray-950',
-  GRAVITY_WELL: 'bg-gray-950 text-gray-50',
-}
 
 export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   const { page, limit, setPage } = usePagination()
@@ -87,7 +76,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
         {systems.map((system) => {
           return (
             <System key={system.symbol} system={system}>
-              <ul className="relative isolate flex items-center -space-x-2">
+              <ul className="relative isolate flex list-none items-center -space-x-2">
                 {system.waypoints
                   .filter((waypoint) => !waypoint.type.includes('ASTEROID'))
                   .map((waypoint) => {
