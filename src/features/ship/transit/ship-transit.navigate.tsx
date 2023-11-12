@@ -135,8 +135,8 @@ const columns = [
         )
 
         return (
-          <div className="text-secondary text-left text-sm">
-            {distance} ({duration}s)
+          <div className="text-left text-sm">
+            {distance} <span className="text-secondary">({duration}s)</span>
           </div>
         )
       },
