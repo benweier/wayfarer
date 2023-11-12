@@ -96,15 +96,14 @@ const columns = [
   }),
   columnHelper.accessor(
     (row) => {
-      const ad = Math.sqrt(row.waypoint.x * row.waypoint.x + row.waypoint.y * row.waypoint.y)
-
-      if (row.activeWaypoint) {
-        const bd = Math.sqrt(row.activeWaypoint.x * row.activeWaypoint.x + row.activeWaypoint.y * row.activeWaypoint.y)
-
-        return Math.abs(ad - bd).toFixed(3)
+      if (!row.activeWaypoint) {
+        return Math.sqrt(row.waypoint.x * row.waypoint.x + row.waypoint.y * row.waypoint.y).toFixed(3)
       }
 
-      return Math.sqrt(row.waypoint.x * row.waypoint.x + row.waypoint.y * row.waypoint.y).toFixed(3)
+      const ad = Math.pow(row.activeWaypoint.x - row.waypoint.x, 2)
+      const bd = Math.pow(row.activeWaypoint.y - row.waypoint.y, 2)
+
+      return Math.sqrt(ad + bd).toFixed(3)
     },
     {
       id: 'distance',
