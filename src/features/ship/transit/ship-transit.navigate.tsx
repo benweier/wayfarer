@@ -24,6 +24,7 @@ import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { type ShipResponse, type WaypointResponse } from '@/types/spacetraders'
+import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { type ShipTransitActionProps } from './ship-transit.types'
 
@@ -91,19 +92,18 @@ const columns = [
     },
     sortingFn: 'alphanumeric',
     enableSorting: true,
-    enableHiding: false,
     size: 200,
   }),
   columnHelper.accessor(
     (row) => {
       if (!row.activeWaypoint) {
-        return Math.sqrt(row.waypoint.x * row.waypoint.x + row.waypoint.y * row.waypoint.y).toFixed(3)
+        return Number(Math.sqrt(row.waypoint.x * row.waypoint.x + row.waypoint.y * row.waypoint.y).toFixed(3))
       }
 
       const xd = row.activeWaypoint.x - row.waypoint.x
       const yd = row.activeWaypoint.y - row.waypoint.y
 
-      return Math.sqrt(xd * xd + yd * yd).toFixed(3)
+      return Number(Math.sqrt(xd * xd + yd * yd).toFixed(3))
     },
     {
       id: 'distance',
@@ -112,7 +112,7 @@ const columns = [
 
         return (
           <div className="flex items-center justify-start gap-2 text-left">
-            <div>Distance</div>
+            <div>Distance (Time)</div>
             <div>
               <Button
                 intent={sorted === false ? 'dim' : 'primary'}
@@ -126,12 +126,22 @@ const columns = [
           </div>
         )
       },
-      cell: ({ getValue }) => {
-        return <div className="text-secondary text-left text-sm">{getValue()}</div>
+      cell: ({ getValue, row }) => {
+        const distance = getValue()
+        const duration = getNavigationDuration(
+          distance,
+          row.original.ship.engine.speed,
+          row.original.ship.nav.flightMode,
+        )
+
+        return (
+          <div className="text-secondary text-left text-sm">
+            {distance} ({duration}s)
+          </div>
+        )
       },
-      sortingFn: 'alphanumeric',
+      sortDescFirst: false,
       enableSorting: true,
-      enableHiding: true,
       size: 200,
     },
   ),
@@ -171,7 +181,6 @@ const columns = [
       return filterValue.includes(row.original.waypoint.type)
     },
     enableSorting: true,
-    enableHiding: true,
     enableColumnFilter: true,
     size: 200,
   }),
@@ -206,17 +215,20 @@ const columns = [
 
       return matchedTraits.length > 0
     },
-    enableSorting: false,
-    enableHiding: true,
-    enableGlobalFilter: true,
     size: 200,
   }),
   columnHelper.display({
     id: 'actions',
     cell: ({ row }) => {
+      const distance: number = row.getValue('distance')
+
       return (
         <div className="flex justify-end">
-          <ShipActions.Navigate ship={row.original.ship} waypointSymbol={row.original.waypoint.symbol}>
+          <ShipActions.Navigate
+            disabled={Math.ceil(distance) > row.original.ship.fuel.current && row.original.ship.fuel.capacity > 0}
+            ship={row.original.ship}
+            waypointSymbol={row.original.waypoint.symbol}
+          >
             {row.original.ship.nav.waypointSymbol !== row.original.waypoint.symbol
               ? (props) => (
                   <Button intent="confirm" kind="flat" {...props}>
