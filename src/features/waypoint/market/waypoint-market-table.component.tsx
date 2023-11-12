@@ -14,27 +14,32 @@ import { AppIcon } from '@/components/icons'
 import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
+import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { formatNumber } from '@/utilities/number'
 
 const columnHelper = createColumnHelper<{ good: MarketGood; trade?: MarketTradeGood }>()
 const columns = [
   columnHelper.accessor((row) => row.good.name, {
     id: 'name',
-    header: ({ column }) => (
-      <div className="flex w-64 items-center justify-start gap-2 text-right">
-        <div>Name</div>
-        <div>
-          <Button
-            intent={column.getIsSorted() !== false ? 'primary' : undefined}
-            kind={column.getIsSorted() !== false ? 'flat' : undefined}
-            size="small"
-            onClick={column.getToggleSortingHandler()}
-          >
-            <AppIcon id="arrow:up-down" className="h-4 w-4" />
-          </Button>
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
+      return (
+        <div className="flex w-64 items-center justify-start gap-2 text-right">
+          <div>Name</div>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </div>
-    ),
+      )
+    },
     cell: ({ getValue }) => {
       return <>{getValue()}</>
     },
@@ -74,21 +79,25 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.trade?.purchasePrice, {
     id: 'purchase_price',
-    header: ({ column }) => (
-      <div className="flex items-center justify-end gap-2 text-right">
-        <div>Purchase Price</div>
-        <div>
-          <Button
-            intent={column.getIsSorted() !== false ? 'primary' : undefined}
-            kind={column.getIsSorted() !== false ? 'flat' : undefined}
-            size="small"
-            onClick={column.getToggleSortingHandler()}
-          >
-            <AppIcon id="arrow:up-down" className="h-4 w-4" />
-          </Button>
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
+      return (
+        <div className="flex items-center justify-end gap-2 text-right">
+          <div>Purchase Price</div>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </div>
-    ),
+      )
+    },
     cell: ({ row, getValue }) => {
       const value = getValue()
 
@@ -118,21 +127,25 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.trade?.sellPrice, {
     id: 'sell_price',
-    header: ({ column }) => (
-      <div className="flex items-center justify-end gap-2 text-right">
-        <div>Sell Price</div>
-        <div>
-          <Button
-            intent={column.getIsSorted() !== false ? 'primary' : undefined}
-            kind={column.getIsSorted() !== false ? 'flat' : undefined}
-            size="small"
-            onClick={column.getToggleSortingHandler()}
-          >
-            <AppIcon id="arrow:up-down" className="h-4 w-4" />
-          </Button>
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
+      return (
+        <div className="flex items-center justify-end gap-2 text-right">
+          <div>Sell Price</div>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </div>
-    ),
+      )
+    },
     cell: ({ row, getValue }) => {
       const value = getValue()
 

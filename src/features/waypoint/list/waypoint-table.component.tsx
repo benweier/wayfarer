@@ -19,6 +19,7 @@ import { AppIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { type WaypointResponse } from '@/types/spacetraders'
+import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { TypeFilter } from './type-filter.component'
 
 const FILTERED_TRAITS = new Set([
@@ -37,21 +38,25 @@ const columnHelper = createColumnHelper<{ waypoint: WaypointResponse; presence?:
 const columns = [
   columnHelper.accessor((row) => row.waypoint.symbol, {
     id: 'symbol',
-    header: ({ column }) => (
-      <div className="flex items-center justify-start gap-2 text-right">
-        <div>Symbol</div>
-        <div>
-          <Button
-            intent={column.getIsSorted() === false ? 'dim' : 'primary'}
-            kind="flat"
-            size="small"
-            onClick={column.getToggleSortingHandler()}
-          >
-            <AppIcon id="arrow:up-down" className="h-4 w-4" />
-          </Button>
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
+      return (
+        <div className="flex items-center justify-start gap-2 text-right">
+          <div>Symbol</div>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </div>
-    ),
+      )
+    },
     cell: ({ row, getValue }) => {
       return (
         <Link
@@ -68,36 +73,40 @@ const columns = [
   }),
   columnHelper.accessor((row) => `${row.waypoint.x}, ${row.waypoint.y}`, {
     id: 'coordinates',
-    header: ({ column }) => (
-      <div className="flex items-center justify-start gap-2 text-left">
-        <div>Coordinates</div>
-        <div>
-          <Button
-            intent={column.getIsSorted() === false ? 'dim' : 'primary'}
-            kind={column.getIsSorted() === false ? undefined : 'flat'}
-            size="small"
-            onClick={column.getToggleSortingHandler()}
-          >
-            <AppIcon id="arrow:up-down" className="h-4 w-4" />
-          </Button>
-        </div>
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
 
-        <Tooltip.Provider delayDuration={100}>
-          <Tooltip.Root>
-            <Tooltip.Trigger asChild>
-              <button>
-                <AppIcon id="help" className="text-secondary h-5 w-5" />
-              </button>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800" sideOffset={5}>
-                Sort coordinates by their distance from the system origin (0, 0).
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
-      </div>
-    ),
+      return (
+        <div className="flex items-center justify-start gap-2 text-left">
+          <div>Coordinates</div>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind={sorted === false ? undefined : 'flat'}
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+            </Button>
+          </div>
+
+          <Tooltip.Provider delayDuration={100}>
+            <Tooltip.Root>
+              <Tooltip.Trigger asChild>
+                <button>
+                  <AppIcon id="help" className="text-secondary h-5 w-5" />
+                </button>
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Content className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800" sideOffset={5}>
+                  Sort coordinates by their distance from the system origin (0, 0).
+                </Tooltip.Content>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+          </Tooltip.Provider>
+        </div>
+      )
+    },
     cell: ({ getValue }) => {
       return <div className="text-secondary text-left text-sm">{getValue()}</div>
     },
@@ -115,17 +124,19 @@ const columns = [
   columnHelper.accessor((row) => row.waypoint.type, {
     id: 'type',
     header: ({ column, table }) => {
+      const sorted = column.getIsSorted()
+
       return (
         <div className="flex items-center justify-start gap-2 text-right">
           <div>Type</div>
           <div>
             <Button
-              intent={column.getIsSorted() === false ? 'dim' : 'primary'}
-              kind={column.getIsSorted() === false ? undefined : 'flat'}
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind={sorted === false ? undefined : 'flat'}
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id="arrow:up-down" className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
             </Button>
           </div>
           <div>
@@ -155,19 +166,6 @@ const columns = [
   columnHelper.accessor((row) => row.waypoint.traits, {
     id: 'traits',
     header: () => {
-      // const facets: WaypointTrait[] = Array.from(column.getFacetedUniqueValues().keys()).flat()
-      // const filterValues = column.getFilterValue() as WaypointTrait[] | undefined
-      // const selected = filterValues?.map((value) => ({
-      //   id: value.symbol,
-      //   value: value.name,
-      // }))
-      // const options = facets
-      //   .filter((value, index, self) => index === self.findIndex((trait) => trait.symbol === value.symbol))
-      //   .map((value) => ({
-      //     id: value.symbol,
-      //     value: value.name,
-      //   }))
-
       return (
         <div className="flex items-center justify-end gap-2 text-right">
           <div>Traits</div>
