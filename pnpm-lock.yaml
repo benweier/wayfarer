@@ -33,17 +33,17 @@ dependencies:
     specifier: ^0.1.1
     version: 0.1.1(tailwindcss@3.3.5)
   '@tailwindcss/forms':
-    specifier: ^0.5.6
-    version: 0.5.6(tailwindcss@3.3.5)
+    specifier: ^0.5.7
+    version: 0.5.7(tailwindcss@3.3.5)
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.5)
   '@tanstack/react-query':
-    specifier: ^5.8.1
-    version: 5.8.1(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^5.8.2
+    version: 5.8.2(react-dom@18.2.0)(react@18.2.0)
   '@tanstack/react-query-devtools':
-    specifier: ^5.8.1
-    version: 5.8.1(@tanstack/react-query@5.8.1)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^5.8.2
+    version: 5.8.2(@tanstack/react-query@5.8.2)(react-dom@18.2.0)(react@18.2.0)
   '@tanstack/react-table':
     specifier: ^8.10.7
     version: 8.10.7(react-dom@18.2.0)(react@18.2.0)
@@ -87,8 +87,8 @@ dependencies:
     specifier: ^6.18.0
     version: 6.18.0(react-dom@18.2.0)(react@18.2.0)
   reactflow:
-    specifier: ^11.9.4
-    version: 11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^11.10.1
+    version: 11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
   tailwindcss:
     specifier: ^3.3.5
     version: 3.3.5
@@ -206,8 +206,8 @@ devDependencies:
     specifier: ^1.22.1
     version: 1.22.1
   lint-staged:
-    specifier: ^15.0.2
-    version: 15.0.2
+    specifier: ^15.1.0
+    version: 15.1.0
   million:
     specifier: 2.6.4
     version: 2.6.4
@@ -1336,13 +1336,13 @@ packages:
       '@babel/runtime': 7.23.2
     dev: false
 
-  /@reactflow/background@11.3.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-bgwvqWxF09chwmdkyClpYEMaewBspdwjgLbbFlLf4SpWPFMYyuvCBQrcISsvy/EDEWO9i3Uj9ktgGAhvtSQsmA==}
+  /@reactflow/background@11.3.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-06FPlSUOOMALEEs+2PqPAbpqmL7WDjrkbG2UsDr2d6mbcDDhHiV4tu9FYoz44SQvXo7ma9VRotlsaR4OiRcYsg==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -1352,13 +1352,13 @@ packages:
       - immer
     dev: false
 
-  /@reactflow/controls@11.2.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-x6e5p9iHjC6gd+4SoZ3DOOp0F1MefGKQ8hT6yPVdqxfo1+rV2WhrWvrX/MCoEu12Dp7457LdLfa0giy3aho8tQ==}
+  /@reactflow/controls@11.2.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-4QHT92/ACVlZkvV+Hq44bAPV8WbMhkJl+/J0EbXcqQ1+an7cWJsF84eeelJw7R5J76RoaSSpKdsWsL2v7HAVlw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -1368,8 +1368,8 @@ packages:
       - immer
     dev: false
 
-  /@reactflow/core@11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Ko7nKPOYalwDTTbRHi2+QXDiidSAcpUzGN3G+0B+QysLZkcaPCkpkMjjHiDC4c/Z1BJBzs1FRJg/T6BXaBnYkg==}
+  /@reactflow/core@11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-GIh3usY1W3eVobx//OO9+Cwm+5evQBBdPGxDaeXwm25UqPMWRI240nXQA5F/5gL5Mwpf0DUC7DR2EmrKNQy+Rw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
@@ -1390,13 +1390,13 @@ packages:
       - immer
     dev: false
 
-  /@reactflow/minimap@11.7.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Jo1R+uDey9IV7O2s3m0gK2+cZpg9M8hq2EZJb3NGfOSzMAPhj3mby0fNJIgTzycreuht0TpA51c2YfjGI3YIOw==}
+  /@reactflow/minimap@11.7.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-kJEtyeQkTZYViLGebVWHVUJROMAGcvejvT+iX4DqKnFb5yK8E8LWlXQpRx2FrL9gDy80mJJaciy7IxnnQKE1bg==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
       '@types/d3-selection': 3.0.10
       '@types/d3-zoom': 3.0.8
       classcat: 5.0.4
@@ -1410,13 +1410,13 @@ packages:
       - immer
     dev: false
 
-  /@reactflow/node-resizer@2.2.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-+p271/hAsM5M1+RQTWW/02pbNkCHeGXwxGimIlL1tMIagyuko0NX2vOz2B8jxJnPKlF09Wj18BcXBNUm3nDcSg==}
+  /@reactflow/node-resizer@2.2.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-1Xb6q97uP7hRBLpog9sRCNfnsHdDgFRGEiU+lQqGgPEAeYwl4nRjWa/sXwH6ajniKxBhGEvrdzOgEFn6CRMcpQ==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       d3-drag: 3.0.0
       d3-selection: 3.0.0
@@ -1428,13 +1428,13 @@ packages:
       - immer
     dev: false
 
-  /@reactflow/node-toolbar@1.3.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-TfcmpXHRBb2mUfzKGjburiU6FWqRME9pPFs1OwIC1z5e9BjupQhNDEKEk8XHi7PKL/mAiDfwuGXaM1BVVFuPqw==}
+  /@reactflow/node-toolbar@1.3.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-JXDEuZ0wKjZ8z7qK2bIst0eZPzNyVEsiHL0e93EyuqT4fA9icoyE0fLq2ryNOOp7MXgId1h7LusnH6ta45F0yQ==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -1708,8 +1708,8 @@ packages:
       tailwindcss: 3.3.5
     dev: false
 
-  /@tailwindcss/forms@0.5.6(tailwindcss@3.3.5):
-    resolution: {integrity: sha512-Fw+2BJ0tmAwK/w01tEFL5TiaJBX1NLT1/YbWgvm7ws3Qcn11kiXxzNTEQDMs5V3mQemhB56l3u0i9dwdzSQldA==}
+  /@tailwindcss/forms@0.5.7(tailwindcss@3.3.5):
+    resolution: {integrity: sha512-QE7X69iQI+ZXwldE+rzasvbJiyV/ju1FGHH0Qn2W3FKbuYtqp8LKcy6iSw79fVUT5/Vvf+0XgLCeYVG+UV6hOw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
@@ -1741,29 +1741,29 @@ packages:
       - typescript
     dev: true
 
-  /@tanstack/query-core@5.8.1:
-    resolution: {integrity: sha512-Y0enatz2zQXBAsd7XmajlCs+WaitdR7dIFkqz9Xd7HL4KV04JOigWVreYseTmNH7YFSBSC/BJ9uuNp1MAf+GfA==}
+  /@tanstack/query-core@5.8.2:
+    resolution: {integrity: sha512-tBTmTbBLxFQPCeKY5AcXdkTLtbQyYzak5yQohw4EKwEmFCFRqnViXjX8jkUd2pQN60Lf4RE2sD5UkzWqOw1ebw==}
     dev: false
 
-  /@tanstack/query-devtools@5.7.4:
-    resolution: {integrity: sha512-wx+gwRZUZq7ISXKFJgaAYvVPt+DwTaLKlzaVLB9SLBFIzcL8Jz8jDQGR9ZQp7/O7SVj0TohS8aFuiiGzQUvWyg==}
+  /@tanstack/query-devtools@5.8.2:
+    resolution: {integrity: sha512-xzI5LpmCSed2/plSu1ujfYadkOay9AADTzQ7U3aGYXHgBkKJ5pZrcTVuK3SHHpuqsD+mNmpzq8jU8omfOsFLxg==}
     dev: false
 
-  /@tanstack/react-query-devtools@5.8.1(@tanstack/react-query@5.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-sE6El2Yj98LlPDzf2Ju9IjWPZvqh2RgoQZ+Jomrfm80uA1HlHUvhXuOB0mOcyc706ZpNpL54no59JbgpHcMuUg==}
+  /@tanstack/react-query-devtools@5.8.2(@tanstack/react-query@5.8.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-8vcntQbZ1uDhSxkCJmbmBOAWsJaj7KlMUt4JbI1CvmOwI6HQi5SVy5Z8gtDH4h17kZKlwCoDUiaKetPgdLqaeg==}
     peerDependencies:
-      '@tanstack/react-query': ^5.8.1
+      '@tanstack/react-query': ^5.8.2
       react: ^18.0.0
       react-dom: ^18.0.0
     dependencies:
-      '@tanstack/query-devtools': 5.7.4
-      '@tanstack/react-query': 5.8.1(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/query-devtools': 5.8.2
+      '@tanstack/react-query': 5.8.2(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/react-query@5.8.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-YMagxS8iNPOLg0pK6WOjdSDlAvWKOf69udLOwQrBVmkC2SRLNLko7elo5Ro3ptlJkXvTVHidxC/h5KGi5bH1XQ==}
+  /@tanstack/react-query@5.8.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-1QGZWaB0Do5CCZ2OEGlacXWeylqN3pTlJPViPqktjViygNtuacbCZWdQEVdD62cYC3ra80YOlKihKmXKKhZwLA==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -1774,7 +1774,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 5.8.1
+      '@tanstack/query-core': 5.8.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -2747,7 +2747,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001561
-      electron-to-chromium: 1.4.580
+      electron-to-chromium: 1.4.581
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
     dev: true
@@ -3254,8 +3254,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium@1.4.580:
-    resolution: {integrity: sha512-T5q3pjQon853xxxHUq3ZP68ZpvJHuSMY2+BZaW3QzjS4HvNuvsMmZ/+lU+nCrftre1jFZ+OSlExynXWBihnXzw==}
+  /electron-to-chromium@1.4.581:
+    resolution: {integrity: sha512-6uhqWBIapTJUxgPTCHH9sqdbxIMPt7oXl0VcAL1kOtlU6aECdcMncCrX5Z7sHQ/invtrC9jUQUef7+HhO8vVFw==}
     dev: true
 
   /emoji-regex@8.0.0:
@@ -4904,8 +4904,8 @@ packages:
   /lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  /lint-staged@15.0.2:
-    resolution: {integrity: sha512-vnEy7pFTHyVuDmCAIFKR5QDO8XLVlPFQQyujQ/STOxe40ICWqJ6knS2wSJ/ffX/Lw0rz83luRDh+ET7toN+rOw==}
+  /lint-staged@15.1.0:
+    resolution: {integrity: sha512-ZPKXWHVlL7uwVpy8OZ7YQjYDAuO5X4kMh0XgZvPNxLcCCngd0PO5jKQyy3+s4TL2EnHoIXIzP1422f/l3nZKMw==}
     engines: {node: '>=18.12.0'}
     hasBin: true
     dependencies:
@@ -4918,7 +4918,7 @@ packages:
       micromatch: 4.0.5
       pidtree: 0.6.0
       string-argv: 0.3.2
-      yaml: 2.3.3
+      yaml: 2.3.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4993,9 +4993,11 @@ packages:
       get-func-name: 2.0.2
     dev: true
 
-  /lru-cache@10.0.1:
-    resolution: {integrity: sha512-IJ4uwUTi2qCccrioU6g9g/5rvvVl13bsdczUUcqbciD9iLr095yj8DQKdObriEvuNSx325N1rV1O0sJFszx75g==}
+  /lru-cache@10.0.2:
+    resolution: {integrity: sha512-Yj9mA8fPiVgOUpByoTZO5pNrcl5Yk37FcSHsUINpAsaBIEZIuqcCclDZJCVxqQShDsmYX8QG63svJiTbOATZwg==}
     engines: {node: 14 || >=16.14}
+    dependencies:
+      semver: 7.5.4
     dev: true
 
   /lru-cache@5.1.1:
@@ -5480,7 +5482,7 @@ packages:
     resolution: {integrity: sha512-MkhCqzzBEpPvxxQ71Md0b1Kk51W01lrYvlMzSUaIzNsODdd7mqhiimSZlr+VegAz5Z6Vzt9Xg2ttE//XBhH3EQ==}
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
-      lru-cache: 10.0.1
+      lru-cache: 10.0.2
       minipass: 7.0.4
     dev: true
 
@@ -5930,18 +5932,18 @@ packages:
     dependencies:
       loose-envify: 1.4.0
 
-  /reactflow@11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-IHAKBkJngNvU9y1vZ5Nw9rvA3Z+zc9geTgQQIi9qq9Y9knGLlDDr9KfsjbFMew9AycAAgVg8TvBEakF4IT5lqg==}
+  /reactflow@11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Q616fElAc5/N37tMwjuRkkgm/VgmnLLTNNCj61z5mvJxae+/VXZQMfot1K6a5LLz9G3SVKqU97PMb9Ga1PRXew==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/background': 11.3.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/controls': 11.2.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/core': 11.9.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/minimap': 11.7.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/node-resizer': 2.2.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
-      '@reactflow/node-toolbar': 1.3.4(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/background': 11.3.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/controls': 11.2.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.10.1(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/minimap': 11.7.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/node-resizer': 2.2.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/node-toolbar': 1.3.6(@types/react@18.2.37)(immer@10.0.3)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -7270,11 +7272,6 @@ packages:
   /yaml@1.10.2:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
-    dev: true
-
-  /yaml@2.3.3:
-    resolution: {integrity: sha512-zw0VAJxgeZ6+++/su5AFoqBbZbrEakwu+X0M5HmcwUiBL7AzcuPKjj5we4xfQLp78LkEMpD0cOnUhmgOVy3KdQ==}
-    engines: {node: '>= 14'}
     dev: true
 
   /yaml@2.3.4:
