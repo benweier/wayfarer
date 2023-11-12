@@ -100,10 +100,10 @@ const columns = [
         return Math.sqrt(row.waypoint.x * row.waypoint.x + row.waypoint.y * row.waypoint.y).toFixed(3)
       }
 
-      const ad = Math.pow(row.activeWaypoint.x - row.waypoint.x, 2)
-      const bd = Math.pow(row.activeWaypoint.y - row.waypoint.y, 2)
+      const xd = row.activeWaypoint.x - row.waypoint.x
+      const yd = row.activeWaypoint.y - row.waypoint.y
 
-      return Math.sqrt(ad + bd).toFixed(3)
+      return Math.sqrt(xd * xd + yd * yd).toFixed(3)
     },
     {
       id: 'distance',
