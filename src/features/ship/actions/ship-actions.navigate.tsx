@@ -9,6 +9,7 @@ import { type ShipActionProps } from './ship-actions.types'
 export const Navigate = ({
   ship,
   waypointSymbol,
+  disabled = false,
   children = (props) => (
     <Button size="small" {...props}>
       Navigate
@@ -50,7 +51,7 @@ export const Navigate = ({
   })
 
   return children({
-    disabled: isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
+    disabled: disabled || isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, waypointSymbol })
     },
