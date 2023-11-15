@@ -24,6 +24,7 @@ import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { type ShipResponse, type WaypointResponse } from '@/types/spacetraders'
+import { getFuelConsumption } from '@/utilities/get-fuel-consumption.helper'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { type ShipTransitActionProps } from './ship-transit.types'
@@ -225,7 +226,10 @@ const columns = [
       return (
         <div className="flex justify-end">
           <ShipActions.Navigate
-            disabled={Math.ceil(distance) > row.original.ship.fuel.current && row.original.ship.fuel.capacity > 0}
+            disabled={
+              getFuelConsumption(distance, row.original.ship.nav.flightMode) > row.original.ship.fuel.current &&
+              row.original.ship.fuel.capacity > 0
+            }
             ship={row.original.ship}
             waypointSymbol={row.original.waypoint.symbol}
           >
