@@ -30,7 +30,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
             intent="confirm"
             kind="flat"
             size="small"
-            disabled={isMutating || ship.fuel.capacity === 0}
+            disabled={isMutating || ship.fuel.capacity === 0 || ship.nav.status === 'IN_TRANSIT'}
           >
             Flight Mode
           </Button>
