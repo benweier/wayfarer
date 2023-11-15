@@ -5,6 +5,7 @@ import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
+import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
 import { ShipStatus } from '@/features/ship/status'
 import { ShipTransit } from '@/features/ship/transit'
 import { ShipDetailRefresh } from './ship-detail-refresh.component'
@@ -51,23 +52,26 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
                   {SHIP_NAV_FLIGHT_MODE.get(ship.nav.flightMode)}
                 </div>
               </div>
-              {ship.nav.status === 'DOCKED' ? (
-                <ShipActions.Orbit ship={ship}>
-                  {(props) => (
-                    <Button intent="primary" kind="flat" size="small" {...props}>
-                      Orbit
-                    </Button>
-                  )}
-                </ShipActions.Orbit>
-              ) : (
-                <ShipActions.Dock ship={ship}>
-                  {(props) => (
-                    <Button intent="primary" kind="flat" size="small" {...props}>
-                      Dock
-                    </Button>
-                  )}
-                </ShipActions.Dock>
-              )}
+              <div className="flex gap-2">
+                {ship.nav.status === 'DOCKED' ? (
+                  <ShipActions.Orbit ship={ship}>
+                    {(props) => (
+                      <Button intent="primary" kind="flat" size="small" {...props}>
+                        Orbit
+                      </Button>
+                    )}
+                  </ShipActions.Orbit>
+                ) : (
+                  <ShipActions.Dock ship={ship}>
+                    {(props) => (
+                      <Button intent="primary" kind="flat" size="small" {...props}>
+                        Dock
+                      </Button>
+                    )}
+                  </ShipActions.Dock>
+                )}
+                <ShipDetailFlightMode ship={ship} />
+              </div>
             </div>
           </div>
         </div>
