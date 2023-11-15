@@ -1,5 +1,5 @@
 import { type QueryFunctionContext } from '@tanstack/react-query'
-import { get, post } from '@/services/fetch'
+import { get, patch, post } from '@/services/fetch'
 import {
   type AgentResponse,
   type ChartResponse,
@@ -213,6 +213,22 @@ export const createShipRefuelMutation = {
     return post<SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>>(url, undefined, {
       headers: createHeaders(),
     })
+  },
+}
+
+export const createShipFlightModeMutation = {
+  getMutationKey: (...args: MaybeMutationKey<{ shipSymbol: string; flightMode: string }>) =>
+    [{ scope: 'ships', entity: 'item', action: 'flight-mode' }, ...args] as const,
+  mutationFn: async ({ shipSymbol, flightMode }: { shipSymbol: string; flightMode: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/nav`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return patch<SpaceTradersResponse<NavigationResponse>>(
+      url,
+      { flightMode },
+      {
+        headers: createHeaders(),
+      },
+    )
   },
 }
 

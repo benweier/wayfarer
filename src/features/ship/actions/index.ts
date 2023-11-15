@@ -1,5 +1,6 @@
 export { Dock } from './ship-actions.dock'
 export { Extract } from './ship-actions.extract'
+export { FlightMode } from './ship-actions.flight-mode'
 export { InstallMount } from './ship-actions.install-mount'
 export { Jettison } from './ship-actions.jettison'
 export { Jump } from './ship-actions.jump'
