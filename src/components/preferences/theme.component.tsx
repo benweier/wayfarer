@@ -1,20 +1,22 @@
 import { RadioGroup } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
+import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import { themeAtom } from '@/store/atoms/theme'
 
 export const Theme = () => {
+  const { t } = useTranslation()
   const [theme, setTheme] = useAtom(themeAtom)
 
   return (
     <RadioGroup value={theme} onChange={setTheme} className="flex flex-col gap-1">
-      <RadioGroup.Label className="text-sm font-bold">Theme</RadioGroup.Label>
+      <RadioGroup.Label className="text-sm font-bold">{t('preferences.theme')}</RadioGroup.Label>
       <div className="grid grid-cols-3 gap-2">
         {[
-          { label: 'Light', value: 'light', icon: 'theme:light' },
-          { label: 'Dark', value: 'dark', icon: 'theme:dark' },
-          { label: 'Auto', value: 'auto', icon: 'theme:auto' },
+          { key: 'preferences.light', value: 'light', icon: 'theme:light' },
+          { key: 'preferences.dark', value: 'dark', icon: 'theme:dark' },
+          { key: 'preferences.system', value: 'system', icon: 'theme:auto' },
         ].map((item) => (
           <RadioGroup.Option
             key={item.value}
@@ -23,7 +25,7 @@ export const Theme = () => {
           >
             <div className={cx('flex w-full flex-col items-center justify-between gap-1')}>
               <MenuIcon id={item.icon} className="h-5 w-5" aria-hidden />
-              <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
+              <RadioGroup.Label className="text-sm font-semibold">{t(item.key)}</RadioGroup.Label>
             </div>
           </RadioGroup.Option>
         ))}

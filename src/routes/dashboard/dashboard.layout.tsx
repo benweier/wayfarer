@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
 import { atom, useAtom } from 'jotai'
 import { Fragment, type PropsWithChildren, Suspense } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, NavLink, Outlet, useSubmit } from 'react-router-dom'
 import { AppIcon, MenuIcon } from '@/components/icons'
 import { Preferences } from '@/components/preferences'
@@ -12,11 +13,12 @@ import { sidebarAtom } from '@/store/atoms/sidebar'
 import { useAuthStore } from '@/store/auth'
 
 const menu = [
-  { name: 'Fleet', href: ROUTES.FLEET, icon: 'fleet' },
-  { name: 'Systems', href: ROUTES.SYSTEMS, icon: 'systems' },
+  { key: 'navigation.fleet', href: ROUTES.FLEET, icon: 'fleet' },
+  { key: 'navigation.systems', href: ROUTES.SYSTEMS, icon: 'systems' },
 ]
 const mobileMenuAtom = atom<boolean>(false)
 const Logout = () => {
+  const { t } = useTranslation()
   const submit = useSubmit()
 
   return (
@@ -29,12 +31,13 @@ const Logout = () => {
       <div className="h-6 w-6">
         <MenuIcon id="logout" className="h-6 w-6" aria-hidden />
       </div>
-      <span className="sr-only text-sm @[220px]/side:not-sr-only">Log out</span>
+      <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.logout')}</span>
     </button>
   )
 }
 
 export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
+  const { t } = useTranslation()
   const [sidebarState] = useAtom(sidebarAtom)
   const [mobileMenuOpen, setMobileMenuOpen] = useAtom(mobileMenuAtom)
 
@@ -98,7 +101,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                       <div className="space-y-1 px-2">
                         {menu.map((item) => (
                           <NavLink
-                            key={item.name}
+                            key={item.key}
                             to={item.href}
                             className="group flex items-center rounded-md p-2 text-base font-medium text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 [&.active]:bg-blue-500 [&.active]:text-white"
                           >
@@ -107,7 +110,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                               className="mr-4 h-5 w-5 text-zinc-400 group-hover:text-zinc-500"
                               aria-hidden
                             />
-                            {item.name}
+                            {t(item.key)}
                           </NavLink>
                         ))}
                       </div>

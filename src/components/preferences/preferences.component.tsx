@@ -2,11 +2,13 @@ import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Popover, Transition } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
 import { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import { Sidebar } from './sidebar.component'
 import { Theme } from './theme.component'
 
 export const Preferences = () => {
+  const { t } = useTranslation()
   const { x, y, refs } = useFloating<HTMLButtonElement>({
     strategy: 'absolute',
     placement: 'top-start',
@@ -30,7 +32,7 @@ export const Preferences = () => {
               <MenuIcon id="settings" className={cx('h-6 w-6', { 'animate-spin': open })} aria-hidden />
             </div>
             <span className="sr-only flex flex-col items-start justify-start text-sm @[220px]/side:not-sr-only">
-              Preferences
+              {t('preferences.label')}
             </span>
           </Popover.Button>
           <div

@@ -1,19 +1,21 @@
 import { RadioGroup } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
+import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import { sidebarAtom } from '@/store/atoms/sidebar'
 
 export const Sidebar = () => {
+  const { t } = useTranslation()
   const [sidebarState, setSidebarState] = useAtom(sidebarAtom)
 
   return (
     <RadioGroup value={sidebarState} onChange={setSidebarState} className="flex flex-col gap-1">
-      <RadioGroup.Label className="text-sm font-bold">Menu</RadioGroup.Label>
+      <RadioGroup.Label className="text-sm font-bold">{t('preferences.menu')}</RadioGroup.Label>
       <div className="grid grid-cols-2 gap-2">
         {[
-          { label: 'Collapsed', value: 'collapsed', icon: 'menu:collapse' },
-          { label: 'Expanded', value: 'expanded', icon: 'menu:expand' },
+          { key: 'preferences.collapse', value: 'collapsed', icon: 'menu:collapse' },
+          { key: 'preferences.expand', value: 'expanded', icon: 'menu:expand' },
         ].map((item) => (
           <RadioGroup.Option
             key={item.value}
@@ -22,7 +24,7 @@ export const Sidebar = () => {
           >
             <div className={cx('flex w-full flex-col items-center justify-between gap-1')}>
               <MenuIcon id={item.icon} className="h-5 w-5" aria-hidden />
-              <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
+              <RadioGroup.Label className="text-sm font-semibold">{t(item.key)}</RadioGroup.Label>
             </div>
           </RadioGroup.Option>
         ))}
