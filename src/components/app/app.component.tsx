@@ -14,6 +14,8 @@ import {
 import { routes } from '@/routes/routes.conf'
 import { Fallback } from '@/routes/routes.fallback'
 import { client } from '@/services/query-client'
+import '@/services/i18n'
+import '@/styles/tailwind.css'
 
 enableMapSet()
 
