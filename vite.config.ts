@@ -15,6 +15,30 @@ export default defineConfig(({ mode }) => {
 
   plugins.push(tsconfigPaths())
   plugins.push(react())
+  // plugins.push(
+  //   VitePWA({
+  //     registerType: 'prompt',
+  //     includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
+  //     manifest: {
+  //       name: 'Wayfarer',
+  //       short_name: 'Wayfarer',
+  //       description: 'A SpaceTraders API interface',
+  //       theme_color: '#18181b',
+  //       icons: [
+  //         {
+  //           src: 'android-chrome-192x192.png',
+  //           sizes: '192x192',
+  //           type: 'image/png',
+  //         },
+  //         {
+  //           src: 'android-chrome-256x256.png',
+  //           sizes: '256x256',
+  //           type: 'image/png',
+  //         },
+  //       ],
+  //     },
+  //   }),
+  // )
 
   if (mode === 'production') {
     plugins.push(
@@ -42,7 +66,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 8080,
-      https: true,
+      open: true,
     },
     envPrefix: ['SENTRY_', 'SPACETRADERS_', 'REACT_'],
     test: {
