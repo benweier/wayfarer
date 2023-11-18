@@ -1,17 +1,14 @@
 import { FloatingPortal } from '@floating-ui/react'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
-import { useIsMutating, useSuspenseQuery } from '@tanstack/react-query'
+import { useIsMutating } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
 import { type ComponentPropsWithRef, Fragment } from 'react'
-import { Badge } from '@/components/badge'
-import { AppIcon, ShipIcon } from '@/components/icons'
+import { AppIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { WaypointTag } from '@/components/waypoint/tag'
-import { WAYPOINT_TYPE } from '@/config/constants'
 import * as ShipActions from '@/features/ship/actions'
-import { getWaypointListQuery } from '@/services/api/spacetraders'
+import { WaypointNavigation } from '@/features/waypoint/navigation'
 import { type ShipResponse } from '@/types/spacetraders'
 
 const MenuActionButton = ({ active, children, ...props }: ComponentPropsWithRef<'button'> & { active: boolean }) => (
@@ -110,7 +107,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
           </div>
         </FloatingPortal>
       </Menu>
-      <Modal size="md" ref={ref} closeable>
+      <Modal ref={ref} size="lg" closeable>
         <div className="space-y-8">
           <h3 className="text-title">
             Navigate Ship: <span className="font-normal">{ship.symbol}</span>
@@ -124,60 +121,10 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
               </div>
             }
           >
-            <Navigate ship={ship} />
+            <WaypointNavigation ship={ship} />
           </QuerySuspenseBoundary>
         </div>
       </Modal>
     </>
-  )
-}
-
-const Navigate = ({ ship }: { ship: ShipResponse }) => {
-  const { data } = useSuspenseQuery({
-    queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: ship.nav.systemSymbol }),
-    queryFn: getWaypointListQuery.queryFn,
-  })
-  const waypoints = data.data
-
-  return (
-    <div className="space-y-4">
-      {waypoints.map((waypoint) => (
-        <div key={waypoint.symbol} className="flex items-start justify-between gap-4">
-          <div className="space-y-1">
-            <div className="font-semibold">{waypoint.symbol}</div>
-            <div className="flex flex-row gap-2">
-              <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type)}</WaypointTag>
-              <div className="text-secondary text-xs">
-                ({waypoint.x}, {waypoint.y})
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-1">
-              {waypoint.traits.map((trait) => (
-                <Badge key={trait.symbol}>{trait.name}</Badge>
-              ))}
-            </div>
-          </div>
-          <ShipActions.Navigate ship={ship} waypointSymbol={waypoint.symbol}>
-            {ship.nav.waypointSymbol !== waypoint.symbol
-              ? (props) => (
-                  <button className="btn btn-icon btn-outline btn-confirm" {...props}>
-                    <ShipIcon id="navigate" className="h-4 w-4" aria-hidden />
-                    <span className="sr-only">
-                      Navigate ship {ship.symbol} to waypoint {waypoint.symbol}
-                    </span>
-                  </button>
-                )
-              : () => (
-                  <div className="btn btn-disabled btn-icon">
-                    <ShipIcon id="pin" className="h-4 w-4" aria-hidden />
-                    <span className="sr-only">
-                      Ship {ship.symbol} is already at waypoint {waypoint.symbol}
-                    </span>
-                  </div>
-                )}
-          </ShipActions.Navigate>
-        </div>
-      ))}
-    </div>
   )
 }
