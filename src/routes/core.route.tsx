@@ -39,7 +39,7 @@ export const Core = () => {
       )}
     >
       <Suspense fallback={<Fallback />}>
-        <Meta />
+        <Meta titleTemplate="%s • Wayfarer" />
         <div className="min-h-screen">
           <NavigationLoader />
           <Outlet />
