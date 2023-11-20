@@ -1,15 +1,8 @@
 import { Navigate, type RouteObject } from 'react-router-dom'
 import { NotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { client } from '@/services/query-client'
 import { getState } from '@/store/auth'
-import {
-  type AgentResponse,
-  type ShipResponse,
-  type SystemsResponse,
-  type WaypointResponse,
-} from '@/types/spacetraders'
 import { withAuth } from '@/utilities/with-auth.loader'
 import * as auth from './auth'
 import { Core } from './core.route'
@@ -45,11 +38,7 @@ export const routes: RouteObject[] = [
                 element: <mod.Route />,
                 loader: mod.loader(client),
                 handle: {
-                  meta: () => (
-                    <>
-                      <title>Leaderboard</title>
-                    </>
-                  ),
+                  meta: mod.meta,
                 },
               }
             },
@@ -64,9 +53,7 @@ export const routes: RouteObject[] = [
                 element: <mod.Route />,
                 loader: mod.loader(client),
                 handle: {
-                  meta: ({ agent }: Partial<{ agent: SpaceTradersResponse<AgentResponse> }>) => (
-                    <>{agent && <title>{`Agent: ${agent.data.symbol}`}</title>}</>
-                  ),
+                  meta: mod.meta,
                 },
               }
             },
@@ -188,11 +175,7 @@ export const routes: RouteObject[] = [
                         element: <mod.Route />,
                         loader: withAuth(mod.loader(client)),
                         handle: {
-                          meta: () => (
-                            <>
-                              <title>Fleet</title>
-                            </>
-                          ),
+                          meta: mod.meta,
                         },
                       }
                     },
@@ -208,9 +191,7 @@ export const routes: RouteObject[] = [
                         element: <mod.Route />,
                         loader: withAuth(mod.loader(client)),
                         handle: {
-                          meta: ({ ship }: Partial<{ ship: SpaceTradersResponse<ShipResponse> }>) => (
-                            <>{ship && <title>{`Ship: ${ship.data.symbol}`}</title>}</>
-                          ),
+                          meta: mod.meta,
                         },
                       }
                     },
@@ -283,11 +264,7 @@ export const routes: RouteObject[] = [
                         element: <mod.Route />,
                         loader: withAuth(mod.loader(client)),
                         handle: {
-                          meta: () => (
-                            <>
-                              <title>Systems</title>
-                            </>
-                          ),
+                          meta: mod.meta,
                         },
                       }
                     },
@@ -306,9 +283,7 @@ export const routes: RouteObject[] = [
                             element: <mod.Route />,
                             loader: withAuth(mod.loader(client)),
                             handle: {
-                              meta: ({ system }: Partial<{ system: SpaceTradersResponse<SystemsResponse> }>) => (
-                                <>{system && <title>{`System: ${system.data.symbol}`}</title>}</>
-                              ),
+                              meta: mod.meta,
                             },
                           }
                         },
@@ -324,9 +299,7 @@ export const routes: RouteObject[] = [
                             element: <mod.Route />,
                             loader: withAuth(mod.loader(client)),
                             handle: {
-                              meta: ({ waypoint }: Partial<{ waypoint: SpaceTradersResponse<WaypointResponse> }>) => (
-                                <>{waypoint && <title>{`Waypoint: ${waypoint.data.symbol}`}</title>}</>
-                              ),
+                              meta: mod.meta,
                             },
                           }
                         },

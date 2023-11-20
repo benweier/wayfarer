@@ -1,7 +1,13 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getShipListQuery, getSystemByIdQuery, getWaypointListQuery } from '@/services/api/spacetraders'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
+import { type SystemsResponse } from '@/types/spacetraders'
+
+export const meta = ({ system }: Partial<{ system: SpaceTradersResponse<SystemsResponse> }>) => {
+  return <>{system && <title>{`System: ${system.data.symbol}`}</title>}</>
+}
 
 export const loader: QueryClientLoaderFn =
   (client) =>

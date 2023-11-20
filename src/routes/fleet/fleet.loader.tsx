@@ -2,6 +2,14 @@ import { defer } from 'react-router-dom'
 import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 
+export const meta = () => {
+  return (
+    <>
+      <title>Fleet</title>
+    </>
+  )
+}
+
 export const loader: QueryClientLoaderFn = (client) => async () => {
   try {
     const ships = client.ensureQueryData({

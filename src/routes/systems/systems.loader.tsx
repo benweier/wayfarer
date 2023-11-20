@@ -3,6 +3,14 @@ import { getSystemListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getRequestPagination } from '@/utilities/get-request-pagination.helper'
 
+export const meta = () => {
+  return (
+    <>
+      <title>Systems</title>
+    </>
+  )
+}
+
 export const loader: QueryClientLoaderFn =
   (client) =>
   async ({ request }) => {

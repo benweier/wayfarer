@@ -2,6 +2,14 @@ import { defer } from 'react-router-dom'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 
+export const meta = () => {
+  return (
+    <>
+      <title>Leaderboard</title>
+    </>
+  )
+}
+
 export const loader: QueryClientLoaderFn = (client) => async () => {
   try {
     const status = await client.ensureQueryData({

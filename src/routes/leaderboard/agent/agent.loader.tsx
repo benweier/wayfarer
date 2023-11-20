@@ -1,7 +1,13 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getAgentBySymbolQuery } from '@/services/api/spacetraders/agent'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
+import { type AgentResponse } from '@/types/spacetraders'
+
+export const meta = ({ agent }: Partial<{ agent: SpaceTradersResponse<AgentResponse> }>) => {
+  return <>{agent && <title>{`Agent: ${agent.data.symbol}`}</title>}</>
+}
 
 export const loader: QueryClientLoaderFn =
   (client) =>

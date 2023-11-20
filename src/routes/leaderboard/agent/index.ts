@@ -1,2 +1,2 @@
 export { Route } from './agent.route'
-export { loader } from './agent.loader'
+export { loader, meta } from './agent.loader'

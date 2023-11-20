@@ -1,2 +1,2 @@
-export { loader } from './waypoint.loader'
+export { loader, meta } from './waypoint.loader'
 export { Route } from './waypoint.route'

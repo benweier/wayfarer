@@ -1,7 +1,13 @@
 import { defer, redirect } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
 import { getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
+import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
+import { type WaypointResponse } from '@/types/spacetraders'
+
+export const meta = ({ waypoint }: Partial<{ waypoint: SpaceTradersResponse<WaypointResponse> }>) => {
+  return <>{waypoint && <title>{`Waypoint: ${waypoint.data.symbol}`}</title>}</>
+}
 
 export const loader: QueryClientLoaderFn =
   (client) =>
