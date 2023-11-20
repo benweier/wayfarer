@@ -3,6 +3,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { enableMapSet } from 'immer'
 import { useEffect } from 'react'
+import { HelmetProvider } from 'react-helmet-async'
 import {
   RouterProvider,
   createBrowserRouter,
@@ -42,10 +43,12 @@ const router = sentryCreateBrowserRouter(routes)
 
 export const App = () => {
   return (
-    <QueryClientProvider client={client}>
-      <RouterProvider router={router} fallbackElement={<Fallback />} future={{ v7_startTransition: true }} />
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={client}>
+        <RouterProvider router={router} fallbackElement={<Fallback />} future={{ v7_startTransition: true }} />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </HelmetProvider>
   )
 }
 
