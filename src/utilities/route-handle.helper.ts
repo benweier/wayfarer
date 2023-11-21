@@ -14,7 +14,7 @@ function isRecordWithKey<T extends string>(value: unknown, key: T): value is Rec
   return !!value && typeof value === 'object' && key in value
 }
 
-export function hasRouteHandle<Handle extends string, Value>(
+export function hasRouteHandle<Value, Handle extends string = string>(
   handle: Handle,
   valuePredicate?: (v: unknown) => v is Value,
 ) {

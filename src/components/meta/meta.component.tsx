@@ -2,15 +2,12 @@ import { Fragment, type ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Await, useMatches } from 'react-router-dom'
 import { type MetaProps } from '@/components/meta/meta.types'
+import { isFunction } from '@/utilities/is-function'
 import { hasRouteHandle } from '@/utilities/route-handle.helper'
-
-function isMetaFn(fn: unknown): fn is (data: unknown) => ReactNode {
-  return typeof fn === 'function'
-}
 
 export const Meta = ({ titleTemplate }: MetaProps) => {
   const matches = useMatches()
-  const meta = matches.filter(hasRouteHandle('meta', isMetaFn)).map((match) => {
+  const meta = matches.filter(hasRouteHandle<(...args: unknown[]) => ReactNode>('meta', isFunction)).map((match) => {
     return (
       <Fragment key={match.id}>
         <Await resolve={match.data}>
