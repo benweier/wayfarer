@@ -6,7 +6,11 @@ import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type AgentResponse } from '@/types/spacetraders'
 
 export const meta = ({ agent }: Partial<{ agent: SpaceTradersResponse<AgentResponse> }>) => {
-  return <>{agent && <title>{`Agent: ${agent.data.symbol}`}</title>}</>
+  if (!agent) {
+    return []
+  }
+
+  return [{ title: `Agent: ${agent.data.symbol}` }]
 }
 
 export const loader: QueryClientLoaderFn =

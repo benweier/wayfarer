@@ -3,11 +3,7 @@ import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 
 export const meta = () => {
-  return (
-    <>
-      <title>Leaderboard</title>
-    </>
-  )
+  return [{ title: 'Leaderboard' }]
 }
 
 export const loader: QueryClientLoaderFn = (client) => async () => {

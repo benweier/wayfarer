@@ -74,11 +74,7 @@ export const routes: RouteObject[] = [
               return {
                 element: <mod.Login />,
                 handle: {
-                  meta: () => (
-                    <>
-                      <title>Log in</title>
-                    </>
-                  ),
+                  meta: () => [{ title: 'Log in' }],
                 },
               }
             },
@@ -92,11 +88,7 @@ export const routes: RouteObject[] = [
               return {
                 element: <mod.Register />,
                 handle: {
-                  meta: () => (
-                    <>
-                      <title>Register</title>
-                    </>
-                  ),
+                  meta: () => [{ title: 'Register' }],
                 },
               }
             },

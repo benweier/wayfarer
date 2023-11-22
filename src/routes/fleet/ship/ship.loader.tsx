@@ -5,7 +5,11 @@ import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const meta = ({ ship }: Partial<{ ship: SpaceTradersResponse<ShipResponse> }>) => {
-  return <>{ship && <title>{`Ship: ${ship.data.symbol}`}</title>}</>
+  if (!ship) {
+    return []
+  }
+
+  return [{ title: `Ship: ${ship.data.symbol}` }]
 }
 
 export const loader: QueryClientLoaderFn =

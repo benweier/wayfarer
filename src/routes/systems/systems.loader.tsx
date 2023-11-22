@@ -4,11 +4,7 @@ import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getRequestPagination } from '@/utilities/get-request-pagination.helper'
 
 export const meta = () => {
-  return (
-    <>
-      <title>Systems</title>
-    </>
-  )
+  return [{ title: 'Systems' }]
 }
 
 export const loader: QueryClientLoaderFn =

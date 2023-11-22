@@ -6,7 +6,11 @@ import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type WaypointResponse } from '@/types/spacetraders'
 
 export const meta = ({ waypoint }: Partial<{ waypoint: SpaceTradersResponse<WaypointResponse> }>) => {
-  return <>{waypoint && <title>{`Waypoint: ${waypoint.data.symbol}`}</title>}</>
+  if (!waypoint) {
+    return []
+  }
+
+  return [{ title: `Waypoint: ${waypoint.data.symbol}` }]
 }
 
 export const loader: QueryClientLoaderFn =
