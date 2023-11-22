@@ -70,11 +70,12 @@ export const routes: RouteObject[] = [
             errorElement: <RouteError />,
             async lazy() {
               const mod = await import('@/features/auth')
+              const meta: MetaFunction = (t) => [{ title: t('auth.login.title', { ns: 'meta' }) }]
 
               return {
                 element: <mod.Login />,
                 handle: {
-                  meta: ((t) => [{ title: t('auth.login.title', { ns: 'meta' }) }]) as MetaFunction,
+                  meta,
                 },
               }
             },
@@ -84,11 +85,12 @@ export const routes: RouteObject[] = [
             errorElement: <RouteError />,
             async lazy() {
               const mod = await import('@/features/auth')
+              const meta: MetaFunction = (t) => [{ title: t('auth.register.title', { ns: 'meta' }) }]
 
               return {
                 element: <mod.Register />,
                 handle: {
-                  meta: ((t) => [{ title: t('auth.register.title', { ns: 'meta' }) }]) as MetaFunction,
+                  meta,
                 },
               }
             },
