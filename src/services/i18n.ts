@@ -1,23 +1,20 @@
-import * as i18next from 'i18next'
+import { createInstance } from 'i18next'
 import languageDetector from 'i18next-browser-languagedetector'
 import backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 
-void i18next
+export const i18n = createInstance()
+
+void i18n
   .use(backend)
   .use(languageDetector)
   .use(initReactI18next)
   .init({
     supportedLngs: ['en'],
     fallbackLng: 'en',
-    ns: ['common'],
+    ns: ['common', 'meta'],
     defaultNS: 'common',
     interpolation: {
       escapeValue: false,
-    },
-    react: {
-      bindI18n: 'languageChanged loaded',
-      nsMode: 'default',
-      useSuspense: true,
     },
   })
