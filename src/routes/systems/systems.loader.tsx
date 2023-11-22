@@ -3,8 +3,8 @@ import { getSystemListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getRequestPagination } from '@/utilities/get-request-pagination.helper'
 
-export const meta = () => {
-  return [{ title: 'Systems' }]
+export const meta: MetaFunction = (t) => {
+  return [{ title: t('systems.title', { ns: 'meta' }) }]
 }
 
 export const loader: QueryClientLoaderFn =

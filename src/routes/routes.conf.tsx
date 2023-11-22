@@ -74,7 +74,7 @@ export const routes: RouteObject[] = [
               return {
                 element: <mod.Login />,
                 handle: {
-                  meta: () => [{ title: 'Log in' }],
+                  meta: ((t) => [{ title: t('auth.login.title', { ns: 'meta' }) }]) as MetaFunction,
                 },
               }
             },
@@ -88,7 +88,7 @@ export const routes: RouteObject[] = [
               return {
                 element: <mod.Register />,
                 handle: {
-                  meta: () => [{ title: 'Register' }],
+                  meta: ((t) => [{ title: t('auth.register.title', { ns: 'meta' }) }]) as MetaFunction,
                 },
               }
             },
@@ -96,6 +96,9 @@ export const routes: RouteObject[] = [
           {
             path: '/logout',
             element: <Navigate to="/login" replace />,
+            handle: {
+              meta: ((t) => [{ title: t('auth.logout.title', { ns: 'meta' }) }]) as MetaFunction,
+            },
             action() {
               const { actions } = getState()
 

@@ -5,12 +5,12 @@ import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type AgentResponse } from '@/types/spacetraders'
 
-export const meta = ({ agent }: Partial<{ agent: SpaceTradersResponse<AgentResponse> }>) => {
+export const meta: MetaFunction<Partial<{ agent: SpaceTradersResponse<AgentResponse> }>> = (t, { agent }) => {
   if (!agent) {
     return []
   }
 
-  return [{ title: `Agent: ${agent.data.symbol}` }]
+  return [{ title: t('agent.title', { ns: 'meta', agentSymbol: agent.data.symbol }) }]
 }
 
 export const loader: QueryClientLoaderFn =

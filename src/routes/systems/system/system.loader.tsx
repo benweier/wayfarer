@@ -5,12 +5,12 @@ import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type SystemsResponse } from '@/types/spacetraders'
 
-export const meta = ({ system }: Partial<{ system: SpaceTradersResponse<SystemsResponse> }>) => {
+export const meta: MetaFunction<Partial<{ system: SpaceTradersResponse<SystemsResponse> }>> = (t, { system }) => {
   if (!system) {
     return []
   }
 
-  return [{ title: `System: ${system.data.symbol}` }]
+  return [{ title: t('system.title', { ns: 'meta', systemSymbol: system.data.symbol }) }]
 }
 
 export const loader: QueryClientLoaderFn =

@@ -2,8 +2,8 @@ import { defer } from 'react-router-dom'
 import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 
-export const meta = () => {
-  return [{ title: 'Fleet' }]
+export const meta: MetaFunction = (t) => {
+  return [{ title: t('fleet.title', { ns: 'meta' }) }]
 }
 
 export const loader: QueryClientLoaderFn = (client) => async () => {

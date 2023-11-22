@@ -5,12 +5,12 @@ import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type WaypointResponse } from '@/types/spacetraders'
 
-export const meta = ({ waypoint }: Partial<{ waypoint: SpaceTradersResponse<WaypointResponse> }>) => {
+export const meta: MetaFunction<Partial<{ waypoint: SpaceTradersResponse<WaypointResponse> }>> = (t, { waypoint }) => {
   if (!waypoint) {
     return []
   }
 
-  return [{ title: `Waypoint: ${waypoint.data.symbol}` }]
+  return [{ title: t('waypoint.title', { ns: 'meta', waypointSymbol: waypoint.data.symbol }) }]
 }
 
 export const loader: QueryClientLoaderFn =
