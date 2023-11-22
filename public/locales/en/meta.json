@@ -1,0 +1,37 @@
+{
+  "overview": {
+    "title": "Overview"
+  },
+  "auth": {
+    "register": {
+      "title": "Register"
+    },
+    "login": {
+      "title": "Log in"
+    },
+    "logout": {
+      "title": "Log out"
+    }
+  },
+  "leaderboard": {
+    "title": "Leaderboard"
+  },
+  "agent": {
+    "title": "Agent: {{agentSymbol}}"
+  },
+  "fleet": {
+    "title": "Fleet"
+  },
+  "ship": {
+    "title": "Ship: {{shipSymbol}}"
+  },
+  "systems": {
+    "title": "Systems"
+  },
+  "system": {
+    "title": "System: {{systemSymbol}}"
+  },
+  "waypoint": {
+    "title": "Waypoint: {{waypointSymbol}}"
+  }
+}
