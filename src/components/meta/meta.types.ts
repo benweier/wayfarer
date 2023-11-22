@@ -1,3 +1,3 @@
 export type MetaProps = {
-  titleTemplate: string
+  titleTemplate?: string
 }
