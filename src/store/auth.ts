@@ -1,5 +1,6 @@
 import { useStore } from 'zustand'
 import { createStore } from 'zustand/vanilla'
+import { client } from '@/services/query-client'
 import { type AgentResponse } from '@/types/spacetraders'
 import { type BoundStoreSelector } from './store.types'
 
@@ -24,9 +25,11 @@ const store = createStore<AuthStore>((set) => ({
       set({ agent })
     },
     signin: (state) => {
+      client.clear()
       set({ isAuthenticated: true, token: state.token, agent: state.agent })
     },
     signout: () => {
+      client.clear()
       set({ isAuthenticated: false, token: null, agent: null })
     },
   },
