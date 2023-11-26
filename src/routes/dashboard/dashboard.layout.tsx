@@ -26,7 +26,7 @@ const Logout = () => {
       onClick={() => {
         submit(null, { method: 'post', action: ROUTES.LOGOUT })
       }}
-      className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-rose-200 shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+      className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-rose-100 shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
     >
       <div className="h-6 w-6">
         <MenuIcon id="logout" className="h-6 w-6" aria-hidden />
@@ -37,6 +37,7 @@ const Logout = () => {
 }
 
 export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
+  const { isAuthenticated } = useAuthStore()
   const { t } = useTranslation()
   const [sidebarState] = useAtom(sidebarAtom)
   const [mobileMenuOpen, setMobileMenuOpen] = useAtom(mobileMenuAtom)
@@ -86,7 +87,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                           setMobileMenuOpen(false)
                         }}
                       >
-                        <span className="sr-only">Close sidebar</span>
+                        <span className="sr-only">{t('menu.close_sidebar')}</span>
                         <AppIcon id="x" className="h-5 w-5 text-white" aria-hidden />
                       </button>
                     </div>
@@ -147,9 +148,24 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
               <div className="flex flex-col items-center justify-center gap-2 p-4">
                 <Preferences />
               </div>
-              <div className="flex flex-shrink items-center justify-center gap-2 bg-rose-600 p-4">
-                <Logout />
-              </div>
+              {isAuthenticated ? (
+                <div className="flex flex-shrink items-center justify-center gap-2 bg-rose-600 p-4">
+                  <Logout />
+                </div>
+              ) : (
+                <div className="flex flex-shrink items-center justify-center gap-2 bg-emerald-600 p-4">
+                  <Link
+                    to={ROUTES.LOGIN}
+                    state={{ redirect: { destination: `${window.location.pathname}${window.location.search}` } }}
+                    className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-emerald-100 shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+                  >
+                    <div className="h-6 w-6">
+                      <MenuIcon id="login" className="h-6 w-6" aria-hidden />
+                    </div>
+                    <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.login')}</span>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -171,7 +187,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                     setMobileMenuOpen(true)
                   }}
                 >
-                  <span className="sr-only">Open sidebar</span>
+                  <span className="sr-only">{t('menu.open_sidebar')}</span>
                   <AppIcon id="hamburger" className="h-5 w-5" aria-hidden />
                 </button>
               </div>
@@ -201,9 +217,11 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden lg:block lg:flex-shrink-0">
               <div className="relative flex h-full flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg dark:bg-zinc-900/50 lg:w-64 2xl:w-96">
-                <div className="p-4">
-                  <Agent />
-                </div>
+                {isAuthenticated && (
+                  <div className="p-4">
+                    <Agent />
+                  </div>
+                )}
               </div>
             </aside>
           </main>
