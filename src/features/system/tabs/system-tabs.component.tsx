@@ -1,8 +1,9 @@
 import { Tab } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { FleetStore } from '@/context/fleet.context'
 import { SystemFleet, SystemFleetFallback } from '@/features/system/fleet'
-import { WaypointList } from '@/features/waypoint/list'
+import { WaypointList, WaypointListError, WaypointListFallback } from '@/features/waypoint/list'
 
 export const SystemTabs = () => {
   return (
@@ -14,8 +15,10 @@ export const SystemTabs = () => {
 
       <Tab.Panels>
         <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<></>}>
-            <WaypointList />
+          <QuerySuspenseBoundary fallback={<WaypointListFallback />} error={<WaypointListError />}>
+            <FleetStore>
+              <WaypointList />
+            </FleetStore>
           </QuerySuspenseBoundary>
         </Tab.Panel>
 
