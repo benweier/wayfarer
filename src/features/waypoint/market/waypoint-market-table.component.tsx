@@ -108,16 +108,14 @@ const columns = [
       return (
         <div className="flex items-center justify-end gap-2">
           <TradeGoodContext.Consumer>
-            {(ctx) => {
-              return (
-                <>
-                  <div className={cx('text-sm', { 'text-secondary': !ctx.Buy })}>{formatNumber(value)}</div>
-                  {ctx.Buy !== undefined && row.original.trade !== undefined ? (
-                    <ctx.Buy good={row.original.trade} />
-                  ) : null}
-                </>
-              )
-            }}
+            {(ctx) => (
+              <>
+                <div className={cx('text-sm', { 'text-secondary': !ctx.Buy })}>{formatNumber(value)}</div>
+                {ctx.Buy !== undefined && row.original.trade !== undefined ? (
+                  <ctx.Buy good={row.original.trade} />
+                ) : null}
+              </>
+            )}
           </TradeGoodContext.Consumer>
         </div>
       )
@@ -156,16 +154,14 @@ const columns = [
       return (
         <div className="flex items-center justify-end gap-2">
           <TradeGoodContext.Consumer>
-            {(ctx) => {
-              return (
-                <>
-                  <div className={cx('text-sm', { 'text-secondary': !ctx.Sell })}>{formatNumber(value)}</div>
-                  {ctx.Sell !== undefined && row.original.trade !== undefined ? (
-                    <ctx.Sell good={row.original.trade} />
-                  ) : null}
-                </>
-              )
-            }}
+            {(ctx) => (
+              <>
+                <div className={cx('text-sm', { 'text-secondary': !ctx.Sell })}>{formatNumber(value)}</div>
+                {ctx.Sell !== undefined && row.original.trade !== undefined ? (
+                  <ctx.Sell good={row.original.trade} />
+                ) : null}
+              </>
+            )}
           </TradeGoodContext.Consumer>
         </div>
       )
