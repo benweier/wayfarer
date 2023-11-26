@@ -1,35 +1,19 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { Pagination, usePagination } from '@/components/pagination'
-import { ROUTES } from '@/config/routes'
-import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
-import { getShipListQuery, getSystemListQuery } from '@/services/api/spacetraders'
+import { useFleetResponse } from '@/context/fleet.context'
+import { getSystemListQuery } from '@/services/api/spacetraders'
 import { formatNumber } from '@/utilities/number'
-import { SystemItem } from '../item'
-import { type SystemListProps } from './system-list.types'
+import { SystemListTable } from './system-table.component'
 
-export const SystemList = ({ System = SystemItem }: SystemListProps) => {
+export const SystemList = () => {
   const { page, limit, setPage } = usePagination()
   const systemsListQuery = useSuspenseQuery({
     queryKey: getSystemListQuery.getQueryKey({ page, limit }),
     queryFn: getSystemListQuery.queryFn,
   })
-  const fleetQuery = useSuspenseQuery({
-    queryKey: getShipListQuery.getQueryKey(),
-    queryFn: getShipListQuery.queryFn,
-    staleTime: Infinity,
-    gcTime: Infinity,
-    select: (response) => {
-      return response.data.reduce<Set<string>>((result, ship) => {
-        result.add(ship.nav.systemSymbol)
-        result.add(ship.nav.waypointSymbol)
-
-        return result
-      }, new Set())
-    },
-  })
+  const ships = useFleetResponse()
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
@@ -42,6 +26,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
   }, [limit, systemsListQuery.data.meta, page, setPage])
 
   const systems = systemsListQuery.data.data
+  const presence = new Set(ships.map((ship) => ship.nav.systemSymbol))
   const meta = systemsListQuery.data.meta
   const results = {
     from: formatNumber(page * limit + 1 - limit),
@@ -58,61 +43,7 @@ export const SystemList = ({ System = SystemItem }: SystemListProps) => {
         })}
       />
 
-      <div className="flex items-center justify-center gap-2 text-sm">
-        {systemsListQuery.isFetching ? (
-          <div>...</div>
-        ) : (
-          <>
-            <div>
-              {results.from} - {results.to}
-            </div>
-            <div className="text-secondary">of</div>
-            <div>{results.total}</div>
-          </>
-        )}
-      </div>
-
-      <div className="grid gap-2">
-        {systems.map((system) => {
-          return (
-            <System key={system.symbol} system={system}>
-              <ul className="relative isolate flex list-none items-center -space-x-2">
-                {system.waypoints
-                  .filter((waypoint) => !waypoint.type.includes('ASTEROID'))
-                  .map((waypoint) => {
-                    const hasShipPresence = fleetQuery.data.has(waypoint.symbol)
-
-                    return (
-                      <li
-                        key={waypoint.symbol}
-                        className={cx(
-                          'list-none overflow-hidden rounded-full border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125',
-                          {
-                            'border-zinc-50 dark:border-zinc-800': !hasShipPresence,
-                            'border-blue-500': hasShipPresence,
-                          },
-                        )}
-                      >
-                        <Link
-                          className={cx(
-                            'flex h-8 w-8 items-center justify-center',
-                            WAYPOINT_TYPE_STYLES[waypoint.type],
-                          )}
-                          to={`${ROUTES.SYSTEMS}/${system.symbol}/waypoint/${waypoint.symbol}`}
-                        >
-                          <span className="font-black" aria-hidden>
-                            {waypoint.type.charAt(0)}
-                          </span>
-                          <span className="sr-only">{waypoint.symbol}</span>
-                        </Link>
-                      </li>
-                    )
-                  })}
-              </ul>
-            </System>
-          )
-        })}
-      </div>
+      <SystemListTable data={systems.map((system) => ({ system, presence: presence.has(system.symbol) }))} />
 
       <div className="row grid items-center justify-center gap-4">
         <div className="flex items-center justify-center gap-2 text-sm">
