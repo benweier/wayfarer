@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { Button } from '@/components/button'
 import { createShipRefuelMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
@@ -18,6 +18,9 @@ export const Refuel = ({
 }: ShipActionProps) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
+  const isMutating = useIsMutating({
+    mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }],
+  })
   const { mutate, isPending } = useMutation({
     mutationKey: createShipRefuelMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefuelMutation.mutationFn,
@@ -48,7 +51,7 @@ export const Refuel = ({
   })
 
   return children({
-    disabled: disabled || isPending || ship.fuel.current === ship.fuel.capacity,
+    disabled: disabled || isMutating > 0 || isPending || ship.fuel.current === ship.fuel.capacity,
     onClick: () => {
       mutate({ shipSymbol: ship.symbol })
     },
