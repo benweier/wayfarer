@@ -1,5 +1,6 @@
 import { type QueryFunctionContext } from '@tanstack/react-query'
 import { get, patch, post } from '@/services/fetch'
+import { getState } from '@/store/auth'
 import {
   type AgentResponse,
   type ChartResponse,
@@ -31,6 +32,12 @@ export const getShipListQuery = {
   queryFn: async ({
     signal,
   }: QueryFunctionContext<FleetQueryKey<'shipList'>>): Promise<SpaceTradersResponse<ShipResponse[], Meta>> => {
+    const { isAuthenticated } = getState()
+
+    if (!isAuthenticated) {
+      return { data: [], meta: { page: 0, total: 0, limit: 0 } }
+    }
+
     const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     url.searchParams.set('page', '1')

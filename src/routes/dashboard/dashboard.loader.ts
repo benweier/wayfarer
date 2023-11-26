@@ -1,9 +1,16 @@
-import { defer } from 'react-router-dom'
+import { defer, json } from 'react-router-dom'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
+import { getState } from '@/store/auth'
 
 export const loader: QueryClientLoaderFn = (client) => () => {
+  const { isAuthenticated } = getState()
+
   try {
+    if (!isAuthenticated) {
+      return json({ ships: [] })
+    }
+
     const ships = client.ensureQueryData({
       queryKey: getShipListQuery.getQueryKey(),
       queryFn: getShipListQuery.queryFn,
