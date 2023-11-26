@@ -27,19 +27,19 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const system = client.ensureQueryData({
+      const system = await client.ensureQueryData({
         queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
         queryFn: getSystemByIdQuery.queryFn,
       })
       const waypoints = client.ensureQueryData({
-        queryKey: getWaypointListQuery.getQueryKey({ systemSymbol }),
+        queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: system.data.symbol }),
         queryFn: getWaypointListQuery.queryFn,
       })
 
       if (!isAuthenticated) {
         return defer({
-          system: await system,
-          waypoints: await waypoints,
+          system,
+          waypoints,
           ships: [],
         })
       }
@@ -52,8 +52,8 @@ export const loader: QueryClientLoaderFn =
       })
 
       return defer({
-        system: await system,
-        waypoints: await waypoints,
+        system,
+        waypoints,
         ships,
       })
     } catch (err) {
