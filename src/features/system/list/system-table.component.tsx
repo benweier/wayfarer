@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
-import { type SystemsResponse } from '@/types/spacetraders'
+import { type SystemWaypoint, type SystemsResponse } from '@/types/spacetraders'
 
 const EXCLUDED_WAYPOINTS = new Set(['ASTEROID', 'ENGINEERED_ASTEROID'])
 const columnHelper = createColumnHelper<{ system: SystemsResponse; presence?: boolean }>()
@@ -72,13 +72,24 @@ const columns = [
       )
     },
     cell: ({ getValue, row }) => {
-      const waypoints = getValue().filter((waypoint) => {
-        return !EXCLUDED_WAYPOINTS.has(waypoint.type)
-      })
+      const values = getValue().reduce<{ waypoints: SystemWaypoint[]; extra: number }>(
+        (result, waypoint) => {
+          if (EXCLUDED_WAYPOINTS.has(waypoint.type)) {
+            result.extra += 1
+
+            return result
+          }
+
+          result.waypoints.push(waypoint)
+
+          return result
+        },
+        { waypoints: [], extra: 0 },
+      )
 
       return (
         <ul className="relative isolate flex list-none items-center justify-end -space-x-2">
-          {waypoints.map((waypoint) => {
+          {values.waypoints.map((waypoint) => {
             return (
               <li
                 key={waypoint.symbol}
@@ -86,9 +97,9 @@ const columns = [
               >
                 <Link
                   className={cx('flex h-6 w-6 items-center justify-center', WAYPOINT_TYPE_STYLES[waypoint.type])}
-                  to={`/system/${row.original.system.symbol}/waypoint/${waypoint.symbol}`}
+                  to={`/systems/${row.original.system.symbol}/waypoint/${waypoint.symbol}`}
                 >
-                  <span className="text-sm font-black" aria-hidden>
+                  <span className="text-sm font-medium" aria-hidden>
                     {waypoint.type.charAt(0)}
                   </span>
                   <span className="sr-only">{waypoint.symbol}</span>
@@ -96,6 +107,18 @@ const columns = [
               </li>
             )
           })}
+          {values.extra > 0 && (
+            <li className="list-none overflow-hidden rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800">
+              <Link
+                className={cx('flex h-6 w-6 items-center justify-center', WAYPOINT_TYPE_STYLES.ASTEROID)}
+                to={`/systems/${row.original.system.symbol}`}
+              >
+                <span className="text-sm font-medium" aria-hidden>
+                  {`${values.extra}`}
+                </span>
+              </Link>
+            </li>
+          )}
         </ul>
       )
     },
