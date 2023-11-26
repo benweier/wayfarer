@@ -123,53 +123,123 @@ export const routes: RouteObject[] = [
         },
         children: [
           {
-            path: '/overview',
-            errorElement: <RouteError />,
-            element: <Navigate to="/fleet" replace />,
-          },
+            path: '/systems',
+            children: [
+              {
+                index: true,
+                errorElement: <RouteError />,
+                async lazy() {
+                  const mod = await import('@/routes/systems')
 
+                  return {
+                    element: <mod.Route />,
+                    loader: mod.loader(client),
+                    handle: {
+                      meta: mod.meta,
+                    },
+                  }
+                },
+              },
+
+              {
+                path: ':systemSymbol',
+                children: [
+                  {
+                    index: true,
+                    errorElement: <RouteError />,
+                    async lazy() {
+                      const mod = await import('@/routes/systems/system')
+
+                      return {
+                        element: <mod.Route />,
+                        loader: mod.loader(client),
+                        handle: {
+                          meta: mod.meta,
+                        },
+                      }
+                    },
+                  },
+
+                  {
+                    path: 'waypoint/:waypointSymbol',
+                    errorElement: <RouteError />,
+                    async lazy() {
+                      const mod = await import('@/routes/systems/waypoint')
+
+                      return {
+                        element: <mod.Route />,
+                        loader: mod.loader(client),
+                        handle: {
+                          meta: mod.meta,
+                        },
+                      }
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        element: <auth.Required />,
+        loader: withAuth(() => null),
+        errorElement: <RouteError />,
+        children: [
           {
-            path: '/contracts',
-            errorElement: <RouteError />,
             async lazy() {
-              const mod = await import('@/routes/contracts')
+              const mod = await import('@/routes/dashboard')
 
               return {
-                element: <mod.Route />,
-                loader: withAuth(mod.loader(client)),
+                element: <mod.Layout />,
+                loader: mod.loader(client),
               }
             },
             children: [
               {
-                path: ':contractId',
+                path: '/overview',
+                errorElement: <RouteError />,
+                element: <Navigate to="/fleet" replace />,
+              },
+
+              {
+                path: '/contracts',
                 errorElement: <RouteError />,
                 async lazy() {
-                  const mod = await import('@/routes/contracts/contract')
+                  const mod = await import('@/routes/contracts')
 
                   return {
                     element: <mod.Route />,
                     loader: withAuth(mod.loader(client)),
                   }
                 },
-              },
-            ],
-          },
+                children: [
+                  {
+                    path: ':contractId',
+                    errorElement: <RouteError />,
+                    async lazy() {
+                      const mod = await import('@/routes/contracts/contract')
 
-          {
-            element: <auth.Required />,
-            loader: withAuth(() => null),
-            children: [
+                      return {
+                        element: <mod.Route />,
+                        loader: withAuth(mod.loader(client)),
+                      }
+                    },
+                  },
+                ],
+              },
               {
                 path: '/fleet',
                 children: [
                   {
                     index: true,
-                    errorElement: <RouteError />,
                     async lazy() {
                       const mod = await import('@/routes/fleet')
 
                       return {
                         element: <mod.Route />,
+                        errorElement: <RouteError />,
                         loader: withAuth(mod.loader(client)),
                         handle: {
                           meta: mod.meta,
@@ -244,64 +314,6 @@ export const routes: RouteObject[] = [
                         ],
                       },
                     ],
-                  },
-                ],
-              },
-            ],
-          },
-
-          {
-            path: '/systems',
-            children: [
-              {
-                index: true,
-                errorElement: <RouteError />,
-                async lazy() {
-                  const mod = await import('@/routes/systems')
-
-                  return {
-                    element: <mod.Route />,
-                    loader: mod.loader(client),
-                    handle: {
-                      meta: mod.meta,
-                    },
-                  }
-                },
-              },
-
-              {
-                path: ':systemSymbol',
-                children: [
-                  {
-                    index: true,
-                    errorElement: <RouteError />,
-                    async lazy() {
-                      const mod = await import('@/routes/systems/system')
-
-                      return {
-                        element: <mod.Route />,
-                        loader: mod.loader(client),
-                        handle: {
-                          meta: mod.meta,
-                        },
-                      }
-                    },
-                  },
-
-                  {
-                    path: 'waypoint/:waypointSymbol',
-                    errorElement: <RouteError />,
-                    async lazy() {
-                      const mod = await import('@/routes/systems/waypoint')
-
-                      return {
-                        element: <mod.Route />,
-                        loader: withAuth(mod.loader(client)),
-                        handle: {
-                          meta: mod.meta,
-                        },
-                      }
-                    },
                   },
                 ],
               },
