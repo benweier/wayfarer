@@ -9,7 +9,7 @@ export const meta: MetaFunction = (t) => {
 
 export const loader: QueryClientLoaderFn =
   (client) =>
-  async ({ request }) => {
+  ({ request }) => {
     const url = new URL(request.url)
     const { page, limit } = getRequestPagination(url.searchParams)
 
@@ -20,7 +20,7 @@ export const loader: QueryClientLoaderFn =
       })
 
       return defer({
-        systems: await systems,
+        systems,
       })
     } catch (err) {
       if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
