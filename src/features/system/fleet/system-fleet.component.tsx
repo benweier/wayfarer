@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useSystemResponse } from '@/context/system.context'
 import { ShipItem } from '@/features/ship/item'
+import { SystemFleetEmpty } from '@/features/system/fleet/system-fleet.empty'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -20,13 +21,7 @@ export const SystemFleet = () => {
   const ships = data.data
 
   if (ships.length === 0) {
-    return (
-      <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-        <div className="text-secondary text-center text-sm">
-          You have no ships in <span className="font-bold">{system.symbol}</span>
-        </div>
-      </div>
-    )
+    return <SystemFleetEmpty system={system} />
   }
 
   return (
