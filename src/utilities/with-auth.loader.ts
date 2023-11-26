@@ -5,18 +5,20 @@ import { getState } from '@/store/auth'
 export type WithAuthLoaderFunction = (loader: LoaderFunction) => LoaderFunction
 
 export const withAuth: WithAuthLoaderFunction = (loader) => {
-  return (...args) => {
+  return (args) => {
     const { isAuthenticated } = getState()
 
     if (!isAuthenticated) {
+      const url = new URL(args.request.url)
+
       throw json(
         {
-          redirect: { destination: `${window.location.pathname}${window.location.search}` },
+          redirect: { destination: `${url.pathname}${url.search}` },
         },
         STATUS_CODES.UNAUTHORIZED,
       )
     }
 
-    return loader(...args)
+    return loader(args)
   }
 }
