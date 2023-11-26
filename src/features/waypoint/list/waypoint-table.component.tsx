@@ -111,10 +111,8 @@ const columns = [
       return <div className="text-secondary text-left text-sm">{getValue()}</div>
     },
     sortingFn: (a, b) => {
-      const [ax, ay] = [a.original.waypoint.x, a.original.waypoint.y]
-      const [bx, by] = [b.original.waypoint.x, b.original.waypoint.y]
-      const ad = ax * ax + ay * ay
-      const bd = bx * bx + by * by
+      const ad = Math.pow(a.original.waypoint.x, 2) + Math.pow(a.original.waypoint.y, 2)
+      const bd = Math.pow(b.original.waypoint.x, 2) + Math.pow(b.original.waypoint.y, 2)
 
       return ad - bd
     },
