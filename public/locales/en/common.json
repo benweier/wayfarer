@@ -23,13 +23,52 @@
     "logout": "Log out"
   },
   "system": {
+    "label": "System",
     "presence_zero": "You have no ships in {{symbol}}",
     "presence_one": "You have {{count, formatNumber}} ship in {{symbol}}",
     "presence_other": "You have {{count, formatNumber}} ships in {{symbol}}"
   },
   "waypoint": {
+    "label": "Waypoint",
     "presence_zero": "You have no ships at {{symbol}}",
     "presence_one": "You have {{count, formatNumber}} ship at {{symbol}}",
     "presence_other": "You have {{count, formatNumber}} ships at {{symbol}}"
+  },
+  "ship": {
+    "label": "Ship",
+    "fuel": "Fuel",
+    "cargo": "Cargo",
+    "no_cargo": "has no cargo",
+    "crew": "Crew",
+    "condition": "Condition",
+    "survey_extract": "Survey/Extract",
+    "loadout": "Loadout",
+    "view_market": "View Market at {{waypointSymbol}}",
+    "no_market": "No Market at {{waypointSymbol}}",
+    "action": {
+      "refuel": "Refuel",
+      "orbit": "Orbit",
+      "dock": "Dock",
+      "docking": "Docking",
+      "undock": "Undock",
+      "undocking": "Undocking",
+      "navigate": "Navigate",
+      "warp": "Warp",
+      "jump": "Jump",
+      "flight_mode": "Flight Mode",
+      "install": "Install"
+    },
+    "flight_mode": {
+      "cruise": "Cruise",
+      "drift": "Drift",
+      "burn": "Burn",
+      "stealth": "Stealth"
+    },
+    "transit": {
+      "route": "Route",
+      "departed": "Departed",
+      "arriving": "Arriving",
+      "arrived": "Arrived"
+    }
   }
 }
