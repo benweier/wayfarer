@@ -22,6 +22,12 @@
     "login": "Log in",
     "logout": "Log out"
   },
+  "general": {
+    "refresh": "Refresh",
+    "last_updated": {
+      "relative": "Last updated {{value, relativeTime}}"
+    }
+  },
   "system": {
     "label": "System",
     "presence_zero": "You have no ships in {{symbol}}",
@@ -36,13 +42,13 @@
   },
   "ship": {
     "label": "Ship",
+    "registration": "Registration",
     "fuel": "Fuel",
     "cargo": "Cargo",
     "no_cargo": "has no cargo",
     "crew": "Crew",
     "condition": "Condition",
     "survey_extract": "Survey/Extract",
-    "loadout": "Loadout",
     "view_market": "View Market at {{waypointSymbol}}",
     "no_market": "No Market at {{waypointSymbol}}",
     "action": {
@@ -69,6 +75,22 @@
       "departed": "Departed",
       "arriving": "Arriving",
       "arrived": "Arrived"
+    },
+    "loadout": {
+      "label": "Loadout",
+      "frame": "Frame",
+      "engine": "Engine",
+      "reactor": "Reactor",
+      "modules": "Modules",
+      "module_slots": "Module Slots",
+      "mounts": "Mounts",
+      "mounting_points": "Mounting Points",
+      "power_required": "Power Required",
+      "remove": "Remove"
+    },
+    "cooldown": {
+      "active": "Cooldown active",
+      "inactive": "Cooldown inactive"
     }
   }
 }
