@@ -1,13 +1,24 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
+import { type PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
 import { type SystemWaypoint, type SystemsResponse } from '@/types/spacetraders'
+const ShipPresence = ({
+  count,
+  systemSymbol,
+  children,
+}: PropsWithChildren<{ count: number; systemSymbol: string }>) => {
+  const { t } = useTranslation()
 
+  return <span title={t('system.presence', { count, systemSymbol })}>{children}</span>
+}
 const EXCLUDED_WAYPOINTS = new Set(['ASTEROID', 'ENGINEERED_ASTEROID'])
-const columnHelper = createColumnHelper<{ system: SystemsResponse; presence?: boolean }>()
+const columnHelper = createColumnHelper<{ system: SystemsResponse; presence: number }>()
 const columns = [
   columnHelper.accessor((row) => row.system.symbol, {
     id: 'symbol',
@@ -25,7 +36,19 @@ const columns = [
         </Link>
       )
     },
-    size: 100,
+    minSize: 25,
+    maxSize: 25,
+  }),
+  columnHelper.display({
+    id: 'presence',
+    minSize: 10,
+    maxSize: 10,
+    cell: ({ row }) =>
+      row.original.presence > 0 && (
+        <ShipPresence count={row.original.presence} systemSymbol={row.original.system.symbol}>
+          <ShipIcon id="anchor" className="h-5 w-5" />
+        </ShipPresence>
+      ),
   }),
   columnHelper.accessor((row) => row.system.type, {
     id: 'type',
@@ -45,7 +68,8 @@ const columns = [
         </div>
       )
     },
-    size: 100,
+    minSize: 15,
+    maxSize: 15,
   }),
   columnHelper.accessor((row) => `${row.system.x}, ${row.system.y}`, {
     id: 'coordinates',
@@ -59,7 +83,8 @@ const columns = [
     cell: ({ getValue }) => {
       return <div className="text-secondary text-left text-sm">{getValue()}</div>
     },
-    size: 100,
+    minSize: 20,
+    maxSize: 20,
   }),
 
   columnHelper.accessor((row) => row.system.waypoints, {
@@ -122,10 +147,12 @@ const columns = [
         </ul>
       )
     },
+    minSize: 30,
+    maxSize: 30,
   }),
 ]
 
-export const SystemListTable = ({ data }: { data: Array<{ system: SystemsResponse; presence?: boolean }> }) => {
+export const SystemListTable = ({ data }: { data: Array<{ system: SystemsResponse; presence: number }> }) => {
   const table = useReactTable({
     data,
     columns,
@@ -143,7 +170,7 @@ export const SystemListTable = ({ data }: { data: Array<{ system: SystemsRespons
                   <th
                     key={header.id}
                     className="text-primary px-3 py-3.5 text-sm font-semibold"
-                    style={{ width: `${100 / group.headers.length}%` }}
+                    style={{ width: `${header.getSize()}%` }}
                   >
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </th>

@@ -26,7 +26,19 @@ export const SystemList = () => {
   }, [limit, systemsListQuery.data.meta, page, setPage])
 
   const systems = systemsListQuery.data.data
-  const presence = new Set(ships.map((ship) => ship.nav.systemSymbol))
+  const presence = new Map(
+    ships.reduce((result, ship) => {
+      const { systemSymbol } = ship.nav
+
+      if (result.has(systemSymbol)) {
+        result.set(systemSymbol, (result.get(systemSymbol) ?? 0) + 1)
+      }
+
+      result.set(systemSymbol, 1)
+
+      return result
+    }, new Map<string, number>()),
+  )
   const meta = systemsListQuery.data.meta
   const results = {
     from: formatNumber(page * limit + 1 - limit),
@@ -43,7 +55,7 @@ export const SystemList = () => {
         })}
       />
 
-      <SystemListTable data={systems.map((system) => ({ system, presence: presence.has(system.symbol) }))} />
+      <SystemListTable data={systems.map((system) => ({ system, presence: presence.get(system.symbol) ?? 0 }))} />
 
       <div className="row grid items-center justify-center gap-4">
         <div className="flex items-center justify-center gap-2 text-sm">

@@ -12,9 +12,23 @@ export const WaypointList = () => {
     queryFn: getWaypointListQuery.queryFn,
   })
   const waypoints = data.data
-  const presence = new Set(ships.map((ship) => ship.nav.waypointSymbol))
+  const presence = new Map(
+    ships.reduce((result, ship) => {
+      const { waypointSymbol } = ship.nav
+
+      if (result.has(waypointSymbol)) {
+        result.set(waypointSymbol, (result.get(waypointSymbol) ?? 0) + 1)
+      }
+
+      result.set(waypointSymbol, 1)
+
+      return result
+    }, new Map<string, number>()),
+  )
 
   return (
-    <WaypointListTable data={waypoints.map((waypoint) => ({ waypoint, presence: presence.has(waypoint.symbol) }))} />
+    <WaypointListTable
+      data={waypoints.map((waypoint) => ({ waypoint, presence: presence.get(waypoint.symbol) ?? 0 }))}
+    />
   )
 }

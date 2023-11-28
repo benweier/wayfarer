@@ -10,11 +10,7 @@ import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { type WaypointResponse } from '@/types/spacetraders'
 
-export const TypeFilter = ({
-  table,
-}: {
-  table: Table<{ waypoint: WaypointResponse; presence?: boolean | undefined }>
-}) => {
+export const TypeFilter = ({ table }: { table: Table<{ waypoint: WaypointResponse; presence: number }> }) => {
   const { x, y, refs } = useFloating<HTMLButtonElement>({
     strategy: 'absolute',
     placement: 'bottom',

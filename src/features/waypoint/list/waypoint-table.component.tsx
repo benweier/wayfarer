@@ -11,17 +11,27 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useState } from 'react'
+import { type PropsWithChildren, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
-import { AppIcon } from '@/components/icons'
+import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
 import { type WaypointResponse } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { TypeFilter } from './type-filter.component'
 
+const ShipPresence = ({
+  count,
+  waypointSymbol,
+  children,
+}: PropsWithChildren<{ count: number; waypointSymbol: string }>) => {
+  const { t } = useTranslation()
+
+  return <span title={t('waypoint.presence', { count, waypointSymbol })}>{children}</span>
+}
 const FILTERED_TRAITS = new Set([
   'UNCHARTED',
   'MARKETPLACE',
@@ -34,10 +44,12 @@ const FILTERED_TRAITS = new Set([
   'ICE_CRYSTALS',
   'EXPLOSIVE_GASES',
 ])
-const columnHelper = createColumnHelper<{ waypoint: WaypointResponse; presence?: boolean }>()
+const columnHelper = createColumnHelper<{ waypoint: WaypointResponse; presence: number }>()
 const columns = [
   columnHelper.accessor((row) => row.waypoint.symbol, {
     id: 'symbol',
+    minSize: 25,
+    maxSize: 25,
     header: ({ column }) => {
       const sorted = column.getIsSorted()
 
@@ -71,8 +83,21 @@ const columns = [
     enableSorting: true,
     enableHiding: false,
   }),
+  columnHelper.display({
+    id: 'presence',
+    minSize: 10,
+    maxSize: 10,
+    cell: ({ row }) =>
+      row.original.presence > 0 && (
+        <ShipPresence count={row.original.presence} waypointSymbol={row.original.waypoint.symbol}>
+          <ShipIcon id="anchor" className="h-5 w-5" />
+        </ShipPresence>
+      ),
+  }),
   columnHelper.accessor((row) => `${row.waypoint.x}, ${row.waypoint.y}`, {
     id: 'coordinates',
+    minSize: 20,
+    maxSize: 20,
     header: ({ column }) => {
       const sorted = column.getIsSorted()
 
@@ -121,6 +146,8 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.waypoint.type, {
     id: 'type',
+    minSize: 20,
+    maxSize: 20,
     header: ({ column, table }) => {
       const sorted = column.getIsSorted()
 
@@ -163,6 +190,8 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.waypoint.traits, {
     id: 'traits',
+    minSize: 30,
+    maxSize: 30,
     header: () => {
       return (
         <div className="flex items-center justify-end gap-2 text-right">
@@ -215,7 +244,7 @@ const columns = [
   // }),
 ]
 
-export const WaypointListTable = ({ data }: { data: Array<{ waypoint: WaypointResponse; presence?: boolean }> }) => {
+export const WaypointListTable = ({ data }: { data: Array<{ waypoint: WaypointResponse; presence: number }> }) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({
@@ -246,7 +275,7 @@ export const WaypointListTable = ({ data }: { data: Array<{ waypoint: WaypointRe
                   <th
                     key={header.id}
                     className="text-primary px-3 py-3.5 text-sm font-semibold"
-                    style={{ width: `${100 / group.headers.length}%` }}
+                    style={{ width: `${header.getSize()}%` }}
                   >
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </th>
