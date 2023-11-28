@@ -11,7 +11,7 @@ export const usePagination = () => {
     limit,
     setPage: useCallback(
       (page: number) => {
-        setParams({ page })
+        setParams({ page: page.toString() })
       },
       [setParams],
     ),
