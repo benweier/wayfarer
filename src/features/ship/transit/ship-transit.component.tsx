@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
@@ -9,10 +10,12 @@ import { type ShipTransitProps } from './ship-transit.types'
 import { ShipTransitWarp } from './ship-transit.warp'
 
 export const ShipTransit = ({ nav }: ShipTransitProps) => {
+  const { t } = useTranslation()
+
   return (
     <div className="flex items-start justify-between gap-4">
       <div className="flex flex-col items-start">
-        <div className="text-secondary text-xs uppercase">Route</div>
+        <div className="text-secondary text-xs uppercase">{t('ship.transit.route')}</div>
         <div className="flex items-center gap-2">
           <div className="text-sm font-medium">
             <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.origin.systemSymbol}`}>
@@ -48,21 +51,21 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
           <ShipTransitNavigate
             trigger={(props) => (
               <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
-                Navigate
+                {t('ship.action.navigate')}
               </Button>
             )}
           />
           <ShipTransitWarp
             trigger={(props) => (
               <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
-                Warp
+                {t('ship.action.warp')}
               </Button>
             )}
           />
           <ShipTransitJump
             trigger={(props) => (
               <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
-                Jump
+                {t('ship.action.jump')}
               </Button>
             )}
           />

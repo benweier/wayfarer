@@ -4,6 +4,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { useIsMutating } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
 import { type ComponentPropsWithRef, Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import { AppIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
@@ -18,6 +19,7 @@ const MenuActionButton = ({ active, children, ...props }: ComponentPropsWithRef<
 )
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
+  const { t } = useTranslation()
   const isMutating =
     useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }] }) > 0
   const { ref, modal } = useModalImperativeHandle()
@@ -68,7 +70,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                       <ShipActions.Orbit ship={ship}>
                         {(props) => (
                           <MenuActionButton active={active} {...props}>
-                            Orbit
+                            {t('ship.action.orbit')}
                           </MenuActionButton>
                         )}
                       </ShipActions.Orbit>
@@ -81,7 +83,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                       <ShipActions.Dock ship={ship}>
                         {(props) => (
                           <MenuActionButton active={active} {...props}>
-                            Dock
+                            {t('ship.action.orbit')}
                           </MenuActionButton>
                         )}
                       </ShipActions.Dock>
@@ -97,7 +99,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                           modal.open()
                         }}
                       >
-                        Navigate
+                        {t('ship.action.navigate')}
                       </MenuActionButton>
                     )}
                   </Menu.Item>

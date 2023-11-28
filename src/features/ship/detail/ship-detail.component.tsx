@@ -1,4 +1,5 @@
 import { type PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
@@ -11,14 +12,15 @@ import { ShipTransit } from '@/features/ship/transit'
 import { ShipDetailRefresh } from './ship-detail-refresh.component'
 
 export const ShipDetail = ({ children }: PropsWithChildren) => {
+  const { t } = useTranslation()
   const ship = useShipResponse()
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between gap-2">
         <div className="headline">
-          <span className="font-bold">Registration:</span> {ship.registration.name} • {ship.registration.role} •{' '}
-          {ship.registration.factionSymbol}
+          <span className="font-bold">{t('ship.registration')}:</span> {ship.registration.name} •{' '}
+          {ship.registration.role} • {ship.registration.factionSymbol}
         </div>
         <ShipDetailRefresh />
       </div>
@@ -27,7 +29,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
         <div className="flex flex-row items-end gap-2">
           <div className="flex gap-8">
             <div>
-              <div className="text-secondary text-xs uppercase">System</div>
+              <div className="text-secondary text-xs uppercase">{t('system.label')}</div>
               <div className="font-semibold">
                 <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
                   {ship.nav.systemSymbol}
@@ -35,7 +37,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
               </div>
             </div>
             <div>
-              <div className="text-secondary text-xs uppercase">Waypoint</div>
+              <div className="text-secondary text-xs uppercase">{t('waypoint.label')}</div>
               <div className="flex items-center gap-2">
                 <div className="font-semibold">
                   <Link
@@ -57,7 +59,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
                   <ShipActions.Orbit ship={ship}>
                     {(props) => (
                       <Button intent="primary" kind="flat" size="small" {...props}>
-                        Orbit
+                        {t('ship.action.orbit')}
                       </Button>
                     )}
                   </ShipActions.Orbit>
@@ -65,7 +67,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
                   <ShipActions.Dock ship={ship}>
                     {(props) => (
                       <Button intent="primary" kind="flat" size="small" {...props}>
-                        Dock
+                        {t('ship.action.dock')}
                       </Button>
                     )}
                   </ShipActions.Dock>

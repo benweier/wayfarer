@@ -1,5 +1,6 @@
 import { useIsMutating } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Card } from '@/components/card'
 import { ShipIcon } from '@/components/icons'
@@ -23,6 +24,7 @@ const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
 }
 
 export const ShipItem = ({ ship }: ShipItemProps) => {
+  const { t } = useTranslation()
   const isMutating =
     useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }] }) > 0
 
@@ -42,7 +44,7 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
           <div className="relative flex w-[400px] flex-row flex-wrap items-end gap-x-2 gap-y-1">
             <div className="flex gap-8">
               <div>
-                <div className="text-secondary text-xs font-medium uppercase">System</div>
+                <div className="text-secondary text-xs font-medium uppercase">{t('system.label')}</div>
                 <div className="text-sm font-semibold">
                   <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
                     {ship.nav.systemSymbol}
@@ -50,7 +52,7 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
                 </div>
               </div>
               <div>
-                <div className="text-secondary text-xs font-medium uppercase">Waypoint</div>
+                <div className="text-secondary text-xs font-medium uppercase">{t('waypoint.label')}</div>
                 <div className="text-sm font-semibold">
                   <Link
                     className="link"

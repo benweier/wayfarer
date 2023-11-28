@@ -3,11 +3,13 @@ import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { useIsMutating } from '@tanstack/react-query'
 import { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import * as ShipActions from '@/features/ship/actions'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
+  const { t } = useTranslation()
   const isMutating =
     useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }] }) > 0
   const { x, y, refs } = useFloating<HTMLButtonElement>({
@@ -32,7 +34,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
             size="small"
             disabled={isMutating || ship.fuel.capacity === 0 || ship.nav.status === 'IN_TRANSIT'}
           >
-            Flight Mode
+            {t('ship.action.flight_mode')}
           </Button>
         </Menu.Button>
 
@@ -65,7 +67,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
                           className="text-left"
                           {...props}
                         >
-                          Cruise
+                          {t('ship.flight_mode.cruise')}
                         </Button>
                       )}
                     </ShipActions.FlightMode>
@@ -82,7 +84,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
                           className="text-left"
                           {...props}
                         >
-                          Burn
+                          {t('ship.flight_mode.burn')}
                         </Button>
                       )}
                     </ShipActions.FlightMode>
@@ -99,7 +101,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
                           className="text-left"
                           {...props}
                         >
-                          Drift
+                          {t('ship.flight_mode.drift')}
                         </Button>
                       )}
                     </ShipActions.FlightMode>
@@ -116,7 +118,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
                           className="text-left"
                           {...props}
                         >
-                          Stealth
+                          {t('ship.flight_mode.stealth')}
                         </Button>
                       )}
                     </ShipActions.FlightMode>

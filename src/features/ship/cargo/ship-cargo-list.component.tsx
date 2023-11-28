@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
@@ -66,6 +67,7 @@ const CancelModal = () => {
 }
 
 export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const ship = useShipResponse()
   const waypoint = useWaypointResponse()
@@ -97,7 +99,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
     return (
       <div className="flex flex-col gap-2 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
         <div className="text-secondary text-center text-sm">
-          <span className="font-bold">{ship.symbol}</span> has no cargo
+          <span className="font-bold">{ship.symbol}</span> {t('ship.no_cargo')}
         </div>
         <div className="text-center">
           <Button
@@ -107,7 +109,9 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
               navigate(`/fleet/ship/${ship.symbol}/market`)
             }}
           >
-            {hasMarketplace ? `View Market at ${ship.nav.waypointSymbol}` : `No Market at ${ship.nav.waypointSymbol}`}
+            {hasMarketplace
+              ? t('ship.view_market', { waypointSymbol: ship.nav.waypointSymbol })
+              : t('ship.no_market', { waypointSymbol: ship.nav.waypointSymbol })}
           </Button>
         </div>
       </div>
@@ -129,7 +133,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                   <ShipActions.InstallMount ship={ship} mountSymbol={item.symbol}>
                     {(props) => (
                       <Button intent="primary" size="small" {...props}>
-                        Install
+                        {t('ship.action.install')}
                       </Button>
                     )}
                   </ShipActions.InstallMount>
@@ -139,7 +143,6 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                   <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
                     <WaypointContext.Provider value={{ waypointSymbol: ship.nav.waypointSymbol }}>
                       <TradeGoodSell
-                        ship={ship}
                         good={good}
                         action={(props) => (
                           <Button intent="confirm" kind="flat" size="small" {...props}>

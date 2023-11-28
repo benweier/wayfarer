@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
 import { useShipTransit } from './use-ship-transit.hook'
@@ -18,6 +19,7 @@ const formatDate = (date: Date) => {
 }
 
 export const ShipTransitStatus = () => {
+  const { t } = useTranslation()
   const ship = useShipResponse()
   const transit = useShipTransit(ship)
 
@@ -25,14 +27,14 @@ export const ShipTransitStatus = () => {
     <div className="flex flex-col gap-1">
       <div className="flex flex-row gap-8">
         <div className="flex flex-col items-start">
-          <div className="text-secondary text-xs uppercase">Departed</div>
+          <div className="text-secondary text-xs uppercase">{t('ship.transit.departed')}</div>
           <div className="flex items-center gap-2">
             <div className="text-sm font-medium">{formatDate(transit.departed)}</div>
           </div>
         </div>
         <div className="flex flex-col items-end">
           <div className="text-secondary text-xs uppercase">
-            {transit.remainingSeconds > 0 ? 'Arriving' : 'Arrived'}
+            {transit.remainingSeconds > 0 ? t('ship.transit.arriving') : t('ship.transit.arrived')}
           </div>
           <div className="flex items-center gap-2">
             <div className="text-sm font-medium">{formatDate(transit.arrival)}</div>
