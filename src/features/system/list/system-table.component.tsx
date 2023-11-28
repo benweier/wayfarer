@@ -1,22 +1,13 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
-import { type PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
 import { SYSTEM_TYPE } from '@/config/constants'
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
+import { ShipPresence } from '@/features/ship/presence'
 import { type SystemWaypoint, type SystemsResponse } from '@/types/spacetraders'
-const ShipPresence = ({
-  count,
-  systemSymbol,
-  children,
-}: PropsWithChildren<{ count: number; systemSymbol: string }>) => {
-  const { t } = useTranslation()
 
-  return <span title={t('system.presence', { count, systemSymbol })}>{children}</span>
-}
 const EXCLUDED_WAYPOINTS = new Set(['ASTEROID', 'ENGINEERED_ASTEROID'])
 const columnHelper = createColumnHelper<{ system: SystemsResponse; presence: number }>()
 const columns = [
@@ -45,7 +36,7 @@ const columns = [
     maxSize: 10,
     cell: ({ row }) =>
       row.original.presence > 0 && (
-        <ShipPresence count={row.original.presence} systemSymbol={row.original.system.symbol}>
+        <ShipPresence label="system.presence" count={row.original.presence} symbol={row.original.system.symbol}>
           <ShipIcon id="anchor" className="h-5 w-5" />
         </ShipPresence>
       ),

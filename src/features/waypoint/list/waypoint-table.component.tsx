@@ -11,27 +11,18 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { type PropsWithChildren, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WAYPOINT_TYPE } from '@/config/constants'
+import { ShipPresence } from '@/features/ship/presence'
 import { type WaypointResponse } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { TypeFilter } from './type-filter.component'
 
-const ShipPresence = ({
-  count,
-  waypointSymbol,
-  children,
-}: PropsWithChildren<{ count: number; waypointSymbol: string }>) => {
-  const { t } = useTranslation()
-
-  return <span title={t('waypoint.presence', { count, waypointSymbol })}>{children}</span>
-}
 const FILTERED_TRAITS = new Set([
   'UNCHARTED',
   'MARKETPLACE',
@@ -89,7 +80,7 @@ const columns = [
     maxSize: 10,
     cell: ({ row }) =>
       row.original.presence > 0 && (
-        <ShipPresence count={row.original.presence} waypointSymbol={row.original.waypoint.symbol}>
+        <ShipPresence label="waypoint.presence" count={row.original.presence} symbol={row.original.waypoint.symbol}>
           <ShipIcon id="anchor" className="h-5 w-5" />
         </ShipPresence>
       ),

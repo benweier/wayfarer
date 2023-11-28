@@ -23,13 +23,13 @@
     "logout": "Log out"
   },
   "system": {
-    "presence_zero": "You have no ships in {{systemSymbol}}",
-    "presence_one": "You have {{count, formatNumber}} ship in {{systemSymbol}}",
-    "presence_other": "You have {{count, formatNumber}} ships in {{systemSymbol}}"
+    "presence_zero": "You have no ships in {{symbol}}",
+    "presence_one": "You have {{count, formatNumber}} ship in {{symbol}}",
+    "presence_other": "You have {{count, formatNumber}} ships in {{symbol}}"
   },
   "waypoint": {
-    "presence_zero": "You have no ships at {{waypointSymbol}}",
-    "presence_one": "You have {{count, formatNumber}} ship at {{waypointSymbol}}",
-    "presence_other": "You have {{count, formatNumber}} ships at {{waypointSymbol}}"
+    "presence_zero": "You have no ships at {{symbol}}",
+    "presence_one": "You have {{count, formatNumber}} ship at {{symbol}}",
+    "presence_other": "You have {{count, formatNumber}} ships at {{symbol}}"
   }
 }
