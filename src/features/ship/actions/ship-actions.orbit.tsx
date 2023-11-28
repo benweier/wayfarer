@@ -1,23 +1,12 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { type Ref, forwardRef } from 'react'
-import { Button } from '@/components/button'
 import { createShipOrbitMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
-const OrbitComponent = (
-  {
-    ship,
-    children = (props) => (
-      <Button size="small" {...props}>
-        Orbit
-      </Button>
-    ),
-  }: ShipActionProps,
-  ref: Ref<HTMLButtonElement>,
-) => {
+const OrbitComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonElement>) => {
   const client = useQueryClient()
   const isMutating = useIsMutating({
     mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }],

@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { Button } from '@/components/button'
 import { createShipExtractMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipSurveyStore } from '@/store/ship'
@@ -10,11 +9,7 @@ import { type ShipActionProps } from './ship-actions.types'
 export const Extract = ({
   ship,
   survey,
-  children = (props) => (
-    <Button size="small" {...props}>
-      Extract
-    </Button>
-  ),
+  children,
 }: ShipActionProps<{
   survey?: SurveyResponse
 }>) => {

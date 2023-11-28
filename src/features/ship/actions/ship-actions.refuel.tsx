@@ -1,21 +1,12 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { Button } from '@/components/button'
 import { createShipRefuelMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
-export const Refuel = ({
-  ship,
-  disabled = false,
-  children = (props) => (
-    <Button size="small" {...props}>
-      Refuel
-    </Button>
-  ),
-}: ShipActionProps) => {
+export const Refuel = ({ ship, disabled = false, children }: ShipActionProps) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const isMutating = useIsMutating({

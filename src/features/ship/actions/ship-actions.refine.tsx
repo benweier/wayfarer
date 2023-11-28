@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { Button } from '@/components/button'
 import { createShipRefineMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -9,11 +8,7 @@ import { type ShipActionProps } from './ship-actions.types'
 export const Refine = ({
   ship,
   item,
-  children = (props) => (
-    <Button size="small" {...props}>
-      Refine
-    </Button>
-  ),
+  children,
 }: ShipActionProps<{
   item: string
 }>) => {

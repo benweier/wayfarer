@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { Button } from '@/components/button'
 import { createShipJettisonMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -10,11 +9,7 @@ export const Jettison = ({
   ship,
   symbol,
   units,
-  children = (props) => (
-    <Button size="small" {...props}>
-      Jettison
-    </Button>
-  ),
+  children,
 }: ShipActionProps<{
   symbol: string
   units: number

@@ -1,20 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { Button } from '@/components/button'
 import { createShipSurveyMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipSurveyStore } from '@/store/ship'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
-export const Survey = ({
-  ship,
-  children = (props) => (
-    <Button size="small" {...props}>
-      Survey
-    </Button>
-  ),
-}: ShipActionProps) => {
+export const Survey = ({ ship, children }: ShipActionProps) => {
   const client = useQueryClient()
   const addSurvey = useShipSurveyStore((state) => state.addSurvey)
   const hasCooldown = ship.cooldown.remainingSeconds > 0

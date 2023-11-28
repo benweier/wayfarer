@@ -1,23 +1,13 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { type Ref, forwardRef } from 'react'
-import { Button } from '@/components/button'
 import { createShipFlightModeMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
 const FlightModeComponent = (
-  {
-    ship,
-    disabled = false,
-    flightMode,
-    children = (props) => (
-      <Button size="small" {...props}>
-        Flight Mode
-      </Button>
-    ),
-  }: ShipActionProps<{ flightMode: string }>,
+  { ship, disabled = false, flightMode, children }: ShipActionProps<{ flightMode: string }>,
   ref: Ref<HTMLButtonElement>,
 ) => {
   const client = useQueryClient()

@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { Button } from '@/components/button'
 import { createShipJumpMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -9,11 +8,7 @@ import { type ShipActionProps } from './ship-actions.types'
 export const Jump = ({
   ship,
   systemSymbol,
-  children = (props) => (
-    <Button size="small" {...props}>
-      Jump
-    </Button>
-  ),
+  children,
 }: ShipActionProps<{
   systemSymbol: string
 }>) => {

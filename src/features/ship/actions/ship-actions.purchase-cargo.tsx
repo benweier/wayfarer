@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { Button } from '@/components/button'
 import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
@@ -11,11 +10,7 @@ export const PurchaseCargo = ({
   ship,
   symbol,
   units,
-  children = (props) => (
-    <Button size="small" {...props}>
-      Purchase
-    </Button>
-  ),
+  children,
 }: ShipActionProps<{
   symbol: string
   units: number
