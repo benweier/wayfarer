@@ -12,7 +12,7 @@ const ShipRouteComponent = () => {
   if (!shipSymbol) return null
 
   return (
-    <div className="grid gap-4 p-4">
+    <div key={shipSymbol} className="grid gap-4 p-4">
       <div className="flex items-center justify-start gap-6">
         <h1 className="text-title">
           {t('ship.label')}: <span className="font-normal">{shipSymbol}</span>

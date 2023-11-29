@@ -12,7 +12,7 @@ export const WaypointRouteComponent = () => {
   if (!systemSymbol || !waypointSymbol) return null
 
   return (
-    <div className="grid gap-4 p-4">
+    <div key={waypointSymbol} className="grid gap-4 p-4">
       <h1 className="text-title">
         {t('waypoint.label')}: <span className="whitespace-nowrap font-normal">{waypointSymbol}</span>
       </h1>
