@@ -25,7 +25,7 @@
   "general": {
     "refresh": "Refresh",
     "last_updated": {
-      "relative": "Last updated {{value, relativeTime}}"
+      "relative": "Last updated {{value, formatRelativeTime}}"
     }
   },
   "systems": {
