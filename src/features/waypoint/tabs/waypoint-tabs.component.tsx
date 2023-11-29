@@ -1,5 +1,6 @@
 import { Tab } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
+import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { WaypointFleetError, WaypointFleetFallback, WaypointFleetList } from '@/features/waypoint/fleet'
@@ -19,6 +20,7 @@ import {
 } from '@/features/waypoint/shipyard'
 
 export const WaypointTabs = () => {
+  const { t } = useTranslation()
   const waypoint = useWaypointResponse()
   const hasMarket = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
   const hasShipyard = waypoint.traits.findIndex((trait) => trait.symbol === 'SHIPYARD') !== -1
@@ -30,16 +32,16 @@ export const WaypointTabs = () => {
           disabled={!hasMarket}
           className={({ selected }) => cx('group tab', { selected, 'opacity-30': !hasMarket })}
         >
-          Market
+          {t('market.label')}
         </Tab>
-        <Tab className={({ selected }) => cx('group tab', { selected })}>Fleet</Tab>
+        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('fleet.label')}</Tab>
         <Tab
           disabled={!hasShipyard}
           className={({ selected }) => cx('group tab', { selected, 'opacity-30': !hasShipyard })}
         >
-          Shipyard
+          {t('shipyard.label')}
         </Tab>
-        <Tab className={({ selected }) => cx('group tab', { selected })}>Jump Gate</Tab>
+        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('jumpgate.label')}</Tab>
       </Tab.List>
 
       <Tab.Panels>
