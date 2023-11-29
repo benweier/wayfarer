@@ -30,8 +30,11 @@ export const loader: QueryClientLoaderFn =
       })
       const marketEnabled = waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
       const market = marketEnabled
-        ? await client.ensureQueryData({
-            queryKey: getWaypointMarketQuery.getQueryKey({ systemSymbol, waypointSymbol }),
+        ? client.ensureQueryData({
+            queryKey: getWaypointMarketQuery.getQueryKey({
+              systemSymbol: waypoint.data.systemSymbol,
+              waypointSymbol: waypoint.data.symbol,
+            }),
             queryFn: getWaypointMarketQuery.queryFn,
           })
         : undefined
