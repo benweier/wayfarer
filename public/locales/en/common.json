@@ -28,6 +28,9 @@
       "relative": "Last updated {{value, relativeTime}}"
     }
   },
+  "systems": {
+    "label": "Systems"
+  },
   "system": {
     "label": "System",
     "presence_zero": "You have no ships in {{symbol}}",
@@ -39,6 +42,18 @@
     "presence_zero": "You have no ships at {{symbol}}",
     "presence_one": "You have {{count, formatNumber}} ship at {{symbol}}",
     "presence_other": "You have {{count, formatNumber}} ships at {{symbol}}"
+  },
+  "market": {
+    "label": "Market"
+  },
+  "shipyard": {
+    "label": "Shipyard"
+  },
+  "jumpgate": {
+    "label": "Jumpgate"
+  },
+  "fleet": {
+    "label": "Fleet"
   },
   "ship": {
     "label": "Ship",
