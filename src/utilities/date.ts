@@ -1,4 +1,5 @@
-export const relativeTime = (date: Date) => {
+export const formatRelativeTime = (value: number | Date) => {
+  const date = new Date(value)
   const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
   const now = new Date().getTime()
   const diffMs = now - date.getTime()
@@ -19,4 +20,21 @@ export const relativeTime = (date: Date) => {
     default:
       return rtf.format(-diffDay, 'day')
   }
+}
+
+const dateTimeFormatter = new Intl.DateTimeFormat('en-gb', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+  hour: '2-digit',
+  hourCycle: 'h23',
+  minute: '2-digit',
+  second: '2-digit',
+})
+
+export const formatDateTime = (value: number | Date) => {
+  const date = new Date(value)
+  const [day, , month, , year, , hour, , minute, , second] = dateTimeFormatter.formatToParts(date)
+
+  return `${year.value}.${month.value}.${day.value} ${hour.value}:${minute.value}:${second.value}`
 }
