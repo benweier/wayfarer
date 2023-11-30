@@ -1,13 +1,13 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import * as Select from '@/components/select'
 import { getShipListQuery } from '@/services/api/spacetraders'
-import { defaultShipItemReducer } from './ship-item-reducer.helper'
+import { defaultGetShipItem } from './ship-item-reducer.helper'
 import { type ShipSelectFieldProps, type ShipSelectItem } from './ship-select-field.types'
 
 export const ShipSelectField = ({
   getShipList = (response) => ({ ships: response.data }),
   onChange,
-  getShipItem = defaultShipItemReducer,
+  getShipItem = defaultGetShipItem,
 }: ShipSelectFieldProps) => {
   const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
