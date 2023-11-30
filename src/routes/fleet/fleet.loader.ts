@@ -6,7 +6,7 @@ export const meta: MetaFunction = (t) => {
   return [{ title: t('fleet.title', { ns: 'meta' }) }]
 }
 
-export const loader: QueryClientLoaderFn = (client) => async () => {
+export const loader: QueryClientLoaderFn = (client) => () => {
   try {
     const ships = client.ensureQueryData({
       queryKey: getShipListQuery.getQueryKey(),
@@ -16,7 +16,7 @@ export const loader: QueryClientLoaderFn = (client) => async () => {
     })
 
     return defer({
-      ships: await ships,
+      ships,
     })
   } catch (err) {
     if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
