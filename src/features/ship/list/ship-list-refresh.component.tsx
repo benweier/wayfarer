@@ -23,12 +23,10 @@ export const ShipListRefresh = () => {
     }
   }, [lastUpdate, state?.dataUpdatedAt])
 
-  if (!state?.dataUpdatedAt) return null
-
   return (
     <div className="flex items-center gap-2">
       <div className="text-secondary text-right text-xs">
-        {isFetching ? '...' : t('general.last_updated.relative', { value: state.dataUpdatedAt })}
+        {isFetching || !state ? '...' : t('general.last_updated.relative', { value: state.dataUpdatedAt })}
       </div>
       <Button
         intent="warn"
