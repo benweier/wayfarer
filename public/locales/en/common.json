@@ -26,6 +26,20 @@
     "refresh": "Refresh",
     "last_updated": {
       "relative": "Last updated {{value, formatRelativeTime}}"
+    },
+    "header": {
+      "symbol": "Symbol",
+      "name": "Name",
+      "presence": "Presence",
+      "type": "Type",
+      "coordinates": "Coordinates",
+      "waypoints": "Waypoints",
+      "traits": "Traits",
+      "trade_volume": "Trade Volume",
+      "supply": "Supply",
+      "purchase_price": "Purchase Price",
+      "sell_price": "Sell Price",
+      "actions": "Actions"
     }
   },
   "systems": {

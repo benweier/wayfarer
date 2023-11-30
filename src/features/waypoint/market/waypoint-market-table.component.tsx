@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
 import { useState } from 'react'
+import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
@@ -26,7 +27,7 @@ const columns = [
 
       return (
         <div className="flex w-64 items-center justify-start gap-2 text-right">
-          <div>Name</div>
+          <Translation>{(t) => <div>{t('general.header.name')}</div>}</Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -47,7 +48,11 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.trade?.tradeVolume, {
     id: 'trade_volume',
-    header: () => <div className="text-right">Trade Volume</div>,
+    header: () => (
+      <div className="text-right">
+        <Translation>{(t) => t('general.header.trade_volume')}</Translation>
+      </div>
+    ),
     cell: ({ getValue }) => {
       const value = getValue()
 
@@ -61,7 +66,11 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.trade?.supply, {
     id: 'supply',
-    header: () => <div className="text-right">Supply</div>,
+    header: () => (
+      <div className="text-right">
+        <Translation>{(t) => t('general.header.supply')}</Translation>
+      </div>
+    ),
     cell: ({ getValue }) => {
       const value = getValue()
 
@@ -84,7 +93,7 @@ const columns = [
 
       return (
         <div className="flex items-center justify-end gap-2 text-right">
-          <div>Purchase Price</div>
+          <Translation>{(t) => <div>{t('general.header.purchase_price')}</div>}</Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -130,7 +139,7 @@ const columns = [
 
       return (
         <div className="flex items-center justify-end gap-2 text-right">
-          <div>Sell Price</div>
+          <Translation>{(t) => <div>{t('general.header.sell_price')}</div>}</Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}

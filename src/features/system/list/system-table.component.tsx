@@ -1,5 +1,6 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
+import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
@@ -15,8 +16,8 @@ const columns = [
     id: 'symbol',
     header: () => {
       return (
-        <div className="flex items-center justify-start gap-2 text-right">
-          <div>Symbol</div>
+        <div className="text-left">
+          <Translation>{(t) => t('general.header.symbol')}</Translation>
         </div>
       )
     },
@@ -45,8 +46,8 @@ const columns = [
     id: 'type',
     header: () => {
       return (
-        <div className="flex items-center justify-start gap-2 text-right">
-          <div>Type</div>
+        <div className="text-left">
+          <Translation>{(t) => t('general.header.type')}</Translation>
         </div>
       )
     },
@@ -66,8 +67,8 @@ const columns = [
     id: 'coordinates',
     header: () => {
       return (
-        <div className="flex items-center justify-start gap-2 text-left">
-          <div>Coordinates</div>
+        <div className="text-left">
+          <Translation>{(t) => t('general.header.coordinates')}</Translation>
         </div>
       )
     },
@@ -82,8 +83,8 @@ const columns = [
     id: 'waypoints',
     header: () => {
       return (
-        <div className="flex items-center justify-end gap-2 text-right">
-          <div>Waypoints</div>
+        <div className="text-right">
+          <Translation>{(t) => t('general.header.waypoints')}</Translation>
         </div>
       )
     },
@@ -130,7 +131,7 @@ const columns = [
                 to={`/systems/${row.original.system.symbol}`}
               >
                 <span className="text-sm font-medium" aria-hidden>
-                  {`${values.extra}`}
+                  {values.extra}
                 </span>
               </Link>
             </li>

@@ -12,6 +12,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
+import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
@@ -45,8 +46,8 @@ const columns = [
       const sorted = column.getIsSorted()
 
       return (
-        <div className="flex items-center justify-start gap-2 text-right">
-          <div>Symbol</div>
+        <div className="flex items-center justify-start gap-2">
+          <Translation>{(t) => <div>{t('general.header.symbol')}</div>}</Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -94,7 +95,7 @@ const columns = [
 
       return (
         <div className="flex items-center justify-start gap-2 text-left">
-          <div>Coordinates</div>
+          <Translation>{(t) => <div>{t('general.header.coordinates')}</div>}</Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -144,7 +145,7 @@ const columns = [
 
       return (
         <div className="flex items-center justify-start gap-2 text-right">
-          <div>Type</div>
+          <Translation>{(t) => <div>{t('general.header.type')}</div>}</Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -185,8 +186,8 @@ const columns = [
     maxSize: 30,
     header: () => {
       return (
-        <div className="flex items-center justify-end gap-2 text-right">
-          <div>Traits</div>
+        <div className="text-right">
+          <Translation>{(t) => t('general.header.traits')}</Translation>
         </div>
       )
     },
