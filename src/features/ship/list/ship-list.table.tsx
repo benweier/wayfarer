@@ -1,4 +1,5 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ShipIcon } from '@/components/icons'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
@@ -22,7 +23,11 @@ const columns = [
   columnHelper.accessor((row) => row.ship.symbol, {
     id: 'symbol',
     header: () => {
-      return <div className="text-left">Symbol</div>
+      return (
+        <div className="text-left">
+          <Translation>{(t) => t('general.header.symbol')}</Translation>
+        </div>
+      )
     },
     cell: ({ getValue }) => {
       const symbol = getValue()
@@ -35,13 +40,18 @@ const columns = [
         </div>
       )
     },
+    enableSorting: true,
     minSize: 20,
     maxSize: 20,
   }),
   columnHelper.accessor((row) => row.ship.nav.systemSymbol, {
     id: 'systemSymbol',
     header: () => {
-      return <div className="text-left">System</div>
+      return (
+        <div className="text-left">
+          <Translation>{(t) => t('general.header.system')}</Translation>
+        </div>
+      )
     },
     cell: ({ getValue, row }) => {
       const systemSymbol = getValue()
@@ -52,13 +62,18 @@ const columns = [
         </Link>
       )
     },
+    enableSorting: true,
     minSize: 10,
     maxSize: 10,
   }),
   columnHelper.accessor((row) => row.ship.nav.waypointSymbol, {
     id: 'waypointSymbol',
     header: () => {
-      return <div className="text-left">Waypoint</div>
+      return (
+        <div className="text-left">
+          <Translation>{(t) => t('general.header.waypoint')}</Translation>
+        </div>
+      )
     },
     cell: ({ getValue, row }) => {
       const waypointSymbol = getValue()
@@ -72,6 +87,7 @@ const columns = [
         </Link>
       )
     },
+    enableSorting: true,
     minSize: 15,
     maxSize: 15,
   }),
@@ -101,7 +117,11 @@ const columns = [
   columnHelper.accessor((row) => row.ship.fuel, {
     id: 'fuel',
     header: () => {
-      return <div className="text-right">Fuel</div>
+      return (
+        <div className="text-right">
+          <Translation>{(t) => t('general.header.fuel')}</Translation>
+        </div>
+      )
     },
     cell: ({ getValue }) => {
       const fuel = getValue()
@@ -115,13 +135,18 @@ const columns = [
         </div>
       )
     },
+    enableSorting: true,
     minSize: 10,
     maxSize: 10,
   }),
   columnHelper.accessor((row) => row.ship.cargo, {
     id: 'cargo',
     header: () => {
-      return <div className="text-right">Cargo</div>
+      return (
+        <div className="text-right">
+          <Translation>{(t) => t('general.header.cargo')}</Translation>
+        </div>
+      )
     },
     cell: ({ getValue }) => {
       const cargo = getValue()
@@ -135,6 +160,7 @@ const columns = [
         </div>
       )
     },
+    enableSorting: true,
     minSize: 10,
     maxSize: 10,
   }),
