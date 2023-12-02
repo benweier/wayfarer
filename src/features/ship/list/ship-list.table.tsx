@@ -1,11 +1,25 @@
-import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import {
+  type ColumnFiltersState,
+  type SortingState,
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
+import { useState } from 'react'
 import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { ShipIcon } from '@/components/icons'
+import { Button } from '@/components/button'
+import { AppIcon, ShipIcon } from '@/components/icons'
 import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ShipControls } from '@/features/ship/item/ship-item.controls'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
+import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   const transit = useShipTransit(ship)
@@ -22,10 +36,22 @@ const columnHelper = createColumnHelper<{ ship: ShipResponse }>()
 const columns = [
   columnHelper.accessor((row) => row.ship.symbol, {
     id: 'symbol',
-    header: () => {
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
       return (
-        <div className="text-left">
-          <Translation>{(t) => t('general.header.symbol')}</Translation>
+        <div className="flex items-center justify-start gap-2">
+          <Translation>{(t) => <div>{t('general.header.symbol')}</div>}</Translation>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       )
     },
@@ -46,10 +72,22 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.ship.nav.systemSymbol, {
     id: 'systemSymbol',
-    header: () => {
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
       return (
-        <div className="text-left">
-          <Translation>{(t) => t('general.header.system')}</Translation>
+        <div className="flex items-center justify-start gap-2">
+          <Translation>{(t) => <div>{t('general.header.system')}</div>}</Translation>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       )
     },
@@ -68,10 +106,22 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.ship.nav.waypointSymbol, {
     id: 'waypointSymbol',
-    header: () => {
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
       return (
-        <div className="text-left">
-          <Translation>{(t) => t('general.header.waypoint')}</Translation>
+        <div className="flex items-center justify-start gap-2">
+          <Translation>{(t) => <div>{t('general.header.waypoint')}</div>}</Translation>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       )
     },
@@ -116,10 +166,22 @@ const columns = [
   }),
   columnHelper.accessor((row) => row.ship.fuel, {
     id: 'fuel',
-    header: () => {
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
       return (
-        <div className="text-right">
-          <Translation>{(t) => t('general.header.fuel')}</Translation>
+        <div className="flex items-center justify-end gap-2">
+          <Translation>{(t) => <div>{t('general.header.fuel')}</div>}</Translation>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       )
     },
@@ -127,24 +189,59 @@ const columns = [
       const fuel = getValue()
 
       return (
-        <div className="flex items-center justify-end gap-1">
-          <ShipIcon id="fuel" className="h-4 w-4 text-teal-500" />
-          <div className="text-sm">
-            {fuel.current} / {fuel.capacity}
+        <div>
+          <div className="flex items-center justify-end gap-2">
+            <ShipIcon id="fuel" className="h-4 w-4 text-teal-500" />
+            <div className="text-sm font-semibold">
+              {fuel.current} / {fuel.capacity}
+            </div>
+          </div>
+          <div className="h-1 max-w-[120px] rounded-full bg-teal-900/20 dark:bg-teal-900/40">
+            <div
+              className="h-1 rounded-full bg-teal-500/80"
+              style={{ width: `${(fuel.current / fuel.capacity) * 100}%` }}
+            />
           </div>
         </div>
       )
     },
+    sortingFn: (a, b) => {
+      if (a.original.ship.fuel.capacity === 0) return 1
+
+      const fuelA = a.original.ship.fuel.current + 1 / a.original.ship.fuel.capacity + 1
+      const fuelB = b.original.ship.fuel.current + 1 / b.original.ship.fuel.capacity + 1
+      const diff = fuelA - fuelB
+
+      if (diff === 0) {
+        return a.original.ship.fuel.capacity - b.original.ship.fuel.capacity
+      }
+
+      return diff
+    },
+    invertSorting: true,
     enableSorting: true,
+    sortDescFirst: true,
     minSize: 10,
     maxSize: 10,
   }),
   columnHelper.accessor((row) => row.ship.cargo, {
     id: 'cargo',
-    header: () => {
+    header: ({ column }) => {
+      const sorted = column.getIsSorted()
+
       return (
-        <div className="text-right">
-          <Translation>{(t) => t('general.header.cargo')}</Translation>
+        <div className="flex items-center justify-end gap-2">
+          <Translation>{(t) => <div>{t('general.header.cargo')}</div>}</Translation>
+          <div>
+            <Button
+              intent={sorted === false ? 'dim' : 'primary'}
+              kind="flat"
+              size="small"
+              onClick={column.getToggleSortingHandler()}
+            >
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       )
     },
@@ -152,15 +249,38 @@ const columns = [
       const cargo = getValue()
 
       return (
-        <div className="flex items-center justify-end gap-2">
-          <ShipIcon id="cargo" className="h-4 w-4 text-fuchsia-500" />
-          <div className="text-sm">
-            {cargo.units} / {cargo.capacity}
+        <div>
+          <div className="flex items-center justify-end gap-2">
+            <ShipIcon id="cargo" className="h-4 w-4 text-fuchsia-500" />
+            <div className="text-sm font-semibold">
+              {cargo.units} / {cargo.capacity}
+            </div>
+          </div>
+          <div className="h-1 max-w-[120px] rounded-full bg-fuchsia-900/20 dark:bg-fuchsia-900/40">
+            <div
+              className="h-1 rounded-full bg-fuchsia-500/80"
+              style={{ width: `${(cargo.units / cargo.capacity) * 100}%` }}
+            />
           </div>
         </div>
       )
     },
+    sortingFn: (a, b) => {
+      if (a.original.ship.cargo.capacity === 0) return 1
+
+      const cargoA = a.original.ship.cargo.units + 1 / a.original.ship.cargo.capacity + 1
+      const cargoB = b.original.ship.cargo.units + 1 / b.original.ship.cargo.capacity + 1
+      const diff = cargoA - cargoB
+
+      if (diff === 0) {
+        return a.original.ship.cargo.capacity - b.original.ship.cargo.capacity
+      }
+
+      return diff
+    },
+    invertSorting: true,
     enableSorting: true,
+    sortDescFirst: true,
     minSize: 10,
     maxSize: 10,
   }),
@@ -182,10 +302,23 @@ const columns = [
 ]
 
 export const ShipListTable = ({ data }: { data: Array<{ ship: ShipResponse }> }) => {
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    state: { sorting, columnFilters },
+    enableHiding: true,
+    enableFilters: true,
+    enableColumnFilters: true,
+    enableGlobalFilter: true,
   })
 
   return (
