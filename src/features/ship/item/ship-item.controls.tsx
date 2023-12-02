@@ -83,7 +83,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                       <ShipActions.Dock ship={ship}>
                         {(props) => (
                           <MenuActionButton active={active} {...props}>
-                            {t('ship.action.orbit')}
+                            {t('ship.action.dock')}
                           </MenuActionButton>
                         )}
                       </ShipActions.Dock>
