@@ -1,3 +1,4 @@
+import { useIsMutating } from '@tanstack/react-query'
 import {
   type ColumnFiltersState,
   type SortingState,
@@ -10,7 +11,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useState } from 'react'
+import { cx } from 'class-variance-authority'
+import { type PropsWithChildren, useState } from 'react'
 import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
@@ -21,6 +23,19 @@ import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 
+const ShipRow = ({ shipSymbol, children }: PropsWithChildren<{ shipSymbol: string }>) => {
+  const isMutating = useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol }] }) > 0
+
+  return (
+    <tr
+      className={cx('even:bg-zinc-200/10 dark:even:bg-zinc-700/10', {
+        'pointer-events-none opacity-30': isMutating,
+      })}
+    >
+      {children}
+    </tr>
+  )
+}
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   const transit = useShipTransit(ship)
 
@@ -342,13 +357,13 @@ export const ShipListTable = ({ data }: { data: Array<{ ship: ShipResponse }> })
           </thead>
           <tbody className="divide-y divide-zinc-200 bg-zinc-100/50 dark:divide-zinc-950 dark:bg-zinc-800/50">
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="even:bg-zinc-200/10 dark:even:bg-zinc-700/10">
+              <ShipRow key={row.id} shipSymbol={row.original.ship.symbol}>
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id} className="h-14 whitespace-nowrap p-3">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
-              </tr>
+              </ShipRow>
             ))}
           </tbody>
         </table>
