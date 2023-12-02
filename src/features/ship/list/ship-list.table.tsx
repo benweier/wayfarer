@@ -204,14 +204,14 @@ const columns = [
       const fuel = getValue()
 
       return (
-        <div>
+        <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="fuel" className="h-4 w-4 text-teal-500" />
             <div className="text-sm font-semibold">
               {fuel.current} / {fuel.capacity}
             </div>
           </div>
-          <div className="h-1 max-w-[120px] rounded-full bg-teal-900/20 dark:bg-teal-900/40">
+          <div className="h-1 w-full max-w-[100px] rounded-full bg-teal-900/20 dark:bg-teal-900/40">
             <div
               className="h-1 rounded-full bg-teal-500/80"
               style={{ width: `${(fuel.current / fuel.capacity) * 100}%` }}
@@ -264,14 +264,14 @@ const columns = [
       const cargo = getValue()
 
       return (
-        <div>
+        <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="cargo" className="h-4 w-4 text-fuchsia-500" />
             <div className="text-sm font-semibold">
               {cargo.units} / {cargo.capacity}
             </div>
           </div>
-          <div className="h-1 max-w-[120px] rounded-full bg-fuchsia-900/20 dark:bg-fuchsia-900/40">
+          <div className="h-1 w-full max-w-[100px] rounded-full bg-fuchsia-900/20 dark:bg-fuchsia-900/40">
             <div
               className="h-1 rounded-full bg-fuchsia-500/80"
               style={{ width: `${(cargo.units / cargo.capacity) * 100}%` }}
