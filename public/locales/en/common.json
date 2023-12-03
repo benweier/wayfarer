@@ -25,7 +25,8 @@
   "general": {
     "refresh": "Refresh",
     "last_updated": {
-      "relative": "Last updated {{value, formatRelativeTime}}"
+      "relative": "Last updated {{value, formatRelativeTime}}",
+      "absolute": "Last updated {{value, formatDateTime}}"
     },
     "header": {
       "symbol": "Symbol",
@@ -33,6 +34,7 @@
       "presence": "Presence",
       "type": "Type",
       "coordinates": "Coordinates",
+      "distance_time": "Distance (Time)",
       "system": "System",
       "waypoint": "Waypoint",
       "waypoints": "Waypoints",
@@ -59,7 +61,10 @@
     "label": "Waypoint",
     "presence_zero": "You have no ships at {{symbol}}",
     "presence_one": "You have {{count, formatNumber}} ship at {{symbol}}",
-    "presence_other": "You have {{count, formatNumber}} ships at {{symbol}}"
+    "presence_other": "You have {{count, formatNumber}} ships at {{symbol}}",
+    "sort_coordinates_tooltip": "Sort coordinates by their distance from the system origin (0, 0)",
+    "navigate_ship_to_waypoint": "Navigate ship {{shipSymbol}} to waypoint {{waypointSymbol}}",
+    "ship_at_waypoint": "Ship {{shipSymbol}} is at waypoint {{waypointSymbol}}"
   },
   "market": {
     "label": "Market"

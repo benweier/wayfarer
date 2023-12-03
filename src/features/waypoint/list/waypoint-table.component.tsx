@@ -116,7 +116,7 @@ const columns = [
               </Tooltip.Trigger>
               <Tooltip.Portal>
                 <Tooltip.Content className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800" sideOffset={5}>
-                  Sort coordinates by their distance from the system origin (0, 0).
+                  <Translation>{(t) => t('waypoint.sort_coordinates_tooltip')}</Translation>
                 </Tooltip.Content>
               </Tooltip.Portal>
             </Tooltip.Root>
