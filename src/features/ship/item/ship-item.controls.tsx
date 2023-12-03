@@ -2,21 +2,15 @@ import { FloatingPortal } from '@floating-ui/react'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { useIsMutating } from '@tanstack/react-query'
-import { cx } from 'class-variance-authority'
-import { type ComponentPropsWithRef, Fragment } from 'react'
+import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipActions from '@/features/ship/actions'
 import { WaypointNavigation } from '@/features/waypoint/navigation'
 import { type ShipResponse } from '@/types/spacetraders'
-
-const MenuActionButton = ({ active, children, ...props }: ComponentPropsWithRef<'button'> & { active: boolean }) => (
-  <button className={cx('btn btn-flat w-full text-left', { 'btn-primary': active })} {...props}>
-    {children}
-  </button>
-)
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()
@@ -43,7 +37,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
           className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-blue-500"
         >
           <span className="sr-only">Manage</span>
-          <AppIcon id="more:vertical" className="h-5 w-5" aria-hidden="true" />
+          <AppIcon id="more:vertical" className="h-4 w-4" aria-hidden="true" />
         </Menu.Button>
 
         <FloatingPortal>
@@ -69,9 +63,14 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                     {({ active }) => (
                       <ShipActions.Orbit ship={ship}>
                         {(props) => (
-                          <MenuActionButton active={active} {...props}>
+                          <Button
+                            intent={active ? 'dim' : undefined}
+                            size="small"
+                            className="w-full text-left"
+                            {...props}
+                          >
                             {t('ship.action.orbit')}
-                          </MenuActionButton>
+                          </Button>
                         )}
                       </ShipActions.Orbit>
                     )}
@@ -82,9 +81,14 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                     {({ active }) => (
                       <ShipActions.Dock ship={ship}>
                         {(props) => (
-                          <MenuActionButton active={active} {...props}>
+                          <Button
+                            intent={active ? 'dim' : undefined}
+                            size="small"
+                            className="w-full text-left"
+                            {...props}
+                          >
                             {t('ship.action.dock')}
-                          </MenuActionButton>
+                          </Button>
                         )}
                       </ShipActions.Dock>
                     )}
@@ -93,14 +97,16 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                 {ship.nav.status === 'IN_ORBIT' && (
                   <Menu.Item as={Fragment}>
                     {({ active }) => (
-                      <MenuActionButton
-                        active={active}
+                      <Button
+                        intent={active ? 'dim' : undefined}
+                        size="small"
+                        className="w-full text-left"
                         onClick={() => {
                           modal.open()
                         }}
                       >
                         {t('ship.action.navigate')}
-                      </MenuActionButton>
+                      </Button>
                     )}
                   </Menu.Item>
                 )}
