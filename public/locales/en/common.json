@@ -64,7 +64,9 @@
     "presence_other": "You have {{count, formatNumber}} ships at {{symbol}}",
     "sort_coordinates_tooltip": "Sort coordinates by their distance from the system origin (0, 0)",
     "navigate_ship_to_waypoint": "Navigate ship {{shipSymbol}} to waypoint {{waypointSymbol}}",
-    "ship_at_waypoint": "Ship {{shipSymbol}} is at waypoint {{waypointSymbol}}"
+    "ship_at_waypoint": "Ship {{shipSymbol}} is at waypoint {{waypointSymbol}}",
+    "view_market": "View Market at {{waypointSymbol}}",
+    "no_market": "No Market at {{waypointSymbol}}"
   },
   "market": {
     "label": "Market"
@@ -87,8 +89,6 @@
     "crew": "Crew",
     "condition": "Condition",
     "survey_extract": "Survey/Extract",
-    "view_market": "View Market at {{waypointSymbol}}",
-    "no_market": "No Market at {{waypointSymbol}}",
     "action": {
       "refuel": "Refuel",
       "orbit": "Orbit",

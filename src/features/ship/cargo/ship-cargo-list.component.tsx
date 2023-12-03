@@ -110,8 +110,8 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
             }}
           >
             {hasMarketplace
-              ? t('ship.view_market', { waypointSymbol: ship.nav.waypointSymbol })
-              : t('ship.no_market', { waypointSymbol: ship.nav.waypointSymbol })}
+              ? t('waypoint.view_market', { waypointSymbol: ship.nav.waypointSymbol })
+              : t('waypoint.no_market', { waypointSymbol: ship.nav.waypointSymbol })}
           </Button>
         </div>
       </div>
