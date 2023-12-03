@@ -15,14 +15,6 @@ export const ShipList = () => {
   })
   const ships = data.data
 
-  if (ships.length === 0) {
-    return (
-      <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-        <div className="text-secondary text-center text-sm">You have don&apos;t own any ships!</div>
-      </div>
-    )
-  }
-
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-end gap-2">
