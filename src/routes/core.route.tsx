@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Suspense } from 'react'
-import { Outlet, useNavigation } from 'react-router-dom'
+import { Outlet, ScrollRestoration, useNavigation } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { Meta } from '@/components/meta'
 import { useThemeManager } from '@/hooks/use-theme-manager.hook'
@@ -39,6 +39,7 @@ export const Core = () => {
       )}
     >
       <Suspense fallback={<Fallback />}>
+        <ScrollRestoration />
         <Meta titleTemplate="%s • Wayfarer" />
         <div className="min-h-screen">
           <NavigationLoader />
