@@ -1,9 +1,12 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { ShipListTable } from '@/features/ship/list/ship-list.table'
+import { useDesktopMediaQuery } from '@/components/responsive'
+import { ShipItem } from '@/features/ship/item'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { ShipListRefresh } from './ship-list-refresh.component'
+import { ShipListTable } from './ship-list.table'
 
 export const ShipList = () => {
+  const isDesktop = useDesktopMediaQuery()
   const { data } = useSuspenseQuery({
     queryKey: getShipListQuery.getQueryKey(),
     queryFn: getShipListQuery.queryFn,
@@ -26,7 +29,11 @@ export const ShipList = () => {
         <ShipListRefresh />
       </div>
 
-      <ShipListTable data={ships.map((ship) => ({ ship }))} />
+      {isDesktop ? (
+        <ShipListTable data={ships.map((ship) => ({ ship }))} />
+      ) : (
+        ships.map((ship) => <ShipItem ship={ship} key={ship.symbol} />)
+      )}
     </div>
   )
 }
