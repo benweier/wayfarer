@@ -65,6 +65,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                         {(props) => (
                           <Button
                             intent={active ? 'dim' : undefined}
+                            kind="flat"
                             size="small"
                             className="w-full text-left"
                             {...props}
@@ -83,6 +84,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                         {(props) => (
                           <Button
                             intent={active ? 'dim' : undefined}
+                            kind="flat"
                             size="small"
                             className="w-full text-left"
                             {...props}
@@ -99,6 +101,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                     {({ active }) => (
                       <Button
                         intent={active ? 'dim' : undefined}
+                        kind="flat"
                         size="small"
                         className="w-full text-left"
                         onClick={() => {
