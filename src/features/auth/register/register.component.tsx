@@ -137,7 +137,7 @@ export const Register = () => {
           </div>
         </form>
       </FormProvider>
-      <Modal isOpen={isSuccess} size="lg" disableExternalClose>
+      <Modal isOpen={isSuccess} size="md" disableExternalClose>
         {isSuccess && <AccessTokenDialog registration={agent} />}
       </Modal>
     </div>
