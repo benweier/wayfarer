@@ -6,11 +6,9 @@ export const LeaderboardRouteComponent = () => {
     <div className="grid gap-4 p-4">
       <h1 className="text-title text-center">Leaderboard</h1>
 
-      <div className="grid gap-12">
-        <QuerySuspenseBoundary fallback={<LeaderboardListFallback />}>
-          <LeaderboardList />
-        </QuerySuspenseBoundary>
-      </div>
+      <QuerySuspenseBoundary fallback={<LeaderboardListFallback />}>
+        <LeaderboardList />
+      </QuerySuspenseBoundary>
     </div>
   )
 }

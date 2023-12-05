@@ -20,17 +20,16 @@ const ShipMarketRouteComponent = () => {
           {t('market.label')}: <span className="font-normal">{ship.nav.waypointSymbol}</span>
         </h1>
       </div>
-      <div className="grid gap-12">
-        <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
-          <div className="space-y-4">
-            <WaypointMarketPreferences />
 
-            <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={<WaypointMarketError />}>
-              <WaypointMarketList />
-            </QuerySuspenseBoundary>
-          </div>
-        </WaypointStore>
-      </div>
+      <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
+        <div className="space-y-4">
+          <WaypointMarketPreferences />
+
+          <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={<WaypointMarketError />}>
+            <WaypointMarketList />
+          </QuerySuspenseBoundary>
+        </div>
+      </WaypointStore>
     </div>
   )
 }

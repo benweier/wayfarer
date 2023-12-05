@@ -13,7 +13,6 @@ const ShipLoadoutRouteComponent = () => {
           {t('ship.loadout.label')}: <span className="font-normal">{ship.symbol}</span>
         </h1>
       </div>
-      <div className="grid gap-12"></div>
     </div>
   )
 }

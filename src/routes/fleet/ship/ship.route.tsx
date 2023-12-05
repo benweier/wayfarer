@@ -18,17 +18,16 @@ const ShipRouteComponent = () => {
           {t('ship.label')}: <span className="font-normal">{shipSymbol}</span>
         </h1>
       </div>
-      <div className="grid gap-12">
-        <QuerySuspenseBoundary>
-          <ShipStore shipSymbol={shipSymbol}>
-            <ShipDetail>
-              <ShipTabs />
-            </ShipDetail>
 
-            <Outlet />
-          </ShipStore>
-        </QuerySuspenseBoundary>
-      </div>
+      <QuerySuspenseBoundary>
+        <ShipStore shipSymbol={shipSymbol}>
+          <ShipDetail>
+            <ShipTabs />
+          </ShipDetail>
+
+          <Outlet />
+        </ShipStore>
+      </QuerySuspenseBoundary>
     </div>
   )
 }

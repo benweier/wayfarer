@@ -12,9 +12,8 @@ const ContractRouteComponent = () => {
           Contract: <span className="font-normal">{contractID}</span>
         </div>
       </div>
-      <div className="grid gap-12">
-        <QuerySuspenseBoundary>{contractID && <ContractDetail id={contractID} />}</QuerySuspenseBoundary>
-      </div>
+
+      <QuerySuspenseBoundary>{contractID && <ContractDetail id={contractID} />}</QuerySuspenseBoundary>
     </div>
   )
 }

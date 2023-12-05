@@ -14,11 +14,9 @@ export const AgentRouteComponent = () => {
         <span>Agent:</span> <span className="font-normal">{agentSymbol.toUpperCase()}</span>
       </h1>
 
-      <div className="grid gap-12">
-        <QuerySuspenseBoundary>
-          <LeaderboardAgent agentSymbol={agentSymbol} />
-        </QuerySuspenseBoundary>
-      </div>
+      <QuerySuspenseBoundary>
+        <LeaderboardAgent agentSymbol={agentSymbol} />
+      </QuerySuspenseBoundary>
     </div>
   )
 }
