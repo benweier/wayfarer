@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Modal, useModalActions } from '@/components/modal'
-import { CONTRACT_TYPE } from '@/config/constants'
 import { createContractAcceptMutation, getContractListQuery } from '@/services/api/spacetraders'
 import { type ContractResponse } from '@/types/spacetraders'
 import { ContractItem } from '../item'
@@ -22,6 +22,7 @@ const CloseModal = () => {
   )
 }
 const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
+  const { t } = useTranslation()
   const client = useQueryClient()
   const acceptContract = useMutation({
     mutationKey: createContractAcceptMutation.getMutationKey({ contractId: contract.id }),
@@ -50,7 +51,7 @@ const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
             <div className="text-title">Accept Contract</div>
             <div className="flex gap-2">
               <div className="text-secondary text-sm">{contract.id}</div>
-              <Badge>{CONTRACT_TYPE.get(contract.type)}</Badge>
+              <Badge>{t(contract.type, { ns: 'spacetraders.contract_type' })}</Badge>
             </div>
           </div>
           <div className="grid gap-2"></div>

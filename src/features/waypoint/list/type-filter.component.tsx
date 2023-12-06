@@ -4,13 +4,14 @@ import { Listbox, Transition } from '@headlessui/react'
 import { type Table } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
 import { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { WAYPOINT_TYPE } from '@/config/constants'
 import { type WaypointResponse } from '@/types/spacetraders'
 
 export const TypeFilter = ({ table }: { table: Table<{ waypoint: WaypointResponse; presence: number }> }) => {
+  const { t } = useTranslation()
   const { x, y, refs } = useFloating<HTMLButtonElement>({
     strategy: 'absolute',
     placement: 'bottom',
@@ -75,7 +76,7 @@ export const TypeFilter = ({ table }: { table: Table<{ waypoint: WaypointRespons
                               )}
                             >
                               <WaypointTag type={option}>{`${facetedValues?.get(option) ?? 0}`}</WaypointTag>
-                              {WAYPOINT_TYPE.get(option)}
+                              {t(option, { ns: 'spacetraders.waypoint_type' })}
                             </span>
                             {selected && (
                               <span className="absolute inset-y-0 right-0 flex items-center pr-4">

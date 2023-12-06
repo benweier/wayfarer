@@ -1,13 +1,14 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { Card } from '@/components/card'
 import { ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { WAYPOINT_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { type WaypointItemProps } from './waypoint-item.types'
 
 export const WaypointItem = ({ systemSymbol, waypoint, hasShipPresence }: WaypointItemProps) => {
+  const { t } = useTranslation()
   const traits = waypoint.traits?.filter((trait) => {
     return trait.symbol === 'MARKETPLACE' || trait.symbol === 'SHIPYARD'
   })
@@ -26,7 +27,7 @@ export const WaypointItem = ({ systemSymbol, waypoint, hasShipPresence }: Waypoi
           )}
         </div>
         <div className="flex items-center justify-between gap-1">
-          <WaypointTag type={waypoint.type}>{WAYPOINT_TYPE.get(waypoint.type)}</WaypointTag>
+          <WaypointTag type={waypoint.type}>{t(waypoint.type, { ns: 'spacetraders.waypoint_type' })}</WaypointTag>
           <div className="text-secondary text-sm font-light">
             ({waypoint.x}, {waypoint.y})
           </div>

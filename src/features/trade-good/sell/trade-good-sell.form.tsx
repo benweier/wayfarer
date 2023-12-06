@@ -1,9 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { TRADE_SYMBOL } from '@/config/constants'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type TradeGoodSellFormProps } from './trade-good-sell.types'
@@ -35,6 +35,7 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
 }
 
 export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormProps) => {
+  const { t } = useTranslation()
   const waypoint = useWaypointResponse()
   const methods = useForm<TradeGoodSellSchema>({
     defaultValues: { ship: ship?.symbol, item: good.symbol },
@@ -55,7 +56,7 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
           <div className="flex items-baseline gap-2">
             <span className="font-bold">{ship.symbol}</span>
             <span className="text-secondary">
-              ({TRADE_SYMBOL.get(good.symbol)}: {count})
+              ({t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count})
             </span>
           </div>
         ),
@@ -63,14 +64,14 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
           <div className="flex flex-col">
             <div className="font-semibold">{ship.symbol}</div>
             <div className="text-secondary text-xs">
-              {TRADE_SYMBOL.get(good.symbol)}: {count}
+              {t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count}
             </div>
           </div>
         ),
         disabled,
       })
     },
-    [good.symbol],
+    [good.symbol, t],
   )
 
   return (

@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
-import { TRADE_SYMBOL } from '@/config/constants'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type ContractDelivery, type ShipResponse } from '@/types/spacetraders'
 import { type DeliverContractSchema, validation } from './deliver-contract.validation'
@@ -31,6 +31,7 @@ export const DeliverContractForm = ({
   deliver: ContractDelivery[]
   onSubmit: (values: DeliverContractSchema) => void
 }) => {
+  const { t } = useTranslation()
   const methods = useForm<DeliverContractSchema>({
     resolver: yupResolver(validation),
   })
@@ -72,7 +73,7 @@ export const DeliverContractForm = ({
                 getItemOption={(item) => item.name}
                 options={deliver.map((item) => ({
                   symbol: item.tradeSymbol,
-                  name: TRADE_SYMBOL.get(item.tradeSymbol) ?? item.tradeSymbol,
+                  name: t(item.tradeSymbol, { ns: 'spacetraders.trade_good' }),
                 }))}
               />
             )}

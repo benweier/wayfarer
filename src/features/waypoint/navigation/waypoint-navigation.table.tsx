@@ -17,7 +17,6 @@ import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { WAYPOINT_TYPE } from '@/config/constants'
 import * as ShipActions from '@/features/ship/actions'
 import { getFuelConsumption } from '@/utilities/get-fuel-consumption.helper'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
@@ -138,7 +137,9 @@ const columns = [
 
       return (
         <div className="flex justify-start">
-          <WaypointTag type={value}>{WAYPOINT_TYPE.get(value)}</WaypointTag>
+          <WaypointTag type={value}>
+            <Translation ns="spacetraders.waypoint_type">{(t) => t(value)}</Translation>
+          </WaypointTag>
         </div>
       )
     },

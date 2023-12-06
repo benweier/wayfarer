@@ -2,7 +2,6 @@ import { type PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
-import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
@@ -48,10 +47,10 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
                   </Link>
                 </div>
                 <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-                  {SHIP_NAV_STATUS.get(ship.nav.status)}
+                  {t(ship.nav.status, { ns: 'spacetraders.nav_status' })}
                 </div>
                 <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-                  {SHIP_NAV_FLIGHT_MODE.get(ship.nav.flightMode)}
+                  {t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}
                 </div>
               </div>
               <div className="flex gap-2">

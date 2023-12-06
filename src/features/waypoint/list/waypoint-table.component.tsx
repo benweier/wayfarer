@@ -18,7 +18,6 @@ import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { WAYPOINT_TYPE } from '@/config/constants'
 import { ShipPresence } from '@/features/ship/presence'
 import { type WaypointResponse } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
@@ -167,7 +166,9 @@ const columns = [
 
       return (
         <div className="flex justify-start">
-          <WaypointTag type={value}>{WAYPOINT_TYPE.get(value)}</WaypointTag>
+          <WaypointTag type={value}>
+            <Translation ns="spacetraders.waypoint_type">{(t) => t(value)}</Translation>
+          </WaypointTag>
         </div>
       )
     },

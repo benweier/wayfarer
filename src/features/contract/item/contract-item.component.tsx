@@ -1,8 +1,8 @@
 import { useIsMutating } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
 import { type PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { CONTRACT_TYPE, TRADE_SYMBOL } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { type ContractResponse } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number'
@@ -19,6 +19,7 @@ const createUniqueSet = (items: string[]) => {
 }
 
 export const ContractItem = ({ contract, children }: PropsWithChildren<ContractItemProps>) => {
+  const { t } = useTranslation()
   const isMutating = useIsMutating({ mutationKey: ['contract', contract.id], exact: false })
 
   return (
@@ -45,14 +46,14 @@ export const ContractItem = ({ contract, children }: PropsWithChildren<ContractI
             </div>
             <div>
               <div className="text-secondary text-xs font-medium uppercase">Type</div>
-              <div className="text-sm">{CONTRACT_TYPE.get(contract.type)}</div>
+              <div className="text-sm">{t(contract.type, { ns: 'spacetraders.contract_type' })}</div>
             </div>
             {contract.type === 'PROCUREMENT' && (
               <div>
                 <div className="text-secondary text-xs font-medium uppercase">Deliver</div>
                 {contract.terms.deliver.map((delivery) => (
                   <div key={delivery.tradeSymbol} className="text-sm">
-                    {TRADE_SYMBOL.get(delivery.tradeSymbol)} x{delivery.unitsRequired}
+                    {t(delivery.tradeSymbol, { ns: 'spacetraders.trade_good' })} x{delivery.unitsRequired}
                   </div>
                 ))}
               </div>

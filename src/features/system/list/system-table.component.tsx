@@ -4,7 +4,6 @@ import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
-import { SYSTEM_TYPE } from '@/config/constants'
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
 import { ShipPresence } from '@/features/ship/presence'
 import { type SystemWaypoint, type SystemsResponse } from '@/types/spacetraders'
@@ -56,7 +55,9 @@ const columns = [
 
       return (
         <div className="flex justify-start">
-          <SystemTag type={value}>{SYSTEM_TYPE.get(value)}</SystemTag>
+          <SystemTag type={value}>
+            <Translation ns="spacetraders.system_type">{(t) => t(value)}</Translation>
+          </SystemTag>
         </div>
       )
     },

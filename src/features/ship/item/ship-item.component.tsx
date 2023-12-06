@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Card } from '@/components/card'
 import { ShipIcon } from '@/components/icons'
-import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -65,10 +64,10 @@ export const ShipItem = ({ ship }: ShipItemProps) => {
             </div>
             <div className="flex gap-x-1">
               <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-                {SHIP_NAV_STATUS.get(ship.nav.status)}
+                {t(ship.nav.status, { ns: 'spacetraders.nav_status' })}
               </div>
               <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-                {SHIP_NAV_FLIGHT_MODE.get(ship.nav.flightMode)}
+                {t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}
               </div>
               <div className="absolute inset-x-0 -bottom-1">
                 <TransitStatusPreview ship={ship} />

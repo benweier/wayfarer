@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
-import { TRADE_SYMBOL } from '@/config/constants'
 import { ShipContext } from '@/context/ship.context'
 import { TradeGoodInfo } from '@/features/trade-good/info'
 import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
@@ -21,6 +21,7 @@ export const TradeGoodBuy = ({
     </Button>
   ),
 }: TradeGoodBuyProps) => {
+  const { t } = useTranslation()
   const ship = useContext(ShipContext)
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore((state) => state.actions)
@@ -67,7 +68,7 @@ export const TradeGoodBuy = ({
     >
       <div className="space-y-8">
         <div className="text-title">
-          Buy: <span className="font-light">{TRADE_SYMBOL.get(good.symbol)}</span>
+          Buy: <span className="font-light">{t(good.symbol, { ns: 'spacetraders.trade_good' })}</span>
         </div>
 
         <TradeGoodInfo price={good.purchasePrice} volume={good.tradeVolume} supply={good.supply} />

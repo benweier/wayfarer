@@ -17,7 +17,6 @@ import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
-import { SHIP_NAV_FLIGHT_MODE, SHIP_NAV_STATUS } from '@/config/constants'
 import { ShipControls } from '@/features/ship/item/ship-item.controls'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -165,10 +164,10 @@ const columns = [
       return (
         <div className="relative flex gap-x-1">
           <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-            {SHIP_NAV_STATUS.get(row.original.ship.nav.status)}
+            <Translation ns="spacetraders.nav_status">{(t) => t(row.original.ship.nav.status)}</Translation>
           </div>
           <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-            {SHIP_NAV_FLIGHT_MODE.get(row.original.ship.nav.flightMode)}
+            <Translation ns="spacetraders.flight_mode">{(t) => t(row.original.ship.nav.flightMode)}</Translation>
           </div>
           <div className="absolute inset-x-0 -bottom-1">
             <TransitStatusPreview ship={row.original.ship} />

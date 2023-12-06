@@ -12,7 +12,6 @@ import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
-import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
@@ -80,7 +79,9 @@ const columns = [
 
       return (
         <div className="text-right">
-          <Badge>{MARKET_TRADE_GOOD_SUPPLY.get(value)}</Badge>
+          <Badge>
+            <Translation ns="spacetraders.trade_supply">{(t) => t(value)}</Translation>
+          </Badge>
         </div>
       )
     },

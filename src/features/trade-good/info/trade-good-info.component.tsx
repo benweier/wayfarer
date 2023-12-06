@@ -1,8 +1,10 @@
-import { MARKET_TRADE_GOOD_SUPPLY } from '@/config/constants'
+import { useTranslation } from 'react-i18next'
 import { formatNumber } from '@/utilities/number'
 import { type TradeGoodInfoProps } from './trade-good-info.types'
 
 export const TradeGoodInfo = ({ price, volume, supply }: TradeGoodInfoProps) => {
+  const { t } = useTranslation()
+
   return (
     <div className="flex items-center gap-12">
       <div>
@@ -17,7 +19,7 @@ export const TradeGoodInfo = ({ price, volume, supply }: TradeGoodInfoProps) => 
 
       <div>
         <div className="text-secondary text-xs font-medium uppercase">Supply</div>
-        <div className="text-base font-semibold">{MARKET_TRADE_GOOD_SUPPLY.get(supply)}</div>
+        <div className="text-base font-semibold">{t(supply, { ns: 'spacetraders.trade_supply' })}</div>
       </div>
     </div>
   )

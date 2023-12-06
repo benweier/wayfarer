@@ -1,8 +1,9 @@
 import { type PropsWithChildren } from 'react'
-import { TRADE_SYMBOL } from '@/config/constants'
+import { useTranslation } from 'react-i18next'
 import { type SurveyResponse } from '@/types/spacetraders'
 
 export const ShipSurveyItem = ({ survey, children }: PropsWithChildren<{ survey: SurveyResponse }>) => {
+  const { t } = useTranslation()
   const expiration = new Date(survey.expiration)
 
   return (
@@ -17,7 +18,7 @@ export const ShipSurveyItem = ({ survey, children }: PropsWithChildren<{ survey:
         <div className="grid grid-cols-2 gap-1 rounded bg-zinc-950/5 px-3 py-2 dark:bg-zinc-950/20">
           {survey.deposits.map((deposit, index) => (
             <div key={index} className="text-sm">
-              {TRADE_SYMBOL.get(deposit.symbol)}
+              {t(deposit.symbol, { ns: 'spacetraders.trade_good' })}
             </div>
           ))}
         </div>

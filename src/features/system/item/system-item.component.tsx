@@ -1,13 +1,15 @@
 import { type PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Card } from '@/components/card'
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
-import { SYSTEM_TYPE } from '@/config/constants'
 import { ROUTES } from '@/config/routes'
 import { type SystemItemProps } from './system-item.types'
 
 export const SystemItem = ({ system, hasShipPresence = false, children }: PropsWithChildren<SystemItemProps>) => {
+  const { t } = useTranslation()
+
   return (
     <Card className="@container/system-item">
       <div className="flex flex-col items-center justify-between gap-2 md:flex-row md:flex-wrap">
@@ -24,7 +26,7 @@ export const SystemItem = ({ system, hasShipPresence = false, children }: PropsW
               )}
             </div>
             <div className="flex flex-row items-center justify-start gap-4">
-              <SystemTag type={system.type}>{SYSTEM_TYPE.get(system.type)}</SystemTag>
+              <SystemTag type={system.type}>{t(system.type, { ns: 'spacetraders.system_type' })}</SystemTag>
               <span className="text-sm font-light">
                 ({system.x}, {system.y})
               </span>
