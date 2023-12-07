@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useSystemResponse } from '@/context/system.context'
-import { ShipItem } from '@/features/ship/item'
+import { ShipListTable } from '@/features/ship/list/ship-list.table'
 import { SystemFleetEmpty } from '@/features/system/fleet/system-fleet.empty'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
@@ -24,11 +24,5 @@ export const SystemFleet = () => {
     return <SystemFleetEmpty system={system} />
   }
 
-  return (
-    <div className="grid grid-cols-1 gap-2">
-      {ships.map((ship) => (
-        <ShipItem key={ship.symbol} ship={ship} />
-      ))}
-    </div>
-  )
+  return <ShipListTable data={ships.map((ship) => ({ ship }))} />
 }
