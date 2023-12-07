@@ -260,37 +260,35 @@ export const WaypointNavigationTable = ({ data }: WaypointNavigationTableProps) 
   })
 
   return (
-    <div className="max-w-screen space-y-4">
-      <div className="overflow-hidden rounded-xl">
-        <table className="min-w-full divide-y divide-zinc-200 dark:divide-zinc-950">
-          <thead className="bg-zinc-100 dark:bg-zinc-800">
-            {table.getHeaderGroups().map((group) => (
-              <tr key={group.id}>
-                {group.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    className="text-primary px-3 py-3.5 text-sm font-semibold"
-                    style={{ width: `${header.getSize()}px` }}
-                  >
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="divide-y divide-zinc-200 bg-zinc-100/50 dark:divide-zinc-950 dark:bg-zinc-800/50">
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="even:bg-zinc-200/10 dark:even:bg-zinc-700/10">
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="whitespace-nowrap p-3">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className="w-full max-w-full overflow-x-auto overflow-y-hidden">
+      <table className="w-full divide-y divide-zinc-200 overflow-hidden rounded-xl dark:divide-zinc-950">
+        <thead className="bg-zinc-100 dark:bg-zinc-800">
+          {table.getHeaderGroups().map((group) => (
+            <tr key={group.id}>
+              {group.headers.map((header) => (
+                <th
+                  key={header.id}
+                  className="text-primary px-3 py-3.5 text-sm font-semibold"
+                  style={{ width: `${header.getSize()}px` }}
+                >
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody className="divide-y divide-zinc-200 bg-zinc-100/50 dark:divide-zinc-950 dark:bg-zinc-800/50">
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id} className="even:bg-zinc-200/10 dark:even:bg-zinc-700/10">
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className="whitespace-nowrap p-3">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
