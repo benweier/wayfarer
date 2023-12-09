@@ -1,4 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
@@ -9,6 +10,7 @@ import { WaypointMarketTable } from './waypoint-market-table.component'
 import { WaypointMarketLayout } from './waypoint-market.layout'
 
 export const WaypointMarketList = () => {
+  const { t } = useTranslation()
   const waypoint = useWaypointResponse()
   const { data } = useSuspenseQuery({
     queryKey: getWaypointMarketQuery.getQueryKey({
@@ -29,7 +31,7 @@ export const WaypointMarketList = () => {
       imports={
         market.imports.length === 0 ? (
           <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-            <div className="text-overline text-center">No Market Imports Available</div>
+            <div className="text-overline text-center">{t('market.imports_empty')}</div>
           </div>
         ) : (
           <TradeGoodContext.Provider value={{ Sell: TradeGoodSell }}>
@@ -40,7 +42,7 @@ export const WaypointMarketList = () => {
       exports={
         market.exports.length === 0 ? (
           <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-            <div className="text-overline text-center">No Market Exports Available</div>
+            <div className="text-overline text-center">{t('market.exports_empty')}</div>
           </div>
         ) : (
           <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy }}>
@@ -51,7 +53,7 @@ export const WaypointMarketList = () => {
       exchange={
         market.exchange.length === 0 ? (
           <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-            <div className="text-overline text-center">No Market Exchanges Available</div>
+            <div className="text-overline text-center">{t('market.exchange_empty')}</div>
           </div>
         ) : (
           <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy, Sell: TradeGoodSell }}>

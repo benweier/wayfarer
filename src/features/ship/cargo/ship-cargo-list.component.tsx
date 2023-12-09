@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
@@ -18,6 +18,7 @@ import { ShipCargoLayout } from './ship-cargo.layout'
 import { type ShipCargoListProps } from './ship-cargo.types'
 
 const JettisonCargo = ({ item }: { item: CargoInventory }) => {
+  const { t } = useTranslation()
   const ship = useShipResponse()
 
   return (
@@ -26,7 +27,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
         <Modal.Trigger>
           {(props) => (
             <Button intent="danger" kind="flat" size="small" {...props}>
-              Jettison
+              {t('ship.action.jettison')}
             </Button>
           )}
         </Modal.Trigger>
@@ -53,6 +54,7 @@ const JettisonCargo = ({ item }: { item: CargoInventory }) => {
   )
 }
 const CancelModal = () => {
+  const { t } = useTranslation()
   const { closeModal } = useModalActions()
 
   return (
@@ -61,7 +63,7 @@ const CancelModal = () => {
         closeModal()
       }}
     >
-      Cancel
+      {t('general.cancel')}
     </Button>
   )
 }
@@ -98,8 +100,13 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
   if (!inventory.length) {
     return (
       <div className="flex flex-col gap-2 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-        <div className="text-secondary text-center text-sm">
-          <span className="font-bold">{ship.symbol}</span> {t('ship.no_cargo')}
+        <div className="text-secondary text-center">
+          <Trans
+            i18nKey="ship.cargo_empty"
+            components={{
+              ship_symbol: <span className="font-bold">{ship.symbol}</span>,
+            }}
+          />
         </div>
         <div className="text-center">
           <Button
@@ -142,7 +149,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                   <ShipActions.Refine ship={ship} item={produce}>
                     {(props) => (
                       <Button size="small" {...props}>
-                        Refine
+                        {t('ship.action.refine')}
                       </Button>
                     )}
                   </ShipActions.Refine>
@@ -154,7 +161,7 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                         good={good}
                         action={(props) => (
                           <Button intent="confirm" kind="flat" size="small" {...props}>
-                            Sell {`(${good.sellPrice})`}
+                            {t('ship.action.sell', { price: good.sellPrice })}
                           </Button>
                         )}
                       />

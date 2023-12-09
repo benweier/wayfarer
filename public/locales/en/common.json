@@ -54,6 +54,7 @@
   "general": {
     "wayfarer": "Wayfarer",
     "description": "A SpaceTraders API Interface",
+    "cancel": "Cancel",
     "refresh": "Refresh",
     "last_updated": {
       "relative": "Last updated {{value, formatRelativeTime}}",
@@ -96,7 +97,12 @@
     "label": "System",
     "presence_zero": "You have no ships in {{symbol}}",
     "presence_one": "You have {{count, formatNumber}} ship in {{symbol}}",
-    "presence_other": "You have {{count, formatNumber}} ships in {{symbol}}"
+    "presence_other": "You have {{count, formatNumber}} ships in {{symbol}}",
+    "fleet|empty": "You have no ships in <system_symbol />",
+    "fleet|unauthenticated": "<login_link /> to view your ships in <system_symbol />"
+  },
+  "waypoints": {
+    "label": "Waypoints"
   },
   "waypoint": {
     "label": "Waypoint",
@@ -107,10 +113,20 @@
     "navigate_ship_to_waypoint": "Navigate ship {{shipSymbol}} to waypoint {{waypointSymbol}}",
     "ship_at_waypoint": "Ship {{shipSymbol}} is at waypoint {{waypointSymbol}}",
     "view_market": "View Market at {{waypointSymbol}}",
-    "no_market": "No Market at {{waypointSymbol}}"
+    "no_market": "No Market at {{waypointSymbol}}",
+    "fleet|empty": "You have no ships at <waypoint_symbol />",
+    "fleet|unauthenticated": "<login_link /> to view your ships at <waypoint_symbol />"
   },
   "market": {
-    "label": "Market"
+    "label": "Market",
+    "imports": "Imports",
+    "imports_empty": "No imports available",
+    "exports": "Exports",
+    "exports_empty": "No exports available",
+    "exchange": "Exchange",
+    "exchange_empty": "No exchanges available",
+    "not_available_heading": "This waypoint does not have a market",
+    "not_available_text": "You can only buy and sell cargo at a waypoint with a market"
   },
   "shipyard": {
     "label": "Shipyard"
@@ -129,7 +145,7 @@
     "registration": "Registration",
     "fuel": "Fuel",
     "cargo": "Cargo",
-    "no_cargo": "has no cargo",
+    "cargo_empty": "<ship_symbol /> has no cargo",
     "crew": "Crew",
     "condition": "Condition",
     "survey_extract": "Survey/Extract",
@@ -140,6 +156,10 @@
       "docking": "Docking",
       "undock": "Undock",
       "undocking": "Undocking",
+      "jettison": "Jettison",
+      "refine": "Refine",
+      "buy": "Buy ({{price}})",
+      "sell": "Sell ({{price}})",
       "navigate": "Navigate",
       "warp": "Warp",
       "jump": "Jump",
@@ -171,6 +191,7 @@
       "remove": "Remove"
     },
     "cooldown": {
+      "label": "Cooldown",
       "active": "Cooldown active",
       "inactive": "Cooldown inactive"
     }
