@@ -6,7 +6,7 @@ const select = (response: StatusResponse) => ({
   status: response.status === 'SpaceTraders is currently online and available to play',
 })
 
-export const useSpaceTradersStatus = (): { status: 'UNKNOWN' | 'ONLINE' | 'OFFLINE'; isChecking: boolean } => {
+export const useSpaceTradersStatus = (): { status: 'unknown' | 'online' | 'offline'; isChecking: boolean } => {
   const { data, isLoading, isFetching, isSuccess, isError } = useQuery({
     queryKey: getStatusQuery.getQueryKey(),
     queryFn: getStatusQuery.queryFn,
@@ -16,12 +16,12 @@ export const useSpaceTradersStatus = (): { status: 'UNKNOWN' | 'ONLINE' | 'OFFLI
 
   return {
     status: isLoading
-      ? 'UNKNOWN'
+      ? 'unknown'
       : isSuccess && data.status
-      ? 'ONLINE'
-      : (isSuccess && !data.status) || isError
-      ? 'OFFLINE'
-      : 'UNKNOWN',
+        ? 'online'
+        : (isSuccess && !data.status) || isError
+          ? 'offline'
+          : 'unknown',
     isChecking: isFetching,
   }
 }
