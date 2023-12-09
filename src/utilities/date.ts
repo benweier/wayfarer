@@ -1,6 +1,7 @@
-export const formatRelativeTime = (value: number | Date) => {
+import { i18n } from '@/services/i18n'
+export const formatRelativeTime = (value: number | Date, lng?: string) => {
   const date = new Date(value)
-  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+  const rtf = new Intl.RelativeTimeFormat(lng, { numeric: 'auto' })
   const now = new Date().getTime()
   const diffMs = now - date.getTime()
   const diffSec = Math.floor(diffMs / 1000)
@@ -10,9 +11,9 @@ export const formatRelativeTime = (value: number | Date) => {
 
   switch (true) {
     case diffSec < 5:
-      return 'right now'
+      return i18n.t('general.right_now')
     case diffMin < 1:
-      return `a few seconds ago`
+      return i18n.t('general.seconds_ago')
     case diffHour < 1:
       return rtf.format(-diffMin, 'minute')
     case diffHour < 24:
