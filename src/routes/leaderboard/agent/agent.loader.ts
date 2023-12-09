@@ -31,8 +31,8 @@ export const loader: QueryClientLoaderFn =
 
       return defer({ agent })
     } catch (err) {
-      if (isHttpError(err, STATUS_CODES.NOT_FOUND)) {
-        throw new Response(STATUS_MESSAGES.NOT_FOUND, { status: STATUS_CODES.NOT_FOUND })
+      if (isHttpError(err)) {
+        throw new Response(err.statusText, { status: err.status })
       }
 
       throw new Response(STATUS_MESSAGES.INTERNAL_SERVER_ERROR, { status: STATUS_CODES.INTERNAL_SERVER_ERROR })
