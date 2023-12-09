@@ -19,14 +19,50 @@
     "close_sidebar": "Close sidebar"
   },
   "auth": {
-    "login": "Log in",
-    "logout": "Log out"
+    "login_heading": "Agent Identification",
+    "login|action": "Log in",
+    "login|text": "Log in with token",
+    "logout|action": "Log out",
+    "register_heading": "New Agent Registration",
+    "register|action": "Register",
+    "register|text": "Register a new agent",
+    "not_registered": "Don't have an access token? <register_link />",
+    "already_registered": "Already have an access token? <login_link />",
+    "support|href": "https://donate.stripe.com/28o29m5vxcri6OccMM",
+    "support|text": "SpaceTraders Project",
+    "fields": {
+      "agent_symbol": {
+        "label": "Agent Symbol",
+        "hint": "Your symbol is not required to login, but may be useful with password managers if you have multiple accounts"
+      },
+      "email": {
+        "label": "Email",
+        "hint": "If you have reserved your agent symbol by supporting the <support_link />, enter the email address you used to reserve it"
+      },
+      "faction": {
+        "label": "Faction"
+      },
+      "access_token": {
+        "label": "Access Token"
+      }
+    },
+    "validation": {
+      "invalid_token": "Invalid token",
+      "access_token_required": "Access token is required"
+    }
   },
   "general": {
+    "wayfarer": "Wayfarer",
+    "description": "A SpaceTraders API Interface",
     "refresh": "Refresh",
     "last_updated": {
       "relative": "Last updated {{value, formatRelativeTime}}",
       "absolute": "Last updated {{value, formatDateTime}}"
+    },
+    "status": {
+      "online": "Online",
+      "offline": "Offline",
+      "unknown": "Unknown"
     },
     "header": {
       "symbol": "Symbol",
@@ -46,6 +82,9 @@
       "fuel": "Fuel",
       "cargo": "Cargo",
       "actions": "Actions"
+    },
+    "fields": {
+      "optional": "(optional)"
     }
   },
   "systems": {
@@ -79,6 +118,9 @@
   },
   "fleet": {
     "label": "Fleet"
+  },
+  "faction": {
+    "label": "Faction"
   },
   "ship": {
     "label": "Ship",

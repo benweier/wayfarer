@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
+import { Trans, useTranslation } from 'react-i18next'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { ROUTES } from '@/config/routes'
@@ -11,6 +12,7 @@ import { useAuthStore } from '@/store/auth'
 import { type LoginSchema, loginValidation } from './login.validation'
 
 export const Login = () => {
+  const { t } = useTranslation()
   const loc = useLocation()
   const { signin } = useAuthStore((state) => state.actions)
   const result = loginValidation.safeParse(loc.state)
@@ -28,7 +30,7 @@ export const Login = () => {
       if (err.status === 401) {
         methods.setError('token', {
           type: 'manual',
-          message: 'Invalid token',
+          message: t('auth.validation.invalid_token'),
         })
       }
     },
@@ -37,23 +39,20 @@ export const Login = () => {
 
   return (
     <div className="grid gap-4">
-      <div className="text-overline text-center">Agent Identification</div>
+      <div className="text-overline text-center">{t('auth.login_heading')}</div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 gap-8">
             <div>
               <label className="label" htmlFor="symbol">
-                Agent Symbol
+                {t('auth.fields.agent_symbol.label')}
               </label>
               <input id="symbol" {...methods.register('symbol')} className="input" type="text" />
-              <div className="text-hint mt-1">
-                Your symbol is not required to login, but may be useful with password managers if you have multiple
-                accounts
-              </div>
+              <div className="text-hint mt-1">{t('auth.fields.agent_symbol.hint')}</div>
             </div>
             <div>
               <label className="label" htmlFor="token">
-                Access Token
+                {t('auth.fields.access_token.label')}
               </label>
               <input
                 id="token"
@@ -68,19 +67,25 @@ export const Login = () => {
               <ErrorMessage
                 errors={methods.formState.errors}
                 name="token"
-                render={({ message }) => <div className="text-hint text-rose-400">{message}</div>}
+                render={({ message }) => <div className="text-hint text-rose-400">{t(message)}</div>}
               />
             </div>
-            <div className="grid gap-4">
-              <Button intent="hero" type="submit" disabled={isPending}>
-                Log In
-              </Button>
-              <div className="text-caption text-center">
-                Don&apos;t have an access token?&nbsp;
-                <Link className="link" to={ROUTES.REGISTER}>
-                  Register a new agent
-                </Link>
-              </div>
+
+            <Button intent="hero" type="submit" disabled={isPending}>
+              {t('auth.login', { context: 'action' })}
+            </Button>
+
+            <div className="text-caption text-center">
+              <Trans
+                i18nKey="auth.not_registered"
+                components={{
+                  register_link: (
+                    <Link className="link" to={ROUTES.REGISTER}>
+                      {t('auth.register', { context: 'text' })}
+                    </Link>
+                  ),
+                }}
+              />
             </div>
           </div>
         </form>

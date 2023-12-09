@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
+import { Trans, useTranslation } from 'react-i18next'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
@@ -15,19 +16,27 @@ import { FactionInfo } from './faction-info.component'
 import { type RegisterSchema, registerValidation } from './register.validation'
 
 const AlreadyRegistered = ({ token }: { token?: string }) => {
+  const { t } = useTranslation()
   const { control } = useFormContext<RegisterSchema>()
   const symbol = useWatch({ control, name: 'symbol' })
 
   return (
     <div className="text-caption text-center">
-      Already have an access token?&nbsp;
-      <Link className="link" to={ROUTES.LOGIN} state={{ symbol, token }}>
-        Log in
-      </Link>
+      <Trans
+        i18nKey="auth.already_registered"
+        components={{
+          login_link: (
+            <Link className="link" to={ROUTES.LOGIN} state={{ symbol, token }}>
+              {t('auth.login', { context: 'text' })}
+            </Link>
+          ),
+        }}
+      />
     </div>
   )
 }
 const FactionField = () => {
+  const { t } = useTranslation()
   const methods = useFormContext<RegisterSchema>()
   const { isSuccess, isPending, data } = useQuery({
     queryKey: getFactionListQuery.getQueryKey(),
@@ -35,7 +44,7 @@ const FactionField = () => {
   })
 
   if (isPending) {
-    return <Select.Skeleton label={<label className="label">Faction</label>} />
+    return <Select.Skeleton label={<label className="label">{t('faction.label')}</label>} />
   }
 
   if (!isSuccess) return null
@@ -53,7 +62,7 @@ const FactionField = () => {
       name="faction"
       render={({ field }) => (
         <Select.Field
-          label={<Select.Label>Faction</Select.Label>}
+          label={<Select.Label>{t('faction.label')}</Select.Label>}
           by={(a, z) => a?.id === z?.id}
           getItemKey={(item) => item.id}
           getItemLabel={(item) => item?.name}
@@ -69,6 +78,7 @@ const FactionField = () => {
 }
 
 export const Register = () => {
+  const { t } = useTranslation()
   const loc = useLocation()
   const result = registerSchema.safeParse(loc.state)
   const methods = useForm<RegisterSchema>({
@@ -83,13 +93,13 @@ export const Register = () => {
 
   return (
     <div className="grid gap-4">
-      <div className="text-overline text-center">New Agent Registration</div>
+      <div className="text-overline text-center">{t('auth.register_heading')}</div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
             <div>
               <label className="label" htmlFor="symbol">
-                Agent Symbol
+                {t('auth.fields.agent_symbol.label')}
               </label>
               <input
                 id="symbol"
@@ -103,20 +113,26 @@ export const Register = () => {
 
             <div>
               <label className="label" htmlFor="email">
-                Email <span className="text-secondary text-xs">(optional)</span>
+                {t('auth.fields.email.label')}{' '}
+                <span className="text-secondary text-xs">{t('general.fields.optional')}</span>
               </label>
               <input id="email" {...methods.register('email')} className="input" type="email" autoComplete="off" />
               <div className="text-hint mt-1">
-                If you have reserved your agent symbol by supporting the{' '}
-                <a
-                  href="https://donate.stripe.com/28o29m5vxcri6OccMM"
-                  target="_blank"
-                  className="link"
-                  rel="noreferrer noopener"
-                >
-                  SpaceTraders project
-                </a>
-                , enter the email address you used to reserve it.
+                <Trans
+                  i18nKey="auth.fields.email.hint"
+                  components={{
+                    support_link: (
+                      <a
+                        href={t('auth.support', { context: 'href' })}
+                        target="_blank"
+                        className="link"
+                        rel="noreferrer noopener"
+                      >
+                        {t('auth.support', { context: 'text' })}
+                      </a>
+                    ),
+                  }}
+                />
               </div>
             </div>
 
@@ -129,7 +145,7 @@ export const Register = () => {
             </QuerySuspenseBoundary>
 
             <Button intent="hero" disabled={isPending} type="submit">
-              Register
+              {t('auth.register', { context: 'action' })}
             </Button>
             <div className="grid gap-4">
               <AlreadyRegistered token={agent?.token} />
