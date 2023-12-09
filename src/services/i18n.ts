@@ -37,6 +37,7 @@ void i18n
       'spacetraders.waypoint_type',
     ],
     defaultNS: 'common',
+    contextSeparator: '|',
     interpolation: {
       escapeValue: false,
     },
