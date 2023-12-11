@@ -60,9 +60,11 @@ export const TradeGoodSell = ({
   const noCargo = Boolean(
     ship &&
       ship.cargo.inventory.find((cargo) => {
-        return cargo.symbol === good.symbol && cargo.units > 0
+        return cargo.symbol === good?.symbol && cargo.units > 0
       }) === undefined,
   )
+
+  if (!good) return null
 
   return (
     <Modal

@@ -59,6 +59,8 @@ export const TradeGoodBuy = ({
   })
   const noCargo = Boolean(ship && ship.cargo.units === ship.cargo.capacity)
 
+  if (!good) return null
+
   return (
     <Modal
       ref={ref}

@@ -3,7 +3,7 @@ import { type MarketTradeGood, type ShipResponse } from '@/types/spacetraders'
 import { type TradeGoodBuySchema } from './trade-good-buy.validation'
 
 export type TradeGoodBuyProps = {
-  good: MarketTradeGood
+  good?: MarketTradeGood
   action?: (props: ButtonHTMLAttributes<HTMLButtonElement>) => ReactNode
 }
 
