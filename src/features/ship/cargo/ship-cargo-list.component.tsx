@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { Modal, useModalActions } from '@/components/modal'
-import { REFINE_ITEM_TYPE, SHIP_MOUNT_TYPE } from '@/config/constants'
 import { useShipResponse } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
@@ -128,15 +127,13 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
   return (
     <ShipCargoLayout>
       {inventory.map((item) => {
-        const mount = SHIP_MOUNT_TYPE.has(item.symbol)
-        const produce = REFINE_ITEM_TYPE.get(item.symbol)
         const good = data?.goods?.get(item.symbol)
 
         return (
           <Fragment key={item.symbol}>
             <Item item={item}>
               <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
-                {mount && (
+                {item.symbol.startsWith('MOUNT_') && (
                   <ShipActions.InstallMount ship={ship} mountSymbol={item.symbol}>
                     {(props) => (
                       <Button intent="primary" size="small" {...props}>
@@ -145,8 +142,8 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
                     )}
                   </ShipActions.InstallMount>
                 )}
-                {produce && (
-                  <ShipActions.Refine ship={ship} item={produce}>
+                {item.symbol.endsWith('_ORE') && (
+                  <ShipActions.Refine ship={ship} item={item.symbol}>
                     {(props) => (
                       <Button size="small" {...props}>
                         {t('ship.action.refine')}
