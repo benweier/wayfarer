@@ -1,3 +1,4 @@
+import * as Tooltip from '@radix-ui/react-tooltip'
 import {
   type SortingState,
   createColumnHelper,
@@ -81,8 +82,23 @@ const columns = [
     {
       id: 'market_value',
       header: () => (
-        <div className="text-right">
-          <Translation>{(t) => t('general.header.market_value')}</Translation>
+        <div className="flex items-center justify-end gap-2">
+          <Translation>{(t) => <div>{t('general.header.market_value')}</div>}</Translation>
+
+          <Tooltip.Provider delayDuration={100}>
+            <Tooltip.Root>
+              <Tooltip.Trigger asChild>
+                <button>
+                  <AppIcon id="help" className="text-secondary h-5 w-5" />
+                </button>
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Content className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800" sideOffset={5}>
+                  <Translation>{(t) => t('ship.cargo_market_value_tooltip')}</Translation>
+                </Tooltip.Content>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+          </Tooltip.Provider>
         </div>
       ),
       cell: ({ getValue }) => {
