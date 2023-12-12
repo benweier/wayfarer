@@ -31,7 +31,7 @@ const Logout = () => {
       <div className="h-6 w-6">
         <MenuIcon id="logout" className="h-6 w-6" aria-hidden />
       </div>
-      <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.logout')}</span>
+      <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.logout', { context: 'action' })}</span>
     </button>
   )
 }
