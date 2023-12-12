@@ -1,95 +1,39 @@
 import { useQuery } from '@tanstack/react-query'
-import { Fragment } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/button'
-import { AppIcon } from '@/components/icons'
-import { Modal, useModalActions } from '@/components/modal'
 import { useShipResponse } from '@/context/ship.context'
 import { SystemContext } from '@/context/system.context'
 import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
-import * as ShipActions from '@/features/ship/actions'
+import { ShipCargoTable } from '@/features/ship/cargo/ship-cargo-table.component'
+import { TradeGoodBuy } from '@/features/trade-good/buy'
+import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
-import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
-import { ShipCargoItem } from './ship-cargo-item.component'
-import { ShipCargoLayout } from './ship-cargo.layout'
-import { type ShipCargoListProps } from './ship-cargo.types'
+import { type MarketTradeGood } from '@/types/spacetraders'
 
-const JettisonCargo = ({ item }: { item: CargoInventory }) => {
-  const { t } = useTranslation()
-  const ship = useShipResponse()
-
-  return (
-    <Modal
-      trigger={
-        <Modal.Trigger>
-          {(props) => (
-            <Button intent="danger" kind="flat" size="small" {...props}>
-              {t('ship.action.jettison')}
-            </Button>
-          )}
-        </Modal.Trigger>
-      }
-    >
-      <div className="grid gap-8">
-        <div className="text-title">Are you sure?</div>
-        <div>
-          Destroy {item.name} x{item.units}
-        </div>
-        <div className="flex gap-2">
-          <CancelModal />
-          <ShipActions.Jettison ship={ship} symbol={item.symbol} units={item.units}>
-            {(props) => (
-              <button className="btn btn-danger flex w-full items-center gap-3" {...props}>
-                <AppIcon id="trash" className="h-5 w-5" />
-                <span>Confirm Jettison</span>
-              </button>
-            )}
-          </ShipActions.Jettison>
-        </div>
-      </div>
-    </Modal>
-  )
-}
-const CancelModal = () => {
-  const { t } = useTranslation()
-  const { closeModal } = useModalActions()
-
-  return (
-    <Button
-      onClick={() => {
-        closeModal()
-      }}
-    >
-      {t('general.cancel')}
-    </Button>
-  )
-}
-
-export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
+export const ShipCargoList = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const ship = useShipResponse()
   const waypoint = useWaypointResponse()
   const hasMarketplace = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
-  const { data } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: getWaypointMarketQuery.getQueryKey({
       systemSymbol: ship.nav.systemSymbol,
       waypointSymbol: ship.nav.waypointSymbol,
     }),
     queryFn: getWaypointMarketQuery.queryFn,
     select: (response) => {
-      const market = [...response.data.imports, ...response.data.exports, ...response.data.exchange]
-      const goods = response.data.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
+      const trade = response.data.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
         result.set(item.symbol, item)
 
         return result
       }, new Map())
 
       return {
-        market: new Map(market.map((item) => [item.symbol, item])),
-        goods,
+        market: response.data,
+        trade,
       }
     },
     enabled: hasMarketplace,
@@ -125,52 +69,38 @@ export const ShipCargoList = ({ Item = ShipCargoItem }: ShipCargoListProps) => {
   }
 
   return (
-    <ShipCargoLayout>
-      {inventory.map((item) => {
-        const good = data?.goods?.get(item.symbol)
+    <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
+      <WaypointContext.Provider value={{ waypointSymbol: ship.nav.waypointSymbol }}>
+        <TradeGoodContext.Provider
+          value={{
+            Buy: TradeGoodBuy,
+            Sell: TradeGoodSell,
+            canBuy(good) {
+              const hasExport =
+                isSuccess && data.market.exports.findIndex((item) => item.symbol === good?.symbol) !== -1
+              const hasExchange =
+                isSuccess && data.market.exchange.findIndex((item) => item.symbol === good?.symbol) !== -1
 
-        return (
-          <Fragment key={item.symbol}>
-            <Item item={item}>
-              <div className="flex flex-wrap justify-end gap-x-2 gap-y-1 @[600px]:justify-start">
-                {item.symbol.startsWith('MOUNT_') && (
-                  <ShipActions.InstallMount ship={ship} mountSymbol={item.symbol}>
-                    {(props) => (
-                      <Button intent="primary" size="small" {...props}>
-                        {t('ship.action.install')}
-                      </Button>
-                    )}
-                  </ShipActions.InstallMount>
-                )}
-                {item.symbol.endsWith('_ORE') && (
-                  <ShipActions.Refine ship={ship} item={item.symbol}>
-                    {(props) => (
-                      <Button size="small" {...props}>
-                        {t('ship.action.refine')}
-                      </Button>
-                    )}
-                  </ShipActions.Refine>
-                )}
-                {good !== undefined && (
-                  <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
-                    <WaypointContext.Provider value={{ waypointSymbol: ship.nav.waypointSymbol }}>
-                      <TradeGoodSell
-                        good={good}
-                        action={(props) => (
-                          <Button intent="confirm" kind="flat" size="small" {...props}>
-                            {t('ship.action.sell', { price: good.sellPrice })}
-                          </Button>
-                        )}
-                      />
-                    </WaypointContext.Provider>
-                  </SystemContext.Provider>
-                )}
-                <JettisonCargo item={item} />
-              </div>
-            </Item>
-          </Fragment>
-        )
-      })}
-    </ShipCargoLayout>
+              return hasExport || hasExchange
+            },
+            canSell(good) {
+              const hasImport =
+                isSuccess && data.market.imports.findIndex((item) => item.symbol === good?.symbol) !== -1
+              const hasExchange =
+                isSuccess && data.market.exchange.findIndex((item) => item.symbol === good?.symbol) !== -1
+
+              return hasImport || hasExchange
+            },
+          }}
+        >
+          <ShipCargoTable
+            data={inventory.map((item) => ({
+              item,
+              trade: data?.trade?.get(item.symbol),
+            }))}
+          />
+        </TradeGoodContext.Provider>
+      </WaypointContext.Provider>
+    </SystemContext.Provider>
   )
 }
