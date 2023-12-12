@@ -305,9 +305,9 @@ const columns = [
     },
     cell: ({ row }) => {
       return (
-        <>
+        <div className="text-right">
           <ShipControls ship={row.original.ship} />
-        </>
+        </div>
       )
     },
     minSize: 5,
