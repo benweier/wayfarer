@@ -8,12 +8,20 @@
   }
 }
 
-.btn-icon {
-  @apply py-1.5 px-2;
+.btn-adornment {
+  @apply flex items-center gap-2;
+
+  & > .adornment-start {
+    @apply -ml-0.5;
+  }
+
+  & > .adornment-end {
+    @apply -mr-0.5;
+  }
 }
 
-.btn-adornment {
-  @apply flex items-center gap-3;
+.btn-icon {
+  @apply py-1.5 px-2;
 }
 
 .btn-primary {
