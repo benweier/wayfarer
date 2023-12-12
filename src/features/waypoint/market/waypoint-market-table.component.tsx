@@ -40,15 +40,22 @@ const columns = [
         </div>
       )
     },
-    cell: ({ getValue }) => {
-      return <>{getValue()}</>
+    cell: ({ getValue, row }) => {
+      return (
+        <>
+          <div>{getValue()}</div>
+          <div className="text-secondary whitespace-pre-wrap text-sm">{row.original.good.description}</div>
+        </>
+      )
     },
     enableSorting: true,
+    minSize: 30,
+    maxSize: 30,
   }),
   columnHelper.accessor((row) => row.trade?.tradeVolume, {
     id: 'trade_volume',
     header: () => (
-      <div className="text-right">
+      <div className="whitespace-nowrap text-right">
         <Translation>{(t) => t('general.header.trade_volume')}</Translation>
       </div>
     ),
@@ -62,6 +69,8 @@ const columns = [
       return <div className="text-right text-sm">{formatNumber(value)}</div>
     },
     enableSorting: false,
+    minSize: 15,
+    maxSize: 15,
   }),
   columnHelper.accessor((row) => row.trade?.supply, {
     id: 'supply',
@@ -86,6 +95,8 @@ const columns = [
       )
     },
     enableSorting: false,
+    minSize: 15,
+    maxSize: 15,
   }),
   columnHelper.accessor((row) => row.trade?.purchasePrice, {
     id: 'purchase_price',
@@ -94,7 +105,9 @@ const columns = [
 
       return (
         <div className="flex items-center justify-end gap-2 text-right">
-          <Translation>{(t) => <div>{t('general.header.purchase_price')}</div>}</Translation>
+          <Translation>
+            {(t) => <div className="whitespace-nowrap">{t('general.header.purchase_price')}</div>}
+          </Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -132,6 +145,8 @@ const columns = [
     },
     enableSorting: true,
     sortDescFirst: false,
+    minSize: 20,
+    maxSize: 20,
   }),
   columnHelper.accessor((row) => row.trade?.sellPrice, {
     id: 'sell_price',
@@ -140,7 +155,7 @@ const columns = [
 
       return (
         <div className="flex items-center justify-end gap-2 text-right">
-          <Translation>{(t) => <div>{t('general.header.sell_price')}</div>}</Translation>
+          <Translation>{(t) => <div className="whitespace-nowrap">{t('general.header.sell_price')}</div>}</Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -178,6 +193,8 @@ const columns = [
     },
     enableSorting: true,
     sortDescFirst: false,
+    minSize: 20,
+    maxSize: 20,
   }),
 ]
 
@@ -199,7 +216,12 @@ export const WaypointMarketTable = ({ data }: { data: Array<{ good: MarketGood; 
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} scope="col" className="text-primary px-3 py-3.5 text-left text-sm font-semibold">
+                <th
+                  key={header.id}
+                  scope="col"
+                  className="text-primary px-3 py-3.5 text-left text-sm font-semibold"
+                  style={{ width: `${header.getSize()}%` }}
+                >
                   {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
