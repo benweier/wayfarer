@@ -9,10 +9,13 @@ export const Jettison = ({
   ship,
   symbol,
   units,
+  disabled = false,
+  onDone,
   children,
 }: ShipActionProps<{
   symbol: string
   units: number
+  onDone?: () => void
 }>) => {
   const client = useQueryClient()
   const { mutate, isPending } = useMutation({
@@ -40,10 +43,13 @@ export const Jettison = ({
         )
       }
     },
+    onSettled: () => {
+      onDone?.()
+    },
   })
 
   return children({
-    disabled: isPending,
+    disabled: disabled || isPending,
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, itemSymbol: symbol, units })
     },
