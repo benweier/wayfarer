@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
 import { WaypointStore } from '@/context/waypoint.context'
-import { ShipCargoError, ShipCargoFallback, ShipCargoList, ShipCargoPreferences } from '@/features/ship/cargo'
+import { ShipCargoError, ShipCargoFallback, ShipCargoList } from '@/features/ship/cargo'
 import { ShipLoadoutList } from '@/features/ship/loadout'
 import { ShipSurveyExtract } from '@/features/ship/survey-extract'
 
@@ -22,15 +22,11 @@ export const ShipTabs = () => {
 
       <Tab.Panels>
         <Tab.Panel>
-          <div className="grid gap-4">
-            <ShipCargoPreferences />
-
-            <QuerySuspenseBoundary fallback={<ShipCargoFallback />} error={<ShipCargoError />}>
-              <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
-                <ShipCargoList />
-              </WaypointStore>
-            </QuerySuspenseBoundary>
-          </div>
+          <QuerySuspenseBoundary fallback={<ShipCargoFallback />} error={<ShipCargoError />}>
+            <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
+              <ShipCargoList />
+            </WaypointStore>
+          </QuerySuspenseBoundary>
         </Tab.Panel>
 
         <Tab.Panel>
