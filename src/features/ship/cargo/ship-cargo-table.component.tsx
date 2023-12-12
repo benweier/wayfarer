@@ -12,6 +12,7 @@ import { useState } from 'react'
 import { Translation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
+import { ShipCargoItemControls } from '@/features/ship/cargo/ship-cargo-item.controls'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
@@ -49,8 +50,8 @@ const columns = [
       )
     },
     enableSorting: true,
-    minSize: 30,
-    maxSize: 30,
+    minSize: 35,
+    maxSize: 35,
   }),
   columnHelper.accessor((row) => row.item.units, {
     id: 'quantity',
@@ -218,6 +219,21 @@ const columns = [
     sortDescFirst: false,
     minSize: 15,
     maxSize: 15,
+  }),
+  columnHelper.display({
+    id: 'actions',
+    header: () => {
+      return <></>
+    },
+    cell: ({ row }) => {
+      return (
+        <div className="text-right">
+          <ShipCargoItemControls item={row.original.item} />
+        </div>
+      )
+    },
+    minSize: 5,
+    maxSize: 5,
   }),
 ]
 
