@@ -39,10 +39,17 @@ const columns = [
         </div>
       )
     },
-    cell: ({ getValue }) => {
-      return <>{getValue()}</>
+    cell: ({ getValue, row }) => {
+      return (
+        <>
+          <div>{getValue()}</div>
+          <div className="text-secondary whitespace-pre-wrap text-sm">{row.original.item.description}</div>
+        </>
+      )
     },
     enableSorting: true,
+    minSize: 30,
+    maxSize: 30,
   }),
   columnHelper.accessor((row) => row.item.units, {
     id: 'quantity',
@@ -57,6 +64,8 @@ const columns = [
       return <div className="text-right">{formatNumber(value)}</div>
     },
     enableSorting: false,
+    minSize: 15,
+    maxSize: 15,
   }),
   columnHelper.accessor(
     (row) => {
@@ -70,10 +79,10 @@ const columns = [
       return units * sell
     },
     {
-      id: 'total_value',
+      id: 'market_value',
       header: () => (
         <div className="text-right">
-          <Translation>{(t) => t('general.header.total_value')}</Translation>
+          <Translation>{(t) => t('general.header.market_value')}</Translation>
         </div>
       ),
       cell: ({ getValue }) => {
@@ -86,6 +95,8 @@ const columns = [
         return <div className="text-right">{formatNumber(value)}</div>
       },
       enableSorting: false,
+      minSize: 15,
+      maxSize: 15,
     },
   ),
   columnHelper.accessor((row) => row.trade?.purchasePrice, {
@@ -95,7 +106,9 @@ const columns = [
 
       return (
         <div className="flex items-center justify-end gap-2 text-right">
-          <Translation>{(t) => <div>{t('general.header.purchase_price')}</div>}</Translation>
+          <Translation>
+            {(t) => <div className="whitespace-nowrap">{t('general.header.purchase_price')}</div>}
+          </Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -125,7 +138,7 @@ const columns = [
               return (
                 <>
                   <div className={cx('text-sm', { 'text-secondary': !ctx.Buy || !canBuy })}>{formatNumber(value)}</div>
-                  {ctx.Buy !== undefined && canBuy && <ctx.Buy good={row.original.trade} />}
+                  {ctx.Buy && canBuy && <ctx.Buy good={row.original.trade} />}
                 </>
               )
             }}
@@ -135,6 +148,8 @@ const columns = [
     },
     enableSorting: true,
     sortDescFirst: false,
+    minSize: 15,
+    maxSize: 15,
   }),
   columnHelper.accessor((row) => row.trade?.sellPrice, {
     id: 'sell_price',
@@ -143,7 +158,7 @@ const columns = [
 
       return (
         <div className="flex items-center justify-end gap-2 text-right">
-          <Translation>{(t) => <div>{t('general.header.sell_price')}</div>}</Translation>
+          <Translation>{(t) => <div className="whitespace-nowrap">{t('general.header.sell_price')}</div>}</Translation>
           <div>
             <Button
               intent={sorted === false ? 'dim' : 'primary'}
@@ -175,7 +190,7 @@ const columns = [
                   <div className={cx('text-sm', { 'text-secondary': !ctx.Sell || !canSell })}>
                     {formatNumber(value)}
                   </div>
-                  {ctx.Sell !== undefined && canSell && <ctx.Sell good={row.original.trade} />}
+                  {ctx.Sell && canSell && <ctx.Sell good={row.original.trade} />}
                 </>
               )
             }}
@@ -185,6 +200,8 @@ const columns = [
     },
     enableSorting: true,
     sortDescFirst: false,
+    minSize: 15,
+    maxSize: 15,
   }),
 ]
 
@@ -206,7 +223,12 @@ export const ShipCargoTable = ({ data }: { data: Array<{ item: CargoInventory; t
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} scope="col" className="text-primary px-3 py-3.5 text-left text-sm font-semibold">
+                <th
+                  key={header.id}
+                  scope="col"
+                  className="text-primary px-3 py-3.5 text-left text-sm font-semibold"
+                  style={{ width: `${header.getSize()}%` }}
+                >
                   {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
