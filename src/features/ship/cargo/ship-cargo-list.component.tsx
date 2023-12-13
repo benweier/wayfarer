@@ -3,8 +3,7 @@ import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
-import { SystemContext } from '@/context/system.context'
-import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
+import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipCargoTable } from '@/features/ship/cargo/ship-cargo-table.component'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
@@ -69,38 +68,30 @@ export const ShipCargoList = () => {
   }
 
   return (
-    <SystemContext.Provider value={{ systemSymbol: ship.nav.systemSymbol }}>
-      <WaypointContext.Provider value={{ waypointSymbol: ship.nav.waypointSymbol }}>
-        <TradeGoodContext.Provider
-          value={{
-            Buy: TradeGoodBuy,
-            Sell: TradeGoodSell,
-            canBuy(good) {
-              const hasExport =
-                isSuccess && data.market.exports.findIndex((item) => item.symbol === good?.symbol) !== -1
-              const hasExchange =
-                isSuccess && data.market.exchange.findIndex((item) => item.symbol === good?.symbol) !== -1
+    <TradeGoodContext.Provider
+      value={{
+        Buy: TradeGoodBuy,
+        Sell: TradeGoodSell,
+        canBuy(good) {
+          const hasExport = isSuccess && data.market.exports.findIndex((item) => item.symbol === good?.symbol) !== -1
+          const hasExchange = isSuccess && data.market.exchange.findIndex((item) => item.symbol === good?.symbol) !== -1
 
-              return hasExport || hasExchange
-            },
-            canSell(good) {
-              const hasImport =
-                isSuccess && data.market.imports.findIndex((item) => item.symbol === good?.symbol) !== -1
-              const hasExchange =
-                isSuccess && data.market.exchange.findIndex((item) => item.symbol === good?.symbol) !== -1
+          return hasExport || hasExchange
+        },
+        canSell(good) {
+          const hasImport = isSuccess && data.market.imports.findIndex((item) => item.symbol === good?.symbol) !== -1
+          const hasExchange = isSuccess && data.market.exchange.findIndex((item) => item.symbol === good?.symbol) !== -1
 
-              return hasImport || hasExchange
-            },
-          }}
-        >
-          <ShipCargoTable
-            data={inventory.map((item) => ({
-              item,
-              trade: data?.trade?.get(item.symbol),
-            }))}
-          />
-        </TradeGoodContext.Provider>
-      </WaypointContext.Provider>
-    </SystemContext.Provider>
+          return hasImport || hasExchange
+        },
+      }}
+    >
+      <ShipCargoTable
+        data={inventory.map((item) => ({
+          item,
+          trade: data?.trade?.get(item.symbol),
+        }))}
+      />
+    </TradeGoodContext.Provider>
   )
 }

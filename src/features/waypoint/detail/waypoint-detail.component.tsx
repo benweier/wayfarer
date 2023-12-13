@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { SystemContext } from '@/context/system.context'
-import { WaypointContext, useWaypointResponse } from '@/context/waypoint.context'
+import { useWaypointResponse } from '@/context/waypoint.context'
 
 export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation()
@@ -56,9 +55,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
         </div>
       )}
 
-      <SystemContext.Provider value={{ systemSymbol: waypoint.systemSymbol }}>
-        <WaypointContext.Provider value={{ waypointSymbol: waypoint.symbol }}>{children}</WaypointContext.Provider>
-      </SystemContext.Provider>
+      {children}
     </div>
   )
 }
