@@ -5,7 +5,7 @@ import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
-import { type MarketTradeGood } from '@/types/spacetraders'
+import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { WaypointMarketTable } from './waypoint-market-table.component'
 import { WaypointMarketLayout } from './waypoint-market.layout'
 
@@ -20,11 +20,7 @@ export const WaypointMarketList = () => {
     queryFn: getWaypointMarketQuery.queryFn,
   })
   const market = data.data
-  const tradeGoods = market.tradeGoods?.reduce<Map<string, MarketTradeGood>>((result, item) => {
-    result.set(item.symbol, item)
-
-    return result
-  }, new Map())
+  const tradeGoods = reduceArrayToMap(data.data.tradeGoods, 'symbol')
 
   return (
     <WaypointMarketLayout
@@ -35,7 +31,7 @@ export const WaypointMarketList = () => {
           </div>
         ) : (
           <TradeGoodContext.Provider value={{ Sell: TradeGoodSell }}>
-            <WaypointMarketTable data={market.imports.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
+            <WaypointMarketTable data={market.imports.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
           </TradeGoodContext.Provider>
         )
       }
@@ -46,7 +42,7 @@ export const WaypointMarketList = () => {
           </div>
         ) : (
           <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy }}>
-            <WaypointMarketTable data={market.exports.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))} />
+            <WaypointMarketTable data={market.exports.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
           </TradeGoodContext.Provider>
         )
       }
@@ -57,9 +53,7 @@ export const WaypointMarketList = () => {
           </div>
         ) : (
           <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy, Sell: TradeGoodSell }}>
-            <WaypointMarketTable
-              data={market.exchange.map((good) => ({ good, trade: tradeGoods?.get(good.symbol) }))}
-            />
+            <WaypointMarketTable data={market.exchange.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
           </TradeGoodContext.Provider>
         )
       }
