@@ -57,12 +57,11 @@ export const TradeGoodSell = ({
       modal.close()
     },
   })
-  const noCargo = Boolean(
-    ship &&
-      ship.cargo.inventory.find((cargo) => {
-        return cargo.symbol === good?.symbol && cargo.units > 0
-      }) === undefined,
-  )
+  const noCargo =
+    ship !== undefined &&
+    ship.cargo.inventory.find((cargo) => {
+      return cargo.symbol === good?.symbol && cargo.units > 0
+    }) === undefined
 
   if (!good) return null
 

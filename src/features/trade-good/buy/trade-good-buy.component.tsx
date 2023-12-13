@@ -57,7 +57,7 @@ export const TradeGoodBuy = ({
       modal.close()
     },
   })
-  const noCargo = Boolean(ship && ship.cargo.units === ship.cargo.capacity)
+  const noCargo = ship !== undefined && ship.cargo.units === ship.cargo.capacity
 
   if (!good) return null
 
