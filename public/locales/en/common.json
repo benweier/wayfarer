@@ -51,6 +51,18 @@
       "access_token_required": "Access token is required"
     }
   },
+  "leaderboard": {
+    "label": "Leaderboard",
+    "most_credits": "Most Credits",
+    "most_charted": "Most Charted Waypoints"
+  },
+  "agent": {
+    "label": "Agent",
+    "credits": "Credits",
+    "headquarters": "Headquarters",
+    "starting_faction": "Starting Faction",
+    "total_ship_count": "Total Ship Count"
+  },
   "general": {
     "wayfarer": "Wayfarer",
     "description": "A SpaceTraders API Interface",

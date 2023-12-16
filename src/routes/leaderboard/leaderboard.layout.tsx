@@ -1,14 +1,17 @@
 import { type PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Outlet } from 'react-router-dom'
 import { AppIcon } from '@/components/icons'
 import { Wayfarer } from '@/components/wayfarer'
 
 export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
+  const { t } = useTranslation()
+
   return (
     <div className="grid min-h-screen w-full items-start gap-6 [grid-template-rows:auto_1fr_auto]">
       <div className="grid grid-flow-row items-center justify-center py-12">
         <Wayfarer className="text-center text-6xl font-black lg:text-7xl" />
-        <div className="text-center text-xl font-semibold text-zinc-500">A SpaceTraders API Interface</div>
+        <div className="text-center text-xl font-semibold text-zinc-500">{t('general.description')}</div>
       </div>
 
       <div>
