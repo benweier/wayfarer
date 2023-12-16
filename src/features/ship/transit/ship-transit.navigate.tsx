@@ -16,7 +16,7 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
         <QuerySuspenseBoundary
           fallback={
             <div className="space-y-6">
-              {Array.from({ length: 3 }).map((_, index) => (
+              {Array.from({ length: 5 }).map((_, index) => (
                 <div key={index} className="mx-auto h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
               ))}
             </div>
