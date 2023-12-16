@@ -15,15 +15,14 @@ import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
-import { AppIcon, ShipIcon } from '@/components/icons'
+import { AppIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
-import * as ShipActions from '@/features/ship/actions'
-import { getFuelConsumption } from '@/utilities/get-fuel-consumption.helper'
+import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
-import { type NavigationTableRow, type WaypointNavigationTableProps } from './waypoint-navigation.types'
+import { type WaypointNavigationTableProps, type WaypointNavigationTableRow } from './waypoint-navigation.types'
 
-const columnHelper = createColumnHelper<NavigationTableRow>()
+const columnHelper = createColumnHelper<WaypointNavigationTableRow>()
 const columns = [
   columnHelper.accessor((row) => row.waypoint.symbol, {
     id: 'symbol',
@@ -192,46 +191,13 @@ const columns = [
 
       return (
         <div className="flex justify-end">
-          {row.original.ship.nav.waypointSymbol !== row.original.waypoint.symbol ? (
-            <ShipActions.Navigate
-              disabled={
-                getFuelConsumption(distance, row.original.ship.nav.flightMode) > row.original.ship.fuel.current &&
-                row.original.ship.fuel.capacity > 0
-              }
-              ship={row.original.ship}
-              waypointSymbol={row.original.waypoint.symbol}
-            >
-              {(props) => (
-                <Button intent="confirm" kind="flat" {...props}>
-                  <ShipIcon id="navigate" className="h-4 w-4" aria-hidden />
-                  <span className="sr-only">
-                    <Translation>
-                      {(t) =>
-                        t('waypoint.navigate_ship_to_waypoint', {
-                          shipSymbol: row.original.ship.symbol,
-                          waypointSymbol: row.original.waypoint.symbol,
-                        })
-                      }
-                    </Translation>
-                  </span>
-                </Button>
-              )}
-            </ShipActions.Navigate>
-          ) : (
-            <Button disabled>
-              <ShipIcon id="pin" className="h-4 w-4" aria-hidden />
-              <span className="sr-only">
-                <Translation>
-                  {(t) =>
-                    t('waypoint.ship_at_waypoint', {
-                      shipSymbol: row.original.ship.symbol,
-                      waypointSymbol: row.original.waypoint.symbol,
-                    })
-                  }
-                </Translation>
-              </span>
-            </Button>
-          )}
+          <WaypointNavigationActionContext.Consumer>
+            {(ctx) =>
+              ctx.Navigate && (
+                <ctx.Navigate ship={row.original.ship} waypoint={row.original.waypoint} distance={distance} />
+              )
+            }
+          </WaypointNavigationActionContext.Consumer>
         </div>
       )
     },
