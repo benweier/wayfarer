@@ -15,7 +15,5 @@ const SYSTEM_TYPE_STYLES: Record<string, string> = {
 }
 
 export const SystemTag = ({ type, children }: SystemTagProps) => {
-  return (
-    <div className={cx('rounded-sm px-2 py-0.5 text-xs font-bold uppercase', SYSTEM_TYPE_STYLES[type])}>{children}</div>
-  )
+  return <div className={cx('rounded-sm px-2 py-0.5 text-xs font-bold', SYSTEM_TYPE_STYLES[type])}>{children}</div>
 }
