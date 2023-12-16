@@ -1,6 +1,12 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { createShipNavigateMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
+import {
+  createShipNavigateMutation,
+  getShipByIdQuery,
+  getShipListQuery,
+  getWaypointMarketQuery,
+  getWaypointShipyardQuery,
+} from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
@@ -24,6 +30,20 @@ export const Navigate = ({
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
+        client.removeQueries({
+          queryKey: getWaypointMarketQuery.getQueryKey({
+            systemSymbol: ship.data.nav.systemSymbol,
+            waypointSymbol: ship.data.nav.waypointSymbol,
+          }),
+        })
+
+        client.removeQueries({
+          queryKey: getWaypointShipyardQuery.getQueryKey({
+            systemSymbol: ship.data.nav.systemSymbol,
+            waypointSymbol: ship.data.nav.waypointSymbol,
+          }),
+        })
+
         client.setQueryData(
           getShipByIdQuery.getQueryKey({ shipSymbol }),
           produce(ship, (draft) => {
