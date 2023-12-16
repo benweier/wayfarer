@@ -17,10 +17,11 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const departed = useMemo(() => new Date(nav.route.departureTime), [nav.route.departureTime])
   const totalSeconds = (arrival.getTime() - departed.getTime()) / 1000
   const remainingSeconds = Math.floor(Math.max(-1, arrival.getTime() - lastUpdate) / 1000)
-  const progress = Math.round((100 / totalSeconds) * (totalSeconds - remainingSeconds))
+  const progress = Math.min(100, Math.max(0, Math.round((100 / totalSeconds) * (totalSeconds - remainingSeconds))))
+  const status = remainingSeconds < 0 ? 'complete' : 'in_progress'
 
   useEffect(() => {
-    if (remainingSeconds < 0) return
+    if (status === 'complete') return
 
     const timeout = setTimeout(() => {
       startTransition(() => {
@@ -31,10 +32,10 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
     return () => {
       clearTimeout(timeout)
     }
-  }, [arrival, remainingSeconds])
+  }, [arrival, status, lastUpdate])
 
   useEffect(() => {
-    if (remainingSeconds < 0 && nav.status === 'IN_TRANSIT') {
+    if (status === 'complete' && nav.status === 'IN_TRANSIT') {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(
         getShipByIdQuery.getQueryKey({ shipSymbol: symbol }),
       )
@@ -72,7 +73,14 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
         )
       }
     }
-  }, [client, nav.status, remainingSeconds, symbol])
+  }, [client, nav.status, status, symbol, lastUpdate])
 
-  return { remainingSeconds, totalSeconds, arrival, departed, progress }
+  return {
+    remainingSeconds,
+    totalSeconds,
+    arrival,
+    departed,
+    progress,
+    status,
+  } as const
 }
