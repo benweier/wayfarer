@@ -16,11 +16,11 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const arrival = useMemo(() => new Date(nav.route.arrival), [nav.route.arrival])
   const departed = useMemo(() => new Date(nav.route.departureTime), [nav.route.departureTime])
   const totalSeconds = (arrival.getTime() - departed.getTime()) / 1000
-  const remainingSeconds = Math.floor(Math.max(0, arrival.getTime() - lastUpdate) / 1000)
+  const remainingSeconds = Math.floor(Math.max(-1, arrival.getTime() - lastUpdate) / 1000)
   const progress = Math.round((100 / totalSeconds) * (totalSeconds - remainingSeconds))
 
   useEffect(() => {
-    if (remainingSeconds === 0) return
+    if (remainingSeconds < 0) return
 
     const timeout = setTimeout(() => {
       startTransition(() => {
@@ -34,7 +34,7 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   }, [arrival, remainingSeconds])
 
   useEffect(() => {
-    if (remainingSeconds === 0 && nav.status === 'IN_TRANSIT') {
+    if (remainingSeconds < 0 && nav.status === 'IN_TRANSIT') {
       const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(
         getShipByIdQuery.getQueryKey({ shipSymbol: symbol }),
       )
