@@ -99,6 +99,10 @@
       "sell_price": "Sell Price",
       "fuel": "Fuel",
       "cargo": "Cargo",
+      "signature": "Signature",
+      "size": "Size",
+      "expiration": "Expiration",
+      "deposits": "Deposits",
       "actions": "Actions"
     },
     "fields": {
@@ -184,7 +188,11 @@
       "warp": "Warp",
       "jump": "Jump",
       "flight_mode": "Flight Mode",
-      "install": "Install"
+      "install": "Install",
+      "survey": "Survey",
+      "discard_survey": "Discard Survey",
+      "extract|with_survey": "Extract",
+      "extract|no_survey": "Extract without Survey"
     },
     "flight_mode": {
       "cruise": "Cruise",
