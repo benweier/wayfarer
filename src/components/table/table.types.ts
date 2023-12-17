@@ -7,5 +7,6 @@ export type TableProps<T> = {
 }
 
 export type RowProps = {
+  className?: string
   row: Row<any>
 }

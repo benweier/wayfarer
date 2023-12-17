@@ -3,7 +3,6 @@ import {
   type ColumnFiltersState,
   type Row,
   type SortingState,
-  flexRender,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -13,7 +12,7 @@ import {
 } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
 import { useState } from 'react'
-import { TableComponent } from '@/components/table'
+import { RowComponent, TableComponent } from '@/components/table'
 import { type ShipResponse } from '@/types/spacetraders'
 import { columns } from './ship-list.columns'
 
@@ -22,17 +21,12 @@ const ShipRow = ({ row }: { row: Row<{ ship: ShipResponse }> }) => {
     useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: row.original.ship.symbol }] }) > 0
 
   return (
-    <tr
-      className={cx('even:bg-zinc-200/10 dark:even:bg-zinc-700/10', {
+    <RowComponent
+      className={cx({
         'pointer-events-none opacity-30': isMutating,
       })}
-    >
-      {row.getVisibleCells().map((cell) => (
-        <td key={cell.id} className="h-14 whitespace-nowrap p-3">
-          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-        </td>
-      ))}
-    </tr>
+      row={row}
+    />
   )
 }
 
