@@ -1,10 +1,11 @@
-import { type Table, flexRender } from '@tanstack/react-table'
+import { flexRender } from '@tanstack/react-table'
+import { RowComponent } from '@/components/table/row.component'
+import { type TableProps } from '@/components/table/table.types'
 
 export const TableComponent = <T extends Record<string, any> = Record<string, never>>({
   table,
-}: {
-  table: Table<T>
-}) => {
+  Row = RowComponent,
+}: TableProps<T>) => {
   const groups = table.getHeaderGroups()
   const rows = table.getRowModel().rows
 
@@ -28,13 +29,7 @@ export const TableComponent = <T extends Record<string, any> = Record<string, ne
         </thead>
         <tbody className="divide-y divide-zinc-200 bg-zinc-100/50 dark:divide-zinc-950 dark:bg-zinc-800/50">
           {rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="h-14 whitespace-nowrap p-3">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
+            <Row key={row.id} row={row} />
           ))}
         </tbody>
       </table>
