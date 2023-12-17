@@ -13,17 +13,21 @@ export const WaypointList = () => {
   })
   const waypoints = data.data
   const presence = new Map(
-    ships.reduce((result, ship) => {
+    ships.reduce<Map<string, number>>((result, ship) => {
       const { waypointSymbol } = ship.nav
 
       if (result.has(waypointSymbol)) {
-        result.set(waypointSymbol, (result.get(waypointSymbol) ?? 0) + 1)
+        const count = result.get(waypointSymbol) ?? 0
+
+        result.set(waypointSymbol, count + 1)
+
+        return result
       }
 
       result.set(waypointSymbol, 1)
 
       return result
-    }, new Map<string, number>()),
+    }, new Map()),
   )
 
   return (
