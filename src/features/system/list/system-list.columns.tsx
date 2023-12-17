@@ -1,4 +1,4 @@
-import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { createColumnHelper } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
 import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -10,7 +10,8 @@ import { type SystemWaypoint, type SystemsResponse } from '@/types/spacetraders'
 
 const EXCLUDED_WAYPOINTS = new Set(['ASTEROID', 'ENGINEERED_ASTEROID'])
 const columnHelper = createColumnHelper<{ system: SystemsResponse; presence: number }>()
-const columns = [
+
+export const columns = [
   columnHelper.accessor((row) => row.system.symbol, {
     id: 'symbol',
     header: () => {
@@ -146,44 +147,3 @@ const columns = [
     maxSize: 30,
   }),
 ]
-
-export const SystemListTable = ({ data }: { data: Array<{ system: SystemsResponse; presence: number }> }) => {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  })
-
-  return (
-    <div className="w-full max-w-full overflow-x-auto overflow-y-hidden">
-      <table className="w-full divide-y divide-zinc-200 overflow-hidden rounded-xl dark:divide-zinc-950">
-        <thead className="bg-zinc-100 dark:bg-zinc-800">
-          {table.getHeaderGroups().map((group) => (
-            <tr key={group.id}>
-              {group.headers.map((header) => (
-                <th
-                  key={header.id}
-                  className="text-primary px-3 py-3.5 text-sm font-semibold"
-                  style={{ width: `${header.getSize()}%` }}
-                >
-                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody className="divide-y divide-zinc-200 bg-zinc-100/50 dark:divide-zinc-950 dark:bg-zinc-800/50">
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="even:bg-zinc-200/10 dark:even:bg-zinc-700/10">
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="h-14 whitespace-nowrap p-3">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}

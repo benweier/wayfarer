@@ -5,7 +5,7 @@ import { Pagination, usePagination } from '@/components/pagination'
 import { useFleetResponse } from '@/context/fleet.context'
 import { getSystemListQuery } from '@/services/api/spacetraders'
 import { formatNumber } from '@/utilities/number'
-import { SystemListTable } from './system-table.component'
+import { SystemListTable } from './system-list.table'
 
 export const SystemList = () => {
   const { page, limit, setPage } = usePagination()

@@ -2,7 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { useFleetResponse } from '@/context/fleet.context'
 import { useSystemResponse } from '@/context/system.context'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
-import { WaypointListTable } from './waypoint-table.component'
+import { WaypointListTable } from './waypoint-list.table'
 
 export const WaypointList = () => {
   const system = useSystemResponse()
