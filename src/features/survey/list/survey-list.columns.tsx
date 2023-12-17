@@ -3,7 +3,7 @@ import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
-import { ShipSurveyActionContext } from '@/context/ship-survey-action.context'
+import { SurveyContext } from '@/features/survey/context'
 import { type SurveyResponse } from '@/types/spacetraders'
 import { formatDateTime } from '@/utilities/date'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
@@ -131,7 +131,7 @@ export const columns = [
     cell: ({ row }) => {
       return (
         <div className="flex justify-end">
-          <ShipSurveyActionContext.Consumer>
+          <SurveyContext.Consumer>
             {(ctx) => {
               return (
                 <div className="flex items-center justify-end gap-2">
@@ -140,7 +140,7 @@ export const columns = [
                 </div>
               )
             }}
-          </ShipSurveyActionContext.Consumer>
+          </SurveyContext.Consumer>
         </div>
       )
     },
