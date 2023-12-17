@@ -7,6 +7,7 @@ import { WaypointStore } from '@/context/waypoint.context'
 import { ShipCargoError, ShipCargoFallback, ShipCargoList } from '@/features/ship/cargo'
 import { ShipLoadoutList } from '@/features/ship/loadout'
 import { ShipSurveyExtract } from '@/features/ship/survey-extract'
+import { SurveyList } from '@/features/survey/list'
 
 export const ShipTabs = () => {
   const { t } = useTranslation()
@@ -30,7 +31,10 @@ export const ShipTabs = () => {
         </Tab.Panel>
 
         <Tab.Panel>
-          <ShipSurveyExtract />
+          <div className="space-y-4">
+            <ShipSurveyExtract ship={ship} />
+            <SurveyList ship={ship} />
+          </div>
         </Tab.Panel>
 
         <Tab.Panel>
