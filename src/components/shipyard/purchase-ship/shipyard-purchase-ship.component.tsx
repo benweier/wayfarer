@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query'
 import { type Ref, forwardRef } from 'react'
 import { Button } from '@/components/button'
-import { type ShipyardPurchaseShipProps } from '@/components/shipyard/purchase-ship/shipyard-purchase-ship.types'
 import { createShipPurchaseMutation } from '@/services/api/spacetraders'
 import { useAuthStore } from '@/store/auth'
+import { type ShipyardPurchaseShipProps } from './shipyard-purchase-ship.types'
 
 const PurchaseShipComponent = (
   {

@@ -1,6 +1,6 @@
 import { flexRender } from '@tanstack/react-table'
-import { RowComponent } from '@/components/table/row.component'
-import { type TableProps } from '@/components/table/table.types'
+import { RowComponent } from './row.component'
+import { type TableProps } from './table.types'
 
 export const TableComponent = <T extends Record<string, any> = Record<string, never>>({
   table,

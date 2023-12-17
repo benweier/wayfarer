@@ -3,10 +3,10 @@ import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
-import { ShipControls } from '@/features/ship/list/ship-list-item.controls'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
+import { ShipControls } from './ship-list-item.controls'
 import { type ShipListTableSchema } from './ship-list.types'
 
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
