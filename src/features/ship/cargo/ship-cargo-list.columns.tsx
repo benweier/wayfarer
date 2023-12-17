@@ -6,11 +6,11 @@ import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { ShipCargoItemControls } from '@/features/ship/cargo/ship-cargo-item.controls'
 import { TradeGoodContext } from '@/features/trade-good/context'
-import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { formatNumber } from '@/utilities/number'
+import { type ShipCargoTableSchema } from './ship-cargo.types'
 
-const columnHelper = createColumnHelper<{ item: CargoInventory; trade?: MarketTradeGood }>()
+const columnHelper = createColumnHelper<ShipCargoTableSchema>()
 
 export const columns = [
   columnHelper.accessor((row) => row.item.name, {

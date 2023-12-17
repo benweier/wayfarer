@@ -10,10 +10,10 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import { TableComponent } from '@/components/table'
-import { type SurveyResponse } from '@/types/spacetraders'
 import { columns } from './survey-list.columns'
+import { type SurveyListTableProps } from './survey-list.types'
 
-export const SurveyListTable = ({ data }: { data: Array<{ survey: SurveyResponse }> }) => {
+export const SurveyListTable = ({ data }: SurveyListTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({

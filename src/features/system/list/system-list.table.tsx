@@ -1,9 +1,9 @@
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { TableComponent } from '@/components/table'
-import { type SystemsResponse } from '@/types/spacetraders'
 import { columns } from './system-list.columns'
+import { type SystemListTableProps } from './system-list.types'
 
-export const SystemListTable = ({ data }: { data: Array<{ system: SystemsResponse; presence: number }> }) => {
+export const SystemListTable = ({ data }: SystemListTableProps) => {
   const table = useReactTable({
     data,
     columns,

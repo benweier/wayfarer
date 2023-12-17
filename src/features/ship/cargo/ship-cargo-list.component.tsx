@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { ShipCargoTable } from '@/features/ship/cargo/ship-cargo-table.component'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
+import { ShipCargoTable } from './ship-cargo-list.table'
 
 export const ShipCargoList = () => {
   const { t } = useTranslation()

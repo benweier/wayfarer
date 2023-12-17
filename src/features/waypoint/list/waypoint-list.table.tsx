@@ -10,10 +10,10 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import { TableComponent } from '@/components/table'
-import { type WaypointResponse } from '@/types/spacetraders'
 import { columns } from './waypoint-list.columns'
+import { type WaypointListTableProps } from './waypoint-list.types'
 
-export const WaypointListTable = ({ data }: { data: Array<{ waypoint: WaypointResponse; presence: number }> }) => {
+export const WaypointListTable = ({ data }: WaypointListTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({

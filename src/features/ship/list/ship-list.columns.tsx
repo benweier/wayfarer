@@ -7,6 +7,7 @@ import { ShipControls } from '@/features/ship/item/ship-item.controls'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
+import { type ShipListTableSchema } from './ship-list.types'
 
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   const transit = useShipTransit(ship)
@@ -19,7 +20,7 @@ const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
     </div>
   )
 }
-const columnHelper = createColumnHelper<{ ship: ShipResponse }>()
+const columnHelper = createColumnHelper<ShipListTableSchema>()
 
 export const columns = [
   columnHelper.accessor((row) => row.ship.symbol, {

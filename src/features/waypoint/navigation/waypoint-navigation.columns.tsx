@@ -6,11 +6,11 @@ import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
-import { type WaypointNavigationTableRow } from '@/features/waypoint/navigation/waypoint-navigation.types'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
+import { type WaypointNavigationTableSchema } from './waypoint-navigation.types'
 
-const columnHelper = createColumnHelper<WaypointNavigationTableRow>()
+const columnHelper = createColumnHelper<WaypointNavigationTableSchema>()
 
 export const columns = [
   columnHelper.accessor((row) => row.waypoint.symbol, {

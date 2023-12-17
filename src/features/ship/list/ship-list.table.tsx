@@ -13,10 +13,10 @@ import {
 import { cx } from 'class-variance-authority'
 import { useState } from 'react'
 import { RowComponent, TableComponent } from '@/components/table'
-import { type ShipResponse } from '@/types/spacetraders'
 import { columns } from './ship-list.columns'
+import { type ShipListTableProps, type ShipListTableSchema } from './ship-list.types'
 
-const ShipRow = ({ row }: { row: Row<{ ship: ShipResponse }> }) => {
+const ShipRow = ({ row }: { row: Row<ShipListTableSchema> }) => {
   const isMutating =
     useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: row.original.ship.symbol }] }) > 0
 
@@ -30,7 +30,7 @@ const ShipRow = ({ row }: { row: Row<{ ship: ShipResponse }> }) => {
   )
 }
 
-export const ShipListTable = ({ data }: { data: Array<{ ship: ShipResponse }> }) => {
+export const ShipListTable = ({ data }: ShipListTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({

@@ -5,11 +5,11 @@ import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { TradeGoodContext } from '@/features/trade-good/context'
-import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { formatNumber } from '@/utilities/number'
+import { type WaypointMarketTableSchema } from './waypoint-market.types'
 
-const columnHelper = createColumnHelper<{ good: MarketGood; trade?: MarketTradeGood }>()
+const columnHelper = createColumnHelper<WaypointMarketTableSchema>()
 
 export const columns = [
   columnHelper.accessor((row) => row.good.name, {

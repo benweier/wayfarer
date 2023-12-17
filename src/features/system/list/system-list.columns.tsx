@@ -6,10 +6,11 @@ import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
 import { ShipPresence } from '@/features/ship/presence'
-import { type SystemWaypoint, type SystemsResponse } from '@/types/spacetraders'
+import { type SystemWaypoint } from '@/types/spacetraders'
+import { type SystemListTableSchema } from './system-list.types'
 
 const EXCLUDED_WAYPOINTS = new Set(['ASTEROID', 'ENGINEERED_ASTEROID'])
-const columnHelper = createColumnHelper<{ system: SystemsResponse; presence: number }>()
+const columnHelper = createColumnHelper<SystemListTableSchema>()
 
 export const columns = [
   columnHelper.accessor((row) => row.system.symbol, {

@@ -1,12 +1,13 @@
 import { Trans, useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '@/config/routes'
+import { useSystemResponse } from '@/context/system.context'
 import { useAuthStore } from '@/store/auth'
-import { type SystemsResponse } from '@/types/spacetraders'
 
-export const SystemFleetEmpty = ({ system }: { system: SystemsResponse }) => {
+export const SystemFleetEmpty = () => {
   const { t } = useTranslation()
   const { isAuthenticated } = useAuthStore()
+  const system = useSystemResponse()
 
   return (
     <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">

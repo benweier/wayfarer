@@ -3,10 +3,10 @@ import { type ShipResponse, type WaypointResponse } from '@/types/spacetraders'
 export type WaypointNavigationProps = { ship: ShipResponse }
 
 export type WaypointNavigationTableProps = {
-  data: WaypointNavigationTableRow[]
+  data: WaypointNavigationTableSchema[]
 }
 
-export type WaypointNavigationTableRow = {
+export type WaypointNavigationTableSchema = {
   waypoint: WaypointResponse
   ship: ShipResponse
   activeWaypoint?: WaypointResponse

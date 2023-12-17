@@ -1,10 +1,10 @@
 import { type SortingState, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import { useState } from 'react'
 import { TableComponent } from '@/components/table'
-import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
-import { columns } from './ship-cargo-list.columns'
+import { columns } from './waypoint-market.columns'
+import { type WaypointMarketTableProps } from './waypoint-market.types'
 
-export const ShipCargoTable = ({ data }: { data: Array<{ item: CargoInventory; trade?: MarketTradeGood }> }) => {
+export const WaypointMarketTable = ({ data }: WaypointMarketTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: false }])
   const table = useReactTable({
     data,

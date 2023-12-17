@@ -1,5 +1,5 @@
 import { type FC, type PropsWithChildren, type ReactNode } from 'react'
-import { type MarketGood } from '@/types/spacetraders'
+import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
 
 export type WaypointMarketLayoutProps = {
   imports: ReactNode
@@ -12,3 +12,12 @@ export type WaypointMarketListProps = {
 }
 
 export type WaypointMarketItemProps = { item: MarketGood; trade?: ReactNode }
+
+export type WaypointMarketTableSchema = {
+  good: MarketGood
+  trade?: MarketTradeGood
+}
+
+export type WaypointMarketTableProps = {
+  data: WaypointMarketTableSchema[]
+}

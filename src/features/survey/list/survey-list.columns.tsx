@@ -4,11 +4,11 @@ import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { SurveyContext } from '@/features/survey/context'
-import { type SurveyResponse } from '@/types/spacetraders'
 import { formatDateTime } from '@/utilities/date'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
+import { type SurveyListTableSchema } from './survey-list.types'
 
-const columnHelper = createColumnHelper<{ survey: SurveyResponse }>()
+const columnHelper = createColumnHelper<SurveyListTableSchema>()
 
 export const columns = [
   columnHelper.accessor((row) => row.survey.signature, {

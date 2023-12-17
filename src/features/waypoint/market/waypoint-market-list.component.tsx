@@ -6,7 +6,7 @@ import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
-import { WaypointMarketTable } from './waypoint-market-table.component'
+import { WaypointMarketTable } from './waypoint-market-list.table'
 import { WaypointMarketLayout } from './waypoint-market.layout'
 
 export const WaypointMarketList = () => {

@@ -8,8 +8,8 @@ import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { ShipPresence } from '@/features/ship/presence'
 import { TypeFilter } from '@/features/waypoint/list/type-filter.component'
-import { type WaypointResponse } from '@/types/spacetraders'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
+import { type WaypointListTableSchema } from './waypoint-list.types'
 
 const FILTERED_TRAITS = new Set([
   'UNCHARTED',
@@ -23,7 +23,7 @@ const FILTERED_TRAITS = new Set([
   'ICE_CRYSTALS',
   'EXPLOSIVE_GASES',
 ])
-const columnHelper = createColumnHelper<{ waypoint: WaypointResponse; presence: number }>()
+const columnHelper = createColumnHelper<WaypointListTableSchema>()
 
 export const columns = [
   columnHelper.accessor((row) => row.waypoint.symbol, {
