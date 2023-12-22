@@ -3,7 +3,6 @@ import { NotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
 import { client } from '@/services/query-client'
 import { getState } from '@/store/auth'
-import { withAuth } from '@/utilities/with-auth.loader'
 import * as auth from './auth'
 import { Core } from './core.route'
 import * as home from './home'
@@ -184,7 +183,7 @@ export const routes: RouteObject[] = [
 
       {
         element: <auth.Required />,
-        loader: withAuth(() => null),
+        loader: auth.withAuth(() => null),
         errorElement: <RouteError />,
         children: [
           {
@@ -211,7 +210,7 @@ export const routes: RouteObject[] = [
 
                   return {
                     element: <mod.Route />,
-                    loader: withAuth(mod.loader(client)),
+                    loader: auth.withAuth(mod.loader(client)),
                   }
                 },
                 children: [
@@ -223,7 +222,7 @@ export const routes: RouteObject[] = [
 
                       return {
                         element: <mod.Route />,
-                        loader: withAuth(mod.loader(client)),
+                        loader: auth.withAuth(mod.loader(client)),
                       }
                     },
                   },
@@ -240,7 +239,7 @@ export const routes: RouteObject[] = [
                       return {
                         element: <mod.Route />,
                         errorElement: <RouteError />,
-                        loader: withAuth(mod.loader(client)),
+                        loader: auth.withAuth(mod.loader(client)),
                         handle: {
                           meta: mod.meta,
                         },
@@ -256,7 +255,7 @@ export const routes: RouteObject[] = [
 
                       return {
                         element: <mod.Route />,
-                        loader: withAuth(mod.loader(client)),
+                        loader: auth.withAuth(mod.loader(client)),
                         handle: {
                           meta: mod.meta,
                         },
@@ -282,7 +281,7 @@ export const routes: RouteObject[] = [
 
                               return {
                                 element: <mod.Route />,
-                                loader: withAuth(mod.loader(client)),
+                                loader: auth.withAuth(mod.loader(client)),
                               }
                             },
                           },
@@ -307,7 +306,7 @@ export const routes: RouteObject[] = [
 
                               return {
                                 element: <mod.Route />,
-                                loader: withAuth(mod.loader(client)),
+                                loader: auth.withAuth(mod.loader(client)),
                               }
                             },
                           },
