@@ -3,8 +3,8 @@ import { getSystemListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getRequestPagination } from '@/utilities/get-request-pagination.helper'
 
-export const meta: MetaFunction = (t) => {
-  return [{ title: t('systems.title', { ns: 'meta' }) }]
+export const meta: MetaFunction<{ page: string }> = (t, { page }) => {
+  return [{ title: t('systems.title', { ns: 'meta', page }) }]
 }
 
 export const loader: QueryClientLoaderFn =
@@ -20,6 +20,7 @@ export const loader: QueryClientLoaderFn =
       })
 
       return defer({
+        page,
         systems,
       })
     } catch (err) {
