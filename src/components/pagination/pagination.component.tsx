@@ -1,4 +1,4 @@
-import { cx } from 'class-variance-authority'
+import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { type PaginationProps } from './pagination.types'
 import { getPagingRange } from './pagination.utils'
@@ -8,9 +8,10 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
 
   return (
     <div className="flex gap-2">
-      <button
+      <Button
         key="first"
-        className="btn flex w-16 items-center justify-center p-1 font-bold"
+        intent="confirm"
+        kind="outline"
         onClick={() => {
           if (current > 1) onChange(1)
         }}
@@ -19,10 +20,11 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
       >
         <AppIcon id="chevron:double-left" className="h-5 w-5" />
         <span className="sr-only">Page 1</span>
-      </button>
-      <button
+      </Button>
+      <Button
         key="previous"
-        className="btn flex w-16 items-center justify-center p-1 font-bold"
+        intent="confirm"
+        kind="outline"
         onClick={() => {
           if (current > 1) onChange(current - 1)
         }}
@@ -31,12 +33,13 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
       >
         <AppIcon id="chevron:left" className="h-5 w-5" />
         <span className="sr-only">Page {current - 1}</span>
-      </button>
+      </Button>
 
       {pages.map((page) => (
-        <button
+        <Button
           key={page}
-          className={cx('btn btn-primary w-16 p-1 font-bold', { 'btn-outline': page !== current })}
+          intent="primary"
+          kind={page === current ? 'solid' : 'outline'}
           onClick={() => {
             if (current !== page) onChange(page)
           }}
@@ -44,12 +47,13 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
           aria-current={page === current ? 'page' : undefined}
         >
           {page}
-        </button>
+        </Button>
       ))}
 
-      <button
+      <Button
         key="next"
-        className="btn flex w-16 items-center justify-center p-1 font-bold"
+        intent="confirm"
+        kind="outline"
         onClick={() => {
           if (current < total) onChange(current + 1)
         }}
@@ -58,10 +62,11 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
       >
         <AppIcon id="chevron:right" className="h-5 w-5" />
         <span className="sr-only">Page {current + 1}</span>
-      </button>
-      <button
+      </Button>
+      <Button
         key="last"
-        className="btn flex w-16 items-center justify-center p-1 font-bold"
+        intent="confirm"
+        kind="outline"
         onClick={() => {
           if (current < total) onChange(total)
         }}
@@ -70,7 +75,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
       >
         <AppIcon id="chevron:double-right" className="h-5 w-5" />
         <span className="sr-only">Page {total}</span>
-      </button>
+      </Button>
     </div>
   )
 }
