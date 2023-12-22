@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
 import { Fragment, type PropsWithChildren } from 'react'
+import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { type ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
@@ -51,7 +52,6 @@ export const Root = ({
           >
             <div className="flex min-h-full items-center justify-center p-5">
               <Dialog.Panel
-                tabIndex={1}
                 className={cx(
                   'transform overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-6 outline-none ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-900 dark:ring-zinc-50/10',
                   {
@@ -67,14 +67,17 @@ export const Root = ({
                 {children}
 
                 {closeable && (
-                  <button
-                    className="btn btn-icon btn-outline btn-danger absolute right-1 top-1 rounded-lg"
+                  <Button
+                    intent="danger"
+                    kind="outline"
+                    size="small"
+                    className="absolute right-2.5 top-2.5"
                     onClick={() => {
                       handleClose()
                     }}
                   >
                     <AppIcon id="x" className="h-4 w-4" />
-                  </button>
+                  </Button>
                 )}
               </Dialog.Panel>
             </div>
