@@ -1,3 +1,3 @@
-export { TableComponent } from './table.component'
-export { RowComponent } from './row.component'
+export { Table } from './table.component'
+export { Row } from './row.component'
 export type { TableProps, RowProps } from './table.types'
