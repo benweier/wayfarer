@@ -28,7 +28,7 @@ export const useThemeManager = () => {
       }
     }
 
-    if (theme !== 'auto') return
+    if (theme !== 'system') return
 
     const listener = (event: MediaQueryListEvent) => {
       if (event.matches) {
