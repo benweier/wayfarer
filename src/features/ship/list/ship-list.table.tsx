@@ -1,7 +1,6 @@
 import { useIsMutating } from '@tanstack/react-query'
 import {
   type ColumnFiltersState,
-  type Row,
   type SortingState,
   getCoreRowModel,
   getFacetedRowModel,
@@ -12,16 +11,16 @@ import {
 } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
 import { useState } from 'react'
-import { RowComponent, TableComponent } from '@/components/table'
+import { Row, Table } from '@/components/table'
 import { columns } from './ship-list.columns'
-import { type ShipListTableProps, type ShipListTableSchema } from './ship-list.types'
+import { type ShipListTableProps, type ShipRowProps } from './ship-list.types'
 
-const ShipRow = ({ row }: { row: Row<ShipListTableSchema> }) => {
+const ShipRow = ({ row }: ShipRowProps) => {
   const isMutating =
     useIsMutating({ mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: row.original.ship.symbol }] }) > 0
 
   return (
-    <RowComponent
+    <Row
       className={cx({
         'pointer-events-none opacity-30': isMutating,
       })}
@@ -50,5 +49,5 @@ export const ShipListTable = ({ data }: ShipListTableProps) => {
     enableGlobalFilter: true,
   })
 
-  return <TableComponent table={table} Row={ShipRow} />
+  return <Table table={table} Row={ShipRow} />
 }

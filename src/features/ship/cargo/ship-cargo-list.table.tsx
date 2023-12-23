@@ -1,6 +1,6 @@
 import { type SortingState, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import { useState } from 'react'
-import { TableComponent } from '@/components/table'
+import { Table } from '@/components/table'
 import { columns } from './ship-cargo-list.columns'
 import { type ShipCargoTableProps } from './ship-cargo.types'
 
@@ -15,5 +15,5 @@ export const ShipCargoTable = ({ data }: ShipCargoTableProps) => {
     state: { sorting },
   })
 
-  return <TableComponent table={table} />
+  return <Table table={table} />
 }

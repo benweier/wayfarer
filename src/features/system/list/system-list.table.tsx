@@ -1,5 +1,5 @@
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { TableComponent } from '@/components/table'
+import { Table } from '@/components/table'
 import { columns } from './system-list.columns'
 import { type SystemListTableProps } from './system-list.types'
 
@@ -10,5 +10,5 @@ export const SystemListTable = ({ data }: SystemListTableProps) => {
     getCoreRowModel: getCoreRowModel(),
   })
 
-  return <TableComponent table={table} />
+  return <Table table={table} />
 }

@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
-import { TableComponent } from '@/components/table'
+import { Table } from '@/components/table'
 import { columns } from './waypoint-list.columns'
 import { type WaypointListTableProps } from './waypoint-list.types'
 
@@ -33,5 +33,5 @@ export const WaypointListTable = ({ data }: WaypointListTableProps) => {
     enableGlobalFilter: true,
   })
 
-  return <TableComponent table={table} />
+  return <Table table={table} />
 }

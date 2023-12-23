@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
-import { TableComponent } from '@/components/table'
+import { Table } from '@/components/table'
 import { columns } from './survey-list.columns'
 import { type SurveyListTableProps } from './survey-list.types'
 
@@ -33,5 +33,5 @@ export const SurveyListTable = ({ data }: SurveyListTableProps) => {
     enableGlobalFilter: true,
   })
 
-  return <TableComponent table={table} />
+  return <Table table={table} />
 }

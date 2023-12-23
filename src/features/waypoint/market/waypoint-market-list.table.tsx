@@ -1,6 +1,6 @@
 import { type SortingState, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import { useState } from 'react'
-import { TableComponent } from '@/components/table'
+import { Table } from '@/components/table'
 import { columns } from './waypoint-market.columns'
 import { type WaypointMarketTableProps } from './waypoint-market.types'
 
@@ -15,5 +15,5 @@ export const WaypointMarketTable = ({ data }: WaypointMarketTableProps) => {
     state: { sorting },
   })
 
-  return <TableComponent table={table} />
+  return <Table table={table} />
 }
