@@ -51,7 +51,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
                 'text-rose-600 dark:text-rose-400': !isCopied,
               })}
             >
-              {isCopied ? <AppIcon id="check" className="h-5 w-5" /> : <AppIcon id="cancel" className="h-5 w-5" />}
+              {isCopied ? <AppIcon id="check" className="size-5" /> : <AppIcon id="cancel" className="size-5" />}
 
               <span className="text-caption whitespace-nowrap">{isCopied ? 'Token Copied!' : 'Token Not Copied'}</span>
             </div>
@@ -59,7 +59,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
         </div>
         <div className="flex items-center justify-center gap-2 text-amber-600 dark:text-amber-400">
           <div>
-            <AppIcon id="alert" className="h-6 w-6" />
+            <AppIcon id="alert" className="size-6" />
           </div>
 
           <span className="text-base font-semibold">

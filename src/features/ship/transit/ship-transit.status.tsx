@@ -34,7 +34,7 @@ export const ShipTransitStatus = () => {
         </div>
         <div className="text-secondary flex w-12 justify-end text-right text-sm">
           {transit.status === 'complete' ? (
-            <ShipIcon id="pin" className="h-5 w-5 text-green-500" />
+            <ShipIcon id="pin" className="size-5 text-green-500" />
           ) : (
             `${transit.remainingSeconds} s`
           )}

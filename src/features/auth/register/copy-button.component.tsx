@@ -4,7 +4,7 @@ import { AppIcon } from '@/components/icons'
 
 export const Copy = ({
   className,
-  children = <AppIcon id="clipboard" className="h-5 w-5" />,
+  children = <AppIcon id="clipboard" className="size-5" />,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (

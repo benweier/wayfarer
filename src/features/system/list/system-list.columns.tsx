@@ -39,7 +39,7 @@ export const columns = [
     cell: ({ row }) =>
       row.original.presence > 0 && (
         <ShipPresence label="system.presence" count={row.original.presence} symbol={row.original.system.symbol}>
-          <ShipIcon id="anchor" className="h-5 w-5" />
+          <ShipIcon id="anchor" className="size-5" />
         </ShipPresence>
       ),
   }),
@@ -117,7 +117,7 @@ export const columns = [
               >
                 <Link
                   aria-label={`${waypoint.symbol}: ${waypoint.type}`}
-                  className={cx('flex h-6 w-6 items-center justify-center', WAYPOINT_TYPE_STYLES[waypoint.type])}
+                  className={cx('flex size-6 items-center justify-center', WAYPOINT_TYPE_STYLES[waypoint.type])}
                   to={`/systems/${row.original.system.symbol}/waypoint/${waypoint.symbol}`}
                 >
                   <span className="text-sm font-medium" aria-hidden>
@@ -132,7 +132,7 @@ export const columns = [
             <li className="list-none overflow-hidden rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800">
               <Link
                 aria-label={`${values.extra} asteroids`}
-                className={cx('flex h-6 w-6 items-center justify-center', WAYPOINT_TYPE_STYLES.ASTEROID)}
+                className={cx('flex size-6 items-center justify-center', WAYPOINT_TYPE_STYLES.ASTEROID)}
                 to={`/systems/${row.original.system.symbol}`}
               >
                 <span className="text-sm font-medium" aria-hidden>

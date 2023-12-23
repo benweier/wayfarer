@@ -27,7 +27,7 @@ export const columns = [
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
             </Button>
           </div>
         </div>
@@ -108,7 +108,7 @@ export const columns = [
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
             </Button>
           </div>
         </div>
@@ -156,7 +156,7 @@ export const columns = [
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
             </Button>
           </div>
         </div>

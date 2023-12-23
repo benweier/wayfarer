@@ -32,7 +32,7 @@ export const FilterColumn = ({
         <Listbox.Button as={Fragment}>
           <Button intent={selected.length > 0 ? 'primary' : 'dim'} kind="flat" size="small" ref={refs.setReference}>
             <span className="sr-only">Filter</span>
-            <AppIcon id="filter" className="h-4 w-4" aria-hidden="true" />
+            <AppIcon id="filter" className="size-4" aria-hidden="true" />
           </Button>
         </Listbox.Button>
 
@@ -70,7 +70,7 @@ export const FilterColumn = ({
 
                           {selected ? (
                             <span className="absolute inset-y-0 right-0 flex items-center pr-4">
-                              <AppIcon id="check" aria-hidden="true" className="h-4 w-4 text-emerald-500" />
+                              <AppIcon id="check" aria-hidden="true" className="size-4 text-emerald-500" />
                             </span>
                           ) : null}
                         </div>

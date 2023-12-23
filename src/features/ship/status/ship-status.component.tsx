@@ -69,7 +69,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
           <div className="rounded-sm rounded-l-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
             <div className="text-secondary text-right text-xs uppercase">{t('ship.fuel')}</div>
             <div className="flex items-center gap-2">
-              <ShipIcon id="fuel" className="h-4 w-4 text-teal-500" />
+              <ShipIcon id="fuel" className="size-4 text-teal-500" />
               <div className="text-sm font-semibold">
                 {ship.fuel.current} / {ship.fuel.capacity}
               </div>
@@ -92,7 +92,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         <div className="rounded-sm bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
           <div className="text-secondary text-right text-xs uppercase">{t('ship.cargo')}</div>
           <div className="flex items-center gap-2">
-            <ShipIcon id="cargo" className="h-4 w-4 text-fuchsia-500" />
+            <ShipIcon id="cargo" className="size-4 text-fuchsia-500" />
             <div className="text-sm font-semibold">
               {ship.cargo.units} / {ship.cargo.capacity}
             </div>
@@ -107,7 +107,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         <div className="rounded-sm rounded-r-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
           <div className="text-secondary text-right text-xs uppercase">{t('ship.condition')}</div>
           <div className="flex items-center gap-2">
-            <ShipIcon id="condition" className="h-4 w-4 text-rose-500" />
+            <ShipIcon id="condition" className="size-4 text-rose-500" />
             <div className="text-sm font-semibold">{ship.frame.condition}%</div>
           </div>
           <div className="h-1 rounded-full bg-rose-900/20 dark:bg-rose-900/40">

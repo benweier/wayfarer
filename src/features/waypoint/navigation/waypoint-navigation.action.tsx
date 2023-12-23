@@ -18,7 +18,7 @@ export const WaypointNavigationAction = ({ ship, waypoint, distance }: WaypointN
         >
           {(props) => (
             <Button intent="confirm" kind="flat" {...props}>
-              <ShipIcon id="navigate" className="h-4 w-4" aria-hidden />
+              <ShipIcon id="navigate" className="size-4" aria-hidden />
               <span className="sr-only">
                 <Translation>
                   {(t) =>
@@ -40,7 +40,7 @@ export const WaypointNavigationAction = ({ ship, waypoint, distance }: WaypointN
             waypointSymbol: waypoint.symbol,
           })}
         >
-          <ShipIcon id="pin" className="h-4 w-4" aria-hidden />
+          <ShipIcon id="pin" className="size-4" aria-hidden />
         </Button>
       )}
     </>

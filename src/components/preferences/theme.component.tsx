@@ -24,7 +24,7 @@ export const Theme = () => {
             className={({ checked }) => cx('btn', { 'btn-primary btn-outline': checked })}
           >
             <div className={cx('flex w-full flex-col items-center justify-between gap-1')}>
-              <MenuIcon id={item.icon} className="h-5 w-5" aria-hidden />
+              <MenuIcon id={item.icon} className="size-5" aria-hidden />
               <RadioGroup.Label className="text-sm font-semibold">{t(item.key)}</RadioGroup.Label>
             </div>
           </RadioGroup.Option>

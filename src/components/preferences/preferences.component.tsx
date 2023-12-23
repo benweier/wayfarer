@@ -28,8 +28,8 @@ export const Preferences = () => {
             ref={refs.setReference}
             className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-semibold text-blue-200 transition-all duration-100 hover:bg-blue-50/10 hover:shadow-sm"
           >
-            <div className="h-6 w-6">
-              <MenuIcon id="settings" className={cx('h-6 w-6', { 'animate-spin': open })} aria-hidden />
+            <div className="size-6">
+              <MenuIcon id="settings" className={cx('size-6', { 'animate-spin': open })} aria-hidden />
             </div>
             <span className="sr-only flex flex-col items-start justify-start text-sm @[220px]/side:not-sr-only">
               {t('preferences.label')}

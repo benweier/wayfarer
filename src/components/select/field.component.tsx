@@ -23,7 +23,7 @@ export const Field = <T = string,>({
           <>
             <span className="block truncate">{getItemLabel(value) ?? <>&nbsp;</>}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-              <AppIcon id="chevron:up-down" className="h-4 w-4 text-zinc-400" aria-hidden="true" />
+              <AppIcon id="chevron:up-down" className="size-4 text-zinc-400" aria-hidden="true" />
             </span>
           </>
         )}
@@ -52,7 +52,7 @@ export const Field = <T = string,>({
 
                     {selected ? (
                       <span className="absolute inset-y-0 right-0 flex items-center pr-4">
-                        <AppIcon id="check" aria-hidden="true" className="h-5 w-5 text-emerald-500" />
+                        <AppIcon id="check" aria-hidden="true" className="size-5 text-emerald-500" />
                       </span>
                     ) : null}
                   </div>

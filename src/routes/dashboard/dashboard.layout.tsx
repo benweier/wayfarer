@@ -28,8 +28,8 @@ const Logout = () => {
       }}
       className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-rose-100 shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
     >
-      <div className="h-6 w-6">
-        <MenuIcon id="logout" className="h-6 w-6" aria-hidden />
+      <div className="size-6">
+        <MenuIcon id="logout" className="size-6" aria-hidden />
       </div>
       <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.logout', { context: 'action' })}</span>
     </button>
@@ -82,13 +82,13 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                     <div className="absolute right-0 top-0 -mr-12 pt-3">
                       <button
                         type="button"
-                        className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        className="ml-1 flex size-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                         onClick={() => {
                           setMobileMenuOpen(false)
                         }}
                       >
                         <span className="sr-only">{t('menu.close_sidebar')}</span>
-                        <AppIcon id="x" className="h-5 w-5 text-white" aria-hidden />
+                        <AppIcon id="x" className="size-5 text-white" aria-hidden />
                       </button>
                     </div>
                   </Transition.Child>
@@ -108,7 +108,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                           >
                             <MenuIcon
                               id={item.icon}
-                              className="mr-4 h-5 w-5 text-zinc-400 group-hover:text-zinc-500"
+                              className="mr-4 size-5 text-zinc-400 group-hover:text-zinc-500"
                               aria-hidden
                             />
                             {t(item.key)}
@@ -159,8 +159,8 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                     state={{ redirect: { destination: `${window.location.pathname}${window.location.search}` } }}
                     className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-emerald-100 shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100 @[220px]/side:w-full"
                   >
-                    <div className="h-6 w-6">
-                      <MenuIcon id="login" className="h-6 w-6" aria-hidden />
+                    <div className="size-6">
+                      <MenuIcon id="login" className="size-6" aria-hidden />
                     </div>
                     <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.login')}</span>
                   </Link>
@@ -188,7 +188,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                   }}
                 >
                   <span className="sr-only">{t('menu.open_sidebar')}</span>
-                  <AppIcon id="hamburger" className="h-5 w-5" aria-hidden />
+                  <AppIcon id="hamburger" className="size-5" aria-hidden />
                 </button>
               </div>
             </div>

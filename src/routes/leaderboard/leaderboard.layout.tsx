@@ -25,10 +25,10 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
       <div className="grid grid-flow-col gap-8 py-12">
         <div className="grid grid-flow-col items-center justify-center gap-8 text-zinc-500">
           <a href="https://spacetraders.io" title="SpaceTraders" className="rounded-full p-2">
-            <AppIcon id="rocket" className="h-8 w-8" />
+            <AppIcon id="rocket" className="size-8" />
           </a>
           <a href="https://github.com/benweier/wayfarer" title="GitHub" className="rounded-full p-2">
-            <AppIcon id="github" className="h-8 w-8" />
+            <AppIcon id="github" className="size-8" />
           </a>
         </div>
       </div>

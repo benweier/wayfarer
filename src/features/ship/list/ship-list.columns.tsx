@@ -38,7 +38,7 @@ export const columns = [
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
             </Button>
           </div>
         </div>
@@ -74,7 +74,7 @@ export const columns = [
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
             </Button>
           </div>
         </div>
@@ -108,7 +108,7 @@ export const columns = [
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
             </Button>
           </div>
         </div>
@@ -168,7 +168,7 @@ export const columns = [
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
             </Button>
           </div>
         </div>
@@ -180,7 +180,7 @@ export const columns = [
       return (
         <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
-            <ShipIcon id="fuel" className="h-4 w-4 text-teal-500" />
+            <ShipIcon id="fuel" className="size-4 text-teal-500" />
             <div className="text-sm font-semibold">
               {fuel.current} / {fuel.capacity}
             </div>
@@ -228,7 +228,7 @@ export const columns = [
               size="small"
               onClick={column.getToggleSortingHandler()}
             >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="h-4 w-4" />
+              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
             </Button>
           </div>
         </div>
@@ -240,7 +240,7 @@ export const columns = [
       return (
         <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
-            <ShipIcon id="cargo" className="h-4 w-4 text-fuchsia-500" />
+            <ShipIcon id="cargo" className="size-4 text-fuchsia-500" />
             <div className="text-sm font-semibold">
               {cargo.units} / {cargo.capacity}
             </div>

@@ -30,9 +30,9 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
             </Link>
           </div>
           <div className="flex flex-row flex-nowrap -space-x-2">
-            <AppIcon id="chevron:right" className="text-secondary h-4 w-4" />
-            <AppIcon id="chevron:right" className="text-secondary h-4 w-4" />
-            <AppIcon id="chevron:right" className="text-secondary h-4 w-4" />
+            <AppIcon id="chevron:right" className="text-secondary size-4" />
+            <AppIcon id="chevron:right" className="text-secondary size-4" />
+            <AppIcon id="chevron:right" className="text-secondary size-4" />
           </div>
           <div className="text-sm font-medium">
             <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.destination.systemSymbol}`}>

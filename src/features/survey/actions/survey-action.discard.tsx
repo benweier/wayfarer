@@ -17,7 +17,7 @@ export const Discard = ({ survey }: { survey: SurveyResponse }) => {
       }}
       title={t('ship.action.discard_survey')}
     >
-      <AppIcon id="trash" className="h-5 w-5" />
+      <AppIcon id="trash" className="size-5" />
     </Button>
   )
 }

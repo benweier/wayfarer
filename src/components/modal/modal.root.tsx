@@ -76,7 +76,7 @@ export const Root = ({
                       handleClose()
                     }}
                   >
-                    <AppIcon id="x" className="h-4 w-4" />
+                    <AppIcon id="x" className="size-4" />
                   </Button>
                 )}
               </Dialog.Panel>

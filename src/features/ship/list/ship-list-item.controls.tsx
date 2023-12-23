@@ -37,7 +37,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
           className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-blue-500"
         >
           <span className="sr-only">Manage</span>
-          <AppIcon id="more:vertical" className="h-4 w-4" aria-hidden="true" />
+          <AppIcon id="more:vertical" className="size-4" aria-hidden="true" />
         </Menu.Button>
 
         <FloatingPortal>

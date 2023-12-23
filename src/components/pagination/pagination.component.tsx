@@ -18,7 +18,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
         disabled={current <= 1}
         aria-label="First page"
       >
-        <AppIcon id="chevron:double-left" className="h-5 w-5" />
+        <AppIcon id="chevron:double-left" className="size-5" />
         <span className="sr-only">Page 1</span>
       </Button>
       <Button
@@ -31,7 +31,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
         disabled={current <= 1}
         aria-label="Previous page"
       >
-        <AppIcon id="chevron:left" className="h-5 w-5" />
+        <AppIcon id="chevron:left" className="size-5" />
         <span className="sr-only">Page {current - 1}</span>
       </Button>
 
@@ -60,7 +60,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
         disabled={current >= total}
         aria-label="Next page"
       >
-        <AppIcon id="chevron:right" className="h-5 w-5" />
+        <AppIcon id="chevron:right" className="size-5" />
         <span className="sr-only">Page {current + 1}</span>
       </Button>
       <Button
@@ -73,7 +73,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
         disabled={current >= total}
         aria-label="Last page"
       >
-        <AppIcon id="chevron:double-right" className="h-5 w-5" />
+        <AppIcon id="chevron:double-right" className="size-5" />
         <span className="sr-only">Page {total}</span>
       </Button>
     </div>

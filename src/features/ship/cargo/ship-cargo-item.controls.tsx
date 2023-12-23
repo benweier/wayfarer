@@ -45,7 +45,7 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
       <Menu>
         <Menu.Button ref={refs.setReference} className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-blue-500">
           <span className="sr-only">Manage</span>
-          <AppIcon id="more:vertical" className="h-4 w-4" aria-hidden="true" />
+          <AppIcon id="more:vertical" className="size-4" aria-hidden="true" />
         </Menu.Button>
 
         <FloatingPortal>
@@ -106,7 +106,7 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
               }}
             >
               {(props) => (
-                <Button intent="danger" adornment={{ start: <AppIcon id="trash" className="h-5 w-5" /> }} {...props}>
+                <Button intent="danger" adornment={{ start: <AppIcon id="trash" className="size-5" /> }} {...props}>
                   {t('ship.action.confirm_jettison', { context: 'action' })}
                 </Button>
               )}
