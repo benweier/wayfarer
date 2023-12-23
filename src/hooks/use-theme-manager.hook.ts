@@ -2,40 +2,36 @@ import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 import { themeAtom } from '@/store/atoms/theme'
 
+const toggleThemeClass = (el: HTMLElement, preference: 'system' | 'light' | 'dark', system: 'light' | 'dark') => {
+  el.classList.remove('light', 'dark')
+
+  switch (preference) {
+    case 'light':
+    case 'dark':
+      el.classList.add(preference)
+      break
+
+    case 'system': {
+      el.classList.add(system)
+
+      break
+    }
+  }
+}
+
 export const useThemeManager = () => {
   const [theme] = useAtom(themeAtom)
 
   useEffect(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+    const el = document.documentElement
 
-    switch (theme) {
-      case 'light':
-        document.documentElement.dataset.theme = 'light'
-        break
-
-      case 'dark':
-        document.documentElement.dataset.theme = 'dark'
-        break
-
-      default: {
-        if (prefersDark.matches) {
-          document.documentElement.dataset.theme = 'dark'
-        } else {
-          document.documentElement.dataset.theme = 'light'
-        }
-
-        break
-      }
-    }
+    toggleThemeClass(el, theme, prefersDark.matches ? 'dark' : 'light')
 
     if (theme !== 'system') return
 
     const listener = (event: MediaQueryListEvent) => {
-      if (event.matches) {
-        document.documentElement.dataset.theme = 'dark'
-      } else {
-        document.documentElement.dataset.theme = 'light'
-      }
+      toggleThemeClass(el, theme, event.matches ? 'dark' : 'light')
     }
 
     prefersDark.addEventListener('change', listener)
