@@ -244,12 +244,16 @@ const Agent = () => {
   return (
     <div>
       <div className="text-right text-xl font-black">{agent.symbol}</div>
-      <div className="text-right text-sm font-bold">{formatNumber(agent.credits)}</div>
-      <div className="text-right text-sm font-semibold">
+      <div className="text-right text-sm">
+        Credits: <span className="font-bold">{formatNumber(agent.credits)}</span>
+      </div>
+      <div className="text-right text-sm">
         HQ:{' '}
-        <Link className="link" to={`/systems/${sector}-${system}/waypoint/${sector}-${system}-${waypoint}`}>
-          {agent.headquarters}
-        </Link>
+        <span className="font-semibold">
+          <Link className="link" to={`/systems/${sector}-${system}/waypoint/${sector}-${system}-${waypoint}`}>
+            {agent.headquarters}
+          </Link>
+        </span>
       </div>
     </div>
   )
