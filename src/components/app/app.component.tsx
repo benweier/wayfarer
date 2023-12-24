@@ -1,45 +1,20 @@
-import * as Sentry from '@sentry/react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { enableMapSet } from 'immer'
-import { Suspense, useEffect } from 'react'
+import { Suspense } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { I18nextProvider } from 'react-i18next'
-import {
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromChildren,
-  matchRoutes,
-  useLocation,
-  useNavigationType,
-} from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { routes } from '@/routes/routes.conf'
 import { Fallback } from '@/routes/routes.fallback'
 import { i18n } from '@/services/i18n'
 import { client } from '@/services/query-client'
+import { sentry } from '@/services/sentry'
 import '@/styles/tailwind.css'
 
 enableMapSet()
 
-Sentry.init({
-  dsn: import.meta.env.SENTRY_DSN,
-  enabled: import.meta.env.PROD,
-  integrations: [
-    new Sentry.BrowserProfilingIntegration(),
-    new Sentry.BrowserTracing({
-      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
-        useEffect,
-        useLocation,
-        useNavigationType,
-        createRoutesFromChildren,
-        matchRoutes,
-      ),
-    }),
-  ],
-  tracesSampleRate: 0.1,
-})
-
-const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouter(createBrowserRouter)
+const sentryCreateBrowserRouter = sentry.wrapCreateBrowserRouter(createBrowserRouter)
 const router = sentryCreateBrowserRouter(routes)
 
 export const App = () => {
