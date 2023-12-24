@@ -11,6 +11,7 @@ import { ROUTES } from '@/config/routes'
 import { Navigation } from '@/features/navigation'
 import { sidebarAtom } from '@/store/atoms/sidebar'
 import { useAuthStore } from '@/store/auth'
+import { formatNumber } from '@/utilities/number'
 
 const menu = [
   { key: 'navigation.fleet', href: ROUTES.FLEET, icon: 'fleet' },
@@ -238,12 +239,18 @@ const Agent = () => {
 
   if (!isAuthenticated) return null
 
-  const credits = new Intl.NumberFormat('en-US').format(agent.credits)
+  const [sector, system, waypoint] = agent.headquarters.split('-')
 
   return (
-    <>
+    <div>
       <div className="text-right text-xl font-black">{agent.symbol}</div>
-      <div className="text-right text-sm font-semibold">Credits: {credits}</div>
-    </>
+      <div className="text-right text-sm font-bold">{formatNumber(agent.credits)}</div>
+      <div className="text-right text-sm font-semibold">
+        HQ:{' '}
+        <Link className="link" to={`/systems/${sector}-${system}/waypoint/${sector}-${system}-${waypoint}`}>
+          {agent.headquarters}
+        </Link>
+      </div>
+    </div>
   )
 }
