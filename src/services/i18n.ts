@@ -41,6 +41,10 @@ void i18n
     interpolation: {
       escapeValue: false,
     },
+    saveMissing: true,
+    missingKeyHandler: (lng, ns, key, fallbackValue) => {
+      console.warn(`Missing translation key - [${lng.join()}] ${ns}:${key} (${fallbackValue})`)
+    },
   })
 i18n.services.formatter?.add('formatNumber', formatNumber)
 i18n.services.formatter?.add('formatRelativeTime', formatRelativeTime)
