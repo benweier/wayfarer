@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { WaypointFleetError, WaypointFleetFallback, WaypointFleetList } from '@/features/waypoint/fleet'
-import { WaypointJumpGateError, WaypointJumpGateFallback, WaypointJumpGateList } from '@/features/waypoint/jumpgate'
+import { WaypointJumpGateError, WaypointJumpGateFallback } from '@/features/waypoint/jumpgate'
 import {
   WaypointMarketError,
   WaypointMarketFallback,
@@ -12,16 +12,16 @@ import {
   WaypointMarketNotAvailable,
   WaypointMarketPreferences,
 } from '@/features/waypoint/market'
-import {
-  WaypointShipyardError,
-  WaypointShipyardFallback,
-  WaypointShipyardList,
-  WaypointShipyardNotAvailable,
-} from '@/features/waypoint/shipyard'
+import { WaypointShipyardError, WaypointShipyardFallback } from '@/features/waypoint/shipyard'
+import { dynamic } from '@/utilities/dynamic.helper'
+
+const { WaypointShipyardList } = dynamic(() => import('@/features/waypoint/shipyard'), 'WaypointShipyardList')
+const { WaypointJumpGateList } = dynamic(() => import('@/features/waypoint/jumpgate'), 'WaypointJumpGateList')
 
 export const WaypointTabs = () => {
   const { t } = useTranslation()
   const waypoint = useWaypointResponse()
+  const isJumpGate = waypoint.type === 'JUMP_GATE'
   const hasMarket = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
   const hasShipyard = waypoint.traits.findIndex((trait) => trait.symbol === 'SHIPYARD') !== -1
 
@@ -35,13 +35,8 @@ export const WaypointTabs = () => {
           {t('market.label')}
         </Tab>
         <Tab className={({ selected }) => cx('group tab', { selected })}>{t('fleet.label')}</Tab>
-        <Tab
-          disabled={!hasShipyard}
-          className={({ selected }) => cx('group tab', { selected, 'opacity-30': !hasShipyard })}
-        >
-          {t('shipyard.label')}
-        </Tab>
-        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('jumpgate.label')}</Tab>
+        {hasShipyard && <Tab className={({ selected }) => cx('group tab', { selected })}>{t('shipyard.label')}</Tab>}
+        {isJumpGate && <Tab className={({ selected }) => cx('group tab', { selected })}>{t('jumpgate.label')}</Tab>}
       </Tab.List>
 
       <Tab.Panels>
@@ -61,17 +56,21 @@ export const WaypointTabs = () => {
           </QuerySuspenseBoundary>
         </Tab.Panel>
 
-        <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<WaypointShipyardFallback />} error={<WaypointShipyardError />}>
-            {hasShipyard ? <WaypointShipyardList /> : <WaypointShipyardNotAvailable />}
-          </QuerySuspenseBoundary>
-        </Tab.Panel>
+        {hasShipyard && (
+          <Tab.Panel>
+            <QuerySuspenseBoundary fallback={<WaypointShipyardFallback />} error={<WaypointShipyardError />}>
+              <WaypointShipyardList />
+            </QuerySuspenseBoundary>
+          </Tab.Panel>
+        )}
 
-        <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<WaypointJumpGateFallback />} error={<WaypointJumpGateError />}>
-            <WaypointJumpGateList />
-          </QuerySuspenseBoundary>
-        </Tab.Panel>
+        {isJumpGate && (
+          <Tab.Panel>
+            <QuerySuspenseBoundary fallback={<WaypointJumpGateFallback />} error={<WaypointJumpGateError />}>
+              <WaypointJumpGateList />
+            </QuerySuspenseBoundary>
+          </Tab.Panel>
+        )}
       </Tab.Panels>
     </Tab.Group>
   )
