@@ -8,6 +8,7 @@ import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-a
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { type WaypointNavigationTableSchema } from './waypoint-navigation.types'
 
+const FILTER_TRAITS = ['MARKETPLACE', 'SHIPYARD', 'STRIPPED']
 const columnHelper = createColumnHelper<WaypointNavigationTableSchema>()
 
 export const columns = [
@@ -125,7 +126,7 @@ export const columns = [
     },
     cell: ({ getValue }) => {
       const traits = getValue().filter((trait) => {
-        return ['MARKETPLACE', 'SHIPYARD'].includes(trait.symbol)
+        return FILTER_TRAITS.includes(trait.symbol)
       })
 
       return (
