@@ -2,6 +2,7 @@ import { createInstance } from 'i18next'
 import languageDetector from 'i18next-browser-languagedetector'
 import backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
+import { sentry } from '@/services/sentry'
 import { formatDateTime, formatRelativeTime } from '@/utilities/date'
 import { formatNumber } from '@/utilities/number'
 
@@ -43,7 +44,13 @@ void i18n
     },
     saveMissing: true,
     missingKeyHandler: (lng, ns, key, fallbackValue) => {
-      console.warn(`Missing translation key - [${lng.join()}] ${ns}:${key} (${fallbackValue})`)
+      const msg = `Missing translation key - [${lng.join()}] ${ns}:${key} (${fallbackValue})`
+
+      if (import.meta.env.PROD) {
+        sentry.captureMessage(msg, 'warning')
+      } else {
+        console.warn(msg)
+      }
     },
   })
 i18n.services.formatter?.add('formatNumber', formatNumber)
