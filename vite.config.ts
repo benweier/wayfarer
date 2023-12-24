@@ -2,6 +2,7 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
+import { checker } from 'vite-plugin-checker'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
@@ -36,6 +37,15 @@ export default defineConfig({
     },
   },
   plugins: [
+    checker({
+      typescript: true,
+      overlay: {
+        position: 'bl',
+        initialIsOpen: false,
+      },
+      terminal: false,
+      enableBuild: false,
+    }),
     basicSSL(),
     tsconfigPaths(),
     react(),
