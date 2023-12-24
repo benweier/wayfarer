@@ -162,7 +162,9 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                     <div className="size-6">
                       <MenuIcon id="login" className="size-6" aria-hidden />
                     </div>
-                    <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.login')}</span>
+                    <span className="sr-only text-sm @[220px]/side:not-sr-only">
+                      {t('auth.login', { context: 'action' })}
+                    </span>
                   </Link>
                 </div>
               )}
