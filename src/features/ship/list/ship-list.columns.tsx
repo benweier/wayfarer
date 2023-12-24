@@ -1,11 +1,10 @@
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { Button } from '@/components/button'
-import { AppIcon, ShipIcon } from '@/components/icons'
+import { ShipIcon } from '@/components/icons'
+import { Sort } from '@/components/table'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
-import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { ShipControls } from './ship-list-item.controls'
 import { type ShipListTableSchema } from './ship-list.types'
 
@@ -26,20 +25,11 @@ export const columns = [
   columnHelper.accessor((row) => row.ship.symbol, {
     id: 'symbol',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-start gap-2">
           <Translation>{(t) => <div>{t('general.header.symbol')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )
@@ -60,22 +50,13 @@ export const columns = [
     maxSize: 20,
   }),
   columnHelper.accessor((row) => row.ship.nav.systemSymbol, {
-    id: 'systemSymbol',
+    id: 'system',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-start gap-2">
           <Translation>{(t) => <div>{t('general.header.system')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )
@@ -94,22 +75,13 @@ export const columns = [
     maxSize: 10,
   }),
   columnHelper.accessor((row) => row.ship.nav.waypointSymbol, {
-    id: 'waypointSymbol',
+    id: 'waypoint',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-start gap-2">
           <Translation>{(t) => <div>{t('general.header.waypoint')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )
@@ -156,20 +128,11 @@ export const columns = [
   columnHelper.accessor((row) => row.ship.fuel, {
     id: 'fuel',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-end gap-2">
           <Translation>{(t) => <div>{t('general.header.fuel')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
-            </Button>
+            <Sort column={column} type="numeric" />
           </div>
         </div>
       )
@@ -216,20 +179,11 @@ export const columns = [
   columnHelper.accessor((row) => row.ship.cargo, {
     id: 'cargo',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-end gap-2">
           <Translation>{(t) => <div>{t('general.header.cargo')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
-            </Button>
+            <Sort column={column} type="numeric" />
           </div>
         </div>
       )

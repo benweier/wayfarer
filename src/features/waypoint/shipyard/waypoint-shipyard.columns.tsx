@@ -4,9 +4,9 @@ import { type PropsWithChildren } from 'react'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
+import { Sort } from '@/components/table'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { type ShipyardShip } from '@/types/spacetraders'
-import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { formatNumber } from '@/utilities/number'
 
 const BuyCell = ({ ship, children }: PropsWithChildren<{ ship: ShipyardShip }>) => {
@@ -33,20 +33,11 @@ export const columns = [
   columnHelper.accessor((row) => row.name, {
     id: 'name',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-start gap-2 text-right">
           <div>Ship Type</div>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )
@@ -215,20 +206,11 @@ export const columns = [
   columnHelper.accessor((row) => row.purchasePrice, {
     id: 'purchase_price',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-end gap-2 text-right">
           <div>Price</div>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
-            </Button>
+            <Sort column={column} type="numeric" />
           </div>
         </div>
       )

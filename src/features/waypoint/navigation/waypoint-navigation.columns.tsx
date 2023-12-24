@@ -2,12 +2,10 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
-import { Button } from '@/components/button'
-import { AppIcon } from '@/components/icons'
+import { Sort } from '@/components/table'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
-import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { type WaypointNavigationTableSchema } from './waypoint-navigation.types'
 
 const columnHelper = createColumnHelper<WaypointNavigationTableSchema>()
@@ -16,20 +14,11 @@ export const columns = [
   columnHelper.accessor((row) => row.waypoint.symbol, {
     id: 'symbol',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-start gap-2 text-right">
           <Translation>{(t) => <div>{t('general.header.waypoint')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )
@@ -63,20 +52,11 @@ export const columns = [
     {
       id: 'distance',
       header: ({ column }) => {
-        const sorted = column.getIsSorted()
-
         return (
           <div className="flex items-center justify-start gap-2 text-left">
             <Translation>{(t) => <div>{t('general.header.distance_time')}</div>}</Translation>
             <div>
-              <Button
-                intent={sorted === false ? 'dim' : 'primary'}
-                kind="flat"
-                size="small"
-                onClick={column.getToggleSortingHandler()}
-              >
-                <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
-              </Button>
+              <Sort column={column} type="numeric" />
             </div>
           </div>
         )
@@ -104,20 +84,11 @@ export const columns = [
   columnHelper.accessor((row) => row.waypoint.type, {
     id: 'type',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-start gap-2 text-right">
           <Translation>{(t) => <div>{t('general.header.type')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )

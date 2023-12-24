@@ -2,10 +2,8 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
 import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
-import { Button } from '@/components/button'
-import { AppIcon } from '@/components/icons'
+import { Sort } from '@/components/table'
 import { TradeGoodContext } from '@/features/trade-good/context'
-import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { formatNumber } from '@/utilities/number'
 import { type WaypointMarketTableSchema } from './waypoint-market.types'
 
@@ -15,20 +13,11 @@ export const columns = [
   columnHelper.accessor((row) => row.good.name, {
     id: 'name',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex w-64 items-center justify-start gap-2 text-right">
           <Translation>{(t) => <div>{t('general.header.name')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )
@@ -94,22 +83,13 @@ export const columns = [
   columnHelper.accessor((row) => row.trade?.purchasePrice, {
     id: 'purchase_price',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-end gap-2 text-right">
           <Translation>
             {(t) => <div className="whitespace-nowrap">{t('general.header.purchase_price')}</div>}
           </Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
-            </Button>
+            <Sort column={column} type="numeric" />
           </div>
         </div>
       )
@@ -144,20 +124,11 @@ export const columns = [
   columnHelper.accessor((row) => row.trade?.sellPrice, {
     id: 'sell_price',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-end gap-2 text-right">
           <Translation>{(t) => <div className="whitespace-nowrap">{t('general.header.sell_price')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'numeric')} className="size-4" />
-            </Button>
+            <Sort column={column} type="numeric" />
           </div>
         </div>
       )

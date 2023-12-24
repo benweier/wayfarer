@@ -1,11 +1,9 @@
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
-import { Button } from '@/components/button'
-import { AppIcon } from '@/components/icons'
+import { Sort } from '@/components/table'
 import { SurveyContext } from '@/features/survey/context'
 import { formatDateTime } from '@/utilities/date'
-import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { type SurveyListTableSchema } from './survey-list.types'
 
 const columnHelper = createColumnHelper<SurveyListTableSchema>()
@@ -14,20 +12,11 @@ export const columns = [
   columnHelper.accessor((row) => row.survey.signature, {
     id: 'signature',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-start gap-2 text-right">
           <Translation>{(t) => <div>{t('general.header.signature')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )
@@ -60,20 +49,11 @@ export const columns = [
   columnHelper.accessor((row) => new Date(row.survey.expiration), {
     id: 'expiration',
     header: ({ column }) => {
-      const sorted = column.getIsSorted()
-
       return (
         <div className="flex items-center justify-start gap-2">
           <Translation>{(t) => <div>{t('general.header.expiration')}</div>}</Translation>
           <div>
-            <Button
-              intent={sorted === false ? 'dim' : 'primary'}
-              kind="flat"
-              size="small"
-              onClick={column.getToggleSortingHandler()}
-            >
-              <AppIcon id={getSortingIcon(sorted, 'alpha')} className="size-4" />
-            </Button>
+            <Sort column={column} type="alpha" />
           </div>
         </div>
       )
