@@ -1,6 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { Badge } from '@/components/badge'
 import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { useShipTransit } from '@/features/ship/transit'
@@ -34,14 +35,17 @@ export const columns = [
         </div>
       )
     },
-    cell: ({ getValue }) => {
+    cell: ({ getValue, row }) => {
       const symbol = getValue()
 
       return (
-        <div className="text-lg">
-          <Link className="link" to={`/fleet/ship/${symbol}`}>
+        <div className="flex items-center justify-between gap-4">
+          <Link className="link text-xl" to={`/fleet/ship/${symbol}`}>
             {symbol}
           </Link>
+          <Badge>
+            <Translation>{(t) => t(row.original.ship.frame.symbol, { ns: 'spacetraders.frame_type' })}</Translation>
+          </Badge>
         </div>
       )
     },
@@ -110,12 +114,12 @@ export const columns = [
     cell: ({ row }) => {
       return (
         <div className="relative flex gap-x-1">
-          <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+          <Badge>
             <Translation ns="spacetraders.nav_status">{(t) => t(row.original.ship.nav.status)}</Translation>
-          </div>
-          <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
+          </Badge>
+          <Badge>
             <Translation ns="spacetraders.flight_mode">{(t) => t(row.original.ship.nav.flightMode)}</Translation>
-          </div>
+          </Badge>
           <div className="absolute inset-x-0 -bottom-1">
             <TransitStatusPreview ship={row.original.ship} />
           </div>

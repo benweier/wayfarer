@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import { ROUTES } from '@/config/routes'
@@ -16,28 +17,23 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         <div className="flex gap-8">
           <div>
             <div className="text-secondary text-xs uppercase">{t('system.label')}</div>
-            <div className="font-semibold">
-              <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
-                {ship.nav.systemSymbol}
-              </Link>
-            </div>
+            <Link className="link" to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}`}>
+              {ship.nav.systemSymbol}
+            </Link>
           </div>
           <div>
             <div className="text-secondary text-xs uppercase">{t('waypoint.label')}</div>
-            <div className="flex items-center gap-2">
-              <div className="font-semibold">
-                <Link
-                  className="link"
-                  to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}/waypoint/${ship.nav.waypointSymbol}`}
-                >
-                  {ship.nav.waypointSymbol}
-                </Link>
-              </div>
-              <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-                {t(ship.nav.status, { ns: 'spacetraders.nav_status' })}
-              </div>
-              <div className="text-primary text-inverse my-0.5 rounded-full bg-zinc-700 px-2.5 text-xs font-bold dark:bg-zinc-300">
-                {t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}
+            <div className="flex items-center gap-4">
+              <Link
+                className="link"
+                to={`${ROUTES.SYSTEMS}/${ship.nav.systemSymbol}/waypoint/${ship.nav.waypointSymbol}`}
+              >
+                {ship.nav.waypointSymbol}
+              </Link>
+
+              <div className="flex gap-1">
+                <Badge>{t(ship.nav.status, { ns: 'spacetraders.nav_status' })}</Badge>
+                <Badge>{t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}</Badge>
               </div>
             </div>
             <div className="flex gap-2">
