@@ -10,18 +10,7 @@ import { ShipPresence } from '@/features/ship/presence'
 import { TypeFilter } from '@/features/waypoint/list/type-filter.component'
 import { type WaypointListTableSchema } from './waypoint-list.types'
 
-const FILTERED_TRAITS = new Set([
-  'UNCHARTED',
-  'MARKETPLACE',
-  'SHIPYARD',
-  'MINERAL_DEPOSITS',
-  'COMMON_METAL_DEPOSITS',
-  'PRECIOUS_METAL_DEPOSITS',
-  'RARE_METAL_DEPOSITS',
-  'METHANE_POOLS',
-  'ICE_CRYSTALS',
-  'EXPLOSIVE_GASES',
-])
+const FILTERED_TRAITS = new Set(['UNCHARTED', 'MARKETPLACE', 'SHIPYARD', 'STRIPPED'])
 const columnHelper = createColumnHelper<WaypointListTableSchema>()
 
 export const columns = [
