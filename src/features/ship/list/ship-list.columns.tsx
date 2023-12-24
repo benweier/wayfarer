@@ -39,7 +39,7 @@ export const columns = [
       const symbol = getValue()
 
       return (
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
           <Link className="link text-xl" to={`/fleet/ship/${symbol}`}>
             {symbol}
           </Link>
@@ -50,8 +50,8 @@ export const columns = [
       )
     },
     enableSorting: true,
-    minSize: 20,
-    maxSize: 20,
+    minSize: 30,
+    maxSize: 30,
   }),
   columnHelper.accessor((row) => row.ship.nav.systemSymbol, {
     id: 'system',
@@ -126,8 +126,8 @@ export const columns = [
         </div>
       )
     },
-    minSize: 25,
-    maxSize: 25,
+    minSize: 20,
+    maxSize: 20,
   }),
   columnHelper.accessor((row) => row.ship.fuel, {
     id: 'fuel',
