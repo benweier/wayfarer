@@ -107,7 +107,11 @@
     },
     "sorting": {
       "asc": "ascending",
-      "desc": "descending"
+      "desc": "descending",
+      "sort_by_property": "Sort by ($t(general.header.{{id}})",
+      "sort_by_property|reset": "Reset $t(general.header.{{id}}) sorting",
+      "sort_by_property|asc": "Sort by $t(general.header.{{id}}) ($t(general.sorting.asc))",
+      "sort_by_property|desc": "Sort by $t(general.header.{{id}}) ($t(general.sorting.desc))"
     },
     "fields": {
       "optional": "(optional)"
