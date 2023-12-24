@@ -1,4 +1,5 @@
 import { flexRender } from '@tanstack/react-table'
+import { useTranslation } from 'react-i18next'
 import { Row as RowComponent } from './row.component'
 import { type TableProps } from './table.types'
 
@@ -6,8 +7,9 @@ export const Table = <T extends Record<string, any> = Record<string, never>>({
   table,
   Row = RowComponent,
 }: TableProps<T>) => {
+  const { t } = useTranslation()
   const groups = table.getHeaderGroups()
-  const rows = table.getRowModel().rows
+  const rows = table.getSortedRowModel().rows
 
   return (
     <div className="w-full max-w-full overflow-x-auto overflow-y-hidden">
@@ -15,15 +17,26 @@ export const Table = <T extends Record<string, any> = Record<string, never>>({
         <thead className="bg-zinc-100 dark:bg-zinc-800">
           {groups.map((group) => (
             <tr key={group.id}>
-              {group.headers.map((header) => (
-                <th
-                  key={header.id}
-                  className="text-primary px-3 py-3.5 text-sm font-semibold"
-                  style={{ width: `${header.getSize()}%` }}
-                >
-                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                </th>
-              ))}
+              {group.headers.map((header) => {
+                const sorted = header.column.getIsSorted()
+
+                return (
+                  <th
+                    key={header.id}
+                    className="text-primary px-3 py-3.5 text-sm font-semibold"
+                    style={{ width: `${header.getSize()}%` }}
+                    aria-sort={
+                      sorted
+                        ? sorted === 'asc'
+                          ? (t('general.sorting.asc') as 'ascending')
+                          : (t('general.sorting.desc') as 'descending')
+                        : undefined
+                    }
+                  >
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  </th>
+                )
+              })}
             </tr>
           ))}
         </thead>
