@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Navigate, useParams } from 'react-router-dom'
 import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
-import { LeaderboardAgent } from '@/features/leaderboard/agent'
+import { AgentDetail } from '@/features/agent/detail'
 
 export const AgentRouteComponent = () => {
   const { t } = useTranslation()
@@ -17,7 +17,7 @@ export const AgentRouteComponent = () => {
       </h1>
 
       <QuerySuspenseBoundary>
-        <LeaderboardAgent agentSymbol={agentSymbol} />
+        <AgentDetail agentSymbol={agentSymbol} />
       </QuerySuspenseBoundary>
     </div>
   )

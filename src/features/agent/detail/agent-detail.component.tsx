@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { getAgentBySymbolQuery } from '@/services/api/spacetraders/agent'
 import { formatNumber } from '@/utilities/number'
 
-export const LeaderboardAgent = ({ agentSymbol }: { agentSymbol: string }) => {
+export const AgentDetail = ({ agentSymbol }: { agentSymbol: string }) => {
   const { t } = useTranslation()
   const { data } = useSuspenseQuery({
     queryKey: getAgentBySymbolQuery.getQueryKey({ agentSymbol }),
