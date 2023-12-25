@@ -20,7 +20,7 @@ export const Navigation = () => {
     <nav className="flex flex-col items-center justify-center gap-2 p-4">
       {menu.map((item) => {
         if ('divider' in item) {
-          return <div key={item.key} className="h-0.5 w-full rounded-full bg-zinc-100/10"></div>
+          return <div key={item.key} className="my-2 h-1 w-full rounded-full bg-zinc-100/20"></div>
         }
 
         return (
