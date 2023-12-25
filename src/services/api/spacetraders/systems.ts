@@ -10,6 +10,9 @@ import {
 import { getPageList } from '@/utilities/get-page-list.helper'
 import { type Meta, type SpaceTradersResponse, attachQueryParams, createHeaders } from './core'
 
+type SystemQueryKey<T extends keyof typeof SYSTEM_QUERIES> = ReturnType<(typeof SYSTEM_QUERIES)[T]>
+type WaypointQueryKey<T extends keyof typeof WAYPOINT_QUERIES> = ReturnType<(typeof WAYPOINT_QUERIES)[T]>
+
 const SYSTEM_QUERIES = {
   systemList: (params?: { page?: number; limit?: number }) => [{ scope: 'systems', entity: 'list' }, params] as const,
   systemById: ({ systemSymbol }: { systemSymbol: string }) =>
@@ -38,9 +41,6 @@ const WAYPOINT_QUERIES = {
       { systemSymbol, waypointSymbol },
     ] as const,
 }
-
-type SystemQueryKey<T extends keyof typeof SYSTEM_QUERIES> = ReturnType<(typeof SYSTEM_QUERIES)[T]>
-type WaypointQueryKey<T extends keyof typeof WAYPOINT_QUERIES> = ReturnType<(typeof WAYPOINT_QUERIES)[T]>
 
 export const getSystemListQuery = {
   getQueryKey: SYSTEM_QUERIES.systemList,
