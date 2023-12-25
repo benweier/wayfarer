@@ -17,50 +17,6 @@ export const routes: RouteObject[] = [
       },
 
       {
-        path: '/leaderboard',
-        errorElement: <RouteError />,
-        async lazy() {
-          const mod = await import('@/routes/leaderboard')
-
-          return {
-            element: <mod.Layout />,
-          }
-        },
-        children: [
-          {
-            index: true,
-            errorElement: <RouteError />,
-            async lazy() {
-              const mod = await import('@/routes/leaderboard')
-
-              return {
-                element: <mod.Route />,
-                loader: mod.loader(client),
-                handle: {
-                  meta: mod.meta,
-                },
-              }
-            },
-          },
-          {
-            path: 'agent/:agentSymbol',
-            errorElement: <RouteError />,
-            async lazy() {
-              const mod = await import('@/routes/leaderboard/agent')
-
-              return {
-                element: <mod.Route />,
-                loader: mod.loader(client),
-                handle: {
-                  meta: mod.meta,
-                },
-              }
-            },
-          },
-        ],
-      },
-
-      {
         element: <auth.Route />,
         errorElement: <RouteError />,
         children: [
@@ -177,6 +133,58 @@ export const routes: RouteObject[] = [
                 ],
               },
             ],
+          },
+
+          {
+            path: '/agents',
+            errorElement: <RouteError />,
+            children: [
+              {
+                index: true,
+                errorElement: <RouteError />,
+                async lazy() {
+                  const mod = await import('@/routes/agents')
+
+                  return {
+                    element: <mod.Route />,
+                    loader: mod.loader(client),
+                    handle: {
+                      meta: mod.meta,
+                    },
+                  }
+                },
+              },
+              {
+                path: ':agentSymbol',
+                errorElement: <RouteError />,
+                async lazy() {
+                  const mod = await import('@/routes/agents/agent')
+
+                  return {
+                    element: <mod.Route />,
+                    loader: mod.loader(client),
+                    handle: {
+                      meta: mod.meta,
+                    },
+                  }
+                },
+              },
+            ],
+          },
+          {
+            path: '/leaderboard',
+            errorElement: <RouteError />,
+            async lazy() {
+              const mod = await import('@/routes/leaderboard')
+
+              return {
+                element: <mod.Route />,
+                loader: mod.loader(client),
+                handle: {
+                  meta: mod.meta,
+                },
+              }
+            },
           },
         ],
       },
