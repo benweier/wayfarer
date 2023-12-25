@@ -12,4 +12,5 @@ export const ROUTES = {
   MARKET: '/market',
   CONTRACTS: '/contracts',
   LEADERBOARD: '/leaderboard',
+  AGENTS: '/agents',
 }
