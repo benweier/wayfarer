@@ -1,7 +1,9 @@
 {
   "navigation": {
     "fleet": "Fleet",
-    "systems": "Systems"
+    "systems": "Systems",
+    "leaderboard": "Leaderboard",
+    "agents": "Agents"
   },
   "preferences": {
     "label": "Preferences",
@@ -55,6 +57,9 @@
     "label": "Leaderboard",
     "most_credits": "Most Credits",
     "most_charted": "Most Charted Waypoints"
+  },
+  "agents": {
+    "label": "Agents"
   },
   "agent": {
     "label": "Agent",
