@@ -29,8 +29,8 @@ export const createHeaders = (init?: HeadersInit) => {
 
 export const attachQueryParams = (url: URL, params?: f.QueryParams) => {
   if (params) {
-    for (const [key, value] of Object.entries(params)) {
-      if (value !== undefined && value !== null) url.searchParams.append(key, String(value))
+    for (const key in params) {
+      if (params[key] !== undefined && params[key] !== null) url.searchParams.append(key, String(params[key]))
     }
   }
 
