@@ -51,7 +51,7 @@ export const columns = [
       return Number(Math.sqrt(Math.pow(xd, 2) + Math.pow(yd, 2)).toFixed(3))
     },
     {
-      id: 'distance',
+      id: 'distance_time',
       header: ({ column }) => {
         return (
           <div className="flex items-center justify-start gap-2 text-left">
