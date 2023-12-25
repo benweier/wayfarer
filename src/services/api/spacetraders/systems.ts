@@ -4,7 +4,7 @@ import {
   type JumpGateResponse,
   type MarketResponse,
   type ShipyardResponse,
-  type SystemsResponse,
+  type SystemResponse,
   type WaypointResponse,
 } from '@/types/spacetraders'
 import { getPageList } from '@/utilities/get-page-list.helper'
@@ -49,7 +49,7 @@ export const getSystemListQuery = {
 
     if (params) attachQueryParams(url, params)
 
-    return get<SpaceTradersResponse<SystemsResponse[], Meta>>(url, { signal, headers: createHeaders() })
+    return get<SpaceTradersResponse<SystemResponse[], Meta>>(url, { signal, headers: createHeaders() })
   },
 }
 
@@ -58,7 +58,7 @@ export const getSystemByIdQuery = {
   queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<SystemQueryKey<'systemById'>>) => {
     const url = new URL(`systems/${args.systemSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return get<SpaceTradersResponse<SystemsResponse>>(url, { signal, headers: createHeaders() })
+    return get<SpaceTradersResponse<SystemResponse>>(url, { signal, headers: createHeaders() })
   },
 }
 

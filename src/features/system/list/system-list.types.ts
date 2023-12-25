@@ -1,7 +1,7 @@
-import { type SystemsResponse } from '@/types/spacetraders'
+import { type SystemResponse } from '@/types/spacetraders'
 
 export type SystemListTableSchema = {
-  system: SystemsResponse
+  system: SystemResponse
   presence: number
 }
 

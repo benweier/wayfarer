@@ -226,7 +226,7 @@ export type SystemWaypoint = {
 
 export type SystemFaction = { symbol: string }
 
-export type SystemsResponse = {
+export type SystemResponse = {
   symbol: string
   sectorSymbol: string
   type: string

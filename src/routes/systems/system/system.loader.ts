@@ -4,9 +4,9 @@ import { getShipListQuery, getSystemByIdQuery, getWaypointListQuery } from '@/se
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/store/auth'
-import { type SystemsResponse } from '@/types/spacetraders'
+import { type SystemResponse } from '@/types/spacetraders'
 
-export const meta: MetaFunction<Partial<{ system: SpaceTradersResponse<SystemsResponse> }>> = (t, { system }) => {
+export const meta: MetaFunction<Partial<{ system: SpaceTradersResponse<SystemResponse> }>> = (t, { system }) => {
   if (!system) {
     return []
   }

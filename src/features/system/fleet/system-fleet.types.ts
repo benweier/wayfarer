@@ -1,3 +1,3 @@
-import { type SystemsResponse } from '@/types/spacetraders'
+import { type SystemResponse } from '@/types/spacetraders'
 
-export type SystemFleetProps = { system: SystemsResponse }
+export type SystemFleetProps = { system: SystemResponse }
