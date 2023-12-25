@@ -12,7 +12,7 @@ export const LeaderboardAgent = ({ agentSymbol }: { agentSymbol: string }) => {
   const agent = data.data
 
   return (
-    <div className="mx-auto grid w-full max-w-xs gap-4">
+    <div className="max-w-md space-y-2">
       <div className="flex items-center justify-between gap-2">
         <span className="font-bold">{t('agent.credits')}:</span> {formatNumber(agent.credits)}
       </div>
@@ -25,7 +25,6 @@ export const LeaderboardAgent = ({ agentSymbol }: { agentSymbol: string }) => {
       <div className="flex items-center justify-between gap-2">
         <span className="font-bold">{t('agent.total_ship_count')}:</span> {formatNumber(agent.shipCount)}
       </div>
-      <div></div>
     </div>
   )
 }
