@@ -108,7 +108,7 @@ export const columns = [
       )
 
       return (
-        <ul className="relative isolate flex list-none items-center justify-end -space-x-2">
+        <ul className="relative isolate flex list-none flex-wrap items-center justify-end -space-x-2">
           {values.waypoints.map((waypoint) => {
             return (
               <li
