@@ -6,8 +6,8 @@ export const LeaderboardRouteComponent = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="grid gap-4 p-4">
-      <h1 className="text-title text-center">{t('leaderboard.label')}</h1>
+    <div className="space-y-4 p-4">
+      <h1 className="text-title">{t('leaderboard.label')}</h1>
 
       <QuerySuspenseBoundary fallback={<LeaderboardListFallback />}>
         <LeaderboardList />
