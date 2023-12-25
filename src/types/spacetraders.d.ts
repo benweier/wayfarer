@@ -21,6 +21,8 @@ export type AgentResponse = {
   symbol: string
   headquarters: string
   credits: number
+  startingFaction: string
+  shipCount: number
 }
 
 export type ContractDelivery = {

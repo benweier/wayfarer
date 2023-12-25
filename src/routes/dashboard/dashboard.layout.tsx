@@ -255,6 +255,12 @@ const Agent = () => {
           </Link>
         </span>
       </div>
+      <div className="text-right text-sm">
+        Faction: <span className="font-semibold">{agent.startingFaction}</span>
+      </div>
+      <div className="text-right text-sm">
+        Ship Count: <span className="font-semibold">{agent.shipCount}</span>
+      </div>
     </div>
   )
 }
