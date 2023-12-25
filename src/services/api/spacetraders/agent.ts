@@ -11,7 +11,7 @@ import { type AgentResponse } from '@/types/spacetraders'
 type AgentQueryKey<T extends keyof typeof AGENT_QUERIES> = ReturnType<(typeof AGENT_QUERIES)[T]>
 
 const AGENT_QUERIES = {
-  agentList: (params?: { page?: number; limit?: number }) => [{ scope: 'agents', entity: 'list' }, params] as const,
+  agentList: (params: { page?: number; limit?: number } = {}) => [{ scope: 'agents', entity: 'list' }, params] as const,
   agentBySymbol: (args: { agentSymbol: string }) => [{ scope: 'agents', entity: 'item' }, args] as const,
 }
 
@@ -20,7 +20,7 @@ export const getAgentListQuery = {
   queryFn: async ({ queryKey: [, params], signal }: QueryFunctionContext<AgentQueryKey<'agentList'>>) => {
     const url = new URL('agents', import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    if (params) attachQueryParams(url, params)
+    attachQueryParams(url, params)
 
     return get<SpaceTradersResponse<AgentResponse[], Meta>>(url, { signal, headers: createHeaders() })
   },

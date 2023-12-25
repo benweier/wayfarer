@@ -14,7 +14,8 @@ type SystemQueryKey<T extends keyof typeof SYSTEM_QUERIES> = ReturnType<(typeof 
 type WaypointQueryKey<T extends keyof typeof WAYPOINT_QUERIES> = ReturnType<(typeof WAYPOINT_QUERIES)[T]>
 
 const SYSTEM_QUERIES = {
-  systemList: (params?: { page?: number; limit?: number }) => [{ scope: 'systems', entity: 'list' }, params] as const,
+  systemList: (params: { page?: number; limit?: number } = {}) =>
+    [{ scope: 'systems', entity: 'list' }, params] as const,
   systemById: ({ systemSymbol }: { systemSymbol: string }) =>
     [{ scope: 'systems', entity: 'item' }, { systemSymbol }] as const,
 }
@@ -47,7 +48,7 @@ export const getSystemListQuery = {
   queryFn: async ({ queryKey: [, params], signal }: QueryFunctionContext<SystemQueryKey<'systemList'>>) => {
     const url = new URL(`systems`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    if (params) attachQueryParams(url, params)
+    attachQueryParams(url, params)
 
     return get<SpaceTradersResponse<SystemResponse[], Meta>>(url, { signal, headers: createHeaders() })
   },
