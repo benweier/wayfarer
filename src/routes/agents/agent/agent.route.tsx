@@ -11,8 +11,8 @@ export const AgentRouteComponent = () => {
   if (!agentSymbol) return <Navigate to={ROUTES.LEADERBOARD} replace />
 
   return (
-    <div className="grid gap-4 p-4">
-      <h1 className="text-title text-center">
+    <div className="space-y-4 p-4">
+      <h1 className="text-title">
         {t('agent.label')}: <span className="font-normal">{agentSymbol.toUpperCase()}</span>
       </h1>
 
