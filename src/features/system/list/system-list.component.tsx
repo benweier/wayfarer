@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useIsFetching, useSuspenseQuery } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
 import { useEffect } from 'react'
 import { Pagination, usePagination } from '@/components/pagination'
@@ -13,6 +13,7 @@ export const SystemList = () => {
     queryKey: getSystemListQuery.getQueryKey({ page, limit }),
     queryFn: getSystemListQuery.queryFn,
   })
+  const isFetching = useIsFetching({ queryKey: getSystemListQuery.getQueryKey() }) > 0
   const ships = useFleetResponse()
 
   useEffect(() => {
@@ -47,15 +48,17 @@ export const SystemList = () => {
   }
 
   return (
-    <div className={cx('relative grid gap-4', { 'opacity-30': systemsListQuery.isFetching })}>
-      <div
-        className={cx('absolute inset-0 backdrop-blur-xs transition-opacity duration-100 ease-in-out', {
-          'pointer-events-none opacity-0': !systemsListQuery.isFetching,
-          'pointer-events-auto opacity-100': systemsListQuery.isFetching,
-        })}
-      />
+    <div className="space-y-4">
+      <div className={cx('relative duration-75 ease-linear', { 'opacity-30': isFetching })}>
+        <div
+          className={cx('absolute inset-0 z-10 duration-75 ease-linear', {
+            'pointer-events-auto backdrop-blur-xs': isFetching,
+            'pointer-events-none': !isFetching,
+          })}
+        />
 
-      <SystemListTable data={systems.map((system) => ({ system, presence: presence.get(system.symbol) ?? 0 }))} />
+        <SystemListTable data={systems.map((system) => ({ system, presence: presence.get(system.symbol) ?? 0 }))} />
+      </div>
 
       <div className="row grid items-center justify-center gap-4">
         <div className="flex items-center justify-center gap-2 text-sm">
