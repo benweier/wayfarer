@@ -6,9 +6,9 @@ export const meta: MetaFunction = (t) => {
   return [{ title: t('leaderboard.title', { ns: 'meta' }) }]
 }
 
-export const loader: QueryClientLoaderFn = (client) => async () => {
+export const loader: QueryClientLoaderFn = (client) => () => {
   try {
-    const status = await client.ensureQueryData({
+    const status = client.ensureQueryData({
       queryKey: getStatusQuery.getQueryKey(),
       queryFn: getStatusQuery.queryFn,
     })
