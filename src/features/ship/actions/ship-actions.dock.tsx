@@ -39,9 +39,9 @@ const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonE
       return { ship, ships }
     },
     onSuccess: (response, { shipSymbol }, ctx) => {
-      const index = ctx?.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
+      const index = ctx.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ctx?.ship) {
+      if (ctx.ship) {
         client.setQueryData(
           getShipByIdQuery.getQueryKey({ shipSymbol }),
           produce(ctx.ship, (draft) => {
@@ -49,7 +49,8 @@ const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonE
           }),
         )
       }
-      if (ctx?.ships && index > -1) {
+
+      if (ctx.ships && index > -1) {
         client.setQueryData(
           getShipListQuery.getQueryKey(),
           produce(ctx.ships, (draft) => {
