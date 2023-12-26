@@ -77,17 +77,17 @@ export const SystemWaypointsCell = ({
   }
 
   return (
-    <div className="relative isolate list-none -space-y-1">
+    <div className="relative isolate list-none -space-y-1.5">
       {pages.map((page, index) => {
         return (
-          <div key={index} className="flex items-center justify-end -space-x-2">
+          <div key={index} className="flex items-center justify-end -space-x-1.5">
             {page.map((waypoint) => {
               if (waypoint.type !== 'ASTEROID') {
                 return (
                   <Link
                     key={waypoint.symbol}
                     className={cx(
-                      'flex size-8 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
+                      'flex size-7 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
                       WAYPOINT_TYPE_STYLES[waypoint.type],
                     )}
                     to={`/systems/${systemSymbol}/waypoint/${waypoint.symbol}`}
@@ -108,7 +108,7 @@ export const SystemWaypointsCell = ({
                 <Link
                   key={waypoint.symbol}
                   className={cx(
-                    'flex size-8 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
+                    'flex size-7 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
                     WAYPOINT_TYPE_STYLES[waypoint.type],
                   )}
                   to={`/systems/${systemSymbol}`}
