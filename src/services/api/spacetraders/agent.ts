@@ -1,4 +1,4 @@
-import { type QueryFunctionContext } from '@tanstack/react-query'
+import { queryOptions } from '@tanstack/react-query'
 import {
   type Meta,
   type SpaceTradersResponse,
@@ -8,29 +8,24 @@ import {
 import { get } from '@/services/fetch'
 import { type AgentResponse } from '@/types/spacetraders'
 
-type AgentQueryKey<T extends keyof typeof AGENT_QUERIES> = ReturnType<(typeof AGENT_QUERIES)[T]>
+export const getAgentListQuery = (params: { page?: number; limit?: number } = {}) =>
+  queryOptions({
+    queryKey: [{ scope: 'agents', entity: 'list' }, params],
+    queryFn: async ({ signal }) => {
+      const url = new URL('agents', import.meta.env.SPACETRADERS_API_BASE_URL)
 
-const AGENT_QUERIES = {
-  agentList: (params: { page?: number; limit?: number } = {}) => [{ scope: 'agents', entity: 'list' }, params] as const,
-  agentBySymbol: (args: { agentSymbol: string }) => [{ scope: 'agents', entity: 'item' }, args] as const,
-}
+      attachQueryParams(url, params)
 
-export const getAgentListQuery = {
-  getQueryKey: AGENT_QUERIES.agentList,
-  queryFn: async ({ queryKey: [, params], signal }: QueryFunctionContext<AgentQueryKey<'agentList'>>) => {
-    const url = new URL('agents', import.meta.env.SPACETRADERS_API_BASE_URL)
+      return get<SpaceTradersResponse<AgentResponse[], Meta>>(url, { signal, headers: createHeaders() })
+    },
+  })
 
-    attachQueryParams(url, params)
+export const getAgentBySymbolQuery = (args: { agentSymbol: string }) =>
+  queryOptions({
+    queryKey: [{ scope: 'agents', entity: 'item' }, args],
+    queryFn: async ({ signal }) => {
+      const url = new URL(`agents/${args.agentSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return get<SpaceTradersResponse<AgentResponse[], Meta>>(url, { signal, headers: createHeaders() })
-  },
-}
-
-export const getAgentBySymbolQuery = {
-  getQueryKey: (args: { agentSymbol: string }) => [{ scope: 'agents', entity: 'item' }, args] as const,
-  queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<AgentQueryKey<'agentBySymbol'>>) => {
-    const url = new URL(`agents/${args.agentSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
-
-    return get<SpaceTradersResponse<AgentResponse>>(url, { signal, headers: createHeaders() })
-  },
-}
+      return get<SpaceTradersResponse<AgentResponse>>(url, { signal, headers: createHeaders() })
+    },
+  })

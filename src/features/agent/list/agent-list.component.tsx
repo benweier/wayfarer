@@ -8,11 +8,8 @@ import { AgentListTable } from './agent-list.table'
 
 export const AgentList = () => {
   const { page, limit, setPage } = usePagination()
-  const agentsListQuery = useSuspenseQuery({
-    queryKey: getAgentListQuery.getQueryKey({ page, limit }),
-    queryFn: getAgentListQuery.queryFn,
-  })
-  const isFetching = useIsFetching({ queryKey: getAgentListQuery.getQueryKey() }) > 0
+  const agentsListQuery = useSuspenseQuery(getAgentListQuery({ page, limit }))
+  const isFetching = useIsFetching({ queryKey: getAgentListQuery().queryKey }) > 0
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

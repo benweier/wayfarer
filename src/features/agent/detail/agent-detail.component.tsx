@@ -5,10 +5,7 @@ import { formatNumber } from '@/utilities/number'
 
 export const AgentDetail = ({ agentSymbol }: { agentSymbol: string }) => {
   const { t } = useTranslation()
-  const { data } = useSuspenseQuery({
-    queryKey: getAgentBySymbolQuery.getQueryKey({ agentSymbol }),
-    queryFn: getAgentBySymbolQuery.queryFn,
-  })
+  const { data } = useSuspenseQuery(getAgentBySymbolQuery({ agentSymbol }))
   const agent = data.data
 
   return (

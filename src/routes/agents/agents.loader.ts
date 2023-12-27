@@ -14,14 +14,11 @@ export const loader: QueryClientLoaderFn =
     const { page, limit } = getRequestPagination(url.searchParams)
 
     try {
-      const systems = client.ensureQueryData({
-        queryKey: getAgentListQuery.getQueryKey({ page, limit }),
-        queryFn: getAgentListQuery.queryFn,
-      })
+      const agents = client.ensureQueryData(getAgentListQuery({ page, limit }))
 
       return defer({
         page,
-        systems,
+        agents,
       })
     } catch (err) {
       if (isHttpError(err)) {

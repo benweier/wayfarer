@@ -24,10 +24,7 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const agent = await client.ensureQueryData({
-        queryKey: getAgentBySymbolQuery.getQueryKey({ agentSymbol: agentSymbol.toUpperCase() }),
-        queryFn: getAgentBySymbolQuery.queryFn,
-      })
+      const agent = await client.ensureQueryData(getAgentBySymbolQuery({ agentSymbol: agentSymbol.toUpperCase() }))
 
       return defer({ agent })
     } catch (err) {
