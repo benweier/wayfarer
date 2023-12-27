@@ -11,12 +11,7 @@ export const loader: QueryClientLoaderFn = (client) => () => {
       return json({ ships: [] })
     }
 
-    const ships = client.ensureQueryData({
-      queryKey: getShipListQuery.getQueryKey(),
-      queryFn: getShipListQuery.queryFn,
-      staleTime: Infinity,
-      gcTime: Infinity,
-    })
+    const ships = client.ensureQueryData(getShipListQuery())
 
     return defer({ ships })
   } catch (err) {

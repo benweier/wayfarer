@@ -1,8 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipRefineMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
 export const Refine = ({
@@ -18,13 +16,15 @@ export const Refine = ({
     mutationKey: createShipRefineMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefineMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
+      const shipListQueryKey = getShipListQuery().queryKey
+      const ship = client.getQueryData(shipByIdQueryKey)
+      const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
         client.setQueryData(
-          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          shipByIdQueryKey,
           produce(ship, (draft) => {
             draft.data.cargo = response.data.cargo
             draft.data.cooldown = response.data.cooldown
@@ -33,7 +33,7 @@ export const Refine = ({
       }
       if (ships && index > -1) {
         client.setQueryData(
-          getShipListQuery.getQueryKey(),
+          shipListQueryKey,
           produce(ships, (draft) => {
             draft.data[index].cooldown = response.data.cooldown
             draft.data[index].cargo = response.data.cargo

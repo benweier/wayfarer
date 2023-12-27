@@ -36,7 +36,7 @@ export const useShipCooldown = (ship: ShipResponse) => {
 
     if (now > expiration || remainingSeconds === 0) {
       client.setQueryData(
-        getShipByIdQuery.getQueryKey({ shipSymbol: ship.symbol }),
+        getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey,
         produce<SpaceTradersResponse<ShipResponse>>((draft) => {
           draft.data.cooldown = { shipSymbol: ship.symbol, totalSeconds: 0, remainingSeconds: 0 }
         }),

@@ -8,12 +8,7 @@ export const meta: MetaFunction = (t) => {
 
 export const loader: QueryClientLoaderFn = (client) => () => {
   try {
-    const ships = client.ensureQueryData({
-      queryKey: getShipListQuery.getQueryKey(),
-      queryFn: getShipListQuery.queryFn,
-      staleTime: Infinity,
-      gcTime: Infinity,
-    })
+    const ships = client.ensureQueryData(getShipListQuery())
 
     return defer({
       ships,

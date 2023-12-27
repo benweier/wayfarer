@@ -7,8 +7,7 @@ import { getShipListQuery } from '@/services/api/spacetraders'
 export const WaypointFleetList = () => {
   const waypoint = useWaypointResponse()
   const { data } = useSuspenseQuery({
-    queryKey: getShipListQuery.getQueryKey(),
-    queryFn: getShipListQuery.queryFn,
+    ...getShipListQuery(),
     select: (response) => ({
       data: response.data.filter(
         (ship) => ship.nav.systemSymbol === waypoint.systemSymbol && ship.nav.waypointSymbol === waypoint.symbol,

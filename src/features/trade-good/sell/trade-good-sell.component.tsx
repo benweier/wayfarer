@@ -7,9 +7,7 @@ import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { ShipContext } from '@/context/ship.context'
 import { TradeGoodInfo } from '@/features/trade-good/info'
 import { createShipCargoSellMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useAuthStore } from '@/store/auth'
-import { type ShipResponse } from '@/types/spacetraders'
 import { TradeGoodSellForm } from './trade-good-sell.form'
 import { type TradeGoodSellProps } from './trade-good-sell.types'
 
@@ -30,13 +28,15 @@ export const TradeGoodSell = ({
     mutationKey: createShipCargoSellMutation.getMutationKey(),
     mutationFn: createShipCargoSellMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
+      const shipListQueryKey = getShipListQuery().queryKey
+      const ship = client.getQueryData(shipByIdQueryKey)
+      const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
         client.setQueryData(
-          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          shipByIdQueryKey,
           produce(ship, (draft) => {
             draft.data.cargo = response.data.cargo
           }),
@@ -44,7 +44,7 @@ export const TradeGoodSell = ({
       }
       if (ships && index > -1) {
         client.setQueryData(
-          getShipListQuery.getQueryKey(),
+          shipListQueryKey,
           produce(ships, (draft) => {
             draft.data[index].cargo = response.data.cargo
           }),

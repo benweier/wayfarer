@@ -2,8 +2,6 @@ import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-quer
 import { produce } from 'immer'
 import { type Ref, forwardRef } from 'react'
 import { createShipDockMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
 const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonElement>) => {
@@ -15,13 +13,15 @@ const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonE
     mutationKey: createShipDockMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipDockMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
+      const shipListQueryKey = getShipListQuery().queryKey
+      const ship = client.getQueryData(shipByIdQueryKey)
+      const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
         client.setQueryData(
-          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          shipByIdQueryKey,
           produce(ship, (draft) => {
             draft.data.nav.status = 'DOCKING'
           }),
@@ -29,7 +29,7 @@ const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonE
       }
       if (ships && index > -1) {
         client.setQueryData(
-          getShipListQuery.getQueryKey(),
+          shipListQueryKey,
           produce(ships, (draft) => {
             draft.data[index].nav.status = 'DOCKING'
           }),
@@ -38,30 +38,34 @@ const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonE
 
       return { ship, ships }
     },
-    onSuccess: (response, { shipSymbol }, ctx) => {
-      const index = ctx.ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
+    onSuccess: (response, { shipSymbol }) => {
+      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
+      const shipListQueryKey = getShipListQuery().queryKey
+      const ship = client.getQueryData(shipByIdQueryKey)
+      const ships = client.getQueryData(shipListQueryKey)
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
-      if (ctx.ship) {
+      if (ship) {
         client.setQueryData(
-          getShipByIdQuery.getQueryKey({ shipSymbol }),
-          produce(ctx.ship, (draft) => {
+          shipByIdQueryKey,
+          produce(ship, (draft) => {
             draft.data.nav = response.data.nav
           }),
         )
       }
 
-      if (ctx.ships && index > -1) {
+      if (ships && index > -1) {
         client.setQueryData(
-          getShipListQuery.getQueryKey(),
-          produce(ctx.ships, (draft) => {
+          shipListQueryKey,
+          produce(ships, (draft) => {
             draft.data[index].nav = response.data.nav
           }),
         )
       }
     },
     onError: (_err, { shipSymbol }, ctx) => {
-      client.setQueryData(getShipByIdQuery.getQueryKey({ shipSymbol }), ctx?.ship)
-      client.setQueryData(getShipListQuery.getQueryKey(), ctx?.ships)
+      client.setQueryData(getShipByIdQuery({ shipSymbol }).queryKey, ctx?.ship)
+      client.setQueryData(getShipListQuery().queryKey, ctx?.ships)
     },
   })
 

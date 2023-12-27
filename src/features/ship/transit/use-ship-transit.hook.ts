@@ -7,7 +7,6 @@ import {
   getWaypointMarketQuery,
   getWaypointShipyardQuery,
 } from '@/services/api/spacetraders'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
@@ -36,10 +35,10 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
 
   useEffect(() => {
     if (status === 'complete' && nav.status === 'IN_TRANSIT') {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(
-        getShipByIdQuery.getQueryKey({ shipSymbol: symbol }),
-      )
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: symbol }).queryKey
+      const shipListQueryKey = getShipListQuery().queryKey
+      const ship = client.getQueryData(shipByIdQueryKey)
+      const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === symbol) ?? -1
 
       if (ship) {
@@ -58,7 +57,7 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
         })
 
         client.setQueryData(
-          getShipByIdQuery.getQueryKey({ shipSymbol: symbol }),
+          shipByIdQueryKey,
           produce(ship, (draft) => {
             draft.data.nav.status = 'IN_ORBIT'
           }),
@@ -66,7 +65,7 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
       }
       if (ships && index !== -1) {
         client.setQueryData(
-          getShipListQuery.getQueryKey(),
+          shipListQueryKey,
           produce(ships, (draft) => {
             draft.data[index].nav.status = 'IN_ORBIT'
           }),

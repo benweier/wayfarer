@@ -8,8 +8,9 @@ export const ShipListRefresh = () => {
   const { t } = useTranslation()
   const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const client = useQueryClient()
-  const isFetching = useIsFetching({ queryKey: getShipListQuery.getQueryKey() }) > 0
-  const state = client.getQueryState(getShipListQuery.getQueryKey())
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isFetching = useIsFetching({ queryKey: shipListQueryKey }) > 0
+  const state = client.getQueryState(shipListQueryKey)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -34,7 +35,7 @@ export const ShipListRefresh = () => {
         size="small"
         disabled={isFetching}
         onClick={() => {
-          void client.invalidateQueries({ queryKey: getShipListQuery.getQueryKey() })
+          void client.invalidateQueries({ queryKey: shipListQueryKey })
         }}
       >
         {t('general.refresh')}

@@ -1,4 +1,4 @@
-import { type QueryFunctionContext } from '@tanstack/react-query'
+import { queryOptions } from '@tanstack/react-query'
 import { get, patch, post } from '@/services/fetch'
 import { getState } from '@/store/auth'
 import {
@@ -20,53 +20,48 @@ import { type Meta, type SpaceTradersResponse, createHeaders } from './core'
 
 type MaybeMutationKey<T = never> = [] | [Partial<T>]
 
-export const FLEET_QUERIES = {
-  shipList: () => [{ scope: 'ships', entity: 'list' }] as const,
-  shipById: (args: { shipSymbol: string }) => [{ scope: 'ships', entity: 'item' }, args] as const,
-}
+export const getShipListQuery = () =>
+  queryOptions({
+    staleTime: Infinity,
+    gcTime: Infinity,
+    queryKey: [{ scope: 'ships', entity: 'list' }],
+    queryFn: async ({ signal }) => {
+      const { isAuthenticated } = getState()
 
-type FleetQueryKey<T extends keyof typeof FLEET_QUERIES> = ReturnType<(typeof FLEET_QUERIES)[T]>
+      if (!isAuthenticated) {
+        return { data: [], meta: { page: 0, total: 0, limit: 0 } }
+      }
 
-export const getShipListQuery = {
-  getQueryKey: FLEET_QUERIES.shipList,
-  queryFn: async ({
-    signal,
-  }: QueryFunctionContext<FleetQueryKey<'shipList'>>): Promise<SpaceTradersResponse<ShipResponse[], Meta>> => {
-    const { isAuthenticated } = getState()
+      const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    if (!isAuthenticated) {
-      return { data: [], meta: { page: 0, total: 0, limit: 0 } }
-    }
+      url.searchParams.set('page', '1')
+      url.searchParams.set('limit', '20')
 
-    const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
+      const initial = await get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
+      const pages = getPageList(Math.ceil(initial.meta.total / initial.meta.limit), 1)
+      const remaining = await Promise.all(
+        pages.map((page) => {
+          url.searchParams.set('page', String(page))
 
-    url.searchParams.set('page', '1')
-    url.searchParams.set('limit', '20')
+          return get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
+        }),
+      )
+      const data = initial.data.concat(...remaining.map((page) => page.data))
+      const meta = { page: 1, total: data.length, limit: data.length }
 
-    const initial = await get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
-    const pages = getPageList(Math.ceil(initial.meta.total / initial.meta.limit), 1)
-    const remaining = await Promise.all(
-      pages.map((page) => {
-        url.searchParams.set('page', String(page))
+      return { data, meta }
+    },
+  })
 
-        return get<SpaceTradersResponse<ShipResponse[], Meta>>(url, { signal, headers: createHeaders() })
-      }),
-    )
-    const data = initial.data.concat(...remaining.map((page) => page.data))
-    const meta = { page: 1, total: data.length, limit: data.length }
+export const getShipByIdQuery = (args: { shipSymbol: string }) =>
+  queryOptions({
+    queryKey: [{ scope: 'ships', entity: 'item' }, args],
+    queryFn: async ({ signal }) => {
+      const url = new URL(`my/ships/${args.shipSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return { data, meta }
-  },
-}
-
-export const getShipByIdQuery = {
-  getQueryKey: FLEET_QUERIES.shipById,
-  queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<FleetQueryKey<'shipById'>>) => {
-    const url = new URL(`my/ships/${args.shipSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
-
-    return get<SpaceTradersResponse<ShipResponse>>(url, { signal, headers: createHeaders() })
-  },
-}
+      return get<SpaceTradersResponse<ShipResponse>>(url, { signal, headers: createHeaders() })
+    },
+  })
 
 export const createShipPurchaseMutation = {
   getMutationKey: (...args: MaybeMutationKey<{ shipType: string; waypointSymbol: string }>) =>

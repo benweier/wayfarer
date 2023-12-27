@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipExtractMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipSurveyStore } from '@/store/ship'
-import { type ShipResponse, type SurveyResponse } from '@/types/spacetraders'
+import { type SurveyResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
 export const Extract = ({
@@ -22,13 +21,15 @@ export const Extract = ({
     onSuccess: (response, { shipSymbol, survey }) => {
       if (survey) removeSurvey(survey.signature)
 
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
+      const shipListQueryKey = getShipListQuery().queryKey
+      const ship = client.getQueryData(shipByIdQueryKey)
+      const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
         client.setQueryData(
-          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          shipByIdQueryKey,
           produce(ship, (draft) => {
             draft.data.cargo = response.data.cargo
             draft.data.cooldown = response.data.cooldown
@@ -37,7 +38,7 @@ export const Extract = ({
       }
       if (ships && index > -1) {
         client.setQueryData(
-          getShipListQuery.getQueryKey(),
+          shipListQueryKey,
           produce(ships, (draft) => {
             draft.data[index].cargo = response.data.cargo
             draft.data[index].cooldown = response.data.cooldown

@@ -9,11 +9,7 @@ export const ShipSelectField = ({
   onChange,
   getShipItem = defaultGetShipItem,
 }: ShipSelectFieldProps) => {
-  const { data } = useSuspenseQuery({
-    queryKey: getShipListQuery.getQueryKey(),
-    queryFn: getShipListQuery.queryFn,
-    select: getShipList,
-  })
+  const { data } = useSuspenseQuery({ ...getShipListQuery(), select: getShipList })
   const state: Map<string, ShipSelectItem> = data.ships.reduce<Map<string, ShipSelectItem>>(getShipItem, new Map())
 
   return (

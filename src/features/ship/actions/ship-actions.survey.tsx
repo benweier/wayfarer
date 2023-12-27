@@ -1,9 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipSurveyMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { useShipSurveyStore } from '@/store/ship'
-import { type ShipResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
 export const Survey = ({ ship, children }: ShipActionProps) => {
@@ -14,17 +12,18 @@ export const Survey = ({ ship, children }: ShipActionProps) => {
     mutationKey: createShipSurveyMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipSurveyMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const ship = client.getQueryData<SpaceTradersResponse<ShipResponse>>(getShipByIdQuery.getQueryKey({ shipSymbol }))
-      const ships = client.getQueryData<SpaceTradersResponse<ShipResponse[]>>(getShipListQuery.getQueryKey())
+      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
+      const shipListQueryKey = getShipListQuery().queryKey
+      const ship = client.getQueryData(shipByIdQueryKey)
+      const ships = client.getQueryData(shipListQueryKey)
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
       const [survey] = response.data.surveys
 
       addSurvey(survey)
 
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-
       if (ship) {
         client.setQueryData(
-          getShipByIdQuery.getQueryKey({ shipSymbol }),
+          shipByIdQueryKey,
           produce(ship, (draft) => {
             draft.data.cooldown = response.data.cooldown
           }),
@@ -32,7 +31,7 @@ export const Survey = ({ ship, children }: ShipActionProps) => {
       }
       if (ships && index > -1) {
         client.setQueryData(
-          getShipListQuery.getQueryKey(),
+          shipListQueryKey,
           produce(ships, (draft) => {
             draft.data[index].cooldown = response.data.cooldown
           }),

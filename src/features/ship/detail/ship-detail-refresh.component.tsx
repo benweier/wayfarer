@@ -10,8 +10,9 @@ export const ShipDetailRefresh = () => {
   const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const client = useQueryClient()
   const ship = useShipResponse()
-  const isFetching = useIsFetching({ queryKey: getShipByIdQuery.getQueryKey({ shipSymbol: ship.symbol }) }) > 0
-  const state = client.getQueryState(getShipByIdQuery.getQueryKey({ shipSymbol: ship.symbol }))
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const isFetching = useIsFetching({ queryKey: shipByIdQueryKey }) > 0
+  const state = client.getQueryState(shipByIdQueryKey)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -35,9 +36,7 @@ export const ShipDetailRefresh = () => {
         kind="outline"
         size="small"
         disabled={isFetching}
-        onClick={() =>
-          client.invalidateQueries({ queryKey: getShipByIdQuery.getQueryKey({ shipSymbol: ship.symbol }) })
-        }
+        onClick={() => client.invalidateQueries({ queryKey: shipByIdQueryKey })}
       >
         {t('general.refresh')}
       </Button>

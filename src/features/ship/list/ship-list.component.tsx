@@ -4,12 +4,7 @@ import { ShipListRefresh } from './ship-list-refresh.component'
 import { ShipListTable } from './ship-list.table'
 
 export const ShipList = () => {
-  const { data } = useSuspenseQuery({
-    queryKey: getShipListQuery.getQueryKey(),
-    queryFn: getShipListQuery.queryFn,
-    staleTime: Infinity,
-    gcTime: Infinity,
-  })
+  const { data } = useSuspenseQuery(getShipListQuery())
   const ships = data.data
 
   return (

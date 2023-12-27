@@ -12,10 +12,7 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const ship = await client.ensureQueryData({
-        queryKey: getShipByIdQuery.getQueryKey({ shipSymbol }),
-        queryFn: getShipByIdQuery.queryFn,
-      })
+      const ship = await client.ensureQueryData(getShipByIdQuery({ shipSymbol }))
 
       return defer({ ship })
     } catch (err) {

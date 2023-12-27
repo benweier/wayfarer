@@ -18,10 +18,7 @@ export const useShipResponse = () => {
 }
 
 export const ShipStore = ({ shipSymbol, children }: PropsWithChildren<ShipStoreProps>) => {
-  const { data } = useSuspenseQuery({
-    queryKey: getShipByIdQuery.getQueryKey({ shipSymbol }),
-    queryFn: getShipByIdQuery.queryFn,
-  })
+  const { data } = useSuspenseQuery(getShipByIdQuery({ shipSymbol }))
 
   return <ShipContext.Provider value={data.data}>{children}</ShipContext.Provider>
 }
