@@ -28,10 +28,7 @@ export const loader: QueryClientLoaderFn =
 
     try {
       const system = await client.ensureQueryData(getSystemByIdQuery({ systemSymbol }))
-      const waypoints = client.ensureQueryData({
-        queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: system.data.symbol }),
-        queryFn: getWaypointListQuery.queryFn,
-      })
+      const waypoints = client.ensureQueryData(getWaypointListQuery({ systemSymbol: system.data.symbol }))
 
       if (!isAuthenticated) {
         return defer({

@@ -7,10 +7,7 @@ import { WaypointNavigationTable } from './waypoint-navigation.table'
 import { type WaypointNavigationProps } from './waypoint-navigation.types'
 
 export const WaypointNavigation = ({ ship }: WaypointNavigationProps) => {
-  const { data } = useSuspenseQuery({
-    queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: ship.nav.systemSymbol }),
-    queryFn: getWaypointListQuery.queryFn,
-  })
+  const { data } = useSuspenseQuery(getWaypointListQuery({ systemSymbol: ship.nav.systemSymbol }))
   const waypoints = data.data
   const activeWaypoint = waypoints.find((waypoint) => waypoint.symbol === ship.nav.waypointSymbol)
 

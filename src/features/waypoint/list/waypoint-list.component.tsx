@@ -7,10 +7,7 @@ import { WaypointListTable } from './waypoint-list.table'
 export const WaypointList = () => {
   const system = useSystemResponse()
   const ships = useFleetResponse()
-  const { data } = useSuspenseQuery({
-    queryKey: getWaypointListQuery.getQueryKey({ systemSymbol: system.symbol }),
-    queryFn: getWaypointListQuery.queryFn,
-  })
+  const { data } = useSuspenseQuery(getWaypointListQuery({ systemSymbol: system.symbol }))
   const waypoints = data.data
   const presence = new Map(
     ships.reduce<Map<string, number>>((result, ship) => {
