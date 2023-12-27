@@ -27,10 +27,10 @@ const Logout = () => {
       onClick={() => {
         submit(null, { method: 'post', action: ROUTES.LOGOUT })
       }}
-      className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-rose-100 shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+      className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-white shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
     >
       <div className="size-6">
-        <MenuIcon id="logout" className="size-6" aria-hidden />
+        <MenuIcon id="logout" className="size-6 text-rose-100" aria-hidden />
       </div>
       <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.logout', { context: 'action' })}</span>
     </button>
@@ -158,10 +158,10 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                   <Link
                     to={ROUTES.LOGIN}
                     state={{ redirect: { destination: `${window.location.pathname}${window.location.search}` } }}
-                    className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-emerald-100 shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+                    className="flex w-full items-center gap-4 rounded px-3 py-2 font-medium text-white shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100 @[220px]/side:w-full"
                   >
                     <div className="size-6">
-                      <MenuIcon id="login" className="size-6" aria-hidden />
+                      <MenuIcon id="login" className="size-6 text-emerald-100" aria-hidden />
                     </div>
                     <span className="sr-only text-sm @[220px]/side:not-sr-only">
                       {t('auth.login', { context: 'action' })}
