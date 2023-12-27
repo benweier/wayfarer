@@ -1,4 +1,4 @@
-import { type QueryFunctionContext } from '@tanstack/react-query'
+import { type QueryFunctionContext, queryOptions } from '@tanstack/react-query'
 import { get } from '@/services/fetch'
 import {
   type JumpGateResponse,
@@ -10,15 +10,8 @@ import {
 import { getPageList } from '@/utilities/get-page-list.helper'
 import { type Meta, type SpaceTradersResponse, attachQueryParams, createHeaders } from './core'
 
-type SystemQueryKey<T extends keyof typeof SYSTEM_QUERIES> = ReturnType<(typeof SYSTEM_QUERIES)[T]>
 type WaypointQueryKey<T extends keyof typeof WAYPOINT_QUERIES> = ReturnType<(typeof WAYPOINT_QUERIES)[T]>
 
-const SYSTEM_QUERIES = {
-  systemList: (params: { page?: number; limit?: number } = {}) =>
-    [{ scope: 'systems', entity: 'list' }, params] as const,
-  systemById: ({ systemSymbol }: { systemSymbol: string }) =>
-    [{ scope: 'systems', entity: 'item' }, { systemSymbol }] as const,
-}
 const WAYPOINT_QUERIES = {
   waypointList: (args: { systemSymbol: string }) => [{ scope: 'waypoints', entity: 'list' }, args] as const,
   waypointById: ({ systemSymbol, waypointSymbol }: { systemSymbol: string; waypointSymbol: string }) =>
@@ -43,25 +36,27 @@ const WAYPOINT_QUERIES = {
     ] as const,
 }
 
-export const getSystemListQuery = {
-  getQueryKey: SYSTEM_QUERIES.systemList,
-  queryFn: async ({ queryKey: [, params], signal }: QueryFunctionContext<SystemQueryKey<'systemList'>>) => {
-    const url = new URL(`systems`, import.meta.env.SPACETRADERS_API_BASE_URL)
+export const getSystemListQuery = (params: { page?: number; limit?: number } = {}) =>
+  queryOptions({
+    queryKey: [{ scope: 'systems', entity: 'list' }, params],
+    queryFn: async ({ signal }) => {
+      const url = new URL(`systems`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    attachQueryParams(url, params)
+      attachQueryParams(url, params)
 
-    return get<SpaceTradersResponse<SystemResponse[], Meta>>(url, { signal, headers: createHeaders() })
-  },
-}
+      return get<SpaceTradersResponse<SystemResponse[], Meta>>(url, { signal, headers: createHeaders() })
+    },
+  })
 
-export const getSystemByIdQuery = {
-  getQueryKey: SYSTEM_QUERIES.systemById,
-  queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<SystemQueryKey<'systemById'>>) => {
-    const url = new URL(`systems/${args.systemSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+export const getSystemByIdQuery = (args: { systemSymbol: string }) =>
+  queryOptions({
+    queryKey: [{ scope: 'systems', entity: 'item' }, args],
+    queryFn: async ({ signal }) => {
+      const url = new URL(`systems/${args.systemSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return get<SpaceTradersResponse<SystemResponse>>(url, { signal, headers: createHeaders() })
-  },
-}
+      return get<SpaceTradersResponse<SystemResponse>>(url, { signal, headers: createHeaders() })
+    },
+  })
 
 export const getWaypointListQuery = {
   getQueryKey: WAYPOINT_QUERIES.waypointList,

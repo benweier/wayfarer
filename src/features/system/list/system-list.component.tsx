@@ -9,11 +9,8 @@ import { SystemListTable } from './system-list.table'
 
 export const SystemList = () => {
   const { page, limit, setPage } = usePagination()
-  const systemsListQuery = useSuspenseQuery({
-    queryKey: getSystemListQuery.getQueryKey({ page, limit }),
-    queryFn: getSystemListQuery.queryFn,
-  })
-  const isFetching = useIsFetching({ queryKey: getSystemListQuery.getQueryKey() }) > 0
+  const systemsListQuery = useSuspenseQuery(getSystemListQuery({ page, limit }))
+  const isFetching = useIsFetching({ queryKey: getSystemListQuery().queryKey }) > 0
   const ships = useFleetResponse()
 
   useEffect(() => {

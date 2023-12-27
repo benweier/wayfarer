@@ -14,10 +14,7 @@ export const loader: QueryClientLoaderFn =
     const { page, limit } = getRequestPagination(url.searchParams)
 
     try {
-      const systems = client.ensureQueryData({
-        queryKey: getSystemListQuery.getQueryKey({ page, limit }),
-        queryFn: getSystemListQuery.queryFn,
-      })
+      const systems = client.ensureQueryData(getSystemListQuery({ page, limit }))
 
       return defer({
         page,

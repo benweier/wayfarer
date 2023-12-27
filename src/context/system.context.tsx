@@ -27,10 +27,7 @@ export const useSystemResponse = () => {
 }
 
 export const SystemStore = ({ systemSymbol, children }: PropsWithChildren<SystemStoreProps>) => {
-  const { data } = useSuspenseQuery({
-    queryKey: getSystemByIdQuery.getQueryKey({ systemSymbol }),
-    queryFn: getSystemByIdQuery.queryFn,
-  })
+  const { data } = useSuspenseQuery(getSystemByIdQuery({ systemSymbol }))
 
   return <SystemStoreContext.Provider value={data.data}>{children}</SystemStoreContext.Provider>
 }
