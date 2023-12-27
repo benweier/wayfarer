@@ -8,8 +8,7 @@ const select = (response: StatusResponse) => ({
 
 export const useSpaceTradersStatus = (): { status: 'unknown' | 'online' | 'offline'; isChecking: boolean } => {
   const { data, isLoading, isFetching, isSuccess, isError } = useQuery({
-    queryKey: getStatusQuery.getQueryKey(),
-    queryFn: getStatusQuery.queryFn,
+    ...getStatusQuery(),
     refetchInterval: 60_000,
     select,
   })

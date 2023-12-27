@@ -8,10 +8,7 @@ export const meta: MetaFunction = (t) => {
 
 export const loader: QueryClientLoaderFn = (client) => () => {
   try {
-    const status = client.ensureQueryData({
-      queryKey: getStatusQuery.getQueryKey(),
-      queryFn: getStatusQuery.queryFn,
-    })
+    const status = client.ensureQueryData(getStatusQuery())
 
     return defer({ status })
   } catch (err) {

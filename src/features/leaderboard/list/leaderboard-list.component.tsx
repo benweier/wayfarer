@@ -8,10 +8,7 @@ import { formatNumber } from '@/utilities/number'
 
 export const LeaderboardList = () => {
   const { t } = useTranslation()
-  const { data } = useSuspenseQuery({
-    queryKey: getStatusQuery.getQueryKey(),
-    queryFn: getStatusQuery.queryFn,
-  })
+  const { data } = useSuspenseQuery(getStatusQuery())
   const leaderboards = data.leaderboards
 
   return (
