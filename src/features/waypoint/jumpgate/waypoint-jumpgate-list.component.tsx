@@ -6,13 +6,12 @@ import { WaypointJumpGateLayout } from './waypoint-jumpgate.layout'
 
 export const WaypointJumpGateList = () => {
   const waypoint = useWaypointResponse()
-  const { data } = useSuspenseQuery({
-    queryKey: getWaypointJumpGateQuery.getQueryKey({
+  const { data } = useSuspenseQuery(
+    getWaypointJumpGateQuery({
       systemSymbol: waypoint.systemSymbol,
       waypointSymbol: waypoint.symbol,
     }),
-    queryFn: getWaypointJumpGateQuery.queryFn,
-  })
+  )
   const jumpgate = data.data
 
   return (

@@ -18,11 +18,10 @@ export const ShipCargoList = () => {
   const waypoint = useWaypointResponse()
   const hasMarketplace = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
   const { data, isSuccess } = useQuery({
-    queryKey: getWaypointMarketQuery.getQueryKey({
+    ...getWaypointMarketQuery({
       systemSymbol: ship.nav.systemSymbol,
       waypointSymbol: ship.nav.waypointSymbol,
     }),
-    queryFn: getWaypointMarketQuery.queryFn,
     select: (response) => {
       return {
         market: {

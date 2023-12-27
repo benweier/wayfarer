@@ -13,25 +13,23 @@ export const loader: QueryClientLoaderFn =
 
     try {
       const ship = await client.ensureQueryData(getShipByIdQuery({ shipSymbol }))
-      const waypoint = await client.ensureQueryData({
-        queryKey: getWaypointByIdQuery.getQueryKey({
+      const waypoint = await client.ensureQueryData(
+        getWaypointByIdQuery({
           systemSymbol: ship.data.nav.systemSymbol,
           waypointSymbol: ship.data.nav.waypointSymbol,
         }),
-        queryFn: getWaypointByIdQuery.queryFn,
-      })
+      )
 
       if (waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') === -1) {
         return redirect(`/fleet/ship/${shipSymbol}`)
       }
 
-      const market = client.ensureQueryData({
-        queryKey: getWaypointMarketQuery.getQueryKey({
+      const market = client.ensureQueryData(
+        getWaypointMarketQuery({
           systemSymbol: ship.data.nav.systemSymbol,
           waypointSymbol: ship.data.nav.waypointSymbol,
         }),
-        queryFn: getWaypointMarketQuery.queryFn,
-      })
+      )
 
       return defer({ ship, waypoint, market })
     } catch (err) {

@@ -30,19 +30,19 @@ export const Navigate = ({
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
-        client.removeQueries({
-          queryKey: getWaypointMarketQuery.getQueryKey({
+        client.removeQueries(
+          getWaypointMarketQuery({
             systemSymbol: ship.data.nav.systemSymbol,
             waypointSymbol: ship.data.nav.waypointSymbol,
           }),
-        })
+        )
 
-        client.removeQueries({
-          queryKey: getWaypointShipyardQuery.getQueryKey({
+        client.removeQueries(
+          getWaypointShipyardQuery({
             systemSymbol: ship.data.nav.systemSymbol,
             waypointSymbol: ship.data.nav.waypointSymbol,
           }),
-        })
+        )
 
         client.setQueryData(
           shipByIdQueryKey,

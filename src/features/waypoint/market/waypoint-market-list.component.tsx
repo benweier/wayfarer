@@ -12,13 +12,12 @@ import { WaypointMarketLayout } from './waypoint-market.layout'
 export const WaypointMarketList = () => {
   const { t } = useTranslation()
   const waypoint = useWaypointResponse()
-  const { data } = useSuspenseQuery({
-    queryKey: getWaypointMarketQuery.getQueryKey({
+  const { data } = useSuspenseQuery(
+    getWaypointMarketQuery({
       systemSymbol: waypoint.systemSymbol,
       waypointSymbol: waypoint.symbol,
     }),
-    queryFn: getWaypointMarketQuery.queryFn,
-  })
+  )
   const market = data.data
   const tradeGoods = reduceArrayToMap(data.data.tradeGoods, 'symbol')
 

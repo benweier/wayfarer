@@ -29,10 +29,7 @@ export const useWaypointResponse = () => {
 }
 
 export const WaypointStore = ({ systemSymbol, waypointSymbol, children }: PropsWithChildren<WaypointStoreProps>) => {
-  const { data } = useSuspenseQuery({
-    queryKey: getWaypointByIdQuery.getQueryKey({ systemSymbol, waypointSymbol }),
-    queryFn: getWaypointByIdQuery.queryFn,
-  })
+  const { data } = useSuspenseQuery(getWaypointByIdQuery({ systemSymbol, waypointSymbol }))
 
   return <WaypointStoreContext.Provider value={data.data}>{children}</WaypointStoreContext.Provider>
 }

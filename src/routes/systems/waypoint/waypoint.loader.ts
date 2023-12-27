@@ -24,19 +24,15 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const waypoint = await client.ensureQueryData({
-        queryKey: getWaypointByIdQuery.getQueryKey({ systemSymbol, waypointSymbol }),
-        queryFn: getWaypointByIdQuery.queryFn,
-      })
+      const waypoint = await client.ensureQueryData(getWaypointByIdQuery({ systemSymbol, waypointSymbol }))
       const marketEnabled = waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
       const market = marketEnabled
-        ? client.ensureQueryData({
-            queryKey: getWaypointMarketQuery.getQueryKey({
+        ? client.ensureQueryData(
+            getWaypointMarketQuery({
               systemSymbol: waypoint.data.systemSymbol,
               waypointSymbol: waypoint.data.symbol,
             }),
-            queryFn: getWaypointMarketQuery.queryFn,
-          })
+          )
         : undefined
 
       return defer({

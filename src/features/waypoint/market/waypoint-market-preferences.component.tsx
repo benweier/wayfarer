@@ -10,16 +10,12 @@ const WaypointMarketRefresh = () => {
   const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const client = useQueryClient()
   const waypoint = useWaypointResponse()
-  const isFetching =
-    useIsFetching({
-      queryKey: getWaypointMarketQuery.getQueryKey({
-        systemSymbol: waypoint.systemSymbol,
-        waypointSymbol: waypoint.symbol,
-      }),
-    }) > 0
-  const state = client.getQueryState(
-    getWaypointMarketQuery.getQueryKey({ systemSymbol: waypoint.systemSymbol, waypointSymbol: waypoint.symbol }),
-  )
+  const waypointMarketQueryKey = getWaypointMarketQuery({
+    systemSymbol: waypoint.systemSymbol,
+    waypointSymbol: waypoint.symbol,
+  }).queryKey
+  const isFetching = useIsFetching({ queryKey: waypointMarketQueryKey }) > 0
+  const state = client.getQueryState(waypointMarketQueryKey)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -43,14 +39,9 @@ const WaypointMarketRefresh = () => {
         kind="outline"
         size="small"
         disabled={isFetching}
-        onClick={() =>
-          client.invalidateQueries({
-            queryKey: getWaypointMarketQuery.getQueryKey({
-              systemSymbol: waypoint.systemSymbol,
-              waypointSymbol: waypoint.symbol,
-            }),
-          })
-        }
+        onClick={() => {
+          void client.invalidateQueries({ queryKey: waypointMarketQueryKey })
+        }}
       >
         {t('general.refresh')}
       </Button>
