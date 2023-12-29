@@ -1,4 +1,5 @@
-import { defer } from 'react-router-dom'
+import { defer, redirect } from 'react-router-dom'
+import { ROUTES } from '@/config/routes'
 import { getShipByIdQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
@@ -18,7 +19,7 @@ export const loader: QueryClientLoaderFn =
     const { shipSymbol } = params
 
     if (!shipSymbol) {
-      throw new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
+      return redirect(ROUTES.FLEET)
     }
 
     try {
