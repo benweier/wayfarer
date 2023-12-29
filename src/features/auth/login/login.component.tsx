@@ -30,7 +30,7 @@ export const Login = () => {
       if (err.status === 401) {
         methods.setError('token', {
           type: 'manual',
-          message: t('auth.validation.invalid_token'),
+          message: 'auth.validation.invalid_token',
         })
       }
     },
