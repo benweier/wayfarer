@@ -6,7 +6,7 @@ import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getState } from '@/store/auth'
 import { type SystemResponse } from '@/types/spacetraders'
 
-export const meta: MetaFunction<Partial<{ system: SpaceTradersResponse<SystemResponse> }>> = (t, { system }) => {
+export const meta: MetaFunction<{ system: SpaceTradersResponse<SystemResponse> }> = (t, { system } = {}) => {
   if (!system) {
     return []
   }
@@ -27,7 +27,7 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const system = await client.ensureQueryData(getSystemByIdQuery({ systemSymbol }))
+      const system = await client.ensureQueryData(getSystemByIdQuery({ systemSymbol: systemSymbol.toUpperCase() }))
       const waypoints = client.ensureQueryData(getWaypointListQuery({ systemSymbol: system.data.symbol }))
 
       if (!isAuthenticated) {

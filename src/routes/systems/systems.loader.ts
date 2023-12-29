@@ -3,7 +3,9 @@ import { getSystemListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { getRequestPagination } from '@/utilities/get-request-pagination.helper'
 
-export const meta: MetaFunction<{ page: number }> = (t, { page }) => {
+export const meta: MetaFunction<{ page: number }> = (t, { page } = {}) => {
+  if (page === undefined) return []
+
   return [{ title: t('systems.title', { ns: 'meta', page }) }]
 }
 

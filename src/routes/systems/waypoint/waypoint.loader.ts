@@ -5,7 +5,7 @@ import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type WaypointResponse } from '@/types/spacetraders'
 
-export const meta: MetaFunction<Partial<{ waypoint: SpaceTradersResponse<WaypointResponse> }>> = (t, { waypoint }) => {
+export const meta: MetaFunction<{ waypoint: SpaceTradersResponse<WaypointResponse> }> = (t, { waypoint } = {}) => {
   if (!waypoint) {
     return []
   }
@@ -24,7 +24,12 @@ export const loader: QueryClientLoaderFn =
     }
 
     try {
-      const waypoint = await client.ensureQueryData(getWaypointByIdQuery({ systemSymbol, waypointSymbol }))
+      const waypoint = await client.ensureQueryData(
+        getWaypointByIdQuery({
+          systemSymbol: systemSymbol.toUpperCase(),
+          waypointSymbol: waypointSymbol.toUpperCase(),
+        }),
+      )
       const marketEnabled = waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
       const market = marketEnabled
         ? client.ensureQueryData(

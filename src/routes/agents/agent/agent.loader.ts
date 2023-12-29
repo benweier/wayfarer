@@ -5,7 +5,7 @@ import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type AgentResponse } from '@/types/spacetraders'
 
-export const meta: MetaFunction<Partial<{ agent: SpaceTradersResponse<AgentResponse> }>> = (t, { agent }) => {
+export const meta: MetaFunction<{ agent: SpaceTradersResponse<AgentResponse> }> = (t, { agent } = {}) => {
   if (!agent) {
     return []
   }

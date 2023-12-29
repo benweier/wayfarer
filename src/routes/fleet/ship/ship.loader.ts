@@ -4,7 +4,7 @@ import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type ShipResponse } from '@/types/spacetraders'
 
-export const meta: MetaFunction<Partial<{ ship: SpaceTradersResponse<ShipResponse> }>> = (t, { ship } = {}) => {
+export const meta: MetaFunction<{ ship: SpaceTradersResponse<ShipResponse> }> = (t, { ship } = {}) => {
   if (!ship) {
     return []
   }
