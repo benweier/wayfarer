@@ -9,26 +9,31 @@ import { type MetaProps } from './meta.types'
 export const Meta = ({ titleTemplate }: MetaProps) => {
   const { t } = useTranslation()
   const matches = useMatches()
+  const handlers = matches.filter(hasRouteHandle<MetaFunction>('meta', isFunction))
 
-  return matches.filter(hasRouteHandle<MetaFunction>('meta', isFunction)).map((match) => {
-    const metas = match.handle.meta(t, match.data)
+  if (handlers.length === 0) return null
 
-    return (
-      <Fragment key={match.id}>
-        <Helmet titleTemplate={titleTemplate}>
-          {metas.map((meta) => {
-            if ('title' in meta) {
-              return <title key={meta.title}>{meta.title}</title>
-            }
+  return (
+    <Helmet titleTemplate={titleTemplate}>
+      {handlers.map((match) => {
+        const metas = match.handle.meta(t, match.data)
 
-            if ('name' in meta) {
-              return <meta key={`${meta.name}|${meta.content}`} name={meta.name} content={meta.content} />
-            }
+        return (
+          <Fragment key={match.id}>
+            {metas.map((meta) => {
+              if ('title' in meta) {
+                return <title key={meta.title}>{meta.title}</title>
+              }
 
-            return <Fragment key={meta} />
-          })}
-        </Helmet>
-      </Fragment>
-    )
-  })
+              if ('name' in meta) {
+                return <meta key={`${meta.name}|${meta.content}`} name={meta.name} content={meta.content} />
+              }
+
+              return <Fragment key={meta} />
+            })}
+          </Fragment>
+        )
+      })}
+    </Helmet>
+  )
 }
