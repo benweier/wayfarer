@@ -57,7 +57,7 @@ export const getShipByIdQuery = (args: { shipSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'ships', entity: 'item' }, args],
     queryFn: async ({ signal }) => {
-      const url = new URL(`my/ships/${args.shipSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+      const url = new URL(`my/ships/${args.shipSymbol.toUpperCase()}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<ShipResponse>>(url, { signal, headers: createHeaders() })
     },

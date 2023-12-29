@@ -13,7 +13,10 @@ export const getWaypointListQuery = (args: { systemSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'list' }, args],
     queryFn: async ({ signal }) => {
-      const url = new URL(`systems/${args.systemSymbol}/waypoints`, import.meta.env.SPACETRADERS_API_BASE_URL)
+      const url = new URL(
+        `systems/${args.systemSymbol.toUpperCase()}/waypoints`,
+        import.meta.env.SPACETRADERS_API_BASE_URL,
+      )
 
       url.searchParams.set('page', '1')
       url.searchParams.set('limit', '20')
@@ -42,7 +45,7 @@ export const getWaypointByIdQuery = (args: { systemSymbol: string; waypointSymbo
     queryKey: [{ scope: 'waypoints', entity: 'item' }, args],
     queryFn: async ({ signal }) => {
       const url = new URL(
-        `systems/${args.systemSymbol}/waypoints/${args.waypointSymbol}`,
+        `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}`,
         import.meta.env.SPACETRADERS_API_BASE_URL,
       )
 
@@ -55,7 +58,7 @@ export const getWaypointMarketQuery = (args: { systemSymbol: string; waypointSym
     queryKey: [{ scope: 'waypoints', entity: 'market' }, args],
     queryFn: async ({ signal }) => {
       const url = new URL(
-        `systems/${args.systemSymbol}/waypoints/${args.waypointSymbol}/market`,
+        `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/market`,
         import.meta.env.SPACETRADERS_API_BASE_URL,
       )
 
@@ -68,7 +71,7 @@ export const getWaypointShipyardQuery = (args: { systemSymbol: string; waypointS
     queryKey: [{ scope: 'waypoints', entity: 'shipyard' }, args],
     queryFn: async ({ signal }) => {
       const url = new URL(
-        `systems/${args.systemSymbol}/waypoints/${args.waypointSymbol}/shipyard`,
+        `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/shipyard`,
         import.meta.env.SPACETRADERS_API_BASE_URL,
       )
 
@@ -81,7 +84,7 @@ export const getWaypointJumpGateQuery = (args: { systemSymbol: string; waypointS
     queryKey: [{ scope: 'waypoints', entity: 'jump-gate' }, args],
     queryFn: async ({ signal }) => {
       const url = new URL(
-        `systems/${args.systemSymbol}/waypoints/${args.waypointSymbol}/jump-gate`,
+        `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/jump-gate`,
         import.meta.env.SPACETRADERS_API_BASE_URL,
       )
 

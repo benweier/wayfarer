@@ -19,15 +19,14 @@ export const loader: QueryClientLoaderFn =
     const { systemSymbol, waypointSymbol } = params
 
     if (!systemSymbol || !waypointSymbol) {
-      redirect(ROUTES.SYSTEMS)
-      throw new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
+      return redirect(ROUTES.SYSTEMS)
     }
 
     try {
       const waypoint = await client.ensureQueryData(
         getWaypointByIdQuery({
-          systemSymbol: systemSymbol.toUpperCase(),
-          waypointSymbol: waypointSymbol.toUpperCase(),
+          systemSymbol: systemSymbol,
+          waypointSymbol: waypointSymbol,
         }),
       )
       const marketEnabled = waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1

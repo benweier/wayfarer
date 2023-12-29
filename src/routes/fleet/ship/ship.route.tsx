@@ -12,12 +12,10 @@ const ShipRouteComponent = () => {
   if (!shipSymbol) return null
 
   return (
-    <div key={shipSymbol} className="grid gap-4 p-4">
-      <div className="flex items-center justify-start gap-6">
-        <h1 className="text-title">
-          {t('ship.label')}: <span className="font-normal">{shipSymbol}</span>
-        </h1>
-      </div>
+    <div key={shipSymbol} className="space-y-4 p-4">
+      <h1 className="text-title">
+        {t('ship.label')}: <span className="font-normal">{shipSymbol.toUpperCase()}</span>
+      </h1>
 
       <QuerySuspenseBoundary>
         <ShipStore shipSymbol={shipSymbol}>

@@ -19,7 +19,7 @@ export const getSystemByIdQuery = (args: { systemSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'systems', entity: 'item' }, args],
     queryFn: async ({ signal }) => {
-      const url = new URL(`systems/${args.systemSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+      const url = new URL(`systems/${args.systemSymbol.toUpperCase()}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<SystemResponse>>(url, { signal, headers: createHeaders() })
     },

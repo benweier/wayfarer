@@ -21,13 +21,11 @@ export const loader: QueryClientLoaderFn =
     const { systemSymbol } = params
 
     if (!systemSymbol) {
-      redirect(ROUTES.SYSTEMS)
-
-      return new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
+      return redirect(ROUTES.SYSTEMS)
     }
 
     try {
-      const system = await client.ensureQueryData(getSystemByIdQuery({ systemSymbol: systemSymbol.toUpperCase() }))
+      const system = await client.ensureQueryData(getSystemByIdQuery({ systemSymbol: systemSymbol }))
       const waypoints = client.ensureQueryData(getWaypointListQuery({ systemSymbol: system.data.symbol }))
 
       if (!isAuthenticated) {

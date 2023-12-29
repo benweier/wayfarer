@@ -10,9 +10,9 @@ export const SystemViewComponent = () => {
   const { systemSymbol } = useParams()
 
   return (
-    <div key={systemSymbol} className="grid gap-4 p-4">
+    <div key={systemSymbol} className="space-y-4 p-4">
       <h1 className="text-title">
-        {t('system.label')}: <span className="whitespace-nowrap font-normal">{systemSymbol}</span>
+        {t('system.label')}: <span className="whitespace-nowrap font-normal">{systemSymbol?.toUpperCase()}</span>
       </h1>
 
       {systemSymbol && (
