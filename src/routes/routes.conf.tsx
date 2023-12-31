@@ -212,16 +212,19 @@ export const routes: RouteObject[] = [
 
               {
                 path: '/contracts',
-                errorElement: <RouteError />,
-                async lazy() {
-                  const mod = await import('@/routes/contracts')
-
-                  return {
-                    element: <mod.Route />,
-                    loader: auth.withAuth(mod.loader(client)),
-                  }
-                },
                 children: [
+                  {
+                    index: true,
+                    errorElement: <RouteError />,
+                    async lazy() {
+                      const mod = await import('@/routes/contracts')
+
+                      return {
+                        element: <mod.Route />,
+                        loader: auth.withAuth(mod.loader(client)),
+                      }
+                    },
+                  },
                   {
                     path: ':contractId',
                     errorElement: <RouteError />,
