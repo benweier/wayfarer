@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Modal, useModalActions } from '@/components/modal'
@@ -28,7 +28,7 @@ const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
     mutationKey: createContractAcceptMutation.getMutationKey({ contractId: contract.id }),
     mutationFn: createContractAcceptMutation.mutationFn,
     onSuccess: () => {
-      void client.invalidateQueries({ queryKey: getContractListQuery.getQueryKey() })
+      void client.invalidateQueries({ queryKey: getContractListQuery().queryKey })
     },
   })
 
@@ -73,9 +73,8 @@ const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
 }
 
 export const ContractList = () => {
-  const { data, isSuccess } = useQuery({
-    queryKey: getContractListQuery.getQueryKey(),
-    queryFn: getContractListQuery.queryFn,
+  const { data, isSuccess } = useSuspenseQuery({
+    ...getContractListQuery(),
     select: (response) => {
       return {
         data: response.data.reduce(contractsReducer, {

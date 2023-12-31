@@ -1,40 +1,56 @@
-import { type QueryFunctionContext } from '@tanstack/react-query'
+import { queryOptions } from '@tanstack/react-query'
 import { get, post } from '@/services/fetch'
+import { getState } from '@/store/auth'
 import { type AgentResponse, type ContractResponse, type ShipCargo } from '@/types/spacetraders'
+import { getPageList } from '@/utilities/get-page-list.helper'
 import { type Meta, type SpaceTradersResponse, createHeaders } from './core'
 
-type MaybeMutationKey<T = never> = [] | [Partial<T>]
+export const getContractListQuery = () =>
+  queryOptions({
+    queryKey: [{ scope: 'contracts', entity: 'list' }],
+    queryFn: async ({ signal }) => {
+      const { isAuthenticated } = getState()
 
-const CONTRACT_QUERIES = {
-  contractList: (params?: { page?: number; limit?: number }) =>
-    [{ scope: 'contracts', entity: 'list' }, params] as const,
-  contractById: ({ contractId }: { contractId: string }) =>
-    [{ scope: 'contracts', entity: 'item' }, { contractId }] as const,
-}
+      if (!isAuthenticated) {
+        return { data: [], meta: { page: 0, total: 0, limit: 0 } }
+      }
 
-type ContractQueryKey<T extends keyof typeof CONTRACT_QUERIES> = ReturnType<(typeof CONTRACT_QUERIES)[T]>
+      const url = new URL('my/contracts', import.meta.env.SPACETRADERS_API_BASE_URL)
 
-export const getContractListQuery = {
-  getQueryKey: CONTRACT_QUERIES.contractList,
-  queryFn: async ({ signal }: QueryFunctionContext<ContractQueryKey<'contractList'>>) => {
-    const url = new URL(`my/contracts`, import.meta.env.SPACETRADERS_API_BASE_URL)
+      url.searchParams.set('page', '1')
+      url.searchParams.set('limit', '20')
 
-    return get<SpaceTradersResponse<ContractResponse[], Meta>>(url, { signal, headers: createHeaders() })
-  },
-}
+      const initial = await get<SpaceTradersResponse<ContractResponse[], Meta>>(url, {
+        signal,
+        headers: createHeaders(),
+      })
+      const pages = getPageList(Math.ceil(initial.meta.total / initial.meta.limit), 1)
+      const remaining = await Promise.all(
+        pages.map((page) => {
+          url.searchParams.set('page', String(page))
 
-export const getContractByIdQuery = {
-  getQueryKey: CONTRACT_QUERIES.contractById,
-  queryFn: async ({ queryKey: [, args], signal }: QueryFunctionContext<ContractQueryKey<'contractById'>>) => {
-    const url = new URL(`my/contracts/${args.contractId}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+          return get<SpaceTradersResponse<ContractResponse[], Meta>>(url, { signal, headers: createHeaders() })
+        }),
+      )
+      const data = initial.data.concat(...remaining.map((page) => page.data))
+      const meta = { page: 1, total: data.length, limit: data.length }
 
-    return get<SpaceTradersResponse<ContractResponse>>(url, { signal, headers: createHeaders() })
-  },
-}
+      return { data, meta }
+    },
+  })
+
+export const getContractByIdQuery = (args: { contractId: string }) =>
+  queryOptions({
+    queryKey: [{ scope: 'contracts', entity: 'item' }, args],
+    queryFn: async ({ signal }) => {
+      const url = new URL(`my/contracts/${args.contractId}`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+      return get<SpaceTradersResponse<ContractResponse>>(url, { signal, headers: createHeaders() })
+    },
+  })
 
 export const createContractAcceptMutation = {
-  getMutationKey: (...args: MaybeMutationKey<{ contractId: string }>) =>
-    [{ scope: 'contracts', entity: 'item', action: 'accept' }, ...args] as const,
+  getMutationKey: (args: { contractId: string }) => [{ scope: 'contracts', entity: 'item', action: 'accept' }, args],
   mutationFn: async (args: { contractId: string }) => {
     const url = new URL(`my/contracts/${args.contractId}/accept`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
@@ -45,8 +61,10 @@ export const createContractAcceptMutation = {
 }
 
 export const createContractDeliverMutation = {
-  getMutationKey: (...args: MaybeMutationKey<{ contractId: string }>) =>
-    [{ scope: 'contracts', entity: 'item', action: 'deliver' }, ...args] as const,
+  getMutationKey: (args: { contractId: string; shipSymbol?: string }) => [
+    { scope: 'contracts', entity: 'item', action: 'deliver' },
+    args,
+  ],
   mutationFn: async (args: { contractId: string; shipSymbol: string; tradeSymbol: string; units: number }) => {
     const url = new URL(`my/contracts/${args.contractId}/deliver`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
@@ -68,8 +86,7 @@ export const createContractDeliverMutation = {
 }
 
 export const createContractFulfillMutation = {
-  getMutationKey: (...args: MaybeMutationKey<{ contractId: string }>) =>
-    [{ scope: 'contracts', entity: 'item', action: 'fulfill' }, ...args] as const,
+  getMutationKey: (args: { contractId: string }) => [{ scope: 'contracts', entity: 'item', action: 'fulfill' }, args],
   mutationFn: async (args: { contractId: string }) => {
     const url = new URL(`my/contracts/${args.contractId}/fulfill`, import.meta.env.SPACETRADERS_API_BASE_URL)
 

@@ -1,16 +1,17 @@
 import { defer } from 'react-router-dom'
-import { getContractListQuery } from '@/services/api/spacetraders'
+import { getContractListQuery } from '@/services/api/spacetraders/contracts'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 
-export const loader: QueryClientLoaderFn = (client) => async () => {
+export const meta: MetaFunction = (t) => {
+  return [{ title: t('contracts.title', { ns: 'meta' }) }]
+}
+
+export const loader: QueryClientLoaderFn = (client) => () => {
   try {
-    const contracts = client.ensureQueryData({
-      queryKey: getContractListQuery.getQueryKey(),
-      queryFn: getContractListQuery.queryFn,
-    })
+    const contracts = client.ensureQueryData(getContractListQuery())
 
     return defer({
-      contracts: await contracts,
+      contracts,
     })
   } catch (err) {
     if (isHttpError(err)) {

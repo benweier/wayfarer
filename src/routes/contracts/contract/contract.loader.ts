@@ -1,21 +1,18 @@
-import { defer } from 'react-router-dom'
+import { defer, redirect } from 'react-router-dom'
 import { getContractByIdQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 
 export const loader: QueryClientLoaderFn =
   (client) =>
   async ({ params }) => {
-    const { contractID } = params
+    const { contractId } = params
 
-    if (!contractID) {
-      throw new Response(STATUS_MESSAGES.UNPROCESSABLE_ENTITY, { status: STATUS_CODES.UNPROCESSABLE_ENTITY })
+    if (!contractId) {
+      return redirect('/contracts')
     }
 
     try {
-      const contract = await client.ensureQueryData({
-        queryKey: getContractByIdQuery.getQueryKey({ contractId: contractID }),
-        queryFn: getContractByIdQuery.queryFn,
-      })
+      const contract = await client.ensureQueryData(getContractByIdQuery({ contractId }))
 
       return defer({ contract })
     } catch (err) {
