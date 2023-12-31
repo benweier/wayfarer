@@ -4,17 +4,15 @@ import { type Ref, forwardRef } from 'react'
 import { createShipDockMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
-const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonElement>) => {
+const DockComponent = ({ ship, disabled = false, children }: ShipActionProps, ref: Ref<HTMLButtonElement>) => {
   const client = useQueryClient()
-  const isMutating = useIsMutating({
-    mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }],
-  })
-  const { mutate } = useMutation({
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
+  const { mutate, isPending } = useMutation({
     mutationKey: createShipDockMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipDockMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -39,8 +37,6 @@ const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonE
       return { ship, ships }
     },
     onSuccess: (response, { shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -63,15 +59,15 @@ const DockComponent = ({ ship, children }: ShipActionProps, ref: Ref<HTMLButtonE
         )
       }
     },
-    onError: (_err, { shipSymbol }, ctx) => {
-      client.setQueryData(getShipByIdQuery({ shipSymbol }).queryKey, ctx?.ship)
-      client.setQueryData(getShipListQuery().queryKey, ctx?.ships)
+    onError: (_err, _variables, ctx) => {
+      client.setQueryData(shipByIdQueryKey, ctx?.ship)
+      client.setQueryData(shipListQueryKey, ctx?.ships)
     },
   })
 
   return children({
     ref,
-    disabled: isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
+    disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
     onClick: () => {
       mutate({ shipSymbol: ship.symbol })
     },

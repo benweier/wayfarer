@@ -18,13 +18,13 @@ export const Navigate = ({
   waypointSymbol: string
 }>) => {
   const client = useQueryClient()
-  const isMutating = useIsMutating({ mutationKey: getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey })
-  const { mutate } = useMutation({
-    mutationKey: createShipNavigateMutation.getMutationKey(),
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
+  const { mutate, isPending } = useMutation({
+    mutationKey: createShipNavigateMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipNavigateMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -66,7 +66,7 @@ export const Navigate = ({
   })
 
   return children({
-    disabled: disabled || isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
+    disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, waypointSymbol })
     },

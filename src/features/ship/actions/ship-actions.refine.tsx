@@ -1,23 +1,25 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipRefineMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
 export const Refine = ({
   ship,
+  disabled = false,
   item,
   children,
 }: ShipActionProps<{
   item: string
 }>) => {
   const client = useQueryClient()
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
   const hasCooldown = ship.cooldown.remainingSeconds > 0
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationKey: createShipRefineMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefineMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -44,7 +46,7 @@ export const Refine = ({
   })
 
   return children({
-    disabled: hasCooldown || isPending,
+    disabled: disabled || hasCooldown || isMutating > 0,
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, produce: item })
     },

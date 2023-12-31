@@ -6,6 +6,7 @@ import { Button } from '@/components/button'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import { formatNumber } from '@/utilities/number'
 import { type TradeGoodSellFormProps } from './trade-good-sell.types'
 import { type TradeGoodSellSchema, validation } from './trade-good-sell.validation'
 
@@ -26,9 +27,7 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
     <div className="flex flex-wrap items-center gap-12">
       <div className="[max-width:50%]">
         <div className="text-secondary text-sm">Sell Price</div>
-        <div className="truncate text-xl font-bold">
-          {isNaN(quantity) ? 0 : new Intl.NumberFormat('en-US').format(quantity * perUnit)}
-        </div>
+        <div className="truncate text-xl font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
       </div>
     </div>
   )
@@ -98,7 +97,9 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
         )}
 
         <div>
-          <label className="label">Quantity</label>
+          <label htmlFor="quantity" className="label">
+            Quantity
+          </label>
           <input
             {...methods.register('quantity', {
               valueAsNumber: true,

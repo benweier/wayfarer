@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipRemoveMountMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { useAuthStore } from '@/store/auth'
@@ -12,12 +12,13 @@ export const RemoveMount = ({
 }: ShipActionProps<{ mountSymbol: string }>) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
   const { mutate, isPending } = useMutation({
     mutationKey: createShipRemoveMountMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRemoveMountMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -46,7 +47,7 @@ export const RemoveMount = ({
   })
 
   return children({
-    disabled: disabled || isPending,
+    disabled: disabled || isMutating > 0 || isPending,
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, mountSymbol })
     },

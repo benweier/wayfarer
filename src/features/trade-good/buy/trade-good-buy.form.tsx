@@ -100,7 +100,9 @@ export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps
         )}
 
         <div>
-          <label className="label">Quantity</label>
+          <label htmlFor="quantity" className="label">
+            Quantity
+          </label>
           <input
             {...methods.register('quantity', {
               valueAsNumber: true,

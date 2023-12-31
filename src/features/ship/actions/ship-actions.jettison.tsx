@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipJettisonMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
@@ -16,12 +16,13 @@ export const Jettison = ({
   onDone?: () => void
 }>) => {
   const client = useQueryClient()
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
   const { mutate, isPending } = useMutation({
     mutationKey: createShipJettisonMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipJettisonMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -49,7 +50,7 @@ export const Jettison = ({
   })
 
   return children({
-    disabled: disabled || isPending,
+    disabled: disabled || isMutating > 0 || isPending,
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, itemSymbol: symbol, units })
     },

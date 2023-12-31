@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipExtractMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { useShipSurveyStore } from '@/store/ship'
@@ -15,14 +15,15 @@ export const Extract = ({
   const client = useQueryClient()
   const removeSurvey = useShipSurveyStore((state) => state.removeSurvey)
   const hasCooldown = ship.cooldown.remainingSeconds > 0
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
   const { mutate, isPending } = useMutation({
     mutationKey: createShipExtractMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipExtractMutation.mutationFn,
     onSuccess: (response, { shipSymbol, survey }) => {
       if (survey) removeSurvey(survey.signature)
 
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -49,7 +50,7 @@ export const Extract = ({
   })
 
   return children({
-    disabled: hasCooldown || isPending,
+    disabled: hasCooldown || isMutating > 0 || isPending,
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, survey })
     },

@@ -25,7 +25,7 @@ export const TradeGoodBuy = ({
   const { setAgent } = useAuthStore((state) => state.actions)
   const client = useQueryClient()
   const { mutateAsync } = useMutation({
-    mutationKey: createShipCargoPurchaseMutation.getMutationKey(),
+    mutationKey: createShipCargoPurchaseMutation.getMutationKey(ship ? { shipSymbol: ship.symbol } : null),
     mutationFn: createShipCargoPurchaseMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
       const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey

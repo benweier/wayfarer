@@ -9,15 +9,13 @@ const FlightModeComponent = (
   ref: Ref<HTMLButtonElement>,
 ) => {
   const client = useQueryClient()
-  const isMutating = useIsMutating({
-    mutationKey: [{ scope: 'ships', entity: 'item' }, { shipSymbol: ship.symbol }],
-  })
-  const { mutate } = useMutation({
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
+  const { mutate, isPending } = useMutation({
     mutationKey: createShipFlightModeMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipFlightModeMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -43,7 +41,7 @@ const FlightModeComponent = (
 
   return children({
     ref,
-    disabled: disabled || isMutating > 0 || ship.fuel.capacity === 0 || ship.nav.status === 'IN_TRANSIT',
+    disabled: disabled || isMutating > 0 || isPending || ship.fuel.capacity === 0 || ship.nav.status === 'IN_TRANSIT',
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, flightMode })
     },

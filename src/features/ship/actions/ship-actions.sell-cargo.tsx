@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipCargoSellMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { useAuthStore } from '@/store/auth'
@@ -8,6 +8,7 @@ export const SellCargo = ({
   ship,
   symbol,
   units,
+  disabled = false,
   children,
 }: ShipActionProps<{
   symbol: string
@@ -15,12 +16,13 @@ export const SellCargo = ({
 }>) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
+  const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
   const { mutate, isPending } = useMutation({
-    mutationKey: createShipCargoSellMutation.getMutationKey(),
+    mutationKey: createShipCargoSellMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipCargoSellMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
@@ -47,7 +49,7 @@ export const SellCargo = ({
   })
 
   return children({
-    disabled: isPending,
+    disabled: disabled || isMutating > 0 || isPending,
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, itemSymbol: symbol, units })
     },

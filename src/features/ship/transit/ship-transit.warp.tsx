@@ -29,12 +29,11 @@ export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
 const Warp = ({ ship }: { ship: ShipResponse }) => {
   const methods = useForm<{ waypointSymbol: string }>()
   const client = useQueryClient()
+  const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
+  const shipListQueryKey = getShipListQuery().queryKey
   const { mutateAsync, isPending } = useMutation({
-    mutationKey: createShipWarpMutation.getMutationKey({ shipSymbol: ship.symbol }),
-    mutationFn: createShipWarpMutation.mutationFn,
+    ...createShipWarpMutation({ shipSymbol: ship.symbol }),
     onSuccess: (response, { shipSymbol }) => {
-      const shipByIdQueryKey = getShipByIdQuery({ shipSymbol }).queryKey
-      const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1

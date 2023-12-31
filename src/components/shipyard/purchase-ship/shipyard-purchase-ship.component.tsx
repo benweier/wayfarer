@@ -1,7 +1,8 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { type Ref, forwardRef } from 'react'
 import { Button } from '@/components/button'
-import { createShipPurchaseMutation } from '@/services/api/spacetraders'
+import { createShipPurchaseMutation, getShipListQuery } from '@/services/api/spacetraders'
 import { useAuthStore } from '@/store/auth'
 import { type ShipyardPurchaseShipProps } from './shipyard-purchase-ship.types'
 
@@ -17,12 +18,25 @@ const PurchaseShipComponent = (
   }: ShipyardPurchaseShipProps,
   ref: Ref<HTMLButtonElement>,
 ) => {
-  const setAgent = useAuthStore((state) => state.actions.setAgent)
-  const credits = useAuthStore((state) => state.agent?.credits ?? 0)
+  const client = useQueryClient()
+  const { credits, setAgent } = useAuthStore((state) => ({
+    credits: state.agent?.credits ?? 0,
+    setAgent: state.actions.setAgent,
+  }))
   const { mutate, isPending } = useMutation({
-    mutationKey: createShipPurchaseMutation.getMutationKey({ shipType: ship.type, waypointSymbol }),
+    mutationKey: createShipPurchaseMutation.getMutationKey(),
     mutationFn: createShipPurchaseMutation.mutationFn,
     onSuccess: (response) => {
+      const ships = client.getQueryData(getShipListQuery().queryKey)
+
+      if (ships !== undefined) {
+        client.setQueryData(
+          getShipListQuery().queryKey,
+          produce(ships, (draft) => {
+            draft.data.push(response.data.ship)
+          }),
+        )
+      }
       setAgent(response.data.agent)
     },
   })
