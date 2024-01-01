@@ -14,6 +14,8 @@ export const RouteError = () => {
   const error = useRouteError()
 
   if (!isRouteErrorResponse(error)) {
+    if (error instanceof Error) return <>{error.message}</>
+
     return <></>
   }
 
