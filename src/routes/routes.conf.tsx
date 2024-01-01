@@ -222,6 +222,9 @@ export const routes: RouteObject[] = [
                       return {
                         element: <mod.Route />,
                         loader: auth.withAuth(mod.loader(client)),
+                        handle: {
+                          meta: mod.meta,
+                        },
                       }
                     },
                   },
@@ -234,6 +237,9 @@ export const routes: RouteObject[] = [
                       return {
                         element: <mod.Route />,
                         loader: auth.withAuth(mod.loader(client)),
+                        handle: {
+                          meta: mod.meta,
+                        },
                       }
                     },
                   },
