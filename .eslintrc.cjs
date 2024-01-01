@@ -97,6 +97,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/unbound-method': 'off',
+    'sonarjs/no-duplicate-string': ['error', { threshold: 5 }],
   },
   overrides: [
     {
