@@ -12,16 +12,12 @@
   @apply flex items-center gap-2;
 
   & > .adornment-start {
-    @apply -ml-0.5;
+    @apply -ml-0.5 flex items-center;
   }
 
   & > .adornment-end {
-    @apply -mr-0.5;
+    @apply -mr-0.5 flex items-center;
   }
-}
-
-.btn-icon {
-  @apply py-1.5 px-2;
 }
 
 .btn-primary {
@@ -86,4 +82,8 @@
   @apply focus:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-zinc-100;
   @apply disabled:cursor-default disabled:opacity-50;
   @apply dark:ring-offset-zinc-800;
+}
+
+.btn-icon {
+  @apply py-1.5 px-2 rounded-md;
 }

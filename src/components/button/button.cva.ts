@@ -20,6 +20,9 @@ export const button = cva('btn', {
       flat: ['btn-flat'],
       outline: ['btn-outline'],
     },
+    icon: {
+      true: ['btn-icon'],
+    },
   },
 })
 
