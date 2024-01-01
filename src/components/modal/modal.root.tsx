@@ -71,12 +71,13 @@ export const Root = ({
                     intent="danger"
                     kind="outline"
                     size="small"
-                    className="absolute right-2.5 top-2.5"
+                    icon
+                    className="absolute right-2 top-2"
                     onClick={() => {
                       handleClose()
                     }}
                   >
-                    <AppIcon id="x" className="size-4" />
+                    <AppIcon id="x" className="size-3" />
                   </Button>
                 )}
               </Dialog.Panel>
