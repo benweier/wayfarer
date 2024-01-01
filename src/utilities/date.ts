@@ -33,7 +33,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en-gb', {
   second: '2-digit',
 })
 
-export const formatDateTime = (value: number | Date) => {
+export const formatDateTime = (value: string | number | Date) => {
   const date = new Date(value)
   const [day, , month, , year, , hour, , minute, , second] = dateTimeFormatter.formatToParts(date)
 
