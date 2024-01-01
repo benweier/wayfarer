@@ -1,79 +1,16 @@
-import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+import { Tab } from '@headlessui/react'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
-import { Badge } from '@/components/badge'
-import { Modal, useModalActions } from '@/components/modal'
-import { createContractAcceptMutation, getContractListQuery } from '@/services/api/spacetraders'
-import { type ContractResponse } from '@/types/spacetraders'
-import { ContractItem } from '../item'
+import { getContractListQuery } from '@/services/api/spacetraders'
+import { acceptedContractsColumns, availableContractsColumns, completedContractsColumns } from './contract-list.columns'
+import { ContractListContext } from './contract-list.context'
+import { ContractListTable } from './contract-list.table'
 import { contractsReducer } from './contracts.utilities'
 
-const CloseModal = () => {
-  const { closeModal } = useModalActions()
-
-  return (
-    <button
-      className="btn"
-      onClick={() => {
-        closeModal()
-      }}
-    >
-      Cancel
-    </button>
-  )
-}
-const AvailableContract = ({ contract }: { contract: ContractResponse }) => {
-  const { t } = useTranslation()
-  const client = useQueryClient()
-  const acceptContract = useMutation({
-    mutationKey: createContractAcceptMutation.getMutationKey({ contractId: contract.id }),
-    mutationFn: createContractAcceptMutation.mutationFn,
-    onSuccess: () => {
-      void client.invalidateQueries({ queryKey: getContractListQuery().queryKey })
-    },
-  })
-
-  return (
-    <ContractItem contract={contract}>
-      <Modal
-        size="md"
-        trigger={
-          <Modal.Trigger>
-            {(props) => (
-              <button className="btn btn-primary btn-outline w-full" {...props}>
-                View Contract
-              </button>
-            )}
-          </Modal.Trigger>
-        }
-      >
-        <div className="grid gap-8">
-          <div>
-            <div className="text-title">Accept Contract</div>
-            <div className="flex gap-2">
-              <div className="text-secondary text-sm">{contract.id}</div>
-              <Badge>{t(contract.type, { ns: 'spacetraders.contract_type' })}</Badge>
-            </div>
-          </div>
-          <div className="grid gap-2"></div>
-          <div className="flex justify-end gap-4">
-            <CloseModal />
-            <button
-              className="btn btn-confirm"
-              onClick={() => {
-                acceptContract.mutate({ contractId: contract.id })
-              }}
-            >
-              Accept Contract
-            </button>
-          </div>
-        </div>
-      </Modal>
-    </ContractItem>
-  )
-}
-
 export const ContractList = () => {
-  const { data, isSuccess } = useSuspenseQuery({
+  const { t } = useTranslation()
+  const { data } = useSuspenseQuery({
     ...getContractListQuery(),
     select: (response) => {
       return {
@@ -86,40 +23,48 @@ export const ContractList = () => {
       }
     },
   })
-
-  if (!isSuccess) return null
-
   const contracts = data.data
-  const meta = data.meta
-
-  if (meta.total === 0) {
-    return (
-      <div className="rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
-        <div className="text-secondary text-center text-sm">
-          <span className="font-bold">No contracts</span> are available
-        </div>
-      </div>
-    )
-  }
 
   return (
-    <div className="grid gap-8">
-      {contracts.accepted.length > 0 && (
-        <div className="grid gap-2">
-          <div className="text-headline">Accepted Contracts</div>
-          {contracts.accepted.map((contract) => (
-            <AvailableContract key={contract.id} contract={contract} />
-          ))}
-        </div>
-      )}
-      {contracts.available.length > 0 && (
-        <div className="grid gap-2">
-          <div className="text-headline">Available Contracts</div>
-          {contracts.available.map((contract) => (
-            <AvailableContract key={contract.id} contract={contract} />
-          ))}
-        </div>
-      )}
-    </div>
+    <Tab.Group as="div" className="tab-group">
+      <Tab.List className="tab-list">
+        <Tab disabled={contracts.accepted.length === 0} className={({ selected }) => cx('group tab', { selected })}>
+          {t('contracts.accepted')} ({contracts.accepted.length})
+        </Tab>
+        <Tab disabled={contracts.available.length === 0} className={({ selected }) => cx('group tab', { selected })}>
+          {t('contracts.available')} ({contracts.available.length})
+        </Tab>
+        <Tab disabled={contracts.completed.length === 0} className={({ selected }) => cx('group tab', { selected })}>
+          {t('contracts.completed')} ({contracts.completed.length})
+        </Tab>
+      </Tab.List>
+
+      <Tab.Panels>
+        <Tab.Panel>
+          <ContractListContext.Provider value={{ Action: () => undefined }}>
+            <ContractListTable
+              data={contracts.accepted.map((contract) => ({ contract }))}
+              columns={acceptedContractsColumns}
+            />
+          </ContractListContext.Provider>
+        </Tab.Panel>
+
+        <Tab.Panel>
+          <ContractListContext.Provider value={{ Action: () => undefined }}>
+            <ContractListTable
+              data={contracts.available.map((contract) => ({ contract }))}
+              columns={availableContractsColumns}
+            />
+          </ContractListContext.Provider>
+        </Tab.Panel>
+
+        <Tab.Panel>
+          <ContractListTable
+            data={contracts.completed.map((contract) => ({ contract }))}
+            columns={completedContractsColumns}
+          />
+        </Tab.Panel>
+      </Tab.Panels>
+    </Tab.Group>
   )
 }
