@@ -5,7 +5,7 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type ContractDelivery, type ShipResponse } from '@/types/spacetraders'
-import { type DeliverContractSchema, validation } from './deliver-contract.validation'
+import { type DeliverContractSchema, validation } from './contract-deliver.validation'
 
 const getShipOption: ShipSelectItemReducer = (ships, ship) => {
   return ships.set(ship.symbol, {
@@ -23,7 +23,7 @@ const getShipOption: ShipSelectItemReducer = (ships, ship) => {
   })
 }
 
-export const DeliverContractForm = ({
+export const ContractDeliverForm = ({
   deliver,
   onSubmit,
 }: {
