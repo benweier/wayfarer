@@ -11,6 +11,7 @@ declare global {
         title: string
       }
     | { name: string; content: string }
+    | { property: string; content: string }
 
   type MetaFunction<T extends Record<string, unknown> = unknown> = (t: TFunction, args?: T) => MetaObject[]
 }

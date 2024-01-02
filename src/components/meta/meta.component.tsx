@@ -29,6 +29,10 @@ export const Meta = ({ titleTemplate }: MetaProps) => {
                 return <meta key={`${meta.name}|${meta.content}`} name={meta.name} content={meta.content} />
               }
 
+              if ('property' in meta) {
+                return <meta key={`${meta.property}|${meta.content}`} property={meta.property} content={meta.content} />
+              }
+
               return <Fragment key={meta} />
             })}
           </Fragment>
