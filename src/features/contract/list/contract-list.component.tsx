@@ -2,11 +2,56 @@ import { Tab } from '@headlessui/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
+import { Button } from '@/components/button'
+import * as ContractActions from '@/features/contract/actions'
+import { ContractDeliver } from '@/features/contract/deliver'
 import { getContractListQuery } from '@/services/api/spacetraders'
+import { type ContractResponse } from '@/types/spacetraders'
 import { acceptedContractsColumns, availableContractsColumns, completedContractsColumns } from './contract-list.columns'
 import { ContractListContext } from './contract-list.context'
 import { ContractListTable } from './contract-list.table'
 import { contractsReducer } from './contracts.utilities'
+
+const AcceptContractsAction = ({ contract }: { contract: ContractResponse }) => (
+  <ContractActions.Accept contract={contract}>
+    {(args) => (
+      <Button
+        ref={args.ref}
+        disabled={args.disabled}
+        intent="confirm"
+        kind="flat"
+        size="small"
+        onClick={() => {
+          void args.execute()
+        }}
+      >
+        Accept
+      </Button>
+    )}
+  </ContractActions.Accept>
+)
+const AvailableContractsAction = ({ contract }: { contract: ContractResponse }) => {
+  return contract.terms.deliver.every((item) => item.unitsRequired === item.unitsFulfilled) ? (
+    <ContractActions.Fulfill contract={contract}>
+      {(args) => (
+        <Button
+          ref={args.ref}
+          disabled={args.disabled}
+          intent="confirm"
+          kind="flat"
+          size="small"
+          onClick={() => {
+            void args.execute()
+          }}
+        >
+          Fulfill
+        </Button>
+      )}
+    </ContractActions.Fulfill>
+  ) : (
+    <ContractDeliver contract={contract} />
+  )
+}
 
 export const ContractList = () => {
   const { t } = useTranslation()
@@ -41,7 +86,7 @@ export const ContractList = () => {
 
       <Tab.Panels>
         <Tab.Panel>
-          <ContractListContext.Provider value={{ Action: () => undefined }}>
+          <ContractListContext.Provider value={{ Action: AvailableContractsAction }}>
             <ContractListTable
               data={contracts.accepted.map((contract) => ({ contract }))}
               columns={acceptedContractsColumns}
@@ -50,7 +95,7 @@ export const ContractList = () => {
         </Tab.Panel>
 
         <Tab.Panel>
-          <ContractListContext.Provider value={{ Action: () => undefined }}>
+          <ContractListContext.Provider value={{ Action: AcceptContractsAction }}>
             <ContractListTable
               data={contracts.available.map((contract) => ({ contract }))}
               columns={availableContractsColumns}
