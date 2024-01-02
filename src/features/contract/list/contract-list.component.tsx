@@ -12,25 +12,31 @@ import { ContractListContext } from './contract-list.context'
 import { ContractListTable } from './contract-list.table'
 import { contractsReducer } from './contracts.utilities'
 
-const AcceptContractsAction = ({ contract }: { contract: ContractResponse }) => (
-  <ContractActions.Accept contract={contract}>
-    {(args) => (
-      <Button
-        ref={args.ref}
-        disabled={args.disabled}
-        intent="confirm"
-        kind="flat"
-        size="small"
-        onClick={() => {
-          void args.execute()
-        }}
-      >
-        Accept
-      </Button>
-    )}
-  </ContractActions.Accept>
-)
+const AcceptContractsAction = ({ contract }: { contract: ContractResponse }) => {
+  const { t } = useTranslation()
+
+  return (
+    <ContractActions.Accept contract={contract}>
+      {(args) => (
+        <Button
+          ref={args.ref}
+          disabled={args.disabled}
+          intent="confirm"
+          kind="flat"
+          size="small"
+          onClick={() => {
+            void args.execute()
+          }}
+        >
+          {t('contract.accept', { context: 'action' })}
+        </Button>
+      )}
+    </ContractActions.Accept>
+  )
+}
 const AvailableContractsAction = ({ contract }: { contract: ContractResponse }) => {
+  const { t } = useTranslation()
+
   return contract.terms.deliver.every((item) => item.unitsRequired === item.unitsFulfilled) ? (
     <ContractActions.Fulfill contract={contract}>
       {(args) => (
@@ -44,7 +50,7 @@ const AvailableContractsAction = ({ contract }: { contract: ContractResponse }) 
             void args.execute()
           }}
         >
-          Fulfill
+          {t('contract.fulfill', { context: 'action' })}
         </Button>
       )}
     </ContractActions.Fulfill>
