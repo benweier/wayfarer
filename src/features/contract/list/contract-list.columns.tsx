@@ -146,11 +146,13 @@ export const availableContractsColumns = [
     id: 'actions',
     cell: ({ row }) => {
       return (
-        <ContractListContext.Consumer>
-          {(ctx) => {
-            return ctx.Action && <ctx.Action contract={row.original.contract} />
-          }}
-        </ContractListContext.Consumer>
+        <div className="text-right">
+          <ContractListContext.Consumer>
+            {(ctx) => {
+              return ctx.Action && <ctx.Action contract={row.original.contract} />
+            }}
+          </ContractListContext.Consumer>
+        </div>
       )
     },
     minSize: 5,
@@ -312,11 +314,13 @@ export const acceptedContractsColumns = [
     id: 'actions',
     cell: ({ row }) => {
       return (
-        <ContractListContext.Consumer>
-          {(ctx) => {
-            return ctx.Action && <ctx.Action contract={row.original.contract} />
-          }}
-        </ContractListContext.Consumer>
+        <div className="text-right">
+          <ContractListContext.Consumer>
+            {(ctx) => {
+              return ctx.Action && <ctx.Action contract={row.original.contract} />
+            }}
+          </ContractListContext.Consumer>
+        </div>
       )
     },
     minSize: 5,
