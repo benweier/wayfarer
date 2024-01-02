@@ -12,7 +12,7 @@ declare global {
       }
     | { name: string; content: string }
 
-  type MetaFunction<T extends Record<string, unknown> = unknown> = (t: TFunction, args?: Partial<T>) => MetaObject[]
+  type MetaFunction<T extends Record<string, unknown> = unknown> = (t: TFunction, args?: T) => MetaObject[]
 }
 
 declare module 'react' {

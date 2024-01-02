@@ -5,7 +5,10 @@ import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
 import { type WaypointResponse } from '@/types/spacetraders'
 
-export const meta: MetaFunction<{ waypoint: SpaceTradersResponse<WaypointResponse> }> = (t, { waypoint } = {}) => {
+export const meta: MetaFunction<Partial<{ waypoint: SpaceTradersResponse<WaypointResponse> }>> = (
+  t,
+  { waypoint } = {},
+) => {
   if (!waypoint) {
     return []
   }
