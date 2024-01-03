@@ -1,7 +1,7 @@
-import { type ShipResponse, type SurveyResponse } from '@/types/spacetraders'
+import { type SurveyResponse } from '@/types/spacetraders'
 
 export type SurveyListProps = {
-  ship: ShipResponse
+  predicate: (value: SurveyResponse, index: number, array: SurveyResponse[]) => boolean
 }
 
 export type SurveyListTableSchema = {

@@ -33,7 +33,11 @@ export const ShipTabs = () => {
         <Tab.Panel>
           <div className="space-y-4">
             <ShipSurveyExtract ship={ship} />
-            <SurveyList ship={ship} />
+            <SurveyList
+              predicate={(survey) => {
+                return survey.symbol === ship.nav.waypointSymbol
+              }}
+            />
           </div>
         </Tab.Panel>
 
