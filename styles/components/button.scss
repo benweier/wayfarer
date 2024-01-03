@@ -1,5 +1,5 @@
 .btn {
-  @apply rounded px-4 py-2 text-sm font-semibold border-2 border-transparent;
+  @apply rounded px-4 py-1.5 text-sm font-semibold border-2 border-transparent;
   @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-100 dark:focus:ring-offset-zinc-800;
   @apply disabled:cursor-not-allowed disabled:opacity-30 disabled:grayscale-50;
 
@@ -73,7 +73,7 @@
 }
 
 .btn-sm {
-  @apply px-2 py-0.5 font-semibold text-xs;
+  @apply px-2.5 py-1 font-semibold text-xs;
 }
 
 .btn-hero {
