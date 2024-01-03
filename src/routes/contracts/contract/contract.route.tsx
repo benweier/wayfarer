@@ -8,7 +8,7 @@ const ContractRouteComponent = () => {
   const { contractId } = useParams()
 
   return (
-    <div className="grid gap-4 p-4">
+    <div className="space-y-4 p-4">
       <div className="flex items-center justify-start gap-6">
         <div className="text-title">
           {t('contract.label')}: <span className="font-normal">{contractId}</span>
