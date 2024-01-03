@@ -39,7 +39,13 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      return <div>{getValue()}</div>
+      const value = getValue()
+
+      return (
+        <Translation>
+          {(t) => <div className="text-sm">{t(value, { ns: 'spacetraders.survey_size' })}</div>}
+        </Translation>
+      )
     },
     sortDescFirst: false,
     enableSorting: true,
@@ -53,7 +59,7 @@ export const columns = [
         <div className="flex items-center justify-start gap-2">
           <Translation>{(t) => <div>{t('general.header.expiration')}</div>}</Translation>
           <div>
-            <Sort column={column} type="alpha" />
+            <Sort column={column} type="numeric" />
           </div>
         </div>
       )
@@ -61,10 +67,11 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div>{formatDateTime(value)}</div>
+      return <div className="text-sm">{formatDateTime(value)}</div>
     },
     enableSorting: true,
     enableColumnFilter: true,
+    sortDescFirst: false,
     minSize: 20,
     maxSize: 20,
   }),
