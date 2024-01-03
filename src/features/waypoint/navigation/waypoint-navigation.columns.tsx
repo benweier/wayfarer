@@ -152,7 +152,7 @@ export const columns = [
   columnHelper.display({
     id: 'actions',
     cell: ({ row }) => {
-      const distance: number = row.getValue('distance')
+      const distance: number = row.getValue('distance_time')
 
       return (
         <div className="flex justify-end">
