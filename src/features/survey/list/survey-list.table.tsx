@@ -14,7 +14,7 @@ import { columns } from './survey-list.columns'
 import { type SurveyListTableProps } from './survey-list.types'
 
 export const SurveyListTable = ({ data }: SurveyListTableProps) => {
-  const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'expiration', desc: false }])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({
     data,
