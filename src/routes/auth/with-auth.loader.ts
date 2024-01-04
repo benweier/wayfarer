@@ -1,12 +1,12 @@
 import { type LoaderFunction, json } from 'react-router-dom'
 import { STATUS_CODES } from '@/services/http'
-import { getState } from '@/store/auth'
+import { getAuthState } from '@/store/auth'
 
 export type WithAuthLoaderFunction = (loader: LoaderFunction) => LoaderFunction
 
 export const withAuth: WithAuthLoaderFunction = (loader) => {
   return (args) => {
-    const { isAuthenticated } = getState()
+    const { isAuthenticated } = getAuthState()
 
     if (!isAuthenticated) {
       const url = new URL(args.request.url)

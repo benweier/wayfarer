@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import { get, post } from '@/services/fetch'
-import { getState } from '@/store/auth'
+import { getAuthState } from '@/store/auth'
 import { type AgentResponse, type ContractResponse, type ShipCargo } from '@/types/spacetraders'
 import { getPageList } from '@/utilities/get-page-list.helper'
 import { type Meta, type SpaceTradersResponse, createHeaders } from './core'
@@ -9,7 +9,7 @@ export const getContractListQuery = () =>
   queryOptions({
     queryKey: [{ scope: 'contracts', entity: 'list' }],
     queryFn: async ({ signal }) => {
-      const { isAuthenticated } = getState()
+      const { isAuthenticated } = getAuthState()
 
       if (!isAuthenticated) {
         return { data: [], meta: { page: 0, total: 0, limit: 0 } }

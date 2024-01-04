@@ -2,7 +2,7 @@ import { Navigate, type RouteObject } from 'react-router-dom'
 import { NotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
 import { client } from '@/services/query-client'
-import { getState } from '@/store/auth'
+import { getAuthState } from '@/store/auth'
 import * as auth from './auth'
 import { Core } from './core.route'
 import * as home from './home'
@@ -57,7 +57,7 @@ export const routes: RouteObject[] = [
               meta: ((t) => [{ title: t('auth.logout.title', { ns: 'meta' }) }]) as MetaFunction,
             },
             action() {
-              const { actions } = getState()
+              const { actions } = getAuthState()
 
               actions.signout()
 

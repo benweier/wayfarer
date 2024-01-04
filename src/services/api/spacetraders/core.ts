@@ -1,4 +1,4 @@
-import { getState } from '@/store/auth'
+import { getAuthState } from '@/store/auth'
 import type * as f from '@/services/fetch'
 
 export type Meta = {
@@ -17,7 +17,7 @@ export type SpaceTradersError<R = unknown> = {
 }
 
 export const createHeaders = (init?: HeadersInit) => {
-  const { isAuthenticated, token } = getState()
+  const { isAuthenticated, token } = getAuthState()
   const headers = new Headers(init)
 
   if (isAuthenticated && !headers.has('Authorization')) headers.set('Authorization', `Bearer ${token}`)

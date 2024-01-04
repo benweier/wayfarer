@@ -35,7 +35,7 @@ const store = createStore<AuthStore>((set) => ({
   },
 }))
 
-export const { getState, setState, subscribe } = store
+export const { getState: getAuthState, setState: setAuthState, subscribe: subscribeToAuthStore } = store
 
 export const useAuthStore: BoundStoreSelector<AuthStore> = (selector = (state: AuthStore) => state) =>
   useStore(store, selector)

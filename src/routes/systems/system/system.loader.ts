@@ -3,7 +3,6 @@ import { ROUTES } from '@/config/routes'
 import { getShipListQuery, getSystemByIdQuery, getWaypointListQuery } from '@/services/api/spacetraders'
 import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
-import { getState } from '@/store/auth'
 import { type SystemResponse } from '@/types/spacetraders'
 
 export const meta: MetaFunction<Partial<{ system: SpaceTradersResponse<SystemResponse> }>> = (t, { system } = {}) => {
@@ -17,7 +16,6 @@ export const meta: MetaFunction<Partial<{ system: SpaceTradersResponse<SystemRes
 export const loader: QueryClientLoaderFn =
   (client) =>
   async ({ params }) => {
-    const { isAuthenticated } = getState()
     const { systemSymbol } = params
 
     if (!systemSymbol) {
@@ -27,15 +25,6 @@ export const loader: QueryClientLoaderFn =
     try {
       const system = await client.ensureQueryData(getSystemByIdQuery({ systemSymbol: systemSymbol }))
       const waypoints = client.ensureQueryData(getWaypointListQuery({ systemSymbol: system.data.symbol }))
-
-      if (!isAuthenticated) {
-        return defer({
-          system,
-          waypoints,
-          ships: [],
-        })
-      }
-
       const ships = client.ensureQueryData(getShipListQuery())
 
       return defer({

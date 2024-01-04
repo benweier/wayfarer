@@ -2,7 +2,7 @@ import { produce } from 'immer'
 import { useStore } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { createStore } from 'zustand/vanilla'
-import { getState } from '@/store/auth'
+import { getAuthState } from '@/store/auth'
 import { type BoundStoreSelector } from '@/store/store.types'
 import { type SurveyResponse } from '@/types/spacetraders'
 
@@ -23,7 +23,7 @@ export const store = createStore<SurveyStore>()(
       surveys: {},
       actions: {
         addSurvey: (survey) => {
-          const auth = getState()
+          const auth = getAuthState()
 
           if (!auth.isAuthenticated) return
 
@@ -36,7 +36,7 @@ export const store = createStore<SurveyStore>()(
         },
         removeSurvey: (signature) => {
           const state = get()
-          const auth = getState()
+          const auth = getAuthState()
 
           if (!auth.isAuthenticated) return
           if (!Object.hasOwn(state, auth.agent.symbol)) return
