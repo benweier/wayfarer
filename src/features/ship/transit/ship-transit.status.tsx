@@ -1,3 +1,4 @@
+import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
@@ -29,8 +30,17 @@ export const ShipTransitStatus = () => {
       </div>
 
       <div className="flex flex-row items-center gap-2">
-        <div className="h-1 grow rounded-full bg-zinc-200 dark:bg-zinc-600">
-          <div className="h-full rounded-full bg-green-500" style={{ width: `${transit.progress}%` }} />
+        <div
+          className={cx('h-1.5 grow rounded-full bg-zinc-200 dark:bg-zinc-600', {
+            'opacity-65': transit.status === 'complete',
+          })}
+        >
+          <div
+            className={cx('h-full rounded-full bg-green-500', {
+              'animate-pulse': transit.status !== 'complete',
+            })}
+            style={{ width: `${transit.progress}%` }}
+          />
         </div>
         <div className="text-secondary flex w-12 justify-end text-right text-sm">
           {transit.status === 'complete' ? (

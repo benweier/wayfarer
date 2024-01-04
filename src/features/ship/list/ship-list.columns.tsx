@@ -15,7 +15,7 @@ const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   if (ship.nav.status !== 'IN_TRANSIT') return null
 
   return (
-    <div className="h-0.5 grow rounded-full bg-zinc-200 dark:bg-zinc-600">
+    <div className="h-1 grow rounded-full bg-zinc-200 dark:bg-zinc-600">
       <div className="h-full rounded-full bg-green-500" style={{ width: `${transit.progress}%` }} />
     </div>
   )
