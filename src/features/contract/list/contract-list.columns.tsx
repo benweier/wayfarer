@@ -170,10 +170,12 @@ export const acceptedContractsColumns = [
         </div>
       )
     },
-    cell: ({ row, getValue }) => {
+    cell: ({ getValue }) => {
+      const value = getValue()
+
       return (
-        <Link className="link" to={`/contracts/${row.original.contract.id}`}>
-          {getValue()}
+        <Link className="link" to={`/contracts/${value}`}>
+          {value}
         </Link>
       )
     },
