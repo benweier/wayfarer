@@ -9,7 +9,7 @@ export const Survey = ({ ship, disabled = false, children }: ShipActionProps) =>
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const addSurvey = useSurveyStore((state) => state.actions.addSurvey)
+  const addSurveys = useSurveyStore((state) => state.actions.addSurveys)
   const hasCooldown = ship.cooldown.remainingSeconds > 0
   const { mutate, isPending } = useMutation({
     mutationKey: createShipSurveyMutation.getMutationKey({ shipSymbol: ship.symbol }),
@@ -18,9 +18,8 @@ export const Survey = ({ ship, disabled = false, children }: ShipActionProps) =>
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
-      const [survey] = response.data.surveys
 
-      addSurvey(survey)
+      addSurveys(response.data.surveys)
 
       if (ship) {
         client.setQueryData(

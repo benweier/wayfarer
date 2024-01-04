@@ -4,10 +4,8 @@ import { type SurveyListProps } from './survey-list.types'
 
 export const SurveyList = ({ predicate = () => true }: SurveyListProps) => {
   const { surveys } = useSurveyStore((state) => {
-    const surveys = state.actions.getSurveys()
-
     return {
-      surveys: surveys.filter(predicate),
+      surveys: state.surveys.filter(predicate),
       removeSurvey: state.actions.removeSurvey,
     }
   })

@@ -2,17 +2,15 @@ import { produce } from 'immer'
 import { useStore } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { createStore } from 'zustand/vanilla'
-import { getAuthState } from '@/store/auth'
 import { type BoundStoreSelector } from '@/store/store.types'
 import { type SurveyResponse } from '@/types/spacetraders'
 
 type SurveyState = {
-  surveys: Record<string, SurveyResponse[]>
+  surveys: SurveyResponse[]
 }
 
 type SurveyHandlers = {
-  getSurveys: () => SurveyResponse[]
-  addSurvey: (survey: SurveyResponse) => void
+  addSurveys: (surveys: SurveyResponse[]) => void
   removeSurvey: (signature: string) => void
 }
 
@@ -21,44 +19,23 @@ type SurveyStore = SurveyState & { actions: SurveyHandlers }
 export const store = createStore<SurveyStore>()(
   persist(
     (set, get) => ({
-      surveys: {},
+      surveys: [],
       actions: {
-        getSurveys: () => {
-          const state = get()
-          const auth = getAuthState()
-
-          if (!auth.isAuthenticated) return []
-          if (!Object.hasOwn(state, auth.agent.symbol)) return []
-
-          return state.surveys[auth.agent.symbol]
-        },
-        addSurvey: (survey) => {
-          const auth = getAuthState()
-
-          if (!auth.isAuthenticated) return
-
+        addSurveys: (surveys) => {
           set(
             produce<SurveyState>((draft) => {
-              if (!Object.hasOwn(draft.surveys, auth.agent.symbol)) draft.surveys[auth.agent.symbol] = []
-              draft.surveys[auth.agent.symbol].push(survey)
+              draft.surveys.push(...surveys)
             }),
           )
         },
         removeSurvey: (signature) => {
-          const state = get()
-          const auth = getAuthState()
-
-          if (!auth.isAuthenticated) return
-          if (!Object.hasOwn(state, auth.agent.symbol)) return
-
-          const surveys = state.surveys[auth.agent.symbol]
-          const index = surveys.findIndex((survey) => survey.signature === signature)
+          const index = get().surveys.findIndex((survey) => survey.signature === signature)
 
           if (index === -1) return
 
           set(
             produce<SurveyState>((draft) => {
-              draft.surveys[auth.agent.symbol].splice(index, 1)
+              draft.surveys.splice(index, 1)
             }),
           )
         },
@@ -69,15 +46,11 @@ export const store = createStore<SurveyStore>()(
       name: 'surveys',
       partialize: (state) => {
         return {
-          surveys: Object.entries(state.surveys).reduce<Record<string, SurveyResponse[]>>((acc, [key, surveys]) => {
-            acc[key] = surveys.filter((survey) => {
-              const expiration = new Date(survey.expiration)
+          surveys: state.surveys.filter((survey) => {
+            const expiration = new Date(survey.expiration)
 
-              return expiration.getTime() > Date.now()
-            })
-
-            return acc
-          }, {}),
+            return expiration.getTime() > Date.now()
+          }),
         }
       },
     },
