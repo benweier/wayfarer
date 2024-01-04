@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
-import { useShipSurveyStore } from '@/store/ship'
+import { useSurveyStore } from '@/store/surveys'
 import { type SurveyResponse } from '@/types/spacetraders'
 
 export const Discard = ({ survey }: { survey: SurveyResponse }) => {
   const { t } = useTranslation()
-  const { removeSurvey } = useShipSurveyStore()
+  const removeSurvey = useSurveyStore((state) => state.actions.removeSurvey)
 
   return (
     <Button

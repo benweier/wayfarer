@@ -1,7 +1,7 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipSurveyMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
-import { useShipSurveyStore } from '@/store/ship'
+import { useSurveyStore } from '@/store/surveys'
 import { type ShipActionProps } from './ship-actions.types'
 
 export const Survey = ({ ship, disabled = false, children }: ShipActionProps) => {
@@ -9,7 +9,7 @@ export const Survey = ({ ship, disabled = false, children }: ShipActionProps) =>
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const addSurvey = useShipSurveyStore((state) => state.addSurvey)
+  const addSurvey = useSurveyStore((state) => state.actions.addSurvey)
   const hasCooldown = ship.cooldown.remainingSeconds > 0
   const { mutate, isPending } = useMutation({
     mutationKey: createShipSurveyMutation.getMutationKey({ shipSymbol: ship.symbol }),

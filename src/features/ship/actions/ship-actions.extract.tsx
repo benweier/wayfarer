@@ -1,7 +1,7 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { createShipExtractMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
-import { useShipSurveyStore } from '@/store/ship'
+import { useSurveyStore } from '@/store/surveys'
 import { type SurveyResponse } from '@/types/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
@@ -13,7 +13,7 @@ export const Extract = ({
   survey?: SurveyResponse
 }>) => {
   const client = useQueryClient()
-  const removeSurvey = useShipSurveyStore((state) => state.removeSurvey)
+  const removeSurvey = useSurveyStore((state) => state.actions.removeSurvey)
   const hasCooldown = ship.cooldown.remainingSeconds > 0
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
