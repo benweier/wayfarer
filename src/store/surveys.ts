@@ -11,6 +11,7 @@ type SurveyState = {
 }
 
 type SurveyHandlers = {
+  getSurveys: () => SurveyResponse[]
   addSurvey: (survey: SurveyResponse) => void
   removeSurvey: (signature: string) => void
 }
@@ -22,6 +23,15 @@ export const store = createStore<SurveyStore>()(
     (set, get) => ({
       surveys: {},
       actions: {
+        getSurveys: () => {
+          const state = get()
+          const auth = getAuthState()
+
+          if (!auth.isAuthenticated) return []
+          if (!Object.hasOwn(state, auth.agent.symbol)) return []
+
+          return state.surveys[auth.agent.symbol]
+        },
         addSurvey: (survey) => {
           const auth = getAuthState()
 
