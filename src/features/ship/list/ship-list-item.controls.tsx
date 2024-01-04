@@ -9,7 +9,7 @@ import { AppIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipActions from '@/features/ship/actions'
-import { WaypointNavigation } from '@/features/waypoint/navigation'
+import { WaypointNavigation, WaypointNavigationFallback } from '@/features/waypoint/navigation'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
@@ -123,15 +123,8 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
           <h3 className="text-title">
             Navigate Ship: <span className="font-normal">{ship.symbol}</span>
           </h3>
-          <QuerySuspenseBoundary
-            fallback={
-              <div className="grid">
-                {Array.from({ length: 3 }).map((_, index) => (
-                  <div key={index} className="mx-auto my-4 h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
-                ))}
-              </div>
-            }
-          >
+
+          <QuerySuspenseBoundary fallback={<WaypointNavigationFallback />}>
             <WaypointNavigation ship={ship} />
           </QuerySuspenseBoundary>
         </div>

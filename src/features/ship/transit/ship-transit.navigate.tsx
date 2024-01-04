@@ -1,7 +1,7 @@
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
-import { WaypointNavigation } from '@/features/waypoint/navigation'
+import { WaypointNavigation, WaypointNavigationFallback } from '@/features/waypoint/navigation'
 import { type ShipTransitActionProps } from './ship-transit.types'
 
 export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
@@ -13,15 +13,8 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
         <h3 className="text-title">
           Navigate Ship: <span className="font-normal">{ship.symbol}</span>
         </h3>
-        <QuerySuspenseBoundary
-          fallback={
-            <div className="space-y-6">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="mx-auto h-3 w-4/5 animate-pulse rounded-full bg-white/5" />
-              ))}
-            </div>
-          }
-        >
+
+        <QuerySuspenseBoundary fallback={<WaypointNavigationFallback />}>
           <WaypointNavigation ship={ship} />
         </QuerySuspenseBoundary>
       </div>
