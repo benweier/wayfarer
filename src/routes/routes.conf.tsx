@@ -333,6 +333,26 @@ export const routes: RouteObject[] = [
                   },
                 ],
               },
+              {
+                path: '/surveys',
+                children: [
+                  {
+                    index: true,
+                    async lazy() {
+                      const mod = await import('@/routes/surveys')
+
+                      return {
+                        element: <mod.Route />,
+                        errorElement: <RouteError />,
+                        loader: auth.withAuth(mod.loader),
+                        handle: {
+                          meta: mod.meta,
+                        },
+                      }
+                    },
+                  },
+                ],
+              },
             ],
           },
         ],
