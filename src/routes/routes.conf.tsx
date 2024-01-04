@@ -344,7 +344,6 @@ export const routes: RouteObject[] = [
                       return {
                         element: <mod.Route />,
                         errorElement: <RouteError />,
-                        loader: auth.withAuth(mod.loader),
                         handle: {
                           meta: mod.meta,
                         },
