@@ -46,7 +46,7 @@ export const columns = [
       const value = getValue()
 
       return (
-        <div className="space-y-2">
+        <div className="h-full space-y-2">
           <div>{value}</div>
           <div className="text-secondary whitespace-break-spaces text-sm">{row.original.description}</div>
         </div>
@@ -65,7 +65,7 @@ export const columns = [
       const { name, description, fuelCapacity, moduleSlots, mountingPoints, requirements } = getValue()
 
       return (
-        <div className="absolute inset-3 space-y-2">
+        <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
             <div className="text-center text-sm">{name}</div>
 
@@ -120,7 +120,7 @@ export const columns = [
       const { name, description, speed, requirements } = getValue()
 
       return (
-        <div className="absolute inset-3 space-y-2">
+        <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
             <div className="text-center text-sm">{name}</div>
 
@@ -167,7 +167,7 @@ export const columns = [
       const { name, description, powerOutput } = getValue()
 
       return (
-        <div className="absolute inset-3 space-y-2">
+        <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
             <div className="text-center text-sm">{name}</div>
 
