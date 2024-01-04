@@ -74,7 +74,7 @@ export const store = createStore<SurveyStore>()(
   ),
 )
 
-export const { getState: getSurveyStore, setState: setSurveyStore, subscribe: subscribeToSurveyStore } = store
+export const { getState: getSurveyState, setState: setSurveyState, subscribe: subscribeToSurveyStore } = store
 
 export const useSurveyStore: BoundStoreSelector<SurveyStore> = (selector = (state: SurveyStore) => state) =>
   useStore(store, selector)
