@@ -5,7 +5,7 @@ export const createModalStore = ({
   isOpen = false,
   onClose,
 }: Partial<{ isOpen: boolean; onClose: () => void }> = {}) => {
-  return createStore<ModalStore>()((set, getState) => ({
+  return createStore<ModalStore>()((set, get) => ({
     isOpen,
     onClose,
     actions: {
@@ -14,7 +14,7 @@ export const createModalStore = ({
       },
       closeModal: () => {
         set({ isOpen: false })
-        getState().onClose?.()
+        get().onClose?.()
       },
     },
   }))
