@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { LeaderboardList, LeaderboardListFallback } from '@/features/leaderboard/list'
 
-export const LeaderboardRouteComponent = () => {
+export const LeaderboardRoute = () => {
   const { t } = useTranslation()
 
   return (
@@ -15,5 +15,3 @@ export const LeaderboardRouteComponent = () => {
     </div>
   )
 }
-
-export const Route = withQSB()(LeaderboardRouteComponent)

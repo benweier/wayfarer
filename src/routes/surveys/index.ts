@@ -1,2 +1,2 @@
 export { loader, meta } from './surveys.loader'
-export { Route } from './surveys.route'
+export { SurveysRoute } from './surveys-route.component'

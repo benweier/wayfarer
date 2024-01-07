@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ShipList, ShipListFallback } from '@/features/ship/list'
 
-export const FleetRouteComponent = () => {
+export const FleetRoute = () => {
   const { t } = useTranslation()
 
   return (
@@ -15,5 +15,3 @@ export const FleetRouteComponent = () => {
     </div>
   )
 }
-
-export const Route = withQSB()(FleetRouteComponent)

@@ -1,20 +1,18 @@
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WaypointStore } from '@/context/waypoint.context'
 import { WaypointDetail } from '@/features/waypoint/detail'
 import { WaypointTabs } from '@/features/waypoint/tabs'
+import { waypointRoute } from '@/routes/waypoint.route'
 
-export const WaypointRouteComponent = () => {
+export const WaypointRoute = () => {
   const { t } = useTranslation()
-  const { systemSymbol, waypointSymbol } = useParams()
-
-  if (!systemSymbol || !waypointSymbol) return null
+  const { systemSymbol, waypointSymbol } = waypointRoute.useParams()
 
   return (
     <div key={waypointSymbol} className="space-y-4 p-4">
       <h1 className="text-title">
-        {t('waypoint.label')}: <span className="whitespace-nowrap font-normal">{waypointSymbol.toUpperCase()}</span>
+        {t('waypoint.label')}: <span className="whitespace-nowrap font-normal">{waypointSymbol}</span>
       </h1>
 
       <QuerySuspenseBoundary>
@@ -27,5 +25,3 @@ export const WaypointRouteComponent = () => {
     </div>
   )
 }
-
-export const Route = withQSB()(WaypointRouteComponent)

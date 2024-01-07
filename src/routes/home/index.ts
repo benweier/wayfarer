@@ -1,1 +1,1 @@
-export { Route } from './home.route'
+export { HomeRoute } from './home-route.component'

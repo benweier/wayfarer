@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ContractList, ContractListFallback } from '@/features/contract/list'
 
-export const ContractsRouteComponent = () => {
+export const ContractsRoute = () => {
   const { t } = useTranslation()
 
   return (
@@ -15,5 +15,3 @@ export const ContractsRouteComponent = () => {
     </div>
   )
 }
-
-export const Route = withQSB()(ContractsRouteComponent)

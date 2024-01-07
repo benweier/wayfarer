@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as SurveyActions from '@/features/survey/actions'
 import { SurveyContext } from '@/features/survey/context'
 import { SurveyList } from '@/features/survey/list'
 
-export const SurveysRouteComponent = () => {
+export const SurveysRoute = () => {
   const { t } = useTranslation()
 
   return (
@@ -23,5 +23,3 @@ export const SurveysRouteComponent = () => {
     </div>
   )
 }
-
-export const Route = withQSB()(SurveysRouteComponent)
