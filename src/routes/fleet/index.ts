@@ -1,2 +1,2 @@
-export { meta } from './fleet.loader'
 export { FleetRoute } from './fleet-route.component'
+export { meta } from './fleet-route.meta'

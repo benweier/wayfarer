@@ -6,7 +6,7 @@ import { rootRoute } from '@/routes/root.route'
 export const authRoute = new Route({
   id: 'auth',
   getParentRoute: () => rootRoute,
-  component: lazyRouteComponent(() => import('@/routes/auth'), 'Route'),
+  component: lazyRouteComponent(() => import('@/routes/auth'), 'AuthLayout'),
 })
 
 export const authRequiredRoute = new Route({

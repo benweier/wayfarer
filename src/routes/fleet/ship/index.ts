@@ -1,2 +1,2 @@
-export { meta } from './ship.loader'
 export { ShipRoute } from './ship-route.component'
+export { meta } from './ship-route.meta'

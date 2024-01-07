@@ -1,2 +1,2 @@
-export { meta } from './waypoint.loader'
 export { WaypointRoute } from './waypoint-route.component'
+export { meta } from './waypoint-route.meta'

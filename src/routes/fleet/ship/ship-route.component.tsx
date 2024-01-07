@@ -7,8 +7,8 @@ import { ShipTabs } from '@/features/ship/tabs'
 import { shipRoute } from '@/routes/ship.route'
 
 export const ShipRoute = () => {
-  const { t } = useTranslation()
   const { shipSymbol } = shipRoute.useParams()
+  const { t } = useTranslation()
 
   return (
     <div key={shipSymbol} className="space-y-4 p-4">

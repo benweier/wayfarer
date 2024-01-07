@@ -1,4 +1,2 @@
-export { Route } from './auth-route.component'
+export { AuthLayout } from './auth-layout.component'
 export { Required } from './required.route'
-export { loader } from './auth.loader'
-export { withAuth } from './with-auth.loader'

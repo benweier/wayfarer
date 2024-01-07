@@ -1,2 +1,2 @@
-export { meta } from './contracts.loader'
 export { ContractsRoute } from './contracts-route.component'
+export { meta } from './contracts-route.meta'
