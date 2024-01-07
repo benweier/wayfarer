@@ -1,4 +1,4 @@
-import { Router } from '@tanstack/react-router'
+import { Router, lazyRouteComponent } from '@tanstack/react-router'
 import { client } from '@/services/query-client'
 import { authStore } from '@/store/auth'
 import { agentRoute } from './agent.route'
@@ -42,6 +42,7 @@ export const router = new Router({
     client,
     auth: authStore,
   },
+  defaultErrorComponent: lazyRouteComponent(() => import('@/components/route-error'), 'RouteError'),
   defaultPendingComponent: Fallback,
   defaultPendingMinMs: 300,
   defaultPendingMs: 800,
