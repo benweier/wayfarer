@@ -15,6 +15,7 @@ void i18n
   .init({
     supportedLngs: ['en'],
     fallbackLng: 'en',
+    load: 'languageOnly',
     ns: [
       'common',
       'meta',
