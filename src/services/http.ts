@@ -1,8 +1,6 @@
 type Keys<T> = keyof T
 type Values<T> = T[keyof T]
 
-export type HttpError = Response
-
 export const http = async <T = unknown>(url: URL | RequestInfo, args: RequestInit): Promise<T> => {
   const response = await fetch(url, args)
 
@@ -19,16 +17,14 @@ export const http = async <T = unknown>(url: URL | RequestInfo, args: RequestIni
   }
 }
 
-export const isHttpError = (err: any, status?: Values<typeof STATUS_CODES>): err is HttpError => {
-  if (!err) return false
+export const isHttpErrorResponse = (err: any, status?: Values<typeof STATUS_CODES>): err is Response => {
+  if (!err || !(err instanceof Response)) return false
 
-  if (typeof err === 'object' && !err.ok) {
-    if (status && err.status === status) return true
-
-    return err.status >= 400
+  if (status !== undefined) {
+    return err.status === status
   }
 
-  return false
+  return true
 }
 
 export const STATUS_MESSAGES: Record<Keys<typeof STATUS_CODES>, string> = {
