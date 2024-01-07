@@ -3,7 +3,7 @@ import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Outlet, ScrollRestoration, useRouterState } from '@tanstack/react-router'
 import { Suspense, lazy } from 'react'
 import { Button } from '@/components/button'
-// import { Meta } from '@/components/meta'
+import { Meta } from '@/components/meta'
 import { useThemeManager } from '@/hooks/use-theme-manager.hook'
 import { Fallback } from '@/routes/routes.fallback'
 
@@ -47,7 +47,7 @@ export const Core = () => {
     >
       <Suspense fallback={<Fallback />}>
         <ScrollRestoration />
-        {/*<Meta titleTemplate="%s • Wayfarer" />*/}
+        <Meta titleTemplate="%s • Wayfarer" />
         <div className="min-h-screen">
           <NavigationLoader />
           <Outlet />
