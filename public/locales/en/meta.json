@@ -17,7 +17,7 @@
     "title": "Leaderboard"
   },
   "agents": {
-    "title": "Agents • Page {{page}}"
+    "title": "Agents"
   },
   "agent": {
     "title": "Agent: {{agentSymbol}}"
@@ -29,7 +29,7 @@
     "title": "Ship: {{shipSymbol}}"
   },
   "systems": {
-    "title": "Systems • Page {{page}}"
+    "title": "Systems"
   },
   "system": {
     "title": "System: {{systemSymbol}}"
@@ -42,5 +42,8 @@
   },
   "contract": {
     "title": "Contract: {{contractId}}"
+  },
+  "surveys": {
+    "title": "Surveys"
   }
 }
