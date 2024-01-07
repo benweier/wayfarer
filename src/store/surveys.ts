@@ -5,18 +5,18 @@ import { createStore } from 'zustand/vanilla'
 import { type BoundStoreSelector } from '@/store/store.types'
 import { type SurveyResponse } from '@/types/spacetraders'
 
-type SurveyState = {
+export type SurveyState = {
   surveys: SurveyResponse[]
 }
 
-type SurveyHandlers = {
+export type SurveyHandlers = {
   addSurveys: (surveys: SurveyResponse[]) => void
   removeSurvey: (signature: string) => void
 }
 
-type SurveyStore = SurveyState & { actions: SurveyHandlers }
+export type SurveyStore = SurveyState & { actions: SurveyHandlers }
 
-export const store = createStore<SurveyStore>()(
+export const surveyStore = createStore<SurveyStore>()(
   persist(
     (set, get) => ({
       surveys: [],
@@ -57,7 +57,5 @@ export const store = createStore<SurveyStore>()(
   ),
 )
 
-export const { getState: getSurveyState, setState: setSurveyState, subscribe: subscribeToSurveyStore } = store
-
 export const useSurveyStore: BoundStoreSelector<SurveyStore> = (selector = (state: SurveyStore) => state) =>
-  useStore(store, selector)
+  useStore(surveyStore, selector)
