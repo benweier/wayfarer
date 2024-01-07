@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
 import { Trans, useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
+import { shipMarketRoute } from '@/routes/ship.route'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { ShipCargoTable } from './ship-cargo-list.table'
@@ -52,7 +53,7 @@ export const ShipCargoList = () => {
             intent="primary"
             disabled={!hasMarketplace}
             onClick={() => {
-              navigate(`/fleet/ship/${ship.symbol}/market`)
+              void navigate({ to: shipMarketRoute.to, params: { shipSymbol: ship.symbol } })
             }}
           >
             {hasMarketplace

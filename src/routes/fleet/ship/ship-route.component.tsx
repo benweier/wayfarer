@@ -1,3 +1,4 @@
+import { Outlet } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ShipStore } from '@/context/ship.context'
@@ -20,6 +21,8 @@ export const ShipRoute = () => {
           <ShipDetail>
             <ShipTabs />
           </ShipDetail>
+
+          <Outlet />
         </ShipStore>
       </QuerySuspenseBoundary>
     </div>
