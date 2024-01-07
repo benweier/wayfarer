@@ -1,12 +1,18 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@tanstack/react-router'
 import { Card } from '@/components/card'
+import { systemRoute } from '@/routes/system.route'
 import { type WaypointJumpGateItemProps } from './waypoint-jumpgate.types'
 
 export const WaypointJumpGateItem = ({ system }: WaypointJumpGateItemProps) => {
   return (
     <Card className="@container/jumpgate-item">
       <div>
-        <Link key={system.symbol} className="link font-semibold" to={`/systems/${system.symbol}`}>
+        <Link
+          key={system.symbol}
+          to={systemRoute.to}
+          params={{ systemSymbol: system.symbol }}
+          className="link font-semibold"
+        >
           {system.symbol}
         </Link>
       </div>
