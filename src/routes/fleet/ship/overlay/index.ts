@@ -1,1 +1,1 @@
-export { Route } from './ship-overlay.route'
+export { ShipOverlayRoute } from './ship-overlay-route.component'
