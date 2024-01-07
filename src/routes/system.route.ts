@@ -1,5 +1,5 @@
 import { Route, lazyRouteComponent } from '@tanstack/react-router'
-import { meta } from '@/routes/systems/system'
+import { meta } from '@/routes/systems/system/system-route.meta'
 import { systemsRoute } from '@/routes/systems.route'
 import { getSystemByIdQuery } from '@/services/api/spacetraders'
 

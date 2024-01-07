@@ -1,5 +1,5 @@
 import { Route, defer, lazyRouteComponent } from '@tanstack/react-router'
-import { meta } from '@/routes/leaderboard'
+import { meta } from '@/routes/leaderboard/leaderboard-route.meta'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { dashboardRoute } from './dashboard.route'
 

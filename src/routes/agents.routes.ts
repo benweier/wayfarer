@@ -1,6 +1,6 @@
 import { Route, defer, lazyRouteComponent } from '@tanstack/react-router'
 import { z } from 'zod'
-import { meta } from '@/routes/agents'
+import { meta } from '@/routes/agents/agents-route.meta'
 import { dashboardRoute } from '@/routes/dashboard.route'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
 

@@ -1,6 +1,6 @@
 import { Route, lazyRouteComponent } from '@tanstack/react-router'
 import { authRequiredRoute } from '@/routes/auth.route'
-import { meta } from '@/routes/surveys'
+import { meta } from '@/routes/surveys/surveys-route.meta'
 import { surveyStore } from '@/store/surveys'
 
 export const surveysRoute = new Route({

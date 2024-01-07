@@ -1,6 +1,6 @@
 import { Route, defer, lazyRouteComponent, redirect } from '@tanstack/react-router'
-import { meta } from '@/routes/fleet/ship'
 import { ShipOverlayRoute } from '@/routes/fleet/ship/overlay'
+import { meta } from '@/routes/fleet/ship/ship-route.meta'
 import { fleetRoute } from '@/routes/fleet.route'
 import { getShipByIdQuery, getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
 

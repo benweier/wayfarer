@@ -1,7 +1,7 @@
 import { Route, defer, lazyRouteComponent } from '@tanstack/react-router'
 import { z } from 'zod'
 import { dashboardRoute } from '@/routes/dashboard.route'
-import { meta } from '@/routes/systems'
+import { meta } from '@/routes/systems/systems-route.meta'
 import { getSystemListQuery } from '@/services/api/spacetraders'
 
 export const systemsRoute = new Route({
