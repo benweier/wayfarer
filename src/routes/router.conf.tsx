@@ -11,7 +11,7 @@ import { leaderboardRoute } from './leaderboard.route'
 import { notFoundRoute } from './not-found.route'
 import { rootIndexRoute, rootRoute } from './root.route'
 import { Fallback } from './routes.fallback'
-import { shipIndexRoute, shipMarketRoute, shipRoute } from './ship.route'
+import { shipIndexRoute, shipMarketRoute, shipOverlayRoute, shipRoute } from './ship.route'
 import { surveysIndexRoute, surveysRoute } from './surveys.route'
 import { systemIndexRoute, systemRoute } from './system.route'
 import { systemsIndexRoute, systemsRoute } from './systems.route'
@@ -25,7 +25,7 @@ export const router = new Router({
       authRequiredRoute.addChildren([
         fleetRoute.addChildren([
           fleetIndexRoute,
-          shipRoute.addChildren([shipIndexRoute.addChildren([shipMarketRoute])]),
+          shipRoute.addChildren([shipIndexRoute.addChildren([shipOverlayRoute.addChildren([shipMarketRoute])])]),
         ]),
         contractsRoute.addChildren([contractsIndexRoute]),
         surveysRoute.addChildren([surveysIndexRoute]),
