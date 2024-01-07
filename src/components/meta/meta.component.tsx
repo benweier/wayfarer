@@ -12,7 +12,7 @@ export const Meta = ({ titleTemplate }: MetaProps) => {
     .map((match) => {
       return {
         id: match.id,
-        meta: match.routeContext.meta(t, match.loaderData) as MetaObject[],
+        meta: match.loaderData === undefined ? [] : (match.routeContext.meta(t, match.loaderData) as MetaObject[]),
       }
     })
 
