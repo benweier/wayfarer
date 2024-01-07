@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import { get, patch, post } from '@/services/fetch'
-import { getAuthState } from '@/store/auth'
+import { authStore } from '@/store/auth'
 import {
   type AgentResponse,
   type ChartResponse,
@@ -26,7 +26,7 @@ export const getShipListQuery = () =>
     gcTime: Infinity,
     queryKey: [{ scope: 'ships', entity: 'list' }],
     queryFn: async ({ signal }) => {
-      const { isAuthenticated } = getAuthState()
+      const { isAuthenticated } = authStore.getState()
 
       if (!isAuthenticated) {
         return { data: [], meta: { page: 0, total: 0, limit: 0 } }

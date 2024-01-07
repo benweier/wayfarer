@@ -1,10 +1,10 @@
 import { defer, json } from 'react-router-dom'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
-import { getAuthState } from '@/store/auth'
+import { authStore } from '@/store/auth'
 
 export const loader: QueryClientLoaderFn = (client) => () => {
-  const { isAuthenticated } = getAuthState()
+  const { isAuthenticated } = authStore.getState()
 
   try {
     if (!isAuthenticated) {

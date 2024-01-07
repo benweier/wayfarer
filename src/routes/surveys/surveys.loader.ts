@@ -1,6 +1,5 @@
 import { defer } from 'react-router-dom'
 import { STATUS_CODES, STATUS_MESSAGES, isHttpError } from '@/services/http'
-import { getAuthState } from '@/store/auth'
 import { getSurveyState } from '@/store/surveys'
 
 export const meta: MetaFunction = (t) => {
@@ -9,14 +8,10 @@ export const meta: MetaFunction = (t) => {
 
 export const loader = () => {
   try {
-    const auth = getAuthState()
     const { surveys } = getSurveyState()
 
-    if (!auth.isAuthenticated) return defer({ surveys: [] })
-    if (!Object.hasOwn(surveys, auth.agent.symbol)) return defer({ surveys: [] })
-
     return defer({
-      surveys: surveys[auth.agent.symbol],
+      surveys,
     })
   } catch (err) {
     if (isHttpError(err)) {

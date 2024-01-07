@@ -4,19 +4,19 @@ import { client } from '@/services/query-client'
 import { type AgentResponse } from '@/types/spacetraders'
 import { type BoundStoreSelector } from './store.types'
 
-type AuthState =
+export type AuthState =
   | { agent: null; token: null; isAuthenticated: false }
   | { agent: AgentResponse; token: string; isAuthenticated: true }
 
-type AuthHandlers = {
+export type AuthHandlers = {
   setAgent: (agent: AgentResponse) => void
   signin: (state: { agent: AgentResponse; token: string }) => void
   signout: () => void
 }
 
-type AuthStore = AuthState & { actions: AuthHandlers }
+export type AuthStore = AuthState & { actions: AuthHandlers }
 
-const store = createStore<AuthStore>((set) => ({
+export const authStore = createStore<AuthStore>((set) => ({
   isAuthenticated: false,
   token: null,
   agent: null,
@@ -35,7 +35,5 @@ const store = createStore<AuthStore>((set) => ({
   },
 }))
 
-export const { getState: getAuthState, setState: setAuthState, subscribe: subscribeToAuthStore } = store
-
 export const useAuthStore: BoundStoreSelector<AuthStore> = (selector = (state: AuthStore) => state) =>
-  useStore(store, selector)
+  useStore(authStore, selector)
