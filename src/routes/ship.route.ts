@@ -1,4 +1,5 @@
 import { Route, defer, lazyRouteComponent, redirect } from '@tanstack/react-router'
+import { meta } from '@/routes/fleet/ship'
 import { ShipOverlayRoute } from '@/routes/fleet/ship/overlay'
 import { fleetRoute } from '@/routes/fleet.route'
 import { getShipByIdQuery, getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
@@ -11,6 +12,7 @@ export const shipRoute = new Route({
 export const shipIndexRoute = new Route({
   path: '/',
   getParentRoute: () => shipRoute,
+  beforeLoad: () => ({ meta }),
   loader: async ({ context, params }) => {
     const ship = context.client.ensureQueryData(getShipByIdQuery({ shipSymbol: params.shipSymbol }))
 

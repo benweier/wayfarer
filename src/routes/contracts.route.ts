@@ -1,5 +1,6 @@
 import { Route, defer, lazyRouteComponent } from '@tanstack/react-router'
 import { authRequiredRoute } from '@/routes/auth.route'
+import { meta } from '@/routes/contracts'
 import { getContractListQuery } from '@/services/api/spacetraders'
 
 export const contractsRoute = new Route({
@@ -9,6 +10,7 @@ export const contractsRoute = new Route({
 export const contractsIndexRoute = new Route({
   path: '/',
   getParentRoute: () => contractsRoute,
+  beforeLoad: () => ({ meta }),
   loader: ({ context }) => {
     const contracts = context.client.ensureQueryData(getContractListQuery())
 

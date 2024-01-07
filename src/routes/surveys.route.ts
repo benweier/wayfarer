@@ -1,5 +1,6 @@
 import { Route, lazyRouteComponent } from '@tanstack/react-router'
 import { authRequiredRoute } from '@/routes/auth.route'
+import { meta } from '@/routes/surveys'
 import { surveyStore } from '@/store/surveys'
 
 export const surveysRoute = new Route({
@@ -9,6 +10,7 @@ export const surveysRoute = new Route({
 export const surveysIndexRoute = new Route({
   path: '/',
   getParentRoute: () => surveysRoute,
+  beforeLoad: () => ({ meta }),
   loader: () => {
     const { surveys } = surveyStore.getState()
 

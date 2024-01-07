@@ -1,5 +1,6 @@
 import { Outlet, Route, defer, lazyRouteComponent } from '@tanstack/react-router'
 import { authRequiredRoute } from '@/routes/auth.route'
+import { meta } from '@/routes/fleet'
 import { getShipListQuery } from '@/services/api/spacetraders'
 
 export const fleetRoute = new Route({
@@ -10,6 +11,7 @@ export const fleetRoute = new Route({
 export const fleetIndexRoute = new Route({
   path: '/',
   getParentRoute: () => fleetRoute,
+  beforeLoad: () => ({ meta }),
   loader: ({ context }) => {
     const fleet = context.client.ensureQueryData(getShipListQuery())
 
