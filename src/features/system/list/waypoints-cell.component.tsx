@@ -1,6 +1,8 @@
+import { Link } from '@tanstack/react-router'
 import { cx } from 'class-variance-authority'
-import { Link } from 'react-router-dom'
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
+import { systemRoute } from '@/routes/system.route'
+import { waypointRoute } from '@/routes/waypoint.route'
 import { type SystemWaypoint } from '@/types/spacetraders'
 import { chunk } from '@/utilities/chunk.helper'
 
@@ -86,11 +88,12 @@ export const SystemWaypointsCell = ({
                 return (
                   <Link
                     key={waypoint.symbol}
+                    to={waypointRoute.to}
+                    params={{ systemSymbol, waypointSymbol: waypoint.symbol }}
                     className={cx(
                       'flex size-7 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
                       WAYPOINT_TYPE_STYLES[waypoint.type],
                     )}
-                    to={`/systems/${systemSymbol}/waypoint/${waypoint.symbol}`}
                   >
                     <span className="text-sm font-medium" aria-hidden>
                       {waypoint.label}
@@ -107,11 +110,12 @@ export const SystemWaypointsCell = ({
               return (
                 <Link
                   key={waypoint.symbol}
+                  to={systemRoute.to}
+                  params={{ systemSymbol }}
                   className={cx(
                     'flex size-7 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
                     WAYPOINT_TYPE_STYLES[waypoint.type],
                   )}
-                  to={`/systems/${systemSymbol}`}
                 >
                   <span className="text-sm font-medium" aria-hidden>
                     {waypoint.label}

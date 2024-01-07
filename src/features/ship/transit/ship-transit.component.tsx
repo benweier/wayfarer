@@ -1,8 +1,9 @@
+import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
-import { ROUTES } from '@/config/routes'
+import { systemRoute } from '@/routes/system.route'
+import { waypointRoute } from '@/routes/waypoint.route'
 import { ShipTransitJump } from './ship-transit.jump'
 import { ShipTransitNavigate } from './ship-transit.navigate'
 import { ShipTransitStatus } from './ship-transit.status'
@@ -18,13 +19,14 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
         <div className="text-secondary text-xs uppercase">{t('ship.transit.route')}</div>
         <div className="flex items-center gap-2">
           <div className="text-sm font-medium">
-            <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.origin.systemSymbol}`}>
+            <Link to={systemRoute.to} params={{ systemSymbol: nav.route.origin.systemSymbol }} className="link">
               {nav.route.origin.systemSymbol}
             </Link>{' '}
             •{' '}
             <Link
+              to={waypointRoute.to}
+              params={{ systemSymbol: nav.route.origin.systemSymbol, waypointSymbol: nav.route.origin.symbol }}
               className="link"
-              to={`${ROUTES.SYSTEMS}/${nav.route.origin.systemSymbol}/waypoint/${nav.route.origin.symbol}`}
             >
               {nav.route.origin.symbol}
             </Link>
@@ -35,13 +37,17 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
             <AppIcon id="chevron:right" className="text-secondary size-4" />
           </div>
           <div className="text-sm font-medium">
-            <Link className="link" to={`${ROUTES.SYSTEMS}/${nav.route.destination.systemSymbol}`}>
+            <Link to={systemRoute.to} params={{ systemSymbol: nav.route.destination.systemSymbol }} className="link">
               {nav.route.destination.systemSymbol}
             </Link>{' '}
             •{' '}
             <Link
+              to={waypointRoute.to}
+              params={{
+                systemSymbol: nav.route.destination.systemSymbol,
+                waypointSymbol: nav.route.destination.symbol,
+              }}
               className="link"
-              to={`${ROUTES.SYSTEMS}/${nav.route.destination.systemSymbol}/waypoint/${nav.route.destination.symbol}`}
             >
               {nav.route.destination.symbol}
             </Link>

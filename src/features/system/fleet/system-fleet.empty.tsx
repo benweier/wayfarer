@@ -1,6 +1,6 @@
+import { Link } from '@tanstack/react-router'
 import { Trans, useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import { ROUTES } from '@/config/routes'
+import { loginRoute } from '@/routes/auth.route'
 import { useAuthStore } from '@/store/auth'
 import { type SystemFleetProps } from './system-fleet.types'
 
@@ -18,8 +18,9 @@ export const SystemFleetEmpty = ({ system }: SystemFleetProps) => {
             system_symbol: <span className="font-bold">{system.symbol}</span>,
             login_link: (
               <Link
-                to={ROUTES.LOGIN}
-                state={{ redirect: { destination: `/systems/${system.symbol}` } }}
+                to={loginRoute.to}
+                search={{ redirect: `/systems/${system.symbol}` }}
+                mask={{ to: loginRoute.to }}
                 className="link"
               >
                 {t('auth.login', { context: 'action' })}

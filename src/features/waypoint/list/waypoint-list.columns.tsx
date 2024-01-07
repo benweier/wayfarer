@@ -1,13 +1,14 @@
 import * as Tooltip from '@radix-ui/react-tooltip'
+import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { ShipPresence } from '@/features/ship/presence'
 import { TypeFilter } from '@/features/waypoint/list/type-filter.component'
+import { waypointRoute } from '@/routes/waypoint.route'
 import { type WaypointListTableSchema } from './waypoint-list.types'
 
 const FILTERED_TRAITS = new Set(['UNCHARTED', 'MARKETPLACE', 'SHIPYARD', 'STRIPPED'])
@@ -31,8 +32,9 @@ export const columns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
+          to={waypointRoute.to}
+          params={{ systemSymbol: row.original.waypoint.systemSymbol, waypointSymbol: row.original.waypoint.symbol }}
           className="link"
-          to={`/systems/${row.original.waypoint.systemSymbol}/waypoint/${row.original.waypoint.symbol}`}
         >
           {getValue()}
         </Link>

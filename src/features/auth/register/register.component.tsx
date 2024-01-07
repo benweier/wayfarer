@@ -1,40 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { Controller, FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
+import { Link } from '@tanstack/react-router'
+import { Controller, FormProvider, useForm, useFormContext } from 'react-hook-form'
 import { Trans, useTranslation } from 'react-i18next'
-import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
-import { ROUTES } from '@/config/routes'
+import { loginRoute } from '@/routes/auth.route'
 import { createAgentMutation } from '@/services/api/spacetraders/auth'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
-import { registerSchema } from '@/validators/register.schema'
 import { AccessTokenDialog } from './access-token-dialog.component'
 import { FactionInfo } from './faction-info.component'
 import { type RegisterSchema, registerValidation } from './register.validation'
 
-const AlreadyRegistered = ({ token }: { token?: string }) => {
-  const { t } = useTranslation()
-  const { control } = useFormContext<RegisterSchema>()
-  const symbol = useWatch({ control, name: 'symbol' })
-
-  return (
-    <div className="text-caption text-center">
-      <Trans
-        i18nKey="auth.already_registered"
-        components={{
-          login_link: (
-            <Link className="link" to={ROUTES.LOGIN} state={{ symbol, token }}>
-              {t('auth.login', { context: 'text' })}
-            </Link>
-          ),
-        }}
-      />
-    </div>
-  )
-}
 const FactionField = () => {
   const { t } = useTranslation()
   const methods = useFormContext<RegisterSchema>()
@@ -79,10 +58,7 @@ const FactionField = () => {
 
 export const Register = () => {
   const { t } = useTranslation()
-  const loc = useLocation()
-  const result = registerSchema.safeParse(loc.state)
   const methods = useForm<RegisterSchema>({
-    defaultValues: result.success ? result.data : undefined,
     resolver: zodResolver(registerValidation),
   })
   const { mutateAsync, isPending, isSuccess, data } = useMutation({
@@ -148,7 +124,18 @@ export const Register = () => {
               {t('auth.register', { context: 'action' })}
             </Button>
             <div className="grid gap-4">
-              <AlreadyRegistered token={agent?.token} />
+              <div className="text-caption text-center">
+                <Trans
+                  i18nKey="auth.already_registered"
+                  components={{
+                    login_link: (
+                      <Link to={loginRoute.to} className="link">
+                        {t('auth.login', { context: 'text' })}
+                      </Link>
+                    ),
+                  }}
+                />
+              </div>
             </div>
           </div>
         </form>

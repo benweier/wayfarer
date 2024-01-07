@@ -1,9 +1,11 @@
+import { Link } from '@tanstack/react-router'
 import { type PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { useWaypointResponse } from '@/context/waypoint.context'
+import { systemRoute } from '@/routes/system.route'
+import { waypointRoute } from '@/routes/waypoint.route'
 
 export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation()
@@ -19,14 +21,18 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
           </div>
           <div className="whitespace-nowrap">
             {t('system.label')}:{' '}
-            <Link className="link" to={`/systems/${waypoint.systemSymbol}`}>
+            <Link to={systemRoute.to} params={{ systemSymbol: waypoint.systemSymbol }} className="link">
               {waypoint.systemSymbol}
             </Link>
           </div>
           {!!waypoint.orbits && (
             <div className="whitespace-nowrap">
               {t('waypoint.orbits')}:{' '}
-              <Link className="link" to={`/systems/${waypoint.systemSymbol}/waypoint/${waypoint.orbits}`}>
+              <Link
+                to={waypointRoute.to}
+                params={{ systemSymbol: waypoint.systemSymbol, waypointSymbol: waypoint.orbits }}
+                className="link"
+              >
                 {waypoint.orbits}
               </Link>
             </div>
@@ -46,7 +52,11 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
           <div className="flex flex-wrap gap-1">
             {waypoint.orbitals.map((orbital) => (
               <div key={orbital.symbol} className="rounded bg-zinc-200/50 px-4 py-2 shadow-sm dark:bg-zinc-700/25">
-                <Link className="link" to={`/systems/${waypoint.systemSymbol}/waypoint/${orbital.symbol}`}>
+                <Link
+                  to={waypointRoute.to}
+                  params={{ systemSymbol: waypoint.systemSymbol, waypointSymbol: orbital.symbol }}
+                  className="link"
+                >
                   {orbital.symbol}
                 </Link>
               </div>

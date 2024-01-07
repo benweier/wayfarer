@@ -1,7 +1,8 @@
+import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
+import { waypointRoute } from '@/routes/waypoint.route'
 import { formatDateTime } from '@/utilities/date'
 import { formatNumber } from '@/utilities/number'
 import { ContractListContext } from './contract-list.context'
@@ -19,12 +20,8 @@ export const availableContractsColumns = [
         </div>
       )
     },
-    cell: ({ row, getValue }) => {
-      return (
-        <Link className="link" to={`/contracts/${row.original.contract.id}`}>
-          {getValue()}
-        </Link>
-      )
+    cell: ({ getValue }) => {
+      return <div>{getValue()}</div>
     },
     minSize: 20,
     maxSize: 20,
@@ -72,7 +69,11 @@ export const availableContractsColumns = [
             return (
               <div key={item.tradeSymbol}>
                 [
-                <Link className="link" to={`/systems/${sector}-${system}/waypoint/${sector}-${system}-${waypoint}`}>
+                <Link
+                  to={waypointRoute.to}
+                  params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
+                  className="link"
+                >
                   {item.destinationSymbol}
                 </Link>
                 ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
@@ -173,11 +174,7 @@ export const acceptedContractsColumns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return (
-        <Link className="link" to={`/contracts/${value}`}>
-          {value}
-        </Link>
-      )
+      return <div>{value}</div>
     },
     minSize: 20,
     maxSize: 20,
@@ -225,7 +222,11 @@ export const acceptedContractsColumns = [
             return (
               <div key={item.tradeSymbol}>
                 [
-                <Link className="link" to={`/systems/${sector}-${system}/waypoint/${sector}-${system}-${waypoint}`}>
+                <Link
+                  to={waypointRoute.to}
+                  params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
+                  className="link"
+                >
                   {item.destinationSymbol}
                 </Link>
                 ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
@@ -259,7 +260,11 @@ export const acceptedContractsColumns = [
             return (
               <div key={item.tradeSymbol}>
                 [
-                <Link className="link" to={`/systems/${sector}-${system}/waypoint/${sector}-${system}-${waypoint}`}>
+                <Link
+                  to={waypointRoute.to}
+                  params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
+                  className="link"
+                >
                   {item.destinationSymbol}
                 </Link>
                 ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
@@ -340,12 +345,8 @@ export const completedContractsColumns = [
         </div>
       )
     },
-    cell: ({ row, getValue }) => {
-      return (
-        <Link className="link" to={`/contracts/${row.original.contract.id}`}>
-          {getValue()}
-        </Link>
-      )
+    cell: ({ getValue }) => {
+      return <div>{getValue()}</div>
     },
     minSize: 20,
     maxSize: 20,
@@ -393,7 +394,11 @@ export const completedContractsColumns = [
             return (
               <div key={item.tradeSymbol}>
                 [
-                <Link className="link" to={`/systems/${sector}-${system}/waypoint/${sector}-${system}-${waypoint}`}>
+                <Link
+                  to={waypointRoute.to}
+                  params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
+                  className="link"
+                >
                   {item.destinationSymbol}
                 </Link>
                 ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}

@@ -1,11 +1,12 @@
+import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
 import { ShipPresence } from '@/features/ship/presence'
-import { SystemWaypointsCell } from '@/features/system/list/waypoints-cell.component'
+import { systemRoute } from '@/routes/system.route'
 import { type SystemListTableSchema } from './system-list.types'
+import { SystemWaypointsCell } from './waypoints-cell.component'
 
 const columnHelper = createColumnHelper<SystemListTableSchema>()
 
@@ -19,10 +20,12 @@ export const columns = [
         </div>
       )
     },
-    cell: ({ row, getValue }) => {
+    cell: ({ getValue }) => {
+      const systemSymbol = getValue()
+
       return (
-        <Link className="link" to={`/systems/${row.original.system.symbol}`}>
-          {getValue()}
+        <Link to={systemRoute.to} params={{ systemSymbol }} className="link">
+          {systemSymbol}
         </Link>
       )
     },

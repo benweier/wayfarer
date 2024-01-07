@@ -1,6 +1,8 @@
+import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { agentsRoute } from '@/routes/agents.routes'
+import { waypointRoute } from '@/routes/waypoint.route'
 import { formatNumber } from '@/utilities/number'
 import { type AgentListTableSchema } from './agent-list.types'
 
@@ -20,8 +22,8 @@ export const columns = [
       const agentSymbol = getValue()
 
       return (
-        <Link className="link" to={`/agents/${agentSymbol}`}>
-          {getValue()}
+        <Link className="link" to={agentsRoute.to} params={{ agentSymbol }}>
+          {agentSymbol}
         </Link>
       )
     },
@@ -55,12 +57,16 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      const value = getValue()
-      const [sector, system, waypoint] = value.split('-')
+      const waypointSymbol = getValue()
+      const [sector, system, waypoint] = waypointSymbol.split('-')
 
       return (
-        <Link className="link" to={`/systems/${sector}-${system}/waypoint/${sector}-${system}-${waypoint}`}>
-          {value}
+        <Link
+          to={waypointRoute.to}
+          params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
+          className="link"
+        >
+          {waypointSymbol}
         </Link>
       )
     },

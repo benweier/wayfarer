@@ -1,10 +1,13 @@
+import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { Badge } from '@/components/badge'
 import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { useShipTransit } from '@/features/ship/transit'
+import { shipRoute } from '@/routes/ship.route'
+import { systemRoute } from '@/routes/system.route'
+import { waypointRoute } from '@/routes/waypoint.route'
 import { type ShipResponse } from '@/types/spacetraders'
 import { ShipControls } from './ship-list-item.controls'
 import { type ShipListTableSchema } from './ship-list.types'
@@ -40,7 +43,7 @@ export const columns = [
 
       return (
         <div className="flex items-center gap-4">
-          <Link className="link text-xl" to={`/fleet/ship/${symbol}`}>
+          <Link to={shipRoute.to} params={{ shipSymbol: symbol }} className="link text-xl">
             {symbol}
           </Link>
           <Badge>
@@ -69,7 +72,7 @@ export const columns = [
       const systemSymbol = getValue()
 
       return (
-        <Link className="link" to={`/systems/${row.original.ship.nav.systemSymbol}`}>
+        <Link to={systemRoute.to} params={{ systemSymbol: row.original.ship.nav.systemSymbol }} className="link">
           {systemSymbol}
         </Link>
       )
@@ -95,8 +98,12 @@ export const columns = [
 
       return (
         <Link
+          to={waypointRoute.to}
+          params={{
+            systemSymbol: row.original.ship.nav.systemSymbol,
+            waypointSymbol: row.original.ship.nav.waypointSymbol,
+          }}
           className="link"
-          to={`/systems/${row.original.ship.nav.systemSymbol}/waypoint/${row.original.ship.nav.waypointSymbol}`}
         >
           {waypointSymbol}
         </Link>
