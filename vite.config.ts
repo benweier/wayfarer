@@ -14,7 +14,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           react: ['react', 'react-dom'],
-          core: ['react-router-dom', '@tanstack/react-query', '@sentry/react'],
+          core: ['@tanstack/react-router', '@tanstack/react-query', '@sentry/react'],
         },
       },
     },
