@@ -1,14 +1,14 @@
 import { useIsFetching, useSuspenseQuery } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
 import { useEffect } from 'react'
-import { Pagination, usePagination } from '@/components/pagination'
+import { Pagination } from '@/components/pagination'
 import { useFleetResponse } from '@/context/fleet.context'
 import { getSystemListQuery } from '@/services/api/spacetraders'
 import { formatNumber } from '@/utilities/number'
 import { SystemListTable } from './system-list.table'
+import { type SystemListProps } from './system-list.types'
 
-export const SystemList = () => {
-  const { page, limit, setPage } = usePagination()
+export const SystemList = ({ page = 1, limit = 20, setPage }: SystemListProps) => {
   const systemsListQuery = useSuspenseQuery(getSystemListQuery({ page, limit }))
   const isFetching = useIsFetching({ queryKey: getSystemListQuery().queryKey }) > 0
   const ships = useFleetResponse()
@@ -20,7 +20,7 @@ export const SystemList = () => {
   useEffect(() => {
     const max = Math.ceil(systemsListQuery.data.meta.total / limit)
 
-    if (page > max) setPage(page)
+    if (page > max) setPage(max)
   }, [limit, systemsListQuery.data.meta, page, setPage])
 
   const systems = systemsListQuery.data.data
