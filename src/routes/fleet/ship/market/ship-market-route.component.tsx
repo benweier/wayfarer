@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
 import { WaypointStore } from '@/context/waypoint.context'
 import {
@@ -9,7 +9,7 @@ import {
   WaypointMarketPreferences,
 } from '@/features/waypoint/market'
 
-const ShipMarketRouteComponent = () => {
+export const ShipMarketRoute = () => {
   const { t } = useTranslation()
   const ship = useShipResponse()
 
@@ -33,5 +33,3 @@ const ShipMarketRouteComponent = () => {
     </div>
   )
 }
-
-export const Route = withQSB()(ShipMarketRouteComponent)
