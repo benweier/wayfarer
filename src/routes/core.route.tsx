@@ -1,16 +1,23 @@
 import * as Sentry from '@sentry/react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
-import { Suspense } from 'react'
-import { Outlet, ScrollRestoration, useNavigation } from 'react-router-dom'
+import { Outlet, ScrollRestoration, useRouterState } from '@tanstack/react-router'
+import { Suspense, lazy } from 'react'
 import { Button } from '@/components/button'
-import { Meta } from '@/components/meta'
+// import { Meta } from '@/components/meta'
 import { useThemeManager } from '@/hooks/use-theme-manager.hook'
-import { Fallback } from './routes.fallback'
+import { Fallback } from '@/routes/routes.fallback'
 
+const TanStackRouterDevtools = import.meta.env.PROD
+  ? () => null
+  : lazy(() =>
+      import('@tanstack/router-devtools').then((mod) => ({
+        default: () => <mod.TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />,
+      })),
+    )
 const NavigationLoader = () => {
-  const navigation = useNavigation()
+  const isLoading = useRouterState({ select: (state) => state.status === 'pending' })
 
-  return navigation.state !== 'idle' ? <span className="loader" /> : <></>
+  return isLoading && <span className="loader" />
 }
 
 export const Core = () => {
@@ -40,10 +47,11 @@ export const Core = () => {
     >
       <Suspense fallback={<Fallback />}>
         <ScrollRestoration />
-        <Meta titleTemplate="%s • Wayfarer" />
+        {/*<Meta titleTemplate="%s • Wayfarer" />*/}
         <div className="min-h-screen">
           <NavigationLoader />
           <Outlet />
+          <TanStackRouterDevtools />
         </div>
       </Suspense>
     </Sentry.ErrorBoundary>
