@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-import { QuerySuspenseBoundary, withQSB } from '@/components/query-suspense-boundary'
+import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ContractDetail } from '@/features/contract/detail'
+import { contractRoute } from '@/routes/contracts/contract'
 
-const ContractRouteComponent = () => {
+export const ContractRoute = () => {
   const { t } = useTranslation()
-  const { contractId } = useParams()
+  const { contractId } = contractRoute.useParams()
 
   return (
     <div className="space-y-4 p-4">
@@ -19,5 +19,3 @@ const ContractRouteComponent = () => {
     </div>
   )
 }
-
-export const Route = withQSB()(ContractRouteComponent)

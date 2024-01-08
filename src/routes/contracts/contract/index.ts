@@ -1,2 +1,1 @@
-export { Route } from './contract-route.component'
-export { meta } from './contract-route.meta'
+export { contractRoute, contractsIndexRoute } from './contract.route'
