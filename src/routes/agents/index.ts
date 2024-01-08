@@ -1,1 +1,1 @@
-export { agentsRoute, agentsIndexRoute } from './agents.routes'
+export { agentsRoute, agentsIndexRoute } from './agents.route'

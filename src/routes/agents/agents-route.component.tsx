@@ -2,7 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { AgentList, AgentListFallback } from '@/features/agent/list'
-import { agentsIndexRoute } from '@/routes/agents/agents.routes'
+import { agentsIndexRoute } from './agents.route'
 
 export const AgentsRoute = () => {
   const { t } = useTranslation()

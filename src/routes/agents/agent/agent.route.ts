@@ -1,5 +1,5 @@
 import { Route, lazyRouteComponent } from '@tanstack/react-router'
-import { agentsRoute } from '@/routes/agents/agents.routes'
+import { agentsRoute } from '@/routes/agents/agents.route'
 import { getAgentBySymbolQuery } from '@/services/api/spacetraders/agent'
 import { meta } from './agent-route.meta'
 
