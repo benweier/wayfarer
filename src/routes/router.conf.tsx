@@ -11,7 +11,7 @@ import { shipIndexRoute, shipMarketRoute, shipOverlayRoute, shipRoute } from './
 import { leaderboardRoute } from './leaderboard'
 import { notFoundRoute } from './not-found.route'
 import { rootIndexRoute, rootRoute } from './root.route'
-import { Fallback } from './routes.fallback'
+import { Fallback } from './router.fallback'
 import { surveysIndexRoute, surveysRoute } from './surveys'
 import { systemsIndexRoute, systemsRoute } from './systems'
 import { systemIndexRoute, systemRoute } from './systems/system'
