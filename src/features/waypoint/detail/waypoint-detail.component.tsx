@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { systemRoute } from '@/routes/system.route'
-import { waypointRoute } from '@/routes/waypoint.route'
+import { systemRoute } from '@/routes/systems/system'
+import { waypointRoute } from '@/routes/systems/waypoint'
 
 export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation()

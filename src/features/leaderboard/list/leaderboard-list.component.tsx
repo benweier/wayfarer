@@ -3,7 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
-import { agentRoute } from '@/routes/agent.route'
+import { agentRoute } from '@/routes/agents/agent'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { formatNumber } from '@/utilities/number'
 

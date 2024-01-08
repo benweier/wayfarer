@@ -1,8 +1,8 @@
 import { Link } from '@tanstack/react-router'
 import { cx } from 'class-variance-authority'
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
-import { systemRoute } from '@/routes/system.route'
-import { waypointRoute } from '@/routes/waypoint.route'
+import { systemRoute } from '@/routes/systems/system'
+import { waypointRoute } from '@/routes/systems/waypoint'
 import { type SystemWaypoint } from '@/types/spacetraders'
 import { chunk } from '@/utilities/chunk.helper'
 

@@ -8,7 +8,7 @@ import { Sort } from '@/components/table'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { ShipPresence } from '@/features/ship/presence'
 import { TypeFilter } from '@/features/waypoint/list/type-filter.component'
-import { waypointRoute } from '@/routes/waypoint.route'
+import { waypointRoute } from '@/routes/systems/waypoint'
 import { type WaypointListTableSchema } from './waypoint-list.types'
 
 const FILTERED_TRAITS = new Set(['UNCHARTED', 'MARKETPLACE', 'SHIPYARD', 'STRIPPED'])

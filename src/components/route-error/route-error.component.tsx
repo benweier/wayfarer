@@ -1,6 +1,6 @@
 import { Navigate } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
-import { loginRoute } from '@/routes/auth.route'
+import { loginRoute } from '@/routes/auth'
 import { STATUS_CODES, isHttpErrorResponse } from '@/services/http'
 
 export const RouteError = ({ error }: { error: any }) => {

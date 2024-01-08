@@ -1,2 +1,1 @@
-export { SystemRoute } from './system-route.component'
-export { meta } from './system-route.meta'
+export { systemRoute, systemIndexRoute } from './system.route'

@@ -1,7 +1,7 @@
 import { Route, defer, lazyRouteComponent } from '@tanstack/react-router'
-import { authRequiredRoute } from '@/routes/auth.route'
-import { meta } from '@/routes/contracts/contracts-route.meta'
+import { authRequiredRoute } from '@/routes/auth/auth.route'
 import { getContractListQuery } from '@/services/api/spacetraders'
+import { meta } from './contracts-route.meta'
 
 export const contractsRoute = new Route({
   path: 'contracts',
@@ -18,5 +18,5 @@ export const contractsIndexRoute = new Route({
       contracts: defer(contracts),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/contracts'), 'ContractsRoute'),
+  component: lazyRouteComponent(() => import('./contracts-route.component'), 'ContractsRoute'),
 })

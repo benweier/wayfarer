@@ -1,7 +1,7 @@
 import { Route, lazyRouteComponent } from '@tanstack/react-router'
-import { meta } from '@/routes/agents/agent/agent-route.meta'
-import { agentsRoute } from '@/routes/agents.routes'
+import { agentsRoute } from '@/routes/agents/agents.routes'
 import { getAgentBySymbolQuery } from '@/services/api/spacetraders/agent'
+import { meta } from './agent-route.meta'
 
 export const agentRoute = new Route({
   path: '$agentSymbol',
@@ -15,5 +15,5 @@ export const agentRoute = new Route({
       agent: await agent,
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/agents/agent'), 'AgentRoute'),
+  component: lazyRouteComponent(() => import('./agent-route.component'), 'AgentRoute'),
 })

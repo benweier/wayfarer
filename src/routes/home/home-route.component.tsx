@@ -1,6 +1,6 @@
 import { Navigate } from '@tanstack/react-router'
-import { loginRoute } from '@/routes/auth.route'
-import { fleetRoute } from '@/routes/fleet.route'
+import { loginRoute } from '@/routes/auth/auth.route'
+import { fleetRoute } from '@/routes/fleet/fleet.route'
 import { useAuthStore } from '@/store/auth'
 
 export const HomeRoute = () => {

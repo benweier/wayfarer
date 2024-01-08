@@ -3,7 +3,7 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { SystemStore } from '@/context/system.context'
 import { SystemDetail } from '@/features/system/detail'
 import { SystemTabs } from '@/features/system/tabs'
-import { systemRoute } from '@/routes/system.route'
+import { systemRoute } from './system.route'
 
 export const SystemRoute = () => {
   const { systemSymbol } = systemRoute.useParams()

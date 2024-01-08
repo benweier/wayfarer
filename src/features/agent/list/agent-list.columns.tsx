@@ -1,8 +1,8 @@
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { agentsRoute } from '@/routes/agents.routes'
-import { waypointRoute } from '@/routes/waypoint.route'
+import { agentsRoute } from '@/routes/agents/agents.routes'
+import { waypointRoute } from '@/routes/systems/waypoint'
 import { formatNumber } from '@/utilities/number'
 import { type AgentListTableSchema } from './agent-list.types'
 

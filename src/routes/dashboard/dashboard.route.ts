@@ -12,5 +12,5 @@ export const dashboardRoute = new Route({
       ships: defer(ships),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/dashboard'), 'Layout'),
+  component: lazyRouteComponent(() => import('./dashboard-layout.component'), 'Layout'),
 })

@@ -1,12 +1,12 @@
 import { Navigate, Route, lazyRouteComponent, redirect } from '@tanstack/react-router'
 import { z } from 'zod'
-import { dashboardRoute } from '@/routes/dashboard.route'
+import { dashboardRoute } from '@/routes/dashboard/dashboard.route'
 import { rootRoute } from '@/routes/root.route'
 
 export const authRoute = new Route({
   id: 'auth',
   getParentRoute: () => rootRoute,
-  component: lazyRouteComponent(() => import('@/routes/auth'), 'AuthLayout'),
+  component: lazyRouteComponent(() => import('./auth-layout.component'), 'AuthLayout'),
 })
 
 export const authRequiredRoute = new Route({

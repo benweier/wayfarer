@@ -1,7 +1,7 @@
 import { Route, lazyRouteComponent } from '@tanstack/react-router'
-import { meta } from '@/routes/systems/system/system-route.meta'
-import { systemsRoute } from '@/routes/systems.route'
+import { systemsRoute } from '@/routes/systems/systems.route'
 import { getSystemByIdQuery } from '@/services/api/spacetraders'
+import { meta } from './system-route.meta'
 
 export const systemRoute = new Route({
   path: '$systemSymbol',
@@ -19,5 +19,5 @@ export const systemIndexRoute = new Route({
       system: await system,
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/systems/system'), 'SystemRoute'),
+  component: lazyRouteComponent(() => import('./system-route.component'), 'SystemRoute'),
 })

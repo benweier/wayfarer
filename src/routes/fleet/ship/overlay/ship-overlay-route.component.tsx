@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from '@tanstack/react-router'
 import { Modal } from '@/components/modal'
-import { shipRoute } from '@/routes/ship.route'
+import { shipRoute } from '@/routes/fleet/ship/ship.route'
 
 export const ShipOverlayRoute = () => {
   const navigate = useNavigate()

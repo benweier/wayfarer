@@ -3,7 +3,7 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { WaypointStore } from '@/context/waypoint.context'
 import { WaypointDetail } from '@/features/waypoint/detail'
 import { WaypointTabs } from '@/features/waypoint/tabs'
-import { waypointRoute } from '@/routes/waypoint.route'
+import { waypointRoute } from './waypoint.route'
 
 export const WaypointRoute = () => {
   const { t } = useTranslation()

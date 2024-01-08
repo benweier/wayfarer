@@ -4,7 +4,7 @@ import { Translation } from 'react-i18next'
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
 import { ShipPresence } from '@/features/ship/presence'
-import { systemRoute } from '@/routes/system.route'
+import { systemRoute } from '@/routes/systems/system'
 import { type SystemListTableSchema } from './system-list.types'
 import { SystemWaypointsCell } from './waypoints-cell.component'
 

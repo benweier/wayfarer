@@ -1,2 +1,1 @@
-export { WaypointRoute } from './waypoint-route.component'
-export { meta } from './waypoint-route.meta'
+export { waypointRoute, waypointIndexRoute } from './waypoint.route'

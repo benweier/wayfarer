@@ -1,8 +1,8 @@
 import { Route, defer, lazyRouteComponent } from '@tanstack/react-router'
 import { z } from 'zod'
-import { meta } from '@/routes/agents/agents-route.meta'
-import { dashboardRoute } from '@/routes/dashboard.route'
+import { dashboardRoute } from '@/routes/dashboard/dashboard.route'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
+import { meta } from './agents-route.meta'
 
 export const agentsRoute = new Route({
   path: 'agents',
@@ -23,5 +23,5 @@ export const agentsIndexRoute = new Route({
       agents: defer(agents),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/agents'), 'AgentsRoute'),
+  component: lazyRouteComponent(() => import('./agents-route.component'), 'AgentsRoute'),
 })

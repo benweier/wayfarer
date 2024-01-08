@@ -5,7 +5,7 @@ import { Badge } from '@/components/badge'
 import { Sort } from '@/components/table'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
-import { waypointRoute } from '@/routes/waypoint.route'
+import { waypointRoute } from '@/routes/systems/waypoint'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { type WaypointNavigationTableSchema } from './waypoint-navigation.types'
 

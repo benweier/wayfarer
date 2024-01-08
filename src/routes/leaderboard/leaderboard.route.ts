@@ -1,7 +1,7 @@
 import { Route, defer, lazyRouteComponent } from '@tanstack/react-router'
-import { meta } from '@/routes/leaderboard/leaderboard-route.meta'
+import { dashboardRoute } from '@/routes/dashboard/dashboard.route'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
-import { dashboardRoute } from './dashboard.route'
+import { meta } from './leaderboard-route.meta'
 
 export const leaderboardRoute = new Route({
   path: 'leaderboard',
@@ -14,5 +14,5 @@ export const leaderboardRoute = new Route({
       status: defer(status),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/leaderboard'), 'LeaderboardRoute'),
+  component: lazyRouteComponent(() => import('./leaderboard-route.component'), 'LeaderboardRoute'),
 })

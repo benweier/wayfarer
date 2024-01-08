@@ -1,7 +1,7 @@
 import { Outlet, Route, defer, lazyRouteComponent } from '@tanstack/react-router'
-import { authRequiredRoute } from '@/routes/auth.route'
-import { meta } from '@/routes/fleet/fleet-route.meta'
+import { authRequiredRoute } from '@/routes/auth/auth.route'
 import { getShipListQuery } from '@/services/api/spacetraders'
+import { meta } from './fleet-route.meta'
 
 export const fleetRoute = new Route({
   path: 'fleet',
@@ -19,5 +19,5 @@ export const fleetIndexRoute = new Route({
       fleet: defer(fleet),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/fleet'), 'FleetRoute'),
+  component: lazyRouteComponent(() => import('./fleet-route.component'), 'FleetRoute'),
 })

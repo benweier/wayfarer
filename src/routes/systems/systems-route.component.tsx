@@ -2,7 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { SystemList, SystemListFallback } from '@/features/system/list'
-import { systemsIndexRoute } from '@/routes/systems.route'
+import { systemsIndexRoute } from './systems.route'
 
 export const SystemsRoute = () => {
   const { t } = useTranslation()

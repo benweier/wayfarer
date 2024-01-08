@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { Trans, useTranslation } from 'react-i18next'
-import { loginRoute } from '@/routes/auth.route'
+import { loginRoute } from '@/routes/auth'
 import { useAuthStore } from '@/store/auth'
 import { type SystemFleetProps } from './system-fleet.types'
 

@@ -4,7 +4,7 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ShipStore } from '@/context/ship.context'
 import { ShipDetail } from '@/features/ship/detail'
 import { ShipTabs } from '@/features/ship/tabs'
-import { shipRoute } from '@/routes/ship.route'
+import { shipRoute } from './ship.route'
 
 export const ShipRoute = () => {
   const { shipSymbol } = shipRoute.useParams()

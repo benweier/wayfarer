@@ -1,8 +1,8 @@
 import { Route, defer, lazyRouteComponent, redirect } from '@tanstack/react-router'
+import { fleetRoute } from '@/routes/fleet/fleet.route'
 import { ShipOverlayRoute } from '@/routes/fleet/ship/overlay'
-import { meta } from '@/routes/fleet/ship/ship-route.meta'
-import { fleetRoute } from '@/routes/fleet.route'
 import { getShipByIdQuery, getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
+import { meta } from './ship-route.meta'
 
 export const shipRoute = new Route({
   path: '$shipSymbol',
@@ -20,7 +20,7 @@ export const shipIndexRoute = new Route({
       ship: await ship,
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/fleet/ship'), 'ShipRoute'),
+  component: lazyRouteComponent(() => import('./ship-route.component'), 'ShipRoute'),
 })
 
 export const shipOverlayRoute = new Route({
@@ -61,5 +61,5 @@ export const shipMarketRoute = new Route({
       market: defer(market),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/fleet/ship/market'), 'ShipMarketRoute'),
+  component: lazyRouteComponent(() => import('./market/ship-market-route.component'), 'ShipMarketRoute'),
 })

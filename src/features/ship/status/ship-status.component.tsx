@@ -5,8 +5,8 @@ import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
-import { systemRoute } from '@/routes/system.route'
-import { waypointRoute } from '@/routes/waypoint.route'
+import { systemRoute } from '@/routes/systems/system'
+import { waypointRoute } from '@/routes/systems/waypoint'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {

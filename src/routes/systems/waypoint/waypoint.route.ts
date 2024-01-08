@@ -1,7 +1,7 @@
 import { Route, lazyRouteComponent } from '@tanstack/react-router'
-import { systemRoute } from '@/routes/system.route'
-import { meta } from '@/routes/systems/waypoint/waypoint-route.meta'
+import { systemRoute } from '@/routes/systems/system/system.route'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders'
+import { meta } from './waypoint-route.meta'
 
 export const waypointRoute = new Route({
   path: 'waypoint/$waypointSymbol',
@@ -21,5 +21,5 @@ export const waypointIndexRoute = new Route({
       waypoint: await waypoint,
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/systems/waypoint'), 'WaypointRoute'),
+  component: lazyRouteComponent(() => import('./waypoint-route.component'), 'WaypointRoute'),
 })
