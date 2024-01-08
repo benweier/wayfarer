@@ -6,7 +6,7 @@ import { systemsIndexRoute } from './systems.route'
 
 export const SystemsRoute = () => {
   const { t } = useTranslation()
-  const navigate = useNavigate({ from: systemsIndexRoute.path })
+  const navigate = useNavigate({ from: systemsIndexRoute.id })
   const { page } = systemsIndexRoute.useSearch()
 
   return (

@@ -1,13 +1,13 @@
 import { useIsFetching, useSuspenseQuery } from '@tanstack/react-query'
 import { cx } from 'class-variance-authority'
 import { useEffect } from 'react'
-import { Pagination, usePagination } from '@/components/pagination'
+import { Pagination } from '@/components/pagination'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
 import { formatNumber } from '@/utilities/number'
 import { AgentListTable } from './agent-list.table'
+import { type AgentListProps } from './agent-list.types'
 
-export const AgentList = () => {
-  const { page, limit, setPage } = usePagination()
+export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => {
   const agentsListQuery = useSuspenseQuery(getAgentListQuery({ page, limit }))
   const isFetching = useIsFetching({ queryKey: getAgentListQuery().queryKey }) > 0
 
