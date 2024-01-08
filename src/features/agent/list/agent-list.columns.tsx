@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { agentsRoute } from '@/routes/agents/agents.routes'
+import { agentRoute } from '@/routes/agents/agent'
 import { waypointRoute } from '@/routes/systems/waypoint'
 import { formatNumber } from '@/utilities/number.helper'
 import { type AgentListTableSchema } from './agent-list.types'
@@ -22,7 +22,7 @@ export const columns = [
       const agentSymbol = getValue()
 
       return (
-        <Link className="link" to={agentsRoute.to} params={{ agentSymbol }}>
+        <Link className="link" to={agentRoute.to} params={{ agentSymbol }}>
           {agentSymbol}
         </Link>
       )
