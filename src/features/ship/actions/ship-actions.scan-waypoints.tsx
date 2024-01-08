@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link } from '@tanstack/react-router'
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
-import { ROUTES } from '@/config/routes'
+import { waypointRoute } from '@/routes/systems/waypoint'
 import { createShipScanWaypointsMutation } from '@/services/api/spacetraders'
 
 export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
@@ -34,7 +34,13 @@ export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
         <div className="grid gap-2">
           {waypoints.map((waypoint) => (
             <div key={waypoint.symbol}>
-              <Link to={`${ROUTES.SYSTEMS}/${waypoint.systemSymbol}/waypoint/${waypoint.symbol}`}>
+              <Link
+                to={waypointRoute}
+                params={{
+                  systemSymbol: waypoint.systemSymbol,
+                  waypointSymbol: waypoint.symbol,
+                }}
+              >
                 {waypoint.symbol}
               </Link>
             </div>
