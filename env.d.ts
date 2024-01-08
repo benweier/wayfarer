@@ -1,11 +1,8 @@
 /// <reference types="vite/client" />
-import { type QueryClient } from '@tanstack/react-query'
 import { type TFunction } from 'i18next'
-import { type LoaderFunction } from 'react-router-dom'
 import type React from 'react'
 
 declare global {
-  type QueryClientLoaderFn = (client: QueryClient) => LoaderFunction
   type MetaObject =
     | {
         title: string
