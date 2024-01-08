@@ -13,10 +13,10 @@ export const fleetIndexRoute = new Route({
   getParentRoute: () => fleetRoute,
   beforeLoad: () => ({ meta }),
   loader: ({ context }) => {
-    const fleet = context.client.ensureQueryData(getShipListQuery())
+    const ships = context.client.ensureQueryData(getShipListQuery())
 
     return {
-      fleet: defer(fleet),
+      ships: defer(ships),
     }
   },
   component: lazyRouteComponent(() => import('./fleet-route.component'), 'FleetRoute'),
