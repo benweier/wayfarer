@@ -2,7 +2,7 @@ import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
-import { formatDateTime } from '@/utilities/date'
+import { formatDateTime } from '@/utilities/date.helper'
 import { useShipTransit } from './use-ship-transit.hook'
 
 export const ShipTransitStatus = () => {

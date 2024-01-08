@@ -6,7 +6,7 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { useAuthStore } from '@/store/auth'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 import { type TradeGoodBuyFormProps } from './trade-good-buy.types'
 import { type TradeGoodBuySchema, validation } from './trade-good-buy.validation'
 

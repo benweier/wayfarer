@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 import { type TradeGoodInfoProps } from './trade-good-info.types'
 
 export const TradeGoodInfo = ({ price, volume, supply }: TradeGoodInfoProps) => {

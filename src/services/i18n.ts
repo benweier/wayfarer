@@ -3,8 +3,8 @@ import languageDetector from 'i18next-browser-languagedetector'
 import backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 import { sentry } from '@/services/sentry'
-import { formatDateTime, formatRelativeTime } from '@/utilities/date'
-import { formatNumber } from '@/utilities/number'
+import { formatDateTime, formatRelativeTime } from '@/utilities/date.helper'
+import { formatNumber } from '@/utilities/number.helper'
 
 export const i18n = createInstance()
 

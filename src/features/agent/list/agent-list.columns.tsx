@@ -3,7 +3,7 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { agentsRoute } from '@/routes/agents/agents.routes'
 import { waypointRoute } from '@/routes/systems/waypoint'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 import { type AgentListTableSchema } from './agent-list.types'
 
 const columnHelper = createColumnHelper<AgentListTableSchema>()

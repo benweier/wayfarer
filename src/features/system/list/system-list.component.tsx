@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Pagination } from '@/components/pagination'
 import { useFleetResponse } from '@/context/fleet.context'
 import { getSystemListQuery } from '@/services/api/spacetraders'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 import { SystemListTable } from './system-list.table'
 import { type SystemListProps } from './system-list.types'
 

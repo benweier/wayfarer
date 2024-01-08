@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { getAgentBySymbolQuery } from '@/services/api/spacetraders/agent'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 
 export const AgentDetail = ({ agentSymbol }: { agentSymbol: string }) => {
   const { t } = useTranslation()

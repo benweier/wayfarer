@@ -7,7 +7,7 @@ import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
 import { Sort } from '@/components/table'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { type ShipyardShip } from '@/types/spacetraders'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 
 const BuyCell = ({ ship, children }: PropsWithChildren<{ ship: ShipyardShip }>) => {
   const waypoint = useWaypointResponse()

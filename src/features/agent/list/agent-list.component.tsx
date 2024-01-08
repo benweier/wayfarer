@@ -3,7 +3,7 @@ import { cx } from 'class-variance-authority'
 import { useEffect } from 'react'
 import { Pagination } from '@/components/pagination'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 import { AgentListTable } from './agent-list.table'
 import { type AgentListProps } from './agent-list.types'
 

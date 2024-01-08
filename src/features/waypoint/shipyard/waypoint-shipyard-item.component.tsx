@@ -3,7 +3,7 @@ import { Button } from '@/components/button'
 import { Card } from '@/components/card'
 import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 import { type WaypointShipyardItemProps } from './waypoint-shipyard.types'
 
 export const WaypointShipyardItem = ({ ship }: PropsWithChildren<WaypointShipyardItemProps>) => {

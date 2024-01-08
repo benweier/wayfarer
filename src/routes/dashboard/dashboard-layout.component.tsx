@@ -13,7 +13,7 @@ import { rootRoute } from '@/routes/root.route'
 import { waypointRoute } from '@/routes/systems/waypoint/waypoint.route'
 import { sidebarAtom } from '@/store/atoms/sidebar'
 import { useAuthStore } from '@/store/auth'
-import { formatNumber } from '@/utilities/number'
+import { formatNumber } from '@/utilities/number.helper'
 
 const menu = [
   { key: 'navigation.fleet', href: '/fleet', icon: 'fleet' },
@@ -220,7 +220,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
 
           {/* Secondary column (hidden on smaller screens) */}
           <aside className="hidden lg:block lg:flex-shrink-0">
-            <div className="relative flex h-full flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg lg:w-64 2xl:w-96 dark:bg-zinc-900/50">
+            <div className="relative flex h-full flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg dark:bg-zinc-900/50 lg:w-64 2xl:w-96">
               {isAuthenticated && (
                 <div className="p-4">
                   <Agent />
