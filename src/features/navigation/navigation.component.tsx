@@ -1,16 +1,21 @@
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
-import { ROUTES } from '@/config/routes'
+import { agentsRoute } from '@/routes/agents'
+import { contractsRoute } from '@/routes/contracts'
+import { fleetRoute } from '@/routes/fleet'
+import { leaderboardRoute } from '@/routes/leaderboard'
+import { surveysRoute } from '@/routes/surveys'
+import { systemsRoute } from '@/routes/systems'
 
 const menu: Array<{ key: string; href: string; icon: string } | { key: 'divider'; divider: true }> = [
-  // { name: 'Overview', href: ROUTES.OVERVIEW, icon: 'home' },
-  // { name: 'Contracts', href: ROUTES.CONTRACTS, icon: 'contracts' },
-  { key: 'navigation.fleet', href: ROUTES.FLEET, icon: 'fleet' },
-  { key: 'navigation.systems', href: ROUTES.SYSTEMS, icon: 'systems' },
+  { key: 'navigation.fleet', href: fleetRoute.to, icon: 'fleet' },
+  { key: 'navigation.systems', href: systemsRoute.to, icon: 'systems' },
+  { key: 'navigation.contracts', href: contractsRoute.to, icon: 'contracts' },
+  { key: 'navigation.surveys', href: surveysRoute.to, icon: 'surveys' },
   { key: 'divider', divider: true },
-  { key: 'navigation.leaderboard', href: ROUTES.LEADERBOARD, icon: 'leaderboard' },
-  { key: 'navigation.agents', href: ROUTES.AGENTS, icon: 'agents' },
+  { key: 'navigation.leaderboard', href: leaderboardRoute.to, icon: 'leaderboard' },
+  { key: 'navigation.agents', href: agentsRoute.to, icon: 'agents' },
 ]
 
 export const Navigation = () => {
