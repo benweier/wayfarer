@@ -1,11 +1,10 @@
 import * as Sentry from '@sentry/react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Outlet, ScrollRestoration, useRouterState } from '@tanstack/react-router'
-import { Suspense, lazy } from 'react'
+import { lazy } from 'react'
 import { Button } from '@/components/button'
 import { Meta } from '@/components/meta'
 import { useThemeManager } from '@/hooks/use-theme-manager.hook'
-import { Fallback } from '@/routes/routes.fallback'
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -45,15 +44,13 @@ export const Core = () => {
         </div>
       )}
     >
-      <Suspense fallback={<Fallback />}>
-        <ScrollRestoration />
-        <Meta titleTemplate="%s • Wayfarer" />
-        <div className="min-h-screen">
-          <NavigationLoader />
-          <Outlet />
-          <TanStackRouterDevtools />
-        </div>
-      </Suspense>
+      <ScrollRestoration />
+      <Meta titleTemplate="%s • Wayfarer" />
+      <div className="min-h-screen">
+        <NavigationLoader />
+        <Outlet />
+        <TanStackRouterDevtools />
+      </div>
     </Sentry.ErrorBoundary>
   )
 }
