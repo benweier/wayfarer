@@ -7,14 +7,20 @@ import { type MetaProps } from './meta.types'
 export const Meta = ({ titleTemplate }: MetaProps) => {
   const routerState = useRouterState()
   const { t } = useTranslation()
-  const matches = [...routerState.matches]
-    .filter((match) => typeof match.routeContext.meta === 'function')
-    .map((match) => {
-      return {
+  const matches = [...routerState.matches].reduce<Array<{ id: string; meta: MetaObject[] }>>((matches, match) => {
+    if (
+      typeof match.routeContext === 'object' &&
+      'meta' in match.routeContext &&
+      typeof match.routeContext.meta === 'function'
+    ) {
+      matches.push({
         id: match.id,
-        meta: match.loaderData === undefined ? [] : (match.routeContext.meta(t, match.loaderData) as MetaObject[]),
-      }
-    })
+        meta: match.loaderData === undefined ? [] : match.routeContext.meta(t, match.loaderData as any),
+      })
+    }
+
+    return matches
+  }, [])
 
   return (
     <Helmet titleTemplate={titleTemplate}>
