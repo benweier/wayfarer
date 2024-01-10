@@ -48,8 +48,8 @@ describe('getRequestPagination', () => {
 
   test('should return minimum values when out-of-bounds params are passed', () => {
     const params = new URLSearchParams({
-      page: -1,
-      limit: 0,
+      page: '-1',
+      limit: '0',
     })
 
     expect(getRequestPagination(params)).toEqual({
@@ -60,8 +60,8 @@ describe('getRequestPagination', () => {
 
   test('should return maximum values when out-of-bounds params are passed', () => {
     const params = new URLSearchParams({
-      page: -1,
-      limit: 100,
+      page: '-1',
+      limit: '100',
     })
 
     expect(getRequestPagination(params)).toEqual({
