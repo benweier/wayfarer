@@ -96,8 +96,10 @@
       "deadline_to_deliver": "Deliver By",
       "deposits": "Deposits",
       "distance_time": "Distance (Time)",
+      "engine": "Engine",
       "expiration": "Expiration",
       "faction": "Faction",
+      "frame": "Frame",
       "fuel": "Fuel",
       "headquarters": "Headquarters",
       "id": "ID",
@@ -107,9 +109,11 @@
       "presence": "Presence",
       "purchase_price": "Purchase Price",
       "quantity": "Quantity",
+      "reactor": "Reactor",
       "requirements": "Requirements",
       "sell_price": "Sell Price",
       "ship_count": "Ship Count",
+      "ship_type": "Ship Type",
       "signature": "Signature",
       "size": "Size",
       "supply": "Supply",
@@ -254,7 +258,8 @@
     "label": "Contracts",
     "available": "Available",
     "accepted": "Accepted",
-    "completed": "Completed"
+    "completed": "Completed",
+    "no_contracts": "No contracts available"
   },
   "contract": {
     "label": "Contract",
