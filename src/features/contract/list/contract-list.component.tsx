@@ -75,6 +75,15 @@ export const ContractList = () => {
     },
   })
   const contracts = data.data
+  const meta = data.meta
+
+  if (meta.total === 0) {
+    return (
+      <div className="flex flex-col">
+        <div className="text-xl font-semibold">{t('contracts.no_contracts')}</div>
+      </div>
+    )
+  }
 
   return (
     <Tab.Group as="div" className="tab-group">
