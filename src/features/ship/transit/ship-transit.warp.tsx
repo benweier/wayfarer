@@ -32,7 +32,8 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const { mutateAsync, isPending } = useMutation({
-    ...createShipWarpMutation({ shipSymbol: ship.symbol }),
+    mutationKey: createShipWarpMutation.getMutationKey({ shipSymbol: ship.symbol }),
+    mutationFn: createShipWarpMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
