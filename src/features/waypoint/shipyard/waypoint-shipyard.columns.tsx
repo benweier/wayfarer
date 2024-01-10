@@ -1,6 +1,7 @@
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { createColumnHelper } from '@tanstack/react-table'
 import { type PropsWithChildren } from 'react'
+import { Translation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
@@ -35,7 +36,7 @@ export const columns = [
     header: ({ column }) => {
       return (
         <div className="flex items-center justify-start gap-2 text-right">
-          <div>Ship Type</div>
+          <Translation>{(t) => <div>{t('general.header.ship_type')}</div>}</Translation>
           <div>
             <Sort column={column} type="alpha" />
           </div>
@@ -60,7 +61,7 @@ export const columns = [
   }),
   columnHelper.accessor((row) => row.frame, {
     id: 'frame',
-    header: () => <div className="text-right">Frame</div>,
+    header: () => <Translation>{(t) => <div className="text-right">{t('general.header.frame')}</div>}</Translation>,
     cell: ({ getValue }) => {
       const { name, description, fuelCapacity, moduleSlots, mountingPoints, requirements } = getValue()
 
@@ -115,7 +116,7 @@ export const columns = [
   }),
   columnHelper.accessor((row) => row.engine, {
     id: 'engine',
-    header: () => <div className="text-right">Engine</div>,
+    header: () => <Translation>{(t) => <div className="text-right">{t('general.header.engine')}</div>}</Translation>,
     cell: ({ getValue }) => {
       const { name, description, speed, requirements } = getValue()
 
@@ -162,7 +163,7 @@ export const columns = [
   }),
   columnHelper.accessor((row) => row.reactor, {
     id: 'reactor',
-    header: () => <div className="text-right">Reactor</div>,
+    header: () => <Translation>{(t) => <div className="text-right">{t('general.header.reactor')}</div>}</Translation>,
     cell: ({ getValue }) => {
       const { name, description, powerOutput } = getValue()
 
@@ -208,7 +209,7 @@ export const columns = [
     header: ({ column }) => {
       return (
         <div className="flex items-center justify-end gap-2 text-right">
-          <div>Price</div>
+          <Translation>{(t) => <div>{t('general.header.purchase_price')}</div>}</Translation>
           <div>
             <Sort column={column} type="numeric" />
           </div>
