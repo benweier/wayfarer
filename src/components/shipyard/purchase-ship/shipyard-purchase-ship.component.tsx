@@ -20,7 +20,7 @@ const PurchaseShipComponent = (
 ) => {
   const client = useQueryClient()
   const { credits, setAgent } = useAuthStore((state) => ({
-    credits: state.agent?.credits ?? 0,
+    credits: state.isAuthenticated ? state.agent.credits : 0,
     setAgent: state.actions.setAgent,
   }))
   const { mutate, isPending } = useMutation({
