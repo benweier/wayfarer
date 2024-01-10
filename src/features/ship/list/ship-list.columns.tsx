@@ -5,9 +5,6 @@ import { Badge } from '@/components/badge'
 import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { useShipTransit } from '@/features/ship/transit'
-import { shipRoute } from '@/routes/fleet/ship'
-import { systemRoute } from '@/routes/systems/system'
-import { waypointRoute } from '@/routes/systems/waypoint'
 import { type ShipResponse } from '@/types/spacetraders'
 import { ShipControls } from './ship-list-item.controls'
 import { type ShipListTableSchema } from './ship-list.types'
@@ -43,7 +40,7 @@ export const columns = [
 
       return (
         <div className="flex items-center gap-4">
-          <Link to={shipRoute.to} params={{ shipSymbol: symbol }} className="link text-xl">
+          <Link to="/fleet/$shipSymbol" params={{ shipSymbol: symbol }} className="link text-xl">
             {symbol}
           </Link>
           <Badge>
@@ -72,7 +69,11 @@ export const columns = [
       const systemSymbol = getValue()
 
       return (
-        <Link to={systemRoute.to} params={{ systemSymbol: row.original.ship.nav.systemSymbol }} className="link">
+        <Link
+          to="/systems/$systemSymbol"
+          params={{ systemSymbol: row.original.ship.nav.systemSymbol }}
+          className="link"
+        >
           {systemSymbol}
         </Link>
       )
@@ -98,7 +99,7 @@ export const columns = [
 
       return (
         <Link
-          to={waypointRoute.to}
+          to="/systems/$systemSymbol/waypoint/$waypointSymbol"
           params={{
             systemSymbol: row.original.ship.nav.systemSymbol,
             waypointSymbol: row.original.ship.nav.waypointSymbol,

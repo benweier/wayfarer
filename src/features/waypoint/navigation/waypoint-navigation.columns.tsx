@@ -5,7 +5,6 @@ import { Badge } from '@/components/badge'
 import { Sort } from '@/components/table'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
-import { waypointRoute } from '@/routes/systems/waypoint'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { type WaypointNavigationTableSchema } from './waypoint-navigation.types'
 
@@ -28,7 +27,7 @@ export const columns = [
     cell: ({ getValue, row }) => {
       return (
         <Link
-          to={waypointRoute.to}
+          to="/systems/$systemSymbol/waypoint/$waypointSymbol"
           params={{
             systemSymbol: row.original.waypoint.systemSymbol,
             waypointSymbol: row.original.waypoint.symbol,

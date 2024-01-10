@@ -1,16 +1,17 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { Link, useNavigate } from '@tanstack/react-router'
+import { Link, RouteApi, useNavigate } from '@tanstack/react-router'
 import { useCallback } from 'react'
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { Trans, useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
-import { loginRoute, registerRoute } from '@/routes/auth'
-import { fleetRoute } from '@/routes/fleet'
+import { ROUTES } from '@/config/routes'
 import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import { useAuthStore } from '@/store/auth'
 import { type LoginSchema, loginValidation } from './login.validation'
+
+const loginRoute = new RouteApi({ id: ROUTES.LOGIN })
 
 export const Login = () => {
   const { redirect } = loginRoute.useSearch()
@@ -25,7 +26,7 @@ export const Login = () => {
     mutationFn: getAgentMutation.mutationFn,
     onSuccess: (response, { token }) => {
       signin({ agent: response.data, token: token })
-      void navigate({ to: redirect === undefined ? fleetRoute.to : (redirect as '/') })
+      void navigate({ to: redirect === undefined ? '/fleet' : (redirect as '/') })
     },
     onError: (err: any) => {
       if (err.status === 401) {
@@ -81,7 +82,7 @@ export const Login = () => {
                 i18nKey="auth.not_registered"
                 components={{
                   register_link: (
-                    <Link to={registerRoute.to} className="link">
+                    <Link to="/register" className="link">
                       {t('auth.register', { context: 'text' })}
                     </Link>
                   ),

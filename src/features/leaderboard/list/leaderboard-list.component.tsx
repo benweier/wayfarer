@@ -3,7 +3,6 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
-import { agentRoute } from '@/routes/agents/agent'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { formatNumber } from '@/utilities/number.helper'
 
@@ -29,7 +28,7 @@ export const LeaderboardList = () => {
                   className="flex flex-col items-center justify-between gap-2 rounded bg-zinc-500 bg-opacity-5 px-5 py-3 dark:bg-opacity-10 sm:flex-row"
                 >
                   <div className="text-lg font-semibold">
-                    <Link to={agentRoute.to} params={{ agentSymbol: item.agentSymbol }} className="link">
+                    <Link to="/agents/$agentSymbol" params={{ agentSymbol: item.agentSymbol }} className="link">
                       {item.agentSymbol}
                     </Link>
                   </div>
@@ -49,7 +48,7 @@ export const LeaderboardList = () => {
                   className="flex flex-col items-center justify-between gap-2 rounded bg-zinc-500 bg-opacity-5 px-5 py-3 dark:bg-opacity-10 sm:flex-row"
                 >
                   <div className="text-lg font-semibold">
-                    <Link to={agentRoute.to} params={{ agentSymbol: item.agentSymbol }} className="link">
+                    <Link to="/agents/$agentSymbol" params={{ agentSymbol: item.agentSymbol }} className="link">
                       {item.agentSymbol}
                     </Link>
                   </div>

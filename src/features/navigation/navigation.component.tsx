@@ -1,22 +1,16 @@
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
-import { agentsRoute } from '@/routes/agents'
-import { contractsRoute } from '@/routes/contracts'
-import { fleetRoute } from '@/routes/fleet'
-import { leaderboardRoute } from '@/routes/leaderboard'
-import { surveysRoute } from '@/routes/surveys'
-import { systemsRoute } from '@/routes/systems'
 
-const menu: Array<{ key: string; href: string; icon: string } | { key: 'divider'; divider: true }> = [
-  { key: 'navigation.fleet', href: fleetRoute.to, icon: 'fleet' },
-  { key: 'navigation.systems', href: systemsRoute.to, icon: 'systems' },
-  { key: 'navigation.contracts', href: contractsRoute.to, icon: 'contracts' },
-  { key: 'navigation.surveys', href: surveysRoute.to, icon: 'surveys' },
+const menu = [
+  { key: 'navigation.fleet', to: '/fleet', icon: 'fleet' },
+  { key: 'navigation.systems', to: '/systems', icon: 'systems' },
+  { key: 'navigation.contracts', to: '/contracts', icon: 'contracts' },
+  { key: 'navigation.surveys', to: '/surveys', icon: 'surveys' },
   { key: 'divider', divider: true },
-  { key: 'navigation.leaderboard', href: leaderboardRoute.to, icon: 'leaderboard' },
-  { key: 'navigation.agents', href: agentsRoute.to, icon: 'agents' },
-]
+  { key: 'navigation.leaderboard', to: '/leaderboard', icon: 'leaderboard' },
+  { key: 'navigation.agents', to: '/agents', icon: 'agents' },
+] as const
 
 export const Navigation = () => {
   const { t } = useTranslation()
@@ -31,7 +25,7 @@ export const Navigation = () => {
         return (
           <Link
             key={item.key}
-            to={item.href}
+            to={item.to}
             className="flex w-full max-w-full items-center gap-4 rounded-md border-2 border-blue-600 px-3 py-2 font-medium text-white transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-800"
           >
             <div>

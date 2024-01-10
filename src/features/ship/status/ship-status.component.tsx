@@ -5,8 +5,6 @@ import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
-import { systemRoute } from '@/routes/systems/system'
-import { waypointRoute } from '@/routes/systems/waypoint'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
@@ -18,7 +16,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         <div className="flex gap-8">
           <div>
             <div className="text-secondary text-xs uppercase">{t('system.label')}</div>
-            <Link to={systemRoute.to} params={{ systemSymbol: ship.nav.systemSymbol }} className="link">
+            <Link to="/systems/$systemSymbol" params={{ systemSymbol: ship.nav.systemSymbol }} className="link">
               {ship.nav.systemSymbol}
             </Link>
           </div>
@@ -26,7 +24,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             <div className="text-secondary text-xs uppercase">{t('waypoint.label')}</div>
             <div className="flex items-center gap-4">
               <Link
-                to={waypointRoute.to}
+                to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                 params={{ systemSymbol: ship.nav.systemSymbol, waypointSymbol: ship.nav.waypointSymbol }}
                 className="link"
               >

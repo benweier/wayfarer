@@ -2,7 +2,6 @@ import { useNavigate } from '@tanstack/react-router'
 import { cx } from 'class-variance-authority'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
-import { loginRoute } from '@/routes/auth'
 import { type RegisterAgentResponse } from '@/types/spacetraders'
 import { Copy } from './copy-button.component'
 import { useCopy } from './use-copy.hook'
@@ -75,7 +74,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
           disabled={!isCopied}
           type="button"
           onClick={() => {
-            void navigate({ to: loginRoute })
+            void navigate({ to: '/login' })
           }}
         >
           Got it. Let&apos;s go!

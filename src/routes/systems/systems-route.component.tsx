@@ -1,13 +1,15 @@
-import { useNavigate } from '@tanstack/react-router'
+import { RouteApi, useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ROUTES } from '@/config/routes'
 import { SystemList, SystemListFallback } from '@/features/system/list'
-import { systemsIndexRoute } from './systems.route'
+
+const systemsRoute = new RouteApi({ id: ROUTES.SYSTEMS })
 
 export const SystemsRoute = () => {
   const { t } = useTranslation()
-  const navigate = useNavigate({ from: systemsIndexRoute.id })
-  const { page } = systemsIndexRoute.useSearch()
+  const navigate = useNavigate({ from: '/systems' })
+  const { page } = systemsRoute.useSearch()
 
   return (
     <div className="space-y-4 p-4">

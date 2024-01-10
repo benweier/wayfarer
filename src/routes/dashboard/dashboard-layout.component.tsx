@@ -8,16 +8,13 @@ import { AppIcon, MenuIcon } from '@/components/icons'
 import { Preferences } from '@/components/preferences'
 import { Wayfarer } from '@/components/wayfarer'
 import { Navigation } from '@/features/navigation'
-import { loginRoute, logoutRoute } from '@/routes/auth/auth.route'
-import { rootRoute } from '@/routes/root.route'
-import { waypointRoute } from '@/routes/systems/waypoint/waypoint.route'
 import { sidebarAtom } from '@/store/atoms/sidebar'
 import { useAuthStore } from '@/store/auth'
 import { formatNumber } from '@/utilities/number.helper'
 
 const menu = [
-  { key: 'navigation.fleet', href: '/fleet', icon: 'fleet' },
-  { key: 'navigation.systems', href: '/systems', icon: 'systems' },
+  { key: 'navigation.fleet', to: '/fleet', icon: 'fleet' },
+  { key: 'navigation.systems', to: '/systems', icon: 'systems' },
 ] as const
 const mobileMenuAtom = atom<boolean>(false)
 const Logout = () => {
@@ -25,7 +22,7 @@ const Logout = () => {
 
   return (
     <Link
-      to={logoutRoute.to}
+      to="/login"
       className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-white shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
     >
       <div className="size-6">
@@ -93,7 +90,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                 </Transition.Child>
                 <div className="pb-4 pt-6">
                   <div className="flex flex-shrink-0 items-center px-4">
-                    <Link to={rootRoute.to}>
+                    <Link to="/">
                       <Wayfarer className="text-lg text-white" />
                     </Link>
                   </div>
@@ -102,7 +99,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                       {menu.map((item) => (
                         <Link
                           key={item.key}
-                          to={item.href}
+                          to={item.to}
                           className="group flex items-center rounded-md p-2 text-base font-medium text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 [&.active]:bg-blue-500 [&.active]:text-white"
                         >
                           <MenuIcon
@@ -136,7 +133,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
           <div className="flex min-h-0 flex-1 flex-col bg-blue-600">
             <div className="flex-1">
               <div className="flex items-center justify-center bg-blue-700 py-4">
-                <Link to={rootRoute.to}>
+                <Link to="/">
                   <div className="text-title text-center text-white">
                     W<span className="hidden @[220px]:inline">ayfarer</span>
                   </div>
@@ -154,11 +151,11 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
             ) : (
               <div className="flex flex-shrink items-center justify-center gap-2 bg-emerald-600 p-4">
                 <Link
-                  to={loginRoute.to}
+                  to="/login"
                   search={{
                     redirect: `${window.location.pathname}${window.location.search}`,
                   }}
-                  mask={{ to: loginRoute.to }}
+                  mask={{ to: '/login' }}
                   className="flex w-full items-center gap-4 rounded px-3 py-2 font-medium text-white shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100 @[220px]/side:w-full"
                 >
                   <div className="size-6">
@@ -179,7 +176,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
         <div className="lg:hidden">
           <div className="flex items-center justify-between bg-blue-600 px-4 py-2 sm:px-6 lg:px-8">
             <div>
-              <Link to={rootRoute.to}>
+              <Link to="/">
                 <Wayfarer className="text-lg" />
               </Link>
             </div>
@@ -252,7 +249,7 @@ const Agent = () => {
         <span className="font-semibold">
           <Link
             className="link"
-            to={waypointRoute.to}
+            to="/systems/$systemSymbol/waypoint/$waypointSymbol"
             params={{
               systemSymbol: `${sector}-${system}`,
               waypointSymbol: `${sector}-${system}-${waypoint}`,

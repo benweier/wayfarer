@@ -4,7 +4,6 @@ import { Translation } from 'react-i18next'
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
 import { ShipPresence } from '@/features/ship/presence'
-import { systemRoute } from '@/routes/systems/system'
 import { type SystemListTableSchema } from './system-list.types'
 import { SystemWaypointsCell } from './waypoints-cell.component'
 
@@ -24,7 +23,7 @@ export const columns = [
       const systemSymbol = getValue()
 
       return (
-        <Link to={systemRoute.to} params={{ systemSymbol }} className="link">
+        <Link to="/systems/$systemSymbol" params={{ systemSymbol }} className="link">
           {systemSymbol}
         </Link>
       )

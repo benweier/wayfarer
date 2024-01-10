@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { systemRoute } from '@/routes/systems/system'
-import { waypointRoute } from '@/routes/systems/waypoint'
 
 export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation()
@@ -21,7 +19,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
           </div>
           <div className="whitespace-nowrap">
             {t('system.label')}:{' '}
-            <Link to={systemRoute.to} params={{ systemSymbol: waypoint.systemSymbol }} className="link">
+            <Link to="/systems/$systemSymbol" params={{ systemSymbol: waypoint.systemSymbol }} className="link">
               {waypoint.systemSymbol}
             </Link>
           </div>
@@ -29,7 +27,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
             <div className="whitespace-nowrap">
               {t('waypoint.orbits')}:{' '}
               <Link
-                to={waypointRoute.to}
+                to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                 params={{ systemSymbol: waypoint.systemSymbol, waypointSymbol: waypoint.orbits }}
                 className="link"
               >
@@ -53,7 +51,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
             {waypoint.orbitals.map((orbital) => (
               <div key={orbital.symbol} className="rounded bg-zinc-200/50 px-4 py-2 shadow-sm dark:bg-zinc-700/25">
                 <Link
-                  to={waypointRoute.to}
+                  to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                   params={{ systemSymbol: waypoint.systemSymbol, waypointSymbol: orbital.symbol }}
                   className="link"
                 >

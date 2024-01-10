@@ -7,7 +7,6 @@ import { useWaypointResponse } from '@/context/waypoint.context'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
-import { shipMarketRoute } from '@/routes/fleet/ship'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { ShipCargoTable } from './ship-cargo-list.table'
@@ -53,7 +52,7 @@ export const ShipCargoList = () => {
             intent="primary"
             disabled={!hasMarketplace}
             onClick={() => {
-              void navigate({ to: shipMarketRoute.to, params: { shipSymbol: ship.symbol } })
+              void navigate({ to: '/fleet/$shipSymbol/market', params: { shipSymbol: ship.symbol } })
             }}
           >
             {hasMarketplace

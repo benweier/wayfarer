@@ -8,7 +8,6 @@ import { Sort } from '@/components/table'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { ShipPresence } from '@/features/ship/presence'
 import { TypeFilter } from '@/features/waypoint/list/type-filter.component'
-import { waypointRoute } from '@/routes/systems/waypoint'
 import { type WaypointListTableSchema } from './waypoint-list.types'
 
 const FILTERED_TRAITS = new Set(['UNCHARTED', 'MARKETPLACE', 'SHIPYARD', 'STRIPPED'])
@@ -32,7 +31,7 @@ export const columns = [
     cell: ({ row, getValue }) => {
       return (
         <Link
-          to={waypointRoute.to}
+          to="/systems/$systemSymbol/waypoint/$waypointSymbol"
           params={{ systemSymbol: row.original.waypoint.systemSymbol, waypointSymbol: row.original.waypoint.symbol }}
           className="link"
         >

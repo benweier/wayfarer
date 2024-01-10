@@ -1,14 +1,11 @@
 import { Navigate } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
-import { loginRoute } from '@/routes/auth'
 import { STATUS_CODES, isHttpErrorResponse } from '@/services/http'
 
 export const RouteError = ({ error }: { error: any }) => {
   if (isHttpErrorResponse(error)) {
     if (error.status === STATUS_CODES.UNAUTHORIZED) {
-      return (
-        <Navigate to={loginRoute.to} replace search={{ redirect: location.pathname }} mask={{ to: loginRoute.to }} />
-      )
+      return <Navigate to="/login" replace search={{ redirect: location.pathname }} mask={{ to: '/login' }} />
     }
 
     if (error.status === STATUS_CODES.NOT_FOUND) {

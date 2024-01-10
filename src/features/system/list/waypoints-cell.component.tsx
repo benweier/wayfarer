@@ -1,8 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { cx } from 'class-variance-authority'
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
-import { systemRoute } from '@/routes/systems/system'
-import { waypointRoute } from '@/routes/systems/waypoint'
 import { type SystemWaypoint } from '@/types/spacetraders'
 import { chunk } from '@/utilities/chunk.helper'
 
@@ -88,7 +86,7 @@ export const SystemWaypointsCell = ({
                 return (
                   <Link
                     key={waypoint.symbol}
-                    to={waypointRoute.to}
+                    to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                     params={{ systemSymbol, waypointSymbol: waypoint.symbol }}
                     className={cx(
                       'flex size-7 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
@@ -110,7 +108,7 @@ export const SystemWaypointsCell = ({
               return (
                 <Link
                   key={waypoint.symbol}
-                  to={systemRoute.to}
+                  to="/systems/$systemSymbol"
                   params={{ systemSymbol }}
                   className={cx(
                     'flex size-7 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',

@@ -2,7 +2,6 @@ import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
-import { waypointRoute } from '@/routes/systems/waypoint'
 import { formatDateTime } from '@/utilities/date.helper'
 import { formatNumber } from '@/utilities/number.helper'
 import { ContractListContext } from './contract-list.context'
@@ -70,7 +69,7 @@ export const availableContractsColumns = [
               <div key={item.tradeSymbol}>
                 [
                 <Link
-                  to={waypointRoute.to}
+                  to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                   params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
                   className="link"
                 >
@@ -223,7 +222,7 @@ export const acceptedContractsColumns = [
               <div key={item.tradeSymbol}>
                 [
                 <Link
-                  to={waypointRoute.to}
+                  to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                   params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
                   className="link"
                 >
@@ -261,7 +260,7 @@ export const acceptedContractsColumns = [
               <div key={item.tradeSymbol}>
                 [
                 <Link
-                  to={waypointRoute.to}
+                  to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                   params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
                   className="link"
                 >
@@ -395,7 +394,7 @@ export const completedContractsColumns = [
               <div key={item.tradeSymbol}>
                 [
                 <Link
-                  to={waypointRoute.to}
+                  to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                   params={{ systemSymbol: `${sector}-${system}`, waypointSymbol: `${sector}-${system}-${waypoint}` }}
                   className="link"
                 >

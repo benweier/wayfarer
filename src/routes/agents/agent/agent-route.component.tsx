@@ -1,7 +1,10 @@
+import { RouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ROUTES } from '@/config/routes'
 import { AgentDetail } from '@/features/agent/detail'
-import { agentRoute } from './agent.route'
+
+const agentRoute = new RouteApi({ id: ROUTES.AGENT })
 
 export const AgentRoute = () => {
   const { t } = useTranslation()

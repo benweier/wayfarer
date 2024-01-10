@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
-import { waypointRoute } from '@/routes/systems/waypoint'
 import { createShipScanWaypointsMutation } from '@/services/api/spacetraders'
 
 export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
@@ -35,7 +34,7 @@ export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
           {waypoints.map((waypoint) => (
             <div key={waypoint.symbol}>
               <Link
-                to={waypointRoute}
+                to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                 params={{
                   systemSymbol: waypoint.systemSymbol,
                   waypointSymbol: waypoint.symbol,

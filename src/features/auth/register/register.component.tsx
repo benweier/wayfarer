@@ -7,7 +7,6 @@ import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
-import { loginRoute } from '@/routes/auth'
 import { createAgentMutation } from '@/services/api/spacetraders/auth'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
 import { AccessTokenDialog } from './access-token-dialog.component'
@@ -129,7 +128,7 @@ export const Register = () => {
                   i18nKey="auth.already_registered"
                   components={{
                     login_link: (
-                      <Link to={loginRoute.to} className="link">
+                      <Link to="/login" className="link">
                         {t('auth.login', { context: 'text' })}
                       </Link>
                     ),

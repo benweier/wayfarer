@@ -1,13 +1,15 @@
-import { useNavigate } from '@tanstack/react-router'
+import { RouteApi, useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ROUTES } from '@/config/routes'
 import { AgentList, AgentListFallback } from '@/features/agent/list'
-import { agentsIndexRoute } from './agents.route'
+
+const agentsRoute = new RouteApi({ id: ROUTES.AGENTS })
 
 export const AgentsRoute = () => {
   const { t } = useTranslation()
-  const navigate = useNavigate({ from: agentsIndexRoute.id })
-  const { page } = agentsIndexRoute.useSearch()
+  const navigate = useNavigate()
+  const { page } = agentsRoute.useSearch()
 
   return (
     <div className="space-y-4 p-4">
@@ -17,7 +19,7 @@ export const AgentsRoute = () => {
         <AgentList
           page={page}
           setPage={(page) => {
-            void navigate({ search: { page } })
+            void navigate({ to: '/agents', search: { page } })
           }}
         />
       </QuerySuspenseBoundary>

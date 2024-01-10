@@ -1,10 +1,12 @@
-import { Outlet } from '@tanstack/react-router'
+import { Outlet, RouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ROUTES } from '@/config/routes'
 import { ShipStore } from '@/context/ship.context'
 import { ShipDetail } from '@/features/ship/detail'
 import { ShipTabs } from '@/features/ship/tabs'
-import { shipRoute } from './ship.route'
+
+const shipRoute = new RouteApi({ id: ROUTES.SHIP })
 
 export const ShipRoute = () => {
   const { shipSymbol } = shipRoute.useParams()

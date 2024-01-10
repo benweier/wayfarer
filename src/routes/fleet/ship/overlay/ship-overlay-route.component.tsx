@@ -1,6 +1,8 @@
-import { Outlet, useNavigate } from '@tanstack/react-router'
+import { Outlet, RouteApi, useNavigate } from '@tanstack/react-router'
 import { Modal } from '@/components/modal'
-import { shipRoute } from '@/routes/fleet/ship/ship.route'
+import { ROUTES } from '@/config/routes'
+
+const shipRoute = new RouteApi({ id: ROUTES.SHIP })
 
 export const ShipOverlayRoute = () => {
   const navigate = useNavigate()
@@ -13,7 +15,7 @@ export const ShipOverlayRoute = () => {
       closeable
       disableExternalClose
       onClose={() => {
-        void navigate({ to: shipRoute.to, params: { shipSymbol } })
+        void navigate({ to: '/fleet/$shipSymbol', params: { shipSymbol } })
       }}
     >
       <Outlet />

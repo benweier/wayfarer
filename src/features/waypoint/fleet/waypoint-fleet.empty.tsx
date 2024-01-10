@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router'
 import { Trans, useTranslation } from 'react-i18next'
-import { loginRoute } from '@/routes/auth'
 import { useAuthStore } from '@/store/auth'
 import { type WaypointResponse } from '@/types/spacetraders'
 
@@ -18,9 +17,9 @@ export const WaypointFleetEmpty = ({ waypoint }: { waypoint: WaypointResponse })
             waypoint_symbol: <span className="font-bold">{waypoint.symbol}</span>,
             login_link: (
               <Link
-                to={loginRoute.to}
-                search={{ redirect: `/systems/${waypoint.systemSymbol}/waypoint/${waypoint.systemSymbol}` }}
-                mask={{ to: loginRoute.to }}
+                to="/login"
+                search={{ redirect: `/systems/${waypoint.systemSymbol}/waypoint/${waypoint.symbol}` }}
+                mask={{ to: '/login' }}
                 className="link"
               >
                 {t('auth.login', { context: 'action' })}
