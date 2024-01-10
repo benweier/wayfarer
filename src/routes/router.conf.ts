@@ -7,37 +7,40 @@ import { authRequiredRoute, authRoute, loginRoute, logoutRoute, registerRoute } 
 import { contractsIndexRoute, contractsRoute } from './contracts'
 import { dashboardRoute } from './dashboard'
 import { fleetIndexRoute, fleetRoute } from './fleet'
-import { shipIndexRoute, shipMarketRoute, shipOverlayRoute, shipRoute } from './fleet/ship'
+import { shipIndexRoute, shipRoute } from './fleet/ship'
+import { shipMarketRoute, shipOverlayRoute } from './fleet/ship/market'
 import { leaderboardRoute } from './leaderboard'
 import { notFoundRoute } from './not-found.route'
-import { rootIndexRoute, rootRoute } from './root.route'
+import { homeRoute, rootRoute } from './root.route'
 import { Fallback } from './router.fallback'
 import { surveysIndexRoute, surveysRoute } from './surveys'
 import { systemsIndexRoute, systemsRoute } from './systems'
 import { systemIndexRoute, systemRoute } from './systems/system'
 import { waypointIndexRoute, waypointRoute } from './systems/waypoint'
 
-export const router = new Router({
-  routeTree: rootRoute.addChildren([
-    rootIndexRoute,
-    authRoute.addChildren([loginRoute, registerRoute, logoutRoute]),
-    dashboardRoute.addChildren([
-      authRequiredRoute.addChildren([
-        fleetRoute.addChildren([
-          fleetIndexRoute,
-          shipRoute.addChildren([shipIndexRoute.addChildren([shipOverlayRoute.addChildren([shipMarketRoute])])]),
-        ]),
-        contractsRoute.addChildren([contractsIndexRoute]),
-        surveysRoute.addChildren([surveysIndexRoute]),
+const routeTree = rootRoute.addChildren([
+  homeRoute,
+  authRoute.addChildren([loginRoute, registerRoute, logoutRoute]),
+  dashboardRoute.addChildren([
+    authRequiredRoute.addChildren([
+      fleetRoute.addChildren([
+        fleetIndexRoute,
+        shipRoute.addChildren([shipIndexRoute.addChildren([shipOverlayRoute.addChildren([shipMarketRoute])])]),
       ]),
-      systemsRoute.addChildren([
-        systemsIndexRoute,
-        systemRoute.addChildren([systemIndexRoute, waypointRoute.addChildren([waypointIndexRoute])]),
-      ]),
-      leaderboardRoute,
-      agentsRoute.addChildren([agentsIndexRoute, agentRoute]),
+      contractsRoute.addChildren([contractsIndexRoute]),
+      surveysRoute.addChildren([surveysIndexRoute]),
     ]),
+    systemsRoute.addChildren([
+      systemsIndexRoute,
+      systemRoute.addChildren([systemIndexRoute, waypointRoute.addChildren([waypointIndexRoute])]),
+    ]),
+    leaderboardRoute,
+    agentsRoute.addChildren([agentsIndexRoute, agentRoute]),
   ]),
+])
+
+export const router = new Router({
+  routeTree,
   context: {
     client,
     auth: authStore,
@@ -49,3 +52,10 @@ export const router = new Router({
   defaultPreloadStaleTime: 0,
   notFoundRoute,
 })
+
+declare module '@tanstack/react-router' {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  interface Register {
+    router: typeof router
+  }
+}

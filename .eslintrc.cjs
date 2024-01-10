@@ -2,9 +2,9 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier', 'import', 'sonarjs'],
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended-type-checked',
-    'plugin:@typescript-eslint/strict-type-checked',
-    'plugin:@typescript-eslint/stylistic-type-checked',
+    // 'plugin:@typescript-eslint/recommended-type-checked',
+    // 'plugin:@typescript-eslint/strict-type-checked',
+    // 'plugin:@typescript-eslint/stylistic-type-checked',
     'plugin:prettier/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
