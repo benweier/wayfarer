@@ -8,13 +8,16 @@ import {
 import { get } from '@/services/fetch'
 import { type AgentResponse } from '@/types/spacetraders'
 
-export const getAgentListQuery = (params: { page?: number; limit?: number } = {}) =>
+export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; limit?: number } = {}) =>
   queryOptions({
-    queryKey: [{ scope: 'agents', entity: 'list' }, params],
+    queryKey: [
+      { scope: 'agents', entity: 'list' },
+      { page, limit },
+    ],
     queryFn: async ({ signal }) => {
       const url = new URL('agents', import.meta.env.SPACETRADERS_API_BASE_URL)
 
-      attachQueryParams(url, params)
+      attachQueryParams(url, { page, limit })
 
       return get<SpaceTradersResponse<AgentResponse[], Meta>>(url, { signal, headers: createHeaders() })
     },
