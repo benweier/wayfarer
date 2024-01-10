@@ -12,7 +12,7 @@ export const rootRoute = rootRouteWithContext<{
   component: Core,
 })
 
-export const rootIndexRoute = new Route({
+export const homeRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/',
   component: HomeRoute,

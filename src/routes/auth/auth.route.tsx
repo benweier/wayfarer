@@ -10,7 +10,7 @@ export const authRoute = new Route({
 })
 
 export const authRequiredRoute = new Route({
-  id: 'authenticated',
+  id: '_authenticated',
   getParentRoute: () => dashboardRoute,
   beforeLoad: ({ location, context }) => {
     if (!context.auth.getState().isAuthenticated) {

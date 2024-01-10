@@ -6,10 +6,6 @@ import { meta } from './surveys-route.meta'
 export const surveysRoute = new Route({
   path: 'surveys',
   getParentRoute: () => authRequiredRoute,
-})
-export const surveysIndexRoute = new Route({
-  path: '/',
-  getParentRoute: () => surveysRoute,
   beforeLoad: () => ({ meta }),
   loader: () => {
     const { surveys } = surveyStore.getState()

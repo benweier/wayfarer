@@ -3,7 +3,7 @@ import { rootRoute } from '@/routes/root.route'
 import { getShipListQuery } from '@/services/api/spacetraders'
 
 export const dashboardRoute = new Route({
-  id: 'dashboard',
+  id: '/_dashboard',
   getParentRoute: () => rootRoute,
   loader: ({ context }) => {
     context.client.ensureQueryData(getShipListQuery())

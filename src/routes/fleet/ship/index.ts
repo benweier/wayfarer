@@ -1,1 +1,1 @@
-export { shipIndexRoute, shipRoute, shipMarketRoute, shipOverlayRoute } from './ship.route'
+export { shipIndexRoute, shipRoute } from './ship.route'

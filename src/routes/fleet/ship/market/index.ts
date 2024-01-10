@@ -1,1 +1,1 @@
-export { ShipMarketRoute } from './ship-market-route.component'
+export { shipMarketRoute, shipOverlayRoute } from './ship-market.route'

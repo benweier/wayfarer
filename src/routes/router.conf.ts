@@ -5,6 +5,7 @@ import { agentsIndexRoute, agentsRoute } from './agents'
 import { agentRoute } from './agents/agent'
 import { authRequiredRoute, authRoute, loginRoute, logoutRoute, registerRoute } from './auth'
 import { contractsIndexRoute, contractsRoute } from './contracts'
+import { contractRoute } from './contracts/contract'
 import { dashboardRoute } from './dashboard'
 import { fleetIndexRoute, fleetRoute } from './fleet'
 import { shipIndexRoute, shipRoute } from './fleet/ship'
@@ -13,7 +14,7 @@ import { leaderboardRoute } from './leaderboard'
 import { notFoundRoute } from './not-found.route'
 import { homeRoute, rootRoute } from './root.route'
 import { Fallback } from './router.fallback'
-import { surveysIndexRoute, surveysRoute } from './surveys'
+import { surveysRoute } from './surveys'
 import { systemsIndexRoute, systemsRoute } from './systems'
 import { systemIndexRoute, systemRoute } from './systems/system'
 import { waypointIndexRoute, waypointRoute } from './systems/waypoint'
@@ -25,10 +26,10 @@ const routeTree = rootRoute.addChildren([
     authRequiredRoute.addChildren([
       fleetRoute.addChildren([
         fleetIndexRoute,
-        shipRoute.addChildren([shipIndexRoute.addChildren([shipOverlayRoute.addChildren([shipMarketRoute])])]),
+        shipRoute.addChildren([shipIndexRoute, shipOverlayRoute.addChildren([shipMarketRoute])]),
       ]),
-      contractsRoute.addChildren([contractsIndexRoute]),
-      surveysRoute.addChildren([surveysIndexRoute]),
+      contractsRoute.addChildren([contractsIndexRoute, contractRoute]),
+      surveysRoute,
     ]),
     systemsRoute.addChildren([
       systemsIndexRoute,

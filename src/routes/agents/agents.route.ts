@@ -13,7 +13,7 @@ export const agentsIndexRoute = new Route({
   path: '/',
   getParentRoute: () => agentsRoute,
   validateSearch: z.object({
-    page: z.number().min(1).optional().catch(1).default(1),
+    page: z.number().min(1).optional().catch(1),
   }),
   beforeLoad: ({ search }) => ({ search, meta }),
   loader: ({ context }) => {

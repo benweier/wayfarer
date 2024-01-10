@@ -1,1 +1,1 @@
-export { surveysRoute, surveysIndexRoute } from './surveys.route'
+export { surveysRoute } from './surveys.route'
