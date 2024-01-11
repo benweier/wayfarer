@@ -1,13 +1,13 @@
-import { useRouterState } from '@tanstack/react-router'
+import { useRouter } from '@tanstack/react-router'
 import { Fragment } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { type MetaProps } from './meta.types'
 
 export const Meta = ({ titleTemplate }: MetaProps) => {
-  const routerState = useRouterState()
+  const router = useRouter()
   const { t } = useTranslation()
-  const matches = [...routerState.matches].reduce<Array<{ id: string; meta: MetaObject[] }>>((matches, match) => {
+  const matches = [...router.state.matches].reduce<Array<{ id: string; meta: MetaObject[] }>>((matches, match) => {
     if (
       typeof match.routeContext === 'object' &&
       'meta' in match.routeContext &&
