@@ -31,13 +31,25 @@ export const loginRoute = new Route({
   validateSearch: z.object({
     redirect: z.string().optional(),
   }),
-  beforeLoad: ({ search }) => ({ search }),
+  beforeLoad: ({ search }) => {
+    const meta: MetaFunction = (t) => [{ title: t('auth.login.title', { ns: 'meta' }) }]
+
+    return {
+      search,
+      meta,
+    }
+  },
   component: lazyRouteComponent(() => import('@/features/auth'), 'Login'),
 })
 export const registerRoute = new Route({
   path: 'register',
   getParentRoute: () => authRoute,
   pendingComponent: () => null,
+  beforeLoad: () => {
+    const meta: MetaFunction = (t) => [{ title: t('auth.register.title', { ns: 'meta' }) }]
+
+    return { meta }
+  },
   component: lazyRouteComponent(() => import('@/features/auth'), 'Register'),
 })
 export const logoutRoute = new Route({
