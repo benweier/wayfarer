@@ -15,7 +15,7 @@ export const Meta = ({ titleTemplate }: MetaProps) => {
     ) {
       matches.push({
         id: match.id,
-        meta: match.loaderData === undefined ? [] : match.routeContext.meta(t, match.loaderData as any),
+        meta: match.routeContext.meta(t, match.loaderData as any),
       })
     }
 
