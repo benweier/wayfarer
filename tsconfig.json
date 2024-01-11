@@ -33,7 +33,7 @@
       "@/*": ["./src/*"]
     },
     "incremental": true,
-    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom", "mdx"],
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "files": ["env.d.ts", "src/routes/router.conf.ts"],

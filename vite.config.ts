@@ -1,8 +1,11 @@
+import path from 'node:path'
+import mdx from '@mdx-js/rollup'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
+import dynamic from 'vite-plugin-dynamic-import'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
@@ -36,6 +39,11 @@ export default defineConfig({
       scopeBehaviour: 'local',
     },
   },
+  resolve: {
+    alias: {
+      '@': path.join(__dirname, 'src'),
+    },
+  },
   plugins: [
     checker({
       typescript: true,
@@ -48,6 +56,8 @@ export default defineConfig({
     }),
     basicSSL(),
     tsconfigPaths(),
+    dynamic(),
+    { enforce: 'pre', ...mdx() },
     react(),
     sentryVitePlugin({
       authToken: process.env.SENTRY_AUTH_TOKEN,
