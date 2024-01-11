@@ -22,7 +22,7 @@ const Logout = () => {
 
   return (
     <Link
-      to="/login"
+      to="/logout"
       className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-white shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
     >
       <div className="size-6">
