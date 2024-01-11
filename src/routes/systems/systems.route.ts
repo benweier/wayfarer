@@ -14,9 +14,12 @@ export const systemsIndexRoute = new Route({
   validateSearch: z.object({
     page: z.number().min(1).optional().catch(1),
   }),
-  beforeLoad: ({ search }) => ({ search, meta }),
-  loader: ({ context }) => {
-    const systems = context.client.ensureQueryData(getSystemListQuery({ page: context.search.page, limit: 20 }))
+  loaderDeps: ({ search }) => ({ page: search.page }),
+  beforeLoad: () => ({
+    meta,
+  }),
+  loader: ({ context, deps }) => {
+    const systems = context.client.ensureQueryData(getSystemListQuery({ page: deps.page, limit: 20 }))
 
     return {
       systems: defer(systems),

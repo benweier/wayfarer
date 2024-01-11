@@ -9,7 +9,7 @@ const systemsRoute = new RouteApi({ id: ROUTES.SYSTEMS })
 export const SystemsRoute = () => {
   const { t } = useTranslation()
   const navigate = useNavigate({ from: '/systems' })
-  const { page } = systemsRoute.useSearch()
+  const { page = 1 } = systemsRoute.useSearch()
 
   return (
     <div className="space-y-4 p-4">

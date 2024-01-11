@@ -9,7 +9,7 @@ const agentsRoute = new RouteApi({ id: ROUTES.AGENTS })
 export const AgentsRoute = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { page } = agentsRoute.useSearch()
+  const { page = 1 } = agentsRoute.useSearch()
 
   return (
     <div className="space-y-4 p-4">
