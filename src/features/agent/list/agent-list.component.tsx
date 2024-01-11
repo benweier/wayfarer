@@ -12,10 +12,6 @@ export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => 
   const isFetching = useIsFetching({ queryKey: getAgentListQuery().queryKey }) > 0
 
   useEffect(() => {
-    window.scrollTo({ top: 0 })
-  }, [agentsListQuery.data.meta.page])
-
-  useEffect(() => {
     const max = Math.ceil(agentsListQuery.data.meta.total / limit)
 
     if (page > max) setPage(page)

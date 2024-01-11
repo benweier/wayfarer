@@ -14,10 +14,6 @@ export const SystemList = ({ page = 1, limit = 20, setPage }: SystemListProps) =
   const ships = useFleetResponse()
 
   useEffect(() => {
-    window.scrollTo({ top: 0 })
-  }, [systemsListQuery.data.meta.page])
-
-  useEffect(() => {
     const max = Math.ceil(systemsListQuery.data.meta.total / limit)
 
     if (page > max) setPage(max)
