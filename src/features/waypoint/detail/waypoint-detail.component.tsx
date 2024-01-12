@@ -10,7 +10,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const waypoint = useWaypointResponse()
 
   return (
-    <div className="grid gap-4">
+    <div className="space-y-8">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row flex-wrap items-center justify-start gap-x-4 gap-y-2">
           <WaypointTag type={waypoint.type}>{t(waypoint.type, { ns: 'spacetraders.waypoint_type' })}</WaypointTag>
