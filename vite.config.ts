@@ -49,7 +49,7 @@ export default defineConfig({
     checker({
       typescript: true,
       overlay: {
-        position: 'bl',
+        position: 'tl',
         initialIsOpen: false,
       },
       terminal: false,
