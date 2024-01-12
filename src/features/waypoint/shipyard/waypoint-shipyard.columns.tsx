@@ -9,13 +9,16 @@ import { Sort } from '@/components/table'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { type ShipyardShip } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number.helper'
+import { type WaypointShipyardTableSchema } from './waypoint-shipyard.types'
 
-const BuyCell = ({ ship, children }: PropsWithChildren<{ ship: ShipyardShip }>) => {
+const BuyShip = ({ ship }: PropsWithChildren<{ ship?: ShipyardShip }>) => {
   const waypoint = useWaypointResponse()
+
+  if (!ship) return
 
   return (
     <div className="flex items-center justify-end gap-2">
-      <div className="text-right text-sm">{children}</div>
+      <div className="text-right text-sm">{formatNumber(ship.purchasePrice)}</div>
       <div>
         <ShipyardPurchaseShip ship={ship} waypointSymbol={waypoint.symbol}>
           {(props) => (
@@ -28,11 +31,11 @@ const BuyCell = ({ ship, children }: PropsWithChildren<{ ship: ShipyardShip }>) 
     </div>
   )
 }
-const columnHelper = createColumnHelper<ShipyardShip>()
+const columnHelper = createColumnHelper<WaypointShipyardTableSchema>()
 
 export const columns = [
-  columnHelper.accessor((row) => row.name, {
-    id: 'name',
+  columnHelper.accessor((row) => row.type, {
+    id: 'type',
     header: ({ column }) => {
       return (
         <div className="flex items-center justify-start gap-2 text-right">
@@ -48,8 +51,10 @@ export const columns = [
 
       return (
         <div className="h-full space-y-2">
-          <div>{value}</div>
-          <div className="text-secondary whitespace-break-spaces text-sm">{row.original.description}</div>
+          <Translation>{(t) => <div>{t(value, { ns: 'spacetraders.ship_type' })}</div>}</Translation>
+          {row.original.ship && (
+            <div className="text-secondary whitespace-break-spaces text-sm">{row.original.ship.description}</div>
+          )}
         </div>
       )
     },
@@ -59,16 +64,18 @@ export const columns = [
     minSize: 35,
     maxSize: 35,
   }),
-  columnHelper.accessor((row) => row.frame, {
+  columnHelper.accessor((row) => row.ship?.frame, {
     id: 'frame',
     header: () => <Translation>{(t) => <div className="text-right">{t('general.header.frame')}</div>}</Translation>,
     cell: ({ getValue }) => {
-      const { name, description, fuelCapacity, moduleSlots, mountingPoints, requirements } = getValue()
+      const value = getValue()
+
+      if (!value) return
 
       return (
         <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
-            <div className="text-center text-sm">{name}</div>
+            <div className="text-center text-sm">{value.name}</div>
 
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
@@ -82,7 +89,7 @@ export const columns = [
                     className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800"
                     sideOffset={5}
                   >
-                    {description}
+                    {value.description}
                   </Tooltip.Content>
                 </Tooltip.Portal>
               </Tooltip.Root>
@@ -92,19 +99,19 @@ export const columns = [
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="text-secondary size-4" />
-                <div className="text-sm">{requirements.power}</div>
+                <div className="text-sm">{value.requirements.power}</div>
               </div>
               <div className="flex items-center gap-2">
                 <ShipIcon id="fuel" className="text-secondary size-4" />
-                <div className="text-sm">{fuelCapacity}</div>
+                <div className="text-sm">{value.fuelCapacity}</div>
               </div>
               <div className="flex items-center gap-2">
                 <ShipIcon id="modules" className="text-secondary size-4" />
-                <div className="text-sm">{moduleSlots}</div>
+                <div className="text-sm">{value.moduleSlots}</div>
               </div>
               <div className="flex items-center gap-2">
                 <ShipIcon id="mounts" className="text-secondary size-4" />
-                <div className="text-sm">{mountingPoints}</div>
+                <div className="text-sm">{value.mountingPoints}</div>
               </div>
             </div>
           </div>
@@ -114,16 +121,18 @@ export const columns = [
     minSize: 15,
     maxSize: 15,
   }),
-  columnHelper.accessor((row) => row.engine, {
+  columnHelper.accessor((row) => row.ship?.engine, {
     id: 'engine',
     header: () => <Translation>{(t) => <div className="text-right">{t('general.header.engine')}</div>}</Translation>,
     cell: ({ getValue }) => {
-      const { name, description, speed, requirements } = getValue()
+      const value = getValue()
+
+      if (!value) return
 
       return (
         <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
-            <div className="text-center text-sm">{name}</div>
+            <div className="text-center text-sm">{value.name}</div>
 
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
@@ -137,7 +146,7 @@ export const columns = [
                     className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800"
                     sideOffset={5}
                   >
-                    {description}
+                    {value.description}
                   </Tooltip.Content>
                 </Tooltip.Portal>
               </Tooltip.Root>
@@ -147,11 +156,11 @@ export const columns = [
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="text-secondary size-4" />
-                <div className="text-sm">{requirements.power}</div>
+                <div className="text-sm">{value.requirements.power}</div>
               </div>
               <div className="flex items-center gap-2">
                 <ShipIcon id="speed" className="text-secondary size-4" />
-                <div className="text-sm">{speed}</div>
+                <div className="text-sm">{value.speed}</div>
               </div>
             </div>
           </div>
@@ -161,16 +170,18 @@ export const columns = [
     minSize: 15,
     maxSize: 15,
   }),
-  columnHelper.accessor((row) => row.reactor, {
+  columnHelper.accessor((row) => row.ship?.reactor, {
     id: 'reactor',
     header: () => <Translation>{(t) => <div className="text-right">{t('general.header.reactor')}</div>}</Translation>,
     cell: ({ getValue }) => {
-      const { name, description, powerOutput } = getValue()
+      const value = getValue()
+
+      if (!value) return
 
       return (
         <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
-            <div className="text-center text-sm">{name}</div>
+            <div className="text-center text-sm">{value.name}</div>
 
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
@@ -184,7 +195,7 @@ export const columns = [
                     className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800"
                     sideOffset={5}
                   >
-                    {description}
+                    {value.description}
                   </Tooltip.Content>
                 </Tooltip.Portal>
               </Tooltip.Root>
@@ -194,7 +205,7 @@ export const columns = [
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="text-secondary size-4" />
-                <div className="text-sm">{powerOutput}</div>
+                <div className="text-sm">{value.powerOutput}</div>
               </div>
             </div>
           </div>
@@ -204,7 +215,7 @@ export const columns = [
     minSize: 15,
     maxSize: 15,
   }),
-  columnHelper.accessor((row) => row.purchasePrice, {
+  columnHelper.accessor((row) => row.ship?.purchasePrice, {
     id: 'purchase_price',
     header: ({ column }) => {
       return (
@@ -216,10 +227,8 @@ export const columns = [
         </div>
       )
     },
-    cell: ({ getValue, row }) => {
-      const value = getValue()
-
-      return <BuyCell ship={row.original}>{formatNumber(value)}</BuyCell>
+    cell: ({ row }) => {
+      return <BuyShip ship={row.original.ship} />
     },
     enableSorting: true,
     enableHiding: true,

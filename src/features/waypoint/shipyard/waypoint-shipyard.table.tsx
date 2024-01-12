@@ -9,10 +9,10 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import { Table } from '@/components/table'
-import { type ShipyardShip } from '@/types/spacetraders'
 import { columns } from './waypoint-shipyard.columns'
+import { type WaypointShipyardTableProps } from './waypoint-shipyard.types'
 
-export const WaypointShipyardTable = ({ data }: { data: ShipyardShip[] }) => {
+export const WaypointShipyardTable = ({ data }: WaypointShipyardTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'type', desc: false }])
   const table = useReactTable({
     data,

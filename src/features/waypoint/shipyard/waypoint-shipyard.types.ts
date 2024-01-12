@@ -1,8 +1,10 @@
-import { type FC } from 'react'
 import { type ShipyardShip } from '@/types/spacetraders'
 
-export type WaypointShipyardListProps = {
-  ShipyardItem?: FC<WaypointShipyardItemProps>
+export type WaypointShipyardTableSchema = {
+  type: string
+  ship?: ShipyardShip
 }
 
-export type WaypointShipyardItemProps = { ship: ShipyardShip }
+export type WaypointShipyardTableProps = {
+  data: WaypointShipyardTableSchema[]
+}
