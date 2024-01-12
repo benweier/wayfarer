@@ -1,1 +1,1 @@
-export { surveysRoute } from './surveys.route'
+export { SurveysRoute } from './surveys-route.component'

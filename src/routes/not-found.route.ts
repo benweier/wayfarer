@@ -1,7 +1,7 @@
 import { NotFoundRoute } from '@tanstack/react-router'
 import { type TFunction } from 'i18next'
 import { NotFound } from '@/components/not-found'
-import { rootRoute } from './root.route'
+import { Route as rootRoute } from './conf/__root'
 
 export const notFoundRoute = new NotFoundRoute({
   getParentRoute: () => rootRoute,

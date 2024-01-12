@@ -1,1 +1,1 @@
-export { agentRoute } from './agent.route'
+export { AgentRoute } from './agent-route.component'

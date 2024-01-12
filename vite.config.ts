@@ -1,6 +1,7 @@
 import path from 'node:path'
 import mdx from '@mdx-js/rollup'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
@@ -59,6 +60,7 @@ export default defineConfig({
     dynamic(),
     { enforce: 'pre', ...mdx() },
     react(),
+    TanStackRouterVite(),
     sentryVitePlugin({
       authToken: process.env.SENTRY_AUTH_TOKEN,
       org: process.env.SENTRY_ORG_NAME,

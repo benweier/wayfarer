@@ -1,9 +1,12 @@
+import { RouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ROUTES } from '@/config/routes'
 import { WaypointStore } from '@/context/waypoint.context'
 import { WaypointDetail } from '@/features/waypoint/detail'
 import { WaypointTabs } from '@/features/waypoint/tabs'
-import { waypointRoute } from './waypoint.route'
+
+const waypointRoute = new RouteApi({ id: ROUTES.WAYPOINT })
 
 export const WaypointRoute = () => {
   const { t } = useTranslation()

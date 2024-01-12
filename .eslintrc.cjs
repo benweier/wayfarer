@@ -99,6 +99,7 @@ module.exports = {
     '@typescript-eslint/unbound-method': 'off',
     'sonarjs/no-duplicate-string': ['error', { threshold: 5 }],
   },
+  ignorePatterns: ['src/routes/route-tree.gen.ts'],
   overrides: [
     {
       files: ['postcss.config.cjs', '.eslintrc.cjs', 'styles/**/*.cjs', 'tailwind.config.cjs', 'vite.config.ts'],

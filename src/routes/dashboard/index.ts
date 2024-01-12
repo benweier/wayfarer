@@ -1,1 +1,1 @@
-export { dashboardRoute } from './dashboard.route'
+export { Layout } from './dashboard-layout.component'

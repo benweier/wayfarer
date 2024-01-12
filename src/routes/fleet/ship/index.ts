@@ -1,1 +1,1 @@
-export { shipIndexRoute, shipRoute } from './ship.route'
+export { ShipRoute } from './ship-route.component'

@@ -1,1 +1,1 @@
-export { fleetRoute, fleetIndexRoute } from './fleet.route'
+export { FleetRoute } from './fleet-route.component'

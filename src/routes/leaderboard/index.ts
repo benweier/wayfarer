@@ -1,1 +1,1 @@
-export { leaderboardRoute } from './leaderboard.route'
+export { LeaderboardRoute } from './leaderboard-route.component'

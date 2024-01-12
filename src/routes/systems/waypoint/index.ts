@@ -1,1 +1,1 @@
-export { waypointRoute, waypointIndexRoute } from './waypoint.route'
+export { WaypointRoute } from './waypoint-route.component'

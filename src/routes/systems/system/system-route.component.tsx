@@ -1,9 +1,12 @@
+import { RouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ROUTES } from '@/config/routes'
 import { SystemStore } from '@/context/system.context'
 import { SystemDetail } from '@/features/system/detail'
 import { SystemTabs } from '@/features/system/tabs'
-import { systemRoute } from './system.route'
+
+const systemRoute = new RouteApi({ id: ROUTES.SYSTEM })
 
 export const SystemRoute = () => {
   const { systemSymbol } = systemRoute.useParams()

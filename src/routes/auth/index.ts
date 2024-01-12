@@ -1,1 +1,1 @@
-export { authRequiredRoute, authRoute, loginRoute, logoutRoute, registerRoute } from './auth.route'
+export { AuthLayout } from './auth-layout.component'

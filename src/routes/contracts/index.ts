@@ -1,1 +1,1 @@
-export { contractsIndexRoute, contractsRoute } from './contracts.route'
+export { ContractsRoute } from './contracts-route.component'

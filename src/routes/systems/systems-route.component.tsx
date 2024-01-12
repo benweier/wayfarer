@@ -8,8 +8,8 @@ const systemsRoute = new RouteApi({ id: ROUTES.SYSTEMS })
 
 export const SystemsRoute = () => {
   const { t } = useTranslation()
-  const navigate = useNavigate({ from: '/systems' })
-  const { page = 1 } = systemsRoute.useSearch()
+  const navigate = useNavigate()
+  const { page } = systemsRoute.useSearch()
 
   return (
     <div className="space-y-4 p-4">
@@ -19,7 +19,7 @@ export const SystemsRoute = () => {
         <SystemList
           page={page}
           setPage={(page) => {
-            void navigate({ search: { page } })
+            void navigate({ to: '/systems', search: { page } })
           }}
         />
       </QuerySuspenseBoundary>

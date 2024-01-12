@@ -1,17 +1,7 @@
-import { Route, defer, lazyRouteComponent, redirect } from '@tanstack/react-router'
+import { FileRoute, defer, lazyRouteComponent, redirect } from '@tanstack/react-router'
 import { getShipByIdQuery, getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
-import { ShipOverlayRoute } from '../overlay'
-import { shipIndexRoute, shipRoute } from '../ship.route'
 
-export const shipOverlayRoute = new Route({
-  id: '_ship_overlay',
-  getParentRoute: () => shipIndexRoute,
-  component: ShipOverlayRoute,
-})
-
-export const shipMarketRoute = new Route({
-  path: 'market',
-  getParentRoute: () => shipOverlayRoute,
+export const Route = new FileRoute('/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market').createRoute({
   loader: async ({ context, params }) => {
     const ship = await context.client.ensureQueryData(getShipByIdQuery({ shipSymbol: params.shipSymbol }))
     const waypoint = await context.client.ensureQueryData(
@@ -23,7 +13,7 @@ export const shipMarketRoute = new Route({
 
     if (waypoint.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') === -1) {
       throw redirect({
-        to: shipRoute.to,
+        to: '/fleet/$shipSymbol',
         params: { shipSymbol: ship.data.symbol },
       })
     }
@@ -41,5 +31,5 @@ export const shipMarketRoute = new Route({
       market: defer(market),
     }
   },
-  component: lazyRouteComponent(() => import('./ship-market-route.component'), 'ShipMarketRoute'),
+  component: lazyRouteComponent(() => import('@/routes/fleet/ship/market'), 'ShipMarketRoute'),
 })
