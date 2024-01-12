@@ -70,7 +70,9 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      if (!value) return
+      if (value === undefined) {
+        return <div className="text-secondary text-right text-sm">-</div>
+      }
 
       return (
         <div className="h-full space-y-2">
@@ -127,7 +129,9 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      if (!value) return
+      if (value === undefined) {
+        return <div className="text-secondary text-right text-sm">-</div>
+      }
 
       return (
         <div className="h-full space-y-2">
@@ -176,7 +180,9 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      if (!value) return
+      if (value === undefined) {
+        return <div className="text-secondary text-right text-sm">-</div>
+      }
 
       return (
         <div className="h-full space-y-2">
@@ -227,7 +233,13 @@ export const columns = [
         </div>
       )
     },
-    cell: ({ row }) => {
+    cell: ({ getValue, row }) => {
+      const value = getValue()
+
+      if (value === undefined) {
+        return <div className="text-secondary text-right text-sm">-</div>
+      }
+
       return <BuyShip ship={row.original.ship} />
     },
     enableSorting: true,
