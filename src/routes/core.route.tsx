@@ -13,6 +13,13 @@ const TanStackRouterDevtools = import.meta.env.PROD
         default: () => <mod.TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />,
       })),
     )
+const TanStackQueryDevtools = import.meta.env.PROD
+  ? () => null
+  : lazy(() =>
+      import('@tanstack/react-query-devtools').then((mod) => ({
+        default: () => <mod.ReactQueryDevtools initialIsOpen={false} />,
+      })),
+    )
 const NavigationLoader = () => {
   const isLoading = useRouterState({ select: (state) => state.status === 'pending' })
 
@@ -50,6 +57,7 @@ export const Core = () => {
         <NavigationLoader />
         <Outlet />
         <TanStackRouterDevtools />
+        <TanStackQueryDevtools />
       </div>
     </Sentry.ErrorBoundary>
   )
