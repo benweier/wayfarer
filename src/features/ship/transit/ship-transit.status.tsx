@@ -21,7 +21,7 @@ export const ShipTransitStatus = () => {
         </div>
         <div className="flex flex-col items-end">
           <div className="text-secondary text-xs uppercase">
-            {transit.status === 'complete' ? t('ship.transit.arriving') : t('ship.transit.arrived')}
+            {transit.status === 'complete' ? t('ship.transit.arrived') : t('ship.transit.arriving')}
           </div>
           <div className="flex items-center gap-2">
             <div className="text-sm font-medium">{formatDateTime(transit.arrival)}</div>
