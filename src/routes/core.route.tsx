@@ -10,7 +10,7 @@ const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
   : lazy(() =>
       import('@tanstack/router-devtools').then((mod) => ({
-        default: () => <mod.TanStackRouterDevtools initialIsOpen={false} position="bottom-right" />,
+        default: () => <mod.TanStackRouterDevtools initialIsOpen={false} position="bottom-left" />,
       })),
     )
 const TanStackQueryDevtools = import.meta.env.PROD
