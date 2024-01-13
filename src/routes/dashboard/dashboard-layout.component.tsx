@@ -90,7 +90,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
                 </Transition.Child>
                 <div className="pb-4 pt-6">
                   <div className="flex flex-shrink-0 items-center px-4">
-                    <Link to="/">
+                    <Link to="/" params={{}}>
                       <Wayfarer className="text-lg text-white" />
                     </Link>
                   </div>
@@ -133,7 +133,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
           <div className="flex min-h-0 flex-1 flex-col bg-blue-600">
             <div className="flex-1">
               <div className="flex items-center justify-center bg-blue-700 py-4">
-                <Link to="/">
+                <Link to="/" params={{}}>
                   <div className="text-title text-center text-white">
                     W<span className="hidden @[220px]:inline">ayfarer</span>
                   </div>
@@ -176,7 +176,7 @@ export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
         <div className="lg:hidden">
           <div className="flex items-center justify-between bg-blue-600 px-4 py-2 sm:px-6 lg:px-8">
             <div>
-              <Link to="/">
+              <Link to="/" params={{}}>
                 <Wayfarer className="text-lg" />
               </Link>
             </div>
