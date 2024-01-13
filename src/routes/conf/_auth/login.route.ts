@@ -1,17 +1,12 @@
 import { FileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 
+const meta: MetaFunction = (t) => [{ title: t('auth.login.title', { ns: 'meta' }) }]
+
 export const Route = new FileRoute('/_auth/login').createRoute({
   validateSearch: z.object({
     redirect: z.string().optional(),
   }),
-  beforeLoad: ({ search }) => {
-    const meta: MetaFunction = (t) => [{ title: t('auth.login.title', { ns: 'meta' }) }]
-
-    return {
-      search,
-      meta,
-    }
-  },
+  beforeLoad: ({ search }) => ({ meta, search }),
   pendingComponent: () => null,
 })
