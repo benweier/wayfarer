@@ -1,4 +1,4 @@
-import { FileRoute, defer, lazyRouteComponent, redirect } from '@tanstack/react-router'
+import { FileRoute, defer, redirect } from '@tanstack/react-router'
 import { getShipByIdQuery, getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
 
 export const Route = new FileRoute('/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market').createRoute({
@@ -31,5 +31,4 @@ export const Route = new FileRoute('/_dashboard/_authenticated/fleet/$shipSymbol
       market: defer(market),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/fleet/ship/market'), 'ShipMarketRoute'),
 })

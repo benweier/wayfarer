@@ -1,4 +1,4 @@
-import { FileRoute, lazyRouteComponent } from '@tanstack/react-router'
+import { FileRoute } from '@tanstack/react-router'
 import { meta } from '@/routes/systems/system/system-route.meta'
 import { getSystemByIdQuery } from '@/services/api/spacetraders'
 
@@ -12,5 +12,4 @@ export const Route = new FileRoute('/_dashboard/systems/$systemSymbol/').createR
       system: await system,
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/systems/system'), 'SystemRoute'),
 })

@@ -1,4 +1,4 @@
-import { FileRoute, lazyRouteComponent } from '@tanstack/react-router'
+import { FileRoute } from '@tanstack/react-router'
 import { meta } from '@/routes/agents/agent/agent-route.meta'
 import { getAgentBySymbolQuery } from '@/services/api/spacetraders/agent'
 
@@ -12,5 +12,4 @@ export const Route = new FileRoute('/_dashboard/agents/$agentSymbol').createRout
       agent: await agent,
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/agents/agent'), 'AgentRoute'),
 })

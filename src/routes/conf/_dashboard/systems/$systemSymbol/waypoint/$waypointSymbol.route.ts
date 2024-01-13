@@ -1,4 +1,4 @@
-import { FileRoute, lazyRouteComponent } from '@tanstack/react-router'
+import { FileRoute } from '@tanstack/react-router'
 import { meta } from '@/routes/systems/waypoint/waypoint-route.meta'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders'
 
@@ -17,5 +17,4 @@ export const Route = new FileRoute('/_dashboard/systems/$systemSymbol/waypoint/$
       waypoint: await waypoint,
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/systems/waypoint'), 'WaypointRoute'),
 })

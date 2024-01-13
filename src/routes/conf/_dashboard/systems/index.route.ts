@@ -1,4 +1,4 @@
-import { FileRoute, defer, lazyRouteComponent } from '@tanstack/react-router'
+import { FileRoute, defer } from '@tanstack/react-router'
 import { z } from 'zod'
 import { meta } from '@/routes/systems/systems-route.meta'
 import { getSystemListQuery } from '@/services/api/spacetraders'
@@ -18,5 +18,4 @@ export const Route = new FileRoute('/_dashboard/systems/').createRoute({
       systems: defer(systems),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/systems'), 'SystemsRoute'),
 })

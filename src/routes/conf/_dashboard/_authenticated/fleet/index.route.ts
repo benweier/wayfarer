@@ -1,4 +1,4 @@
-import { FileRoute, defer, lazyRouteComponent } from '@tanstack/react-router'
+import { FileRoute, defer } from '@tanstack/react-router'
 import { meta } from '@/routes/fleet/fleet-route.meta'
 import { getShipListQuery } from '@/services/api/spacetraders'
 
@@ -11,7 +11,6 @@ export const Route = new FileRoute('/_dashboard/_authenticated/fleet/').createRo
       ships: defer(ships),
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/fleet'), 'FleetRoute'),
   staleTime: Infinity,
   gcTime: Infinity,
 })

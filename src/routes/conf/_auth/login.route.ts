@@ -1,4 +1,4 @@
-import { FileRoute, lazyRouteComponent } from '@tanstack/react-router'
+import { FileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 
 export const Route = new FileRoute('/_auth/login').createRoute({
@@ -13,6 +13,5 @@ export const Route = new FileRoute('/_auth/login').createRoute({
       meta,
     }
   },
-  component: lazyRouteComponent(() => import('@/features/auth/login'), 'Login'),
   pendingComponent: () => null,
 })

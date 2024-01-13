@@ -1,4 +1,4 @@
-import { FileRoute, lazyRouteComponent } from '@tanstack/react-router'
+import { FileRoute } from '@tanstack/react-router'
 import { meta } from '@/routes/fleet/ship/ship-route.meta'
 import { getShipByIdQuery } from '@/services/api/spacetraders'
 
@@ -12,5 +12,4 @@ export const Route = new FileRoute('/_dashboard/_authenticated/fleet/$shipSymbol
       ship: await ship,
     }
   },
-  component: lazyRouteComponent(() => import('@/routes/fleet/ship'), 'ShipRoute'),
 })

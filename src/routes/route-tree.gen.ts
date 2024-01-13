@@ -1,7 +1,6 @@
+import { FileRoute, lazyRouteComponent } from '@tanstack/react-router'
+
 import { Route as rootRoute } from './conf/__root'
-import { Route as DashboardRouteImport } from './conf/_dashboard.route'
-import { Route as AuthRouteImport } from './conf/_auth.route'
-import { Route as IndexRouteImport } from './conf/index.route'
 import { Route as DashboardSystemsRouteImport } from './conf/_dashboard/systems.route'
 import { Route as DashboardLeaderboardRouteImport } from './conf/_dashboard/leaderboard.route'
 import { Route as DashboardAgentsRouteImport } from './conf/_dashboard/agents.route'
@@ -19,83 +18,135 @@ import { Route as DashboardSystemsSystemSymbolIndexRouteImport } from './conf/_d
 import { Route as DashboardauthenticatedFleetIndexRouteImport } from './conf/_dashboard/_authenticated/fleet/index.route'
 import { Route as DashboardauthenticatedFleetShipSymbolRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol.route'
 import { Route as DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport } from './conf/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.route'
-import { Route as DashboardauthenticatedFleetShipSymboloverlayRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.route'
 import { Route as DashboardauthenticatedFleetShipSymboloverlayMarketRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market.route'
 
-const DashboardRouteRoute = DashboardRouteImport.update({
+const DashboardComponentImport = new FileRoute('/_dashboard').createRoute()
+const AuthComponentImport = new FileRoute('/_auth').createRoute()
+const IndexComponentImport = new FileRoute('/').createRoute()
+const DashboardauthenticatedFleetShipSymboloverlayComponentImport =
+  new FileRoute(
+    '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay',
+  ).createRoute()
+
+const DashboardComponentRoute = DashboardComponentImport.update({
   id: '/_dashboard',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).update({
+  component: lazyRouteComponent(
+    () => import('./conf/_dashboard.component'),
+    'component',
+  ),
+})
 
-const AuthRouteRoute = AuthRouteImport.update({
+const AuthComponentRoute = AuthComponentImport.update({
   id: '/_auth',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).update({
+  component: lazyRouteComponent(
+    () => import('./conf/_auth.component'),
+    'component',
+  ),
+})
 
-const IndexRouteRoute = IndexRouteImport.update({
+const IndexComponentRoute = IndexComponentImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).update({
+  component: lazyRouteComponent(
+    () => import('./conf/index.component'),
+    'component',
+  ),
+})
 
 const DashboardSystemsRouteRoute = DashboardSystemsRouteImport.update({
   path: '/systems',
-  getParentRoute: () => DashboardRouteRoute,
+  getParentRoute: () => DashboardComponentRoute,
 } as any)
 
 const DashboardLeaderboardRouteRoute = DashboardLeaderboardRouteImport.update({
   path: '/leaderboard',
-  getParentRoute: () => DashboardRouteRoute,
+  getParentRoute: () => DashboardComponentRoute,
 } as any)
 
 const DashboardAgentsRouteRoute = DashboardAgentsRouteImport.update({
   path: '/agents',
-  getParentRoute: () => DashboardRouteRoute,
+  getParentRoute: () => DashboardComponentRoute,
 } as any)
 
 const DashboardauthenticatedRouteRoute =
   DashboardauthenticatedRouteImport.update({
     id: '/_authenticated',
-    getParentRoute: () => DashboardRouteRoute,
+    getParentRoute: () => DashboardComponentRoute,
   } as any)
 
 const AuthRegisterRouteRoute = AuthRegisterRouteImport.update({
   path: '/register',
-  getParentRoute: () => AuthRouteRoute,
-} as any)
+  getParentRoute: () => AuthComponentRoute,
+} as any).update({
+  component: lazyRouteComponent(
+    () => import('./conf/_auth/register.component'),
+    'component',
+  ),
+})
 
 const AuthLogoutRouteRoute = AuthLogoutRouteImport.update({
   path: '/logout',
-  getParentRoute: () => AuthRouteRoute,
+  getParentRoute: () => AuthComponentRoute,
 } as any)
 
 const AuthLoginRouteRoute = AuthLoginRouteImport.update({
   path: '/login',
-  getParentRoute: () => AuthRouteRoute,
-} as any)
+  getParentRoute: () => AuthComponentRoute,
+} as any).update({
+  component: lazyRouteComponent(
+    () => import('./conf/_auth/login.component'),
+    'component',
+  ),
+})
 
 const DashboardSystemsIndexRouteRoute = DashboardSystemsIndexRouteImport.update(
   {
     path: '/',
     getParentRoute: () => DashboardSystemsRouteRoute,
   } as any,
-)
+).update({
+  component: lazyRouteComponent(
+    () => import('./conf/_dashboard/systems/index.component'),
+    'component',
+  ),
+})
 
 const DashboardAgentsIndexRouteRoute = DashboardAgentsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardAgentsRouteRoute,
-} as any)
+} as any).update({
+  component: lazyRouteComponent(
+    () => import('./conf/_dashboard/agents/index.component'),
+    'component',
+  ),
+})
 
 const DashboardAgentsAgentSymbolRouteRoute =
   DashboardAgentsAgentSymbolRouteImport.update({
     path: '/$agentSymbol',
     getParentRoute: () => DashboardAgentsRouteRoute,
-  } as any)
+  } as any).update({
+    component: lazyRouteComponent(
+      () => import('./conf/_dashboard/agents/$agentSymbol.component'),
+      'component',
+    ),
+  })
 
 const DashboardauthenticatedSurveysRouteRoute =
   DashboardauthenticatedSurveysRouteImport.update({
     path: '/surveys',
     getParentRoute: () => DashboardauthenticatedRouteRoute,
-  } as any)
+  } as any).update({
+    component: lazyRouteComponent(
+      () => import('./conf/_dashboard/_authenticated/surveys.component'),
+      'component',
+    ),
+  })
 
 const DashboardauthenticatedFleetRouteRoute =
   DashboardauthenticatedFleetRouteImport.update({
@@ -107,85 +158,130 @@ const DashboardauthenticatedContractsRouteRoute =
   DashboardauthenticatedContractsRouteImport.update({
     path: '/contracts',
     getParentRoute: () => DashboardauthenticatedRouteRoute,
-  } as any)
+  } as any).update({
+    component: lazyRouteComponent(
+      () => import('./conf/_dashboard/_authenticated/contracts.component'),
+      'component',
+    ),
+  })
 
 const DashboardSystemsSystemSymbolIndexRouteRoute =
   DashboardSystemsSystemSymbolIndexRouteImport.update({
     path: '/$systemSymbol/',
     getParentRoute: () => DashboardSystemsRouteRoute,
-  } as any)
+  } as any).update({
+    component: lazyRouteComponent(
+      () => import('./conf/_dashboard/systems/$systemSymbol/index.component'),
+      'component',
+    ),
+  })
 
 const DashboardauthenticatedFleetIndexRouteRoute =
   DashboardauthenticatedFleetIndexRouteImport.update({
     path: '/',
     getParentRoute: () => DashboardauthenticatedFleetRouteRoute,
-  } as any)
+  } as any).update({
+    component: lazyRouteComponent(
+      () => import('./conf/_dashboard/_authenticated/fleet/index.component'),
+      'component',
+    ),
+  })
 
 const DashboardauthenticatedFleetShipSymbolRouteRoute =
   DashboardauthenticatedFleetShipSymbolRouteImport.update({
     path: '/$shipSymbol',
     getParentRoute: () => DashboardauthenticatedFleetRouteRoute,
-  } as any)
+  } as any).update({
+    component: lazyRouteComponent(
+      () =>
+        import('./conf/_dashboard/_authenticated/fleet/$shipSymbol.component'),
+      'component',
+    ),
+  })
+
+const DashboardauthenticatedFleetShipSymboloverlayComponentRoute =
+  DashboardauthenticatedFleetShipSymboloverlayComponentImport.update({
+    id: '/_overlay',
+    getParentRoute: () => DashboardauthenticatedFleetShipSymbolRouteRoute,
+  } as any).update({
+    component: lazyRouteComponent(
+      () =>
+        import(
+          './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.component'
+        ),
+      'component',
+    ),
+  })
 
 const DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute =
   DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport.update({
     path: '/$systemSymbol/waypoint/$waypointSymbol',
     getParentRoute: () => DashboardSystemsRouteRoute,
-  } as any)
-
-const DashboardauthenticatedFleetShipSymboloverlayRouteRoute =
-  DashboardauthenticatedFleetShipSymboloverlayRouteImport.update({
-    id: '/_overlay',
-    getParentRoute: () => DashboardauthenticatedFleetShipSymbolRouteRoute,
-  } as any)
+  } as any).update({
+    component: lazyRouteComponent(
+      () =>
+        import(
+          './conf/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.component'
+        ),
+      'component',
+    ),
+  })
 
 const DashboardauthenticatedFleetShipSymboloverlayMarketRouteRoute =
   DashboardauthenticatedFleetShipSymboloverlayMarketRouteImport.update({
     path: '/market',
     getParentRoute: () =>
-      DashboardauthenticatedFleetShipSymboloverlayRouteRoute,
-  } as any)
+      DashboardauthenticatedFleetShipSymboloverlayComponentRoute,
+  } as any).update({
+    component: lazyRouteComponent(
+      () =>
+        import(
+          './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market.component'
+        ),
+      'component',
+    ),
+  })
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof IndexComponentImport
       parentRoute: typeof rootRoute
     }
     '/_auth': {
-      preLoaderRoute: typeof AuthRouteImport
+      preLoaderRoute: typeof AuthComponentImport
       parentRoute: typeof rootRoute
     }
     '/_dashboard': {
-      preLoaderRoute: typeof DashboardRouteImport
+      preLoaderRoute: typeof DashboardComponentImport
       parentRoute: typeof rootRoute
     }
     '/_auth/login': {
       preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof AuthRouteImport
+      parentRoute: typeof AuthComponentImport
     }
     '/_auth/logout': {
       preLoaderRoute: typeof AuthLogoutRouteImport
-      parentRoute: typeof AuthRouteImport
+      parentRoute: typeof AuthComponentImport
     }
     '/_auth/register': {
       preLoaderRoute: typeof AuthRegisterRouteImport
-      parentRoute: typeof AuthRouteImport
+      parentRoute: typeof AuthComponentImport
     }
     '/_dashboard/_authenticated': {
       preLoaderRoute: typeof DashboardauthenticatedRouteImport
-      parentRoute: typeof DashboardRouteImport
+      parentRoute: typeof DashboardComponentImport
     }
     '/_dashboard/agents': {
       preLoaderRoute: typeof DashboardAgentsRouteImport
-      parentRoute: typeof DashboardRouteImport
+      parentRoute: typeof DashboardComponentImport
     }
     '/_dashboard/leaderboard': {
       preLoaderRoute: typeof DashboardLeaderboardRouteImport
-      parentRoute: typeof DashboardRouteImport
+      parentRoute: typeof DashboardComponentImport
     }
     '/_dashboard/systems': {
       preLoaderRoute: typeof DashboardSystemsRouteImport
-      parentRoute: typeof DashboardRouteImport
+      parentRoute: typeof DashboardComponentImport
     }
     '/_dashboard/_authenticated/contracts': {
       preLoaderRoute: typeof DashboardauthenticatedContractsRouteImport
@@ -223,35 +319,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSystemsSystemSymbolIndexRouteImport
       parentRoute: typeof DashboardSystemsRouteImport
     }
-    '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay': {
-      preLoaderRoute: typeof DashboardauthenticatedFleetShipSymboloverlayRouteImport
-      parentRoute: typeof DashboardauthenticatedFleetShipSymbolRouteImport
-    }
     '/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol': {
       preLoaderRoute: typeof DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport
       parentRoute: typeof DashboardSystemsRouteImport
     }
+    '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay': {
+      preLoaderRoute: typeof DashboardauthenticatedFleetShipSymboloverlayComponentImport
+      parentRoute: typeof DashboardauthenticatedFleetShipSymbolRouteImport
+    }
     '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market': {
       preLoaderRoute: typeof DashboardauthenticatedFleetShipSymboloverlayMarketRouteImport
-      parentRoute: typeof DashboardauthenticatedFleetShipSymboloverlayRouteImport
+      parentRoute: typeof DashboardauthenticatedFleetShipSymboloverlayComponentImport
     }
   }
 }
 export const routeTree = rootRoute.addChildren([
-  IndexRouteRoute,
-  AuthRouteRoute.addChildren([
+  IndexComponentRoute,
+  AuthComponentRoute.addChildren([
     AuthLoginRouteRoute,
     AuthLogoutRouteRoute,
     AuthRegisterRouteRoute,
   ]),
-  DashboardRouteRoute.addChildren([
+  DashboardComponentRoute.addChildren([
     DashboardauthenticatedRouteRoute.addChildren([
       DashboardauthenticatedContractsRouteRoute,
       DashboardauthenticatedFleetRouteRoute.addChildren([
         DashboardauthenticatedFleetShipSymbolRouteRoute.addChildren([
-          DashboardauthenticatedFleetShipSymboloverlayRouteRoute.addChildren([
-            DashboardauthenticatedFleetShipSymboloverlayMarketRouteRoute,
-          ]),
+          DashboardauthenticatedFleetShipSymboloverlayComponentRoute.addChildren(
+            [DashboardauthenticatedFleetShipSymboloverlayMarketRouteRoute],
+          ),
         ]),
         DashboardauthenticatedFleetIndexRouteRoute,
       ]),
