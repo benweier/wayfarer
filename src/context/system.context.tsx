@@ -16,7 +16,7 @@ export const useSystemSymbolContext = () => {
   return ctx
 }
 
-const SystemStoreContext = createContext<SystemResponse | null>(null)
+export const SystemStoreContext = createContext<SystemResponse | null>(null)
 
 export const useSystemResponse = () => {
   const system = useContext(SystemStoreContext)

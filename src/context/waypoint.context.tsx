@@ -18,7 +18,7 @@ export const useWaypointSymbolContext = () => {
   return ctx
 }
 
-const WaypointStoreContext = createContext<WaypointResponse | null>(null)
+export const WaypointStoreContext = createContext<WaypointResponse | null>(null)
 
 export const useWaypointResponse = () => {
   const waypoint = useContext(WaypointStoreContext)
