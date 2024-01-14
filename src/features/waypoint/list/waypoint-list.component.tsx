@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useFleetResponse } from '@/context/fleet.context'
 import { useSystemResponse } from '@/context/system.context'
+import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { WaypointListTable } from './waypoint-list.table'
 
@@ -9,23 +10,7 @@ export const WaypointList = () => {
   const ships = useFleetResponse()
   const { data } = useSuspenseQuery(getWaypointListQuery({ systemSymbol: system.symbol }))
   const waypoints = data.data
-  const presence = new Map(
-    ships.reduce<Map<string, number>>((result, ship) => {
-      const { waypointSymbol } = ship.nav
-
-      if (result.has(waypointSymbol)) {
-        const count = result.get(waypointSymbol) ?? 0
-
-        result.set(waypointSymbol, count + 1)
-
-        return result
-      }
-
-      result.set(waypointSymbol, 1)
-
-      return result
-    }, new Map()),
-  )
+  const presence = getShipPresence(ships)
 
   return (
     <WaypointListTable

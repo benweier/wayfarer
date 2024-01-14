@@ -2,31 +2,11 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { useFleetResponse } from '@/context/fleet.context'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
 import { ShipStatus } from '@/features/ship/status'
+import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
 import { WaypointNavigationAction } from '@/features/waypoint/navigation/waypoint-navigation.action'
 import { getWaypointListQuery } from '@/services/api/spacetraders'
-import { type ShipResponse } from '@/types/spacetraders'
 import { WaypointNavigationTable } from './waypoint-navigation.table'
 import { type WaypointNavigationProps } from './waypoint-navigation.types'
-
-const getShipPresence = (ships: ShipResponse[]) => {
-  console.log(ships)
-
-  return ships.reduce<Map<string, number>>((result, ship) => {
-    const { waypointSymbol } = ship.nav
-
-    if (result.has(waypointSymbol)) {
-      const count = result.get(waypointSymbol) ?? 0
-
-      result.set(waypointSymbol, count + 1)
-
-      return result
-    }
-
-    result.set(waypointSymbol, 1)
-
-    return result
-  }, new Map())
-}
 
 export const WaypointNavigation = ({ ship }: WaypointNavigationProps) => {
   const ships = useFleetResponse()
