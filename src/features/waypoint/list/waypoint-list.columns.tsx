@@ -6,7 +6,6 @@ import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { ShipPresence } from '@/features/ship/presence'
 import { TypeFilter } from '@/features/waypoint/list/type-filter.component'
 import { type WaypointListTableSchema } from './waypoint-list.types'
 
@@ -50,9 +49,17 @@ export const columns = [
     maxSize: 10,
     cell: ({ row }) =>
       row.original.presence > 0 && (
-        <ShipPresence label="waypoint.presence" count={row.original.presence} symbol={row.original.waypoint.symbol}>
-          <ShipIcon id="anchor" className="size-5" />
-        </ShipPresence>
+        <Translation>
+          {(t) => {
+            const title = t('waypoint.presence', { count: row.original.presence, symbol: row.original.waypoint.symbol })
+
+            return (
+              <span title={title}>
+                <ShipIcon id="anchor" className="size-5" />
+              </span>
+            )
+          }}
+        </Translation>
       ),
   }),
   columnHelper.accessor((row) => `${row.waypoint.x}, ${row.waypoint.y}`, {
@@ -135,8 +142,8 @@ export const columns = [
   }),
   columnHelper.accessor((row) => row.waypoint.traits, {
     id: 'traits',
-    minSize: 30,
-    maxSize: 30,
+    minSize: 25,
+    maxSize: 25,
     header: () => {
       return (
         <div className="text-right">

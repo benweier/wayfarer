@@ -3,7 +3,6 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
-import { ShipPresence } from '@/features/ship/presence'
 import { type SystemListTableSchema } from './system-list.types'
 import { SystemWaypointsCell } from './waypoints-cell.component'
 
@@ -37,9 +36,17 @@ export const columns = [
     maxSize: 10,
     cell: ({ row }) =>
       row.original.presence > 0 && (
-        <ShipPresence label="system.presence" count={row.original.presence} symbol={row.original.system.symbol}>
-          <ShipIcon id="anchor" className="size-5" />
-        </ShipPresence>
+        <Translation>
+          {(t) => {
+            const title = t('system.presence', { count: row.original.presence, symbol: row.original.system.symbol })
+
+            return (
+              <span title={title}>
+                <ShipIcon id="anchor" className="size-5" />
+              </span>
+            )
+          }}
+        </Translation>
       ),
   }),
   columnHelper.accessor((row) => row.system.type, {
