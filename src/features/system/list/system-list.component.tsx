@@ -3,6 +3,7 @@ import { cx } from 'class-variance-authority'
 import { useEffect } from 'react'
 import { Pagination } from '@/components/pagination'
 import { useFleetResponse } from '@/context/fleet.context'
+import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
 import { getSystemListQuery } from '@/services/api/spacetraders'
 import { formatNumber } from '@/utilities/number.helper'
 import { SystemListTable } from './system-list.table'
@@ -20,19 +21,7 @@ export const SystemList = ({ page = 1, limit = 20, setPage }: SystemListProps) =
   }, [limit, systemsListQuery.data.meta, page, setPage])
 
   const systems = systemsListQuery.data.data
-  const presence = new Map(
-    ships.reduce((result, ship) => {
-      const { systemSymbol } = ship.nav
-
-      if (result.has(systemSymbol)) {
-        result.set(systemSymbol, (result.get(systemSymbol) ?? 0) + 1)
-      }
-
-      result.set(systemSymbol, 1)
-
-      return result
-    }, new Map<string, number>()),
-  )
+  const presence = getShipPresence(ships, 'systemSymbol')
   const meta = systemsListQuery.data.meta
   const results = {
     from: formatNumber(page * limit + 1 - limit),

@@ -10,7 +10,7 @@ export const WaypointList = () => {
   const ships = useFleetResponse()
   const { data } = useSuspenseQuery(getWaypointListQuery({ systemSymbol: system.symbol }))
   const waypoints = data.data
-  const presence = getShipPresence(ships)
+  const presence = getShipPresence(ships, 'waypointSymbol')
 
   return (
     <WaypointListTable

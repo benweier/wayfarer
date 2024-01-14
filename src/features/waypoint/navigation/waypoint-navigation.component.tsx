@@ -13,7 +13,7 @@ export const WaypointNavigation = ({ ship }: WaypointNavigationProps) => {
   const { data } = useSuspenseQuery(getWaypointListQuery({ systemSymbol: ship.nav.systemSymbol }))
   const waypoints = data.data
   const activeWaypoint = waypoints.find((waypoint) => waypoint.symbol === ship.nav.waypointSymbol)
-  const presence = getShipPresence(ships)
+  const presence = getShipPresence(ships, 'waypointSymbol')
 
   return (
     <div className="space-y-4">
