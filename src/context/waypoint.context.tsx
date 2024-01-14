@@ -8,12 +8,12 @@ export type WaypointStoreProps = {
   waypointSymbol: string
 }
 
-export const WaypointContext = createContext<{ waypointSymbol: string } | null>(null)
+export const WaypointSymbolContext = createContext<{ waypointSymbol: string } | null>(null)
 
-export const useWaypointContext = () => {
-  const ctx = useContext(WaypointContext)
+export const useWaypointSymbolContext = () => {
+  const ctx = useContext(WaypointSymbolContext)
 
-  if (!ctx) throw new Error('WaypointContext is missing a value.')
+  if (!ctx) throw new Error('WaypointSymbolContext is missing a value.')
 
   return ctx
 }

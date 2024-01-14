@@ -6,12 +6,12 @@ import { type SystemResponse } from '@/types/spacetraders'
 export type SystemStoreProps = {
   systemSymbol: string
 }
-export const SystemContext = createContext<{ systemSymbol: string } | null>(null)
+export const SystemSymbolContext = createContext<{ systemSymbol: string } | null>(null)
 
-export const useSystemContext = () => {
-  const ctx = useContext(SystemContext)
+export const useSystemSymbolContext = () => {
+  const ctx = useContext(SystemSymbolContext)
 
-  if (!ctx) throw new Error('SystemContext is missing a value.')
+  if (!ctx) throw new Error('SystemSymbolContext is missing a value.')
 
   return ctx
 }
