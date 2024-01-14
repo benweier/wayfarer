@@ -10,6 +10,7 @@ export type WaypointNavigationTableSchema = {
   waypoint: WaypointResponse
   ship: ShipResponse
   activeWaypoint?: WaypointResponse
+  presence: number
 }
 
 export type WaypointNavigationActionProps = {

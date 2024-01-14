@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
+import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
@@ -42,6 +43,25 @@ export const columns = [
     enableSorting: true,
     minSize: 25,
     maxSize: 25,
+  }),
+  columnHelper.display({
+    id: 'presence',
+    minSize: 10,
+    maxSize: 10,
+    cell: ({ row }) =>
+      row.original.presence > 0 && (
+        <Translation>
+          {(t) => {
+            const title = t('waypoint.presence', { count: row.original.presence, symbol: row.original.waypoint.symbol })
+
+            return (
+              <span title={title}>
+                <ShipIcon id="anchor" className="size-5" />
+              </span>
+            )
+          }}
+        </Translation>
+      ),
   }),
   columnHelper.accessor(
     (row) => {

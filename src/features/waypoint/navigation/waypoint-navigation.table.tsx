@@ -14,7 +14,7 @@ import { columns } from './waypoint-navigation.columns'
 import { type WaypointNavigationTableProps } from './waypoint-navigation.types'
 
 export const WaypointNavigationTable = ({ data }: WaypointNavigationTableProps) => {
-  const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'distance_time', desc: false }])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({
     data,
