@@ -54,14 +54,14 @@ dependencies:
     specifier: ^5.17.10
     version: 5.17.10(@tanstack/react-query@5.17.10)(react@18.2.0)
   '@tanstack/react-router':
-    specifier: ^1.4.2
-    version: 1.4.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^1.4.3
+    version: 1.4.3(react-dom@18.2.0)(react@18.2.0)
   '@tanstack/react-table':
     specifier: ^8.11.6
     version: 8.11.6(react-dom@18.2.0)(react@18.2.0)
   '@tanstack/router-devtools':
-    specifier: ^1.4.2
-    version: 1.4.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^1.4.3
+    version: 1.4.3(react-dom@18.2.0)(react@18.2.0)
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -143,8 +143,8 @@ devDependencies:
     specifier: ^5.17.7
     version: 5.17.7(eslint@8.56.0)(typescript@5.3.3)
   '@tanstack/router-vite-plugin':
-    specifier: ^1.4.2
-    version: 1.4.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^1.4.3
+    version: 1.4.3(react-dom@18.2.0)(react@18.2.0)
   '@testing-library/dom':
     specifier: ^9.3.4
     version: 9.3.4
@@ -227,8 +227,8 @@ devDependencies:
     specifier: ^6.2.0
     version: 6.2.0(eslint@8.56.0)(typescript@5.3.3)
   happy-dom:
-    specifier: ^13.0.4
-    version: 13.0.4
+    specifier: ^13.0.6
+    version: 13.0.6
   husky:
     specifier: ^8.0.3
     version: 8.0.3
@@ -297,7 +297,7 @@ devDependencies:
     version: 4.2.3(typescript@5.3.3)(vite@5.0.11)
   vitest:
     specifier: ^1.2.0
-    version: 1.2.0(@types/node@20.11.0)(happy-dom@13.0.4)(lightningcss@1.22.1)
+    version: 1.2.0(@types/node@20.11.0)(happy-dom@13.0.6)(lightningcss@1.22.1)
 
 packages:
 
@@ -3598,8 +3598,8 @@ packages:
       - typescript
     dev: true
 
-  /@tanstack/history@1.4.2:
-    resolution: {integrity: sha512-XjV0p7GM1u5/tHmjtwUC48ZmwSX2CTOZbatPEvglJBTd7feZksp55EIcSztWc2mpft7nm9nJGgV5/aEsRpXZRQ==}
+  /@tanstack/history@1.4.3:
+    resolution: {integrity: sha512-Aur99XDWtjhVtdMJDOj5ocA7L/HVrnHdRSKQtp5f44OiNeFrXZ3CNsDz2QPng+iQpH4ebZ6eW53OBuXVJzzpXA==}
     engines: {node: '>=12'}
 
   /@tanstack/query-core@5.17.10:
@@ -3630,15 +3630,15 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@tanstack/react-router@1.4.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-wRMVZAze6n/GgcE5FxbRyF1NeFP7TNmuypWAq+kEfAlHmgmQJ6d4H3ttpB9V9rTy9GDAh/+NPF0orl6gNTRGWQ==}
+  /@tanstack/react-router@1.4.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-HRpTB5IGDfW+ZLTxRK7aTM3C8bxhvpP9Di6Y+wMqu6c2CxqPu7o31ynRdq4q7vlCUST8mQGUPNwbCOpf0iS7OA==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
     dependencies:
       '@babel/runtime': 7.23.8
-      '@tanstack/history': 1.4.2
+      '@tanstack/history': 1.4.3
       '@tanstack/react-store': 0.2.1(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/store': 0.1.3
       react: 18.2.0
@@ -3680,8 +3680,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/router-cli@1.4.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-eGohRq8SdB5R1vqoWIN8uLEnA3NBNmBeTCy8OGCZc2RKT1r4wN4VbnzTSp4PUNwxUnS26kuNdbFtDCHZXTJesA==}
+  /@tanstack/router-cli@1.4.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-M1zkzsNAc1Q770r9g1F2NDO19tSKIYPaAGz4V8VNc42vjTZfl+6TxR9j7KQeLwK4sSNetac6ckKpoYsom+f2Kg==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
@@ -3691,7 +3691,7 @@ packages:
       '@babel/preset-env': 7.23.8(@babel/core@7.23.7)
       '@babel/template': 7.22.15
       '@babel/types': 7.23.6
-      '@tanstack/react-router': 1.4.2(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-router': 1.4.3(react-dom@18.2.0)(react@18.2.0)
       '@types/fs-extra': 9.0.13
       '@types/klaw': 3.0.6
       '@types/through2': 2.0.41
@@ -3710,26 +3710,26 @@ packages:
       - supports-color
     dev: true
 
-  /@tanstack/router-devtools@1.4.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-fuPtE1IYU4bbNaFDtD9sJc/VLtN5iGBsYWgZvdOkJ3wmdcx91ezpalBqHDswjJo8e64kXxasFRvM6dPayukA/Q==}
+  /@tanstack/router-devtools@1.4.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-iumkNWte8M9NxyBkLuSdhxZm3LhvzHhy+3EMkpLYzgpYtiDISGQ/i/eQqMdiPPCHKL6e3tOIVT6Lcm4mPA9YWg==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
     dependencies:
       '@babel/runtime': 7.23.8
-      '@tanstack/react-router': 1.4.2(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-router': 1.4.3(react-dom@18.2.0)(react@18.2.0)
       date-fns: 2.30.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/router-vite-plugin@1.4.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-rxh+Cx8oEAtVxH9b8Rw2iputir37VqC3iK4xnIehH09vqRoZpJhSOHXDdc9j5oesJUjYY6wFU6AQ834OwU1cGw==}
+  /@tanstack/router-vite-plugin@1.4.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-0OeS3XCEKsFSPvlYzFD1Hac6qZYLbKvUJUmRq2X85YaBkJpo8K2hp5y1/6kMNza+i3UsTRqqGEqwpKmqFxiUaQ==}
     engines: {node: '>=12'}
     dependencies:
-      '@tanstack/react-router': 1.4.2(react-dom@18.2.0)(react@18.2.0)
-      '@tanstack/router-cli': 1.4.2(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-router': 1.4.3(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/router-cli': 1.4.3(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom
@@ -3788,7 +3788,7 @@ packages:
       dom-accessibility-api: 0.6.3
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 1.2.0(@types/node@20.11.0)(happy-dom@13.0.4)(lightningcss@1.22.1)
+      vitest: 1.2.0(@types/node@20.11.0)(happy-dom@13.0.6)(lightningcss@1.22.1)
     dev: true
 
   /@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0):
@@ -4399,7 +4399,7 @@ packages:
       std-env: 3.7.0
       test-exclude: 6.0.0
       v8-to-istanbul: 9.2.0
-      vitest: 1.2.0(@types/node@20.11.0)(happy-dom@13.0.4)(lightningcss@1.22.1)
+      vitest: 1.2.0(@types/node@20.11.0)(happy-dom@13.0.6)(lightningcss@1.22.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6342,8 +6342,8 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /happy-dom@13.0.4:
-    resolution: {integrity: sha512-f2qxUhnj1y8nnuHOhoKCE1L8XjsdhYoMit/KMf5Me3coi+JrkS8UJ9hLEnuHE0/y5xcBt+OPWvFTAiUrgdntpw==}
+  /happy-dom@13.0.6:
+    resolution: {integrity: sha512-Uyfnicb9UNd6W80C7Jf8ceAwekYkALzD3hbZmVGkH/UkdBmTd6CikpG6GSdgSl25gkRN/gZ8FMo/vdEUcUtLMQ==}
     dependencies:
       css.escape: 1.5.1
       entities: 4.5.0
@@ -10303,7 +10303,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.2.0(@types/node@20.11.0)(happy-dom@13.0.4)(lightningcss@1.22.1):
+  /vitest@1.2.0(@types/node@20.11.0)(happy-dom@13.0.6)(lightningcss@1.22.1):
     resolution: {integrity: sha512-Ixs5m7BjqvLHXcibkzKRQUvD/XLw0E3rvqaCMlrm/0LMsA0309ZqYvTlPzkhh81VlEyVZXFlwWnkhb6/UMtcaQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -10339,7 +10339,7 @@ packages:
       chai: 4.4.1
       debug: 4.3.4
       execa: 8.0.1
-      happy-dom: 13.0.4
+      happy-dom: 13.0.6
       local-pkg: 0.5.0
       magic-string: 0.30.5
       pathe: 1.1.2
