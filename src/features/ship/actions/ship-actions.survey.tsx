@@ -41,7 +41,7 @@ export const Survey = ({ ship, disabled = false, children }: ShipActionProps) =>
   })
 
   return children({
-    disabled: disabled || isMutating > 0 || isPending || hasCooldown,
+    disabled: disabled || isMutating > 0 || isPending || hasCooldown || ship.nav.status !== 'IN_ORBIT',
     onClick: () => {
       mutate({ shipSymbol: ship.symbol })
     },

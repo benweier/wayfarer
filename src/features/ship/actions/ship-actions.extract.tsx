@@ -51,7 +51,7 @@ export const Extract = ({
   })
 
   return children({
-    disabled: disabled || hasCooldown || isMutating > 0 || isPending,
+    disabled: disabled || hasCooldown || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, survey })
     },
