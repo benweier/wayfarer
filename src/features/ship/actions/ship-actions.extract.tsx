@@ -8,6 +8,7 @@ import { type ShipActionProps } from './ship-actions.types'
 export const Extract = ({
   ship,
   survey,
+  disabled,
   children,
 }: ShipActionProps<{
   survey?: SurveyResponse
@@ -50,7 +51,7 @@ export const Extract = ({
   })
 
   return children({
-    disabled: hasCooldown || isMutating > 0 || isPending,
+    disabled: disabled || hasCooldown || isMutating > 0 || isPending,
     onClick: () => {
       mutate({ shipSymbol: ship.symbol, survey })
     },
