@@ -6,7 +6,6 @@ import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
-import { ShipControls } from './ship-list-item.controls'
 import { type ShipListTableSchema } from './ship-list.types'
 
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
@@ -79,8 +78,8 @@ export const columns = [
       )
     },
     enableSorting: true,
-    minSize: 10,
-    maxSize: 10,
+    minSize: 15,
+    maxSize: 15,
   }),
   columnHelper.accessor((row) => row.ship.nav.waypointSymbol, {
     id: 'waypoint',
@@ -134,8 +133,8 @@ export const columns = [
         </div>
       )
     },
-    minSize: 20,
-    maxSize: 20,
+    minSize: 25,
+    maxSize: 25,
   }),
   columnHelper.accessor((row) => row.ship.fuel, {
     id: 'fuel',
@@ -238,20 +237,5 @@ export const columns = [
     sortDescFirst: true,
     minSize: 10,
     maxSize: 10,
-  }),
-  columnHelper.display({
-    id: 'actions',
-    header: () => {
-      return <></>
-    },
-    cell: ({ row }) => {
-      return (
-        <div className="text-right">
-          <ShipControls ship={row.original.ship} />
-        </div>
-      )
-    },
-    minSize: 5,
-    maxSize: 5,
   }),
 ]
