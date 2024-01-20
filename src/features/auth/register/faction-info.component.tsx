@@ -9,8 +9,7 @@ export const FactionInfo = () => {
   const { control } = useFormContext<RegisterSchema>()
   const faction = useWatch({ control, name: 'faction' })
   const { data } = useSuspenseQuery({
-    queryKey: getFactionListQuery.getQueryKey(),
-    queryFn: getFactionListQuery.queryFn,
+    ...getFactionListQuery(),
     select: (response) => {
       const factions = new Map<string, FactionResponse>()
 

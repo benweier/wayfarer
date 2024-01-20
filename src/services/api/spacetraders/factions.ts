@@ -1,18 +1,19 @@
-import { type QueryFunctionContext } from '@tanstack/react-query'
+import { type QueryFunctionContext, queryOptions } from '@tanstack/react-query'
 import { type Meta, type SpaceTradersResponse, createHeaders } from '@/services/api/spacetraders/core'
 import { get } from '@/services/fetch'
 import { type FactionResponse } from '@/types/spacetraders'
 
-export const getFactionListQuery = {
-  getQueryKey: () => [{ scope: 'factions', entity: 'list' }] as const,
-  queryFn: async ({ signal }: QueryFunctionContext) => {
-    const url = new URL('factions', import.meta.env.SPACETRADERS_API_BASE_URL)
+export const getFactionListQuery = () =>
+  queryOptions({
+    queryKey: [{ scope: 'factions', entity: 'list' }],
+    queryFn: async ({ signal }) => {
+      const url = new URL('factions', import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    url.searchParams.set('limit', '20')
+      url.searchParams.set('limit', '20')
 
-    return get<SpaceTradersResponse<FactionResponse[], Meta>>(url, { signal, headers: createHeaders() })
-  },
-}
+      return get<SpaceTradersResponse<FactionResponse[], Meta>>(url, { signal, headers: createHeaders() })
+    },
+  })
 
 export const getFactionByIdQuery = {
   getQueryKey: (args: { factionSymbol: string }) => [{ scope: 'factions', entity: 'item' }, args] as const,

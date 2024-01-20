@@ -16,10 +16,7 @@ import { type RegisterSchema, registerValidation } from './register.validation'
 const FactionField = () => {
   const { t } = useTranslation()
   const methods = useFormContext<RegisterSchema>()
-  const { isSuccess, isPending, data } = useQuery({
-    queryKey: getFactionListQuery.getQueryKey(),
-    queryFn: getFactionListQuery.queryFn,
-  })
+  const { isSuccess, isPending, data } = useQuery(getFactionListQuery())
 
   if (isPending) {
     return <Select.Skeleton label={<label className="label">{t('faction.label')}</label>} />
