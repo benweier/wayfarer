@@ -31,7 +31,7 @@ export const Navigation = () => {
             className="relative flex w-full max-w-full items-center gap-4 rounded-md border-2 border-blue-600 px-3 py-2 font-medium text-white transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-800"
           >
             {item.auth && !isAuthenticated && (
-              <span className="absolute bottom-0 right-0 rounded-full bg-blue-100 p-1 text-blue-950">
+              <span className="absolute left-0 top-0 rounded-full bg-blue-100 p-1 text-blue-950">
                 <MenuIcon id="key" className="size-2" aria-hidden />
               </span>
             )}
