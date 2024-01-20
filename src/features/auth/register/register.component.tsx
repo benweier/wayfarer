@@ -1,4 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import { Controller, FormProvider, useForm, useFormContext } from 'react-hook-form'
@@ -11,7 +11,7 @@ import { createAgentMutation } from '@/services/api/spacetraders/auth'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
 import { AccessTokenDialog } from './access-token-dialog.component'
 import { FactionInfo } from './faction-info.component'
-import { type RegisterSchema, registerValidation } from './register.validation'
+import { RegisterSchema } from './register.schema'
 
 const FactionField = () => {
   const { t } = useTranslation()
@@ -55,7 +55,7 @@ const FactionField = () => {
 export const Register = () => {
   const { t } = useTranslation()
   const methods = useForm<RegisterSchema>({
-    resolver: zodResolver(registerValidation),
+    resolver: valibotResolver(RegisterSchema),
   })
   const { mutateAsync, isPending, isSuccess, data } = useMutation({
     mutationKey: createAgentMutation.getMutationKey(),

@@ -1,5 +1,5 @@
 import { ErrorMessage } from '@hookform/error-message'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useMutation } from '@tanstack/react-query'
 import { Link, RouteApi, useNavigate } from '@tanstack/react-router'
 import { useCallback } from 'react'
@@ -9,7 +9,7 @@ import { Button } from '@/components/button'
 import { ROUTES } from '@/config/routes'
 import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import { useAuthStore } from '@/store/auth'
-import { type LoginSchema, loginValidation } from './login.validation'
+import { LoginSchema } from './login.schema'
 
 const loginRoute = new RouteApi({ id: ROUTES.LOGIN })
 
@@ -17,9 +17,9 @@ export const Login = () => {
   const { redirect } = loginRoute.useSearch()
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { signin } = useAuthStore((state) => state.actions)
+  const signin = useAuthStore((state) => state.actions.signin)
   const methods = useForm<LoginSchema>({
-    resolver: zodResolver(loginValidation),
+    resolver: valibotResolver(LoginSchema),
   })
   const { mutateAsync, isPending } = useMutation({
     mutationKey: getAgentMutation.getMutationKey(),
