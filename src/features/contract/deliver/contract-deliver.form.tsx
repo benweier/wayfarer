@@ -1,11 +1,11 @@
-import { yupResolver } from '@hookform/resolvers/yup'
+import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type ContractDelivery, type ShipResponse } from '@/types/spacetraders'
-import { type DeliverContractSchema, validation } from './contract-deliver.validation'
+import { DeliverContractSchema } from './contract-deliver.schema'
 
 const getShipOption: ShipSelectItemReducer = (ships, ship) => {
   return ships.set(ship.symbol, {
@@ -33,7 +33,7 @@ export const ContractDeliverForm = ({
 }) => {
   const { t } = useTranslation()
   const methods = useForm<DeliverContractSchema>({
-    resolver: yupResolver(validation),
+    resolver: valibotResolver(DeliverContractSchema),
   })
 
   return (

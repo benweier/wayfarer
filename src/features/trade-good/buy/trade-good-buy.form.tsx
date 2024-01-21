@@ -1,4 +1,4 @@
-import { yupResolver } from '@hookform/resolvers/yup'
+import { valibotResolver } from '@hookform/resolvers/valibot'
 import { cx } from 'class-variance-authority'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { Button } from '@/components/button'
@@ -7,8 +7,8 @@ import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { useAuthStore } from '@/store/auth'
 import { formatNumber } from '@/utilities/number.helper'
+import { TradeGoodBuySchema } from './trade-good-buy.schema'
 import { type TradeGoodBuyFormProps } from './trade-good-buy.types'
-import { type TradeGoodBuySchema, validation } from './trade-good-buy.validation'
 
 const getShipItem: ShipSelectItemReducer = (ships, ship) => {
   const disabled = ship.cargo.units >= ship.cargo.capacity
@@ -71,9 +71,11 @@ const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {
 export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps) => {
   const waypoint = useWaypointResponse()
   const methods = useForm<TradeGoodBuySchema>({
-    defaultValues: { ship: ship?.symbol, item: good.symbol },
-    resolver: yupResolver(validation),
-    context: { good },
+    defaultValues: {
+      ship: ship?.symbol,
+      item: good.symbol,
+    },
+    resolver: valibotResolver(TradeGoodBuySchema({ max: good.tradeVolume })),
   })
 
   return (

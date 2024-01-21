@@ -1,4 +1,4 @@
-import { yupResolver } from '@hookform/resolvers/yup'
+import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -7,8 +7,8 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { formatNumber } from '@/utilities/number.helper'
+import { TradeGoodSellSchema } from './trade-good-sell.schema'
 import { type TradeGoodSellFormProps } from './trade-good-sell.types'
-import { type TradeGoodSellSchema, validation } from './trade-good-sell.validation'
 
 const SubmitPurchase = () => {
   const { isSubmitting, isValid } = useFormState()
@@ -38,7 +38,11 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
   const waypoint = useWaypointResponse()
   const methods = useForm<TradeGoodSellSchema>({
     defaultValues: { ship: ship?.symbol, item: good.symbol },
-    resolver: yupResolver(validation),
+    resolver: valibotResolver(
+      TradeGoodSellSchema({
+        max: ship?.cargo.inventory.find((item) => item.symbol === good.symbol)?.units ?? 999,
+      }),
+    ),
   })
   const getShipItem: ShipSelectItemReducer = useCallback(
     (ships, ship) => {
