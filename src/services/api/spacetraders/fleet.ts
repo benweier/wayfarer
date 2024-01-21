@@ -274,6 +274,30 @@ export const createShipRefineMutation = {
   },
 }
 
+export const createShipTransferCargoMutation = {
+  getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'transfer-cargo' }, args],
+  mutationFn: async ({
+    shipSymbol,
+    itemSymbol,
+    units,
+  }: {
+    shipSymbol: {
+      from: string
+      to: string
+    }
+    itemSymbol: string
+    units: number
+  }) => {
+    const url = new URL(`my/ships/${shipSymbol.from.toUpperCase()}/transfer`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ cargo: ShipCargo }>>(
+      url,
+      { shipSymbol: shipSymbol.to, tradeSymbol: itemSymbol, units },
+      { headers: createHeaders() },
+    )
+  },
+}
+
 export const createShipJettisonMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'jettison' }, args],
   mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
