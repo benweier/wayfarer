@@ -1,6 +1,6 @@
 import { type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { type MarketTradeGood, type ShipResponse } from '@/types/spacetraders'
-import { type TradeGoodBuySchema } from './trade-good-buy.validation'
+import { type TradeGoodBuySchema } from './trade-good-buy.schema'
 
 export type TradeGoodBuyProps = {
   good?: MarketTradeGood
