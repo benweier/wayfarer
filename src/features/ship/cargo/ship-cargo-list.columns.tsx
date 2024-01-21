@@ -72,8 +72,8 @@ export const columns = [
           <Tooltip.Provider delayDuration={100}>
             <Tooltip.Root>
               <Tooltip.Trigger asChild>
-                <button>
-                  <AppIcon id="help" className="text-secondary size-5" />
+                <button className="btn btn-icon">
+                  <AppIcon id="help" className="text-secondary size-4" />
                 </button>
               </Tooltip.Trigger>
               <Tooltip.Portal>
