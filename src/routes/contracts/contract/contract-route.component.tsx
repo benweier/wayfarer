@@ -4,11 +4,11 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
 import { ContractDetail } from '@/features/contract/detail'
 
-const contractRoute = new RouteApi({ id: ROUTES.CONTRACT })
+const api = new RouteApi({ id: ROUTES.CONTRACT })
 
 export const ContractRoute = () => {
   const { t } = useTranslation()
-  const { contractId } = contractRoute.useParams()
+  const { contractId } = api.useParams()
 
   return (
     <div className="space-y-4 p-4">

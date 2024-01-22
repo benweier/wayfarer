@@ -4,11 +4,11 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
 import { AgentDetail } from '@/features/agent/detail'
 
-const agentRoute = new RouteApi({ id: ROUTES.AGENT })
+const api = new RouteApi({ id: ROUTES.AGENT })
 
 export const AgentRoute = () => {
   const { t } = useTranslation()
-  const { agentSymbol } = agentRoute.useParams()
+  const { agentSymbol } = api.useParams()
 
   return (
     <div className="space-y-4 p-4">

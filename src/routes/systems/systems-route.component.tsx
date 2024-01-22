@@ -4,12 +4,12 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
 import { SystemList, SystemListFallback } from '@/features/system/list'
 
-const systemsRoute = new RouteApi({ id: ROUTES.SYSTEMS })
+const api = new RouteApi({ id: ROUTES.SYSTEMS })
 
 export const SystemsRoute = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { page } = systemsRoute.useSearch()
+  const { page } = api.useSearch()
 
   return (
     <div className="space-y-4 p-4">

@@ -11,10 +11,10 @@ import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import { useAuthStore } from '@/store/auth'
 import { LoginSchema } from './login.schema'
 
-const loginRoute = new RouteApi({ id: ROUTES.LOGIN })
+const api = new RouteApi({ id: ROUTES.LOGIN })
 
 export const Login = () => {
-  const { redirect } = loginRoute.useSearch()
+  const { redirect } = api.useSearch()
   const navigate = useNavigate()
   const { t } = useTranslation()
   const signin = useAuthStore((state) => state.actions.signin)
