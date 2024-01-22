@@ -74,7 +74,7 @@ export const TradeGoodSell = ({
     >
       <div className="space-y-8">
         <div className="text-title">
-          Sell: <span className="font-light">{t(good.symbol, { ns: 'spacetraders.trade_good' })}</span>
+          {t('market.sell')}: <span className="font-light">{t(good.symbol, { ns: 'spacetraders.trade_good' })}</span>
         </div>
 
         <TradeGoodInfo price={good.sellPrice} volume={good.tradeVolume} supply={good.supply} />

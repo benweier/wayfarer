@@ -17,7 +17,7 @@ export const Discard = ({ survey }: { survey: SurveyResponse }) => {
       onClick={() => {
         removeSurvey(survey.signature)
       }}
-      title={t('ship.action.discard_survey')}
+      title={t('surveys.discard')}
     >
       <AppIcon id="trash" className="size-5" />
     </Button>

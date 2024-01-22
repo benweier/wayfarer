@@ -11,7 +11,9 @@ export const CargoTransfer = ({ ship, item }: { ship: ShipResponse; item: CargoI
 
   return (
     <div className="grid gap-8">
-      <h3 className="text-title">{t('general.are_you_sure')}</h3>
+      <h3 className="text-title">{t('cargo.transfer.heading')}</h3>
+
+      <p>{t('cargo.transfer.message')}</p>
 
       <div className="flex gap-2">
         <ShipActions.TransferCargo ship={ship} item={item}>
@@ -30,7 +32,7 @@ export const CargoTransfer = ({ ship, item }: { ship: ShipResponse; item: CargoI
             >
               <div className="flex gap-2">
                 <Button type="submit" intent="confirm">
-                  Transfer
+                  {t('cargo.transfer.confirm', { context: 'action' })}
                 </Button>
                 <Button
                   onClick={() => {

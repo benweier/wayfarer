@@ -1,6 +1,7 @@
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { type PropsWithChildren } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -27,6 +28,7 @@ export const CargoTransferForm = ({
   onSubmit,
   children,
 }: PropsWithChildren<{ fromShip: ShipResponse; onSubmit: (values: CargoTransferSchema) => void }>) => {
+  const { t } = useTranslation()
   const methods = useForm<CargoTransferSchema>({
     resolver: valibotResolver(CargoTransferSchema),
   })
@@ -61,7 +63,7 @@ export const CargoTransferForm = ({
         </div>
 
         <div>
-          <label className="label">Quantity</label>
+          <label className="label">{t('general.fields.quantity')}</label>
           <input
             {...methods.register('quantity', {
               valueAsNumber: true,

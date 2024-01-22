@@ -1,6 +1,7 @@
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { cx } from 'class-variance-authority'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
@@ -35,15 +36,17 @@ const getShipItem: ShipSelectItemReducer = (ships, ship) => {
   })
 }
 const TradeGoodBuySubmit = () => {
+  const { t } = useTranslation()
   const { isSubmitting, isValid } = useFormState()
 
   return (
     <Button intent="primary" type="submit" className="uppercase" disabled={isSubmitting || !isValid}>
-      Buy
+      {t('market.buy')}
     </Button>
   )
 }
 const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {
+  const { t } = useTranslation()
   const { control } = useFormContext<TradeGoodBuySchema>()
   const { isAuthenticated, agent } = useAuthStore()
   const quantity = useWatch({ control, name: 'quantity' })
@@ -56,12 +59,12 @@ const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {
           'text-rose-500': quantity * perUnit > credits,
         })}
       >
-        <div className="text-secondary text-sm">Purchase Price</div>
+        <div className="text-secondary text-sm">{t('market.purchase_price')}</div>
         <div className="truncate text-xl font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
       </div>
 
       <div>
-        <div className="text-secondary text-sm">Available Credits</div>
+        <div className="text-secondary text-sm">{t('market.available_credits')}</div>
         <div className="truncate text-xl font-bold">{formatNumber(credits)}</div>
       </div>
     </div>
@@ -69,6 +72,7 @@ const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {
 }
 
 export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps) => {
+  const { t } = useTranslation()
   const waypoint = useWaypointResponse()
   const methods = useForm<TradeGoodBuySchema>({
     defaultValues: {
@@ -103,7 +107,7 @@ export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps
 
         <div>
           <label htmlFor="quantity" className="label">
-            Quantity
+            {t('general.fields.quantity')}
           </label>
           <input
             {...methods.register('quantity', {

@@ -1,4 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import * as Select from '@/components/select'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { defaultGetShipItem } from './ship-item-reducer.helper'
@@ -9,12 +10,13 @@ export const ShipSelectField = ({
   onChange,
   getShipItem = defaultGetShipItem,
 }: ShipSelectFieldProps) => {
+  const { t } = useTranslation()
   const { data } = useSuspenseQuery({ ...getShipListQuery(), select: getShipList })
   const state: Map<string, ShipSelectItem> = data.ships.reduce<Map<string, ShipSelectItem>>(getShipItem, new Map())
 
   return (
     <Select.Field
-      label={<Select.Label>Ship</Select.Label>}
+      label={<Select.Label>{t('general.fields.ship')}</Select.Label>}
       by={(a, z) => a?.symbol === z?.symbol}
       onChange={onChange}
       getItemKey={(ship) => ship.symbol}

@@ -11,22 +11,24 @@ import { TradeGoodSellSchema } from './trade-good-sell.schema'
 import { type TradeGoodSellFormProps } from './trade-good-sell.types'
 
 const SubmitPurchase = () => {
+  const { t } = useTranslation()
   const { isSubmitting, isValid } = useFormState()
 
   return (
     <Button intent="primary" type="submit" className="uppercase" disabled={isSubmitting || !isValid}>
-      Sell
+      {t('market.sell')}
     </Button>
   )
 }
 const SellPrice = ({ perUnit }: { perUnit: number }) => {
+  const { t } = useTranslation()
   const { control } = useFormContext<TradeGoodSellSchema>()
   const quantity = useWatch({ control, name: 'quantity' })
 
   return (
     <div className="flex flex-wrap items-center gap-12">
       <div className="[max-width:50%]">
-        <div className="text-secondary text-sm">Sell Price</div>
+        <div className="text-secondary text-sm">{t('market.sell_price')}</div>
         <div className="truncate text-xl font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
       </div>
     </div>
@@ -102,7 +104,7 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
 
         <div>
           <label htmlFor="quantity" className="label">
-            Quantity
+            {t('general.fields.quantity')}
           </label>
           <input
             {...methods.register('quantity', {

@@ -136,6 +136,8 @@
       "sort_by_property|desc": "Sort by $t(general.header.{{id}}) ($t(general.sorting.desc))"
     },
     "fields": {
+      "ship": "Ship",
+      "quantity": "Quantity",
       "optional": "(optional)"
     }
   },
@@ -177,7 +179,12 @@
     "exchange": "Exchange",
     "exchange_empty": "No exchanges available",
     "not_available_heading": "This waypoint does not have a market",
-    "not_available_text": "You can only buy and sell cargo at a waypoint with a market"
+    "not_available_text": "You can only buy and sell cargo at a waypoint with a market",
+    "buy": "Buy",
+    "sell": "Sell",
+    "purchase_price": "Purchase Price",
+    "sell_price": "Sell Price",
+    "available_credits": "Available Credits"
   },
   "shipyard": {
     "label": "Shipyard"
@@ -203,10 +210,8 @@
     "survey_extract": "Survey/Extract",
     "status": "Status",
     "action": {
-      "buy": "Buy ({{price}})",
       "confirm_jettison|action": "Confirm Jettison",
       "confirm_jettison|text": "Destroy: {{units}}x $t(spacetraders.trade_good:{{itemSymbol}})",
-      "discard_survey": "Discard Survey",
       "dock": "Dock",
       "docking": "Docking",
       "extract|no_survey": "Extract without Survey",
@@ -271,6 +276,14 @@
     "fulfill|action": "Fulfill"
   },
   "surveys": {
-    "label": "Surveys"
+    "label": "Surveys",
+    "discard": "Discard Survey"
+  },
+  "cargo": {
+    "transfer": {
+      "heading": "Transfer Cargo",
+      "message": "Select a target ship and quantity to transfer. Target ship must have enough cargo space available.",
+      "confirm|action": "Confirm Transfer"
+    }
   }
 }
