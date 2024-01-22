@@ -3,7 +3,7 @@ import { startTransition, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
-import { getShipByIdQuery } from '@/services/api/spacetraders'
+import { getShipByIdQuery, getWaypointByIdQuery } from '@/services/api/spacetraders'
 
 export const ShipDetailRefresh = () => {
   const { t } = useTranslation()
@@ -36,7 +36,15 @@ export const ShipDetailRefresh = () => {
         kind="outline"
         size="small"
         disabled={isFetching}
-        onClick={() => client.invalidateQueries({ queryKey: shipByIdQueryKey })}
+        onClick={() => {
+          void client.invalidateQueries({ queryKey: shipByIdQueryKey })
+          void client.invalidateQueries({
+            queryKey: getWaypointByIdQuery({
+              systemSymbol: ship.nav.systemSymbol,
+              waypointSymbol: ship.nav.waypointSymbol,
+            }).queryKey,
+          })
+        }}
       >
         {t('general.refresh')}
       </Button>
