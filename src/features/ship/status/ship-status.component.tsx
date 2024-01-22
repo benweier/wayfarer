@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
-import { WaypointStoreContext } from '@/context/waypoint.context'
+import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -78,7 +78,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
               />
             </div>
           </div>
-          <WaypointStoreContext.Consumer>
+          <WaypointContext.Consumer>
             {(ctx) => (
               <ShipActions.Refuel
                 ship={ship}
@@ -94,7 +94,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
                 )}
               </ShipActions.Refuel>
             )}
-          </WaypointStoreContext.Consumer>
+          </WaypointContext.Consumer>
         </div>
         <div className="rounded-sm bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
           <div className="text-secondary text-right text-xs uppercase">{t('ship.cargo')}</div>

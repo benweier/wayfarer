@@ -3,11 +3,10 @@ import { useNavigate } from '@tanstack/react-router'
 import { Trans, useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
-import { useWaypointResponse } from '@/context/waypoint.context'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
-import { getWaypointMarketQuery } from '@/services/api/spacetraders'
+import { getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { ShipCargoTable } from './ship-cargo-list.table'
 
@@ -15,8 +14,14 @@ export const ShipCargoList = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const ship = useShipResponse()
-  const waypoint = useWaypointResponse()
-  const hasMarketplace = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
+  const waypoint = useQuery(
+    getWaypointByIdQuery({
+      systemSymbol: ship.nav.systemSymbol,
+      waypointSymbol: ship.nav.waypointSymbol,
+    }),
+  )
+  const hasMarketplace =
+    waypoint.isSuccess && waypoint.data.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
   const { data, isSuccess } = useQuery({
     ...getWaypointMarketQuery({
       systemSymbol: ship.nav.systemSymbol,

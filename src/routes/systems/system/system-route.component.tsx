@@ -1,16 +1,18 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { RouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
-import { SystemStore } from '@/context/system.context'
+import { SystemContext } from '@/context/system.context'
 import { SystemDetail } from '@/features/system/detail'
 import { SystemTabs } from '@/features/system/tabs'
+import { getSystemByIdQuery } from '@/services/api/spacetraders'
 
-const systemRoute = new RouteApi({ id: ROUTES.SYSTEM })
+const api = new RouteApi({ id: ROUTES.SYSTEM })
 
 export const SystemRoute = () => {
-  const { systemSymbol } = systemRoute.useParams()
   const { t } = useTranslation()
+  const { systemSymbol } = api.useParams()
+  const system = useSuspenseQuery(getSystemByIdQuery({ systemSymbol }))
 
   return (
     <div key={systemSymbol} className="space-y-4 p-4">
@@ -18,15 +20,11 @@ export const SystemRoute = () => {
         {t('system.label')}: <span className="whitespace-nowrap font-normal">{systemSymbol}</span>
       </h1>
 
-      {systemSymbol && (
-        <QuerySuspenseBoundary>
-          <SystemStore systemSymbol={systemSymbol}>
-            <SystemDetail>
-              <SystemTabs />
-            </SystemDetail>
-          </SystemStore>
-        </QuerySuspenseBoundary>
-      )}
+      <SystemContext.Provider value={system.data.data}>
+        <SystemDetail>
+          <SystemTabs />
+        </SystemDetail>
+      </SystemContext.Provider>
     </div>
   )
 }

@@ -1,8 +1,6 @@
 import { type PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
-import { WaypointStore } from '@/context/waypoint.context'
 import { ShipStatus } from '@/features/ship/status'
 import { ShipTransit } from '@/features/ship/transit'
 import { ShipDetailRefresh } from './ship-detail-refresh.component'
@@ -21,13 +19,9 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
         <ShipDetailRefresh />
       </div>
 
-      <QuerySuspenseBoundary>
-        <WaypointStore systemSymbol={ship.nav.systemSymbol} waypointSymbol={ship.nav.waypointSymbol}>
-          <ShipStatus ship={ship} />
-          <ShipTransit nav={ship.nav} />
-          {children}
-        </WaypointStore>
-      </QuerySuspenseBoundary>
+      <ShipStatus ship={ship} />
+      <ShipTransit nav={ship.nav} />
+      {children}
     </div>
   )
 }

@@ -1,16 +1,29 @@
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
 import { Outlet, RouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
-import { ShipStore } from '@/context/ship.context'
+import { ShipContext } from '@/context/ship.context'
+import { WaypointContext } from '@/context/waypoint.context'
 import { ShipDetail } from '@/features/ship/detail'
 import { ShipTabs } from '@/features/ship/tabs'
+import { getShipByIdQuery, getWaypointByIdQuery } from '@/services/api/spacetraders'
 
-const shipRoute = new RouteApi({ id: ROUTES.SHIP })
+const api = new RouteApi({ id: ROUTES.SHIP })
 
 export const ShipRoute = () => {
-  const { shipSymbol } = shipRoute.useParams()
   const { t } = useTranslation()
+  const { shipSymbol } = api.useParams()
+  const ship = useSuspenseQuery(
+    getShipByIdQuery({
+      shipSymbol,
+    }),
+  )
+  const waypoint = useQuery(
+    getWaypointByIdQuery({
+      systemSymbol: ship.data.data.nav.systemSymbol,
+      waypointSymbol: ship.data.data.nav.waypointSymbol,
+    }),
+  )
 
   return (
     <div key={shipSymbol} className="space-y-4 p-4">
@@ -18,15 +31,15 @@ export const ShipRoute = () => {
         {t('ship.label')}: <span className="font-normal">{shipSymbol}</span>
       </h1>
 
-      <QuerySuspenseBoundary>
-        <ShipStore shipSymbol={shipSymbol}>
+      <ShipContext.Provider value={ship.data.data}>
+        <WaypointContext.Provider value={waypoint.data?.data}>
           <ShipDetail>
             <ShipTabs />
           </ShipDetail>
 
           <Outlet />
-        </ShipStore>
-      </QuerySuspenseBoundary>
+        </WaypointContext.Provider>
+      </ShipContext.Provider>
     </div>
   )
 }

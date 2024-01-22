@@ -1,16 +1,25 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { RouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
-import { WaypointStore } from '@/context/waypoint.context'
+import { WaypointContext } from '@/context/waypoint.context'
 import { WaypointDetail } from '@/features/waypoint/detail'
 import { WaypointTabs } from '@/features/waypoint/tabs'
+import { getWaypointByIdQuery } from '@/services/api/spacetraders'
 
-const waypointRoute = new RouteApi({ id: ROUTES.WAYPOINT })
+const api = new RouteApi({
+  id: ROUTES.WAYPOINT,
+})
 
 export const WaypointRoute = () => {
   const { t } = useTranslation()
-  const { systemSymbol, waypointSymbol } = waypointRoute.useParams()
+  const { systemSymbol, waypointSymbol } = api.useParams()
+  const waypoint = useSuspenseQuery(
+    getWaypointByIdQuery({
+      systemSymbol,
+      waypointSymbol,
+    }),
+  )
 
   return (
     <div key={waypointSymbol} className="space-y-4 p-4">
@@ -18,13 +27,11 @@ export const WaypointRoute = () => {
         {t('waypoint.label')}: <span className="whitespace-nowrap font-normal">{waypointSymbol}</span>
       </h1>
 
-      <QuerySuspenseBoundary>
-        <WaypointStore systemSymbol={systemSymbol} waypointSymbol={waypointSymbol}>
-          <WaypointDetail>
-            <WaypointTabs />
-          </WaypointDetail>
-        </WaypointStore>
-      </QuerySuspenseBoundary>
+      <WaypointContext.Provider value={waypoint.data.data}>
+        <WaypointDetail>
+          <WaypointTabs />
+        </WaypointDetail>
+      </WaypointContext.Provider>
     </div>
   )
 }
