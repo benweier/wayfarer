@@ -1,3 +1,3 @@
-import { Layout } from '@/routes/dashboard'
+import { DashboardLayout } from '@/routes/dashboard'
 
-export const component = Layout
+export const component = DashboardLayout

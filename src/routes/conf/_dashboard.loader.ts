@@ -1,5 +1,5 @@
 import { type QueryClient } from '@tanstack/react-query'
-import { type RouteLoaderFn } from '@tanstack/react-router'
+import { type RouteLoaderFn, defer } from '@tanstack/react-router'
 import { type StoreApi } from 'zustand/vanilla'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { type AuthStore } from '@/store/auth'
@@ -10,5 +10,9 @@ export const loader: RouteLoaderFn<
   { client: QueryClient; auth: StoreApi<AuthStore> },
   { meta: MetaFunction }
 > = ({ context }) => {
-  void context.client.ensureQueryData(getShipListQuery())
+  const ships = context.client.ensureQueryData(getShipListQuery())
+
+  return {
+    ships: defer(ships),
+  }
 }

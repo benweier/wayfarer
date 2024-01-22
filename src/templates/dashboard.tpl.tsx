@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Link, Outlet } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { cx } from 'class-variance-authority'
 import { atom, useAtom } from 'jotai'
 import { Fragment, type PropsWithChildren, Suspense } from 'react'
@@ -33,7 +33,7 @@ const Logout = () => {
   )
 }
 
-export const Layout = ({ children = <Outlet /> }: PropsWithChildren) => {
+export const DashboardTemplate = ({ children }: PropsWithChildren) => {
   const { isAuthenticated } = useAuthStore()
   const { t } = useTranslation()
   const [sidebarState] = useAtom(sidebarAtom)
