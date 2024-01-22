@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery, useSuspenseQuery } from '@tanstack/react-query'
 import { Outlet, RouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '@/config/routes'
@@ -18,12 +18,13 @@ export const ShipRoute = () => {
       shipSymbol,
     }),
   )
-  const waypoint = useQuery(
-    getWaypointByIdQuery({
+  const waypoint = useQuery({
+    ...getWaypointByIdQuery({
       systemSymbol: ship.data.data.nav.systemSymbol,
       waypointSymbol: ship.data.data.nav.waypointSymbol,
     }),
-  )
+    placeholderData: keepPreviousData,
+  })
 
   return (
     <div key={shipSymbol} className="space-y-4 p-4">

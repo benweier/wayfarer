@@ -1,8 +1,10 @@
 import { Link } from '@tanstack/react-router'
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
+import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
@@ -10,6 +12,7 @@ import { type ShipResponse } from '@/types/spacetraders'
 
 export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()
+  const waypoint = useContext(WaypointContext)
 
   return (
     <div className="flex items-start justify-between gap-4">
@@ -23,7 +26,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
           </div>
           <div>
             <div className="text-secondary text-xs uppercase">{t('waypoint.label')}</div>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col items-start">
               <Link
                 to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                 params={{ systemSymbol: ship.nav.systemSymbol, waypointSymbol: ship.nav.waypointSymbol }}
@@ -32,10 +35,20 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
                 {ship.nav.waypointSymbol}
               </Link>
 
-              <div className="flex gap-1">
-                <Badge>{t(ship.nav.status, { ns: 'spacetraders.nav_status' })}</Badge>
-                <Badge>{t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}</Badge>
-              </div>
+              {waypoint && (
+                <div>
+                  <WaypointTag type={waypoint.type}>
+                    {t(waypoint.type, { ns: 'spacetraders.waypoint_type' })}
+                  </WaypointTag>
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            <div className="text-secondary text-xs uppercase">{t('ship.status')}</div>
+            <div className="flex h-6 items-center gap-1">
+              <Badge>{t(ship.nav.status, { ns: 'spacetraders.nav_status' })}</Badge>
+              <Badge>{t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}</Badge>
             </div>
             <div className="flex gap-2">
               {ship.nav.status === 'DOCKED' ? (
