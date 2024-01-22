@@ -138,8 +138,8 @@ dependencies:
     specifier: ^3.22.4
     version: 3.22.4
   zustand:
-    specifier: ^4.5.0
-    version: 4.5.0(@types/react@18.2.48)(immer@10.0.3)(react@18.2.0)
+    specifier: ^5.0.0-alpha.2
+    version: 5.0.0-alpha.2(@types/react@18.2.48)(immer@10.0.3)(react@18.2.0)
 
 devDependencies:
   '@mdx-js/rollup':
@@ -10756,6 +10756,29 @@ packages:
       immer: 10.0.3
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  /zustand@5.0.0-alpha.2(@types/react@18.2.48)(immer@10.0.3)(react@18.2.0):
+    resolution: {integrity: sha512-1l1GhnDG6n+QLhfLToGQGt4Y1cjJdZFXe7PIxoFqwB+vLPdSBqpwBpwRUeU1j+EAfMZA520DBOVi0YX0WZxrsQ==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0'
+      immer: '>=9.0.6'
+      react: '>=18.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.48
+      immer: 10.0.3
+      react: 18.2.0
     dev: false
 
   /zwitch@2.0.4:

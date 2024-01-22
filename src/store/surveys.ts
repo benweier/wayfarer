@@ -1,9 +1,9 @@
 import { produce } from 'immer'
-import { useStore } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { useStore } from 'zustand/react'
 import { createStore } from 'zustand/vanilla'
-import { type BoundStoreSelector } from '@/store/store.types'
 import { type SurveyResponse } from '@/types/spacetraders'
+import { type BoundStoreSelector } from './store.types'
 
 export type SurveyState = {
   surveys: SurveyResponse[]

@@ -1,4 +1,4 @@
-import { useStore } from 'zustand'
+import { useStore } from 'zustand/react'
 import { createStore } from 'zustand/vanilla'
 import { client } from '@/services/query-client'
 import { type AgentResponse } from '@/types/spacetraders'
