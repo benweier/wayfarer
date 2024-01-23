@@ -1,7 +1,6 @@
 import { Tab } from '@headlessui/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
-import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
 import { formatNumber } from '@/utilities/number.helper'
@@ -14,8 +13,8 @@ export const LeaderboardList = () => {
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
-        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('leaderboard.most_credits')}</Tab>
-        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('leaderboard.most_charted')}</Tab>
+        <Tab className="group tab ui-selected:selected">{t('leaderboard.most_credits')}</Tab>
+        <Tab className="group tab ui-selected:selected">{t('leaderboard.most_charted')}</Tab>
       </Tab.List>
 
       <Tab.Panels>

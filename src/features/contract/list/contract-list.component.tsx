@@ -1,6 +1,5 @@
 import { Tab } from '@headlessui/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import * as ContractActions from '@/features/contract/actions'
@@ -88,13 +87,13 @@ export const ContractList = () => {
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
-        <Tab disabled={contracts.accepted.length === 0} className={({ selected }) => cx('group tab', { selected })}>
+        <Tab className="group tab ui-selected:selected">
           {t('contracts.accepted')} ({contracts.accepted.length})
         </Tab>
-        <Tab disabled={contracts.available.length === 0} className={({ selected }) => cx('group tab', { selected })}>
+        <Tab className="group tab ui-selected:selected">
           {t('contracts.available')} ({contracts.available.length})
         </Tab>
-        <Tab disabled={contracts.completed.length === 0} className={({ selected }) => cx('group tab', { selected })}>
+        <Tab className="group tab ui-selected:selected">
           {t('contracts.completed')} ({contracts.completed.length})
         </Tab>
       </Tab.List>

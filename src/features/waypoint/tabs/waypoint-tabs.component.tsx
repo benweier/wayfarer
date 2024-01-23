@@ -1,5 +1,4 @@
 import { Tab } from '@headlessui/react'
-import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
@@ -28,15 +27,12 @@ export const WaypointTabs = () => {
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
-        <Tab
-          disabled={!hasMarket}
-          className={({ selected }) => cx('group tab', { selected, 'opacity-30': !hasMarket })}
-        >
+        <Tab disabled={!hasMarket} className="group tab ui-selected:selected disabled:opacity-30">
           {t('market.label')}
         </Tab>
-        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('fleet.label')}</Tab>
-        {hasShipyard && <Tab className={({ selected }) => cx('group tab', { selected })}>{t('shipyard.label')}</Tab>}
-        {isJumpGate && <Tab className={({ selected }) => cx('group tab', { selected })}>{t('jumpgate.label')}</Tab>}
+        <Tab className="group tab ui-selected:selected">{t('fleet.label')}</Tab>
+        {hasShipyard && <Tab className="group tab ui-selected:selected">{t('shipyard.label')}</Tab>}
+        {isJumpGate && <Tab className="group tab ui-selected:selected">{t('jumpgate.label')}</Tab>}
       </Tab.List>
 
       <Tab.Panels>

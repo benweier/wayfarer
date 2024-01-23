@@ -1,5 +1,4 @@
 import { Tab } from '@headlessui/react'
-import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
@@ -17,9 +16,9 @@ export const ShipTabs = () => {
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
-        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('ship.cargo')}</Tab>
-        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('ship.survey_extract')}</Tab>
-        <Tab className={({ selected }) => cx('group tab', { selected })}>{t('ship.loadout.label')}</Tab>
+        <Tab className="group tab ui-selected:selected">{t('ship.cargo')}</Tab>
+        <Tab className="group tab ui-selected:selected">{t('ship.survey_extract')}</Tab>
+        <Tab className="group tab ui-selected:selected">{t('ship.loadout.label')}</Tab>
       </Tab.List>
 
       <Tab.Panels>
