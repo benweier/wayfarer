@@ -63,35 +63,29 @@ export const TransferCargo = (
       }
       // Update the destination ship cargo
       if (toShip && fromShipCargoItem) {
-        const toShipCargo = toShip.data.cargo
         // Find an existing item in the destination ship cargo
-        const toShipItemIndex = toShipCargo.inventory.findIndex((item) => item.symbol === itemSymbol)
+        const toShipItemIndex = toShip.data.cargo.inventory.findIndex((item) => item.symbol === itemSymbol)
 
-        if (toShipItemIndex > -1) {
-          // If the item exists in the destination ship cargo, update the units
-          client.setQueryData(
-            toShipQueryKey,
-            produce(toShip, (draft) => {
-              draft.data.cargo.units = toShip.data.cargo.units + units
+        client.setQueryData(
+          toShipQueryKey,
+          produce(toShip, (draft) => {
+            draft.data.cargo.units = toShip.data.cargo.units + units
+
+            if (toShipItemIndex > -1) {
+              // If the item exists in the destination ship cargo, update the units
               draft.data.cargo.inventory[toShipItemIndex].units =
                 toShip.data.cargo.inventory[toShipItemIndex].units + units
-            }),
-          )
-        } else {
-          // Otherwise, add a new item to the destination ship cargo using the source ship item
-          client.setQueryData(
-            toShipQueryKey,
-            produce(toShip, (draft) => {
-              draft.data.cargo.units = toShip.data.cargo.units + units
+            } else {
+              // Otherwise, add a new item to the destination ship cargo using the source ship item
               draft.data.cargo.inventory.push({
                 symbol: fromShipCargoItem.symbol,
                 name: fromShipCargoItem.name,
                 description: fromShipCargoItem.description,
                 units: units,
               })
-            }),
-          )
-        }
+            }
+          }),
+        )
       }
 
       if (!ships) return
