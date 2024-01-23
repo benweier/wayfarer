@@ -41,7 +41,7 @@ export const TransferCargo = (
     onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
-      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol.to) ?? -1
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol.from) ?? -1
 
       if (ship) {
         client.setQueryData(
