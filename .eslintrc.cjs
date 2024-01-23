@@ -98,6 +98,7 @@ module.exports = {
     ],
     '@typescript-eslint/unbound-method': 'off',
     'sonarjs/no-duplicate-string': ['error', { threshold: 5 }],
+    'sonarjs/cognitive-complexity': ['error', 20],
   },
   ignorePatterns: ['src/routes/route-tree.gen.ts'],
   overrides: [
