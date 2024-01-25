@@ -1,13 +1,7 @@
-import { FileRoute } from '@tanstack/react-router'
-import { object, optional, parse, string } from 'valibot'
+import { createFileRoute } from '@tanstack/react-router'
 
-const SearchParamsSchema = object({
-  redirect: optional(string()),
-})
 const meta: MetaFunction = (t) => [{ title: t('auth.login.title', { ns: 'meta' }) }]
 
-export const Route = new FileRoute('/_auth/login').createRoute({
-  validateSearch: (search) => parse(SearchParamsSchema, search),
-  beforeLoad: ({ search }) => ({ meta, search }),
-  pendingComponent: () => null,
+export const Route = createFileRoute('/_auth/login')({
+  beforeLoad: () => ({ meta }),
 })

@@ -1,7 +1,22 @@
-import { FileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { meta } from '@/routes/fleet/ship/ship-route.meta'
+import { getShipByIdQuery, getWaypointByIdQuery } from '@/services/api/spacetraders'
 
-export const Route = new FileRoute('/_dashboard/_authenticated/fleet/$shipSymbol').createRoute({
+export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymbol')({
   parseParams: ({ shipSymbol }) => ({ shipSymbol: shipSymbol.toUpperCase() }),
   beforeLoad: () => ({ meta }),
+  loader: async ({ context, params }) => {
+    const ship = await context.client.ensureQueryData(getShipByIdQuery({ shipSymbol: params.shipSymbol }))
+    const waypoint = await context.client.ensureQueryData(
+      getWaypointByIdQuery({
+        systemSymbol: ship.data.nav.systemSymbol,
+        waypointSymbol: ship.data.nav.waypointSymbol,
+      }),
+    )
+
+    return {
+      ship,
+      waypoint,
+    }
+  },
 })

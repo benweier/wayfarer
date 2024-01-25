@@ -1,6 +1,6 @@
-import { FileRoute, Navigate, redirect } from '@tanstack/react-router'
+import { Navigate, createFileRoute, redirect } from '@tanstack/react-router'
 
-export const Route = new FileRoute('/_auth/logout').createRoute({
+export const Route = createFileRoute('/_auth/logout')({
   beforeLoad: ({ context }) => {
     const auth = context.auth.getState()
 

@@ -1,5 +1,5 @@
-import { FileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = new FileRoute('/_dashboard/_authenticated/fleet/$shipSymbol/_overlay').createRoute({
+export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymbol/_overlay')({
   pendingComponent: () => null,
 })

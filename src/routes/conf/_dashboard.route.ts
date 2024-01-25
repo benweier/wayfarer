@@ -1,7 +1,14 @@
-import { FileRoute } from '@tanstack/react-router'
+import { createFileRoute, defer } from '@tanstack/react-router'
+import { meta } from '@/routes/dashboard/dashboard-layout.meta'
+import { getShipListQuery } from '@/services/api/spacetraders'
 
-const meta: MetaFunction = (t) => [{ title: t('dashboard.title', { ns: 'meta' }) }]
-
-export const Route = new FileRoute('/_dashboard').createRoute({
+export const Route = createFileRoute('/_dashboard')({
   beforeLoad: () => ({ meta }),
+  loader: ({ context }) => {
+    const ships = context.client.ensureQueryData(getShipListQuery())
+
+    return {
+      ships: defer(ships),
+    }
+  },
 })

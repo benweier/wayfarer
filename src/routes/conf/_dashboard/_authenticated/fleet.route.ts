@@ -1,3 +1,5 @@
-import { FileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute } from '@tanstack/react-router'
 
-export const Route = new FileRoute('/_dashboard/_authenticated/fleet').createRoute({})
+export const Route = createFileRoute('/_dashboard/_authenticated/fleet')({
+  component: Outlet,
+})
