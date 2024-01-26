@@ -4,6 +4,7 @@ import { authStore } from '@/store/auth'
 import {
   type AgentResponse,
   type ChartResponse,
+  type ContractResponse,
   type CooldownResponse,
   type ExtractResponse,
   type FuelResponse,
@@ -346,5 +347,14 @@ export const createShipRemoveMountMutation = {
       SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; mounts: ShipMount[] }>,
       { symbol: string }
     >(url, { symbol: mountSymbol }, { headers: createHeaders() })
+  },
+}
+
+export const createShipNegotiateContractMutation = {
+  getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'negotiate-contract' }, args],
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol}/negotiate/contract`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ contract: ContractResponse }>>(url, undefined, { headers: createHeaders() })
   },
 }
