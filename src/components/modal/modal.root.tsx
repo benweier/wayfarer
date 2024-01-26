@@ -50,7 +50,7 @@ export const Root = ({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-90"
           >
-            <div className="flex min-h-full items-center justify-center p-5">
+            <div className="flex justify-center p-6">
               <Dialog.Panel
                 className={cx(
                   'transform overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-6 outline-none ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-900 dark:ring-zinc-50/10',
