@@ -35,7 +35,7 @@ export const CargoTransferForm = ({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} className="grid gap-8">
+      <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-8">
         <div>
           <Controller
             control={methods.control}
