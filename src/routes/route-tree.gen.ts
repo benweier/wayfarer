@@ -10,22 +10,22 @@ import { Route as IndexRouteImport } from './conf/index.route'
 import { Route as DashboardSystemsRouteImport } from './conf/_dashboard/systems.route'
 import { Route as DashboardLeaderboardRouteImport } from './conf/_dashboard/leaderboard.route'
 import { Route as DashboardAgentsRouteImport } from './conf/_dashboard/agents.route'
-import { Route as DashboardauthenticatedRouteImport } from './conf/_dashboard/_authenticated.route'
+import { Route as DashboardAuthenticatedRouteImport } from './conf/_dashboard/_authenticated.route'
 import { Route as AuthRegisterRouteImport } from './conf/_auth/register.route'
 import { Route as AuthLogoutRouteImport } from './conf/_auth/logout.route'
 import { Route as AuthLoginRouteImport } from './conf/_auth/login.route'
 import { Route as DashboardSystemsIndexRouteImport } from './conf/_dashboard/systems/index.route'
 import { Route as DashboardAgentsIndexRouteImport } from './conf/_dashboard/agents/index.route'
 import { Route as DashboardAgentsAgentSymbolRouteImport } from './conf/_dashboard/agents/$agentSymbol.route'
-import { Route as DashboardauthenticatedSurveysRouteImport } from './conf/_dashboard/_authenticated/surveys.route'
-import { Route as DashboardauthenticatedFleetRouteImport } from './conf/_dashboard/_authenticated/fleet.route'
-import { Route as DashboardauthenticatedContractsRouteImport } from './conf/_dashboard/_authenticated/contracts.route'
+import { Route as DashboardAuthenticatedSurveysRouteImport } from './conf/_dashboard/_authenticated/surveys.route'
+import { Route as DashboardAuthenticatedFleetRouteImport } from './conf/_dashboard/_authenticated/fleet.route'
+import { Route as DashboardAuthenticatedContractsRouteImport } from './conf/_dashboard/_authenticated/contracts.route'
 import { Route as DashboardSystemsSystemSymbolIndexRouteImport } from './conf/_dashboard/systems/$systemSymbol/index.route'
-import { Route as DashboardauthenticatedFleetIndexRouteImport } from './conf/_dashboard/_authenticated/fleet/index.route'
-import { Route as DashboardauthenticatedFleetShipSymbolRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol.route'
+import { Route as DashboardAuthenticatedFleetIndexRouteImport } from './conf/_dashboard/_authenticated/fleet/index.route'
+import { Route as DashboardAuthenticatedFleetShipSymbolRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol.route'
 import { Route as DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport } from './conf/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.route'
-import { Route as DashboardauthenticatedFleetShipSymboloverlayRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.route'
-import { Route as DashboardauthenticatedFleetShipSymboloverlayMarketRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.route'
+import { Route as DashboardAuthenticatedFleetShipSymbolOverlayRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.route'
+import { Route as DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.route'
 
 // Create Virtual Routes
 
@@ -65,8 +65,8 @@ const DashboardAgentsRouteRoute = DashboardAgentsRouteImport.update({
   getParentRoute: () => DashboardRouteRoute,
 } as any)
 
-const DashboardauthenticatedRouteRoute =
-  DashboardauthenticatedRouteImport.update({
+const DashboardAuthenticatedRouteRoute =
+  DashboardAuthenticatedRouteImport.update({
     id: '/_authenticated',
     getParentRoute: () => DashboardRouteRoute,
   } as any)
@@ -110,26 +110,26 @@ const DashboardAgentsAgentSymbolRouteRoute =
     import('./conf/_dashboard/agents/$agentSymbol.lazy').then((d) => d.Route),
   )
 
-const DashboardauthenticatedSurveysRouteRoute =
-  DashboardauthenticatedSurveysRouteImport.update({
+const DashboardAuthenticatedSurveysRouteRoute =
+  DashboardAuthenticatedSurveysRouteImport.update({
     path: '/surveys',
-    getParentRoute: () => DashboardauthenticatedRouteRoute,
+    getParentRoute: () => DashboardAuthenticatedRouteRoute,
   } as any).lazy(() =>
     import('./conf/_dashboard/_authenticated/surveys.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const DashboardauthenticatedFleetRouteRoute =
-  DashboardauthenticatedFleetRouteImport.update({
+const DashboardAuthenticatedFleetRouteRoute =
+  DashboardAuthenticatedFleetRouteImport.update({
     path: '/fleet',
-    getParentRoute: () => DashboardauthenticatedRouteRoute,
+    getParentRoute: () => DashboardAuthenticatedRouteRoute,
   } as any)
 
-const DashboardauthenticatedContractsRouteRoute =
-  DashboardauthenticatedContractsRouteImport.update({
+const DashboardAuthenticatedContractsRouteRoute =
+  DashboardAuthenticatedContractsRouteImport.update({
     path: '/contracts',
-    getParentRoute: () => DashboardauthenticatedRouteRoute,
+    getParentRoute: () => DashboardAuthenticatedRouteRoute,
   } as any).lazy(() =>
     import('./conf/_dashboard/_authenticated/contracts.lazy').then(
       (d) => d.Route,
@@ -146,20 +146,20 @@ const DashboardSystemsSystemSymbolIndexRouteRoute =
     ),
   )
 
-const DashboardauthenticatedFleetIndexRouteRoute =
-  DashboardauthenticatedFleetIndexRouteImport.update({
+const DashboardAuthenticatedFleetIndexRouteRoute =
+  DashboardAuthenticatedFleetIndexRouteImport.update({
     path: '/',
-    getParentRoute: () => DashboardauthenticatedFleetRouteRoute,
+    getParentRoute: () => DashboardAuthenticatedFleetRouteRoute,
   } as any).lazy(() =>
     import('./conf/_dashboard/_authenticated/fleet/index.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const DashboardauthenticatedFleetShipSymbolRouteRoute =
-  DashboardauthenticatedFleetShipSymbolRouteImport.update({
+const DashboardAuthenticatedFleetShipSymbolRouteRoute =
+  DashboardAuthenticatedFleetShipSymbolRouteImport.update({
     path: '/$shipSymbol',
-    getParentRoute: () => DashboardauthenticatedFleetRouteRoute,
+    getParentRoute: () => DashboardAuthenticatedFleetRouteRoute,
   } as any).lazy(() =>
     import('./conf/_dashboard/_authenticated/fleet/$shipSymbol.lazy').then(
       (d) => d.Route,
@@ -176,21 +176,21 @@ const DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute =
     ).then((d) => d.Route),
   )
 
-const DashboardauthenticatedFleetShipSymboloverlayRouteRoute =
-  DashboardauthenticatedFleetShipSymboloverlayRouteImport.update({
+const DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute =
+  DashboardAuthenticatedFleetShipSymbolOverlayRouteImport.update({
     id: '/_overlay',
-    getParentRoute: () => DashboardauthenticatedFleetShipSymbolRouteRoute,
+    getParentRoute: () => DashboardAuthenticatedFleetShipSymbolRouteRoute,
   } as any).lazy(() =>
     import(
       './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.lazy'
     ).then((d) => d.Route),
   )
 
-const DashboardauthenticatedFleetShipSymboloverlayMarketRouteRoute =
-  DashboardauthenticatedFleetShipSymboloverlayMarketRouteImport.update({
+const DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute =
+  DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteImport.update({
     path: '/market',
     getParentRoute: () =>
-      DashboardauthenticatedFleetShipSymboloverlayRouteRoute,
+      DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute,
   } as any).lazy(() =>
     import(
       './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.lazy'
@@ -226,7 +226,7 @@ declare module '@tanstack/react-router' {
       parentRoute: typeof AuthLazyImport
     }
     '/_dashboard/_authenticated': {
-      preLoaderRoute: typeof DashboardauthenticatedRouteImport
+      preLoaderRoute: typeof DashboardAuthenticatedRouteImport
       parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/agents': {
@@ -242,16 +242,16 @@ declare module '@tanstack/react-router' {
       parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/_authenticated/contracts': {
-      preLoaderRoute: typeof DashboardauthenticatedContractsRouteImport
-      parentRoute: typeof DashboardauthenticatedRouteImport
+      preLoaderRoute: typeof DashboardAuthenticatedContractsRouteImport
+      parentRoute: typeof DashboardAuthenticatedRouteImport
     }
     '/_dashboard/_authenticated/fleet': {
-      preLoaderRoute: typeof DashboardauthenticatedFleetRouteImport
-      parentRoute: typeof DashboardauthenticatedRouteImport
+      preLoaderRoute: typeof DashboardAuthenticatedFleetRouteImport
+      parentRoute: typeof DashboardAuthenticatedRouteImport
     }
     '/_dashboard/_authenticated/surveys': {
-      preLoaderRoute: typeof DashboardauthenticatedSurveysRouteImport
-      parentRoute: typeof DashboardauthenticatedRouteImport
+      preLoaderRoute: typeof DashboardAuthenticatedSurveysRouteImport
+      parentRoute: typeof DashboardAuthenticatedRouteImport
     }
     '/_dashboard/agents/$agentSymbol': {
       preLoaderRoute: typeof DashboardAgentsAgentSymbolRouteImport
@@ -266,28 +266,28 @@ declare module '@tanstack/react-router' {
       parentRoute: typeof DashboardSystemsRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol': {
-      preLoaderRoute: typeof DashboardauthenticatedFleetShipSymbolRouteImport
-      parentRoute: typeof DashboardauthenticatedFleetRouteImport
+      preLoaderRoute: typeof DashboardAuthenticatedFleetShipSymbolRouteImport
+      parentRoute: typeof DashboardAuthenticatedFleetRouteImport
     }
     '/_dashboard/_authenticated/fleet/': {
-      preLoaderRoute: typeof DashboardauthenticatedFleetIndexRouteImport
-      parentRoute: typeof DashboardauthenticatedFleetRouteImport
+      preLoaderRoute: typeof DashboardAuthenticatedFleetIndexRouteImport
+      parentRoute: typeof DashboardAuthenticatedFleetRouteImport
     }
     '/_dashboard/systems/$systemSymbol/': {
       preLoaderRoute: typeof DashboardSystemsSystemSymbolIndexRouteImport
       parentRoute: typeof DashboardSystemsRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay': {
-      preLoaderRoute: typeof DashboardauthenticatedFleetShipSymboloverlayRouteImport
-      parentRoute: typeof DashboardauthenticatedFleetShipSymbolRouteImport
+      preLoaderRoute: typeof DashboardAuthenticatedFleetShipSymbolOverlayRouteImport
+      parentRoute: typeof DashboardAuthenticatedFleetShipSymbolRouteImport
     }
     '/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol': {
       preLoaderRoute: typeof DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport
       parentRoute: typeof DashboardSystemsRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market': {
-      preLoaderRoute: typeof DashboardauthenticatedFleetShipSymboloverlayMarketRouteImport
-      parentRoute: typeof DashboardauthenticatedFleetShipSymboloverlayRouteImport
+      preLoaderRoute: typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteImport
+      parentRoute: typeof DashboardAuthenticatedFleetShipSymbolOverlayRouteImport
     }
   }
 }
@@ -297,17 +297,17 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRouteRoute,
   DashboardRouteRoute.addChildren([
-    DashboardauthenticatedRouteRoute.addChildren([
-      DashboardauthenticatedContractsRouteRoute,
-      DashboardauthenticatedFleetRouteRoute.addChildren([
-        DashboardauthenticatedFleetShipSymbolRouteRoute.addChildren([
-          DashboardauthenticatedFleetShipSymboloverlayRouteRoute.addChildren([
-            DashboardauthenticatedFleetShipSymboloverlayMarketRouteRoute,
+    DashboardAuthenticatedRouteRoute.addChildren([
+      DashboardAuthenticatedContractsRouteRoute,
+      DashboardAuthenticatedFleetRouteRoute.addChildren([
+        DashboardAuthenticatedFleetShipSymbolRouteRoute.addChildren([
+          DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute.addChildren([
+            DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute,
           ]),
         ]),
-        DashboardauthenticatedFleetIndexRouteRoute,
+        DashboardAuthenticatedFleetIndexRouteRoute,
       ]),
-      DashboardauthenticatedSurveysRouteRoute,
+      DashboardAuthenticatedSurveysRouteRoute,
     ]),
     DashboardAgentsRouteRoute.addChildren([
       DashboardAgentsAgentSymbolRouteRoute,
