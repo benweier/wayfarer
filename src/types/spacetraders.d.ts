@@ -440,6 +440,16 @@ export type ExtractResponse = {
   }
 }
 
+export type SiphonYield = {
+  symbol: string
+  units: number
+}
+
+export type SiphonResponse = {
+  shipSymbol: string
+  yield: SiphonYield
+}
+
 export type RegisterAgentResponse = {
   token: string
   agent: AgentResponse

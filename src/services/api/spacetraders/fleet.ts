@@ -13,6 +13,7 @@ import {
   type ShipCargo,
   type ShipMount,
   type ShipResponse,
+  type SiphonResponse,
   type SurveyResponse,
   type WaypointResponse,
 } from '@/types/spacetraders'
@@ -254,6 +255,19 @@ export const createShipExtractMutation = {
     return post<SpaceTradersResponse<{ cooldown: CooldownResponse; extraction: ExtractResponse; cargo: ShipCargo }>>(
       url,
       survey,
+      { headers: createHeaders() },
+    )
+  },
+}
+
+export const createShipSiphonMutation = {
+  getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'siphon' }, args],
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/siphon`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ cooldown: CooldownResponse; siphon: SiphonResponse; cargo: ShipCargo }>>(
+      url,
+      undefined,
       { headers: createHeaders() },
     )
   },
