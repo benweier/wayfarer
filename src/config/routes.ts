@@ -10,7 +10,6 @@ export const ROUTES = {
   SHIP: '/_dashboard/_authenticated/fleet/$shipSymbol',
   SHIP_MARKET: '/_dashboard/_authenticated/fleet/$shipSymbol/_ship_overlay/market',
   CONTRACTS: '/_dashboard/_authenticated/contracts',
-  CONTRACT: '/_dashboard/_authenticated/contracts/$contractId',
   SURVEYS: '/_dashboard/_authenticated/surveys',
   LEADERBOARD: '/_dashboard/leaderboard',
   AGENTS: '/_dashboard/agents/',
