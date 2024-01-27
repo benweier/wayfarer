@@ -1,30 +1,33 @@
-import { useRouterState } from '@tanstack/react-router'
+import { getRenderedMatches, useRouterState } from '@tanstack/react-router'
 import { Fragment } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { type MetaProps } from './meta.types'
 
 export const Meta = ({ titleTemplate }: MetaProps) => {
-  const state = useRouterState()
   const { t } = useTranslation()
-  const matches = [...state.matches].reduce<Array<{ id: string; meta: MetaObject[] }>>((matches, match) => {
-    if (
-      typeof match.routeContext === 'object' &&
-      'meta' in match.routeContext &&
-      typeof match.routeContext.meta === 'function'
-    ) {
-      matches.push({
-        id: match.id,
-        meta: match.routeContext.meta(t, match.loaderData as any),
-      })
-    }
+  const metas = useRouterState({
+    select: (state) => {
+      return getRenderedMatches(state).reduce<Array<{ id: string; meta: MetaObject[] }>>((metas, match) => {
+        if (
+          typeof match.routeContext === 'object' &&
+          'meta' in match.routeContext &&
+          typeof match.routeContext.meta === 'function'
+        ) {
+          metas.push({
+            id: match.id,
+            meta: match.routeContext.meta(t, match.loaderData as any),
+          })
+        }
 
-    return matches
-  }, [])
+        return metas
+      }, [])
+    },
+  })
 
   return (
     <Helmet titleTemplate={titleTemplate}>
-      {matches.map(({ id, meta }) => {
+      {metas.map(({ id, meta }) => {
         return (
           <Fragment key={id}>
             {meta.map((tag) => {
