@@ -1,6 +1,6 @@
 import { createFileRoute, defer } from '@tanstack/react-router'
 import { fallback, minValue, number, object, optional, parse } from 'valibot'
-import { meta } from '@/routes/systems/systems-route.meta'
+import { meta } from '@/routes/agents/agents-route.meta'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
 
 const SearchParamsSchema = object({
