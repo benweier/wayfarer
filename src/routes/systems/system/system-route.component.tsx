@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { RouteApi } from '@tanstack/react-router'
+import { getRouteApi } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { ROUTES } from '@/config/routes'
 import { SystemContext } from '@/context/system.context'
@@ -7,7 +7,7 @@ import { SystemDetail } from '@/features/system/detail'
 import { SystemTabs } from '@/features/system/tabs'
 import { getSystemByIdQuery } from '@/services/api/spacetraders'
 
-const api = new RouteApi({ id: ROUTES.SYSTEM })
+const api = getRouteApi(ROUTES.SYSTEM)
 
 export const SystemRoute = () => {
   const { t } = useTranslation()
