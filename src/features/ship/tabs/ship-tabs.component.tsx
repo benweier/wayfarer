@@ -4,7 +4,7 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
 import { ShipCargoError, ShipCargoFallback, ShipCargoList } from '@/features/ship/cargo'
 import { ShipLoadoutList } from '@/features/ship/loadout'
-import { ShipSurveyExtract } from '@/features/ship/survey-extract'
+import { ShipResources } from '@/features/ship/resourecs'
 import * as SurveyActions from '@/features/survey/actions'
 import { SurveyContext } from '@/features/survey/context'
 import { SurveyList } from '@/features/survey/list'
@@ -30,7 +30,7 @@ export const ShipTabs = () => {
 
         <Tab.Panel>
           <div className="space-y-4">
-            <ShipSurveyExtract ship={ship} />
+            <ShipResources ship={ship} />
             <SurveyContext.Provider
               value={{
                 Extract: SurveyActions.Extract,

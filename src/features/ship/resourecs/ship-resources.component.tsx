@@ -6,7 +6,7 @@ import { ShipCooldown } from '@/features/ship/cooldown'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders'
 import { type ShipResponse } from '@/types/spacetraders'
 
-export const ShipSurveyExtract = ({ ship }: { ship: ShipResponse }) => {
+export const ShipResources = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()
   const waypointQuery = useQuery(
     getWaypointByIdQuery({
