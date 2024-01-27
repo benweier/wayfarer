@@ -17,7 +17,7 @@ export const ShipTabs = () => {
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
         <Tab className="group tab ui-selected:selected">{t('ship.cargo')}</Tab>
-        <Tab className="group tab ui-selected:selected">{t('ship.survey_extract')}</Tab>
+        <Tab className="group tab ui-selected:selected">{t('ship.resources')}</Tab>
         <Tab className="group tab ui-selected:selected">{t('ship.loadout.label')}</Tab>
       </Tab.List>
 

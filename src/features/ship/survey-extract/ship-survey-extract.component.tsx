@@ -14,12 +14,13 @@ export const ShipSurveyExtract = ({ ship }: { ship: ShipResponse }) => {
       waypointSymbol: ship.nav.waypointSymbol,
     }),
   )
-  const disabled = waypointQuery.data?.data.type !== 'ASTEROID'
+  const canSurveyExtract = waypointQuery.data?.data.type === 'ASTEROID'
+  const canSiphon = waypointQuery.data?.data.type === 'GAS_GIANT'
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
       <div className="flex gap-2">
-        <ShipActions.Survey ship={ship} disabled={disabled}>
+        <ShipActions.Survey ship={ship} disabled={!canSurveyExtract}>
           {(props) => (
             <Button intent="primary" {...props}>
               {t('ship.action.survey')} {ship.nav.waypointSymbol}
@@ -27,13 +28,21 @@ export const ShipSurveyExtract = ({ ship }: { ship: ShipResponse }) => {
           )}
         </ShipActions.Survey>
 
-        <ShipActions.Extract ship={ship} disabled={disabled}>
+        <ShipActions.Extract ship={ship} disabled={!canSurveyExtract}>
           {(props) => (
             <Button intent="confirm" {...props}>
               {t('ship.action.extract', { context: 'no_survey' })}
             </Button>
           )}
         </ShipActions.Extract>
+
+        <ShipActions.Siphon ship={ship} disabled={!canSiphon}>
+          {(props) => (
+            <Button intent="warn" {...props}>
+              {t('ship.action.siphon')}
+            </Button>
+          )}
+        </ShipActions.Siphon>
       </div>
       <div className="w-full max-w-xs">
         <ShipCooldown ship={ship} />
