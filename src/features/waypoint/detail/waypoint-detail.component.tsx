@@ -10,7 +10,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const waypoint = useWaypointResponse()
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row flex-wrap items-center justify-start gap-x-4 gap-y-2">
           <WaypointTag type={waypoint.type}>{t(waypoint.type, { ns: 'spacetraders.waypoint_type' })}</WaypointTag>
@@ -46,7 +46,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
 
       {waypoint.orbitals.length > 0 && (
         <div className="space-y-1">
-          <div className="text-sm">{t('waypoint.orbitals')}</div>
+          <div className="text-secondary text-xs uppercase">{t('waypoint.orbitals')}</div>
           <div className="flex flex-wrap gap-1">
             {waypoint.orbitals.map((orbital) => (
               <div key={orbital.symbol} className="rounded bg-zinc-200/50 px-4 py-2 shadow-sm dark:bg-zinc-700/25">
