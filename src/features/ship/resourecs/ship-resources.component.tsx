@@ -37,8 +37,8 @@ export const ShipResources = ({ ship }: { ship: ShipResponse }) => {
         </ShipActions.Extract>
 
         <ShipActions.Siphon ship={ship} disabled={!canSiphon}>
-          {(props) => (
-            <Button intent="warn" {...props}>
+          {({ ref, disabled, execute }) => (
+            <Button ref={ref} intent="warn" disabled={disabled} onClick={execute}>
               {t('ship.action.siphon')}
             </Button>
           )}
