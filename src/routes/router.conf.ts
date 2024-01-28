@@ -1,8 +1,8 @@
 import { createRouter } from '@tanstack/react-router'
+import { NotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
 import { client } from '@/services/query-client'
 import { authStore } from '@/store/auth'
-import { notFoundRoute } from './not-found.route'
 import { routeTree } from './route-tree.gen'
 import { Fallback } from './router.fallback'
 
@@ -17,7 +17,7 @@ export const router = createRouter({
   defaultPendingComponent: Fallback,
   defaultPendingMinMs: 300,
   defaultPendingMs: 800,
-  notFoundRoute,
+  globalNotFound: NotFound,
 })
 
 declare module '@tanstack/react-router' {
