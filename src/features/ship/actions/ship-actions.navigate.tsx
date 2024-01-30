@@ -21,7 +21,7 @@ export const Navigate = ({
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipNavigateMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipNavigateMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -30,19 +30,23 @@ export const Navigate = ({
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
 
       if (ship) {
-        client.removeQueries(
-          getWaypointMarketQuery({
-            systemSymbol: ship.data.nav.systemSymbol,
-            waypointSymbol: ship.data.nav.waypointSymbol,
-          }),
-        )
+        // Remove market and shipyard queries only
+        // if no ships are left at the waypoint
+        if (ships?.data.every((s) => s.nav.waypointSymbol !== ship.data.nav.waypointSymbol)) {
+          void client.removeQueries(
+            getWaypointMarketQuery({
+              systemSymbol: ship.data.nav.systemSymbol,
+              waypointSymbol: ship.data.nav.waypointSymbol,
+            }),
+          )
 
-        client.removeQueries(
-          getWaypointShipyardQuery({
-            systemSymbol: ship.data.nav.systemSymbol,
-            waypointSymbol: ship.data.nav.waypointSymbol,
-          }),
-        )
+          void client.removeQueries(
+            getWaypointShipyardQuery({
+              systemSymbol: ship.data.nav.systemSymbol,
+              waypointSymbol: ship.data.nav.waypointSymbol,
+            }),
+          )
+        }
 
         client.setQueryData(
           shipByIdQueryKey,
@@ -68,7 +72,7 @@ export const Navigate = ({
   return children({
     disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
     onClick: () => {
-      mutate({ shipSymbol: ship.symbol, waypointSymbol })
+      return mutateAsync({ shipSymbol: ship.symbol, waypointSymbol })
     },
   })
 }
