@@ -4,6 +4,7 @@ import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
+import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
@@ -108,12 +109,23 @@ export const columns = [
   ),
   columnHelper.accessor((row) => row.waypoint.type, {
     id: 'type',
-    header: ({ column }) => {
+    header: ({ column, table }) => {
+      const types = table.getColumn('type')
+      const facetedValues: Map<string, number> | undefined = types?.getFacetedUniqueValues()
+      const filterValues = types?.getFilterValue() as string[] | undefined
+
       return (
         <div className="flex items-center justify-start gap-2 text-right">
           <Translation>{(t) => <div>{t('general.header.type')}</div>}</Translation>
           <div>
             <Sort column={column} type="alpha" />
+          </div>
+          <div>
+            <WaypointTypeFilter
+              values={filterValues}
+              facets={facetedValues}
+              onChange={(value) => table.getColumn('type')?.setFilterValue(value)}
+            />
           </div>
         </div>
       )

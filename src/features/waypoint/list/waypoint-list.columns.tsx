@@ -5,8 +5,8 @@ import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
+import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { TypeFilter } from '@/features/waypoint/list/type-filter.component'
 import { type WaypointListTableSchema } from './waypoint-list.types'
 
 const FILTERED_TRAITS = new Set(['UNCHARTED', 'MARKETPLACE', 'SHIPYARD', 'STRIPPED'])
@@ -108,6 +108,10 @@ export const columns = [
     minSize: 20,
     maxSize: 20,
     header: ({ column, table }) => {
+      const types = table.getColumn('type')
+      const facetedValues: Map<string, number> | undefined = types?.getFacetedUniqueValues()
+      const filterValues = types?.getFilterValue() as string[] | undefined
+
       return (
         <div className="flex items-center justify-start gap-2 text-right">
           <Translation>{(t) => <div>{t('general.header.type')}</div>}</Translation>
@@ -115,7 +119,11 @@ export const columns = [
             <Sort column={column} type="alpha" />
           </div>
           <div>
-            <TypeFilter table={table} />
+            <WaypointTypeFilter
+              values={filterValues}
+              facets={facetedValues}
+              onChange={(value) => types?.setFilterValue(value)}
+            />
           </div>
         </div>
       )

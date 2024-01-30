@@ -1,16 +1,22 @@
 import { FloatingPortal } from '@floating-ui/react'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
 import { Listbox, Transition } from '@headlessui/react'
-import { type Table } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
 import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { type WaypointResponse } from '@/types/spacetraders'
 
-export const TypeFilter = ({ table }: { table: Table<{ waypoint: WaypointResponse; presence: number }> }) => {
+export const WaypointTypeFilter = ({
+  values = [],
+  facets = new Map(),
+  onChange,
+}: {
+  values?: string[]
+  facets?: Map<string, number>
+  onChange: (value: string[]) => void
+}) => {
   const { t } = useTranslation()
   const { x, y, refs } = useFloating<HTMLButtonElement>({
     strategy: 'absolute',
@@ -22,23 +28,20 @@ export const TypeFilter = ({ table }: { table: Table<{ waypoint: WaypointRespons
       })
     },
   })
-  const types = table.getColumn('type')
-  const facetedValues: Map<string, number> | undefined = types?.getFacetedUniqueValues()
-  const filterValues = (types?.getFilterValue() as string[] | undefined) ?? []
-  const filterOptions = facetedValues === undefined ? [] : Array.from(facetedValues.keys()).sort()
+  const options = Array.from(facets.keys()).sort()
 
   return (
     <Listbox
       as="div"
       className="relative"
-      value={filterValues}
+      value={values}
       onChange={(value) => {
-        table.getColumn('type')?.setFilterValue(value)
+        onChange(value)
       }}
       multiple
     >
       <Listbox.Button as={Fragment}>
-        <Button intent={filterValues.length > 0 ? 'primary' : 'dim'} kind="flat" size="small" ref={refs.setReference}>
+        <Button intent={values.length > 0 ? 'primary' : 'dim'} kind="flat" size="small" ref={refs.setReference}>
           <span className="sr-only">Filter Types</span>
           <AppIcon id="filter" className="size-4" aria-hidden="true" />
         </Button>
@@ -61,9 +64,9 @@ export const TypeFilter = ({ table }: { table: Table<{ waypoint: WaypointRespons
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            {filterOptions.length > 0 && (
+            {options.length > 0 && (
               <Listbox.Options className="mt-1 max-h-64 w-full overflow-auto rounded-md border-2 border-zinc-100 bg-white/90 text-sm outline-none backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90">
-                {filterOptions.map((option) => {
+                {options.map((option) => {
                   return (
                     <Listbox.Option key={option} value={option}>
                       {({ selected, active, disabled }) => {
@@ -75,7 +78,7 @@ export const TypeFilter = ({ table }: { table: Table<{ waypoint: WaypointRespons
                                 { 'bg-zinc-900/5 dark:bg-zinc-100/10': active, 'opacity-50': disabled },
                               )}
                             >
-                              <WaypointTag type={option}>{`${facetedValues?.get(option) ?? 0}`}</WaypointTag>
+                              <WaypointTag type={option}>{`${facets.get(option) ?? 0}`}</WaypointTag>
                               {t(option, { ns: 'spacetraders.waypoint_type' })}
                             </span>
                             {selected && (
