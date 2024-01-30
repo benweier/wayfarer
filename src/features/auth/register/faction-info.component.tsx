@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from 'react-hook-form'
 import { Badge } from '@/components/badge'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
 import { type FactionResponse } from '@/types/spacetraders'
-import { type RegisterSchema } from './register.validation'
+import { type RegisterSchema } from './register.schema'
 
 export const FactionInfo = () => {
   const { control } = useFormContext<RegisterSchema>()
