@@ -37,7 +37,7 @@ export const ShipCargoList = () => {
         trade: reduceArrayToMap(response.data.tradeGoods, 'symbol'),
       }
     },
-    enabled: hasMarketplace,
+    enabled: hasMarketplace && ship.nav.status !== 'IN_TRANSIT',
   })
   const inventory = ship.cargo.inventory
 
