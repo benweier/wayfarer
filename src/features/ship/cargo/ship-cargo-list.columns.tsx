@@ -129,7 +129,7 @@ export const columns = [
               return (
                 <>
                   <div className={cx('text-sm', { 'text-secondary': !ctx.Buy || !canBuy })}>{formatNumber(value)}</div>
-                  {ctx.Buy && canBuy && <ctx.Buy good={row.original.trade} />}
+                  {ctx.Buy && <ctx.Buy good={row.original.trade} disabled={!canBuy} />}
                 </>
               )
             }}
@@ -172,7 +172,7 @@ export const columns = [
                   <div className={cx('text-sm', { 'text-secondary': !ctx.Sell || !canSell })}>
                     {formatNumber(value)}
                   </div>
-                  {ctx.Sell && canSell && <ctx.Sell good={row.original.trade} />}
+                  {ctx.Sell && <ctx.Sell good={row.original.trade} disabled={!canSell} />}
                 </>
               )
             }}

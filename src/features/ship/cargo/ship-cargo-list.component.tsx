@@ -80,7 +80,7 @@ export const ShipCargoList = () => {
           const hasExport = data.market.exports.has(good.symbol)
           const hasExchange = data.market.exchange.has(good.symbol)
 
-          return hasExport || hasExchange
+          return ship.nav.status === 'DOCKED' && (hasExport || hasExchange)
         },
         canSell(good) {
           if (!isSuccess || good === undefined) return false
@@ -88,7 +88,7 @@ export const ShipCargoList = () => {
           const hasImport = data.market.imports.has(good.symbol)
           const hasExchange = data.market.exchange.has(good.symbol)
 
-          return hasImport || hasExchange
+          return ship.nav.status === 'DOCKED' && (hasImport || hasExchange)
         },
       }}
     >
