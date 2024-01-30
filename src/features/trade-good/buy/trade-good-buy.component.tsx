@@ -13,6 +13,7 @@ import { type TradeGoodBuyProps } from './trade-good-buy.types'
 
 export const TradeGoodBuy = ({
   good,
+  disabled = false,
   action = (props) => (
     <Button intent="danger" kind="outline" size="small" {...props}>
       Buy
@@ -65,7 +66,7 @@ export const TradeGoodBuy = ({
     <Modal
       ref={ref}
       size="md"
-      trigger={<Modal.Trigger disabled={good.tradeVolume === 0 || noCargo}>{action}</Modal.Trigger>}
+      trigger={<Modal.Trigger disabled={disabled || good.tradeVolume === 0 || noCargo}>{action}</Modal.Trigger>}
       closeable
     >
       <div className="space-y-8">

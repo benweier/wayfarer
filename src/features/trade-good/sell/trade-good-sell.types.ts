@@ -4,6 +4,7 @@ import { type TradeGoodSellSchema } from './trade-good-sell.schema'
 
 export type TradeGoodSellProps = {
   good?: MarketTradeGood
+  disabled?: boolean
   action?: (props: ButtonHTMLAttributes<HTMLButtonElement>) => ReactNode
 }
 
