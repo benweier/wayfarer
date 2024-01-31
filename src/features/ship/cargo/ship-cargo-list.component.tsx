@@ -74,21 +74,21 @@ export const ShipCargoList = () => {
       value={{
         Buy: TradeGoodBuy,
         Sell: TradeGoodSell,
-        canBuy(good) {
-          if (!isSuccess || good === undefined) return false
+        canBuy: (good) => {
+          if (!isSuccess || good === undefined || ship.nav.status !== 'DOCKED') return false
 
           const hasExport = data.market.exports.has(good.symbol)
           const hasExchange = data.market.exchange.has(good.symbol)
 
-          return ship.nav.status === 'DOCKED' && (hasExport || hasExchange)
+          return hasExport || hasExchange
         },
-        canSell(good) {
-          if (!isSuccess || good === undefined) return false
+        canSell: (good) => {
+          if (!isSuccess || good === undefined || ship.nav.status !== 'DOCKED') return false
 
           const hasImport = data.market.imports.has(good.symbol)
           const hasExchange = data.market.exchange.has(good.symbol)
 
-          return ship.nav.status === 'DOCKED' && (hasImport || hasExchange)
+          return hasImport || hasExchange
         },
       }}
     >
