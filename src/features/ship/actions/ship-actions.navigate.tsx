@@ -28,26 +28,9 @@ export const Navigate = ({
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
       const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
+      let _ships: typeof ships
 
       if (ship) {
-        // Remove market and shipyard queries only
-        // if no ships are left at the waypoint
-        if (ships?.data.every((s) => s.nav.waypointSymbol !== ship.data.nav.waypointSymbol)) {
-          void client.removeQueries(
-            getWaypointMarketQuery({
-              systemSymbol: ship.data.nav.systemSymbol,
-              waypointSymbol: ship.data.nav.waypointSymbol,
-            }),
-          )
-
-          void client.removeQueries(
-            getWaypointShipyardQuery({
-              systemSymbol: ship.data.nav.systemSymbol,
-              waypointSymbol: ship.data.nav.waypointSymbol,
-            }),
-          )
-        }
-
         client.setQueryData(
           shipByIdQueryKey,
           produce(ship, (draft) => {
@@ -58,11 +41,34 @@ export const Navigate = ({
       }
 
       if (ships && index > -1) {
-        client.setQueryData(
+        _ships = client.setQueryData(
           shipListQueryKey,
           produce(ships, (draft) => {
             draft.data[index].nav = response.data.nav
             draft.data[index].fuel = response.data.fuel
+          }),
+        )
+      }
+
+      // Remove market and shipyard queries of the origin
+      // only if no ships are left at the origin
+      if (
+        _ships?.data.every(({ nav }) => {
+          // Check the updated ship list against the origin
+          return nav.waypointSymbol !== response.data.nav.route.origin.symbol
+        })
+      ) {
+        void client.removeQueries(
+          getWaypointMarketQuery({
+            systemSymbol: response.data.nav.route.origin.systemSymbol,
+            waypointSymbol: response.data.nav.route.origin.symbol,
+          }),
+        )
+
+        void client.removeQueries(
+          getWaypointShipyardQuery({
+            systemSymbol: response.data.nav.route.origin.systemSymbol,
+            waypointSymbol: response.data.nav.route.origin.symbol,
           }),
         )
       }
