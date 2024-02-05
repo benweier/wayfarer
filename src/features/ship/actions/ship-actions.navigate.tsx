@@ -24,6 +24,30 @@ export const Navigate = ({
   const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipNavigateMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipNavigateMutation.mutationFn,
+    onMutate: ({ shipSymbol }) => {
+      const ship = client.getQueryData(shipByIdQueryKey)
+      const ships = client.getQueryData(shipListQueryKey)
+      const index = ships?.data.findIndex((ship) => ship.symbol === shipSymbol) ?? -1
+
+      if (ship) {
+        client.setQueryData(
+          shipByIdQueryKey,
+          produce(ship, (draft) => {
+            draft.data.nav.status = 'ACCELERATING'
+          }),
+        )
+      }
+      if (ships && index > -1) {
+        client.setQueryData(
+          shipListQueryKey,
+          produce(ships, (draft) => {
+            draft.data[index].nav.status = 'ACCELERATING'
+          }),
+        )
+      }
+
+      return { ship, ships }
+    },
     onSuccess: (response, { shipSymbol }) => {
       const ship = client.getQueryData(shipByIdQueryKey)
       const ships = client.getQueryData(shipListQueryKey)
@@ -72,6 +96,10 @@ export const Navigate = ({
           }),
         )
       }
+    },
+    onError: (_err, _variables, ctx) => {
+      client.setQueryData(shipByIdQueryKey, ctx?.ship)
+      client.setQueryData(shipListQueryKey, ctx?.ships)
     },
   })
 
