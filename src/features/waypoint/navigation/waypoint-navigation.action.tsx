@@ -1,4 +1,4 @@
-import { Translation, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import * as ShipActions from '@/features/ship/actions'
@@ -12,7 +12,7 @@ export const WaypointNavigationAction = ({ ship, waypoint, distance }: WaypointN
     <>
       {ship.nav.waypointSymbol !== waypoint.symbol ? (
         <ShipActions.Navigate
-          disabled={getFuelConsumption(distance, ship.nav.flightMode) > ship.fuel.current && ship.fuel.capacity > 0}
+          disabled={ship.fuel.capacity > 0 && getFuelConsumption(distance, ship.nav.flightMode) > ship.fuel.current}
           ship={ship}
           waypointSymbol={waypoint.symbol}
         >
@@ -20,27 +20,23 @@ export const WaypointNavigationAction = ({ ship, waypoint, distance }: WaypointN
             <Button intent="confirm" kind="flat" icon {...props}>
               <ShipIcon id="navigate" className="size-4" aria-hidden />
               <span className="sr-only">
-                <Translation>
-                  {(t) =>
-                    t('waypoint.navigate_ship_to_waypoint', {
-                      shipSymbol: ship.symbol,
-                      waypointSymbol: waypoint.symbol,
-                    })
-                  }
-                </Translation>
+                {t('waypoint.navigate_ship_to_waypoint', {
+                  shipSymbol: ship.symbol,
+                  waypointSymbol: waypoint.symbol,
+                })}
               </span>
             </Button>
           )}
         </ShipActions.Navigate>
       ) : (
-        <Button
-          disabled
-          title={t('waypoint.ship_at_waypoint', {
-            shipSymbol: ship.symbol,
-            waypointSymbol: waypoint.symbol,
-          })}
-        >
+        <Button disabled icon>
           <ShipIcon id="pin" className="size-4" aria-hidden />
+          <span className="sr-only">
+            {t('waypoint.ship_at_waypoint', {
+              shipSymbol: ship.symbol,
+              waypointSymbol: waypoint.symbol,
+            })}
+          </span>
         </Button>
       )}
     </>
