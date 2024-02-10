@@ -4,6 +4,8 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
+// eslint-disable-next-line node/no-missing-import
+import { vite as million } from 'million/compiler'
 import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
 import dynamic from 'vite-plugin-dynamic-import'
@@ -59,6 +61,7 @@ export default defineConfig({
     tsconfigPaths(),
     dynamic(),
     { enforce: 'pre', ...mdx() },
+    million({ auto: true }),
     react(),
     TanStackRouterVite(),
     sentryVitePlugin({
