@@ -9,9 +9,11 @@ export const FleetRoute = () => {
     <div className="space-y-4 p-4">
       <h1 className="text-title">{t('fleet.label')}</h1>
 
-      <QuerySuspenseBoundary fallback={<ShipListFallback />}>
-        <ShipList />
-      </QuerySuspenseBoundary>
+      <div>
+        <QuerySuspenseBoundary fallback={<ShipListFallback />}>
+          <ShipList />
+        </QuerySuspenseBoundary>
+      </div>
     </div>
   )
 }

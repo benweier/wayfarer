@@ -15,14 +15,16 @@ export const SystemsRoute = () => {
     <div className="space-y-4 p-4">
       <h1 className="text-title">{t('systems.label')}</h1>
 
-      <QuerySuspenseBoundary fallback={<SystemListFallback />}>
-        <SystemList
-          page={page}
-          setPage={(page) => {
-            void navigate({ to: '/systems', search: { page } })
-          }}
-        />
-      </QuerySuspenseBoundary>
+      <div>
+        <QuerySuspenseBoundary fallback={<SystemListFallback />}>
+          <SystemList
+            page={page}
+            setPage={(page) => {
+              void navigate({ to: '/systems', search: { page } })
+            }}
+          />
+        </QuerySuspenseBoundary>
+      </div>
     </div>
   )
 }

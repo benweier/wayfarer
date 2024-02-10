@@ -25,11 +25,13 @@ export const WaypointRoute = () => {
         {t('waypoint.label')}: <span className="whitespace-nowrap font-normal">{waypointSymbol}</span>
       </h1>
 
-      <WaypointContext.Provider value={waypoint.data.data}>
-        <WaypointDetail>
-          <WaypointTabs />
-        </WaypointDetail>
-      </WaypointContext.Provider>
+      <div>
+        <WaypointContext.Provider value={waypoint.data.data}>
+          <WaypointDetail>
+            <WaypointTabs />
+          </WaypointDetail>
+        </WaypointContext.Provider>
+      </div>
     </div>
   )
 }

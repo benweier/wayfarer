@@ -18,7 +18,7 @@ export const SystemDetail = ({ children }: PropsWithChildren) => {
         </div>
       </div>
 
-      {children}
+      <div>{children}</div>
     </div>
   )
 }

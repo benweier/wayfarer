@@ -19,8 +19,13 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
         <ShipDetailRefresh />
       </div>
 
-      <ShipStatus ship={ship} />
-      <ShipTransit nav={ship.nav} />
+      <div>
+        <ShipStatus ship={ship} />
+      </div>
+
+      <div>
+        <ShipTransit nav={ship.nav} />
+      </div>
       {children}
     </div>
   )

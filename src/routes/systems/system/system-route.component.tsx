@@ -20,11 +20,13 @@ export const SystemRoute = () => {
         {t('system.label')}: <span className="whitespace-nowrap font-normal">{systemSymbol}</span>
       </h1>
 
-      <SystemContext.Provider value={system.data.data}>
-        <SystemDetail>
-          <SystemTabs />
-        </SystemDetail>
-      </SystemContext.Provider>
+      <div>
+        <SystemContext.Provider value={system.data.data}>
+          <SystemDetail>
+            <SystemTabs />
+          </SystemDetail>
+        </SystemContext.Provider>
+      </div>
     </div>
   )
 }
