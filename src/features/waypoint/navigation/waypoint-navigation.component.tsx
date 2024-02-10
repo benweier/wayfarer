@@ -9,6 +9,10 @@ import { getWaypointListQuery } from '@/services/api/spacetraders'
 import { WaypointNavigationTable } from './waypoint-navigation.table'
 import { type WaypointNavigationProps } from './waypoint-navigation.types'
 
+const WAYPOINT_NAVIGATION_CONTEXT = {
+  Navigate: WaypointNavigationAction,
+}
+
 export const WaypointNavigation = ({ ship }: WaypointNavigationProps) => {
   const ships = useFleetResponse()
   const { data } = useSuspenseQuery(getWaypointListQuery({ systemSymbol: ship.nav.systemSymbol }))
@@ -37,7 +41,7 @@ export const WaypointNavigation = ({ ship }: WaypointNavigationProps) => {
         onChange={(event) => setSearch(event.target.value)}
       />
 
-      <WaypointNavigationActionContext.Provider value={{ Navigate: WaypointNavigationAction }}>
+      <WaypointNavigationActionContext.Provider value={WAYPOINT_NAVIGATION_CONTEXT}>
         <WaypointNavigationTable data={rows} />
       </WaypointNavigationActionContext.Provider>
     </div>

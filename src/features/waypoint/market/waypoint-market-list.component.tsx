@@ -9,6 +9,17 @@ import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { WaypointMarketTable } from './waypoint-market-list.table'
 import { WaypointMarketLayout } from './waypoint-market.layout'
 
+const IMPORT_MARKET_CONTEXT = {
+  Buy: TradeGoodBuy,
+}
+const EXPORT_MARKET_CONTEXT = {
+  Sell: TradeGoodSell,
+}
+const EXCHANGE_MARKET_CONTEXT = {
+  Buy: TradeGoodBuy,
+  Sell: TradeGoodSell,
+}
+
 export const WaypointMarketList = () => {
   const { t } = useTranslation()
   const waypoint = useWaypointResponse()
@@ -29,7 +40,7 @@ export const WaypointMarketList = () => {
             <div className="text-overline text-center">{t('market.imports_empty')}</div>
           </div>
         ) : (
-          <TradeGoodContext.Provider value={{ Sell: TradeGoodSell }}>
+          <TradeGoodContext.Provider value={IMPORT_MARKET_CONTEXT}>
             <WaypointMarketTable data={market.imports.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
           </TradeGoodContext.Provider>
         )
@@ -40,7 +51,7 @@ export const WaypointMarketList = () => {
             <div className="text-overline text-center">{t('market.exports_empty')}</div>
           </div>
         ) : (
-          <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy }}>
+          <TradeGoodContext.Provider value={EXPORT_MARKET_CONTEXT}>
             <WaypointMarketTable data={market.exports.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
           </TradeGoodContext.Provider>
         )
@@ -51,7 +62,7 @@ export const WaypointMarketList = () => {
             <div className="text-overline text-center">{t('market.exchange_empty')}</div>
           </div>
         ) : (
-          <TradeGoodContext.Provider value={{ Buy: TradeGoodBuy, Sell: TradeGoodSell }}>
+          <TradeGoodContext.Provider value={EXCHANGE_MARKET_CONTEXT}>
             <WaypointMarketTable data={market.exchange.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
           </TradeGoodContext.Provider>
         )
