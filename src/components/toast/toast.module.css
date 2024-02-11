@@ -1,0 +1,69 @@
+.toast {
+  .toast-label {
+    @apply text-lg;
+  }
+
+  .toast-description {
+    @apply text-base;
+  }
+
+  &[data-status='success'] {
+    @apply border-2 border-emerald-800 bg-emerald-600;
+
+    .toast-label {
+      @apply font-bold text-white;
+    }
+
+    .toast-description {
+      @apply text-emerald-100;
+    }
+  }
+
+  &[data-status='warning'] {
+    @apply border-2 border-yellow-800 bg-yellow-600;
+
+    .toast-label {
+      @apply font-bold text-white;
+    }
+
+    .toast-description {
+      @apply text-yellow-100;
+    }
+  }
+
+  &[data-status='error'] {
+    @apply border-2 border-rose-800 bg-rose-600;
+
+    .toast-label {
+      @apply font-bold text-white;
+    }
+
+    .toast-description {
+      @apply text-rose-100;
+    }
+  }
+
+  &[data-status='info'] {
+    @apply border-2 border-blue-800 bg-blue-600;
+
+    .toast-label {
+      @apply font-bold text-white;
+    }
+
+    .toast-description {
+      @apply text-blue-100;
+    }
+  }
+
+  &[data-status='neutral'] {
+    @apply border-2 border-gray-800 bg-gray-600;
+
+    .toast-label {
+      @apply font-bold text-white;
+    }
+
+    .toast-description {
+      @apply text-gray-100;
+    }
+  }
+}
