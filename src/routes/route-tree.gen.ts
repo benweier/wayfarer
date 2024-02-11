@@ -13,27 +13,27 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './conf/__root'
-import { Route as DashboardRouteImport } from './conf/_dashboard.route.ts'
-import { Route as IndexRouteImport } from './conf/index.route.ts'
-import { Route as DashboardSystemsRouteImport } from './conf/_dashboard/systems.route.ts'
-import { Route as DashboardLeaderboardRouteImport } from './conf/_dashboard/leaderboard.route.ts'
-import { Route as DashboardAgentsRouteImport } from './conf/_dashboard/agents.route.ts'
-import { Route as DashboardAuthenticatedRouteImport } from './conf/_dashboard/_authenticated.route.ts'
-import { Route as AuthRegisterRouteImport } from './conf/_auth/register.route.ts'
-import { Route as AuthLogoutRouteImport } from './conf/_auth/logout.route.tsx'
-import { Route as AuthLoginRouteImport } from './conf/_auth/login.route.ts'
-import { Route as DashboardSystemsIndexRouteImport } from './conf/_dashboard/systems/index.route.ts'
-import { Route as DashboardAgentsIndexRouteImport } from './conf/_dashboard/agents/index.route.ts'
-import { Route as DashboardAgentsAgentSymbolRouteImport } from './conf/_dashboard/agents/$agentSymbol.route.ts'
-import { Route as DashboardAuthenticatedSurveysRouteImport } from './conf/_dashboard/_authenticated/surveys.route.ts'
-import { Route as DashboardAuthenticatedFleetRouteImport } from './conf/_dashboard/_authenticated/fleet.route.ts'
-import { Route as DashboardAuthenticatedContractsRouteImport } from './conf/_dashboard/_authenticated/contracts.route.ts'
-import { Route as DashboardSystemsSystemSymbolIndexRouteImport } from './conf/_dashboard/systems/$systemSymbol/index.route.ts'
-import { Route as DashboardAuthenticatedFleetIndexRouteImport } from './conf/_dashboard/_authenticated/fleet/index.route.ts'
-import { Route as DashboardAuthenticatedFleetShipSymbolRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol.route.ts'
-import { Route as DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport } from './conf/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.route.ts'
-import { Route as DashboardAuthenticatedFleetShipSymbolOverlayRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.route.ts'
-import { Route as DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.route.ts'
+import { Route as DashboardRouteImport } from './conf/_dashboard.route'
+import { Route as IndexRouteImport } from './conf/index.route'
+import { Route as DashboardSystemsRouteImport } from './conf/_dashboard/systems.route'
+import { Route as DashboardLeaderboardRouteImport } from './conf/_dashboard/leaderboard.route'
+import { Route as DashboardAgentsRouteImport } from './conf/_dashboard/agents.route'
+import { Route as DashboardAuthenticatedRouteImport } from './conf/_dashboard/_authenticated.route'
+import { Route as AuthRegisterRouteImport } from './conf/_auth/register.route'
+import { Route as AuthLogoutRouteImport } from './conf/_auth/logout.route'
+import { Route as AuthLoginRouteImport } from './conf/_auth/login.route'
+import { Route as DashboardSystemsIndexRouteImport } from './conf/_dashboard/systems/index.route'
+import { Route as DashboardAgentsIndexRouteImport } from './conf/_dashboard/agents/index.route'
+import { Route as DashboardAgentsAgentSymbolRouteImport } from './conf/_dashboard/agents/$agentSymbol.route'
+import { Route as DashboardAuthenticatedSurveysRouteImport } from './conf/_dashboard/_authenticated/surveys.route'
+import { Route as DashboardAuthenticatedFleetRouteImport } from './conf/_dashboard/_authenticated/fleet.route'
+import { Route as DashboardAuthenticatedContractsRouteImport } from './conf/_dashboard/_authenticated/contracts.route'
+import { Route as DashboardSystemsSystemSymbolIndexRouteImport } from './conf/_dashboard/systems/$systemSymbol/index.route'
+import { Route as DashboardAuthenticatedFleetIndexRouteImport } from './conf/_dashboard/_authenticated/fleet/index.route'
+import { Route as DashboardAuthenticatedFleetShipSymbolRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol.route'
+import { Route as DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport } from './conf/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.route'
+import { Route as DashboardAuthenticatedFleetShipSymbolOverlayRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.route'
+import { Route as DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteImport } from './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.route'
 
 // Create Virtual Routes
 
@@ -44,12 +44,12 @@ const AuthLazyImport = createFileRoute('/_auth')()
 const AuthLazyRoute = AuthLazyImport.update({
   id: '/_auth',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./conf/_auth.lazy.ts').then((d) => d.Route))
+} as any).lazy(() => import('./conf/_auth.lazy').then((d) => d.Route))
 
 const DashboardRouteRoute = DashboardRouteImport.update({
   id: '/_dashboard',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./conf/_dashboard.lazy.ts').then((d) => d.Route))
+} as any).lazy(() => import('./conf/_dashboard.lazy').then((d) => d.Route))
 
 const IndexRouteRoute = IndexRouteImport.update({
   path: '/',
@@ -65,7 +65,7 @@ const DashboardLeaderboardRouteRoute = DashboardLeaderboardRouteImport.update({
   path: '/leaderboard',
   getParentRoute: () => DashboardRouteRoute,
 } as any).lazy(() =>
-  import('./conf/_dashboard/leaderboard.lazy.ts').then((d) => d.Route),
+  import('./conf/_dashboard/leaderboard.lazy').then((d) => d.Route),
 )
 
 const DashboardAgentsRouteRoute = DashboardAgentsRouteImport.update({
@@ -82,9 +82,7 @@ const DashboardAuthenticatedRouteRoute =
 const AuthRegisterRouteRoute = AuthRegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => AuthLazyRoute,
-} as any).lazy(() =>
-  import('./conf/_auth/register.lazy.ts').then((d) => d.Route),
-)
+} as any).lazy(() => import('./conf/_auth/register.lazy').then((d) => d.Route))
 
 const AuthLogoutRouteRoute = AuthLogoutRouteImport.update({
   path: '/logout',
@@ -94,7 +92,7 @@ const AuthLogoutRouteRoute = AuthLogoutRouteImport.update({
 const AuthLoginRouteRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthLazyRoute,
-} as any).lazy(() => import('./conf/_auth/login.lazy.ts').then((d) => d.Route))
+} as any).lazy(() => import('./conf/_auth/login.lazy').then((d) => d.Route))
 
 const DashboardSystemsIndexRouteRoute = DashboardSystemsIndexRouteImport.update(
   {
@@ -102,14 +100,14 @@ const DashboardSystemsIndexRouteRoute = DashboardSystemsIndexRouteImport.update(
     getParentRoute: () => DashboardSystemsRouteRoute,
   } as any,
 ).lazy(() =>
-  import('./conf/_dashboard/systems/index.lazy.ts').then((d) => d.Route),
+  import('./conf/_dashboard/systems/index.lazy').then((d) => d.Route),
 )
 
 const DashboardAgentsIndexRouteRoute = DashboardAgentsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardAgentsRouteRoute,
 } as any).lazy(() =>
-  import('./conf/_dashboard/agents/index.lazy.ts').then((d) => d.Route),
+  import('./conf/_dashboard/agents/index.lazy').then((d) => d.Route),
 )
 
 const DashboardAgentsAgentSymbolRouteRoute =
@@ -117,9 +115,7 @@ const DashboardAgentsAgentSymbolRouteRoute =
     path: '/$agentSymbol',
     getParentRoute: () => DashboardAgentsRouteRoute,
   } as any).lazy(() =>
-    import('./conf/_dashboard/agents/$agentSymbol.lazy.ts').then(
-      (d) => d.Route,
-    ),
+    import('./conf/_dashboard/agents/$agentSymbol.lazy').then((d) => d.Route),
   )
 
 const DashboardAuthenticatedSurveysRouteRoute =
@@ -127,7 +123,7 @@ const DashboardAuthenticatedSurveysRouteRoute =
     path: '/surveys',
     getParentRoute: () => DashboardAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./conf/_dashboard/_authenticated/surveys.lazy.ts').then(
+    import('./conf/_dashboard/_authenticated/surveys.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -143,7 +139,7 @@ const DashboardAuthenticatedContractsRouteRoute =
     path: '/contracts',
     getParentRoute: () => DashboardAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./conf/_dashboard/_authenticated/contracts.lazy.ts').then(
+    import('./conf/_dashboard/_authenticated/contracts.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -153,7 +149,7 @@ const DashboardSystemsSystemSymbolIndexRouteRoute =
     path: '/$systemSymbol/',
     getParentRoute: () => DashboardSystemsRouteRoute,
   } as any).lazy(() =>
-    import('./conf/_dashboard/systems/$systemSymbol/index.lazy.ts').then(
+    import('./conf/_dashboard/systems/$systemSymbol/index.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -163,7 +159,7 @@ const DashboardAuthenticatedFleetIndexRouteRoute =
     path: '/',
     getParentRoute: () => DashboardAuthenticatedFleetRouteRoute,
   } as any).lazy(() =>
-    import('./conf/_dashboard/_authenticated/fleet/index.lazy.ts').then(
+    import('./conf/_dashboard/_authenticated/fleet/index.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -173,7 +169,7 @@ const DashboardAuthenticatedFleetShipSymbolRouteRoute =
     path: '/$shipSymbol',
     getParentRoute: () => DashboardAuthenticatedFleetRouteRoute,
   } as any).lazy(() =>
-    import('./conf/_dashboard/_authenticated/fleet/$shipSymbol.lazy.ts').then(
+    import('./conf/_dashboard/_authenticated/fleet/$shipSymbol.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -184,7 +180,7 @@ const DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute =
     getParentRoute: () => DashboardSystemsRouteRoute,
   } as any).lazy(() =>
     import(
-      './conf/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.lazy.ts'
+      './conf/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.lazy'
     ).then((d) => d.Route),
   )
 
@@ -194,7 +190,7 @@ const DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute =
     getParentRoute: () => DashboardAuthenticatedFleetShipSymbolRouteRoute,
   } as any).lazy(() =>
     import(
-      './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.lazy.ts'
+      './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.lazy'
     ).then((d) => d.Route),
   )
 
@@ -205,7 +201,7 @@ const DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute =
       DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute,
   } as any).lazy(() =>
     import(
-      './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.lazy.ts'
+      './conf/_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.lazy'
     ).then((d) => d.Route),
   )
 
