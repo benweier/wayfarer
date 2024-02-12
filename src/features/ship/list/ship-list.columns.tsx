@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
-import { ShipIcon } from '@/components/icons'
+import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { useShipTransit } from '@/features/ship/transit'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -156,7 +156,11 @@ export const columns = [
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="fuel" className="size-4 text-teal-500" />
             <div className="text-sm font-semibold">
-              {fuel.current} / {fuel.capacity}
+              {fuel.capacity === 0 ? (
+                <AppIcon id="infinity" className="size-5" aria-label="Infinite" />
+              ) : (
+                `${fuel.current} / ${fuel.capacity}`
+              )}
             </div>
           </div>
           <div className="h-1 w-full max-w-[100px] rounded-full bg-teal-900/20 dark:bg-teal-900/40">

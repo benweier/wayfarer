@@ -3,9 +3,10 @@ import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
-import { ShipIcon } from '@/components/icons'
+import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointContext } from '@/context/waypoint.context'
+import { NegotiateContract } from '@/features/ship/actions'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -69,6 +70,15 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
                 </ShipActions.Dock>
               )}
               <ShipDetailFlightMode ship={ship} />
+              <NegotiateContract ship={ship} disabled={ship.nav.status !== 'DOCKED'}>
+                {(props) => {
+                  return (
+                    <Button intent="primary" kind="flat" size="small" {...props}>
+                      {t('ship.action.negotiate_contract')}
+                    </Button>
+                  )
+                }}
+              </NegotiateContract>
             </div>
           </div>
         </div>
@@ -81,7 +91,11 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             <div className="flex items-center gap-2">
               <ShipIcon id="fuel" className="size-4 text-teal-500" />
               <div className="text-sm font-semibold">
-                {ship.fuel.current} / {ship.fuel.capacity}
+                {ship.fuel.capacity === 0 ? (
+                  <AppIcon id="infinity" className="size-5" aria-label="Infinite" />
+                ) : (
+                  `${ship.fuel.current} / ${ship.fuel.capacity}`
+                )}
               </div>
             </div>
             <div className="h-1 rounded-full bg-teal-900/20 dark:bg-teal-900/40">
