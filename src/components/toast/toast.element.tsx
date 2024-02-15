@@ -6,7 +6,7 @@ export const ToastElement = ({ id, toast }: ToastElementProps) => {
   return (
     <div
       id={`toast-${id}`}
-      className={cx(classes.toast, 'pointer-events-auto w-full rounded-lg bg-white px-4 py-3 md:w-96')}
+      className={cx(classes.toast, 'pointer-events-auto w-full rounded-lg px-4 py-3 md:w-96')}
       data-status={toast.status}
     >
       <div className={classes['toast-label']}>{toast.label}</div>
