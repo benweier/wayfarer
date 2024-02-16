@@ -1,10 +1,9 @@
 import { getRenderedMatches, useRouterState } from '@tanstack/react-router'
 import { Fragment } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { type MetaProps } from './meta.types'
 
-export const Meta = ({ titleTemplate }: MetaProps) => {
+export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
   const { t } = useTranslation()
   const metas = useRouterState({
     select: (state) => {
@@ -26,13 +25,13 @@ export const Meta = ({ titleTemplate }: MetaProps) => {
   })
 
   return (
-    <Helmet titleTemplate={titleTemplate}>
+    <>
       {metas.map(({ id, meta }) => {
         return (
           <Fragment key={id}>
             {meta.map((tag) => {
               if ('title' in tag) {
-                return <title key={tag.title}>{tag.title}</title>
+                return <title key={tag.title}>{`${titleTemplate.replace(/%s/g, () => tag.title)}`}</title>
               }
 
               if ('name' in tag) {
@@ -48,6 +47,6 @@ export const Meta = ({ titleTemplate }: MetaProps) => {
           </Fragment>
         )
       })}
-    </Helmet>
+    </>
   )
 }
