@@ -6,7 +6,6 @@ import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointContext } from '@/context/waypoint.context'
-import { NegotiateContract } from '@/features/ship/actions'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
 import { type ShipResponse } from '@/types/spacetraders'
@@ -70,15 +69,6 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
                 </ShipActions.Dock>
               )}
               <ShipDetailFlightMode ship={ship} />
-              <NegotiateContract ship={ship} disabled={ship.nav.status !== 'DOCKED'}>
-                {(props) => {
-                  return (
-                    <Button intent="primary" kind="flat" size="small" {...props}>
-                      {t('ship.action.negotiate_contract')}
-                    </Button>
-                  )
-                }}
-              </NegotiateContract>
             </div>
           </div>
         </div>
