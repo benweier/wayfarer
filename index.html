@@ -9,8 +9,8 @@
 
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eeeeee" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
-
-    <meta name="color-scheme" content="dark light" />
+    <meta name="color-scheme" media="(prefers-color-scheme: light)" content="dark" />
+    <meta name="color-scheme" media="(prefers-color-scheme: dark)" content="light" />
 
     <title>Wayfarer</title>
     <meta name="description" content="An open-source user interface for the Space Traders API" />
@@ -20,6 +20,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
     <link rel="preload" href="/space-grotesk.woff2" as="font" />
+    <link rel="preconnect" href="https://api.spacetraders.io" />
     <style>
       @font-face {
         font-family: 'Space Grotesk';
