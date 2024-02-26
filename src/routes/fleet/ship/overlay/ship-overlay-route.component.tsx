@@ -11,7 +11,7 @@ export const ShipOverlayRoute = () => {
   return (
     <Modal
       isOpen
-      size="lg"
+      size="auto"
       closeable
       disableExternalClose
       onClose={() => {
