@@ -128,16 +128,6 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             />
           </div>
         </div>
-        <div className="rounded-sm rounded-r-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
-          <div className="text-secondary text-right text-xs uppercase">{t('ship.condition')}</div>
-          <div className="flex items-center gap-2">
-            <ShipIcon id="condition" className="size-4 text-rose-500" />
-            <div className="text-sm font-semibold">{ship.frame.condition}%</div>
-          </div>
-          <div className="h-1 rounded-full bg-rose-900/20 dark:bg-rose-900/40">
-            <div className="h-1 rounded-full bg-rose-500/80" style={{ width: `${ship.frame.condition}%` }} />
-          </div>
-        </div>
       </div>
     </div>
   )
