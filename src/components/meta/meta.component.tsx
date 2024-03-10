@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { type MetaProps } from './meta.types'
 
 export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('meta')
   const metas = useRouterState({
     select: (state) => {
       const metas = state.matches.reduce<Map<string, ReactNode>>((metas, match) => {
@@ -13,7 +13,7 @@ export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
           'meta' in match.routeContext &&
           typeof match.routeContext.meta === 'function'
         ) {
-          const meta = match.routeContext.meta(t, match.loaderData as any)
+          const meta: MetaObject[] = match.routeContext.meta(t, match.loaderData)
 
           meta.forEach((tag) => {
             if ('title' in tag) {
