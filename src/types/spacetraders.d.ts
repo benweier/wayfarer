@@ -126,6 +126,7 @@ export type ShipFrame = {
   mountingPoints: number
   fuelCapacity: number
   condition: number
+  integrity: number
   requirements: {
     power: number
     crew: number
@@ -137,6 +138,7 @@ export type ShipReactor = {
   name: string
   description: string
   condition: number
+  integrity: number
   powerOutput: number
   requirements: {
     crew: number
@@ -148,6 +150,7 @@ export type ShipEngine = {
   name: string
   description: string
   condition: number
+  integrity: number
   speed: number
   requirements: {
     power: number
@@ -445,9 +448,29 @@ export type SiphonYield = {
   units: number
 }
 
-export type SiphonResponse = {
+export type SiphonResult = {
   shipSymbol: string
   yield: SiphonYield
+}
+
+export type ShipSiphonResponse = {
+  cooldown: CooldownResponse
+  siphon: SiphonResult
+  cargo: ShipCargo
+}
+
+export type ShipRepairTransaction = {
+  waypointSymbol: string
+  shipSymbol: string
+  totalPrice: number
+  timestamp: string
+}
+
+export type ShipScrapTransaction = {
+  waypointSymbol: string
+  shipSymbol: string
+  totalPrice: number
+  timestamp: string
 }
 
 export type RegisterAgentResponse = {

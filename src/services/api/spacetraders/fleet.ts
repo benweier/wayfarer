@@ -12,8 +12,10 @@ import {
   type NavigationResponse,
   type ShipCargo,
   type ShipMount,
+  type ShipRepairTransaction,
   type ShipResponse,
-  type SiphonResponse,
+  type ShipScrapTransaction,
+  type ShipSiphonResponse,
   type SurveyResponse,
   type WaypointResponse,
 } from '@/types/spacetraders'
@@ -265,11 +267,7 @@ export const createShipSiphonMutation = {
   mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/siphon`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
-    return post<SpaceTradersResponse<{ cooldown: CooldownResponse; siphon: SiphonResponse; cargo: ShipCargo }>>(
-      url,
-      undefined,
-      { headers: createHeaders() },
-    )
+    return post<SpaceTradersResponse<ShipSiphonResponse>>(url, undefined, { headers: createHeaders() })
   },
 }
 
@@ -370,5 +368,54 @@ export const createShipNegotiateContractMutation = {
     const url = new URL(`my/ships/${shipSymbol}/negotiate/contract`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ contract: ContractResponse }>>(url, undefined, { headers: createHeaders() })
+  },
+}
+
+export const getShipScrapQuery = (args: { shipSymbol: string }) =>
+  queryOptions({
+    queryKey: [{ scope: 'ships', entity: 'scrap' }, args],
+    queryFn: async ({ signal }) => {
+      const url = new URL(`my/ships/${args.shipSymbol.toUpperCase()}/scrap`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+      return get<SpaceTradersResponse<{ transaction: ShipScrapTransaction }>>(url, { signal, headers: createHeaders() })
+    },
+  })
+
+export const createShipScrapMutation = {
+  getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'scrap' }, args],
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/scrap`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ agent: AgentResponse; transaction: ShipScrapTransaction }>>(url, undefined, {
+      headers: createHeaders(),
+    })
+  },
+}
+
+export const getShipRepairQuery = (args: { shipSymbol: string }) =>
+  queryOptions({
+    queryKey: [{ scope: 'ships', entity: 'repair' }, args],
+    queryFn: async ({ signal }) => {
+      const url = new URL(`my/ships/${args.shipSymbol.toUpperCase()}/repair`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+      return get<SpaceTradersResponse<{ transaction: ShipRepairTransaction }>>(url, {
+        signal,
+        headers: createHeaders(),
+      })
+    },
+  })
+
+export const createShipRepairMutation = {
+  getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'repair' }, args],
+  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+    const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/repair`, import.meta.env.SPACETRADERS_API_BASE_URL)
+
+    return post<SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse; transaction: ShipRepairTransaction }>>(
+      url,
+      undefined,
+      {
+        headers: createHeaders(),
+      },
+    )
   },
 }
