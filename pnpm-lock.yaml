@@ -158,8 +158,8 @@ devDependencies:
     specifier: ^5.20.1
     version: 5.20.1(eslint@8.57.0)(typescript@5.4.2)
   '@tanstack/router-vite-plugin':
-    specifier: ^1.19.3
-    version: 1.19.3
+    specifier: ^1.19.5
+    version: 1.19.5
   '@testing-library/dom':
     specifier: ^9.3.4
     version: 9.3.4
@@ -3703,19 +3703,19 @@ packages:
       - csstype
     dev: false
 
-  /@tanstack/router-generator@1.19.3:
-    resolution: {integrity: sha512-2fWANAv0TjgE5NcaRoKAR9g8cKiWAHI76PHMjxOaJ0mXppdgPEBtiN3dzzQa9AQeixEpZTMEv8pFp/fTOnzBug==}
+  /@tanstack/router-generator@1.19.5:
+    resolution: {integrity: sha512-inBGJmH10bN6G38o1oMF5owEjMPiYF1gK22lFsQl+wmDp5RSy/AItd+nvbDU2xbICWKAHLdtnZFdaXrg23wF8Q==}
     engines: {node: '>=12'}
     dependencies:
       prettier: 3.2.5
       zod: 3.22.4
     dev: true
 
-  /@tanstack/router-vite-plugin@1.19.3:
-    resolution: {integrity: sha512-Aq9yul8INCepoixPQCeW9Xs2f1v+uOLIQa4hM80j4i0/4N+jEf46N67ZyQIDY1GDFLxneJ6JCNJ7PHO4CMYTFQ==}
+  /@tanstack/router-vite-plugin@1.19.5:
+    resolution: {integrity: sha512-Cf+v+z8TEulf0ybcFFXyvJ1HVEYTIhr34R1t3DoRcdwFb92GieNQIRj/gmYtR4bXt/TjtYj11t2jZYDV2MOnrg==}
     engines: {node: '>=12'}
     dependencies:
-      '@tanstack/router-generator': 1.19.3
+      '@tanstack/router-generator': 1.19.5
     dev: true
 
   /@tanstack/store@0.1.3:
