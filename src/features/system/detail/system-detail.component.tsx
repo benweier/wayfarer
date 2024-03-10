@@ -4,17 +4,15 @@ import { SystemTag } from '@/components/system/tag'
 import { useSystemResponse } from '@/context/system.context'
 
 export const SystemDetail = ({ children }: PropsWithChildren) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('spacetraders.system_type')
   const system = useSystemResponse()
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-row flex-wrap items-center justify-start gap-x-4 gap-y-2">
-          <SystemTag type={system.type}>{t(system.type, { ns: 'spacetraders.system_type' })}</SystemTag>
-          <div className="text-sm font-light">
-            ({system.x}, {system.y})
-          </div>
+      <div className="flex items-center justify-start gap-x-4">
+        <SystemTag type={system.type}>{t(system.type)}</SystemTag>
+        <div className="text-sm font-light">
+          ({system.x}, {system.y})
         </div>
       </div>
 
