@@ -4,5 +4,5 @@ import { type SystemResponse } from '@/types/spacetraders'
 export const meta: MetaFunction<{ system: SpaceTradersResponse<SystemResponse> }> = (t, { system } = {}) => {
   if (!system) return []
 
-  return [{ title: t('system.title', { ns: 'meta', systemSymbol: system.data.symbol }) }]
+  return [{ title: t('system.title', { systemSymbol: system.data.symbol }) }]
 }

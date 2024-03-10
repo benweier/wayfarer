@@ -4,5 +4,5 @@ import { type AgentResponse } from '@/types/spacetraders'
 export const meta: MetaFunction<{ agent: SpaceTradersResponse<AgentResponse> }> = (t, { agent } = {}) => {
   if (!agent) return []
 
-  return [{ title: t('agent.title', { ns: 'meta', agentSymbol: agent.data.symbol }) }]
+  return [{ title: t('agent.title', { agentSymbol: agent.data.symbol }) }]
 }

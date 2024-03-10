@@ -4,7 +4,7 @@ import { object, optional, parse, string } from 'valibot'
 const SearchParamsSchema = object({
   redirect: optional(string()),
 })
-const meta: MetaFunction = (t) => [{ title: t('auth.login.title', { ns: 'meta' }) }]
+const meta: MetaFunction = (t) => [{ title: t('auth.login.title') }]
 
 export const Route = createFileRoute('/_auth/login')({
   validateSearch: (search) => parse(SearchParamsSchema, search),

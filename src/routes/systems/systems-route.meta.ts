@@ -1,3 +1,3 @@
 export const meta: MetaFunction = (t) => {
-  return [{ title: t('systems.title', { ns: 'meta' }) }]
+  return [{ title: t('systems.title') }]
 }

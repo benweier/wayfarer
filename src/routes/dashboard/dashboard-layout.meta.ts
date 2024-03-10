@@ -1,1 +1,1 @@
-export const meta: MetaFunction = (t) => [{ title: t('dashboard.title', { ns: 'meta' }) }]
+export const meta: MetaFunction = (t) => [{ title: t('dashboard.title') }]

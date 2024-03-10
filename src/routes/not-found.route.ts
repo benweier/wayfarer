@@ -7,7 +7,7 @@ export const notFoundRoute = new NotFoundRoute({
   getParentRoute: () => rootRoute,
   beforeLoad: () => {
     return {
-      meta: (t: TFunction) => [{ title: t('not_found.title', { ns: 'meta' }) }],
+      meta: (t: TFunction) => [{ title: t('not_found.title') }],
     }
   },
   component: NotFound,
