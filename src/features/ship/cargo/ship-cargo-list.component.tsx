@@ -6,6 +6,7 @@ import { useShipResponse } from '@/context/ship.context'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
+import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
 import { getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { ShipCargoTable } from './ship-cargo-list.table'
@@ -20,8 +21,7 @@ export const ShipCargoList = () => {
       waypointSymbol: ship.nav.waypointSymbol,
     }),
   )
-  const hasMarketplace =
-    waypoint.isSuccess && waypoint.data.data.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
+  const hasMarketplace = waypoint.isSuccess && hasTrait(waypoint.data.data.traits, ['MARKETPLACE'])
   const { data, isSuccess } = useQuery({
     ...getWaypointMarketQuery({
       systemSymbol: ship.nav.systemSymbol,

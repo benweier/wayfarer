@@ -12,6 +12,7 @@ import {
   WaypointMarketPreferences,
 } from '@/features/waypoint/market'
 import { WaypointShipyardError, WaypointShipyardFallback } from '@/features/waypoint/shipyard'
+import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
 import { dynamic } from '@/utilities/dynamic.helper'
 
 const { WaypointShipyardList } = dynamic(() => import('@/features/waypoint/shipyard'), 'WaypointShipyardList')
@@ -21,8 +22,8 @@ export const WaypointTabs = () => {
   const { t } = useTranslation()
   const waypoint = useWaypointResponse()
   const isJumpGate = waypoint.type === 'JUMP_GATE'
-  const hasMarket = waypoint.traits.findIndex((trait) => trait.symbol === 'MARKETPLACE') !== -1
-  const hasShipyard = waypoint.traits.findIndex((trait) => trait.symbol === 'SHIPYARD') !== -1
+  const hasMarket = hasTrait(waypoint.traits, ['MARKETPLACE'])
+  const hasShipyard = hasTrait(waypoint.traits, ['SHIPYARD'])
 
   return (
     <Tab.Group as="div" className="tab-group">
