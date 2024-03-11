@@ -8,6 +8,7 @@ import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
+import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
 import { type ShipResponse } from '@/types/spacetraders'
 
 export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
@@ -76,9 +77,9 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
 
       <div className="flex items-start gap-0.5">
         <div className="flex flex-col items-end gap-0.5">
-          <div className="rounded-sm rounded-l-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
+          <div className="min-w-24 rounded-sm rounded-l-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
             <div className="text-secondary text-right text-xs uppercase">{t('ship.fuel')}</div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-end gap-2">
               <ShipIcon id="fuel" className="size-4 text-teal-500" />
               <div className="text-sm font-semibold">
                 {ship.fuel.capacity === 0 ? (
@@ -99,10 +100,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             {(ctx) => (
               <ShipActions.Refuel
                 ship={ship}
-                disabled={
-                  ship.nav.status !== 'DOCKED' ||
-                  ctx?.traits.find((trait) => trait.symbol === 'MARKETPLACE') === undefined
-                }
+                disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, ['MARKETPLACE'])}
               >
                 {(props) => (
                   <Button intent="confirm" kind="flat" size="small" {...props}>
@@ -113,9 +111,9 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             )}
           </WaypointContext.Consumer>
         </div>
-        <div className="rounded-sm bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
+        <div className="min-w-24 rounded-sm bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
           <div className="text-secondary text-right text-xs uppercase">{t('ship.cargo')}</div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-end gap-2">
             <ShipIcon id="cargo" className="size-4 text-fuchsia-500" />
             <div className="text-sm font-semibold">
               {ship.cargo.units} / {ship.cargo.capacity}
@@ -127,6 +125,39 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
               style={{ width: `${(ship.cargo.units / ship.cargo.capacity) * 100}%` }}
             />
           </div>
+        </div>
+        <div className="flex flex-col items-end gap-0.5">
+          <div className="w-full min-w-24 rounded-sm rounded-r-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
+            <div className="text-secondary text-right text-xs uppercase">{t('ship.condition')}</div>
+            <div className="flex items-center justify-end gap-2">
+              <ShipIcon id="condition" className="size-4 text-rose-500" />
+              <div className="text-sm font-semibold">
+                {ship.frame.condition} / {ship.engine.condition} / {ship.reactor.condition}
+              </div>
+            </div>
+            <div className="h-1 rounded-full bg-rose-900/20 dark:bg-rose-900/40">
+              <div
+                className="h-1 rounded-full bg-rose-500/80"
+                style={{
+                  width: `${((ship.frame.condition + ship.engine.condition + ship.reactor.condition) / 3) * 100}%`,
+                }}
+              />
+            </div>
+          </div>
+          <WaypointContext.Consumer>
+            {(ctx) => (
+              <ShipActions.Repair
+                ship={ship}
+                disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, ['SHIPYARD'])}
+              >
+                {(props) => (
+                  <Button intent="confirm" kind="flat" size="small" {...props}>
+                    {t('ship.action.repair')}
+                  </Button>
+                )}
+              </ShipActions.Repair>
+            )}
+          </WaypointContext.Consumer>
         </div>
       </div>
     </div>
