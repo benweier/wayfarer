@@ -158,8 +158,8 @@ devDependencies:
     specifier: ^5.20.1
     version: 5.20.1(eslint@8.57.0)(typescript@5.4.2)
   '@tanstack/router-vite-plugin':
-    specifier: ^1.19.5
-    version: 1.19.5
+    specifier: ^1.19.6
+    version: 1.19.6
   '@testing-library/dom':
     specifier: ^9.3.4
     version: 9.3.4
@@ -245,8 +245,8 @@ devDependencies:
     specifier: ^6.2.0
     version: 6.2.0(eslint@8.57.0)(typescript@5.4.2)
   happy-dom:
-    specifier: ^13.7.1
-    version: 13.7.1
+    specifier: ^13.7.3
+    version: 13.7.3
   husky:
     specifier: ^8.0.3
     version: 8.0.3
@@ -321,7 +321,7 @@ devDependencies:
     version: 4.3.1(typescript@5.4.2)(vite@5.1.5)
   vitest:
     specifier: ^1.3.1
-    version: 1.3.1(@types/node@20.11.25)(happy-dom@13.7.1)(lightningcss@1.24.0)
+    version: 1.3.1(@types/node@20.11.25)(happy-dom@13.7.3)(lightningcss@1.24.0)
 
 packages:
 
@@ -3703,19 +3703,19 @@ packages:
       - csstype
     dev: false
 
-  /@tanstack/router-generator@1.19.5:
-    resolution: {integrity: sha512-inBGJmH10bN6G38o1oMF5owEjMPiYF1gK22lFsQl+wmDp5RSy/AItd+nvbDU2xbICWKAHLdtnZFdaXrg23wF8Q==}
+  /@tanstack/router-generator@1.19.6:
+    resolution: {integrity: sha512-6eZhErABOw1qrobhxMARO8xkBmIyTo0XBeqIjAP1kOoA/DMCE58NDug3+T8I19dLT70Yf+vq4Nz4AkBGZXpf5w==}
     engines: {node: '>=12'}
     dependencies:
       prettier: 3.2.5
       zod: 3.22.4
     dev: true
 
-  /@tanstack/router-vite-plugin@1.19.5:
-    resolution: {integrity: sha512-Cf+v+z8TEulf0ybcFFXyvJ1HVEYTIhr34R1t3DoRcdwFb92GieNQIRj/gmYtR4bXt/TjtYj11t2jZYDV2MOnrg==}
+  /@tanstack/router-vite-plugin@1.19.6:
+    resolution: {integrity: sha512-01JV46fQQ7ej01N/w+wPWOBSEgmPH56nxWklFdhmcfpij5NvWgp7UD0PW4dk8TUXN9XO5D4f66o/uorYJz4tuA==}
     engines: {node: '>=12'}
     dependencies:
-      '@tanstack/router-generator': 1.19.5
+      '@tanstack/router-generator': 1.19.6
     dev: true
 
   /@tanstack/store@0.1.3:
@@ -3774,7 +3774,7 @@ packages:
       dom-accessibility-api: 0.6.3
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 1.3.1(@types/node@20.11.25)(happy-dom@13.7.1)(lightningcss@1.24.0)
+      vitest: 1.3.1(@types/node@20.11.25)(happy-dom@13.7.3)(lightningcss@1.24.0)
     dev: true
 
   /@testing-library/react@14.2.1(react-dom@18.3.0-canary-0066e0b68-20240306)(react@18.3.0-canary-0066e0b68-20240306):
@@ -4415,7 +4415,7 @@ packages:
       std-env: 3.7.0
       test-exclude: 6.0.0
       v8-to-istanbul: 9.2.0
-      vitest: 1.3.1(@types/node@20.11.25)(happy-dom@13.7.1)(lightningcss@1.24.0)
+      vitest: 1.3.1(@types/node@20.11.25)(happy-dom@13.7.3)(lightningcss@1.24.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4745,7 +4745,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.23.0
-      caniuse-lite: 1.0.30001596
+      caniuse-lite: 1.0.30001597
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -4845,7 +4845,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001596
+      caniuse-lite: 1.0.30001597
       electron-to-chromium: 1.4.699
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
@@ -4884,8 +4884,8 @@ packages:
     resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
     engines: {node: '>= 6'}
 
-  /caniuse-lite@1.0.30001596:
-    resolution: {integrity: sha512-zpkZ+kEr6We7w63ORkoJ2pOfBwBkY/bJrG/UZ90qNb45Isblu8wzDgevEOrRL1r9dWayHjYiiyCMEXPn4DweGQ==}
+  /caniuse-lite@1.0.30001597:
+    resolution: {integrity: sha512-7LjJvmQU6Sj7bL0j5b5WY/3n7utXUJvAe1lxhsHDbLmwX9mdL86Yjtr+5SRCyf8qME4M7pU2hswj0FpyBVCv9w==}
     dev: true
 
   /ccount@2.0.1:
@@ -5297,7 +5297,7 @@ packages:
       side-channel: 1.0.6
       which-boxed-primitive: 1.0.2
       which-collection: 1.0.2
-      which-typed-array: 1.1.14
+      which-typed-array: 1.1.15
     dev: true
 
   /deep-is@0.1.4:
@@ -5481,7 +5481,7 @@ packages:
       has-property-descriptors: 1.0.2
       has-proto: 1.0.3
       has-symbols: 1.0.3
-      hasown: 2.0.1
+      hasown: 2.0.2
       internal-slot: 1.0.7
       is-array-buffer: 3.0.4
       is-callable: 1.2.7
@@ -5505,7 +5505,7 @@ packages:
       typed-array-byte-offset: 1.0.2
       typed-array-length: 1.0.5
       unbox-primitive: 1.0.2
-      which-typed-array: 1.1.14
+      which-typed-array: 1.1.15
     dev: true
 
   /es-array-method-boxes-properly@1.0.0:
@@ -5567,13 +5567,13 @@ packages:
     dependencies:
       get-intrinsic: 1.2.4
       has-tostringtag: 1.0.2
-      hasown: 2.0.1
+      hasown: 2.0.2
     dev: true
 
   /es-shim-unscopables@1.0.2:
     resolution: {integrity: sha512-J3yBRXCzDu4ULnQwxyToo/OjdMx6akgVC7K6few0a7F/0wLtmKKN7I73AH5T2836UuXRqN7Qg+IIUw/+YJksRw==}
     dependencies:
-      hasown: 2.0.1
+      hasown: 2.0.2
     dev: true
 
   /es-to-primitive@1.2.1:
@@ -5734,7 +5734,7 @@ packages:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.1.1)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
-      hasown: 2.0.1
+      hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3
       minimatch: 3.1.2
@@ -5782,7 +5782,7 @@ packages:
       emoji-regex: 9.2.2
       es-iterator-helpers: 1.0.17
       eslint: 8.57.0
-      hasown: 2.0.1
+      hasown: 2.0.2
       jsx-ast-utils: 3.3.5
       language-tags: 1.0.9
       minimatch: 3.1.2
@@ -6270,7 +6270,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.3
       has-symbols: 1.0.3
-      hasown: 2.0.1
+      hasown: 2.0.2
 
   /get-nonce@1.0.1:
     resolution: {integrity: sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==}
@@ -6432,8 +6432,8 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /happy-dom@13.7.1:
-    resolution: {integrity: sha512-uQgxSTqQY4lMVIhV/W6GWYOT6h7Z6CNlsa+SyvAcOy311spU3zPDNAMzayJky9q4xqfEQf3cQj8yDZngiYUEDA==}
+  /happy-dom@13.7.3:
+    resolution: {integrity: sha512-xMwilTgO34BGEX0TAoM369wwwAy0fK/Jq6BGaRYhSjxLtfQ740nqxHfjFyBqPjCVmKiPUS4npBnMrGLii7eCOg==}
     engines: {node: '>=16.0.0'}
     dependencies:
       entities: 4.5.0
@@ -6475,8 +6475,8 @@ packages:
       has-symbols: 1.0.3
     dev: true
 
-  /hasown@2.0.1:
-    resolution: {integrity: sha512-1/th4MHjnwncwXsIW6QMzlvYL9kG5e/CpVvLRZe4XPa8TOUNbCELqmvhDmnkNsAjwaG4+I8gJJL0JBvTTLO9qA==}
+  /hasown@2.0.2:
+    resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
@@ -6687,7 +6687,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       es-errors: 1.3.0
-      hasown: 2.0.1
+      hasown: 2.0.2
       side-channel: 1.0.6
     dev: true
 
@@ -6763,7 +6763,7 @@ packages:
   /is-core-module@2.13.1:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
     dependencies:
-      hasown: 2.0.1
+      hasown: 2.0.2
 
   /is-date-object@1.0.5:
     resolution: {integrity: sha512-9YQaSxsAiSwcvS33MBk3wTCVnWK+HhF8VZR2jRxehM16QcVOdHqPn4VPHmRK4lSr38n9JriurInLcP90xsYNfQ==}
@@ -6923,7 +6923,7 @@ packages:
     resolution: {integrity: sha512-uZ25/bUAlUY5fR4OKT4rZQEBrzQWYV9ZJYGGsUmEJ6thodVJ1HX64ePQ6Z0qPWP+m+Uq6e9UugrE38jeYsDSMw==}
     engines: {node: '>= 0.4'}
     dependencies:
-      which-typed-array: 1.1.14
+      which-typed-array: 1.1.15
     dev: true
 
   /is-weakmap@2.0.2:
@@ -10383,7 +10383,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.3.1(@types/node@20.11.25)(happy-dom@13.7.1)(lightningcss@1.24.0):
+  /vitest@1.3.1(@types/node@20.11.25)(happy-dom@13.7.3)(lightningcss@1.24.0):
     resolution: {integrity: sha512-/1QJqXs8YbCrfv/GPQ05wAZf2eakUPLPa18vkJAKE7RXOKfVHqMZZ1WlTjiwl6Gcn65M5vpNUB6EFLnEdRdEXQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -10418,7 +10418,7 @@ packages:
       chai: 4.4.1
       debug: 4.3.4
       execa: 8.0.1
-      happy-dom: 13.7.1
+      happy-dom: 13.7.3
       local-pkg: 0.5.0
       magic-string: 0.30.8
       pathe: 1.1.2
@@ -10554,7 +10554,7 @@ packages:
       isarray: 2.0.5
       which-boxed-primitive: 1.0.2
       which-collection: 1.0.2
-      which-typed-array: 1.1.14
+      which-typed-array: 1.1.15
     dev: true
 
   /which-collection@1.0.2:
@@ -10567,8 +10567,8 @@ packages:
       is-weakset: 2.0.3
     dev: true
 
-  /which-typed-array@1.1.14:
-    resolution: {integrity: sha512-VnXFiIW8yNn9kIHN88xvZ4yOWchftKDsRJ8fEPacX/wl1lOvBrhsJ/OeJCXq7B0AaijRuqgzSKalJoPk+D8MPg==}
+  /which-typed-array@1.1.15:
+    resolution: {integrity: sha512-oV0jmFtUky6CXfkqehVvBP/LSWJ2sy4vWMioiENyJLePrBO/yKyV9OyJySfAKosh+RYkIl5zJCNZ8/4JncrpdA==}
     engines: {node: '>= 0.4'}
     dependencies:
       available-typed-arrays: 1.0.7
