@@ -14,10 +14,10 @@ export const router = createRouter({
   },
   defaultPreload: false,
   defaultErrorComponent: RouteError,
+  defaultNotFoundComponent: NotFound,
   defaultPendingComponent: Fallback,
   defaultPendingMinMs: 300,
   defaultPendingMs: 800,
-  globalNotFound: NotFound,
 })
 
 declare module '@tanstack/react-router' {
