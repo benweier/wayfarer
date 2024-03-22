@@ -4,8 +4,6 @@ import { Outlet, ScrollRestoration, useRouterState } from '@tanstack/react-route
 import { lazy } from 'react'
 import { Button } from '@/components/button'
 import { Meta } from '@/components/meta'
-import { ToastContainer } from '@/components/toast'
-import { useThemeManager } from '@/hooks/use-theme-manager.hook'
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -29,8 +27,6 @@ const NavigationLoader = () => {
 
 export const Core = () => {
   const { reset } = useQueryErrorResetBoundary()
-
-  useThemeManager()
 
   return (
     <Sentry.ErrorBoundary
@@ -60,7 +56,6 @@ export const Core = () => {
         <TanStackRouterDevtools />
         <TanStackQueryDevtools />
       </div>
-      <ToastContainer />
     </Sentry.ErrorBoundary>
   )
 }
