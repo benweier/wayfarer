@@ -77,7 +77,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
 
       <div className="flex items-start gap-0.5">
         <div className="flex flex-col items-end gap-0.5">
-          <div className="min-w-24 rounded-sm rounded-l-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
+          <div className="min-w-24 rounded-sm rounded-l-lg bg-zinc-100 py-2 px-3 dark:border-zinc-700 dark:bg-zinc-700/25">
             <div className="text-secondary text-right text-xs uppercase">{t('ship.fuel')}</div>
             <div className="flex items-center justify-end gap-2">
               <ShipIcon id="fuel" className="size-4 text-teal-500" />
@@ -111,7 +111,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             )}
           </WaypointContext.Consumer>
         </div>
-        <div className="min-w-24 rounded-sm bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
+        <div className="min-w-24 rounded-sm bg-zinc-100 py-2 px-3 dark:border-zinc-700 dark:bg-zinc-700/25">
           <div className="text-secondary text-right text-xs uppercase">{t('ship.cargo')}</div>
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="cargo" className="size-4 text-fuchsia-500" />
@@ -127,7 +127,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
           </div>
         </div>
         <div className="flex flex-col items-end gap-0.5">
-          <div className="w-full min-w-24 rounded-sm rounded-r-lg bg-zinc-100 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-700/25">
+          <div className="w-full min-w-24 rounded-sm rounded-r-lg bg-zinc-100 py-2 px-3 dark:border-zinc-700 dark:bg-zinc-700/25">
             <div className="text-secondary text-right text-xs uppercase">{t('ship.condition')}</div>
             <div className="flex items-center justify-end gap-2">
               <ShipIcon id="condition" className="size-4 text-rose-500" />

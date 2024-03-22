@@ -53,7 +53,7 @@ export const ShipCargoPreferences = () => {
             checked={showCargoDescription}
             onChange={setShowCargoDescription}
             className={cx(
-              'relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 ',
+              'focus-visible:ring-opacity-75 relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white ',
               {
                 'bg-emerald-500 dark:bg-emerald-600': showCargoDescription,
                 'bg-zinc-700 dark:bg-zinc-900': !showCargoDescription,
@@ -63,7 +63,7 @@ export const ShipCargoPreferences = () => {
             <span
               aria-hidden="true"
               className={cx(
-                'pointer-events-none inline-block size-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out',
+                'pointer-events-none inline-block size-5 transform rounded-full bg-white ring-0 shadow-lg transition duration-200 ease-in-out',
                 {
                   'translate-x-0': !showCargoDescription,
                   'translate-x-6': showCargoDescription,

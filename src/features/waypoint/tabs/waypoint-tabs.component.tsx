@@ -28,12 +28,12 @@ export const WaypointTabs = () => {
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
-        <Tab disabled={!hasMarket} className="group tab ui-selected:selected disabled:opacity-30">
+        <Tab disabled={!hasMarket} className="group tab disabled:opacity-30">
           {t('market.label')}
         </Tab>
-        <Tab className="group tab ui-selected:selected">{t('fleet.label')}</Tab>
-        {hasShipyard && <Tab className="group tab ui-selected:selected">{t('shipyard.label')}</Tab>}
-        {isJumpGate && <Tab className="group tab ui-selected:selected">{t('jumpgate.label')}</Tab>}
+        <Tab className="group tab">{t('fleet.label')}</Tab>
+        {hasShipyard && <Tab className="group tab">{t('shipyard.label')}</Tab>}
+        {isJumpGate && <Tab className="group tab">{t('jumpgate.label')}</Tab>}
       </Tab.List>
 
       <Tab.Panels>

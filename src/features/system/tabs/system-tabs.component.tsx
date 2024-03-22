@@ -10,8 +10,8 @@ export const SystemTabs = () => {
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
-        <Tab className="group tab ui-selected:selected">{t('waypoints.label')}</Tab>
-        <Tab className="group tab ui-selected:selected">{t('fleet.label')}</Tab>
+        <Tab className="group tab">{t('waypoints.label')}</Tab>
+        <Tab className="group tab">{t('fleet.label')}</Tab>
       </Tab.List>
 
       <Tab.Panels>

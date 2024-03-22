@@ -41,7 +41,7 @@ export const WaypointTypeFilter = ({
       multiple
     >
       <Listbox.Button as={Fragment}>
-        <Button intent={values.length > 0 ? 'primary' : 'dim'} kind="flat" size="small" ref={refs.setReference}>
+        <Button intent={values.length > 0 ? 'primary' : 'dim'} kind="flat" icon ref={refs.setReference}>
           <span className="sr-only">Filter Types</span>
           <AppIcon id="filter" className="size-4" aria-hidden="true" />
         </Button>
@@ -74,7 +74,7 @@ export const WaypointTypeFilter = ({
                           <div className="relative p-1">
                             <span
                               className={cx(
-                                'relative flex cursor-default select-none gap-2 truncate rounded py-1 pl-1 pr-10 transition-colors duration-100 ease-in-out',
+                                'relative flex cursor-default gap-2 truncate rounded py-1 pr-10 pl-1 transition-colors duration-100 ease-in-out select-none',
                                 { 'bg-zinc-900/5 dark:bg-zinc-100/10': active, 'opacity-50': disabled },
                               )}
                             >

@@ -23,7 +23,7 @@ export const Table = <T extends Record<string, any> = Record<string, never>>({
                 return (
                   <th
                     key={header.id}
-                    className="text-primary px-3 py-3.5 text-sm font-semibold"
+                    className="text-primary py-3.5 px-3 text-sm font-semibold"
                     style={{ width: `${header.getSize()}%` }}
                     aria-sort={
                       sorted

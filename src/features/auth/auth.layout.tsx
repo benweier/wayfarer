@@ -36,7 +36,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation()
 
   return (
-    <div className="grid min-h-screen w-full auto-rows-min items-center gap-6 [grid-template-rows:auto_1fr_auto]">
+    <div className="grid min-h-screen w-full auto-rows-min [grid-template-rows:auto_1fr_auto] items-center gap-6">
       <div className="grid grid-flow-row items-center justify-center py-12">
         <Wayfarer className="text-center text-6xl font-black lg:text-7xl" />
         <div className="text-center text-xl font-semibold text-zinc-500">{t('general.description')}</div>

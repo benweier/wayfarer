@@ -43,7 +43,7 @@ export const ShipCargoList = () => {
 
   if (!inventory.length) {
     return (
-      <div className="flex flex-col gap-2 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+      <div className="flex flex-col gap-2 rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
         <div className="text-secondary text-center">
           <Trans
             i18nKey="ship.cargo_empty"

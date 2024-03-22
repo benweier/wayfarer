@@ -49,7 +49,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
           <div className="text-secondary text-xs uppercase">{t('waypoint.orbitals')}</div>
           <div className="flex flex-wrap gap-1">
             {waypoint.orbitals.map((orbital) => (
-              <div key={orbital.symbol} className="rounded bg-zinc-200/50 px-4 py-2 shadow-sm dark:bg-zinc-700/25">
+              <div key={orbital.symbol} className="rounded bg-zinc-200/50 py-2 px-4 shadow-sm dark:bg-zinc-700/25">
                 <Link
                   to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                   params={{ systemSymbol: waypoint.systemSymbol, waypointSymbol: orbital.symbol }}

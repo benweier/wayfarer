@@ -38,7 +38,7 @@ export const Core = () => {
       fallback={({ resetError, error }) => (
         <div className="flex min-h-screen flex-col items-center justify-center">
           <div className="flex w-full flex-col items-center gap-4 p-3">
-            <div className="font-mono text-xl font-bold tracking-tighter text-rose-500">{error.message}</div>
+            <div className="display-sm font-mono text-rose-500">{error.message}</div>
             <Button
               intent="primary"
               className="w-full max-w-xs"

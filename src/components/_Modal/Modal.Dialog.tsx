@@ -50,13 +50,14 @@ export const Root = ({ size, overlay = <Overlay />, children }: PropsWithChildre
             tabIndex={0}
             role="dialog"
             className={cx(
-              'relative m-8 flex max-h-[80vh] flex-col overflow-y-auto rounded-lg border border-zinc-300 bg-zinc-50 bg-opacity-75 p-0 ring ring-zinc-900/5 backdrop-blur-lg focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:bg-opacity-75 dark:ring-zinc-50/10',
+              'relative m-8 flex max-h-[80vh] flex-col overflow-y-auto rounded-lg border border-zinc-300 bg-zinc-50 p-0 ring-3 ring-zinc-900/5 backdrop-blur-lg focus:outline-none dark:border-zinc-700 dark:bg-zinc-900/75 dark:ring-zinc-50/10',
+
               {
                 'w-full md:max-w-sm': size === 'sm',
                 'w-full md:max-w-2xl': size === 'md',
                 'w-full md:max-w-6xl': size === 'lg',
                 'md:max-w-screen w-full': size === 'full',
-                'min-w-fit max-w-full': size === 'auto',
+                'max-w-full min-w-fit': size === 'auto',
               },
             )}
           >
@@ -70,16 +71,16 @@ export const Root = ({ size, overlay = <Overlay />, children }: PropsWithChildre
 
 const Title = ({ children }: PropsWithChildren) => {
   return (
-    <div className="flex-basis-auto sticky flex-shrink-0 flex-grow-0 bg-zinc-100 p-4 dark:bg-zinc-800/50">
+    <div className="flex-basis-auto flex-grow-0 flex-shrink-0 sticky bg-zinc-100 p-4 dark:bg-zinc-800/50">
       {children}
     </div>
   )
 }
 const Content = ({ children }: PropsWithChildren) => {
-  return <div className="flex-grow-1 flex-shrink-1 flex-basis-auto overflow-y-auto p-4">{children}</div>
+  return <div className="flex-basis-auto flex-grow-1 flex-shrink-1 overflow-y-auto p-4">{children}</div>
 }
 const Actions = ({ children }: PropsWithChildren) => {
-  return <div className="flex-basis-auto flex-shrink-0 flex-grow-0 bg-zinc-100 dark:bg-zinc-800/50">{children}</div>
+  return <div className="flex-basis-auto flex-grow-0 flex-shrink-0 bg-zinc-100 dark:bg-zinc-800/50">{children}</div>
 }
 
 export const Dialog = Object.assign(Root, { Close, Title, Content, Actions })

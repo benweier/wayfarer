@@ -88,7 +88,7 @@ export const columns = [
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
                   <Tooltip.Content
-                    className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800"
+                    className="w-64 rounded-md bg-zinc-200 py-2 px-4 text-xs text-zinc-800"
                     sideOffset={5}
                   >
                     {value.description}
@@ -97,7 +97,7 @@ export const columns = [
               </Tooltip.Root>
             </Tooltip.Provider>
           </div>
-          <div className="rounded-md bg-zinc-500 bg-opacity-5 p-2 dark:bg-opacity-10">
+          <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="text-secondary size-4" />
@@ -147,7 +147,7 @@ export const columns = [
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
                   <Tooltip.Content
-                    className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800"
+                    className="w-64 rounded-md bg-zinc-200 py-2 px-4 text-xs text-zinc-800"
                     sideOffset={5}
                   >
                     {value.description}
@@ -156,7 +156,7 @@ export const columns = [
               </Tooltip.Root>
             </Tooltip.Provider>
           </div>
-          <div className="rounded-md bg-zinc-500 bg-opacity-5 p-2 dark:bg-opacity-10">
+          <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="text-secondary size-4" />
@@ -198,7 +198,7 @@ export const columns = [
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
                   <Tooltip.Content
-                    className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800"
+                    className="w-64 rounded-md bg-zinc-200 py-2 px-4 text-xs text-zinc-800"
                     sideOffset={5}
                   >
                     {value.description}
@@ -207,7 +207,7 @@ export const columns = [
               </Tooltip.Root>
             </Tooltip.Provider>
           </div>
-          <div className="rounded-md bg-zinc-500 bg-opacity-5 p-2 dark:bg-opacity-10">
+          <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="text-secondary size-4" />

@@ -41,7 +41,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
         <FloatingPortal>
           <div
             ref={refs.setFloating}
-            className="absolute left-0 top-0 z-10 w-max"
+            className="absolute top-0 left-0 z-10 w-max"
             style={{
               transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
             }}
@@ -55,7 +55,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="flex w-36 origin-top-right flex-col gap-1 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
+              <Menu.Items className="flex w-36 origin-top-right flex-col gap-1 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring-3 ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
                 <Menu.Item as={Fragment}>
                   {({ active }) => (
                     <ShipActions.FlightMode ship={ship} flightMode="CRUISE">

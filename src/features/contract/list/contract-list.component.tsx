@@ -45,13 +45,13 @@ export const ContractList = () => {
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
-        <Tab className="group tab ui-selected:selected">
+        <Tab className="group tab">
           {t('contracts.accepted')} ({contracts.accepted.length})
         </Tab>
-        <Tab className="group tab ui-selected:selected">
+        <Tab className="group tab">
           {t('contracts.available')} ({contracts.available.length})
         </Tab>
-        <Tab className="group tab ui-selected:selected">
+        <Tab className="group tab">
           {t('contracts.completed')} ({contracts.completed.length})
         </Tab>
       </Tab.List>

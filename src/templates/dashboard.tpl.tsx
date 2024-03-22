@@ -23,7 +23,7 @@ const Logout = () => {
   return (
     <Link
       to="/logout"
-      className="flex w-full items-center gap-4 rounded px-3 py-2 font-semibold text-white shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+      className="flex w-full items-center gap-4 rounded py-2 px-3 font-semibold text-white shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
     >
       <div className="size-6">
         <MenuIcon id="logout" className="size-6 text-rose-100" aria-hidden />
@@ -52,7 +52,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-zinc-900 bg-opacity-90" />
+            <div className="fixed inset-0 bg-zinc-900/90" />
           </Transition.Child>
 
           <div className="fixed inset-0 z-40 flex">
@@ -75,10 +75,10 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <div className="absolute right-0 top-0 -mr-12 pt-3">
+                  <div className="absolute top-0 right-0 -mr-12 pt-3">
                     <button
                       type="button"
-                      className="ml-1 flex size-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      className="ml-1 flex size-10 items-center justify-center rounded-full focus:ring-2 focus:ring-white focus:outline-none focus:ring-inset"
                       onClick={() => {
                         setMobileMenuOpen(false)
                       }}
@@ -88,8 +88,8 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="pb-4 pt-6">
-                  <div className="flex flex-shrink-0 items-center px-4">
+                <div className="pt-6 pb-4">
+                  <div className="flex-shrink-0 flex items-center px-4">
                     <Link to="/">
                       <Wayfarer className="text-lg text-white" />
                     </Link>
@@ -115,7 +115,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                 </div>
               </Dialog.Panel>
             </Transition.Child>
-            <div className="w-14 flex-shrink-0" aria-hidden>
+            <div className="flex-shrink-0 w-14" aria-hidden>
               {/* Force sidebar to shrink to fit close icon */}
             </div>
           </div>
@@ -125,7 +125,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
       {/* Static sidebar for desktop */}
       <div className="z-10 hidden min-h-screen lg:fixed lg:flex">
         <div
-          className={cx('flex flex-col transition-all duration-100 ease-in-out @container/side', {
+          className={cx('@container/side flex flex-col transition-all duration-100 ease-in-out', {
             'w-20': sidebarState === 'collapsed',
             'w-56': sidebarState === 'expanded',
           })}
@@ -145,18 +145,18 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
               <Preferences />
             </div>
             {isAuthenticated ? (
-              <div className="flex flex-shrink items-center justify-center gap-2 bg-rose-600 p-4">
+              <div className="flex-shrink flex items-center justify-center gap-2 bg-rose-600 p-4">
                 <Logout />
               </div>
             ) : (
-              <div className="flex flex-shrink items-center justify-center gap-2 bg-emerald-600 p-4">
+              <div className="flex-shrink flex items-center justify-center gap-2 bg-emerald-600 p-4">
                 <Link
                   to="/login"
                   search={{
                     redirect: `${window.location.pathname}${window.location.search}`,
                   }}
                   mask={{ to: '/login' }}
-                  className="flex w-full items-center gap-4 rounded px-3 py-2 font-medium text-white shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+                  className="flex w-full items-center gap-4 rounded py-2 px-3 font-medium text-white shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100 @[220px]/side:w-full"
                 >
                   <div className="size-6">
                     <MenuIcon id="login" className="size-6 text-emerald-100" aria-hidden />
@@ -174,7 +174,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         {/* Mobile top navigation */}
         <div className="lg:hidden">
-          <div className="flex items-center justify-between bg-blue-600 px-4 py-2 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between bg-blue-600 py-2 px-4 sm:px-6 lg:px-8">
             <div>
               <Link to="/">
                 <Wayfarer className="text-lg" />
@@ -183,7 +183,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
             <div>
               <button
                 type="button"
-                className="-mr-3 inline-flex h-12 w-12 items-center justify-center rounded-md bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                className="-mr-3 inline-flex h-12 w-12 items-center justify-center rounded-md bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-white focus:outline-none focus:ring-inset"
                 onClick={() => {
                   setMobileMenuOpen(true)
                 }}
@@ -216,8 +216,8 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
           </section>
 
           {/* Secondary column (hidden on smaller screens) */}
-          <aside className="hidden lg:block lg:flex-shrink-0">
-            <div className="relative flex h-full flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg dark:bg-zinc-950/20 lg:w-64 2xl:w-96">
+          <aside className="lg:flex-shrink-0 hidden lg:block">
+            <div className="relative flex h-full flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg lg:w-64 2xl:w-96 dark:bg-zinc-950/20">
               {isAuthenticated && (
                 <div className="p-4">
                   <Agent />

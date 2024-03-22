@@ -82,7 +82,7 @@ export const columns = [
                 </button>
               </Tooltip.Trigger>
               <Tooltip.Portal>
-                <Tooltip.Content className="w-64 rounded-md bg-zinc-200 px-4 py-2 text-xs text-zinc-800" sideOffset={5}>
+                <Tooltip.Content className="w-64 rounded-md bg-zinc-200 py-2 px-4 text-xs text-zinc-800" sideOffset={5}>
                   <Translation>{(t) => t('waypoint.sort_coordinates_tooltip')}</Translation>
                 </Tooltip.Content>
               </Tooltip.Portal>

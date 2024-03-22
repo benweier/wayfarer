@@ -43,7 +43,7 @@ export const Field = <T = string,>({
                   <div className="relative p-1">
                     <span
                       className={cx(
-                        'relative block cursor-default select-none truncate rounded py-2 pl-3 pr-9 transition-colors duration-100 ease-in-out',
+                        'relative block cursor-default truncate rounded py-2 pr-9 pl-3 transition-colors duration-100 ease-in-out select-none',
                         { 'bg-zinc-900/5 dark:bg-zinc-100/10': active, 'opacity-50': disabled },
                       )}
                     >

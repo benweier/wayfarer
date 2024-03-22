@@ -36,7 +36,7 @@ export const WaypointMarketList = () => {
     <WaypointMarketLayout
       imports={
         market.imports.length === 0 ? (
-          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
             <div className="text-overline text-center">{t('market.imports_empty')}</div>
           </div>
         ) : (
@@ -47,7 +47,7 @@ export const WaypointMarketList = () => {
       }
       exports={
         market.exports.length === 0 ? (
-          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
             <div className="text-overline text-center">{t('market.exports_empty')}</div>
           </div>
         ) : (
@@ -58,7 +58,7 @@ export const WaypointMarketList = () => {
       }
       exchange={
         market.exchange.length === 0 ? (
-          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
             <div className="text-overline text-center">{t('market.exchange_empty')}</div>
           </div>
         ) : (

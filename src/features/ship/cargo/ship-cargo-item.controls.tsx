@@ -25,7 +25,7 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
 
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            className="flex w-52 flex-col gap-2 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5"
+            className="flex w-52 flex-col gap-2 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring-3 ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5"
             sideOffset={5}
             collisionPadding={{
               right: 16,
@@ -34,7 +34,7 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
           >
             <DropdownMenu.Item asChild>
               <button
-                className="btn btn-flat btn-sm w-full text-left data-[highlighted]:btn-dim"
+                className="btn btn-flat btn-sm data-[highlighted]:btn-dim w-full text-left"
                 onClick={() => {
                   transfer.modal.open()
                 }}
@@ -44,7 +44,7 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild>
               <button
-                className="btn btn-flat btn-sm w-full text-left data-[highlighted]:btn-dim"
+                className="btn btn-flat btn-sm data-[highlighted]:btn-dim w-full text-left"
                 onClick={() => {
                   jettison.modal.open()
                 }}

@@ -10,7 +10,7 @@ export const WaypointShipyardItem = ({ ship }: PropsWithChildren<WaypointShipyar
   const waypoint = useWaypointResponse()
 
   return (
-    <Card className="relative @container/market-item">
+    <Card className="@container/market-item relative">
       <div className="flex flex-col flex-wrap justify-between gap-4 @lg/market-item:flex-row">
         <div className="min-w-[280px] flex-1 space-y-2">
           <div className="flex flex-row justify-between gap-8">

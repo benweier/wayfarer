@@ -32,7 +32,7 @@ export const WaypointMarketError = () => {
   if (!ctx?.error) return <></>
 
   return (
-    <div className="px-3 py-9">
+    <div className="py-9 px-3">
       <div className="text-secondary text-center text-lg">
         <Message error={ctx.error} onReset={ctx.resetErrorBoundary} />
       </div>

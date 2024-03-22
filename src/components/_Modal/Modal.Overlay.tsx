@@ -13,11 +13,11 @@ export const Overlay = ({ variant = 'auto' }: OverlayProps) => {
       {transition.stage !== 'exited' && (
         <div
           className={cx(
-            'fixed inset-0 z-50 backdrop-blur-xs',
+            'fixed inset-0 z-50 backdrop-blur-sm',
             {
-              'bg-white bg-opacity-60': variant === 'light',
-              'bg-black bg-opacity-40': variant === 'dark',
-              'bg-white bg-opacity-75 dark:bg-black dark:bg-opacity-75': variant === 'auto',
+              'bg-white/60': variant === 'light',
+              'bg-black/40': variant === 'dark',
+              'bg-white/75 dark:bg-black/75': variant === 'auto',
             },
             {
               'opacity-0': transition.stage === 'appear',

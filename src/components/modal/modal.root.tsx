@@ -37,7 +37,7 @@ export const Root = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-white/50 backdrop-blur-xs dark:bg-black/50" />
+          <div className="backdrop-blur-xs fixed inset-0 bg-white/50 dark:bg-black/50" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -53,14 +53,14 @@ export const Root = ({
             <div className="flex justify-center p-6">
               <Dialog.Panel
                 className={cx(
-                  'transform overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-6 outline-none ring ring-black/5 transition-all dark:border-zinc-700 dark:bg-zinc-900 dark:ring-zinc-50/10',
+                  'transform overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-6 ring-3 ring-black/5 outline-none transition-all dark:border-zinc-700 dark:bg-zinc-900 dark:ring-zinc-50/10',
                   {
                     'w-auto': size === 'auto',
                     'w-screen': size === 'full',
-                    'w-full max-w-screen-sm': size === 'sm',
-                    'w-full max-w-screen-md': size === 'md',
-                    'w-full max-w-screen-lg': size === 'lg',
-                    'w-full max-w-screen-xl': size === 'xl',
+                    'max-w-screen-sm w-full': size === 'sm',
+                    'max-w-screen-md w-full': size === 'md',
+                    'max-w-screen-lg w-full': size === 'lg',
+                    'max-w-screen-xl w-full': size === 'xl',
                   },
                 )}
               >
@@ -72,7 +72,7 @@ export const Root = ({
                     kind="outline"
                     size="small"
                     icon
-                    className="absolute right-2 top-2"
+                    className="absolute top-2 right-2"
                     onClick={() => {
                       handleClose()
                     }}
