@@ -103,7 +103,7 @@ module.exports = {
   ignorePatterns: ['src/routes/route-tree.gen.ts'],
   overrides: [
     {
-      files: ['postcss.config.cjs', '.eslintrc.cjs', 'styles/**/*.cjs', 'tailwind.config.cjs', 'vite.config.ts'],
+      files: ['.eslintrc.cjs', 'styles/**/*.cjs', 'tailwind.config.cjs', 'vite.config.ts'],
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       parserOptions: {
@@ -114,7 +114,9 @@ module.exports = {
         node: true,
       },
       rules: {
-        '@typescript-eslint/no-var-requires': 'off',
+        'node/no-missing-import': ["error", {
+          "allowModules": ["@tailwindcss/vite"],
+        }],
       },
     },
     {
