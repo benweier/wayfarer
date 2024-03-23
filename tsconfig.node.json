@@ -5,12 +5,5 @@
     "noEmit": true,
     "allowJs": true
   },
-  "include": [
-    "postcss.config.cjs",
-    ".eslintrc.cjs",
-    "postcss.config.cjs",
-    "styles/**/*.cjs",
-    "tailwind.config.cjs",
-    "vite.config.ts"
-  ]
+  "include": [".eslintrc.cjs", "vite.config.ts"]
 }

@@ -103,7 +103,7 @@ module.exports = {
   ignorePatterns: ['src/routes/route-tree.gen.ts'],
   overrides: [
     {
-      files: ['.eslintrc.cjs', 'styles/**/*.cjs', 'tailwind.config.cjs', 'vite.config.ts'],
+      files: ['.eslintrc.cjs', 'vite.config.ts'],
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       parserOptions: {
