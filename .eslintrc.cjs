@@ -120,7 +120,7 @@ module.exports = {
       },
     },
     {
-      files: ['src/**/*'],
+      files: ['src/**/*', 'test/**/*'],
       plugins: ['react'],
       extends: [
         'plugin:react/recommended',

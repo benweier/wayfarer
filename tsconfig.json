@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "removeComments": true,
     "preserveConstEnums": true,
@@ -16,7 +16,7 @@
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "outDir": "build",
-    "target": "ESNext",
+    "target": "ES2022",
     "declaration": false,
     "checkJs": false,
     "sourceMap": false,
@@ -30,13 +30,14 @@
     "isolatedModules": true,
     "importHelpers": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/test/*": ["./test/*"]
     },
     "incremental": true,
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom", "mdx"],
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "files": ["env.d.ts", "src/routes/router.conf.ts"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "./test/vitest.setup.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "test/**/*.ts", "test/**/*.tsx"],
   "exclude": ["node_modules", "build", "dist"]
 }
