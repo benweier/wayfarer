@@ -1,6 +1,7 @@
 import path from 'node:path'
 import mdx from '@mdx-js/rollup'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import tailwindcss from '@tailwindcss/vite'
 import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
@@ -59,6 +60,7 @@ export default defineConfig({
     tsconfigPaths(),
     dynamic(),
     { enforce: 'pre', ...mdx() },
+    tailwindcss(),
     react(),
     TanStackRouterVite(),
     sentryVitePlugin({
