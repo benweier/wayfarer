@@ -1,0 +1,17 @@
+.input {
+  @apply block w-full max-w-full appearance-none rounded-md border-2 border-zinc-300 bg-white py-2.5 px-3 text-sm placeholder-zinc-400;
+  @apply focus:ring-0 focus:hover:ring-2;
+  @apply hover:ring-2 hover:ring-zinc-300/50 focus:border-blue-400 hover:focus:ring-blue-400/50;
+  @apply border-zinc-500 focus:outline-none dark:bg-zinc-800 dark:hover:ring-zinc-500/50 dark:focus:border-blue-400 dark:hover:focus:ring-blue-400/50;
+}
+
+.select {
+  @apply relative block w-full max-w-full appearance-none rounded-md border-2 border-zinc-300 bg-white py-2.5 px-3 text-left text-sm;
+  @apply focus:ring-0 focus:hover:ring-2;
+  @apply hover:ring-2 hover:ring-zinc-300/50 focus:border-blue-400 hover:focus:ring-blue-400/50;
+  @apply focus:outline-none dark:border-zinc-500 dark:bg-zinc-800 dark:hover:ring-zinc-500/50 dark:focus:border-blue-400 dark:hover:focus:ring-blue-400/50;
+
+  > .select-placeholder {
+    @apply flex h-5 items-center;
+  }
+}

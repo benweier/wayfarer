@@ -1,17 +1,57 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('tailwindcss');
+@import url('./typography.css') layer(base);
+@import url('./button.css') layer(base);
+@import url('./input.css') layer(base);
+@import url('./tabs.css') layer(base);
+
+@keyframes indefinite {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}
+
+@theme {
+  --font-family-space-grotesk: 'Space Grotesk', var(--font-family-sans);
+  --default-font-feature-settings: 'ss01', 'ss03', 'case' 1, 'zero' 1;
+  --animate-indefinite: indefinite 1s linear infinite;
+  --blur-xs: 2px;
+  --width-screen-sm: var(--breakpoint-sm);
+  --width-screen-md: var(--breakpoint-md);
+  --width-screen-lg: var(--breakpoint-lg);
+  --width-screen-xl: var(--breakpoint-xl);
+  --width-screen-2xl: var(--breakpoint-2xl);
+}
 
 @layer base {
   body {
-    @apply relative bg-zinc-50 font-space-grotesk text-base text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100;
+    font-family: var(--font-family-space-grotesk);
+
+    @apply bg-zinc-50 text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100;
     @apply selection:bg-emerald-200 selection:text-emerald-900 dark:selection:bg-emerald-300;
+  }
+
+  #wayfarer {
+    min-height: 100dvh;
   }
 }
 
 @layer components {
   .loader {
     @apply fixed z-50 block h-1 w-full overflow-hidden;
-    @apply after:absolute after:left-0 after:right-0 after:top-0 after:h-full after:w-1/6 after:animate-indefinite after:bg-green-600 dark:after:bg-green-400;
+    @apply animate-indefinite after:absolute after:top-0 after:right-0 after:left-0 after:h-full after:w-1/6 after:bg-green-600 dark:after:bg-green-400;
+  }
+
+  .link {
+    @apply rounded-sm font-bold text-sky-600 ring-blue-500 outline-none focus-visible:ring-2 dark:text-sky-400;
+  }
+
+  .label {
+    @apply mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300;
   }
 }

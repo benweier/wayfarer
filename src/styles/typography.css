@@ -1,24 +1,27 @@
-.text-hero {
-  @apply text-6xl font-black;
-}
 .text-title {
   @apply text-4xl font-black;
 }
+
 .text-subtitle {
   @apply text-2xl font-light;
 }
+
 .text-headline {
   @apply text-xl font-semibold;
 }
+
 .text-overline {
   @apply text-lg font-medium;
 }
+
 .text-body {
   @apply text-base font-normal;
 }
+
 .text-caption {
   @apply text-sm font-normal;
 }
+
 .text-hint {
   @apply text-xs font-medium;
 }
