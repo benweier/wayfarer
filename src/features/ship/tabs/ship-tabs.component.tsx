@@ -16,9 +16,9 @@ export const ShipTabs = () => {
   return (
     <Tab.Group as="div" className="tab-group">
       <Tab.List className="tab-list">
-        <Tab className="group tab ui-selected:selected">{t('ship.cargo')}</Tab>
-        <Tab className="group tab ui-selected:selected">{t('ship.resources')}</Tab>
-        <Tab className="group tab ui-selected:selected">{t('ship.loadout.label')}</Tab>
+        <Tab className="group tab">{t('ship.cargo')}</Tab>
+        <Tab className="group tab">{t('ship.resources')}</Tab>
+        <Tab className="group tab">{t('ship.loadout.label')}</Tab>
       </Tab.List>
 
       <Tab.Panels>
