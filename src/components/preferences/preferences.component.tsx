@@ -5,7 +5,6 @@ import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import { Sidebar } from './sidebar.component'
-import { Theme } from './theme.component'
 
 export const Preferences = () => {
   const { t } = useTranslation()
@@ -26,7 +25,7 @@ export const Preferences = () => {
         <>
           <Popover.Button
             ref={refs.setReference}
-            className="flex w-full items-center gap-4 overflow-hidden rounded-md px-3 py-2 font-medium text-white transition-all duration-100 hover:bg-blue-50/10 hover:shadow-sm"
+            className="flex w-full items-center gap-4 overflow-hidden rounded-md py-2 px-3 font-medium text-white transition-all duration-100 hover:bg-blue-50/10 hover:shadow-sm"
           >
             <div className="size-6 text-blue-100">
               <MenuIcon id="settings" className={cx('size-6', { 'animate-spin': open })} aria-hidden />
@@ -37,7 +36,7 @@ export const Preferences = () => {
           </Popover.Button>
           <div
             ref={refs.setFloating}
-            className="absolute left-0 top-0 w-max"
+            className="absolute top-0 left-0 w-max"
             style={{
               transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
             }}
@@ -51,9 +50,8 @@ export const Preferences = () => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-4"
             >
-              <Popover.Panel className="relative z-50 w-screen max-w-xs origin-bottom-left overflow-y-auto rounded-lg bg-zinc-100/75 p-4 ring ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
+              <Popover.Panel className="relative z-50 w-screen max-w-xs origin-bottom-left overflow-y-auto rounded-lg bg-zinc-100/75 p-4 ring-3 ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
                 <div className="flex flex-col gap-4">
-                  <Theme />
                   <Sidebar />
                 </div>
               </Popover.Panel>
