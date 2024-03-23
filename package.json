@@ -113,6 +113,7 @@
     "tailwindcss-animate": "^1.0.7",
     "ts-toolbelt": "^9.6.0",
     "tslib": "^2.6.2",
+    "turbo": "^1.13.0",
     "typescript": "^5.4.3",
     "typescript-plugin-css-modules": "^5.1.0",
     "vite": "^5.2.2",
@@ -126,9 +127,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "check": "turbo lint test build",
+    "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint src test --ext .ts,.tsx",
     "lint:css": "stylelint src/**/*.css",
-    "tc": "tsc --noEmit",
+    "tc": "tsc",
     "test": "vitest run src",
     "prepare": "husky install"
   }
