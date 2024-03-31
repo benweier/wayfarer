@@ -87,3 +87,11 @@ export const useMobileContainerQuery = (args: { up?: boolean; below?: boolean } 
 
   return useContainerQuery(query, ref)
 }
+
+export const usePrefersColorSchemeQuery = (preference: 'no-preference' | 'light' | 'dark' | 'system') => {
+  const query = {
+    query: `(prefers-color-scheme: ${preference})`,
+  }
+
+  return useMediaQuery(query)
+}
