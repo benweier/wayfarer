@@ -1,4 +1,4 @@
-import { createStore } from 'zustand'
+import { createStore } from 'zustand/vanilla'
 import { type ModalStore } from './modal.types'
 
 export const createModalStore = ({

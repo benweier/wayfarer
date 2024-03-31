@@ -12,20 +12,17 @@ export const Root = ({
   disableExternalClose = false,
   children,
 }: PropsWithChildren<ModalDialogProps>) => {
-  const { show, handleClose } = useModalContext((state) => ({
-    show: state.isOpen,
-    handleClose: state.actions.closeModal,
-  }))
+  const modal = useModalContext()
 
   return (
-    <Transition appear show={show} as={Fragment} static>
+    <Transition appear show={modal.isOpen} as={Fragment} static>
       <Dialog
         as="div"
         className="relative z-10"
         static
         onClose={() => {
           if (disableExternalClose) return
-          handleClose()
+          modal.actions.closeModal()
         }}
       >
         <Transition.Child
@@ -74,7 +71,7 @@ export const Root = ({
                     icon
                     className="absolute top-2 right-2"
                     onClick={() => {
-                      handleClose()
+                      modal.actions.closeModal()
                     }}
                   >
                     <AppIcon id="x" className="size-3" />
