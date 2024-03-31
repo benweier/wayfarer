@@ -1,4 +1,4 @@
-export { Desktop, Tablet, Mobile } from './responsive.component'
+export { Desktop, Tablet, Mobile, PrefersColorScheme } from './responsive.component'
 export {
   useDesktopMediaQuery,
   useTabletMediaQuery,
