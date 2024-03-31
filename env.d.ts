@@ -17,4 +17,9 @@ declare module 'react' {
   function forwardRef<T, P = Record<string, never>>(
     render: (props: P, ref: React.Ref<T>) => React.ReactElement | null,
   ): (props: P & React.RefAttributes<T>) => React.ReactElement | null
+
+  /* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
+  interface CSSProperties {
+    [key: `--${string}`]: string | number | undefined
+  }
 }
