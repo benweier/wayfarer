@@ -1,6 +1,4 @@
-import { useAtomValue } from 'jotai'
 import { type ReactNode } from 'react'
-import { themeAtom } from '@/store/atoms/theme'
 import { type ResponsiveComponentProps } from './responsive.types'
 import {
   useDesktopMediaQuery,
@@ -28,19 +26,20 @@ export const Mobile = ({ up, below, fallback, children }: ResponsiveComponentPro
 }
 
 export const PrefersColorScheme = ({
+  preference,
   light,
   dark,
-  fallback,
 }: {
-  light?: ReactNode
-  dark?: ReactNode
-  fallback?: ReactNode
+  preference: 'light' | 'dark' | 'system'
+  light: ReactNode
+  dark: ReactNode
 }) => {
-  const theme = useAtomValue(themeAtom)
-  const match = usePrefersColorSchemeQuery(theme)
+  const match = usePrefersColorSchemeQuery('dark')
 
-  if (match && theme === 'light') return light
-  if (match && theme === 'dark') return dark
+  if (preference === 'light') return light
+  if (preference === 'dark') return dark
 
-  return fallback
+  if (match) return dark
+
+  return light
 }
