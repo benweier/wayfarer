@@ -40,19 +40,19 @@ export const Login = () => {
   const onSubmit = useCallback<SubmitHandler<LoginSchema>>((values) => mutateAsync(values), [mutateAsync])
 
   return (
-    <div className="grid gap-4">
-      <div className="text-overline text-center">{t('auth.login_heading')}</div>
+    <div className="grid gap-8">
+      <div className="display-xs text-center">{t('auth.login_heading')}</div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 gap-8">
-            <div>
+            <div className="space-y-1">
               <label className="label" htmlFor="symbol">
                 {t('auth.fields.agent_symbol.label')}
               </label>
               <input id="symbol" {...methods.register('symbol')} className="input" type="text" />
-              <div className="text-hint mt-1">{t('auth.fields.agent_symbol.hint')}</div>
+              <div className="typography-sm mt-1">{t('auth.fields.agent_symbol.hint')}</div>
             </div>
-            <div>
+            <div className="space-y-1">
               <label className="label" htmlFor="token">
                 {t('auth.fields.access_token.label')}
               </label>
@@ -69,15 +69,17 @@ export const Login = () => {
               <ErrorMessage
                 errors={methods.formState.errors}
                 name="token"
-                render={({ message }) => <div className="text-hint text-rose-400">{t(message)}</div>}
+                render={({ message }) => (
+                  <div className="typography-sm text-foreground-error-secondary">{t(message)}</div>
+                )}
               />
             </div>
 
-            <Button intent="hero" type="submit" disabled={isPending}>
+            <Button intent="info" size="large" type="submit" disabled={isPending}>
               {t('auth.login', { context: 'action' })}
             </Button>
 
-            <div className="text-caption text-center">
+            <div className="typography-md text-center">
               <Trans
                 i18nKey="auth.not_registered"
                 components={{

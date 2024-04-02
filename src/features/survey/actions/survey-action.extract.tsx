@@ -11,7 +11,7 @@ export const Extract = ({ survey }: { survey: SurveyResponse }) => {
   return (
     <ShipActions.Extract ship={ship} survey={survey}>
       {(props) => (
-        <Button intent="confirm" {...props}>
+        <Button intent="info" {...props}>
           {t('ship.action.extract', { context: 'with_survey' })}
         </Button>
       )}

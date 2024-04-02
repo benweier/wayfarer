@@ -11,7 +11,7 @@ export const Discard = ({ survey }: { survey: SurveyResponse }) => {
   return (
     <Button
       intent="danger"
-      kind="flat"
+      kind="solid"
       size="small"
       icon
       onClick={() => {

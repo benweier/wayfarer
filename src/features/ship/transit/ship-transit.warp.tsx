@@ -15,7 +15,7 @@ export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
   return (
     <Modal size="md" closeable trigger={<Modal.Trigger>{trigger}</Modal.Trigger>}>
       <div className="grid gap-8">
-        <h3 className="text-title">
+        <h3 className="display-lg font-bold">
           Warp Ship: <span className="font-normal">{ship.symbol}</span>
         </h3>
         <QuerySuspenseBoundary>
@@ -69,11 +69,13 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
     >
       <fieldset disabled={isPending || ship.nav.status !== 'IN_ORBIT'} className="grid gap-4">
         <div>
-          <label className="label">Waypoint Symbol</label>
+          <label className="label" htmlFor="waypointSymbol">
+            Waypoint Symbol
+          </label>
           <input {...methods.register('waypointSymbol')} className="input" />
         </div>
         <div className="flex justify-end">
-          <Button intent="primary" type="submit">
+          <Button intent="info" type="submit">
             Warp
           </Button>
         </div>

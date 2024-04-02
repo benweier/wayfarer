@@ -24,7 +24,7 @@ export const FactionInfo = () => {
 
   return (
     <div>
-      <div className="text-sm">{info.description}</div>
+      <div className="typography-sm">{info.description}</div>
       <div className="flex flex-wrap gap-1">
         {info.traits.map((trait) => (
           <Badge key={trait.symbol}>{trait.name}</Badge>

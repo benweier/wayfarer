@@ -10,8 +10,8 @@ export const Sidebar = () => {
   const [sidebarState, setSidebarState] = useAtom(sidebarAtom)
 
   return (
-    <RadioGroup value={sidebarState} onChange={setSidebarState} className="flex flex-col gap-1">
-      <RadioGroup.Label className="text-sm font-bold">{t('preferences.menu')}</RadioGroup.Label>
+    <RadioGroup value={sidebarState} onChange={setSidebarState} className="flex flex-col gap-4">
+      <RadioGroup.Label className="typography-sm font-bold">{t('preferences.menu')}</RadioGroup.Label>
       <div className="grid grid-cols-2 gap-2">
         {[
           { key: 'preferences.collapse', value: 'collapsed', icon: 'menu:collapse' },
@@ -24,7 +24,7 @@ export const Sidebar = () => {
           >
             <div className={cx('flex w-full flex-col items-center justify-between gap-1')}>
               <MenuIcon id={item.icon} className="size-5" aria-hidden />
-              <RadioGroup.Label className="text-sm font-semibold">{t(item.key)}</RadioGroup.Label>
+              <RadioGroup.Label className="typography-sm font-semibold">{t(item.key)}</RadioGroup.Label>
             </div>
           </RadioGroup.Option>
         ))}

@@ -32,7 +32,7 @@ export const SystemList = ({ page = 1, limit = 20, setPage }: SystemListProps) =
       <SystemListTable data={systems.map((system) => ({ system, presence: presence.get(system.symbol) ?? 0 }))} />
 
       <div className="row grid items-center justify-center gap-4">
-        <div className="flex items-center justify-center gap-2 text-sm">
+        <div className="typography-sm flex items-center justify-center gap-2">
           {systemsListQuery.isFetching ? (
             <div>...</div>
           ) : (
@@ -40,7 +40,7 @@ export const SystemList = ({ page = 1, limit = 20, setPage }: SystemListProps) =
               <div>
                 {results.from} - {results.to}
               </div>
-              <div className="text-secondary">of</div>
+              <div className="text-foreground-secondary">of</div>
               <div>{results.total}</div>
             </>
           )}

@@ -25,7 +25,7 @@ export const Preferences = () => {
         <>
           <Popover.Button
             ref={refs.setReference}
-            className="flex w-full items-center gap-4 overflow-hidden rounded-md py-2 px-3 font-medium text-white transition-all duration-100 hover:bg-blue-50/10 hover:shadow-sm"
+            className="text-foreground-primary flex w-full items-center gap-4 overflow-hidden rounded-md py-2 px-3 font-medium transition-all duration-100 hover:bg-blue-50/10 hover:shadow-sm"
           >
             <div className="size-6 text-blue-100">
               <MenuIcon id="settings" className={cx('size-6', { 'animate-spin': open })} aria-hidden />
@@ -50,7 +50,7 @@ export const Preferences = () => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-4"
             >
-              <Popover.Panel className="relative z-50 w-screen max-w-xs origin-bottom-left overflow-y-auto rounded-lg bg-zinc-100/75 p-4 ring-3 ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
+              <Popover.Panel className="bg-background-primary/75 ring-border-primary/20 relative z-50 w-screen max-w-xs origin-bottom-left overflow-y-auto rounded-lg p-4 ring-3 backdrop-blur-lg">
                 <div className="flex flex-col gap-4">
                   <Sidebar />
                 </div>

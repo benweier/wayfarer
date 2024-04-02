@@ -29,7 +29,7 @@ export const ShipCargoPreferences = () => {
   return (
     <div className="flex items-center justify-between gap-4">
       <RadioGroup value={cargoDisplayMode} onChange={setCargoDisplayMode}>
-        <RadioGroup.Label className="sr-only text-sm font-bold">Display as</RadioGroup.Label>
+        <RadioGroup.Label className="typography-sm sr-only font-bold">Display as</RadioGroup.Label>
         <div className="flex items-center gap-2">
           {[
             { label: 'List', value: 'list' },
@@ -40,7 +40,7 @@ export const ShipCargoPreferences = () => {
               value={item.value}
               className={({ checked }) => cx('btn btn-sm', { 'btn-primary btn-outline': checked })}
             >
-              <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
+              <RadioGroup.Label className="typography-sm font-semibold">{item.label}</RadioGroup.Label>
             </RadioGroup.Option>
           ))}
         </div>
@@ -48,7 +48,7 @@ export const ShipCargoPreferences = () => {
 
       <div className="flex items-center justify-end gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-secondary text-sm">Show item description</span>
+          <span className="text-secondary typography-sm">Show item description</span>
           <Switch
             checked={showCargoDescription}
             onChange={setShowCargoDescription}

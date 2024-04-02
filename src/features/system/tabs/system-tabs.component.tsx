@@ -1,6 +1,6 @@
-import { Tab } from '@headlessui/react'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import * as Tabs from '@/components/tabs'
 import { SystemFleet, SystemFleetFallback } from '@/features/system/fleet'
 import { WaypointList, WaypointListError, WaypointListFallback } from '@/features/waypoint/list'
 
@@ -8,25 +8,23 @@ export const SystemTabs = () => {
   const { t } = useTranslation()
 
   return (
-    <Tab.Group as="div" className="tab-group">
-      <Tab.List className="tab-list">
-        <Tab className="group tab">{t('waypoints.label')}</Tab>
-        <Tab className="group tab">{t('fleet.label')}</Tab>
-      </Tab.List>
+    <Tabs.Root defaultValue="waypoints">
+      <Tabs.List>
+        <Tabs.Trigger value="waypoints">{t('waypoints.label')}</Tabs.Trigger>
+        <Tabs.Trigger value="fleet">{t('fleet.label')}</Tabs.Trigger>
+      </Tabs.List>
 
-      <Tab.Panels>
-        <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<WaypointListFallback />} error={<WaypointListError />}>
-            <WaypointList />
-          </QuerySuspenseBoundary>
-        </Tab.Panel>
+      <Tabs.Content value="waypoints">
+        <QuerySuspenseBoundary fallback={<WaypointListFallback />} error={<WaypointListError />}>
+          <WaypointList />
+        </QuerySuspenseBoundary>
+      </Tabs.Content>
 
-        <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<SystemFleetFallback />}>
-            <SystemFleet />
-          </QuerySuspenseBoundary>
-        </Tab.Panel>
-      </Tab.Panels>
-    </Tab.Group>
+      <Tabs.Content value="fleet">
+        <QuerySuspenseBoundary fallback={<SystemFleetFallback />}>
+          <SystemFleet />
+        </QuerySuspenseBoundary>
+      </Tabs.Content>
+    </Tabs.Root>
   )
 }

@@ -1,0 +1,62 @@
+.system-tag {
+  --system-tag-radius: var(--radius-sm);
+  --system-tag-padding-y: var(--spacing-0);
+  --system-tag-padding-x: var(--spacing-2);
+
+  &[data-system-type='NEUTRON_STAR'] {
+    --system-tag-fg: var(--fg-system-neutron-star);
+    --system-tag-bg: var(--bg-system-neutron-star);
+  }
+
+  &[data-system-type='RED_STAR'] {
+    --system-tag-fg: var(--fg-system-red-star);
+    --system-tag-bg: var(--bg-system-red-star);
+  }
+
+  &[data-system-type='ORANGE_STAR'] {
+    --system-tag-fg: var(--fg-system-orange-star);
+    --system-tag-bg: var(--bg-system-orange-star);
+  }
+
+  &[data-system-type='BLUE_STAR'] {
+    --system-tag-fg: var(--fg-system-blue-star);
+    --system-tag-bg: var(--bg-system-blue-star);
+  }
+
+  &[data-system-type='YOUNG_STAR'] {
+    --system-tag-fg: var(--fg-system-young-star);
+    --system-tag-bg: var(--bg-system-young-star);
+  }
+
+  &[data-system-type='WHITE_DWARF'] {
+    --system-tag-fg: var(--fg-system-white-dwarf);
+    --system-tag-bg: var(--bg-system-white-dwarf);
+  }
+
+  &[data-system-type='BLACK_HOLE'] {
+    --system-tag-fg: var(--fg-system-black-hole);
+    --system-tag-bg: var(--bg-system-black-hole);
+  }
+
+  &[data-system-type='HYPERGIANT'] {
+    --system-tag-fg: var(--fg-system-hypergiant);
+    --system-tag-bg: var(--bg-system-hypergiant);
+  }
+
+  &[data-system-type='NEBULA'] {
+    --system-tag-fg: var(--fg-system-nebula);
+    --system-tag-bg: var(--bg-system-nebula);
+  }
+
+  &[data-system-type='UNSTABLE'] {
+    --system-tag-fg: var(--fg-system-unstable);
+    --system-tag-bg: var(--bg-system-unstable);
+  }
+
+  padding: var(--system-tag-padding-y) var(--system-tag-padding-x);
+  font-size: var(--font-size-text-xs);
+  font-weight: bold;
+  color: var(--system-tag-fg);
+  background-color: var(--system-tag-bg);
+  border-radius: var(--system-tag-radius);
+}

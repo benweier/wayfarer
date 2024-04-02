@@ -34,7 +34,7 @@ export const Root = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="backdrop-blur-xs fixed inset-0 bg-white/50 dark:bg-black/50" />
+          <div className="backdrop-blur-xs bg-background-primary/20 fixed inset-0" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -50,7 +50,7 @@ export const Root = ({
             <div className="flex justify-center p-6">
               <Dialog.Panel
                 className={cx(
-                  'transform overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-6 ring-3 ring-black/5 outline-none transition-all dark:border-zinc-700 dark:bg-zinc-900 dark:ring-zinc-50/10',
+                  'bg-background-primary border-border-primary ring-border-primary/20 transform overflow-hidden rounded-xl border p-6 ring-3 outline-none transition-all',
                   {
                     'w-auto': size === 'auto',
                     'w-screen': size === 'full',

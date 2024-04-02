@@ -31,7 +31,7 @@ export const CargoTransfer = ({ ship, item }: { ship: ShipResponse; item: CargoI
               }}
             >
               <div className="flex gap-2">
-                <Button type="submit" intent="confirm">
+                <Button type="submit" intent="info">
                   {t('cargo.transfer.confirm', { context: 'action' })}
                 </Button>
                 <Button

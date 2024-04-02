@@ -20,14 +20,14 @@ const SpaceTradersStatus = () => {
       <span className="text-sm">Status:</span>
       <div
         className={cx({
-          'text-emerald-400': status === 'online',
-          'text-rose-400': status === 'offline',
-          'text-yellow-400': isChecking,
+          'text-foreground-success-secondary': status === 'online',
+          'text-foreground-error-secondary': status === 'offline',
+          'text-foreground-warning-secondary': isChecking,
         })}
       >
         <AppIcon id={icon[status]} className="size-6" aria-hidden />
       </div>
-      <span className="text-sm font-semibold">{t(`general.status.${status}`)}</span>
+      <span className="typography-sm font-semibold">{t(`general.status.${status}`)}</span>
     </>
   )
 }
@@ -38,12 +38,20 @@ export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="grid min-h-screen w-full auto-rows-min [grid-template-rows:auto_1fr_auto] items-center gap-6">
       <div className="grid grid-flow-row items-center justify-center py-12">
-        <Wayfarer className="text-center text-6xl font-black lg:text-7xl" />
-        <div className="text-center text-xl font-semibold text-zinc-500">{t('general.description')}</div>
+        <Wayfarer className="display-lg display-xl text-center font-black" />
+        <div className="typography-xl text-foreground-tertiary text-center font-semibold">
+          {t('general.description')}
+        </div>
         <div className="grid grid-flow-col items-center justify-center gap-2 py-4">
           <QuerySuspenseBoundary
-            fallback={<AppIcon id="connection:unknown" className="size-6 animate-spin text-yellow-400" aria-hidden />}
-            error={<AppIcon id="connection:offline" className="size-6 text-rose-400" aria-hidden />}
+            fallback={
+              <AppIcon
+                id="connection:unknown"
+                className="text-foreground-warning-secondary size-6 animate-spin"
+                aria-hidden
+              />
+            }
+            error={<AppIcon id="connection:offline" className="text-foreground-error-secondary size-6" aria-hidden />}
           >
             <SpaceTradersStatus />
           </QuerySuspenseBoundary>
@@ -51,7 +59,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       </div>
 
       <div>
-        <div className="bg-zinc-200/40 dark:bg-zinc-800/40">
+        <div className="bg-background-secondary">
           <div className="mx-auto grid w-full max-w-lg items-center">
             <div className="p-8">{children}</div>
           </div>
@@ -59,7 +67,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       </div>
 
       <div className="grid grid-flow-col gap-8 py-12">
-        <div className="grid grid-flow-col items-center justify-center gap-8 text-zinc-500">
+        <div className="text-foreground-tertiary grid grid-flow-col items-center justify-center gap-8">
           <a href="https://spacetraders.io" title="SpaceTraders" className="rounded-full p-2">
             <AppIcon id="rocket" className="size-8" />
           </a>

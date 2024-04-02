@@ -36,8 +36,8 @@ export const WaypointMarketList = () => {
     <WaypointMarketLayout
       imports={
         market.imports.length === 0 ? (
-          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
-            <div className="text-overline text-center">{t('market.imports_empty')}</div>
+          <div className="border-border-primary flex flex-col gap-4 rounded border-2 border-dashed py-9 px-3">
+            <div className="text-center text-lg">{t('market.imports_empty')}</div>
           </div>
         ) : (
           <TradeGoodContext.Provider value={IMPORT_MARKET_CONTEXT}>
@@ -47,8 +47,8 @@ export const WaypointMarketList = () => {
       }
       exports={
         market.exports.length === 0 ? (
-          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
-            <div className="text-overline text-center">{t('market.exports_empty')}</div>
+          <div className="border-border-primary flex flex-col gap-4 rounded border-2 border-dashed py-9 px-3">
+            <div className="text-center text-lg">{t('market.exports_empty')}</div>
           </div>
         ) : (
           <TradeGoodContext.Provider value={EXPORT_MARKET_CONTEXT}>
@@ -58,8 +58,8 @@ export const WaypointMarketList = () => {
       }
       exchange={
         market.exchange.length === 0 ? (
-          <div className="flex flex-col gap-4 rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
-            <div className="text-overline text-center">{t('market.exchange_empty')}</div>
+          <div className="border-border-primary flex flex-col gap-4 rounded border-2 border-dashed py-9 px-3">
+            <div className="text-center text-lg">{t('market.exchange_empty')}</div>
           </div>
         ) : (
           <TradeGoodContext.Provider value={EXCHANGE_MARKET_CONTEXT}>

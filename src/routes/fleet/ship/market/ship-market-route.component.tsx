@@ -24,7 +24,7 @@ export const ShipMarketRoute = () => {
   return (
     <div className="space-y-4 p-4">
       <div className="flex items-center justify-start gap-6">
-        <h1 className="text-title">
+        <h1 className="display-md font-bold">
           {t('market.label')}: <span className="font-normal">{ship.nav.waypointSymbol}</span>
         </h1>
       </div>

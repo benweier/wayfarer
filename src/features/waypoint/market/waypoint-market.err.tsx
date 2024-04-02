@@ -14,7 +14,7 @@ const Message = ({ error, onReset }: ErrorComponentProps) => {
       <div>An error occurred while displaying this market</div>
       {onReset !== undefined && (
         <Button
-          intent="primary"
+          intent="info"
           onClick={() => {
             onReset()
           }}

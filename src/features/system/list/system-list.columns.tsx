@@ -82,7 +82,7 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      return <div className="text-secondary text-left text-sm">{getValue()}</div>
+      return <div className="text-foreground-secondary typography-sm text-left">{getValue()}</div>
     },
     minSize: 20,
     maxSize: 20,

@@ -18,7 +18,7 @@ const BuyShip = ({ ship }: PropsWithChildren<{ ship?: ShipyardShip }>) => {
 
   return (
     <div className="flex items-center justify-end gap-2">
-      <div className="text-right text-sm">{formatNumber(ship.purchasePrice)}</div>
+      <div className="typography-sm text-right">{formatNumber(ship.purchasePrice)}</div>
       <div>
         <ShipyardPurchaseShip ship={ship} waypointSymbol={waypoint.symbol}>
           {(props) => (
@@ -53,7 +53,9 @@ export const columns = [
         <div className="h-full space-y-2">
           <Translation>{(t) => <div>{t(value, { ns: 'spacetraders.ship_type' })}</div>}</Translation>
           {row.original.ship && (
-            <div className="text-secondary whitespace-break-spaces text-sm">{row.original.ship.description}</div>
+            <div className="text-foreground-secondary typography-sm whitespace-break-spaces">
+              {row.original.ship.description}
+            </div>
           )}
         </div>
       )
@@ -71,24 +73,24 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return (
         <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
-            <div className="text-center text-sm">{value.name}</div>
+            <div className="typography-sm text-center">{value.name}</div>
 
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
                   <button>
-                    <AppIcon id="help" className="text-secondary size-5" />
+                    <AppIcon id="help" className="text-foreground-secondary size-5" />
                   </button>
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
                   <Tooltip.Content
-                    className="w-64 rounded-md bg-zinc-200 py-2 px-4 text-xs text-zinc-800"
+                    className="typography-xs bg-foreground-secondary text-background-secondary w-64 rounded-md py-2 px-4"
                     sideOffset={5}
                   >
                     {value.description}
@@ -100,20 +102,20 @@ export const columns = [
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
-                <ShipIcon id="power" className="text-secondary size-4" />
-                <div className="text-sm">{value.requirements.power}</div>
+                <ShipIcon id="power" className="text-foreground-secondary size-4" />
+                <div className="typography-sm">{value.requirements.power}</div>
               </div>
               <div className="flex items-center gap-2">
-                <ShipIcon id="fuel" className="text-secondary size-4" />
-                <div className="text-sm">{value.fuelCapacity}</div>
+                <ShipIcon id="fuel" className="text-foreground-secondary size-4" />
+                <div className="typography-sm">{value.fuelCapacity}</div>
               </div>
               <div className="flex items-center gap-2">
-                <ShipIcon id="modules" className="text-secondary size-4" />
-                <div className="text-sm">{value.moduleSlots}</div>
+                <ShipIcon id="modules" className="text-foreground-secondary size-4" />
+                <div className="typography-sm">{value.moduleSlots}</div>
               </div>
               <div className="flex items-center gap-2">
-                <ShipIcon id="mounts" className="text-secondary size-4" />
-                <div className="text-sm">{value.mountingPoints}</div>
+                <ShipIcon id="mounts" className="text-foreground-secondary size-4" />
+                <div className="typography-sm">{value.mountingPoints}</div>
               </div>
             </div>
           </div>
@@ -130,24 +132,24 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return (
         <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
-            <div className="text-center text-sm">{value.name}</div>
+            <div className="typography-sm text-center">{value.name}</div>
 
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
                   <button>
-                    <AppIcon id="help" className="text-secondary size-5" />
+                    <AppIcon id="help" className="text-foreground-secondary size-5" />
                   </button>
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
                   <Tooltip.Content
-                    className="w-64 rounded-md bg-zinc-200 py-2 px-4 text-xs text-zinc-800"
+                    className="typography-xs bg-foreground-secondary text-background-secondary w-64 rounded-md py-2 px-4"
                     sideOffset={5}
                   >
                     {value.description}
@@ -159,12 +161,12 @@ export const columns = [
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
-                <ShipIcon id="power" className="text-secondary size-4" />
-                <div className="text-sm">{value.requirements.power}</div>
+                <ShipIcon id="power" className="text-foreground-secondary size-4" />
+                <div className="typography-sm">{value.requirements.power}</div>
               </div>
               <div className="flex items-center gap-2">
-                <ShipIcon id="speed" className="text-secondary size-4" />
-                <div className="text-sm">{value.speed}</div>
+                <ShipIcon id="speed" className="text-foreground-secondary size-4" />
+                <div className="typography-sm">{value.speed}</div>
               </div>
             </div>
           </div>
@@ -181,24 +183,24 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return (
         <div className="h-full space-y-2">
           <div className="flex items-center justify-end gap-2">
-            <div className="text-center text-sm">{value.name}</div>
+            <div className="typography-sm text-center">{value.name}</div>
 
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
                   <button>
-                    <AppIcon id="help" className="text-secondary size-5" />
+                    <AppIcon id="help" className="text-foreground-secondary size-5" />
                   </button>
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
                   <Tooltip.Content
-                    className="w-64 rounded-md bg-zinc-200 py-2 px-4 text-xs text-zinc-800"
+                    className="typography-xs bg-foreground-secondary text-background-secondary w-64 rounded-md py-2 px-4"
                     sideOffset={5}
                   >
                     {value.description}
@@ -210,8 +212,8 @@ export const columns = [
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
-                <ShipIcon id="power" className="text-secondary size-4" />
-                <div className="text-sm">{value.powerOutput}</div>
+                <ShipIcon id="power" className="text-foreground-secondary size-4" />
+                <div className="typography-sm">{value.powerOutput}</div>
               </div>
             </div>
           </div>
@@ -237,7 +239,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return <BuyShip ship={row.original.ship} />

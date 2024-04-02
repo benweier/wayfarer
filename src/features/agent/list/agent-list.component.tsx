@@ -28,7 +28,7 @@ export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => 
       <AgentListTable data={agents.map((agent) => ({ agent }))} />
 
       <div className="grid items-center justify-center gap-4">
-        <div className="flex items-center justify-center gap-2 text-sm">
+        <div className="typography-sm flex items-center justify-center gap-2">
           {agentsListQuery.isFetching ? (
             <div>...</div>
           ) : (
@@ -36,7 +36,7 @@ export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => 
               <div>
                 {results.from} - {results.to}
               </div>
-              <div className="text-secondary">of</div>
+              <div className="text-foreground-secondary">of</div>
               <div>{results.total}</div>
             </>
           )}

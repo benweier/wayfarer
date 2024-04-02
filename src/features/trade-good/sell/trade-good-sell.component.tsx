@@ -15,7 +15,7 @@ export const TradeGoodSell = ({
   good,
   disabled = false,
   action = (props) => (
-    <Button intent="confirm" kind="outline" size="small" {...props}>
+    <Button intent="success" kind="outline" size="small" {...props}>
       Sell
     </Button>
   ),
@@ -73,7 +73,7 @@ export const TradeGoodSell = ({
       closeable
     >
       <div className="space-y-8">
-        <div className="text-title">
+        <div className="display-lg font-bold">
           {t('market.sell')}: <span className="font-light">{t(good.symbol, { ns: 'spacetraders.trade_good' })}</span>
         </div>
 

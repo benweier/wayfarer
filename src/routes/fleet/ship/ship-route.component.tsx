@@ -28,7 +28,7 @@ export const ShipRoute = () => {
 
   return (
     <div key={shipSymbol} className="space-y-4 p-4">
-      <h1 className="text-title">
+      <h1 className="display-md font-bold">
         {t('ship.label')}: <span className="font-normal">{shipSymbol}</span>
       </h1>
 

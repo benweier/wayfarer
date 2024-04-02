@@ -7,7 +7,7 @@ export const LeaderboardRoute = () => {
 
   return (
     <div className="space-y-4 p-4">
-      <h1 className="text-title">{t('leaderboard.label')}</h1>
+      <h1 className="display-md font-bold">{t('leaderboard.label')}</h1>
 
       <div>
         <QuerySuspenseBoundary fallback={<LeaderboardListFallback />}>

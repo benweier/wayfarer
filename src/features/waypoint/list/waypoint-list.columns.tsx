@@ -78,11 +78,14 @@ export const columns = [
             <Tooltip.Root>
               <Tooltip.Trigger asChild>
                 <button>
-                  <AppIcon id="help" className="text-secondary size-5" />
+                  <AppIcon id="help" className="text-foreground-secondary size-5" />
                 </button>
               </Tooltip.Trigger>
               <Tooltip.Portal>
-                <Tooltip.Content className="w-64 rounded-md bg-zinc-200 py-2 px-4 text-xs text-zinc-800" sideOffset={5}>
+                <Tooltip.Content
+                  className="bg-foreground-secondary text-background-secondary typography-sm w-72 rounded-md py-2 px-4"
+                  sideOffset={5}
+                >
                   <Translation>{(t) => t('waypoint.sort_coordinates_tooltip')}</Translation>
                 </Tooltip.Content>
               </Tooltip.Portal>
@@ -92,7 +95,7 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      return <div className="text-secondary text-left text-sm">{getValue()}</div>
+      return <div className="text-foreground-secondary typography-sm text-left">{getValue()}</div>
     },
     sortingFn: (a, b) => {
       const ad = Math.pow(a.original.waypoint.x, 2) + Math.pow(a.original.waypoint.y, 2)

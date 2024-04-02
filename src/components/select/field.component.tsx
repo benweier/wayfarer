@@ -30,7 +30,7 @@ export const Field = <T = string,>({
       </Listbox.Button>
 
       {options.length > 0 && (
-        <Listbox.Options className="absolute z-10 mt-1 max-h-48 w-full overflow-auto rounded-md border-2 border-zinc-100 bg-white/90 text-sm outline-none backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90">
+        <Listbox.Options className="border-border-primary bg-background-primary/90 typography-sm absolute z-10 mt-1 max-h-48 w-full overflow-auto rounded-md border-2 outline-none backdrop-blur-md">
           {options.map((option) => (
             <Listbox.Option
               key={getItemKey(option)}
@@ -44,7 +44,7 @@ export const Field = <T = string,>({
                     <span
                       className={cx(
                         'relative block cursor-default truncate rounded py-2 pr-9 pl-3 transition-colors duration-100 ease-in-out select-none',
-                        { 'bg-zinc-900/5 dark:bg-zinc-100/10': active, 'opacity-50': disabled },
+                        { 'bg-background-tertiary': active, 'opacity-50': disabled },
                       )}
                     >
                       {getItemOption(option)}

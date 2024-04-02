@@ -3,26 +3,31 @@ import { type VariantProps, cva } from 'class-variance-authority'
 export const button = cva('btn', {
   variants: {
     intent: {
-      primary: ['btn-primary'],
-      confirm: ['btn-confirm'],
+      brand: ['btn-brand'],
+      info: ['btn-info'],
       success: ['btn-success'],
-      warn: ['btn-warn'],
+      warn: ['btn-warning'],
       danger: ['btn-danger'],
-      dim: ['btn-dim'],
-      hero: ['btn-hero'],
+      neutral: ['btn-neutral'],
     },
     size: {
       small: ['btn-sm'],
-      normal: [],
+      normal: ['btn-md'],
+      large: ['btn-lg'],
     },
     kind: {
-      solid: [],
+      solid: ['btn-solid'],
       flat: ['btn-flat'],
       outline: ['btn-outline'],
     },
     icon: {
       true: ['btn-icon'],
     },
+  },
+  defaultVariants: {
+    intent: 'info',
+    kind: 'solid',
+    size: 'normal',
   },
 })
 

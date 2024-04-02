@@ -14,8 +14,8 @@ const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   if (ship.nav.status !== 'IN_TRANSIT') return null
 
   return (
-    <div className="h-1 grow rounded-full bg-zinc-200 dark:bg-zinc-600">
-      <div className="h-full rounded-full bg-green-500" style={{ width: `${transit.progress}%` }} />
+    <div className="bg-background-tertiary h-1 grow rounded-full">
+      <div className="bg-background-success-secondary h-full rounded-full" style={{ width: `${transit.progress}%` }} />
     </div>
   )
 }
@@ -154,7 +154,7 @@ export const columns = [
       return (
         <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
-            <ShipIcon id="fuel" className="size-4 text-teal-500" />
+            <ShipIcon id="fuel" className="text-foreground-fuel size-4" />
             <div className="text-sm font-semibold">
               {fuel.capacity === 0 ? (
                 <AppIcon id="infinity" className="size-5" aria-label="Infinite" />
@@ -163,9 +163,9 @@ export const columns = [
               )}
             </div>
           </div>
-          <div className="h-1 w-full max-w-[100px] rounded-full bg-teal-900/20 dark:bg-teal-900/40">
+          <div className="bg-background-fuel/30 h-1 w-full max-w-[100px] rounded-full">
             <div
-              className="h-1 rounded-full bg-teal-500/80"
+              className="bg-foreground-fuel h-1 rounded-full"
               style={{ width: `${(fuel.current / fuel.capacity) * 100}%` }}
             />
           </div>
@@ -214,9 +214,9 @@ export const columns = [
               {cargo.units} / {cargo.capacity}
             </div>
           </div>
-          <div className="h-1 w-full max-w-[100px] rounded-full bg-fuchsia-900/20 dark:bg-fuchsia-900/40">
+          <div className="bg-background-cargo/30 h-1 w-full max-w-[100px] rounded-full">
             <div
-              className="h-1 rounded-full bg-fuchsia-500/80"
+              className="bg-foreground-cargo h-1 rounded-full"
               style={{ width: `${(cargo.units / cargo.capacity) * 100}%` }}
             />
           </div>

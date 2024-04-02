@@ -13,7 +13,7 @@ export const SurveysRoute = () => {
 
   return (
     <div className="space-y-4 p-4">
-      <h1 className="text-title">{t('surveys.label')}</h1>
+      <h1 className="display-md font-bold">{t('surveys.label')}</h1>
 
       <div>
         <QuerySuspenseBoundary>

@@ -12,7 +12,7 @@ export const AgentRoute = () => {
 
   return (
     <div className="space-y-4 p-4">
-      <h1 className="text-title">
+      <h1 className="display-md font-bold">
         {t('agent.label')}: <span className="font-normal">{agentSymbol}</span>
       </h1>
 

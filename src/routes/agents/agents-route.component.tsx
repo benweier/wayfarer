@@ -13,7 +13,7 @@ export const AgentsRoute = () => {
 
   return (
     <div className="space-y-4 p-4">
-      <h1 className="text-title">{t('agents.label')}</h1>
+      <h1 className="display-md font-bold">{t('agents.label')}</h1>
 
       <QuerySuspenseBoundary fallback={<AgentListFallback />}>
         <AgentList

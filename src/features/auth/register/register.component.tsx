@@ -64,12 +64,12 @@ export const Register = () => {
   const agent = isSuccess ? data.data : undefined
 
   return (
-    <div className="grid gap-4">
-      <div className="text-overline text-center">{t('auth.register_heading')}</div>
+    <div className="grid gap-8">
+      <div className="display-xs text-center">{t('auth.register_heading')}</div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
-            <div>
+            <div className="space-y-1">
               <label className="label" htmlFor="symbol">
                 {t('auth.fields.agent_symbol.label')}
               </label>
@@ -83,13 +83,15 @@ export const Register = () => {
               />
             </div>
 
-            <div>
+            <div className="space-y-1">
               <label className="label" htmlFor="email">
                 {t('auth.fields.email.label')}{' '}
-                <span className="text-secondary text-xs">{t('general.fields.optional')}</span>
+                <span className="text-foreground-tertiary typography-xs font-normal">
+                  {t('general.fields.optional')}
+                </span>
               </label>
               <input id="email" {...methods.register('email')} className="input" type="email" autoComplete="off" />
-              <div className="text-hint mt-1">
+              <div className="typography-sm mt-1">
                 <Trans
                   i18nKey="auth.fields.email.hint"
                   components={{
@@ -116,11 +118,11 @@ export const Register = () => {
               <FactionInfo />
             </QuerySuspenseBoundary>
 
-            <Button intent="hero" disabled={isPending} type="submit">
+            <Button intent="info" size="large" disabled={isPending} type="submit">
               {t('auth.register', { context: 'action' })}
             </Button>
             <div className="grid gap-4">
-              <div className="text-caption text-center">
+              <div className="typography-base text-center">
                 <Trans
                   i18nKey="auth.already_registered"
                   components={{

@@ -29,8 +29,8 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
         <Menu.Button as={Fragment}>
           <Button
             ref={refs.setReference}
-            intent="confirm"
-            kind="flat"
+            intent="success"
+            kind="outline"
             size="small"
             disabled={isMutating || ship.fuel.capacity === 0 || ship.nav.status === 'IN_TRANSIT'}
           >
@@ -61,7 +61,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
                     <ShipActions.FlightMode ship={ship} flightMode="CRUISE">
                       {(props) => (
                         <Button
-                          intent={active ? 'dim' : undefined}
+                          intent={active ? 'neutral' : undefined}
                           kind="flat"
                           size="small"
                           className="text-left"
@@ -78,7 +78,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
                     <ShipActions.FlightMode ship={ship} flightMode="BURN">
                       {(props) => (
                         <Button
-                          intent={active ? 'dim' : undefined}
+                          intent={active ? 'neutral' : undefined}
                           kind="flat"
                           size="small"
                           className="text-left"
@@ -95,7 +95,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
                     <ShipActions.FlightMode ship={ship} flightMode="DRIFT">
                       {(props) => (
                         <Button
-                          intent={active ? 'dim' : undefined}
+                          intent={active ? 'neutral' : undefined}
                           kind="flat"
                           size="small"
                           className="text-left"
@@ -112,7 +112,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
                     <ShipActions.FlightMode ship={ship} flightMode="STEALTH">
                       {(props) => (
                         <Button
-                          intent={active ? 'dim' : undefined}
+                          intent={active ? 'neutral' : undefined}
                           kind="flat"
                           size="small"
                           className="text-left"

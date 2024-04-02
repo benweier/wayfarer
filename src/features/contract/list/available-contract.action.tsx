@@ -13,8 +13,8 @@ export const AvailableContractAction = ({ contract }: { contract: ContractRespon
         <Button
           ref={args.ref}
           disabled={args.disabled}
-          intent="confirm"
-          kind="flat"
+          intent="info"
+          kind="solid"
           size="small"
           onClick={() => {
             void args.execute()

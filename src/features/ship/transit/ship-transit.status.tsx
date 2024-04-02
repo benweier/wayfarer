@@ -14,13 +14,13 @@ export const ShipTransitStatus = () => {
     <div className="flex flex-col gap-1">
       <div className="flex flex-row gap-8">
         <div className="flex flex-col items-start">
-          <div className="text-secondary text-xs uppercase">{t('ship.transit.departed')}</div>
+          <div className="text-foreground-tertiary text-xs uppercase">{t('ship.transit.departed')}</div>
           <div className="flex items-center gap-2">
             <div className="text-sm font-medium">{formatDateTime(transit.departed)}</div>
           </div>
         </div>
         <div className="flex flex-col items-end">
-          <div className="text-secondary text-xs uppercase">
+          <div className="text-foreground-tertiary text-xs uppercase">
             {transit.status === 'complete' ? t('ship.transit.arrived') : t('ship.transit.arriving')}
           </div>
           <div className="flex items-center gap-2">
@@ -31,20 +31,20 @@ export const ShipTransitStatus = () => {
 
       <div className="flex flex-row items-center gap-2">
         <div
-          className={cx('h-1.5 grow rounded-full bg-zinc-200 dark:bg-zinc-600', {
+          className={cx('bg-background-tertiary h-1.5 grow rounded-full', {
             'opacity-65': transit.status === 'complete',
           })}
         >
           <div
-            className={cx('h-full rounded-full bg-green-500', {
+            className={cx('bg-background-success-primary h-full rounded-full', {
               'animate-pulse': transit.status !== 'complete',
             })}
             style={{ width: `${transit.progress}%` }}
           />
         </div>
-        <div className="text-secondary flex w-12 justify-end text-right text-sm">
+        <div className="text-foreground-secondary typography-sm flex w-12 justify-end text-right">
           {transit.status === 'complete' ? (
-            <ShipIcon id="pin" className="size-5 text-green-500" />
+            <ShipIcon id="pin" className="text-foreground-success-secondary size-5" />
           ) : (
             `${transit.remainingSeconds} s`
           )}

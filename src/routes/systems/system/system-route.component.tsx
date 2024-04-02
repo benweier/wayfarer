@@ -16,7 +16,7 @@ export const SystemRoute = () => {
 
   return (
     <div key={systemSymbol} className="space-y-4 p-4">
-      <h1 className="text-title">
+      <h1 className="display-md font-bold">
         {t('system.label')}: <span className="whitespace-nowrap font-normal">{systemSymbol}</span>
       </h1>
 

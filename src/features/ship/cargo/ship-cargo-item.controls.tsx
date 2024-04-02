@@ -25,12 +25,9 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
 
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            className="flex w-52 flex-col gap-2 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring-3 ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5"
+            className="bg-background-secondary flex w-52 flex-col gap-2 overflow-y-auto rounded-md p-1 ring-3 ring-black/5 backdrop-blur-lg dark:ring-white/5"
             sideOffset={5}
-            collisionPadding={{
-              right: 16,
-              bottom: 16,
-            }}
+            collisionPadding={16}
           >
             <DropdownMenu.Item asChild>
               <button

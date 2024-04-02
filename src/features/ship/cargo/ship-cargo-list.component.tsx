@@ -54,7 +54,7 @@ export const ShipCargoList = () => {
         </div>
         <div className="text-center">
           <Button
-            intent="primary"
+            intent="info"
             disabled={!hasMarketplace}
             onClick={() => {
               void navigate({ to: '/fleet/$shipSymbol/market', params: { shipSymbol: ship.symbol } })

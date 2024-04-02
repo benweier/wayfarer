@@ -61,7 +61,7 @@ export const availableContractsColumns = [
       const value = getValue()
 
       return (
-        <div className="flex flex-col gap-1 text-left text-sm">
+        <div className="typography-sm flex flex-col gap-1 text-left">
           {value.map((item) => {
             const [sector, system, waypoint] = item.destinationSymbol.split('-')
 
@@ -76,7 +76,7 @@ export const availableContractsColumns = [
                   {item.destinationSymbol}
                 </Link>
                 ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
-                <span className="text-secondary">({formatNumber(item.unitsRequired)})</span>
+                <span className="text-foreground-secondary">({formatNumber(item.unitsRequired)})</span>
               </div>
             )
           })}
@@ -98,7 +98,7 @@ export const availableContractsColumns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-left text-sm">{formatDateTime(value)}</div>
+      return <div className="typography-sm text-left">{formatDateTime(value)}</div>
     },
     minSize: 15,
     maxSize: 15,
@@ -115,7 +115,7 @@ export const availableContractsColumns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-left text-sm">{formatDateTime(value)}</div>
+      return <div className="typography-sm text-left">{formatDateTime(value)}</div>
     },
     minSize: 15,
     maxSize: 15,
@@ -133,9 +133,9 @@ export const availableContractsColumns = [
       const payment = getValue()
 
       return (
-        <div className="text-right text-sm">
+        <div className="typography-sm text-right">
           {formatNumber(payment.onFulfilled)}{' '}
-          <span className="text-secondary">({formatNumber(payment.onAccepted)})</span>
+          <span className="text-foreground-secondary">({formatNumber(payment.onAccepted)})</span>
         </div>
       )
     },
@@ -214,7 +214,7 @@ export const acceptedContractsColumns = [
       const value = getValue()
 
       return (
-        <div className="flex flex-col gap-1 text-left text-sm">
+        <div className="typography-sm flex flex-col gap-1 text-left">
           {value.map((item) => {
             const [sector, system, waypoint] = item.destinationSymbol.split('-')
 
@@ -229,7 +229,7 @@ export const acceptedContractsColumns = [
                   {item.destinationSymbol}
                 </Link>
                 ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
-                <span className="text-secondary">({formatNumber(item.unitsRequired)})</span>
+                <span className="text-foreground-secondary">({formatNumber(item.unitsRequired)})</span>
               </div>
             )
           })}
@@ -252,7 +252,7 @@ export const acceptedContractsColumns = [
       const value = getValue()
 
       return (
-        <div className="flex flex-col gap-1 text-left text-sm">
+        <div className="typography-sm flex flex-col gap-1 text-left">
           {value.map((item) => {
             const [sector, system, waypoint] = item.destinationSymbol.split('-')
 
@@ -267,7 +267,7 @@ export const acceptedContractsColumns = [
                   {item.destinationSymbol}
                 </Link>
                 ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
-                <span className="text-secondary">({formatNumber(item.unitsFulfilled)})</span>
+                <span className="text-foreground-secondary">({formatNumber(item.unitsFulfilled)})</span>
               </div>
             )
           })}
@@ -289,7 +289,7 @@ export const acceptedContractsColumns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-left text-sm">{formatDateTime(value)}</div>
+      return <div className="typography-sm text-left">{formatDateTime(value)}</div>
     },
     minSize: 15,
     maxSize: 15,
@@ -307,9 +307,9 @@ export const acceptedContractsColumns = [
       const payment = getValue()
 
       return (
-        <div className="text-right text-sm">
+        <div className="typography-sm text-right">
           {formatNumber(payment.onFulfilled)}{' '}
-          <span className="text-secondary">({formatNumber(payment.onAccepted)})</span>
+          <span className="text-foreground-secondary">({formatNumber(payment.onAccepted)})</span>
         </div>
       )
     },
@@ -386,7 +386,7 @@ export const completedContractsColumns = [
       const value = getValue()
 
       return (
-        <div className="flex flex-col gap-1 text-left text-sm">
+        <div className="typography-sm flex flex-col gap-1 text-left">
           {value.map((item) => {
             const [sector, system, waypoint] = item.destinationSymbol.split('-')
 
@@ -401,7 +401,7 @@ export const completedContractsColumns = [
                   {item.destinationSymbol}
                 </Link>
                 ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
-                <span className="text-secondary">({formatNumber(item.unitsFulfilled)})</span>
+                <span className="text-foreground-secondary">({formatNumber(item.unitsFulfilled)})</span>
               </div>
             )
           })}
@@ -424,9 +424,9 @@ export const completedContractsColumns = [
       const payment = getValue()
 
       return (
-        <div className="text-right text-sm">
+        <div className="typography-sm text-right">
           {formatNumber(payment.onFulfilled)}{' '}
-          <span className="text-secondary">({formatNumber(payment.onAccepted)})</span>
+          <span className="text-foreground-secondary">({formatNumber(payment.onAccepted)})</span>
         </div>
       )
     },

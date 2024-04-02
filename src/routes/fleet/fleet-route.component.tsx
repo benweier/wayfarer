@@ -7,7 +7,7 @@ export const FleetRoute = () => {
 
   return (
     <div className="space-y-4 p-4">
-      <h1 className="text-title">{t('fleet.label')}</h1>
+      <h1 className="display-md font-bold">{t('fleet.label')}</h1>
 
       <div>
         <QuerySuspenseBoundary fallback={<ShipListFallback />}>

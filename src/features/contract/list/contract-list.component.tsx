@@ -1,6 +1,6 @@
-import { Tab } from '@headlessui/react'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
+import * as Tabs from '@/components/tabs'
 import { AcceptContractAction } from '@/features/contract/list/accept-contract.action'
 import { AvailableContractAction } from '@/features/contract/list/available-contract.action'
 import { getContractListQuery } from '@/services/api/spacetraders'
@@ -37,51 +37,49 @@ export const ContractList = () => {
   if (meta.total === 0) {
     return (
       <div className="flex flex-col">
-        <div className="text-xl font-semibold">{t('contracts.no_contracts')}</div>
+        <div className="typography-xl font-semibold">{t('contracts.no_contracts')}</div>
       </div>
     )
   }
 
   return (
-    <Tab.Group as="div" className="tab-group">
-      <Tab.List className="tab-list">
-        <Tab className="group tab">
+    <Tabs.Root defaultValue="accepted">
+      <Tabs.List>
+        <Tabs.Trigger value="accepted">
           {t('contracts.accepted')} ({contracts.accepted.length})
-        </Tab>
-        <Tab className="group tab">
+        </Tabs.Trigger>
+        <Tabs.Trigger value="available">
           {t('contracts.available')} ({contracts.available.length})
-        </Tab>
-        <Tab className="group tab">
+        </Tabs.Trigger>
+        <Tabs.Trigger value="completed">
           {t('contracts.completed')} ({contracts.completed.length})
-        </Tab>
-      </Tab.List>
+        </Tabs.Trigger>
+      </Tabs.List>
 
-      <Tab.Panels>
-        <Tab.Panel>
-          <ContractListContext.Provider value={ACCEPT_CONTRACTS_CONTEXT}>
-            <ContractListTable
-              data={contracts.accepted.map((contract) => ({ contract }))}
-              columns={acceptedContractsColumns}
-            />
-          </ContractListContext.Provider>
-        </Tab.Panel>
-
-        <Tab.Panel>
-          <ContractListContext.Provider value={AVAILABLE_CONTRACTS_CONTEXT}>
-            <ContractListTable
-              data={contracts.available.map((contract) => ({ contract }))}
-              columns={availableContractsColumns}
-            />
-          </ContractListContext.Provider>
-        </Tab.Panel>
-
-        <Tab.Panel>
+      <Tabs.Content value="accepted">
+        <ContractListContext.Provider value={ACCEPT_CONTRACTS_CONTEXT}>
           <ContractListTable
-            data={contracts.completed.map((contract) => ({ contract }))}
-            columns={completedContractsColumns}
+            data={contracts.accepted.map((contract) => ({ contract }))}
+            columns={acceptedContractsColumns}
           />
-        </Tab.Panel>
-      </Tab.Panels>
-    </Tab.Group>
+        </ContractListContext.Provider>
+      </Tabs.Content>
+
+      <Tabs.Content value="available">
+        <ContractListContext.Provider value={AVAILABLE_CONTRACTS_CONTEXT}>
+          <ContractListTable
+            data={contracts.available.map((contract) => ({ contract }))}
+            columns={availableContractsColumns}
+          />
+        </ContractListContext.Provider>
+      </Tabs.Content>
+
+      <Tabs.Content value="completed">
+        <ContractListTable
+          data={contracts.completed.map((contract) => ({ contract }))}
+          columns={completedContractsColumns}
+        />
+      </Tabs.Content>
+    </Tabs.Root>
   )
 }

@@ -41,7 +41,7 @@ export const WaypointTypeFilter = ({
       multiple
     >
       <Listbox.Button as={Fragment}>
-        <Button intent={values.length > 0 ? 'primary' : 'dim'} kind="flat" icon ref={refs.setReference}>
+        <Button intent={values.length > 0 ? 'info' : 'neutral'} kind="flat" icon ref={refs.setReference}>
           <span className="sr-only">Filter Types</span>
           <AppIcon id="filter" className="size-4" aria-hidden="true" />
         </Button>
@@ -65,7 +65,7 @@ export const WaypointTypeFilter = ({
             leaveTo="transform opacity-0 scale-95"
           >
             {options.length > 0 && (
-              <Listbox.Options className="mt-1 max-h-64 w-full overflow-auto rounded-md border-2 border-zinc-100 bg-white/90 text-sm outline-none backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90">
+              <Listbox.Options className="border-border-primary bg-background-primary/90 typography-sm mt-1 max-h-64 w-full overflow-auto rounded-md border-2 outline-none backdrop-blur-md">
                 {options.map((option) => {
                   return (
                     <Listbox.Option key={option} value={option}>
@@ -75,7 +75,7 @@ export const WaypointTypeFilter = ({
                             <span
                               className={cx(
                                 'relative flex cursor-default gap-2 truncate rounded py-1 pr-10 pl-1 transition-colors duration-100 ease-in-out select-none',
-                                { 'bg-zinc-900/5 dark:bg-zinc-100/10': active, 'opacity-50': disabled },
+                                { 'bg-background-tertiary': active, 'opacity-50': disabled },
                               )}
                             >
                               <WaypointTag type={option}>{`${facets.get(option) ?? 0}`}</WaypointTag>
@@ -83,7 +83,11 @@ export const WaypointTypeFilter = ({
                             </span>
                             {selected && (
                               <span className="absolute inset-y-0 right-0 flex items-center pr-4">
-                                <AppIcon id="check" aria-hidden="true" className="size-4 text-emerald-500" />
+                                <AppIcon
+                                  id="check"
+                                  aria-hidden="true"
+                                  className="text-foreground-success-secondary size-4"
+                                />
                               </span>
                             )}
                           </div>

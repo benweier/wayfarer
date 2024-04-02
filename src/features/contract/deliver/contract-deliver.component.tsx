@@ -16,7 +16,7 @@ export const ContractDeliver = ({ contract }: ContractDeliverProps) => {
       trigger={
         <Modal.Trigger>
           {(props) => (
-            <Button intent="primary" kind="solid" size="small" {...props}>
+            <Button intent="info" kind="solid" size="small" {...props}>
               {t('contract.deliver', { context: 'action' })}
             </Button>
           )}
@@ -24,7 +24,7 @@ export const ContractDeliver = ({ contract }: ContractDeliverProps) => {
       }
     >
       <div className="space-y-8">
-        <div className="text-title">{t('contract.deliver_heading')}</div>
+        <div className="display-sm">{t('contract.deliver_heading')}</div>
 
         <ContractActions.Deliver contract={contract}>
           {({ execute }) => (

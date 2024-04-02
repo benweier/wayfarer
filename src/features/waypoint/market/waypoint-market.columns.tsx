@@ -26,7 +26,9 @@ export const columns = [
       return (
         <>
           <div>{getValue()}</div>
-          <div className="text-secondary whitespace-pre-wrap text-sm">{row.original.good.description}</div>
+          <div className="text-foreground-secondary typography-sm whitespace-pre-wrap">
+            {row.original.good.description}
+          </div>
         </>
       )
     },
@@ -45,10 +47,10 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
-      return <div className="text-right text-sm">{formatNumber(value)}</div>
+      return <div className="typography-sm text-right">{formatNumber(value)}</div>
     },
     enableSorting: false,
     minSize: 15,
@@ -65,7 +67,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return (
@@ -98,7 +100,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return (
@@ -106,7 +108,9 @@ export const columns = [
           <TradeGoodContext.Consumer>
             {(ctx) => (
               <>
-                <div className={cx('text-sm', { 'text-secondary': !ctx.Buy })}>{formatNumber(value)}</div>
+                <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Buy })}>
+                  {formatNumber(value)}
+                </div>
                 {ctx.Buy !== undefined && row.original.trade !== undefined ? (
                   <ctx.Buy good={row.original.trade} />
                 ) : null}
@@ -137,7 +141,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return (
@@ -145,7 +149,9 @@ export const columns = [
           <TradeGoodContext.Consumer>
             {(ctx) => (
               <>
-                <div className={cx('text-sm', { 'text-secondary': !ctx.Sell })}>{formatNumber(value)}</div>
+                <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Sell })}>
+                  {formatNumber(value)}
+                </div>
                 {ctx.Sell !== undefined && row.original.trade !== undefined ? (
                   <ctx.Sell good={row.original.trade} />
                 ) : null}

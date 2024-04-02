@@ -1,6 +1,6 @@
-import { Tab } from '@headlessui/react'
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import * as Tabs from '@/components/tabs'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { WaypointFleetError, WaypointFleetFallback, WaypointFleetList } from '@/features/waypoint/fleet'
 import { WaypointJumpGateError, WaypointJumpGateFallback } from '@/features/waypoint/jumpgate'
@@ -26,49 +26,47 @@ export const WaypointTabs = () => {
   const hasShipyard = hasTrait(waypoint.traits, ['SHIPYARD'])
 
   return (
-    <Tab.Group as="div" className="tab-group">
-      <Tab.List className="tab-list">
-        <Tab disabled={!hasMarket} className="group tab disabled:opacity-30">
+    <Tabs.Root defaultValue={hasMarket ? 'marketplace' : 'fleet'}>
+      <Tabs.List>
+        <Tabs.Trigger value="marketplace" disabled={!hasMarket}>
           {t('market.label')}
-        </Tab>
-        <Tab className="group tab">{t('fleet.label')}</Tab>
-        {hasShipyard && <Tab className="group tab">{t('shipyard.label')}</Tab>}
-        {isJumpGate && <Tab className="group tab">{t('jumpgate.label')}</Tab>}
-      </Tab.List>
+        </Tabs.Trigger>
+        <Tabs.Trigger value="fleet">{t('fleet.label')}</Tabs.Trigger>
+        {hasShipyard && <Tabs.Trigger value="shipyard">{t('shipyard.label')}</Tabs.Trigger>}
+        {isJumpGate && <Tabs.Trigger value="jump-gate">{t('jumpgate.label')}</Tabs.Trigger>}
+      </Tabs.List>
 
-      <Tab.Panels>
-        <Tab.Panel>
-          <div className="space-y-4">
-            <WaypointMarketPreferences />
+      <Tabs.Content value="marketplace">
+        <div className="space-y-4">
+          <WaypointMarketPreferences />
 
-            <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={<WaypointMarketError />}>
-              {hasMarket ? <WaypointMarketList /> : <WaypointMarketNotAvailable />}
-            </QuerySuspenseBoundary>
-          </div>
-        </Tab.Panel>
-
-        <Tab.Panel>
-          <QuerySuspenseBoundary fallback={<WaypointFleetFallback />} error={<WaypointFleetError />}>
-            <WaypointFleetList />
+          <QuerySuspenseBoundary fallback={<WaypointMarketFallback />} error={<WaypointMarketError />}>
+            {hasMarket ? <WaypointMarketList /> : <WaypointMarketNotAvailable />}
           </QuerySuspenseBoundary>
-        </Tab.Panel>
+        </div>
+      </Tabs.Content>
 
-        {hasShipyard && (
-          <Tab.Panel>
-            <QuerySuspenseBoundary fallback={<WaypointShipyardFallback />} error={<WaypointShipyardError />}>
-              <WaypointShipyardList />
-            </QuerySuspenseBoundary>
-          </Tab.Panel>
-        )}
+      <Tabs.Content value="fleet">
+        <QuerySuspenseBoundary fallback={<WaypointFleetFallback />} error={<WaypointFleetError />}>
+          <WaypointFleetList />
+        </QuerySuspenseBoundary>
+      </Tabs.Content>
 
-        {isJumpGate && (
-          <Tab.Panel>
-            <QuerySuspenseBoundary fallback={<WaypointJumpGateFallback />} error={<WaypointJumpGateError />}>
-              <WaypointJumpGateList />
-            </QuerySuspenseBoundary>
-          </Tab.Panel>
-        )}
-      </Tab.Panels>
-    </Tab.Group>
+      {hasShipyard && (
+        <Tabs.Content value="shipyard">
+          <QuerySuspenseBoundary fallback={<WaypointShipyardFallback />} error={<WaypointShipyardError />}>
+            <WaypointShipyardList />
+          </QuerySuspenseBoundary>
+        </Tabs.Content>
+      )}
+
+      {isJumpGate && (
+        <Tabs.Content value="jump-gate">
+          <QuerySuspenseBoundary fallback={<WaypointJumpGateFallback />} error={<WaypointJumpGateError />}>
+            <WaypointJumpGateList />
+          </QuerySuspenseBoundary>
+        </Tabs.Content>
+      )}
+    </Tabs.Root>
   )
 }

@@ -43,7 +43,7 @@ export const columns = [
 
       return (
         <Translation>
-          {(t) => <div className="text-sm">{t(value, { ns: 'spacetraders.survey_size' })}</div>}
+          {(t) => <div className="typography-sm">{t(value, { ns: 'spacetraders.survey_size' })}</div>}
         </Translation>
       )
     },
@@ -67,7 +67,7 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-sm">{formatDateTime(value)}</div>
+      return <div className="typography-sm">{formatDateTime(value)}</div>
     },
     enableSorting: true,
     enableColumnFilter: true,

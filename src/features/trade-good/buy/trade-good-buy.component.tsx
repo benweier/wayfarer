@@ -70,7 +70,7 @@ export const TradeGoodBuy = ({
       closeable
     >
       <div className="space-y-8">
-        <div className="text-title">
+        <div className="display-lg font-bold">
           {t('market.buy')}: <span className="font-light">{t(good.symbol, { ns: 'spacetraders.trade_good' })}</span>
         </div>
 

@@ -18,11 +18,11 @@ export const ShipResources = ({ ship }: { ship: ShipResponse }) => {
   const canSiphon = waypointQuery.data?.data.type === 'GAS_GIANT'
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed border-zinc-300 px-3 py-9 dark:border-zinc-600">
+    <div className="border-border-primary flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed py-9 px-3">
       <div className="flex gap-2">
         <ShipActions.Survey ship={ship} disabled={!canSurveyExtract}>
           {(props) => (
-            <Button intent="primary" {...props}>
+            <Button intent="success" {...props}>
               {t('ship.action.survey')} {ship.nav.waypointSymbol}
             </Button>
           )}
@@ -30,7 +30,7 @@ export const ShipResources = ({ ship }: { ship: ShipResponse }) => {
 
         <ShipActions.Extract ship={ship} disabled={!canSurveyExtract}>
           {(props) => (
-            <Button intent="confirm" {...props}>
+            <Button intent="info" {...props}>
               {t('ship.action.extract', { context: 'no_survey' })}
             </Button>
           )}

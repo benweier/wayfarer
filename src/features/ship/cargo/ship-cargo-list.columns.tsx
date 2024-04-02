@@ -28,7 +28,9 @@ export const columns = [
       return (
         <>
           <div>{getValue()}</div>
-          <div className="text-secondary whitespace-pre-wrap text-sm">{row.original.item.description}</div>
+          <div className="text-foreground-secondary typography-sm whitespace-pre-wrap">
+            {row.original.item.description}
+          </div>
         </>
       )
     },
@@ -73,7 +75,7 @@ export const columns = [
             <Tooltip.Root>
               <Tooltip.Trigger asChild>
                 <button className="btn btn-icon">
-                  <AppIcon id="help" className="text-secondary size-4" />
+                  <AppIcon id="help" className="text-foreground-secondary size-4" />
                 </button>
               </Tooltip.Trigger>
               <Tooltip.Portal>
@@ -89,7 +91,7 @@ export const columns = [
         const value = getValue()
 
         if (value === undefined) {
-          return <div className="text-secondary text-right text-sm">-</div>
+          return <div className="text-foreground-secondary typography-sm text-right">-</div>
         }
 
         return <div className="text-right">{formatNumber(value)}</div>
@@ -117,7 +119,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return (
@@ -128,7 +130,9 @@ export const columns = [
 
               return (
                 <>
-                  <div className={cx('text-sm', { 'text-secondary': !ctx.Buy || !canBuy })}>{formatNumber(value)}</div>
+                  <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Buy || !canBuy })}>
+                    {formatNumber(value)}
+                  </div>
                   {ctx.Buy && <ctx.Buy good={row.original.trade} disabled={!canBuy} />}
                 </>
               )
@@ -158,7 +162,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-secondary text-right text-sm">-</div>
+        return <div className="text-foreground-secondary typography-sm text-right">-</div>
       }
 
       return (
@@ -169,7 +173,7 @@ export const columns = [
 
               return (
                 <>
-                  <div className={cx('text-sm', { 'text-secondary': !ctx.Sell || !canSell })}>
+                  <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Sell || !canSell })}>
                     {formatNumber(value)}
                   </div>
                   {ctx.Sell && <ctx.Sell good={row.original.trade} disabled={!canSell} />}

@@ -40,7 +40,7 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-sm">{formatNumber(value)}</div>
+      return formatNumber(value)
     },
     minSize: 15,
     maxSize: 15,
@@ -95,7 +95,7 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-bold text-right">{formatNumber(value)}</div>
+      return <div className="text-right">{formatNumber(value)}</div>
     },
     minSize: 20,
     maxSize: 20,

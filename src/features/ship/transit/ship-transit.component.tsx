@@ -14,9 +14,9 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
   return (
     <div className="flex items-start justify-between gap-4">
       <div className="flex flex-col items-start">
-        <div className="text-secondary text-xs uppercase">{t('ship.transit.route')}</div>
+        <div className="text-foreground-secondary typography-xs uppercase">{t('ship.transit.route')}</div>
         <div className="flex items-center gap-2">
-          <div className="text-sm font-medium">
+          <div className="typography-sm font-medium">
             <Link to="/systems/$systemSymbol" params={{ systemSymbol: nav.route.origin.systemSymbol }} className="link">
               {nav.route.origin.systemSymbol}
             </Link>{' '}
@@ -30,11 +30,11 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
             </Link>
           </div>
           <div className="flex flex-row flex-nowrap -space-x-2">
-            <AppIcon id="chevron:right" className="text-secondary size-4" />
-            <AppIcon id="chevron:right" className="text-secondary size-4" />
-            <AppIcon id="chevron:right" className="text-secondary size-4" />
+            <AppIcon id="chevron:right" className="text-foreground-secondary size-4" />
+            <AppIcon id="chevron:right" className="text-foreground-secondary size-4" />
+            <AppIcon id="chevron:right" className="text-foreground-secondary size-4" />
           </div>
-          <div className="text-sm font-medium">
+          <div className="typography-sm font-medium">
             <Link
               to="/systems/$systemSymbol"
               params={{ systemSymbol: nav.route.destination.systemSymbol }}
@@ -58,21 +58,21 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
         <div className="flex items-center gap-1">
           <ShipTransitNavigate
             trigger={(props) => (
-              <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <Button intent="warn" kind="outline" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 {t('ship.action.navigate')}
               </Button>
             )}
           />
           <ShipTransitWarp
             trigger={(props) => (
-              <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <Button intent="warn" kind="outline" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 {t('ship.action.warp')}
               </Button>
             )}
           />
           <ShipTransitJump
             trigger={(props) => (
-              <Button intent="warn" kind="flat" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+              <Button intent="warn" kind="outline" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
                 {t('ship.action.jump')}
               </Button>
             )}

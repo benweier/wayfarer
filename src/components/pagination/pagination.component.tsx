@@ -10,7 +10,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
     <div className="flex gap-2">
       <Button
         key="first"
-        intent="confirm"
+        intent="success"
         kind="outline"
         onClick={() => {
           if (current > 1) onChange(1)
@@ -23,7 +23,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
       </Button>
       <Button
         key="previous"
-        intent="confirm"
+        intent="success"
         kind="outline"
         onClick={() => {
           if (current > 1) onChange(current - 1)
@@ -38,7 +38,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
       {pages.map((page) => (
         <Button
           key={page}
-          intent="primary"
+          intent="info"
           kind={page === current ? 'solid' : 'outline'}
           onClick={() => {
             if (current !== page) onChange(page)
@@ -52,7 +52,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
 
       <Button
         key="next"
-        intent="confirm"
+        intent="success"
         kind="outline"
         onClick={() => {
           if (current < total) onChange(current + 1)
@@ -65,7 +65,7 @@ export const Pagination = ({ current, total, length = 5, onChange }: PaginationP
       </Button>
       <Button
         key="last"
-        intent="confirm"
+        intent="success"
         kind="outline"
         onClick={() => {
           if (current < total) onChange(total)

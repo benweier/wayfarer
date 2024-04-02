@@ -15,7 +15,7 @@ const SubmitPurchase = () => {
   const { isSubmitting, isValid } = useFormState()
 
   return (
-    <Button intent="primary" type="submit" className="uppercase" disabled={isSubmitting || !isValid}>
+    <Button intent="info" type="submit" className="uppercase" disabled={isSubmitting || !isValid}>
       {t('market.sell')}
     </Button>
   )
@@ -28,7 +28,7 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
   return (
     <div className="flex flex-wrap items-center gap-12">
       <div className="[max-width:50%]">
-        <div className="text-secondary text-sm">{t('market.sell_price')}</div>
+        <div className="text-foreground-secondary text-sm">{t('market.sell_price')}</div>
         <div className="truncate text-xl font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
       </div>
     </div>
@@ -60,7 +60,7 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
         label: (
           <div className="flex items-baseline gap-2">
             <span className="font-bold">{ship.symbol}</span>
-            <span className="text-secondary">
+            <span className="text-foreground-secondary">
               ({t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count})
             </span>
           </div>
@@ -68,7 +68,7 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
         option: (
           <div className="flex flex-col">
             <div className="font-semibold">{ship.symbol}</div>
-            <div className="text-secondary text-xs">
+            <div className="text-foreground-secondary typography-xs">
               {t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count}
             </div>
           </div>

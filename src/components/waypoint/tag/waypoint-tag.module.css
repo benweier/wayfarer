@@ -1,0 +1,77 @@
+.waypoint-tag {
+  --waypoint-tag-radius: var(--radius-sm);
+  --waypoint-tag-padding-y: var(--spacing-0);
+  --waypoint-tag-padding-x: var(--spacing-2);
+
+  &[data-waypoint-type='MOON'] {
+    --waypoint-tag-fg: var(--fg-waypoint-moon);
+    --waypoint-tag-bg: var(--bg-waypoint-moon);
+  }
+
+  &[data-waypoint-type='GAS_GIANT'] {
+    --waypoint-tag-fg: var(--fg-waypoint-gas-giant);
+    --waypoint-tag-bg: var(--bg-waypoint-gas-giant);
+  }
+
+  &[data-waypoint-type='NEBULA'] {
+    --waypoint-tag-fg: var(--fg-waypoint-nebula);
+    --waypoint-tag-bg: var(--bg-waypoint-nebula);
+  }
+
+  &[data-waypoint-type='ASTEROID_FIELD'] {
+    --waypoint-tag-fg: var(--fg-waypoint-asteroid-field);
+    --waypoint-tag-bg: var(--bg-waypoint-asteroid-field);
+  }
+
+  &[data-waypoint-type='ASTEROID_BASE'] {
+    --waypoint-tag-fg: var(--fg-waypoint-asteroid-base);
+    --waypoint-tag-bg: var(--bg-waypoint-asteroid-base);
+  }
+
+  &[data-waypoint-type='ASTEROID'] {
+    --waypoint-tag-fg: var(--fg-waypoint-asteroid);
+    --waypoint-tag-bg: var(--bg-waypoint-asteroid);
+  }
+
+  &[data-waypoint-type='ENGINEERED_ASTEROID'] {
+    --waypoint-tag-fg: var(--fg-waypoint-engineered-asteroid);
+    --waypoint-tag-bg: var(--bg-waypoint-engineered-asteroid);
+  }
+
+  &[data-waypoint-type='FUEL_STATION'] {
+    --waypoint-tag-fg: var(--fg-waypoint-fuel-station);
+    --waypoint-tag-bg: var(--bg-waypoint-fuel-station);
+  }
+
+  &[data-waypoint-type='PLANET'] {
+    --waypoint-tag-fg: var(--fg-waypoint-planet);
+    --waypoint-tag-bg: var(--bg-waypoint-planet);
+  }
+
+  &[data-waypoint-type='DEBRIS_FIELD'] {
+    --waypoint-tag-fg: var(--fg-waypoint-debris-field);
+    --waypoint-tag-bg: var(--bg-waypoint-debris-field);
+  }
+
+  &[data-waypoint-type='ORBITAL_STATION'] {
+    --waypoint-tag-fg: var(--fg-waypoint-orbital-station);
+    --waypoint-tag-bg: var(--bg-waypoint-orbital-station);
+  }
+
+  &[data-waypoint-type='JUMP_GATE'] {
+    --waypoint-tag-fg: var(--fg-waypoint-jump-gate);
+    --waypoint-tag-bg: var(--bg-waypoint-jump-gate);
+  }
+
+  &[data-waypoint-type='GRAVITY_WELL'] {
+    --waypoint-tag-fg: var(--fg-waypoint-gravity-well);
+    --waypoint-tag-bg: var(--bg-waypoint-gravity-well);
+  }
+
+  padding: var(--waypoint-tag-padding-y) var(--waypoint-tag-padding-x);
+  font-size: var(--font-size-text-xs);
+  font-weight: bold;
+  color: var(--waypoint-tag-fg);
+  background-color: var(--waypoint-tag-bg);
+  border-radius: var(--waypoint-tag-radius);
+}

@@ -19,7 +19,7 @@ const getShipItem: ShipSelectItemReducer = (ships, ship) => {
     label: (
       <div className="flex items-baseline gap-2">
         <span className="font-bold">{ship.symbol}</span>
-        <span className="text-secondary">
+        <span className="text-foreground-secondary">
           (Cargo: {ship.cargo.units} / {ship.cargo.capacity})
         </span>
       </div>
@@ -27,7 +27,7 @@ const getShipItem: ShipSelectItemReducer = (ships, ship) => {
     option: (
       <div className="flex flex-col">
         <div className="font-bold">{ship.symbol}</div>
-        <div className="text-secondary text-xs">
+        <div className="text-foreground-secondary typography-xs">
           Cargo: {ship.cargo.units} / {ship.cargo.capacity}
         </div>
       </div>
@@ -40,7 +40,7 @@ const TradeGoodBuySubmit = () => {
   const { isSubmitting, isValid } = useFormState()
 
   return (
-    <Button intent="primary" type="submit" className="uppercase" disabled={isSubmitting || !isValid}>
+    <Button intent="info" type="submit" className="uppercase" disabled={isSubmitting || !isValid}>
       {t('market.buy')}
     </Button>
   )
@@ -59,12 +59,12 @@ const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {
           'text-rose-500': quantity * perUnit > credits,
         })}
       >
-        <div className="text-secondary text-sm">{t('market.purchase_price')}</div>
+        <div className="text-foreground-secondary typography-xs">{t('market.purchase_price')}</div>
         <div className="truncate text-xl font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
       </div>
 
       <div>
-        <div className="text-secondary text-sm">{t('market.available_credits')}</div>
+        <div className="text-foreground-secondary typography-xs">{t('market.available_credits')}</div>
         <div className="truncate text-xl font-bold">{formatNumber(credits)}</div>
       </div>
     </div>

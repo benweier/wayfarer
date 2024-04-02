@@ -21,7 +21,7 @@ export const WaypointRoute = () => {
 
   return (
     <div key={waypointSymbol} className="space-y-4 p-4">
-      <h1 className="text-title">
+      <h1 className="display-md font-bold">
         {t('waypoint.label')}: <span className="whitespace-nowrap font-normal">{waypointSymbol}</span>
       </h1>
 

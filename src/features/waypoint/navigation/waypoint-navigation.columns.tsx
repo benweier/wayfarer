@@ -96,8 +96,8 @@ export const columns = [
         )
 
         return (
-          <div className="text-left text-sm">
-            {distance} <span className="text-secondary">({duration}s)</span>
+          <div className="typography-sm text-left">
+            {distance} <span className="text-foreground-secondary">({duration}s)</span>
           </div>
         )
       },

@@ -10,7 +10,7 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
   return (
     <Modal size="xl" closeable trigger={<Modal.Trigger>{trigger}</Modal.Trigger>}>
       <div className="space-y-8">
-        <h3 className="text-title">
+        <h3 className="display-lg font-bold">
           Navigate Ship: <span className="font-normal">{ship.symbol}</span>
         </h3>
 

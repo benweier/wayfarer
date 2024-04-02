@@ -8,7 +8,7 @@ export const SystemFleetEmpty = ({ system }: SystemFleetProps) => {
   const { isAuthenticated } = useAuthStore()
 
   return (
-    <div className="rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
+    <div className="border-border-primary rounded border-2 border-dashed py-9 px-3">
       <div className="text-center">
         <Trans
           i18nKey="system.fleet"

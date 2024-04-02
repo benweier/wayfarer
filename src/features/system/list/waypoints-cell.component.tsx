@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { cx } from 'class-variance-authority'
-import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
+import { WaypointTag } from '@/components/waypoint/tag'
 import { type SystemWaypoint } from '@/types/spacetraders'
 import { chunk } from '@/utilities/chunk.helper'
 
@@ -88,17 +87,19 @@ export const SystemWaypointsCell = ({
                     key={waypoint.symbol}
                     to="/systems/$systemSymbol/waypoint/$waypointSymbol"
                     params={{ systemSymbol, waypointSymbol: waypoint.symbol }}
-                    className={cx(
-                      'flex size-7 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
-                      WAYPOINT_TYPE_STYLES[waypoint.type],
-                    )}
                   >
-                    <span className="text-sm font-medium" aria-hidden>
-                      {waypoint.label}
-                    </span>
-                    <span className="sr-only">
-                      {waypoint.type} {waypoint.symbol}
-                    </span>
+                    <WaypointTag
+                      type={waypoint.type}
+                      className="border-border-primary flex size-7 items-center justify-center border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125"
+                      style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
+                    >
+                      <span className="text-sm font-medium" aria-hidden>
+                        {waypoint.label}
+                      </span>
+                      <span className="sr-only">
+                        {waypoint.type} {waypoint.symbol}
+                      </span>
+                    </WaypointTag>
                   </Link>
                 )
               }
@@ -106,21 +107,19 @@ export const SystemWaypointsCell = ({
               if (waypoint.label === 0) return null
 
               return (
-                <Link
-                  key={waypoint.symbol}
-                  to="/systems/$systemSymbol"
-                  params={{ systemSymbol }}
-                  className={cx(
-                    'flex size-7 items-center justify-center rounded-full border-2 border-zinc-50 transition duration-100 ease-in-out hover:z-0 hover:scale-125 dark:border-zinc-800',
-                    WAYPOINT_TYPE_STYLES[waypoint.type],
-                  )}
-                >
-                  <span className="text-sm font-medium" aria-hidden>
-                    {waypoint.label}
-                  </span>
-                  <span className="sr-only">
-                    {waypoint.label} {waypoint.symbol}
-                  </span>
+                <Link key={waypoint.symbol} to="/systems/$systemSymbol" params={{ systemSymbol }}>
+                  <WaypointTag
+                    type="ASTEROID"
+                    className="border-border-primary flex size-7 items-center justify-center border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125"
+                    style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
+                  >
+                    <span className="text-sm font-medium" aria-hidden>
+                      {waypoint.label}
+                    </span>
+                    <span className="sr-only">
+                      {waypoint.type} {waypoint.symbol}
+                    </span>
+                  </WaypointTag>
                 </Link>
               )
             })}

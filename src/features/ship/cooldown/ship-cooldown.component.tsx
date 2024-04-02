@@ -9,7 +9,7 @@ export const ShipCooldown = ({ ship }: { ship: ShipResponse }) => {
 
   return (
     <div className="flex flex-col gap-1 ">
-      <div className="text-secondary flex justify-between text-sm">
+      <div className="text-foreground-secondary typography-sm flex justify-between">
         <div>{remainingSeconds > 0 ? t('ship.cooldown.active') : t('ship.cooldown.inactive')}</div>
         <div>{remainingSeconds > 0 && `${remainingSeconds}s left`}</div>
       </div>
