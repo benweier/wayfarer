@@ -1,0 +1,53 @@
+.tabs-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-spacing-4);
+}
+
+.tabs-list {
+  display: flex;
+  flex-shrink: 0;
+  border: 1px solid var(--u-border-primary);
+  border-radius: var(--radius-lg);
+}
+
+.tabs-trigger {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: var(--u-spacing-2) var(--u-spacing-3);
+  color: var(--tabs-trigger-fg);
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--tabs-trigger-bg);
+  outline: none;
+
+  &:focus {
+    z-index: var(--z-10);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--tabs-trigger-focus-ring) 32%, var(--u-color-transparent));
+  }
+
+  &:first-of-type {
+    border-top-left-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
+  }
+
+  &:last-of-type {
+    border-top-right-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
+  }
+
+  &:disabled {
+    color: var(--tabs-trigger-fg-disabled);
+    cursor: default;
+    background-color: var(--tabs-trigger-bg-disabled);
+  }
+
+  /* @apply ring-blue-400/50 ring-offset-2 ring-offset-blue-400 focus:ring-2 focus:outline-none; */
+
+  /* @apply bg-zinc-100 text-zinc-600 hover:bg-zinc-100/50 dark:bg-zinc-900/50 dark:text-zinc-300 dark:hover:bg-zinc-700/25; */
+}
+
+.tabs-content {
+  /* this space intentionally left blank */
+}

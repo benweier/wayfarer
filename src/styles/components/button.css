@@ -1,0 +1,104 @@
+.btn {
+  --button-radius: var(--radius-md);
+  --button-focus-ring-width: 3px;
+
+  padding: var(--button-padding-y) var(--button-padding-x);
+  font-size: var(--button-font-size);
+  font-weight: 800;
+  line-height: var(--button-line-height);
+  color: var(--button-fg);
+  appearance: none;
+  cursor: pointer;
+  background-color: var(--button-bg);
+  border: 1px solid var(--button-border);
+  border-radius: var(--button-radius);
+  outline: none;
+
+  &:hover {
+    background-color: var(--button-bg-hover);
+    border-color: var(--button-border-hover);
+  }
+
+  &:focus {
+    border-color: var(--button-border-focus);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--button-focus-ring) var(--button-focus-ring-mix), var(--u-color-transparent));
+  }
+
+  &:active {
+    background-color: var(--button-bg-active);
+  }
+
+  &:disabled {
+    color: var(--button-fg-disabled);
+    cursor: default;
+    background-color: var(--button-bg-disabled);
+    border-color: var(--button-border-disabled);
+  }
+}
+
+.btn-xs {
+  --button-padding-y: var(--u-spacing-0-5);
+  --button-padding-x: var(--u-spacing-2);
+  --button-font-size: var(--u-font-size-text-sm);
+  --button-line-height: var(--u-line-height-text-sm);
+}
+
+.btn-sm {
+  --button-padding-y: var(--u-spacing-1);
+  --button-padding-x: var(--u-spacing-3);
+  --button-font-size: var(--u-font-size-text-xs);
+  --button-line-height: var(--u-line-height-text-xs);
+  --button-radius: var(--radius-sm);
+}
+
+.btn-md {
+  --button-padding-y: var(--u-spacing-2-5);
+  --button-padding-x: var(--u-spacing-4);
+  --button-font-size: var(--u-font-size-text-base);
+  --button-line-height: var(--u-line-height-text-base);
+}
+
+.btn-lg {
+  --button-padding-y: var(--u-spacing-3);
+  --button-padding-x: var(--u-spacing-5);
+  --button-font-size: var(--u-font-size-text-lg);
+  --button-line-height: var(--u-line-height-text-lg);
+}
+
+.btn-xl {
+  --button-padding-y: var(--u-spacing-4);
+  --button-padding-x: var(--u-spacing-6);
+  --button-font-size: var(--u-font-size-text-lg);
+  --button-line-height: var(--u-line-height-text-lg);
+}
+
+.btn-icon {
+  --button-padding-y: var(--u-spacing-1-5);
+  --button-padding-x: var(--u-spacing-1-5);
+  --button-font-size: var(--u-font-size-text-base);
+  --button-line-height: var(--u-line-height-text-base);
+  --button-radius: var(--radius-md);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-adornment {
+  display: flex;
+  gap: var(--u-spacing-2);
+  align-items: center;
+
+  & > .adornment-start {
+    display: flex;
+    align-items: center;
+    margin-left: -2px;
+  }
+
+  & > .adornment-end {
+    display: flex;
+    align-items: center;
+    margin-right: -2px;
+  }
+}

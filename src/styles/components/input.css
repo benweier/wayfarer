@@ -1,0 +1,72 @@
+.label {
+  display: block;
+  margin-bottom: var(--spacing-1);
+  font-size: var(--font-size-text-sm);
+  font-weight: 600;
+  color: var(--u-fg-secondary);
+}
+
+.input,
+.select {
+  --input-padding-y: var(--u-spacing-2);
+  --input-padding-x: var(--u-spacing-3);
+  --input-radius: var(--radius-md);
+  --input-focus-ring-width: 3px;
+  --input-focus-ring-color: var(--u-border-brand);
+  --input-font-size: var(--u-font-size-text-base);
+  --input-line-height: var(--u-line-height-text-base);
+  --input-fg-color: var(--u-fg-primary);
+  --input-fg-color-disabled: var(--u-fg-quinary);
+  --input-fg-color-placeholder: var(--u-fg-quaternary);
+  --input-bg-color: var(--u-bg-primary);
+  --input-bg-color-read-only: var(--u-bg-secondary);
+  --input-bg-color-disabled: var(--u-bg-disabled-subtle);
+  --input-border-color: var(--u-border-primary);
+  --input-border-color-hover: var(--u-border-brand);
+  --input-border-color-focus: var(--u-border-brand);
+
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  font-size: var(--input-font-size);
+  line-height: var(--input-line-height);
+  color: var(--input-fg-color);
+  text-align: left;
+  appearance: none;
+  background-color: var(--input-bg-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--input-radius);
+  outline: none;
+
+  &:hover:not(:disabled) {
+    border-color: var(--input-border-color-hover);
+  }
+
+  &:focus:not(:disabled) {
+    border-color: var(--input-border-color-focus);
+    box-shadow: 0 0 0 var(--input-focus-ring-width)
+      color-mix(in srgb, var(--input-focus-ring-color) 24%, var(--u-color-transparent));
+  }
+
+  &:not(button):read-only {
+    cursor: default;
+    background-color: var(--input-bg-color-read-only);
+  }
+
+  &:disabled {
+    color: var(--input-fg-color-disabled);
+    cursor: not-allowed;
+    background-color: var(--input-bg-color-disabled);
+  }
+
+  &::placeholder {
+    color: var(--input-fg-color-placeholder);
+  }
+
+  > .select-placeholder {
+    display: flex;
+    align-items: center;
+    height: 1.25rem;
+  }
+}
