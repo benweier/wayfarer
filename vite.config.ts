@@ -13,10 +13,12 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   build: {
     sourcemap: true,
+    cssCodeSplit: false,
     cssMinify: 'lightningcss',
     modulePreload: { polyfill: false },
     rollupOptions: {
       output: {
+        chunkFileNames: '[hash:12].js',
         manualChunks: {
           react: ['react', 'react-dom'],
           core: ['@tanstack/react-router', '@tanstack/react-query', '@sentry/react'],
