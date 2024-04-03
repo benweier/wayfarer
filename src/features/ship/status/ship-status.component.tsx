@@ -5,6 +5,7 @@ import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
+import { WaypointTraits } from '@/config/spacetraders'
 import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
@@ -100,7 +101,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             {(ctx) => (
               <ShipActions.Refuel
                 ship={ship}
-                disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, ['MARKETPLACE'])}
+                disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, [WaypointTraits.Marketplace])}
               >
                 {(props) => (
                   <Button intent="info" kind="outline" size="small" {...props}>
@@ -148,7 +149,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             {(ctx) => (
               <ShipActions.Repair
                 ship={ship}
-                disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, ['SHIPYARD'])}
+                disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, [WaypointTraits.Shipyard])}
               >
                 {(props) => (
                   <Button intent="success" kind="outline" size="small" {...props}>

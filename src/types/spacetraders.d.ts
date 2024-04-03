@@ -1,3 +1,5 @@
+import { type WaypointTraits, type WaypointTypes } from '@/config/spacetraders'
+
 type StatusResponse = {
   status: string
   version: string
@@ -253,7 +255,7 @@ export type WaypointFaction = {
 }
 
 export type WaypointTrait = {
-  symbol: string
+  symbol: WaypointTraits
   name: string
   description: string
 }
@@ -266,7 +268,7 @@ export type WaypointModifier = {
 
 export type WaypointResponse = {
   symbol: string
-  type: string
+  type: WaypointTypes
   systemSymbol: string
   x: number
   y: number

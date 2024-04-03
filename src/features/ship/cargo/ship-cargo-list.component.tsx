@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { Trans, useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
+import { WaypointTraits } from '@/config/spacetraders'
 import { useShipResponse } from '@/context/ship.context'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
@@ -21,7 +22,7 @@ export const ShipCargoList = () => {
       waypointSymbol: ship.nav.waypointSymbol,
     }),
   )
-  const hasMarketplace = waypoint.isSuccess && hasTrait(waypoint.data.data.traits, ['MARKETPLACE'])
+  const hasMarketplace = waypoint.isSuccess && hasTrait(waypoint.data.data.traits, [WaypointTraits.Marketplace])
   const { data, isSuccess } = useQuery({
     ...getWaypointMarketQuery({
       systemSymbol: ship.nav.systemSymbol,

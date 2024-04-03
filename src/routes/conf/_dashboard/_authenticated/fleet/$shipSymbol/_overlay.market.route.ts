@@ -1,4 +1,5 @@
 import { createFileRoute, defer, redirect } from '@tanstack/react-router'
+import { WaypointTraits } from '@/config/spacetraders'
 import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
 import { getShipByIdQuery, getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
 
@@ -12,7 +13,7 @@ export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymb
       }),
     )
 
-    if (!hasTrait(waypoint.data.traits, ['MARKETPLACE'])) {
+    if (!hasTrait(waypoint.data.traits, [WaypointTraits.Marketplace])) {
       throw redirect({
         to: '/fleet/$shipSymbol',
         params: { shipSymbol: ship.data.symbol },

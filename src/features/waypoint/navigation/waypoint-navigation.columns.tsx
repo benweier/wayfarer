@@ -6,11 +6,12 @@ import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
+import { WaypointTraits } from '@/config/spacetraders'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { type WaypointNavigationTableSchema } from './waypoint-navigation.types'
 
-const FILTER_TRAITS = ['MARKETPLACE', 'SHIPYARD', 'STRIPPED']
+const FILTER_TRAITS = [WaypointTraits.Marketplace, WaypointTraits.Shipyard, WaypointTraits.Stripped]
 const columnHelper = createColumnHelper<WaypointNavigationTableSchema>()
 
 export const columns = [
@@ -162,7 +163,7 @@ export const columns = [
     },
     cell: ({ getValue }) => {
       const traits = getValue().filter((trait) => {
-        return FILTER_TRAITS.includes(trait.symbol)
+        return FILTER_TRAITS.some((symbol) => symbol === trait.symbol)
       })
 
       return (

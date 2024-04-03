@@ -7,9 +7,15 @@ import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
+import { WaypointTraits } from '@/config/spacetraders'
 import { type WaypointListTableSchema } from './waypoint-list.types'
 
-const FILTERED_TRAITS = new Set(['UNCHARTED', 'MARKETPLACE', 'SHIPYARD', 'STRIPPED'])
+const FILTERED_TRAITS = new Set<WaypointTraits>([
+  WaypointTraits.Uncharted,
+  WaypointTraits.Marketplace,
+  WaypointTraits.Shipyard,
+  WaypointTraits.Stripped,
+])
 const columnHelper = createColumnHelper<WaypointListTableSchema>()
 
 export const columns = [

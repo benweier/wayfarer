@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Tabs from '@/components/tabs'
+import { WaypointTraits, WaypointTypes } from '@/config/spacetraders'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { WaypointFleetError, WaypointFleetFallback, WaypointFleetList } from '@/features/waypoint/fleet'
 import { WaypointJumpGateError, WaypointJumpGateFallback } from '@/features/waypoint/jumpgate'
@@ -21,9 +22,9 @@ const { WaypointJumpGateList } = dynamic(() => import('@/features/waypoint/jumpg
 export const WaypointTabs = () => {
   const { t } = useTranslation()
   const waypoint = useWaypointResponse()
-  const isJumpGate = waypoint.type === 'JUMP_GATE'
-  const hasMarket = hasTrait(waypoint.traits, ['MARKETPLACE'])
-  const hasShipyard = hasTrait(waypoint.traits, ['SHIPYARD'])
+  const isJumpGate = waypoint.type === WaypointTypes.JumpGate
+  const hasMarket = hasTrait(waypoint.traits, [WaypointTraits.Marketplace])
+  const hasShipyard = hasTrait(waypoint.traits, [WaypointTraits.Shipyard])
 
   return (
     <Tabs.Root defaultValue={hasMarket ? 'marketplace' : 'fleet'}>

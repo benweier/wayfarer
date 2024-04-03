@@ -3,6 +3,8 @@ import { type TFunction } from 'i18next'
 import type React from 'react'
 
 declare global {
+  type Values<T> = T[keyof T]
+
   type MetaObject =
     | {
         title: string
