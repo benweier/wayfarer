@@ -134,7 +134,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
             <div className="flex-1">
               <div className="flex items-center justify-center bg-blue-700 py-4">
                 <Link to="/">
-                  <div className="text-title text-center text-white">
+                  <div className="display-md text-center font-black text-white">
                     W<span className="hidden @[220px]:inline">ayfarer</span>
                   </div>
                 </Link>
