@@ -9,7 +9,7 @@ export const ShipLoadoutItem = ({ name, description, action, children }: PropsWi
           <div className="font-semibold">{name}</div>
           {action && <div>{action}</div>}
         </div>
-        <div className="text-secondary text-sm">{description}</div>
+        <div className="text-foreground-secondary typography-sm">{description}</div>
       </div>
       {children && <div className="bg-background-secondary rounded p-2">{children}</div>}
     </div>

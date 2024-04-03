@@ -11,7 +11,7 @@ const Close = () => {
 
   return (
     <button
-      className="h-full w-full border-t border-zinc-300 p-3 text-center text-xs text-zinc-700 hover:bg-zinc-200/50 focus:bg-zinc-200/30 focus:outline-none dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700/50 dark:focus:bg-zinc-700/50"
+      className="typography-xs h-full w-full border-t border-zinc-300 p-3 text-center text-zinc-700 hover:bg-zinc-200/50 focus:bg-zinc-200/30 focus:outline-none dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700/50 dark:focus:bg-zinc-700/50"
       onClick={closeModal}
     >
       CLOSE

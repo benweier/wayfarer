@@ -26,21 +26,21 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
                 <ShipIcon id="modules" className="size-5 text-lime-500" />
                 <div>{ship.frame.moduleSlots}</div>
               </div>
-              <div className="text-secondary text-xs uppercase">{t('ship.loadout.module_slots')}</div>
+              <div className="text-secondary typography-xs uppercase">{t('ship.loadout.module_slots')}</div>
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <ShipIcon id="mounts" className="size-5 text-orange-500" />
                 <div>{ship.frame.mountingPoints}</div>
               </div>
-              <div className="text-secondary text-xs uppercase">{t('ship.loadout.mounting_points')}</div>
+              <div className="text-secondary typography-xs uppercase">{t('ship.loadout.mounting_points')}</div>
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="size-5 text-indigo-500" />
                 <div>{ship.frame.requirements.power}</div>
               </div>
-              <div className="text-secondary text-xs uppercase">{t('ship.loadout.power_required')}</div>
+              <div className="text-secondary typography-xs uppercase">{t('ship.loadout.power_required')}</div>
             </div>
           </div>
         </div>

@@ -26,7 +26,7 @@ export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
       }
     >
       <div className="grid gap-4">
-        <div className="text-lg font-bold">
+        <div className="typography-lg font-bold">
           Waypoints <span className="font-light">({waypoints.length})</span>
         </div>
 

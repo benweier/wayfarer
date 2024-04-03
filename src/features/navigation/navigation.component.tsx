@@ -38,7 +38,7 @@ export const Navigation = () => {
             <div>
               <MenuIcon id={item.icon} className="size-5 text-blue-100" aria-hidden />
             </div>
-            <span className="sr-only text-sm @[220px]/side:not-sr-only">{t(item.key)}</span>
+            <span className="typography-sm sr-only @[220px]/side:not-sr-only">{t(item.key)}</span>
           </Link>
         )
       })}

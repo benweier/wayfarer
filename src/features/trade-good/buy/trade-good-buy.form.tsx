@@ -60,12 +60,12 @@ const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {
         })}
       >
         <div className="text-foreground-secondary typography-xs">{t('market.purchase_price')}</div>
-        <div className="truncate text-xl font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
+        <div className="typography-xl truncate font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
       </div>
 
       <div>
         <div className="text-foreground-secondary typography-xs">{t('market.available_credits')}</div>
-        <div className="truncate text-xl font-bold">{formatNumber(credits)}</div>
+        <div className="typography-xl truncate font-bold">{formatNumber(credits)}</div>
       </div>
     </div>
   )

@@ -39,7 +39,7 @@ export const columns = [
 
       return (
         <div className="flex items-center gap-4">
-          <Link to="/fleet/$shipSymbol" params={{ shipSymbol: symbol }} className="link text-xl">
+          <Link to="/fleet/$shipSymbol" params={{ shipSymbol: symbol }} className="link typography-lg font-bold">
             {symbol}
           </Link>
           <Badge>
@@ -155,7 +155,7 @@ export const columns = [
         <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="fuel" className="text-foreground-fuel size-4" />
-            <div className="text-sm font-semibold">
+            <div className="typography-sm font-semibold">
               {fuel.capacity === 0 ? (
                 <AppIcon id="infinity" className="size-5" aria-label="Infinite" />
               ) : (
@@ -210,7 +210,7 @@ export const columns = [
         <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="cargo" className="size-4 text-fuchsia-500" />
-            <div className="text-sm font-semibold">
+            <div className="typography-sm font-semibold">
               {cargo.units} / {cargo.capacity}
             </div>
           </div>

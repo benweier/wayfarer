@@ -93,7 +93,7 @@ export const SystemWaypointsCell = ({
                       className="border-border-primary flex size-7 items-center justify-center border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125"
                       style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
                     >
-                      <span className="text-sm font-medium" aria-hidden>
+                      <span className="typography-sm font-medium" aria-hidden>
                         {waypoint.label}
                       </span>
                       <span className="sr-only">
@@ -113,7 +113,7 @@ export const SystemWaypointsCell = ({
                     className="border-border-primary flex size-7 items-center justify-center border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125"
                     style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
                   >
-                    <span className="text-sm font-medium" aria-hidden>
+                    <span className="typography-sm font-medium" aria-hidden>
                       {waypoint.label}
                     </span>
                     <span className="sr-only">

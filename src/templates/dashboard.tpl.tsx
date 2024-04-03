@@ -28,7 +28,7 @@ const Logout = () => {
       <div className="size-6">
         <MenuIcon id="logout" className="size-6 text-rose-100" aria-hidden />
       </div>
-      <span className="sr-only text-sm @[220px]/side:not-sr-only">{t('auth.logout', { context: 'action' })}</span>
+      <span className="typography-sm sr-only @[220px]/side:not-sr-only">{t('auth.logout', { context: 'action' })}</span>
     </Link>
   )
 }
@@ -91,7 +91,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                 <div className="pt-6 pb-4">
                   <div className="flex-shrink-0 flex items-center px-4">
                     <Link to="/">
-                      <Wayfarer className="text-lg text-white" />
+                      <Wayfarer className="typography-lg text-white" />
                     </Link>
                   </div>
                   <nav aria-label="Sidebar" className="mt-5">
@@ -100,7 +100,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                         <Link
                           key={item.key}
                           to={item.to}
-                          className="group flex items-center rounded-md p-2 text-base font-medium text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 [&.active]:bg-blue-500 [&.active]:text-white"
+                          className="group typography-base flex items-center rounded-md p-2 font-medium text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 [&.active]:bg-blue-500 [&.active]:text-white"
                         >
                           <MenuIcon
                             id={item.icon}
@@ -161,7 +161,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                   <div className="size-6">
                     <MenuIcon id="login" className="size-6 text-emerald-100" aria-hidden />
                   </div>
-                  <span className="sr-only text-sm @[220px]/side:not-sr-only">
+                  <span className="typography-sm sr-only @[220px]/side:not-sr-only">
                     {t('auth.login', { context: 'action' })}
                   </span>
                 </Link>
@@ -177,7 +177,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
           <div className="flex items-center justify-between bg-blue-600 py-2 px-4 sm:px-6 lg:px-8">
             <div>
               <Link to="/">
-                <Wayfarer className="text-lg" />
+                <Wayfarer className="typography-lg" />
               </Link>
             </div>
             <div>
@@ -240,11 +240,11 @@ const Agent = () => {
 
   return (
     <div>
-      <div className="text-right text-xl font-black">{agent.symbol}</div>
-      <div className="text-right text-sm">
+      <div className="typography-xl text-right font-black">{agent.symbol}</div>
+      <div className="typography-sm text-right">
         Credits: <span className="font-bold">{formatNumber(agent.credits)}</span>
       </div>
-      <div className="text-right text-sm">
+      <div className="typography-sm text-right">
         HQ:{' '}
         <span className="font-semibold">
           <Link
@@ -259,10 +259,10 @@ const Agent = () => {
           </Link>
         </span>
       </div>
-      <div className="text-right text-sm">
+      <div className="typography-sm text-right">
         Faction: <span className="font-semibold">{agent.startingFaction}</span>
       </div>
-      <div className="text-right text-sm">
+      <div className="typography-sm text-right">
         Ship Count: <span className="font-semibold">{agent.shipCount}</span>
       </div>
     </div>

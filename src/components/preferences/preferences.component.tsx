@@ -30,7 +30,7 @@ export const Preferences = () => {
             <div className="size-6 text-blue-100">
               <MenuIcon id="settings" className={cx('size-6', { 'animate-spin': open })} aria-hidden />
             </div>
-            <span className="sr-only flex flex-col items-start justify-start text-sm @[220px]/side:not-sr-only">
+            <span className="typography-sm sr-only flex flex-col items-start justify-start @[220px]/side:not-sr-only">
               {t('preferences.label')}
             </span>
           </Popover.Button>

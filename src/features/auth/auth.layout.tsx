@@ -17,7 +17,7 @@ const SpaceTradersStatus = () => {
 
   return (
     <>
-      <span className="text-sm">Status:</span>
+      <span className="typography-sm">Status:</span>
       <div
         className={cx({
           'text-foreground-success-secondary': status === 'online',
