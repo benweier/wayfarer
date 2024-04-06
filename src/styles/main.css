@@ -4,6 +4,7 @@
 @import url('./components/input.css') layer(components);
 @import url('./components/button.css') layer(components);
 @import url('./components/tabs.css') layer(components);
+@import url('./components/toggle-group.css') layer(components);
 @import url('./components/typography.css') layer(utilities);
 
 @keyframes loader {
