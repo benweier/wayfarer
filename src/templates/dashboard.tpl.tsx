@@ -217,7 +217,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
 
           {/* Secondary column (hidden on smaller screens) */}
           <aside className="lg:flex-shrink-0 hidden lg:block">
-            <div className="relative flex h-full flex-col overflow-y-auto border-zinc-200 bg-zinc-100 backdrop-blur-lg lg:w-64 2xl:w-96 dark:bg-zinc-950/20">
+            <div className="bg-background-secondary relative flex h-full flex-col overflow-y-auto backdrop-blur-lg lg:w-64 2xl:w-96">
               {isAuthenticated && (
                 <div className="p-4">
                   <Agent />
