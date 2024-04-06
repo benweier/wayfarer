@@ -5,6 +5,7 @@ import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import { Sidebar } from './sidebar.component'
+import { Theme } from './theme.component'
 
 export const Preferences = () => {
   const { t } = useTranslation()
@@ -50,8 +51,9 @@ export const Preferences = () => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-4"
             >
-              <Popover.Panel className="bg-background-primary/75 ring-border-primary/20 relative z-50 w-screen max-w-xs origin-bottom-left overflow-y-auto rounded-lg p-4 ring-3 backdrop-blur-lg">
+              <Popover.Panel className="bg-background-primary/80 ring-border-primary/20 relative z-50 origin-bottom-left overflow-y-auto rounded-lg p-5 ring-3 backdrop-blur-lg">
                 <div className="flex flex-col gap-4">
+                  <Theme />
                   <Sidebar />
                 </div>
               </Popover.Panel>
