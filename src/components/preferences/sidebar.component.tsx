@@ -1,34 +1,39 @@
-import { RadioGroup } from '@headlessui/react'
-import { cx } from 'class-variance-authority'
 import { useAtom } from 'jotai'
 import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
-import { sidebarAtom } from '@/store/atoms/sidebar'
+import * as ToggleGroup from '@/components/toggle-group'
+import { type SidebarState, sidebarAtom } from '@/store/atoms/sidebar'
 
 export const Sidebar = () => {
   const { t } = useTranslation()
   const [sidebarState, setSidebarState] = useAtom(sidebarAtom)
 
   return (
-    <RadioGroup value={sidebarState} onChange={setSidebarState} className="flex flex-col gap-4">
-      <RadioGroup.Label className="typography-sm font-bold">{t('preferences.menu')}</RadioGroup.Label>
-      <div className="grid grid-cols-2 gap-2">
-        {[
-          { key: 'preferences.collapse', value: 'collapsed', icon: 'menu:collapse' },
-          { key: 'preferences.expand', value: 'expanded', icon: 'menu:expand' },
-        ].map((item) => (
-          <RadioGroup.Option
-            key={item.value}
-            value={item.value}
-            className={({ checked }) => cx('btn', { 'btn-primary btn-outline': checked })}
-          >
-            <div className={cx('flex w-full flex-col items-center justify-between gap-1')}>
-              <MenuIcon id={item.icon} className="size-5" aria-hidden />
-              <RadioGroup.Label className="typography-sm font-semibold">{t(item.key)}</RadioGroup.Label>
-            </div>
-          </RadioGroup.Option>
-        ))}
-      </div>
-    </RadioGroup>
+    <div>
+      <label className="label" id="preferences.sidebar">
+        {t('preferences.menu')}
+      </label>
+      <ToggleGroup.Root
+        type="single"
+        value={sidebarState}
+        aria-labelledby="preferences.sidebar"
+        onValueChange={(value: SidebarState) => {
+          if (value) void setSidebarState(value)
+        }}
+      >
+        <ToggleGroup.Item value="collapsed">
+          <div className="typography-sm flex w-full items-center justify-between gap-2 font-semibold">
+            <MenuIcon id="menu:collapse" className="size-4" aria-hidden />
+            {t('preferences.collapse')}
+          </div>
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="expanded">
+          <div className="typography-sm flex w-full items-center justify-between gap-2 font-semibold">
+            <MenuIcon id="menu:expand" className="size-4" aria-hidden />
+            {t('preferences.expand')}
+          </div>
+        </ToggleGroup.Item>
+      </ToggleGroup.Root>
+    </div>
   )
 }
