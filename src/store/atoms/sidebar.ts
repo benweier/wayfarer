@@ -1,6 +1,6 @@
 import { atomWithStorage } from 'jotai/utils'
 
-type SidebarState = 'collapsed' | 'expanded'
+export type SidebarState = 'collapsed' | 'expanded'
 
 const SIDEBAR_STORAGE_KEY = 'sidebar'
 

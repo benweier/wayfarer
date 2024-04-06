@@ -1,6 +1,6 @@
 import { atomWithStorage } from 'jotai/utils'
 
-type ThemeState = 'system' | 'light' | 'dark'
+export type ThemeState = 'system' | 'light' | 'dark'
 
 const THEME_STORAGE_KEY = 'theme'
 
