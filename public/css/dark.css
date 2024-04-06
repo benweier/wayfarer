@@ -320,9 +320,9 @@
   }
 
   .toggle-group-item {
-    --toggle-group-item-bg: var(--u-bg-secondary);
-    --toggle-group-item-bg-hover: var(--u-bg-secondary-hover);
-    --toggle-group-item-bg-active: var(--u-bg-quaternary);
+    --toggle-group-item-bg: var(--u-bg-primary);
+    --toggle-group-item-bg-hover: var(--u-bg-primary-hover);
+    --toggle-group-item-bg-active: var(--u-bg-secondary);
     --toggle-group-item-bg-disabled: var(--u-bg-disabled);
     --toggle-group-item-fg: var(--u-fg-primary);
     --toggle-group-item-fg-disabled: var(--u-fg-disabled);
