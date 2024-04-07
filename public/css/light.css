@@ -372,14 +372,14 @@
   .toggle-group-item {
     --toggle-group-item-bg: var(--u-bg-primary);
     --toggle-group-item-bg-hover: var(--u-bg-primary-hover);
-    --toggle-group-item-bg-active: var(--u-bg-secondary);
+    --toggle-group-item-bg-selected: var(--u-bg-tertiary);
     --toggle-group-item-bg-disabled: var(--u-bg-disabled);
     --toggle-group-item-fg: var(--u-fg-primary);
     --toggle-group-item-fg-disabled: var(--u-fg-disabled);
     --toggle-group-item-border: var(--u-color-transparent);
     --toggle-group-item-border-disabled: var(--u-color-transparent);
     --toggle-group-item-focus-ring: var(--u-border-info);
-    --toggle-group-item-focus-ring-mix: 44%;
+    --toggle-group-item-focus-ring-mix: 64%;
     --toggle-group-item-radius: var(--radius-md);
     --toggle-group-item-focus-ring-width: 3px;
     --toggle-group-item-padding-y: var(--u-spacing-3);

@@ -51,7 +51,7 @@
 
   &:active,
   &[data-state='on'] {
-    background-color: var(--toggle-group-item-bg-active);
+    background-color: var(--toggle-group-item-bg-selected);
   }
 
   &:disabled {
