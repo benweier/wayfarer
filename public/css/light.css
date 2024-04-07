@@ -357,12 +357,9 @@
     --tabs-trigger-bg-disabled: var(--u-bg-primary);
     --tabs-trigger-bg-hover: var(--u-bg-primary-hover);
     --tabs-trigger-focus-ring: var(--u-border-brand);
-
-    &[data-state='active'] {
-      --tabs-trigger-fg: var(--u-fg-primary);
-      --tabs-trigger-bg: var(--u-bg-tertiary);
-      --tabs-trigger-bg-hover: var(--u-bg-secondary-subtle);
-    }
+    --tabs-trigger-fg-selected: var(--u-fg-primary);
+    --tabs-trigger-bg-selected: var(--u-bg-tertiary);
+    --tabs-trigger-bg-selected-hover: var(--u-bg-secondary-subtle);
   }
 
   .toggle-group {

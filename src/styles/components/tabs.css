@@ -22,6 +22,10 @@
   background-color: var(--tabs-trigger-bg);
   outline: none;
 
+  &:hover {
+    background-color: var(--tabs-trigger-bg-hover);
+  }
+
   &:focus {
     z-index: var(--z-10);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--tabs-trigger-focus-ring) 32%, var(--u-color-transparent));
@@ -35,6 +39,15 @@
   &:last-of-type {
     border-top-right-radius: var(--radius-lg);
     border-bottom-right-radius: var(--radius-lg);
+  }
+
+  &[data-state='active'] {
+    color: var(--tabs-trigger-fg-selected);
+    background-color: var(--tabs-trigger-bg-selected);
+
+    &:hover {
+      background-color: var(--tabs-trigger-bg-selected-hover);
+    }
   }
 
   &:disabled {
