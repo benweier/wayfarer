@@ -46,8 +46,11 @@
   /* Background */
   --u-bg-primary: var(--u-color-white);
   --u-bg-primary-hover: var(--u-color-neutral-50);
+  --u-bg-primary-solid: var(--u-color-neutral-950);
   --u-bg-secondary: var(--u-color-neutral-50);
   --u-bg-secondary-hover: var(--u-color-neutral-100);
+  --u-bg-secondary-subtle: var(--u-color-neutral-25);
+  --u-bg-secondary-solid: var(--u-color-neutral-600);
   --u-bg-tertiary: var(--u-color-neutral-100);
   --u-bg-quaternary: var(--u-color-neutral-200);
   --u-bg-active: var(--u-color-neutral-50);
