@@ -281,9 +281,9 @@
     }
 
     &.btn-outline {
-      --button-bg: color-mix(in srgb, var(--u-color-neutral-900));
-      --button-bg-hover: color-mix(in srgb, var(--u-color-neutral-800));
-      --button-bg-active: color-mix(in srgb, var(--u-color-neutral-900));
+      --button-bg: var(--u-color-neutral-900);
+      --button-bg-hover: var(--u-color-neutral-800);
+      --button-bg-active: var(--u-color-neutral-900);
       --button-bg-disabled: var(--u-bg-disabled);
       --button-fg: var(--u-color-neutral-300);
       --button-fg-hover: var(--u-color-neutral-100);
