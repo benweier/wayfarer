@@ -63,10 +63,4 @@
   &::placeholder {
     color: var(--input-fg-placeholder);
   }
-
-  > .select-placeholder {
-    display: flex;
-    align-items: center;
-    height: 1.25rem;
-  }
 }
