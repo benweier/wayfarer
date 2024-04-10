@@ -28,7 +28,7 @@ export const WaypointTypeFilter = ({
       })
     },
   })
-  const options = Array.from(facets.keys()).sort()
+  const options = Array.from(facets.keys()).toSorted()
 
   return (
     <Listbox
@@ -41,7 +41,7 @@ export const WaypointTypeFilter = ({
       multiple
     >
       <Listbox.Button as={Fragment}>
-        <Button intent={values.length > 0 ? 'info' : 'neutral'} kind="flat" icon ref={refs.setReference}>
+        <Button intent={values.length > 0 ? 'info' : 'neutral'} kind="outline" icon ref={refs.setReference}>
           <span className="sr-only">Filter Types</span>
           <AppIcon id="filter" className="size-4" aria-hidden="true" />
         </Button>
