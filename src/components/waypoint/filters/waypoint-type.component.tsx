@@ -28,7 +28,7 @@ export const WaypointTypeFilter = ({
       })
     },
   })
-  const options = Array.from(facets.keys()).toSorted()
+  const options = Array.from(facets.keys()).toSorted((a, b) => a.localeCompare(b))
 
   return (
     <Listbox
