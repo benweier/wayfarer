@@ -9,6 +9,7 @@ import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
 import { createAgentMutation } from '@/services/api/spacetraders/auth'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
+import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { AccessTokenDialog } from './access-token-dialog.component'
 import { FactionInfo } from './faction-info.component'
 import { RegisterSchema } from './register.schema'
@@ -16,38 +17,49 @@ import { RegisterSchema } from './register.schema'
 const FactionField = () => {
   const { t } = useTranslation()
   const methods = useFormContext<RegisterSchema>()
-  const { isSuccess, isPending, data } = useQuery(getFactionListQuery())
-
-  if (isPending) {
-    return <Select.Skeleton label={<label className="label">{t('faction.label')}</label>} />
-  }
-
-  if (!isSuccess) return null
-
-  const factions = data.data
-    .map((faction) => ({
-      id: faction.symbol,
-      name: faction.name,
-    }))
-    .sort((a, z) => a.name.localeCompare(z.name))
+  const { isPending, data } = useQuery(getFactionListQuery())
+  const factions = reduceArrayToMap(
+    data?.data.toSorted((a, z) => a.name.localeCompare(z.name)),
+    'symbol',
+  )
 
   return (
     <Controller
       control={methods.control}
       name="faction"
-      render={({ field }) => (
-        <Select.Field
-          label={<Select.Label>{t('faction.label')}</Select.Label>}
-          by={(a, z) => a?.id === z?.id}
-          getItemKey={(item) => item.id}
-          getItemLabel={(item) => item?.name}
-          getItemOption={(item) => item.name}
-          options={factions}
-          onChange={(value) => {
-            if (value) field.onChange(value.id)
-          }}
-        />
-      )}
+      render={({ field }) => {
+        return (
+          <div>
+            <label htmlFor={field.name} className="label">
+              {t('faction.label')}
+            </label>
+            <Select.Field
+              id={field.name}
+              selected={field.value && <div className="text-foreground-primary">{factions.get(field.value)?.name}</div>}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              placeholder={
+                isPending ? (
+                  <div className="bg-background-quaternary my-2 h-2 w-2/3 animate-pulse rounded-full" />
+                ) : (
+                  <div className="text-foreground-tertiary italic">{t('faction.select_placeholder')}</div>
+                )
+              }
+            >
+              {Array.from(factions).map(([key, faction]) => {
+                return (
+                  <Select.Item key={key} value={faction.symbol}>
+                    <div className="flex gap-3">
+                      <div>{faction.name}</div>
+                      <div className="text-foreground-tertiary">[{faction.symbol}]</div>
+                    </div>
+                  </Select.Item>
+                )
+              })}
+            </Select.Field>
+          </div>
+        )
+      }}
     />
   )
 }
@@ -66,6 +78,7 @@ export const Register = () => {
   return (
     <div className="grid gap-8">
       <div className="display-xs text-center">{t('auth.register_heading')}</div>
+
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
@@ -91,7 +104,7 @@ export const Register = () => {
                 </span>
               </label>
               <input id="email" {...methods.register('email')} className="input" type="email" autoComplete="off" />
-              <div className="typography-sm mt-1">
+              <div className="typography-sm mt-2">
                 <Trans
                   i18nKey="auth.fields.email.hint"
                   components={{
