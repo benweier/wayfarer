@@ -68,6 +68,7 @@
     --waypoint-tag-bg: var(--bg-waypoint-gravity-well);
   }
 
+  display: inline-block;
   padding: var(--waypoint-tag-padding-y) var(--waypoint-tag-padding-x);
   font-size: var(--font-size-text-xs);
   font-weight: bold;
