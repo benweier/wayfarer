@@ -6,7 +6,7 @@ import { type SelectFieldProps } from './select.types'
 export const Field = ({
   id,
   value,
-  placeholder,
+  placeholder = <>&nbsp;</>,
   selected,
   onChange,
   onBlur,
@@ -22,7 +22,7 @@ export const Field = ({
       </Select.Trigger>
 
       <Select.Portal>
-        <Select.Content className="bg-background-primary border-border-primary overflow-hidden rounded-md border">
+        <Select.Content className="bg-background-primary border-border-primary z-50 overflow-hidden rounded-md border">
           <Select.ScrollUpButton className="text-foreground-secondary bg-background-secondary mb-2 flex cursor-default items-center justify-center py-1">
             <AppIcon id="chevron:up" className="text-foreground-tertiary size-3" aria-hidden="true" />
           </Select.ScrollUpButton>
