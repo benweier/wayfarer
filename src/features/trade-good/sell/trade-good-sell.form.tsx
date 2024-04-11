@@ -3,9 +3,8 @@ import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { formatNumber } from '@/utilities/number.helper'
 import { TradeGoodSellSchema } from './trade-good-sell.schema'
 import { type TradeGoodSellFormProps } from './trade-good-sell.types'
@@ -58,7 +57,7 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
       return ships.set(ship.symbol, {
         ship,
         label: (
-          <div className="flex items-baseline gap-2">
+          <div className="flex items-baseline gap-2 ">
             <span className="font-bold">{ship.symbol}</span>
             <span className="text-foreground-secondary">
               ({t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count})
@@ -66,9 +65,9 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
           </div>
         ),
         option: (
-          <div className="flex flex-col">
+          <div className="typography-sm flex flex-col">
             <div className="font-semibold">{ship.symbol}</div>
-            <div className="text-foreground-secondary typography-xs">
+            <div className="text-foreground-secondary">
               {t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count}
             </div>
           </div>
@@ -87,17 +86,19 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
             control={methods.control}
             name="ship"
             render={({ field }) => (
-              <QuerySuspenseBoundary fallback={<ShipSelectFallback />}>
+              <div>
+                <label htmlFor={field.name}>{t('general.fields.ship')}</label>
                 <ShipSelectField
+                  id={field.name}
+                  selected={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
                   getShipItem={getShipItem}
-                  onChange={(value) => {
-                    if (value) field.onChange(value.symbol)
-                  }}
                   getShipList={(response) => ({
                     ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
                   })}
                 />
-              </QuerySuspenseBoundary>
+              </div>
             )}
           />
         )}

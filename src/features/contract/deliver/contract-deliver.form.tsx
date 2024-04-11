@@ -1,10 +1,10 @@
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
-import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type ContractDelivery, type ShipResponse } from '@/types/spacetraders'
+import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { DeliverContractSchema } from './contract-deliver.schema'
 
 const getShipOption: ShipSelectItemReducer = (ships, ship) => {
@@ -35,6 +35,10 @@ export const ContractDeliverForm = ({
   const methods = useForm<DeliverContractSchema>({
     resolver: valibotResolver(DeliverContractSchema),
   })
+  const items = reduceArrayToMap(
+    deliver.toSorted((a, z) => a.tradeSymbol.localeCompare(z.tradeSymbol)),
+    'tradeSymbol',
+  )
 
   return (
     <FormProvider {...methods}>
@@ -43,17 +47,21 @@ export const ContractDeliverForm = ({
           control={methods.control}
           name="ship"
           render={({ field }) => (
-            <QuerySuspenseBoundary fallback={<ShipSelectFallback />}>
+            <div>
+              <label htmlFor={field.name}>{t('general.fields.ship')}</label>
               <ShipSelectField
-                getShipItem={getShipOption}
+                id={field.name}
+                selected={field.value}
                 onChange={(value) => {
-                  if (value) field.onChange(value.symbol)
+                  if (value) field.onChange(value)
                 }}
+                onBlur={field.onBlur}
+                getShipItem={getShipOption}
                 getShipList={(response) => ({
                   ships: response.data,
                 })}
               />
-            </QuerySuspenseBoundary>
+            </div>
           )}
         />
 
@@ -61,27 +69,43 @@ export const ContractDeliverForm = ({
           <Controller
             control={methods.control}
             name="item"
-            render={({ field }) => (
-              <Select.Field
-                label={<Select.Label>Item</Select.Label>}
-                by={(a, z) => a?.symbol === z?.symbol}
-                onChange={(value) => {
-                  if (value) field.onChange(value.symbol)
-                }}
-                getItemKey={(item) => item.symbol}
-                getItemLabel={(item) => item?.name}
-                getItemOption={(item) => item.name}
-                options={deliver.map((item) => ({
-                  symbol: item.tradeSymbol,
-                  name: t(item.tradeSymbol, { ns: 'spacetraders.trade_good' }),
-                }))}
-              />
-            )}
+            render={({ field }) => {
+              const selected = items.get(field.value)
+
+              return (
+                <div>
+                  <label htmlFor={field.name}>Item</label>
+                  <Select.Field
+                    id={field.name}
+                    selected={
+                      field.value &&
+                      selected && (
+                        <div className="text-foreground-primary">
+                          {t(selected.tradeSymbol, { ns: 'spacetraders.trade_good' })}
+                        </div>
+                      )
+                    }
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                  >
+                    {Array.from(items).map(([key, item]) => {
+                      return (
+                        <Select.Item key={key} value={item.tradeSymbol}>
+                          {t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}
+                        </Select.Item>
+                      )
+                    })}
+                  </Select.Field>
+                </div>
+              )
+            }}
           />
         </div>
 
         <div>
-          <label className="label">Quantity</label>
+          <label htmlFor="quantity" className="label">
+            Quantity
+          </label>
           <input
             {...methods.register('quantity', {
               valueAsNumber: true,

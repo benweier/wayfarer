@@ -2,8 +2,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { type PropsWithChildren } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
-import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { type ShipResponse } from '@/types/spacetraders'
 import { CargoTransferSchema } from './cargo-transfer.validation'
 
@@ -41,12 +40,14 @@ export const CargoTransferForm = ({
             control={methods.control}
             name="ship"
             render={({ field }) => (
-              <QuerySuspenseBoundary fallback={<ShipSelectFallback />}>
+              <div>
+                <label htmlFor={field.name}>{t('general.fields.ship')}</label>
                 <ShipSelectField
+                  id={field.name}
+                  selected={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
                   getShipItem={getShipOption}
-                  onChange={(value) => {
-                    if (value) field.onChange(value.symbol)
-                  }}
                   getShipList={(response) => ({
                     ships: response.data.filter((ship) => {
                       return (
@@ -57,7 +58,7 @@ export const CargoTransferForm = ({
                     }),
                   })}
                 />
-              </QuerySuspenseBoundary>
+              </div>
             )}
           />
         </div>

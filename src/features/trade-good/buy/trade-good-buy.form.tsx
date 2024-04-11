@@ -3,9 +3,8 @@ import { cx } from 'class-variance-authority'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
-import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { ShipSelectFallback, ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { useAuthStore } from '@/store/auth'
 import { formatNumber } from '@/utilities/number.helper'
 import { TradeGoodBuySchema } from './trade-good-buy.schema'
@@ -25,9 +24,9 @@ const getShipItem: ShipSelectItemReducer = (ships, ship) => {
       </div>
     ),
     option: (
-      <div className="flex flex-col">
+      <div className="typography-sm flex flex-col">
         <div className="font-bold">{ship.symbol}</div>
-        <div className="text-foreground-secondary typography-xs">
+        <div className="text-foreground-secondary">
           Cargo: {ship.cargo.units} / {ship.cargo.capacity}
         </div>
       </div>
@@ -90,17 +89,19 @@ export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps
             control={methods.control}
             name="ship"
             render={({ field }) => (
-              <QuerySuspenseBoundary fallback={<ShipSelectFallback />}>
+              <div>
+                <label htmlFor={field.name}>{t('general.fields.ship')}</label>
                 <ShipSelectField
+                  id={field.name}
+                  selected={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
                   getShipItem={getShipItem}
-                  onChange={(value) => {
-                    if (value) field.onChange(value.symbol)
-                  }}
                   getShipList={(response) => ({
                     ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
                   })}
                 />
-              </QuerySuspenseBoundary>
+              </div>
             )}
           />
         )}
