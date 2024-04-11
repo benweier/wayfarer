@@ -196,7 +196,8 @@
     "label": "Fleet"
   },
   "faction": {
-    "label": "Faction"
+    "label": "Faction",
+    "select_placeholder": "Select a faction"
   },
   "ship": {
     "label": "Ship",
@@ -209,6 +210,7 @@
     "condition": "Condition",
     "resources": "Resources",
     "status": "Status",
+    "select_placeholder": "Select a ship",
     "action": {
       "confirm_jettison|action": "Confirm Jettison",
       "confirm_jettison|text": "Destroy: {{units}}x $t(spacetraders.trade_good:{{itemSymbol}})",
