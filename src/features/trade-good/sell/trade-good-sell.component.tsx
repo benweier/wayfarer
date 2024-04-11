@@ -59,7 +59,8 @@ export const TradeGoodSell = ({
     },
   })
   const noCargo =
-    ship?.cargo.inventory.find((cargo) => {
+    ship !== undefined &&
+    ship.cargo.inventory.find((cargo) => {
       return cargo.symbol === good?.symbol
     }) === undefined
 

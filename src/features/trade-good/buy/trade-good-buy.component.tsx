@@ -58,7 +58,7 @@ export const TradeGoodBuy = ({
       modal.close()
     },
   })
-  const noCargo = ship !== undefined && ship.cargo.units === ship.cargo.capacity
+  const noCapacity = ship !== undefined && ship.cargo.units === ship.cargo.capacity
 
   if (!good) return null
 
@@ -66,7 +66,7 @@ export const TradeGoodBuy = ({
     <Modal
       ref={ref}
       size="md"
-      trigger={<Modal.Trigger disabled={disabled || good.tradeVolume === 0 || noCargo}>{action}</Modal.Trigger>}
+      trigger={<Modal.Trigger disabled={disabled || good.tradeVolume === 0 || noCapacity}>{action}</Modal.Trigger>}
       closeable
     >
       <div className="space-y-8">
