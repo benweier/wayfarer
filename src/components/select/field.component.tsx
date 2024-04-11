@@ -15,7 +15,9 @@ export const Field = ({
   return (
     <Select.Root value={value} onValueChange={onChange}>
       <Select.Trigger id={id} className="select" onBlur={onBlur}>
-        <Select.Value placeholder={placeholder}>{selected}</Select.Value>
+        <Select.Value placeholder={<div className="text-foreground-tertiary italic">{placeholder}</div>}>
+          {selected}
+        </Select.Value>
         <Select.Icon className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <AppIcon id="chevron:up-down" className="text-fg-tertiary size-4" aria-hidden="true" />
         </Select.Icon>

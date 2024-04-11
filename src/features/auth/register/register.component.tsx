@@ -42,7 +42,7 @@ const FactionField = () => {
                 isPending ? (
                   <div className="bg-background-quaternary my-2 h-2 w-2/3 animate-pulse rounded-full" />
                 ) : (
-                  <div className="text-foreground-tertiary italic">{t('faction.select_placeholder')}</div>
+                  t('faction.select_placeholder')
                 )
               }
             >
