@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { type FocusEventHandler, type ReactNode } from 'react'
 import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type ShipResponse } from '@/types/spacetraders'
 
@@ -17,7 +17,10 @@ export type ShipSelectItemReducer = (
 ) => Map<string, ShipSelectItem>
 
 export type ShipSelectFieldProps = {
-  onChange: (value?: ShipResponse | null) => void
+  id?: string
+  selected?: string
+  onBlur?: FocusEventHandler<HTMLButtonElement>
+  onChange: (value?: string) => void
   getShipItem?: ShipSelectItemReducer
   getShipList?: (data: SpaceTradersResponse<ShipResponse[], Meta>) => { ships: ShipResponse[] }
 }

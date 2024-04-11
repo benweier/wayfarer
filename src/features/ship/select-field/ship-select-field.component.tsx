@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import * as Select from '@/components/select'
 import { getShipListQuery } from '@/services/api/spacetraders'
@@ -6,24 +6,34 @@ import { defaultGetShipItem } from './ship-item-reducer.helper'
 import { type ShipSelectFieldProps, type ShipSelectItem } from './ship-select-field.types'
 
 export const ShipSelectField = ({
-  getShipList = (response) => ({ ships: response.data }),
+  id,
+  selected,
+  onBlur,
   onChange,
+  getShipList = (response) => ({ ships: response.data }),
   getShipItem = defaultGetShipItem,
 }: ShipSelectFieldProps) => {
   const { t } = useTranslation()
-  const { data } = useSuspenseQuery({ ...getShipListQuery(), select: getShipList })
-  const state: Map<string, ShipSelectItem> = data.ships.reduce<Map<string, ShipSelectItem>>(getShipItem, new Map())
+  const { data, isSuccess } = useQuery({ ...getShipListQuery(), select: getShipList })
+  const ships: Map<string, ShipSelectItem> = isSuccess
+    ? data.ships.reduce<Map<string, ShipSelectItem>>(getShipItem, new Map())
+    : new Map()
 
   return (
     <Select.Field
-      label={<Select.Label>{t('general.fields.ship')}</Select.Label>}
-      by={(a, z) => a?.symbol === z?.symbol}
+      id={id}
+      selected={(selected && ships.get(selected)?.label) ?? selected}
+      placeholder={t('ship.select_placeholder')}
       onChange={onChange}
-      getItemKey={(ship) => ship.symbol}
-      getItemLabel={(ship) => (ship ? state.get(ship.symbol)?.label : undefined)}
-      getItemOption={(ship) => state.get(ship.symbol)?.option}
-      getItemDisabled={(ship) => state.get(ship.symbol)?.disabled}
-      options={data.ships}
-    />
+      onBlur={onBlur}
+    >
+      {Array.from(ships).map(([key, item]) => {
+        return (
+          <Select.Item key={key} value={item.ship.symbol} disabled={item.disabled}>
+            {item.option}
+          </Select.Item>
+        )
+      })}
+    </Select.Field>
   )
 }
