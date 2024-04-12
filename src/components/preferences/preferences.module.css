@@ -1,0 +1,33 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.overlay[data-state='open'],
+.content[data-state='open'] {
+  animation: fade-in 84ms ease-out;
+}
+
+.overlay[data-state='closed'],
+.content[data-state='closed'] {
+  animation: fade-out 84ms ease-in;
+}
