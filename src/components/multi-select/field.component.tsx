@@ -15,10 +15,7 @@ export const Field = ({ trigger, id, value, onChange, children }: PropsWithChild
         <Popover.Content
           side="bottom"
           align="center"
-          className={cx(
-            styles.popover,
-            'bg-background-primary border-border-primary relative z-50 rounded-md border p-px',
-          )}
+          className={cx(styles.popover, 'bg-background-primary border-border-primary relative z-50 rounded-md border')}
           sideOffset={8}
         >
           <ScrollArea.Root className="h-full max-h-[320px] overflow-hidden" type="scroll">
@@ -28,10 +25,10 @@ export const Field = ({ trigger, id, value, onChange, children }: PropsWithChild
               </Root>
             </ScrollArea.Viewport>
             <ScrollArea.Scrollbar
-              className="bg-background-secondary flex touch-none p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
+              className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
               orientation="vertical"
             >
-              <ScrollArea.Thumb className="bg-background-tertiary relative flex-1 rounded-full before:absolute before:top-1/2 before:left-1/2 before:h-full before:min-h-[44px] before:w-full before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']" />
+              <ScrollArea.Thumb className="bg-background-tertiary relative flex-1 rounded-full" />
             </ScrollArea.Scrollbar>
           </ScrollArea.Root>
         </Popover.Content>
