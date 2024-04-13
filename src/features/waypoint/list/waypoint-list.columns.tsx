@@ -129,7 +129,7 @@ export const columns = [
           </div>
           <div>
             <WaypointTypeFilter
-              values={filterValues}
+              value={filterValues}
               facets={facetedValues}
               onChange={(value) => types?.setFilterValue(value)}
             />
