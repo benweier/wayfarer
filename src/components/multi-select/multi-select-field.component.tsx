@@ -2,7 +2,7 @@ import * as Popover from '@radix-ui/react-popover'
 import * as ScrollArea from '@radix-ui/react-scroll-area'
 import { cx } from 'class-variance-authority'
 import { type PropsWithChildren } from 'react'
-import { Root } from './multi-select.group'
+import { Options } from './multi-select-options.component'
 import styles from './multi-select.module.css'
 import { type MultiSelectFieldProps } from './multi-select.types'
 
@@ -20,9 +20,9 @@ export const Field = ({ trigger, id, value, onChange, children }: PropsWithChild
         >
           <ScrollArea.Root className="h-full max-h-[320px] overflow-hidden" type="scroll">
             <ScrollArea.Viewport className="h-full max-h-[320px] p-2">
-              <Root type="multiple" aria-labelledby={id} value={value} onValueChange={onChange}>
+              <Options type="multiple" aria-labelledby={id} value={value} onValueChange={onChange}>
                 {children}
-              </Root>
+              </Options>
             </ScrollArea.Viewport>
             <ScrollArea.Scrollbar
               className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
