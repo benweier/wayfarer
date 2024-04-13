@@ -10,73 +10,73 @@ dependencies:
     version: 1.0.0
   '@floating-ui/react':
     specifier: ^0.26.12
-    version: 0.26.12(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 0.26.12(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@floating-ui/react-dom':
     specifier: ^2.0.8
-    version: 2.0.8(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 2.0.8(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@headlessui/react':
     specifier: ^1.7.18
-    version: 1.7.18(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 1.7.18(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@headlessui/tailwindcss':
     specifier: ^0.2.0
     version: 0.2.0(tailwindcss@4.0.0-alpha.14)
   '@hookform/error-message':
     specifier: ^2.0.1
-    version: 2.0.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react-hook-form@7.51.3)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 2.0.1(react-dom@19.0.0-canary-96c584661-20240412)(react-hook-form@7.51.3)(react@19.0.0-canary-96c584661-20240412)
   '@hookform/resolvers':
     specifier: ^3.3.4
     version: 3.3.4(react-hook-form@7.51.3)
   '@mdx-js/react':
     specifier: ^3.0.1
-    version: 3.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 3.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
   '@pixi/react':
     specifier: ^7.1.2
-    version: 7.1.2(@babel/runtime@7.24.4)(@pixi/app@7.4.2)(@pixi/constants@7.4.2)(@pixi/core@7.4.2)(@pixi/display@7.4.2)(@pixi/extensions@7.4.2)(@pixi/graphics@7.4.2)(@pixi/math@7.4.2)(@pixi/mesh-extras@7.4.2)(@pixi/mesh@7.4.2)(@pixi/particle-container@7.4.2)(@pixi/sprite-animated@7.4.2)(@pixi/sprite-tiling@7.4.2)(@pixi/sprite@7.4.2)(@pixi/text-bitmap@7.4.2)(@pixi/text@7.4.2)(@pixi/ticker@7.4.2)(prop-types@15.8.1)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 7.1.2(@babel/runtime@7.24.4)(@pixi/app@7.4.2)(@pixi/constants@7.4.2)(@pixi/core@7.4.2)(@pixi/display@7.4.2)(@pixi/extensions@7.4.2)(@pixi/graphics@7.4.2)(@pixi/math@7.4.2)(@pixi/mesh-extras@7.4.2)(@pixi/mesh@7.4.2)(@pixi/particle-container@7.4.2)(@pixi/sprite-animated@7.4.2)(@pixi/sprite-tiling@7.4.2)(@pixi/sprite@7.4.2)(@pixi/text-bitmap@7.4.2)(@pixi/text@7.4.2)(@pixi/ticker@7.4.2)(prop-types@15.8.1)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-dialog':
     specifier: ^1.0.5
-    version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-dropdown-menu':
     specifier: ^2.0.6
-    version: 2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-label':
     specifier: ^2.0.2
-    version: 2.0.2(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 2.0.2(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-popover':
     specifier: ^1.0.7
-    version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-scroll-area':
     specifier: ^1.0.5
-    version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-select':
     specifier: ^2.0.0
-    version: 2.0.0(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 2.0.0(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-tabs':
     specifier: ^1.0.4
-    version: 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-toggle-group':
     specifier: ^1.0.4
-    version: 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@radix-ui/react-tooltip':
     specifier: ^1.0.7
-    version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@sentry/react':
     specifier: ^7.110.0
-    version: 7.110.0(react@19.0.0-canary-4c12339ce-20240408)
+    version: 7.110.0(react@19.0.0-canary-96c584661-20240412)
   '@tanstack/react-query':
     specifier: ^5.29.2
-    version: 5.29.2(react@19.0.0-canary-4c12339ce-20240408)
+    version: 5.29.2(react@19.0.0-canary-96c584661-20240412)
   '@tanstack/react-query-devtools':
     specifier: ^5.29.2
-    version: 5.29.2(@tanstack/react-query@5.29.2)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 5.29.2(@tanstack/react-query@5.29.2)(react@19.0.0-canary-96c584661-20240412)
   '@tanstack/react-router':
-    specifier: ^1.26.20
-    version: 1.26.20(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    specifier: ^1.27.0
+    version: 1.27.0(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@tanstack/react-table':
-    specifier: ^8.15.3
-    version: 8.15.3(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    specifier: ^8.16.0
+    version: 8.16.0(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@tanstack/router-devtools':
-    specifier: ^1.26.20
-    version: 1.26.20(csstype@3.1.3)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    specifier: ^1.27.0
+    version: 1.27.0(csstype@3.1.3)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -97,13 +97,13 @@ dependencies:
     version: 10.0.4
   jotai:
     specifier: ^2.8.0
-    version: 2.8.0(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 2.8.0(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
   jotai-immer:
     specifier: ^0.3.0
-    version: 0.3.0(immer@10.0.4)(jotai@2.8.0)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 0.3.0(immer@10.0.4)(jotai@2.8.0)(react@19.0.0-canary-96c584661-20240412)
   kbar:
     specifier: 0.1.0-beta.45
-    version: 0.1.0-beta.45(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 0.1.0-beta.45(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   nanoid:
     specifier: ^5.0.7
     version: 5.0.7
@@ -111,35 +111,35 @@ dependencies:
     specifier: ^8.1.0
     version: 8.1.0
   react:
-    specifier: 19.0.0-canary-4c12339ce-20240408
-    version: 19.0.0-canary-4c12339ce-20240408
+    specifier: 19.0.0-canary-96c584661-20240412
+    version: 19.0.0-canary-96c584661-20240412
   react-dom:
-    specifier: 19.0.0-canary-4c12339ce-20240408
-    version: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+    specifier: 19.0.0-canary-96c584661-20240412
+    version: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
   react-error-boundary:
     specifier: ^4.0.13
-    version: 4.0.13(react@19.0.0-canary-4c12339ce-20240408)
+    version: 4.0.13(react@19.0.0-canary-96c584661-20240412)
   react-hook-form:
     specifier: ^7.51.3
-    version: 7.51.3(react@19.0.0-canary-4c12339ce-20240408)
+    version: 7.51.3(react@19.0.0-canary-96c584661-20240412)
   react-i18next:
     specifier: ^14.1.0
-    version: 14.1.0(i18next@23.11.1)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 14.1.0(i18next@23.11.1)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   react-responsive:
     specifier: ^10.0.0
-    version: 10.0.0(react@19.0.0-canary-4c12339ce-20240408)
+    version: 10.0.0(react@19.0.0-canary-96c584661-20240412)
   react-transition-group:
     specifier: ^4.4.5
-    version: 4.4.5(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 4.4.5(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   reactflow:
     specifier: ^11.11.1
-    version: 11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   tailwindcss:
     specifier: 4.0.0-alpha.14
     version: 4.0.0-alpha.14
   use-resize-observer:
     specifier: ^9.1.0
-    version: 9.1.0(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 9.1.0(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   valibot:
     specifier: ^0.30.0
     version: 0.30.0
@@ -148,7 +148,7 @@ dependencies:
     version: 5.10.0
   zustand:
     specifier: 5.0.0-alpha.6
-    version: 5.0.0-alpha.6(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408)
+    version: 5.0.0-alpha.6(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412)
 
 devDependencies:
   '@mdx-js/rollup':
@@ -164,8 +164,8 @@ devDependencies:
     specifier: ^5.28.11
     version: 5.28.11(eslint@8.57.0)(typescript@5.4.5)
   '@tanstack/router-vite-plugin':
-    specifier: ^1.26.16
-    version: 1.26.16(vite@5.2.8)
+    specifier: ^1.26.21
+    version: 1.26.21(vite@5.2.8)
   '@testing-library/dom':
     specifier: ^10.0.0
     version: 10.0.0
@@ -173,8 +173,8 @@ devDependencies:
     specifier: ^6.4.2
     version: 6.4.2(vitest@1.5.0)
   '@testing-library/react':
-    specifier: ^15.0.1
-    version: 15.0.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+    specifier: ^15.0.2
+    version: 15.0.2(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
   '@testing-library/user-event':
     specifier: ^14.5.2
     version: 14.5.2(@testing-library/dom@10.0.0)
@@ -185,8 +185,8 @@ devDependencies:
     specifier: ^20.12.7
     version: 20.12.7
   '@types/react':
-    specifier: ^18.2.77
-    version: 18.2.77
+    specifier: ^18.2.78
+    version: 18.2.78
   '@types/react-dom':
     specifier: ^18.2.25
     version: 18.2.25
@@ -248,8 +248,8 @@ devDependencies:
     specifier: ^0.25.1
     version: 0.25.1(eslint@8.57.0)
   eslint-plugin-testing-library:
-    specifier: ^6.2.0
-    version: 6.2.0(eslint@8.57.0)(typescript@5.4.5)
+    specifier: ^6.2.1
+    version: 6.2.1(eslint@8.57.0)(typescript@5.4.5)
   happy-dom:
     specifier: ^14.7.1
     version: 14.7.1
@@ -266,8 +266,8 @@ devDependencies:
     specifier: ^3.0.6
     version: 3.0.6(rollup@4.14.2)
   playwright:
-    specifier: ^1.43.0
-    version: 1.43.0
+    specifier: ^1.43.1
+    version: 1.43.1
   postcss:
     specifier: ^8.4.38
     version: 8.4.38
@@ -1906,27 +1906,27 @@ packages:
       '@floating-ui/utils': 0.2.1
     dev: false
 
-  /@floating-ui/react-dom@2.0.8(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@floating-ui/react-dom@2.0.8(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-HOdqOt3R3OGeTKidaLvJKcgg75S6tibQ3Tif4eyd91QnIJWr0NLvoXFpJA/j8HqkFSL68GDca9AuyWEHlhyClw==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
       '@floating-ui/dom': 1.6.3
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@floating-ui/react@0.26.12(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@floating-ui/react@0.26.12(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-D09o62HrWdIkstF2kGekIKAC0/N/Dl6wo3CQsnLcOmO3LkW6Ik8uIb3kw8JYkwxNCcg+uJ2bpWUiIijTBep05w==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@floating-ui/react-dom': 2.0.8(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@floating-ui/react-dom': 2.0.8(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       '@floating-ui/utils': 0.2.1
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
       tabbable: 6.2.0
     dev: false
 
@@ -1934,17 +1934,17 @@ packages:
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
     dev: false
 
-  /@headlessui/react@1.7.18(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@headlessui/react@1.7.18(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-4i5DOrzwN4qSgNsL4Si61VMkUcWbcSKueUV7sFhpHzQcSShdlHENE5+QBntMSRvHt8NyoFO2AGG8si9lq+w4zQ==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16 || ^17 || ^18
       react-dom: ^16 || ^17 || ^18
     dependencies:
-      '@tanstack/react-virtual': 3.2.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@tanstack/react-virtual': 3.2.1(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       client-only: 0.0.1
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
   /@headlessui/tailwindcss@0.2.0(tailwindcss@4.0.0-alpha.14):
@@ -1956,16 +1956,16 @@ packages:
       tailwindcss: 4.0.0-alpha.14
     dev: false
 
-  /@hookform/error-message@2.0.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react-hook-form@7.51.3)(react@19.0.0-canary-4c12339ce-20240408):
+  /@hookform/error-message@2.0.1(react-dom@19.0.0-canary-96c584661-20240412)(react-hook-form@7.51.3)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-U410sAr92xgxT1idlu9WWOVjndxLdgPUHEB8Schr27C9eh7/xUnITWpCMF93s+lGiG++D4JnbSnrb5A21AdSNg==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
       react-hook-form: ^7.0.0
     dependencies:
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      react-hook-form: 7.51.3(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      react-hook-form: 7.51.3(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
   /@hookform/resolvers@3.3.4(react-hook-form@7.51.3):
@@ -1973,7 +1973,7 @@ packages:
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.51.3(react@19.0.0-canary-4c12339ce-20240408)
+      react-hook-form: 7.51.3(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
@@ -2079,15 +2079,15 @@ packages:
       - supports-color
     dev: true
 
-  /@mdx-js/react@3.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@mdx-js/react@3.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==}
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
   /@mdx-js/rollup@3.0.1(rollup@4.14.2):
@@ -2231,7 +2231,7 @@ packages:
       '@pixi/sprite': 7.4.2(@pixi/core@7.4.2)(@pixi/display@7.4.2)
     dev: false
 
-  /@pixi/react@7.1.2(@babel/runtime@7.24.4)(@pixi/app@7.4.2)(@pixi/constants@7.4.2)(@pixi/core@7.4.2)(@pixi/display@7.4.2)(@pixi/extensions@7.4.2)(@pixi/graphics@7.4.2)(@pixi/math@7.4.2)(@pixi/mesh-extras@7.4.2)(@pixi/mesh@7.4.2)(@pixi/particle-container@7.4.2)(@pixi/sprite-animated@7.4.2)(@pixi/sprite-tiling@7.4.2)(@pixi/sprite@7.4.2)(@pixi/text-bitmap@7.4.2)(@pixi/text@7.4.2)(@pixi/ticker@7.4.2)(prop-types@15.8.1)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@pixi/react@7.1.2(@babel/runtime@7.24.4)(@pixi/app@7.4.2)(@pixi/constants@7.4.2)(@pixi/core@7.4.2)(@pixi/display@7.4.2)(@pixi/extensions@7.4.2)(@pixi/graphics@7.4.2)(@pixi/math@7.4.2)(@pixi/mesh-extras@7.4.2)(@pixi/mesh@7.4.2)(@pixi/particle-container@7.4.2)(@pixi/sprite-animated@7.4.2)(@pixi/sprite-tiling@7.4.2)(@pixi/sprite@7.4.2)(@pixi/text-bitmap@7.4.2)(@pixi/text@7.4.2)(@pixi/ticker@7.4.2)(prop-types@15.8.1)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-ZhqeXcFCRfFYCvncGW6Bxc3PFCYN1PgpF60iZwQJA6/UD3DB70JQvtDkRnyQcy5yqsjNtdxS8HB42oNjQFnZrA==}
     peerDependencies:
       '@babel/runtime': ^7.14.8
@@ -2276,8 +2276,8 @@ packages:
       lodash.times: 4.3.2
       performance-now: 2.1.0
       prop-types: 15.8.1
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
   /@pixi/runner@7.4.2:
@@ -2387,7 +2387,7 @@ packages:
       '@babel/runtime': 7.24.4
     dev: false
 
-  /@radix-ui/react-arrow@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-arrow@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-wSP+pHsB/jQRaL6voubsQ/ZlrGBHHrOjmBnr19hxYgtS0WvAFwZhK2WP/YY5yF9uKECCEEDGxuLxq1NBK51wFA==}
     peerDependencies:
       '@types/react': '*'
@@ -2401,14 +2401,14 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-collection@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-collection@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-3SzW+0PW7yBBoQlT8wNcGtaxaD0XSu0uLUFgrtHY08Acx05TaHaOmVLR73c0j/cqpDy53KBMO7s0dx2wmOIDIA==}
     peerDependencies:
       '@types/react': '*'
@@ -2422,17 +2422,17 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}
     peerDependencies:
       '@types/react': '*'
@@ -2442,11 +2442,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-context@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-context@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-ebbrdFoYTcuZ0v4wG5tedGnp9tzcV8awzsxYph7gXUyvnNLuTIcCk1q17JEbnVhXAKG9oX3KtchwiMIAYp9NLg==}
     peerDependencies:
       '@types/react': '*'
@@ -2456,11 +2456,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-dialog@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-dialog@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-GjWJX/AUpB703eEBanuBnIWdIXg6NvJFCXcNlSZk4xdszCdhrJgBoUd1cGk67vFO+WdA2pfI/plOpqz/5GUP6Q==}
     peerDependencies:
       '@types/react': '*'
@@ -2475,26 +2475,26 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
       aria-hidden: 1.2.4
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      react-remove-scroll: 2.5.5(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      react-remove-scroll: 2.5.5(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-direction@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-direction@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-RXcvnXgyvYvBEOhCBuddKecVkoMiI10Jcm5cTI7abJRAHYfFxeu+FBQs/DvdxSYucxR5mna0dNsL6QFlds5TMA==}
     peerDependencies:
       '@types/react': '*'
@@ -2504,11 +2504,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-dismissable-layer@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-dismissable-layer@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-aJeDjQhywg9LBu2t/At58hCvr7pEm0o2Ke1x33B+MhjNmmZ17sy4KImo0KPLgsnc/zN7GPdce8Cnn0SWvwZO7g==}
     peerDependencies:
       '@types/react': '*'
@@ -2523,17 +2523,17 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-escape-keydown': 1.0.3(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-escape-keydown': 1.0.3(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-dropdown-menu@2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-dropdown-menu@2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-i6TuFOoWmLWq+M/eCLGd/bQ2HfAX1RJgvrBQ6AQLmzfvsLdefxbWu8G9zczcPFfcSPehz9GcpF6K9QYreFV8hA==}
     peerDependencies:
       '@types/react': '*'
@@ -2548,19 +2548,19 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-menu': 2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-menu': 2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-focus-guards@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-focus-guards@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-Rect2dWbQ8waGzhMavsIbmSVCgYxkXLxxR3ZvCX79JOglzdEy4JXMb98lq4hPxUbLr77nP0UOGf4rcMU+s1pUA==}
     peerDependencies:
       '@types/react': '*'
@@ -2570,11 +2570,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-focus-scope@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-focus-scope@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-sL04Mgvf+FmyvZeYfNu1EPAaaxD+aw7cYeIB9L9Fvq8+urhltTRaEo5ysKOpHuKPclsZcSUMKlN05x4u+CINpA==}
     peerDependencies:
       '@types/react': '*'
@@ -2588,16 +2588,16 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-id@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-id@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-tI7sT/kqYp8p96yGWY1OAnLHrqDgzHefRBKQ2YAkBS5ja7QLcZ9Z/uY7bEjPUatf8RomoXM8/1sMj1IJaE5UzQ==}
     peerDependencies:
       '@types/react': '*'
@@ -2607,12 +2607,12 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-label@2.0.2(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-label@2.0.2(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-N5ehvlM7qoTLx7nWPodsPYPgMzA5WM8zZChQg8nyFJKnDO5WHdba1vv5/H6IO5LtJMfD2Q3wh1qHFGNtK0w3bQ==}
     peerDependencies:
       '@types/react': '*'
@@ -2626,14 +2626,14 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-menu@2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-menu@2.0.6(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-BVkFLS+bUC8HcImkRKPSiVumA1VPOOEC5WBMiT+QAVsPzW1FJzI9KnqgGxVDPBcql5xXrHkD3JOVoXWEXD8SYA==}
     peerDependencies:
       '@types/react': '*'
@@ -2648,30 +2648,30 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-popper': 1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-popper': 1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
       aria-hidden: 1.2.4
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      react-remove-scroll: 2.5.5(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      react-remove-scroll: 2.5.5(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-popover@1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-popover@1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-shtvVnlsxT6faMnK/a7n0wptwBD23xc1Z5mdrtKLwVEfsEMXodS0r5s0/g5P0hX//EKYZS2sxUjqfzlg52ZSnQ==}
     peerDependencies:
       '@types/react': '*'
@@ -2686,27 +2686,27 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-popper': 1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-popper': 1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
       aria-hidden: 1.2.4
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      react-remove-scroll: 2.5.5(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      react-remove-scroll: 2.5.5(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-popper@1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-popper@1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-cKpopj/5RHZWjrbF2846jBNacjQVwkP068DfmgrNJXpvVWrOvlAmE9xSiy5OqeE+Gi8D9fP+oDhUnPqNMY8/5w==}
     peerDependencies:
       '@types/react': '*'
@@ -2720,23 +2720,23 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@floating-ui/react-dom': 2.0.8(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-arrow': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-rect': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-size': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+      '@floating-ui/react-dom': 2.0.8(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-arrow': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-rect': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-size': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
       '@radix-ui/rect': 1.0.1
-      '@types/react': 18.2.77
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-portal@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-portal@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-Qki+C/EuGUVCQTOTD5vzJzJuMUlewbzuKyUy+/iHM2uwGiru9gZeBJtHAPKAEkB5KWGi9mP/CHKcY0wt1aW45Q==}
     peerDependencies:
       '@types/react': '*'
@@ -2750,14 +2750,14 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-presence@1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-presence@1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-UXLW4UAbIY5ZjcvzjfRFo5gxva8QirC9hF7wRE4U5gz+TP0DbRk+//qyuAQ1McDxBt1xNMBTaciFGvEmJvAZCg==}
     peerDependencies:
       '@types/react': '*'
@@ -2771,15 +2771,15 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-primitive@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-primitive@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-yi58uVyoAcK/Nq1inRY56ZSjKypBNKTa/1mcL8qdl6oJeEaDbOldlzrGn7P6Q3Id5d+SYNGc5AJgc4vGhjs5+g==}
     peerDependencies:
       '@types/react': '*'
@@ -2793,14 +2793,14 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-roving-focus@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-roving-focus@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-2mUg5Mgcu001VkGy+FfzZyzbmuUWzgWkj3rvv4yu+mLw03+mTzbxZHvfcGyFp2b8EkQeMkpRQ5FiA2Vr2O6TeQ==}
     peerDependencies:
       '@types/react': '*'
@@ -2815,21 +2815,21 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-scroll-area@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-scroll-area@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-b6PAgH4GQf9QEn8zbT2XUHpW5z8BzqEc7Kl11TwDrvuTrxlkcjTD5qa/bxgKr+nmuXKu4L/W5UZ4mlP/VG/5Gw==}
     peerDependencies:
       '@types/react': '*'
@@ -2845,20 +2845,20 @@ packages:
       '@babel/runtime': 7.24.4
       '@radix-ui/number': 1.0.1
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-select@2.0.0(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-select@2.0.0(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-RH5b7af4oHtkcHS7pG6Sgv5rk5Wxa7XI8W5gvB1N/yiuDGZxko1ynvOiVhFM7Cis2A8zxF9bTOUVbRDzPepe6w==}
     peerDependencies:
       '@types/react': '*'
@@ -2874,32 +2874,32 @@ packages:
       '@babel/runtime': 7.24.4
       '@radix-ui/number': 1.0.1
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-popper': 1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-previous': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-visually-hidden': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-focus-guards': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-focus-scope': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-popper': 1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-previous': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-visually-hidden': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
       aria-hidden: 1.2.4
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      react-remove-scroll: 2.5.5(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      react-remove-scroll: 2.5.5(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-slot@1.0.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-slot@1.0.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-YeTpuq4deV+6DusvVUW4ivBgnkHwECUu0BiN43L5UCDFgdhsRUWAghhTF5MbvNTPzmiFOx90asDSUjWuCNapwg==}
     peerDependencies:
       '@types/react': '*'
@@ -2909,12 +2909,12 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-tabs@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-tabs@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-egZfYY/+wRNCflXNHx+dePvnz9FbmssDTJBtgRfDY7e8SE5oIo3Py2eCB1ckAbh1Q7cQ/6yJZThJ++sgbxibog==}
     peerDependencies:
       '@types/react': '*'
@@ -2929,20 +2929,20 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-toggle-group@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-toggle-group@1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-Uaj/M/cMyiyT9Bx6fOZO0SAG4Cls0GptBWiBmBxofmDbNVnYYoyRWj/2M/6VCi/7qcXFWnHhRUfdfZFvvkuu8A==}
     peerDependencies:
       '@types/react': '*'
@@ -2957,19 +2957,19 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-toggle': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-toggle': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-toggle@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-toggle@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-Pkqg3+Bc98ftZGsl60CLANXQBBQ4W3mTFS9EJvNxKMZ7magklKV69/id1mlAlOFDDfHvlCms0fx8fA4CMKDJHg==}
     peerDependencies:
       '@types/react': '*'
@@ -2984,15 +2984,15 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-tooltip@1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-tooltip@1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-lPh5iKNFVQ/jav/j6ZrWq3blfDJ0OH9R6FlNUHPMqdLuQ9vwDgFsRxvl8b7Asuy5c8xmoojHUxKHQSOAvMHxyw==}
     peerDependencies:
       '@types/react': '*'
@@ -3007,24 +3007,24 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-popper': 1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@radix-ui/react-visually-hidden': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-popper': 1.1.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@radix-ui/react-visually-hidden': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@radix-ui/react-use-callback-ref@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-use-callback-ref@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-D94LjX4Sp0xJFVaoQOd3OO9k7tpBYNOXdVhkltUbGv2Qb9OXdrg/CpsjlZv7ia14Sylv398LswWBVVu5nqKzAQ==}
     peerDependencies:
       '@types/react': '*'
@@ -3034,11 +3034,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-use-controllable-state@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-use-controllable-state@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-Svl5GY5FQeN758fWKrjM6Qb7asvXeiZltlT4U2gVfl8Gx5UAv2sMR0LWo8yhsIZh2oQ0eFdZ59aoOOMV7b47VA==}
     peerDependencies:
       '@types/react': '*'
@@ -3048,12 +3048,12 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-use-escape-keydown@1.0.3(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-use-escape-keydown@1.0.3(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-vyL82j40hcFicA+M4Ex7hVkB9vHgSse1ZWomAqV2Je3RleKGO5iM8KMOEtfoSB0PnIelMd2lATjTGMYqN5ylTg==}
     peerDependencies:
       '@types/react': '*'
@@ -3063,12 +3063,12 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-use-layout-effect@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-use-layout-effect@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-v/5RegiJWYdoCvMnITBkNNx6bCj20fiaJnWtRkU18yITptraXjffz5Qbn05uOiQnOvi+dbkznkoaMltz1GnszQ==}
     peerDependencies:
       '@types/react': '*'
@@ -3078,11 +3078,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-use-previous@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-use-previous@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-cV5La9DPwiQ7S0gf/0qiD6YgNqM5Fk97Kdrlc5yBcrF3jyEZQwm7vYFqMo4IfeHgJXsRaMvLABFtd0OVEmZhDw==}
     peerDependencies:
       '@types/react': '*'
@@ -3092,11 +3092,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-use-rect@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-use-rect@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-Cq5DLuSiuYVKNU8orzJMbl15TXilTnJKUCltMVQg53BQOF1/C5toAaGrowkgksdBQ9H+SRL23g0HDmg9tvmxXw==}
     peerDependencies:
       '@types/react': '*'
@@ -3107,11 +3107,11 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
       '@radix-ui/rect': 1.0.1
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-use-size@1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-use-size@1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-ibay+VqrgcaI6veAojjofPATwledXiSmX+C0KrBk/xgpX9rBzPV3OsfwlhQdUOFbh+LKQorLYT+xTXW9V8yd0g==}
     peerDependencies:
       '@types/react': '*'
@@ -3121,12 +3121,12 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@radix-ui/react-visually-hidden@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@radix-ui/react-visually-hidden@1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-D4w41yN5YRKtu464TLnByKzMDG/JlMPHtfZgQAu9v6mNakUqGUI9vUrfQKz8NK41VMm/xbZbh76NUTVtIYqOMA==}
     peerDependencies:
       '@types/react': '*'
@@ -3140,11 +3140,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.24.4
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@types/react': 18.2.77
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@types/react': 18.2.78
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
   /@radix-ui/rect@1.0.1:
@@ -3157,39 +3157,39 @@ packages:
     resolution: {integrity: sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==}
     dev: false
 
-  /@reactflow/background@11.3.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@reactflow/background@11.3.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-27ahQyHuX2YTc1lABvAPpd5JWBH5P3qTHLGOO+Qfqq4mbicwQ0UGQ2bVDWDwoHOyep2EuMuphrLttaMr0hiviw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@reactflow/core': 11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       classcat: 5.0.5
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      zustand: 4.5.2(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      zustand: 4.5.2(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412)
     transitivePeerDependencies:
       - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/controls@11.2.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@reactflow/controls@11.2.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-FyqQv5pWEc2ycEGgIaLPmD5ezW3chsNwqMCjBMETxRj45R4uy6j+gDNi5EgURCan7T12uvoFeQopSZ96JL8XDQ==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@reactflow/core': 11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       classcat: 5.0.5
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      zustand: 4.5.2(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      zustand: 4.5.2(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412)
     transitivePeerDependencies:
       - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/core@11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@reactflow/core@11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-O9f/q9SZ+29am/XdoZgm/LTdkgQdypcVj9a1yZZgcS6rVDkij1yIiOT3nkGxwnNkJz0rwCn2xtL5SkK038AQ7w==}
     peerDependencies:
       react: '>=17'
@@ -3203,63 +3203,63 @@ packages:
       d3-drag: 3.0.0
       d3-selection: 3.0.0
       d3-zoom: 3.0.0
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      zustand: 4.5.2(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      zustand: 4.5.2(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412)
     transitivePeerDependencies:
       - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/minimap@11.7.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@reactflow/minimap@11.7.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-zXxv+IExvWuaZ+gmRIfmU09A+slG9rMKTVfjqd+ewFV4LFcCyMNMIx3gZybdLZtgUDKIOoU/hAWIY+FbU7GTKw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@reactflow/core': 11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       '@types/d3-selection': 3.0.10
       '@types/d3-zoom': 3.0.8
       classcat: 5.0.5
       d3-selection: 3.0.0
       d3-zoom: 3.0.0
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      zustand: 4.5.2(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      zustand: 4.5.2(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412)
     transitivePeerDependencies:
       - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/node-resizer@2.2.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@reactflow/node-resizer@2.2.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-g/5iLo5vPBoFozU+2WXub+mbpNkQhR+PRX9o0YvH/lYs1pS7JYFSzCOHdHpLHAImoCGrKY1XN5scYly36jWkDw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@reactflow/core': 11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       classcat: 5.0.5
       d3-drag: 3.0.0
       d3-selection: 3.0.0
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      zustand: 4.5.2(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      zustand: 4.5.2(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412)
     transitivePeerDependencies:
       - '@types/react'
       - immer
     dev: false
 
-  /@reactflow/node-toolbar@1.3.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@reactflow/node-toolbar@1.3.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-PKcTrtC88WZjNQz4ACnPgbNDBprsLJVDxyV1x8drGMNRePPrErkUNxsbhrr49L8ffmIavd4kxW5XVNOx8Kswmw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@reactflow/core': 11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       classcat: 5.0.5
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      zustand: 4.5.2(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      zustand: 4.5.2(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412)
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -3619,7 +3619,7 @@ packages:
       '@sentry/utils': 7.110.0
     dev: false
 
-  /@sentry/react@7.110.0(react@19.0.0-canary-4c12339ce-20240408):
+  /@sentry/react@7.110.0(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-ryfA2QR41PV+kP3g0lGvpDZ+OkuxSdj2nTjCqPeZKHsK45GYvDMlWkukdHbwrx8ulkbAcWEjPmuZZzHspyieNw==}
     engines: {node: '>=8'}
     peerDependencies:
@@ -3630,7 +3630,7 @@ packages:
       '@sentry/types': 7.110.0
       '@sentry/utils': 7.110.0
       hoist-non-react-statics: 3.3.2
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
   /@sentry/replay@7.110.0:
@@ -3673,7 +3673,7 @@ packages:
   /@surma/rollup-plugin-off-main-thread@2.2.3:
     resolution: {integrity: sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ==}
     dependencies:
-      ejs: 3.1.9
+      ejs: 3.1.10
       json5: 2.2.3
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.11
@@ -3946,89 +3946,89 @@ packages:
     resolution: {integrity: sha512-5UN629fKa5/1K/2Pd26gaU7epxRrYiT1gy+V+pW5K6hnf1DeUKK3pANSb2eHKlecjIKIhTwyF7k9XdyE2gREvQ==}
     dev: false
 
-  /@tanstack/react-query-devtools@5.29.2(@tanstack/react-query@5.29.2)(react@19.0.0-canary-4c12339ce-20240408):
+  /@tanstack/react-query-devtools@5.29.2(@tanstack/react-query@5.29.2)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-EmsaLNa8iFtReAW+5ftom0/TW78fIosVor517ak/+JFaoTBw8Yub3ao937JFE6AM3K/HXhteqvObetgt1ndLcw==}
     peerDependencies:
       '@tanstack/react-query': ^5.29.2
       react: ^18.0.0
     dependencies:
       '@tanstack/query-devtools': 5.28.10
-      '@tanstack/react-query': 5.29.2(react@19.0.0-canary-4c12339ce-20240408)
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@tanstack/react-query': 5.29.2(react@19.0.0-canary-96c584661-20240412)
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@tanstack/react-query@5.29.2(react@19.0.0-canary-4c12339ce-20240408):
+  /@tanstack/react-query@5.29.2(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-nyuWILR4u7H5moLGSiifLh8kIqQDLNOHGuSz0rcp+J75fNc8aQLyr5+I2JCHU3n+nJrTTW1ssgAD8HiKD7IFBQ==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
       '@tanstack/query-core': 5.29.0
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /@tanstack/react-router@1.26.20(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
-    resolution: {integrity: sha512-gsZvv7VFRDRV2/A6K4hI92p10c5P8t96m5w44R1DVGRu4j9ANVDoDme1TDXHAgZGkuSalu7/MMdem5+cYsRnXA==}
+  /@tanstack/react-router@1.27.0(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
+    resolution: {integrity: sha512-tBFGdB7o2z0BIT9fsmsF0I9SrLya86HV0xVdPSUWcwFOVUYy8UtDmVw9rBb0Rze0oW5keNgvECT+kYhD6e1vCg==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
       '@tanstack/history': 1.26.10
-      '@tanstack/react-store': 0.2.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      '@tanstack/react-store': 0.2.1(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
       tiny-invariant: 1.3.3
       tiny-warning: 1.0.3
     dev: false
 
-  /@tanstack/react-store@0.2.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@tanstack/react-store@0.2.1(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-tEbMCQjbeVw9KOP/202LfqZMSNAVi6zYkkp1kBom8nFuMx/965Hzes3+6G6b/comCwVxoJU8Gg9IrcF8yRPthw==}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
     dependencies:
       '@tanstack/store': 0.1.3
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      use-sync-external-store: 1.2.0(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      use-sync-external-store: 1.2.0(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@tanstack/react-table@8.15.3(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
-    resolution: {integrity: sha512-aocQ4WpWiAh7R+yxNp+DGQYXeVACh5lv2kk96DjYgFiHDCB0cOFoYMT/pM6eDOzeMXR9AvPoLeumTgq8/0qX+w==}
+  /@tanstack/react-table@8.16.0(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
+    resolution: {integrity: sha512-rKRjnt8ostqN2fercRVOIH/dq7MAmOENCMvVlKx6P9Iokhh6woBGnIZEkqsY/vEJf1jN3TqLOb34xQGLVRuhAg==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@tanstack/table-core': 8.15.3
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      '@tanstack/table-core': 8.16.0
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@tanstack/react-virtual@3.2.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /@tanstack/react-virtual@3.2.1(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-i9Nt0ssIh2bSjomJZlr6Iq5usT/9+ewo2/fKHRNk6kjVKS8jrhXbnO8NEawarCuBx/efv0xpoUUKKGxa0cQb4Q==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@tanstack/virtual-core': 3.2.1
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /@tanstack/router-devtools@1.26.20(csstype@3.1.3)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
-    resolution: {integrity: sha512-bVWL5qtBJ1OotjESqpoyMdTZaiAsHLZNcBmvXLbXt76knLw5ELyyBIe8ieF+6xQxKh7JT/wpsWGCdh9frwYfTw==}
+  /@tanstack/router-devtools@1.27.0(csstype@3.1.3)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
+    resolution: {integrity: sha512-iG3yQU/gJ3aykxr2GwD0yV0GVFPybHhVv8armBXL27+l2e0KwYzxET3GQ6HLCmx6BhKEx4Jwvkx9WQYccTAwUw==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@tanstack/react-router': 1.26.20(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@tanstack/react-router': 1.27.0(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       clsx: 2.1.0
       date-fns: 2.30.0
       goober: 2.1.14(csstype@3.1.3)
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     transitivePeerDependencies:
       - csstype
     dev: false
@@ -4041,8 +4041,8 @@ packages:
       zod: 3.22.4
     dev: true
 
-  /@tanstack/router-vite-plugin@1.26.16(vite@5.2.8):
-    resolution: {integrity: sha512-djFWmqrYEFSeBIkH8wCEccSqFe/5wCKcqMcDWHB7KWVOMUcTJLsgXE4mxvIx8xoIi/5Fcvc6PlkqRBSgrFrqwg==}
+  /@tanstack/router-vite-plugin@1.26.21(vite@5.2.8):
+    resolution: {integrity: sha512-aQ/omLBHhPM+jMv7/QCAp4PPjeSnFbjZcsxn27hulrhuknrt6KZTKE5pmYeeC4W2EkYfGZSh2+Lf6lpWhBV0pA==}
     engines: {node: '>=12'}
     dependencies:
       '@babel/core': 7.24.4
@@ -4070,8 +4070,8 @@ packages:
     resolution: {integrity: sha512-GnolmC8Fr4mvsHE1fGQmR3Nm0eBO3KnZjDU0a+P3TeQNM/dDscFGxtA7p31NplQNW3KwBw4t1RVFmz0VeKLxcw==}
     dev: false
 
-  /@tanstack/table-core@8.15.3:
-    resolution: {integrity: sha512-wOgV0HfEvuMOv8RlqdR9MdNNqq0uyvQtP39QOvGlggHvIObOE4exS+D5LGO8LZ3LUXxId2IlUKcHDHaGujWhUg==}
+  /@tanstack/table-core@8.16.0:
+    resolution: {integrity: sha512-dCG8vQGk4js5v88/k83tTedWOwjGnIyONrKpHpfmSJB8jwFHl8GSu1sBBxbtACVAPtAQgwNxl0rw1d3RqRM1Tg==}
     engines: {node: '>=12'}
     dev: false
 
@@ -4125,8 +4125,8 @@ packages:
       vitest: 1.5.0(@types/node@20.12.7)(happy-dom@14.7.1)(lightningcss@1.24.1)
     dev: true
 
-  /@testing-library/react@15.0.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
-    resolution: {integrity: sha512-I8u4qqGAuBg7C1/kRB9n7Oz9Pc/UHEkmiQRbJziSG8B13eZfAcAUn8TSP26ZIvfSeb68CngmtZbKKcRqcQKa3g==}
+  /@testing-library/react@15.0.2(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
+    resolution: {integrity: sha512-5mzIpuytB1ctpyywvyaY2TAAUQVCZIGqwiqFQf6u9lvj/SJQepGUzNV18Xpk+NLCaCE2j7CWrZE0tEf9xLZYiQ==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18.0.0
@@ -4135,8 +4135,8 @@ packages:
       '@babel/runtime': 7.24.4
       '@testing-library/dom': 10.0.0
       '@types/react-dom': 18.2.25
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: true
 
   /@testing-library/user-event@14.5.2(@testing-library/dom@10.0.0):
@@ -4456,10 +4456,10 @@ packages:
   /@types/react-dom@18.2.25:
     resolution: {integrity: sha512-o/V48vf4MQh7juIKZU2QGDfli6p1+OOi5oXx36Hffpc9adsHeXjVp8rHuPkjd8VT8sOJ2Zp05HR7CdpGTIUFUA==}
     dependencies:
-      '@types/react': 18.2.77
+      '@types/react': 18.2.78
 
-  /@types/react@18.2.77:
-    resolution: {integrity: sha512-CUT9KUUF+HytDM7WiXKLF9qUSg4tGImwy4FXTlfEDPEkkNUzJ7rVFolYweJ9fS1ljoIaP7M7Rdjc5eUm/Yu5AA==}
+  /@types/react@18.2.78:
+    resolution: {integrity: sha512-qOwdPnnitQY4xKlKayt42q5W5UQrSHjgoXNVEtxeqdITJ99k4VXJOP3vt8Rkm9HmgJpH50UNU+rlqfkfWOqp0A==}
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
@@ -5212,7 +5212,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001609
-      electron-to-chromium: 1.4.735
+      electron-to-chromium: 1.4.736
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
     dev: true
@@ -5763,16 +5763,16 @@ packages:
     resolution: {integrity: sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==}
     dev: false
 
-  /ejs@3.1.9:
-    resolution: {integrity: sha512-rC+QVNMJWv+MtPgkt0y+0rVEIdbtxVADApW9JXrUVlzHetgcyczP/E7DJmWJ4fJCZF2cPcBk0laWO9ZHMG3DmQ==}
+  /ejs@3.1.10:
+    resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     dependencies:
       jake: 10.8.7
     dev: true
 
-  /electron-to-chromium@1.4.735:
-    resolution: {integrity: sha512-pkYpvwg8VyOTQAeBqZ7jsmpCjko1Qc6We1ZtZCjRyYbT5v4AIUKDy5cQTRotQlSSZmMr8jqpEt6JtOj5k7lR7A==}
+  /electron-to-chromium@1.4.736:
+    resolution: {integrity: sha512-Rer6wc3ynLelKNM4lOCg7/zPQj8tPOCB2hzD32PX9wd3hgRRi9MxEbmkFCokzcEhRVMiOVLjnL9ig9cefJ+6+Q==}
     dev: true
 
   /emoji-regex@10.3.0:
@@ -6223,8 +6223,8 @@ packages:
       eslint: 8.57.0
     dev: true
 
-  /eslint-plugin-testing-library@6.2.0(eslint@8.57.0)(typescript@5.4.5):
-    resolution: {integrity: sha512-+LCYJU81WF2yQ+Xu4A135CgK8IszcFcyMF4sWkbiu6Oj+Nel0TrkZq/HvDw0/1WuO3dhDQsZA/OpEMGd0NfcUw==}
+  /eslint-plugin-testing-library@6.2.1(eslint@8.57.0)(typescript@5.4.5):
+    resolution: {integrity: sha512-CP2YV/AxtgyrXgizM4648UkuVrFGDcCA8uDmrLytGqtsa7wgC6MTuIQqEAT1Qm4/zCxnC8xRtiGgfEwEt6hmdw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0, npm: '>=6'}
     peerDependencies:
       eslint: ^7.5.0 || ^8.0.0
@@ -7358,7 +7358,7 @@ packages:
       supports-color: 7.2.0
     dev: true
 
-  /jotai-immer@0.3.0(immer@10.0.4)(jotai@2.8.0)(react@19.0.0-canary-4c12339ce-20240408):
+  /jotai-immer@0.3.0(immer@10.0.4)(jotai@2.8.0)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-k+o4rWfWWLyHfucHAdoiN+l8flxMrKC/bEFvJA98znj+kbPW5R90EPa1u8mhWLJTABW3xjAp7Z3kyD3FVi0Hgw==}
     peerDependencies:
       immer: '*'
@@ -7366,11 +7366,11 @@ packages:
       react: '>=17.0.0'
     dependencies:
       immer: 10.0.4
-      jotai: 2.8.0(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      react: 19.0.0-canary-4c12339ce-20240408
+      jotai: 2.8.0(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /jotai@2.8.0(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /jotai@2.8.0(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-yZNMC36FdLOksOr8qga0yLf14miCJlEThlp5DeFJNnqzm2+ZG7wLcJzoOyij5K6U6Xlc5ljQqPDlJRgqW0Y18g==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
@@ -7382,8 +7382,8 @@ packages:
       react:
         optional: true
     dependencies:
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
   /js-tokens@4.0.0:
@@ -7475,18 +7475,18 @@ packages:
       object.values: 1.2.0
     dev: true
 
-  /kbar@0.1.0-beta.45(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /kbar@0.1.0-beta.45(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-kXvjthqPLoWZXlxLJPrFKioskNdQv1O3Ukg5mqq2ExK3Ix1qvYT3W/ACDRIv/e/CHxPWZoTriB4oFbQ6UCSX5g==}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.77)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
+      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.78)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
       fast-equals: 2.0.4
       fuse.js: 6.6.2
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
-      react-virtual: 2.10.4(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
+      react-virtual: 2.10.4(react@19.0.0-canary-96c584661-20240412)
       tiny-invariant: 1.3.3
     transitivePeerDependencies:
       - '@types/react'
@@ -8268,7 +8268,7 @@ packages:
       '@babel/types': 7.24.0
       '@rollup/pluginutils': 5.1.0(rollup@4.14.2)
       kleur: 4.1.5
-      undici: 6.12.0
+      undici: 6.13.0
       unplugin: 1.10.1
     transitivePeerDependencies:
       - rollup
@@ -8690,18 +8690,18 @@ packages:
       pathe: 1.1.2
     dev: true
 
-  /playwright-core@1.43.0:
-    resolution: {integrity: sha512-iWFjyBUH97+pUFiyTqSLd8cDMMOS0r2ZYz2qEsPjH8/bX++sbIJT35MSwKnp1r/OQBAqC5XO99xFbJ9XClhf4w==}
+  /playwright-core@1.43.1:
+    resolution: {integrity: sha512-EI36Mto2Vrx6VF7rm708qSnesVQKbxEWvPrfA1IPY6HgczBplDx7ENtx+K2n4kJ41sLLkuGfmb0ZLSSXlDhqPg==}
     engines: {node: '>=16'}
     hasBin: true
     dev: true
 
-  /playwright@1.43.0:
-    resolution: {integrity: sha512-SiOKHbVjTSf6wHuGCbqrEyzlm6qvXcv7mENP+OZon1I07brfZLGdfWV0l/efAzVx7TF3Z45ov1gPEkku9q25YQ==}
+  /playwright@1.43.1:
+    resolution: {integrity: sha512-V7SoH0ai2kNt1Md9E3Gwas5B9m8KR2GVvwZnAI6Pg0m3sh7UvgiYhRrhsziCmqMJNouPckiOhk8T+9bSAK0VIA==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright-core: 1.43.0
+      playwright-core: 1.43.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -8937,8 +8937,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /qs@6.12.0:
-    resolution: {integrity: sha512-trVZiI6RMOkO476zLGaBIzszOdFPnCCXHPG9kn0yuS1uz6xdVxPfZdB3vUig9pxPFDM9BRAgz/YUIVQ1/vuiUg==}
+  /qs@6.12.1:
+    resolution: {integrity: sha512-zWmv4RSuB9r2mYQw3zxQuHWeU+42aKi1wWig/j4ele4ygELZ7PEO6MM7rim9oAQH2A5MWfsAVf/jPvTPgCbvUQ==}
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.6
@@ -8954,33 +8954,33 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /react-dom@19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408):
-    resolution: {integrity: sha512-dMttAQ6IA63sUCCw+ZBE4QBO87PGjEcgNhNTYGHmw15ONqeUKQ8XmGEUKBOTmux7CIV9gdmKr3BGUFdGeT5ERA==}
+  /react-dom@19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412):
+    resolution: {integrity: sha512-BF/9BKTieBBNUuZF8JiEbl9TaJdjo8eUtzh/tiE13Krr1vk5sd8NEXpdZxapc752eiBiINvrlOXdnTLJCj/xLQ==}
     peerDependencies:
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
     dependencies:
-      react: 19.0.0-canary-4c12339ce-20240408
-      scheduler: 0.25.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
+      scheduler: 0.25.0-canary-96c584661-20240412
 
-  /react-error-boundary@4.0.13(react@19.0.0-canary-4c12339ce-20240408):
+  /react-error-boundary@4.0.13(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-b6PwbdSv8XeOSYvjt8LpgpKrZ0yGdtZokYwkwV2wlcZbxgopHX/hgPl5VgpnoVOWd868n1hktM8Qm4b+02MiLQ==}
     peerDependencies:
       react: '>=16.13.1'
     dependencies:
       '@babel/runtime': 7.24.4
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /react-hook-form@7.51.3(react@19.0.0-canary-4c12339ce-20240408):
+  /react-hook-form@7.51.3(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-cvJ/wbHdhYx8aviSWh28w9ImjmVsb5Y05n1+FW786vEZQJV5STNM0pW6ujS+oiBecb0ARBxJFyAnXj9+GHXACQ==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
     dependencies:
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /react-i18next@14.1.0(i18next@23.11.1)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /react-i18next@14.1.0(i18next@23.11.1)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-3KwX6LHpbvGQ+sBEntjV4sYW3Zovjjl3fpoHbUwSgFHf0uRBcbeCBLR5al6ikncI5+W0EFb71QXZmfop+J6NrQ==}
     peerDependencies:
       i18next: '>= 23.2.3'
@@ -8996,8 +8996,8 @@ packages:
       '@babel/runtime': 7.24.4
       html-parse-stringify: 3.0.1
       i18next: 23.11.1
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
   /react-is@16.13.1:
@@ -9016,7 +9016,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-remove-scroll-bar@2.3.6(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /react-remove-scroll-bar@2.3.6(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-DtSYaao4mBmX+HDo5YWYdBWQwYIQQshUV/dVxFxK+KM26Wjwp1gZ6rv6OC3oujI6Bfu6Xyg3TwK533AQutsn/g==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -9026,13 +9026,13 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-style-singleton: 2.2.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
+      react-style-singleton: 2.2.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
       tslib: 2.6.2
     dev: false
 
-  /react-remove-scroll@2.5.5(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /react-remove-scroll@2.5.5(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-ImKhrzJJsyXJfBZ4bzu8Bwpka14c/fQt0k+cyFp/PBhTfyDnU5hjOtM4AG/0AMyy8oKzOTR0lDgJIM7pYXI0kw==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -9042,16 +9042,16 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-remove-scroll-bar: 2.3.6(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      react-style-singleton: 2.2.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
+      react-remove-scroll-bar: 2.3.6(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      react-style-singleton: 2.2.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
       tslib: 2.6.2
-      use-callback-ref: 1.3.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
-      use-sidecar: 1.1.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408)
+      use-callback-ref: 1.3.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
+      use-sidecar: 1.1.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /react-responsive@10.0.0(react@19.0.0-canary-4c12339ce-20240408):
+  /react-responsive@10.0.0(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-N6/UiRLGQyGUqrarhBZmrSmHi2FXSD++N5VbSKsBBvWfG0ZV7asvUBluSv5lSzdMyEVjzZ6Y8DL4OHABiztDOg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -9060,11 +9060,11 @@ packages:
       hyphenate-style-name: 1.0.4
       matchmediaquery: 0.4.2
       prop-types: 15.8.1
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
       shallow-equal: 3.1.0
     dev: false
 
-  /react-style-singleton@2.2.1(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /react-style-singleton@2.2.1(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -9074,14 +9074,14 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.77
+      '@types/react': 18.2.78
       get-nonce: 1.0.1
       invariant: 2.2.4
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
       tslib: 2.6.2
     dev: false
 
-  /react-transition-group@4.4.5(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /react-transition-group@4.4.5(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
     peerDependencies:
       react: '>=16.6.0'
@@ -9091,37 +9091,37 @@ packages:
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /react-virtual@2.10.4(react@19.0.0-canary-4c12339ce-20240408):
+  /react-virtual@2.10.4(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-Ir6+oPQZTVHfa6+JL9M7cvMILstFZH/H3jqeYeKI4MSUX+rIruVwFC6nGVXw9wqAw8L0Kg2KvfXxI85OvYQdpQ==}
     peerDependencies:
       react: ^16.6.3 || ^17.0.0
     dependencies:
       '@reach/observe-rect': 1.2.0
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
-  /react@19.0.0-canary-4c12339ce-20240408:
-    resolution: {integrity: sha512-QdQl76CTAmYrwjxq6fZRDWw2/MHPNxkYQ1xZVir2MbK/wxK62vFAPGr2j/AXs36ADVUq+tUGx4XNmdgnfL4f1Q==}
+  /react@19.0.0-canary-96c584661-20240412:
+    resolution: {integrity: sha512-4wZI4CuU4HeKOqy+nu+PlHigTuxYXKAM4d0HaeHtQsgTM8UdyHxgEJ9sjibA0nEhuvNCT9BuyHlVdWqwmcNR2A==}
     engines: {node: '>=0.10.0'}
 
-  /reactflow@11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /reactflow@11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-2GEh0bTkYR7rzAV3qdeN6C1o4qumtETZl7yQv1GVrfgr3c77nCUAOKsv5hetRejOGNnJudRwn6axeWFAY+IjNg==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/background': 11.3.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@reactflow/controls': 11.2.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@reactflow/core': 11.11.1(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@reactflow/minimap': 11.7.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@reactflow/node-resizer': 2.2.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      '@reactflow/node-toolbar': 1.3.11(@types/react@18.2.77)(immer@10.0.4)(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      '@reactflow/background': 11.3.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@reactflow/controls': 11.2.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@reactflow/core': 11.11.1(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@reactflow/minimap': 11.7.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@reactflow/node-resizer': 2.2.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      '@reactflow/node-toolbar': 1.3.11(@types/react@18.2.78)(immer@10.0.4)(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -9405,8 +9405,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /scheduler@0.25.0-canary-4c12339ce-20240408:
-    resolution: {integrity: sha512-XGG/Y5q5jeJy+rKp963+nlz81H/eDEMDmwem8QFHkuufjW/IEhM9ha6PO76m9qA6Qr59HVjlTGJ6D1bH1lemeQ==}
+  /scheduler@0.25.0-canary-96c584661-20240412:
+    resolution: {integrity: sha512-yIgey951Qr5hSpwdrk1w2OJoywBXFdew8duq27Bo8WQ+4Zp02OX6GjZuS0iRnKxmYh/6FApkQOaYT1T0CdlBTQ==}
 
   /semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
@@ -10213,8 +10213,8 @@ packages:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
-  /undici@6.12.0:
-    resolution: {integrity: sha512-d87yk8lqSFUYtR5fTFe2frpkMIrUEz+lgoJmhcL+J3StVl+8fj8ytE4lLnJOTPCE12YbumNGzf4LYsQyusdV5g==}
+  /undici@6.13.0:
+    resolution: {integrity: sha512-Q2rtqmZWrbP8nePMq7mOJIN98M0fYvSgV89vwl/BQRT4mDOeY2GXZngfGpcBBhtky3woM7G24wZV3Q304Bv6cw==}
     engines: {node: '>=18.0'}
     dev: true
 
@@ -10356,10 +10356,10 @@ packages:
     resolution: {integrity: sha512-6hxOLGfZASQK/cijlZnZJTq8OXAkt/3YGfQX45vvMYXpZoo8NdWZcY73K108Jf759lS1Bv/8wXnHDTSz17dSRw==}
     dependencies:
       punycode: 1.4.1
-      qs: 6.12.0
+      qs: 6.12.1
     dev: false
 
-  /use-callback-ref@1.3.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /use-callback-ref@1.3.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-elOQwe6Q8gqZgDA8mrh44qRTQqpIHDcZ3hXTLjBe1i4ph8XpNJnO+aQf3NaG+lriLopI4HMx9VjQLfPQ6vhnoA==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -10369,23 +10369,23 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.77
-      react: 19.0.0-canary-4c12339ce-20240408
+      '@types/react': 18.2.78
+      react: 19.0.0-canary-96c584661-20240412
       tslib: 2.6.2
     dev: false
 
-  /use-resize-observer@9.1.0(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
+  /use-resize-observer@9.1.0(react-dom@19.0.0-canary-96c584661-20240412)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-R25VqO9Wb3asSD4eqtcxk8sJalvIOYBqS8MNZlpDSQ4l4xMQxC/J7Id9HoTqPq8FwULIn0PVW+OAqF2dyYbjow==}
     peerDependencies:
       react: 16.8.0 - 18
       react-dom: 16.8.0 - 18
     dependencies:
       '@juggle/resize-observer': 3.4.0
-      react: 19.0.0-canary-4c12339ce-20240408
-      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      react-dom: 19.0.0-canary-96c584661-20240412(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /use-sidecar@1.1.2(@types/react@18.2.77)(react@19.0.0-canary-4c12339ce-20240408):
+  /use-sidecar@1.1.2(@types/react@18.2.78)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -10395,18 +10395,18 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.77
+      '@types/react': 18.2.78
       detect-node-es: 1.1.0
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
       tslib: 2.6.2
     dev: false
 
-  /use-sync-external-store@1.2.0(react@19.0.0-canary-4c12339ce-20240408):
+  /use-sync-external-store@1.2.0(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
   /util-deprecate@1.0.2:
@@ -11026,7 +11026,7 @@ packages:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: true
 
-  /zustand@4.5.2(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408):
+  /zustand@4.5.2(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -11041,13 +11041,13 @@ packages:
       react:
         optional: true
     dependencies:
-      '@types/react': 18.2.77
+      '@types/react': 18.2.78
       immer: 10.0.4
-      react: 19.0.0-canary-4c12339ce-20240408
-      use-sync-external-store: 1.2.0(react@19.0.0-canary-4c12339ce-20240408)
+      react: 19.0.0-canary-96c584661-20240412
+      use-sync-external-store: 1.2.0(react@19.0.0-canary-96c584661-20240412)
     dev: false
 
-  /zustand@5.0.0-alpha.6(@types/react@18.2.77)(immer@10.0.4)(react@19.0.0-canary-4c12339ce-20240408):
+  /zustand@5.0.0-alpha.6(@types/react@18.2.78)(immer@10.0.4)(react@19.0.0-canary-96c584661-20240412):
     resolution: {integrity: sha512-tj59H6VFNbzJYfnGB/QPhKdzvpc1XlpTSTYLGiEwxaJgXafn24s0pjcWjHzNBv/kcXAvBg4R0CxtL+Yz4sprhQ==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
@@ -11065,9 +11065,9 @@ packages:
       use-sync-external-store:
         optional: true
     dependencies:
-      '@types/react': 18.2.77
+      '@types/react': 18.2.78
       immer: 10.0.4
-      react: 19.0.0-canary-4c12339ce-20240408
+      react: 19.0.0-canary-96c584661-20240412
     dev: false
 
   /zwitch@2.0.4:
