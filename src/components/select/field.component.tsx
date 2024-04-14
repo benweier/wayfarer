@@ -1,3 +1,4 @@
+import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as Select from '@radix-ui/react-select'
 import { type PropsWithChildren } from 'react'
 import { AppIcon } from '@/components/icons'
@@ -28,15 +29,18 @@ export const Field = ({
           className="bg-background-primary border-border-primary z-50 overflow-hidden rounded-md border"
           sideOffset={8}
         >
-          <Select.ScrollUpButton className="text-foreground-secondary bg-background-secondary mb-2 flex cursor-default items-center justify-center py-1">
-            <AppIcon id="chevron:up" className="text-foreground-tertiary size-3" aria-hidden="true" />
-          </Select.ScrollUpButton>
+          <ScrollArea.Root className="h-full max-h-[320px] overflow-hidden" type="scroll">
+            <ScrollArea.Viewport className="h-full max-h-[320px] p-2">
+              <Select.Viewport>{children}</Select.Viewport>
+            </ScrollArea.Viewport>
 
-          <Select.Viewport className="p-2">{children}</Select.Viewport>
-
-          <Select.ScrollDownButton className="text-foreground-secondary bg-background-secondary mt-2 flex cursor-default items-center justify-center py-1">
-            <AppIcon id="chevron:down" className="text-fg-tertiary size-3" aria-hidden="true" />
-          </Select.ScrollDownButton>
+            <ScrollArea.Scrollbar
+              className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
+              orientation="vertical"
+            >
+              <ScrollArea.Thumb className="bg-background-tertiary relative flex-1 rounded-full" />
+            </ScrollArea.Scrollbar>
+          </ScrollArea.Root>
         </Select.Content>
       </Select.Portal>
     </Select.Root>
