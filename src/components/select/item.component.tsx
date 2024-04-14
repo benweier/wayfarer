@@ -3,18 +3,18 @@ import { cx } from 'class-variance-authority'
 import { type ForwardedRef, forwardRef } from 'react'
 import { AppIcon } from '@/components/icons'
 
-const ItemComponent = (
+const SelectItemComponent = (
   { children, className, ...props }: Select.SelectItemProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
   return (
     <Select.Item
+      ref={ref}
+      {...props}
       className={cx(
         'group text-foreground-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:bg-background-secondary data-[highlighted]:text-foreground-primary typography-sm relative flex items-center rounded-sm py-2 pr-16 pl-8 select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none',
         className,
       )}
-      ref={ref}
-      {...props}
     >
       <Select.ItemText>{children}</Select.ItemText>
       <Select.ItemIndicator className="absolute left-1 inline-flex w-6 items-center justify-center">
@@ -24,4 +24,4 @@ const ItemComponent = (
   )
 }
 
-export const Item = forwardRef(ItemComponent)
+export const Item = forwardRef(SelectItemComponent)
