@@ -10,7 +10,7 @@ const ItemComponent = (
   return (
     <Select.Item
       className={cx(
-        'text-foreground-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:bg-background-secondary data-[highlighted]:text-foreground-primary typography-sm relative flex items-center rounded-sm py-2 pr-8 pl-8 select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none',
+        'group text-foreground-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:bg-background-secondary data-[highlighted]:text-foreground-primary typography-sm relative flex items-center rounded-sm py-2 pr-16 pl-8 select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none',
         className,
       )}
       ref={ref}
