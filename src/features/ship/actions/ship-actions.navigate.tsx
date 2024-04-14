@@ -14,9 +14,12 @@ export const Navigate = ({
   waypointSymbol,
   disabled = false,
   children,
-}: ShipActionProps<{
-  waypointSymbol: string
-}>) => {
+}: ShipActionProps<
+  ReturnType<typeof createShipNavigateMutation.mutationFn>,
+  {
+    waypointSymbol: string
+  }
+>) => {
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
@@ -105,7 +108,7 @@ export const Navigate = ({
 
   return children({
     disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
-    onClick: () => {
+    execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol, waypointSymbol })
     },
   })

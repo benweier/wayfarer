@@ -28,8 +28,13 @@ export const CargoJettison = ({ ship, item }: { ship: ShipResponse; item: CargoI
             closeModal()
           }}
         >
-          {(props) => (
-            <Button intent="danger" adornment={{ start: <AppIcon id="trash" className="size-5" /> }} {...props}>
+          {({ disabled, execute }) => (
+            <Button
+              intent="danger"
+              adornment={{ start: <AppIcon id="trash" className="size-5" /> }}
+              disabled={disabled}
+              onClick={() => execute()}
+            >
               {t('ship.action.confirm_jettison', { context: 'action' })}
             </Button>
           )}

@@ -4,7 +4,11 @@ import { createShipRepairMutation, getShipByIdQuery, getShipListQuery } from '@/
 import { useAuthStore } from '@/store/auth'
 import { type ShipActionProps } from './ship-actions.types'
 
-export const Repair = ({ ship, disabled = false, children }: ShipActionProps) => {
+export const Repair = ({
+  ship,
+  disabled = false,
+  children,
+}: ShipActionProps<ReturnType<typeof createShipRepairMutation.mutationFn>>) => {
   const client = useQueryClient()
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
@@ -42,7 +46,7 @@ export const Repair = ({ ship, disabled = false, children }: ShipActionProps) =>
 
   return children({
     disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'DOCKED',
-    onClick: () => {
+    execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol })
     },
   })

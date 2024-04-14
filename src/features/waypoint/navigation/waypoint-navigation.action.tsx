@@ -16,8 +16,8 @@ export const WaypointNavigationAction = ({ ship, waypoint, distance }: WaypointN
           ship={ship}
           waypointSymbol={waypoint.symbol}
         >
-          {(props) => (
-            <Button intent="success" kind="outline" icon {...props}>
+          {({ disabled, execute }) => (
+            <Button intent="success" kind="outline" icon disabled={disabled} onClick={() => execute()}>
               <ShipIcon id="navigate" className="size-4" aria-hidden />
               <span className="sr-only">
                 {t('waypoint.navigate_ship_to_waypoint', {

@@ -1,18 +1,19 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { type Ref, forwardRef } from 'react'
 import { createShipFlightModeMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
-const FlightModeComponent = (
-  { ship, disabled = false, flightMode, children }: ShipActionProps<{ flightMode: string }>,
-  ref: Ref<HTMLButtonElement>,
-) => {
+export const FlightMode = ({
+  ship,
+  disabled = false,
+  flightMode,
+  children,
+}: ShipActionProps<ReturnType<typeof createShipFlightModeMutation.mutationFn>, { flightMode: string }>) => {
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipFlightModeMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipFlightModeMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -40,12 +41,9 @@ const FlightModeComponent = (
   })
 
   return children({
-    ref,
     disabled: disabled || isMutating > 0 || isPending || ship.fuel.capacity === 0 || ship.nav.status === 'IN_TRANSIT',
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, flightMode })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, flightMode })
     },
   })
 }
-
-export const FlightMode = forwardRef(FlightModeComponent)

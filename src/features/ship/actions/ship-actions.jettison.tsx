@@ -10,16 +10,19 @@ export const Jettison = ({
   disabled = false,
   onDone,
   children,
-}: ShipActionProps<{
-  symbol: string
-  units: number
-  onDone?: () => void
-}>) => {
+}: ShipActionProps<
+  ReturnType<typeof createShipJettisonMutation.mutationFn>,
+  {
+    symbol: string
+    units: number
+    onDone?: () => void
+  }
+>) => {
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipJettisonMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipJettisonMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -51,8 +54,8 @@ export const Jettison = ({
 
   return children({
     disabled: disabled || isMutating > 0 || isPending,
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, itemSymbol: symbol, units })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, itemSymbol: symbol, units })
     },
   })
 }

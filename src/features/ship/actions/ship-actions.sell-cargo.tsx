@@ -10,16 +10,19 @@ export const SellCargo = ({
   units,
   disabled = false,
   children,
-}: ShipActionProps<{
-  symbol: string
-  units: number
-}>) => {
+}: ShipActionProps<
+  ReturnType<typeof createShipCargoSellMutation.mutationFn>,
+  {
+    symbol: string
+    units: number
+  }
+>) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipCargoSellMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipCargoSellMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -50,8 +53,8 @@ export const SellCargo = ({
 
   return children({
     disabled: disabled || isMutating > 0 || isPending,
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, itemSymbol: symbol, units })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, itemSymbol: symbol, units })
     },
   })
 }

@@ -7,14 +7,17 @@ export const Warp = ({
   ship,
   waypointSymbol,
   children,
-}: ShipActionProps<{
-  waypointSymbol: string
-}>) => {
+}: ShipActionProps<
+  ReturnType<typeof createShipWarpMutation.mutationFn>,
+  {
+    waypointSymbol: string
+  }
+>) => {
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipWarpMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipWarpMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -46,8 +49,8 @@ export const Warp = ({
 
   return children({
     disabled: isMutating > 0 || isPending,
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, waypointSymbol })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, waypointSymbol })
     },
   })
 }

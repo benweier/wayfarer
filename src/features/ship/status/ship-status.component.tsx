@@ -55,16 +55,16 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             <div className="flex gap-2">
               {ship.nav.status === 'DOCKED' ? (
                 <ShipActions.Orbit ship={ship}>
-                  {(props) => (
-                    <Button intent="info" kind="outline" size="small" {...props}>
+                  {({ disabled, execute }) => (
+                    <Button intent="info" kind="outline" size="small" disabled={disabled} onClick={() => execute()}>
                       {t('ship.action.orbit')}
                     </Button>
                   )}
                 </ShipActions.Orbit>
               ) : (
                 <ShipActions.Dock ship={ship}>
-                  {(props) => (
-                    <Button intent="info" kind="outline" size="small" {...props}>
+                  {({ disabled, execute }) => (
+                    <Button intent="info" kind="outline" size="small" disabled={disabled} onClick={() => execute()}>
                       {t('ship.action.dock')}
                     </Button>
                   )}
@@ -103,8 +103,8 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
                 ship={ship}
                 disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, [WaypointTraits.Marketplace])}
               >
-                {(props) => (
-                  <Button intent="info" kind="outline" size="small" {...props}>
+                {({ disabled, execute }) => (
+                  <Button intent="info" kind="outline" size="small" disabled={disabled} onClick={() => execute()}>
                     {t('ship.action.refuel')}
                   </Button>
                 )}
@@ -151,8 +151,8 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
                 ship={ship}
                 disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, [WaypointTraits.Shipyard])}
               >
-                {(props) => (
-                  <Button intent="success" kind="outline" size="small" {...props}>
+                {({ disabled, execute }) => (
+                  <Button intent="success" kind="outline" size="small" disabled={disabled} onClick={() => execute()}>
                     {t('ship.action.repair')}
                   </Button>
                 )}

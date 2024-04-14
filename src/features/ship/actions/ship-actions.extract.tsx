@@ -10,16 +10,19 @@ export const Extract = ({
   survey,
   disabled,
   children,
-}: ShipActionProps<{
-  survey?: SurveyResponse
-}>) => {
+}: ShipActionProps<
+  ReturnType<typeof createShipExtractMutation.mutationFn>,
+  {
+    survey?: SurveyResponse
+  }
+>) => {
   const client = useQueryClient()
   const removeSurvey = useSurveyStore((state) => state.actions.removeSurvey)
   const hasCooldown = ship.cooldown.remainingSeconds > 0
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipExtractMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipExtractMutation.mutationFn,
     onSuccess: (response, { shipSymbol, survey }) => {
@@ -52,8 +55,8 @@ export const Extract = ({
 
   return children({
     disabled: disabled || hasCooldown || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, survey })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, survey })
     },
   })
 }

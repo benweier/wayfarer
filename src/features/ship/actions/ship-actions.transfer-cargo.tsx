@@ -1,37 +1,23 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { type ReactNode, type Ref, type RefAttributes } from 'react'
+import { type ShipActionProps } from '@/features/ship/actions/ship-actions.types'
 import { createShipTransferCargoMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { type CargoInventory, type ShipResponse } from '@/types/spacetraders'
 
-type TransferCargoActionProps<OnClickArgs = never, R = unknown, T = unknown> = {
-  ship: ShipResponse
-  item: CargoInventory
-  disabled?: boolean
-  children: (
-    args: RefAttributes<HTMLButtonElement> & {
-      disabled: boolean
-      execute: (...args: OnClickArgs[]) => R
-    },
-  ) => ReactNode
-} & T
-
-export const TransferCargo = (
+export const TransferCargo = ({
+  ship,
+  disabled = false,
+  children = () => null,
+}: ShipActionProps<
+  ReturnType<typeof createShipTransferCargoMutation.mutationFn>,
+  { item: CargoInventory },
   {
-    ship,
-    disabled = false,
-    children = () => null,
-  }: TransferCargoActionProps<
-    {
-      toShipSymbol: string
-      symbol: string
-      units: number
-    },
-    ReturnType<typeof createShipTransferCargoMutation.mutationFn>
-  >,
-  ref: Ref<HTMLButtonElement>,
-) => {
+    toShipSymbol: string
+    symbol: string
+    units: number
+  }
+>) => {
   const client = useQueryClient()
   const fromShipQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
@@ -130,7 +116,6 @@ export const TransferCargo = (
   })
 
   return children({
-    ref,
     disabled: disabled || isMutating > 0,
     execute: ({ toShipSymbol, symbol, units }) => {
       return mutateAsync({

@@ -62,13 +62,14 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                   <Menu.Item as={Fragment}>
                     {({ active }) => (
                       <ShipActions.Orbit ship={ship}>
-                        {(props) => (
+                        {({ disabled, execute }) => (
                           <Button
-                            intent={active ? 'dim' : undefined}
+                            intent={active ? 'neutral' : undefined}
                             kind="flat"
                             size="small"
                             className="w-full text-left"
-                            {...props}
+                            disabled={disabled}
+                            onClick={() => execute()}
                           >
                             {t('ship.action.orbit')}
                           </Button>
@@ -81,13 +82,14 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                   <Menu.Item as={Fragment}>
                     {({ active }) => (
                       <ShipActions.Dock ship={ship}>
-                        {(props) => (
+                        {({ disabled, execute }) => (
                           <Button
-                            intent={active ? 'dim' : undefined}
+                            intent={active ? 'neutral' : undefined}
                             kind="flat"
                             size="small"
                             className="w-full text-left"
-                            {...props}
+                            disabled={disabled}
+                            onClick={() => execute()}
                           >
                             {t('ship.action.dock')}
                           </Button>
@@ -100,7 +102,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                   <Menu.Item as={Fragment}>
                     {({ active }) => (
                       <Button
-                        intent={active ? 'dim' : undefined}
+                        intent={active ? 'neutral' : undefined}
                         kind="flat"
                         size="small"
                         className="w-full text-left"

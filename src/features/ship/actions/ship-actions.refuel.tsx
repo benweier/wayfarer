@@ -4,13 +4,17 @@ import { createShipRefuelMutation, getShipByIdQuery, getShipListQuery } from '@/
 import { useAuthStore } from '@/store/auth'
 import { type ShipActionProps } from './ship-actions.types'
 
-export const Refuel = ({ ship, disabled = false, children }: ShipActionProps) => {
+export const Refuel = ({
+  ship,
+  disabled = false,
+  children,
+}: ShipActionProps<ReturnType<typeof createShipRefuelMutation.mutationFn>>) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipRefuelMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefuelMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -41,8 +45,8 @@ export const Refuel = ({ ship, disabled = false, children }: ShipActionProps) =>
 
   return children({
     disabled: disabled || isMutating > 0 || isPending || ship.fuel.current === ship.fuel.capacity,
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol })
     },
   })
 }

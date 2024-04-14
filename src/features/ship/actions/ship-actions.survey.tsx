@@ -4,14 +4,18 @@ import { createShipSurveyMutation, getShipByIdQuery, getShipListQuery } from '@/
 import { useSurveyStore } from '@/store/surveys'
 import { type ShipActionProps } from './ship-actions.types'
 
-export const Survey = ({ ship, disabled = false, children }: ShipActionProps) => {
+export const Survey = ({
+  ship,
+  disabled = false,
+  children,
+}: ShipActionProps<ReturnType<typeof createShipSurveyMutation.mutationFn>>) => {
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
   const addSurveys = useSurveyStore((state) => state.actions.addSurveys)
   const hasCooldown = ship.cooldown.remainingSeconds > 0
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipSurveyMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipSurveyMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -42,8 +46,8 @@ export const Survey = ({ ship, disabled = false, children }: ShipActionProps) =>
 
   return children({
     disabled: disabled || isMutating > 0 || isPending || hasCooldown || ship.nav.status !== 'IN_ORBIT',
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol })
     },
   })
 }

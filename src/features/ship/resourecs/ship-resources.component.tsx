@@ -21,24 +21,24 @@ export const ShipResources = ({ ship }: { ship: ShipResponse }) => {
     <div className="border-border-primary flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed py-9 px-3">
       <div className="flex gap-2">
         <ShipActions.Survey ship={ship} disabled={!canSurveyExtract}>
-          {(props) => (
-            <Button intent="success" {...props}>
+          {({ disabled, execute }) => (
+            <Button intent="success" disabled={disabled} onClick={() => execute()}>
               {t('ship.action.survey')} {ship.nav.waypointSymbol}
             </Button>
           )}
         </ShipActions.Survey>
 
         <ShipActions.Extract ship={ship} disabled={!canSurveyExtract}>
-          {(props) => (
-            <Button intent="info" {...props}>
+          {({ disabled, execute }) => (
+            <Button intent="info" disabled={disabled} onClick={() => execute()}>
               {t('ship.action.extract', { context: 'no_survey' })}
             </Button>
           )}
         </ShipActions.Extract>
 
         <ShipActions.Siphon ship={ship} disabled={!canSiphon}>
-          {({ ref, disabled, execute }) => (
-            <Button ref={ref} intent="warn" disabled={disabled} onClick={execute}>
+          {({ disabled, execute }) => (
+            <Button intent="warn" disabled={disabled} onClick={() => execute()}>
               {t('ship.action.siphon')}
             </Button>
           )}

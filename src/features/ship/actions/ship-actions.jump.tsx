@@ -8,15 +8,18 @@ export const Jump = ({
   systemSymbol,
   disabled = false,
   children,
-}: ShipActionProps<{
-  systemSymbol: string
-}>) => {
+}: ShipActionProps<
+  ReturnType<typeof createShipJumpMutation.mutationFn>,
+  {
+    systemSymbol: string
+  }
+>) => {
   const client = useQueryClient()
   const hasCooldown = ship.cooldown.remainingSeconds > 0
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipJumpMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipJumpMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -48,8 +51,8 @@ export const Jump = ({
 
   return children({
     disabled: disabled || hasCooldown || isMutating > 0 || isPending,
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, systemSymbol })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, systemSymbol })
     },
   })
 }

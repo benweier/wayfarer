@@ -1,15 +1,18 @@
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { type Ref, forwardRef } from 'react'
 import { createShipOrbitMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { type ShipActionProps } from './ship-actions.types'
 
-const OrbitComponent = ({ ship, disabled = false, children }: ShipActionProps, ref: Ref<HTMLButtonElement>) => {
+export const Orbit = ({
+  ship,
+  disabled = false,
+  children,
+}: ShipActionProps<ReturnType<typeof createShipOrbitMutation.mutationFn>>) => {
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipOrbitMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipOrbitMutation.mutationFn,
     onMutate: ({ shipSymbol }) => {
@@ -66,12 +69,9 @@ const OrbitComponent = ({ ship, disabled = false, children }: ShipActionProps, r
   })
 
   return children({
-    ref,
     disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'DOCKED',
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol })
     },
   })
 }
-
-export const Orbit = forwardRef(OrbitComponent)

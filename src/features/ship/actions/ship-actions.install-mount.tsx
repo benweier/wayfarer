@@ -9,13 +9,13 @@ export const InstallMount = ({
   mountSymbol,
   disabled = false,
   children,
-}: ShipActionProps<{ mountSymbol: string }>) => {
+}: ShipActionProps<ReturnType<typeof createShipInstallMountMutation.mutationFn>, { mountSymbol: string }>) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipInstallMountMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipInstallMountMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -48,8 +48,8 @@ export const InstallMount = ({
 
   return children({
     disabled: disabled || isMutating > 0 || isPending || ship.fuel.current === ship.fuel.capacity,
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, mountSymbol })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, mountSymbol })
     },
   })
 }

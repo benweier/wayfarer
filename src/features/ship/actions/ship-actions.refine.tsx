@@ -6,17 +6,20 @@ import { type ShipActionProps } from './ship-actions.types'
 export const Refine = ({
   ship,
   disabled = false,
-  item,
+  itemSymbol,
   children,
-}: ShipActionProps<{
-  item: string
-}>) => {
+}: ShipActionProps<
+  ReturnType<typeof createShipRefineMutation.mutationFn>,
+  {
+    itemSymbol: string
+  }
+>) => {
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
   const hasCooldown = ship.cooldown.remainingSeconds > 0
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationKey: createShipRefineMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRefineMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -47,8 +50,8 @@ export const Refine = ({
 
   return children({
     disabled: disabled || hasCooldown || isMutating > 0,
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, produce: item })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, produce: itemSymbol })
     },
   })
 }

@@ -4,7 +4,11 @@ import { createShipScrapMutation, getShipByIdQuery, getShipListQuery } from '@/s
 import { useAuthStore } from '@/store/auth'
 import { type ShipActionProps } from './ship-actions.types'
 
-export const Scrap = ({ ship, disabled = false, children }: ShipActionProps) => {
+export const Scrap = ({
+  ship,
+  disabled = false,
+  children,
+}: ShipActionProps<ReturnType<typeof createShipScrapMutation.mutationFn>>) => {
   const client = useQueryClient()
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
@@ -37,7 +41,7 @@ export const Scrap = ({ ship, disabled = false, children }: ShipActionProps) => 
 
   return children({
     disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'DOCKED',
-    onClick: () => {
+    execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol })
     },
   })

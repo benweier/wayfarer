@@ -9,13 +9,13 @@ export const RemoveMount = ({
   mountSymbol,
   disabled = false,
   children,
-}: ShipActionProps<{ mountSymbol: string }>) => {
+}: ShipActionProps<ReturnType<typeof createShipRemoveMountMutation.mutationFn>, { mountSymbol: string }>) => {
   const setAgent = useAuthStore((state) => state.actions.setAgent)
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey
   const isMutating = useIsMutating({ mutationKey: shipByIdQueryKey })
-  const { mutate, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: createShipRemoveMountMutation.getMutationKey({ shipSymbol: ship.symbol }),
     mutationFn: createShipRemoveMountMutation.mutationFn,
     onSuccess: (response, { shipSymbol }) => {
@@ -48,8 +48,8 @@ export const RemoveMount = ({
 
   return children({
     disabled: disabled || isMutating > 0 || isPending,
-    onClick: () => {
-      mutate({ shipSymbol: ship.symbol, mountSymbol })
+    execute: () => {
+      return mutateAsync({ shipSymbol: ship.symbol, mountSymbol })
     },
   })
 }
