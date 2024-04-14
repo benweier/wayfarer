@@ -26,13 +26,14 @@ export const Field = ({
 
       <Select.Portal>
         <Select.Content
-          className="bg-background-primary border-border-primary z-50 overflow-hidden rounded-md border"
+          position="popper"
           sideOffset={8}
+          className="popover bg-background-primary border-border-primary z-50 w-[var(--radix-select-trigger-width)] rounded-md border"
         >
-          <ScrollArea.Root className="h-full max-h-[320px] overflow-hidden" type="scroll">
-            <ScrollArea.Viewport className="h-full max-h-[320px] p-2">
-              <Select.Viewport>{children}</Select.Viewport>
-            </ScrollArea.Viewport>
+          <ScrollArea.Root className="max-h-[320px] overflow-hidden" type="scroll">
+            <Select.Viewport asChild>
+              <ScrollArea.Viewport className="h-full max-h-[320px] p-2">{children}</ScrollArea.Viewport>
+            </Select.Viewport>
 
             <ScrollArea.Scrollbar
               className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
