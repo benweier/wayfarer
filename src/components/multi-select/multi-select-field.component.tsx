@@ -1,9 +1,7 @@
 import * as Popover from '@radix-ui/react-popover'
 import * as ScrollArea from '@radix-ui/react-scroll-area'
-import { cx } from 'class-variance-authority'
 import { type PropsWithChildren } from 'react'
 import { Options } from './multi-select-options.component'
-import styles from './multi-select.module.css'
 import { type MultiSelectFieldProps } from './multi-select.types'
 
 export const Field = ({ trigger, id, value, onChange, children }: PropsWithChildren<MultiSelectFieldProps>) => {
@@ -12,13 +10,11 @@ export const Field = ({ trigger, id, value, onChange, children }: PropsWithChild
       <Popover.Trigger asChild>{trigger}</Popover.Trigger>
 
       <Popover.Portal>
-        <Popover.Content
-          side="bottom"
-          align="center"
-          className={cx(styles.popover, 'bg-background-primary border-border-primary relative z-50 rounded-md border')}
-          sideOffset={8}
-        >
-          <ScrollArea.Root className="h-full max-h-[320px] overflow-hidden" type="scroll">
+        <Popover.Content side="bottom" align="center" sideOffset={8} asChild>
+          <ScrollArea.Root
+            className="popover bg-background-primary border-border-primary relative z-50 h-full max-h-[320px] overflow-hidden rounded-md border"
+            type="scroll"
+          >
             <ScrollArea.Viewport className="h-full max-h-[320px] p-2">
               <Options type="multiple" aria-labelledby={id} value={value} onValueChange={onChange}>
                 {children}

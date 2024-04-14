@@ -19,6 +19,30 @@
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) scaleX(90%) scaleY(90%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleX(100%) scaleY(100%);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scaleX(100%) scaleY(100%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-24px) scaleX(90%) scaleY(90%);
+  }
+}
+
 @theme {
   --default-font-family: 'Space Grotesk', var(--font-family-sans);
   --default-font-feature-settings: 'ss01', 'ss03', 'case' 1, 'zero' 1;
@@ -218,6 +242,18 @@
 
     &:focus {
       box-shadow: 0 0 0 2px color-mix(in srgb, var(--link-fg) 67%, transparent);
+    }
+  }
+
+  .popover {
+    will-change: transform, opacity;
+
+    &[data-state='open'] {
+      animation: fade-in 84ms ease-out;
+    }
+
+    &[data-state='closed'] {
+      animation: fade-out 84ms ease-in;
     }
   }
 }
