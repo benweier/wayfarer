@@ -6,7 +6,6 @@ import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
-import { checker } from 'vite-plugin-checker'
 import dynamic from 'vite-plugin-dynamic-import'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
@@ -49,15 +48,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    checker({
-      typescript: true,
-      overlay: {
-        position: 'tl',
-        initialIsOpen: false,
-      },
-      terminal: false,
-      enableBuild: false,
-    }),
     basicSSL(),
     tsconfigPaths(),
     dynamic(),
