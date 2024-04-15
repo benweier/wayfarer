@@ -71,7 +71,7 @@ export const TradeGoodSell = ({
       ref={ref}
       size="md"
       trigger={<Modal.Trigger disabled={disabled || good.tradeVolume === 0 || noCargo}>{action}</Modal.Trigger>}
-      closeable
+      close={<Modal.Close />}
     >
       <div className="space-y-8">
         <div className="display-lg font-bold">

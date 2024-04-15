@@ -120,7 +120,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
           </div>
         </FloatingPortal>
       </Menu>
-      <Modal ref={ref} size="lg" closeable>
+      <Modal ref={ref} size="lg" close={<Modal.Close />}>
         <div className="space-y-8">
           <h3 className="text-title">
             Navigate Ship: <span className="font-normal">{ship.symbol}</span>
