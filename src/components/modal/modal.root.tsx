@@ -1,14 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { cx } from 'class-variance-authority'
 import { Fragment, type PropsWithChildren } from 'react'
-import { Button } from '@/components/button'
-import { AppIcon } from '@/components/icons'
 import { type ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
 
 export const Root = ({
   size = 'auto',
-  closeable = false,
+  close,
   disableExternalClose = false,
   children,
 }: PropsWithChildren<ModalDialogProps>) => {
@@ -63,20 +61,7 @@ export const Root = ({
               >
                 {children}
 
-                {closeable && (
-                  <Button
-                    intent="danger"
-                    kind="outline"
-                    size="small"
-                    icon
-                    className="absolute top-2 right-2"
-                    onClick={() => {
-                      modal.actions.closeModal()
-                    }}
-                  >
-                    <AppIcon id="x" className="size-3" />
-                  </Button>
-                )}
+                {close && <div className="absolute top-2 right-2">{close}</div>}
               </Dialog.Panel>
             </div>
           </Transition.Child>

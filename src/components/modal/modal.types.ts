@@ -5,13 +5,16 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
 export type ModalProps = {
   trigger?: ReactNode
   isOpen?: boolean
-  onClose?: () => void
   size?: DialogSize
-  closeable?: boolean
+  close?: ReactNode
   disableExternalClose?: boolean
 }
 
-export type ModalDialogProps = { size?: DialogSize; closeable?: boolean; disableExternalClose?: boolean }
+export type ModalDialogProps = {
+  size?: DialogSize
+  close?: ReactNode
+  disableExternalClose?: boolean
+}
 
 export type ModalImperativeRef = {
   openModal: () => void

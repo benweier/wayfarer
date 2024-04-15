@@ -1,3 +1,4 @@
+import { Close } from './modal.close'
 import { Modal as ModalComponent } from './modal.component'
 import { Trigger } from './modal.trigger'
 
@@ -12,4 +13,4 @@ export type {
   ModalStore,
 } from './modal.types'
 
-export const Modal = Object.assign(ModalComponent, { Trigger })
+export const Modal = Object.assign(ModalComponent, { Trigger, Close })

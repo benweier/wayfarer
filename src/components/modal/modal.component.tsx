@@ -1,14 +1,26 @@
-import { type ForwardedRef, type PropsWithChildren, forwardRef, useImperativeHandle } from 'react'
+import { type ForwardedRef, type PropsWithChildren, forwardRef, useImperativeHandle, useState } from 'react'
+import { createStore } from 'zustand'
 import { ModalContext } from './modal.context'
 import { Root } from './modal.root'
-import { type ModalImperativeRef, type ModalProps } from './modal.types'
-import { useModalStoreCreator } from './use-modal-store-creator.hook'
+import { type ModalImperativeRef, type ModalProps, type ModalStore } from './modal.types'
 
 const ModalProviderComponent = (
-  { trigger, isOpen = false, onClose, size, closeable, disableExternalClose, children }: PropsWithChildren<ModalProps>,
+  { trigger, isOpen = false, size, close, disableExternalClose, children }: PropsWithChildren<ModalProps>,
   ref?: ForwardedRef<ModalImperativeRef | undefined>,
 ) => {
-  const store = useModalStoreCreator({ isOpen, onClose })
+  const [store] = useState(() => {
+    return createStore<ModalStore>((set) => ({
+      isOpen,
+      actions: {
+        openModal: () => {
+          set({ isOpen: true })
+        },
+        closeModal: () => {
+          set({ isOpen: false })
+        },
+      },
+    }))
+  })
 
   useImperativeHandle(ref, () => ({
     openModal: () => {
@@ -22,7 +34,8 @@ const ModalProviderComponent = (
   return (
     <ModalContext.Provider value={store}>
       {trigger}
-      <Root size={size} closeable={closeable} disableExternalClose={disableExternalClose}>
+
+      <Root size={size} close={close} disableExternalClose={disableExternalClose}>
         {children}
       </Root>
     </ModalContext.Provider>
