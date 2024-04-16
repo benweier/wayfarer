@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { type Ref, forwardRef } from 'react'
-import { type ContractActionProps } from '@/features/contract/actions/contract-actions.types'
 import { createContractAcceptMutation, getContractListQuery } from '@/services/api/spacetraders'
 import { useAuthStore } from '@/store/auth'
+import { type ContractActionProps } from './contract-actions.types'
 
 const AcceptComponent = (
   {
