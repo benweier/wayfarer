@@ -8,14 +8,17 @@ import { Sort } from '@/components/table'
 import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointTraits } from '@/config/spacetraders'
+import { type WaypointTrait } from '@/types/spacetraders'
 import { type WaypointListTableSchema } from './waypoint-list.types'
 
 const FILTERED_TRAITS = new Set<WaypointTraits>([
   WaypointTraits.Uncharted,
-  WaypointTraits.Marketplace,
-  WaypointTraits.Shipyard,
   WaypointTraits.Stripped,
+  WaypointTraits.Shipyard,
+  WaypointTraits.Marketplace,
 ])
+const SORT_ORDER = Array.from(FILTERED_TRAITS)
+const sortTraitsFn = (a: WaypointTrait, b: WaypointTrait) => SORT_ORDER.indexOf(a.symbol) - SORT_ORDER.indexOf(b.symbol)
 const columnHelper = createColumnHelper<WaypointListTableSchema>()
 
 export const columns = [
@@ -169,14 +172,18 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      const traits = getValue().filter((trait) => {
-        return FILTERED_TRAITS.has(trait.symbol)
-      })
+      const traits = getValue()
+        .filter((trait) => {
+          return FILTERED_TRAITS.has(trait.symbol)
+        })
+        .toSorted(sortTraitsFn)
 
       return (
         <div className="flex flex-wrap items-center justify-end gap-1">
           {traits.map((trait) => (
-            <Badge key={trait.symbol}>{trait.name}</Badge>
+            <Badge key={trait.symbol}>
+              <Translation>{(t) => t(trait.symbol, { ns: 'spacetraders.waypoint_trait' })}</Translation>
+            </Badge>
           ))}
         </div>
       )

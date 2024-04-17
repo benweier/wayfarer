@@ -8,10 +8,17 @@ import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointTraits } from '@/config/spacetraders'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
+import { type WaypointTrait } from '@/types/spacetraders'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { type WaypointNavigationTableSchema } from './waypoint-navigation.types'
 
-const FILTER_TRAITS = [WaypointTraits.Marketplace, WaypointTraits.Shipyard, WaypointTraits.Stripped]
+const FILTER_TRAITS = new Set<WaypointTraits>([
+  WaypointTraits.Stripped,
+  WaypointTraits.Shipyard,
+  WaypointTraits.Marketplace,
+])
+const SORT_ORDER = Array.from(FILTER_TRAITS)
+const sortTraitsFn = (a: WaypointTrait, b: WaypointTrait) => SORT_ORDER.indexOf(a.symbol) - SORT_ORDER.indexOf(b.symbol)
 const columnHelper = createColumnHelper<WaypointNavigationTableSchema>()
 
 export const columns = [
@@ -162,15 +169,30 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      const traits = getValue().filter((trait) => {
-        return FILTER_TRAITS.some((symbol) => symbol === trait.symbol)
-      })
+      const traits = getValue()
+        .filter((trait) => {
+          return FILTER_TRAITS.has(trait.symbol)
+        })
+        .toSorted(sortTraitsFn)
 
       return (
         <div className="flex flex-wrap items-center justify-end gap-1">
-          {traits.map((trait) => (
-            <Badge key={trait.symbol}>{trait.name}</Badge>
-          ))}
+          {traits.map((trait) => {
+            switch (trait.symbol) {
+              case WaypointTraits.Shipyard:
+                return <Badge key={trait.symbol}>Shipyard</Badge>
+
+              case WaypointTraits.Marketplace:
+                return <Badge key={trait.symbol}>Marketplace</Badge>
+
+              default:
+                return (
+                  <Badge key={trait.symbol}>
+                    <Translation>{(t) => t(trait.symbol, { ns: 'spacetraders.waypoint_trait' })}</Translation>
+                  </Badge>
+                )
+            }
+          })}
         </div>
       )
     },
