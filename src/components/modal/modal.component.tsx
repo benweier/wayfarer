@@ -33,9 +33,7 @@ const ModalProviderComponent = (
 
   return (
     <ModalContext.Provider value={store}>
-      {trigger}
-
-      <Root size={size} close={close} disableExternalClose={disableExternalClose}>
+      <Root trigger={trigger} size={size} close={close} disableExternalClose={disableExternalClose}>
         {children}
       </Root>
     </ModalContext.Provider>

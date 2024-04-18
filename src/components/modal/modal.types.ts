@@ -11,6 +11,7 @@ export type ModalProps = {
 }
 
 export type ModalDialogProps = {
+  trigger?: ReactNode
   size?: DialogSize
   close?: ReactNode
   disableExternalClose?: boolean
