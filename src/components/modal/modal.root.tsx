@@ -27,7 +27,7 @@ export const Root = ({
         <Dialog.Overlay className="backdrop-blur-xs bg-background-primary/20 fixed inset-0 z-40" />
         <Dialog.Content
           className={cx(
-            'popover bg-background-primary border-border-primary ring-border-primary/20 fixed fixed top-[50%] left-[50%] z-50 max-h-[85vh] translate-x-[-50%] translate-y-[-50%] overflow-y-auto rounded-xl p-6 ring-3 focus:outline-none',
+            'popover bg-background-primary border-border-primary ring-border-primary/20 fixed fixed top-1/2 left-1/2 z-50 max-h-[85vh] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl p-6 ring-3 focus:outline-none',
             {
               'w-auto': size === 'auto',
               'w-screen': size === 'full',
