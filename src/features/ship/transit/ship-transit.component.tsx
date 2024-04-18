@@ -55,27 +55,27 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
             </Link>
           </div>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <ShipTransitNavigate
-            trigger={(props) => (
-              <Button intent="warn" kind="outline" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+            trigger={
+              <Button intent="warn" kind="outline" size="small">
                 {t('ship.action.navigate')}
               </Button>
-            )}
+            }
           />
           <ShipTransitWarp
-            trigger={(props) => (
-              <Button intent="warn" kind="outline" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+            trigger={
+              <Button intent="warn" kind="outline" size="small">
                 {t('ship.action.warp')}
               </Button>
-            )}
+            }
           />
           <ShipTransitJump
-            trigger={(props) => (
-              <Button intent="warn" kind="outline" size="small" disabled={nav.status !== 'IN_ORBIT'} {...props}>
+            trigger={
+              <Button intent="warn" kind="outline" size="small">
                 {t('ship.action.jump')}
               </Button>
-            )}
+            }
           />
         </div>
       </div>

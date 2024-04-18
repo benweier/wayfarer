@@ -15,11 +15,9 @@ export const ContractDeliver = ({ contract }: ContractDeliverProps) => {
       size="md"
       trigger={
         <Modal.Trigger>
-          {(props) => (
-            <Button intent="info" kind="solid" size="small" {...props}>
-              {t('contract.deliver', { context: 'action' })}
-            </Button>
-          )}
+          <Button intent="info" kind="solid" size="small">
+            {t('contract.deliver', { context: 'action' })}
+          </Button>
         </Modal.Trigger>
       }
     >

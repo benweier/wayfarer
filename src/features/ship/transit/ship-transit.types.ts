@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { type NavigationResponse } from '@/types/spacetraders'
 
 export type ShipTransitProps = {
@@ -6,5 +6,5 @@ export type ShipTransitProps = {
 }
 
 export type ShipTransitActionProps = {
-  trigger: (props: ButtonHTMLAttributes<HTMLButtonElement>) => ReactNode
+  trigger: ReactNode
 }

@@ -8,7 +8,11 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
   const ship = useShipResponse()
 
   return (
-    <Modal size="xl" close={<Modal.Close />} trigger={<Modal.Trigger>{trigger}</Modal.Trigger>}>
+    <Modal
+      size="xl"
+      close={<Modal.Close />}
+      trigger={<Modal.Trigger disabled={ship.nav.status !== 'IN_ORBIT'}>{trigger}</Modal.Trigger>}
+    >
       <div className="space-y-8">
         <h3 className="display-lg font-bold">
           Navigate Ship: <span className="font-normal">{ship.symbol}</span>
