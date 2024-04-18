@@ -27,8 +27,11 @@ export const Root = ({
       <Dialog.Portal>
         <Dialog.Overlay className="backdrop-blur-xs bg-background-primary/20 fixed inset-0 z-40" />
         <Dialog.Content
+          style={{
+            '--dialog-content-max-height': '85vh',
+          }}
           className={cx(
-            'popover bg-background-primary border-border-primary ring-border-primary/20 fixed top-1/2 left-1/2 z-50 max-h-[85vh] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl ring-3 focus:outline-none',
+            'popover bg-background-primary border-border-primary ring-border-primary/20 fixed top-1/2 left-1/2 z-50 max-h-[var(--dialog-content-max-height)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl ring-3 focus:outline-none',
             {
               'w-auto': size === 'auto',
               'w-screen': size === 'full',
@@ -39,8 +42,8 @@ export const Root = ({
             },
           )}
         >
-          <ScrollArea.Root className="max-h-[85vh] overflow-hidden" type="scroll">
-            <ScrollArea.Viewport className="relative h-full max-h-[85vh] p-6">
+          <ScrollArea.Root className="max-h-[var(--dialog-content-max-height)] overflow-hidden" type="scroll">
+            <ScrollArea.Viewport className="relative h-full max-h-[var(--dialog-content-max-height)] p-6">
               {children}
 
               {close && <div className="absolute top-4 right-4">{close}</div>}
