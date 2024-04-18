@@ -249,11 +249,11 @@
     will-change: transform, opacity;
 
     &[data-state='open'] {
-      animation: fade-in 84ms ease-out;
+      animation: fade-in 72ms ease-out;
     }
 
     &[data-state='closed'] {
-      animation: fade-out 84ms ease-in;
+      animation: fade-out 72ms ease-in;
     }
   }
 }
