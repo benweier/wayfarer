@@ -24,7 +24,7 @@ export const Field = ({ trigger, id, value, onChange, children }: PropsWithChild
               className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
               orientation="vertical"
             >
-              <ScrollArea.Thumb className="bg-background-tertiary relative flex-1 rounded-full" />
+              <ScrollArea.Thumb className="bg-background-quaternary relative flex-1 rounded-full" />
             </ScrollArea.Scrollbar>
           </ScrollArea.Root>
         </Popover.Content>
