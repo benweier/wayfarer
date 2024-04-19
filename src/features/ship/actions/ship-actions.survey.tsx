@@ -1,8 +1,8 @@
-import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
 import { createShipSurveyMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { useSurveyStore } from '@/store/surveys'
-import { type ShipActionProps } from './ship-actions.types'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
+import type { ShipActionProps } from './ship-actions.types'
 
 export const Survey = ({
   ship,

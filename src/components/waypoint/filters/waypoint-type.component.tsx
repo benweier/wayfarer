@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import * as MultiSelect from '@/components/multi-select'
 import { WaypointTag } from '@/components/waypoint/tag'
+import { useTranslation } from 'react-i18next'
 
 export const WaypointTypeFilter = ({
   value = [],

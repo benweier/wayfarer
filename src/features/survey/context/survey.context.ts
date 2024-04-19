@@ -1,5 +1,5 @@
+import type { SurveyResponse } from '@/types/spacetraders'
 import { type FC, createContext } from 'react'
-import { type SurveyResponse } from '@/types/spacetraders'
 
 export const SurveyContext = createContext<{
   Extract?: FC<{ survey: SurveyResponse }>

@@ -1,13 +1,13 @@
-import { valibotResolver } from '@hookform/resolvers/valibot'
-import { useCallback } from 'react'
-import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { formatNumber } from '@/utilities/number.helper'
+import { valibotResolver } from '@hookform/resolvers/valibot'
+import { useCallback } from 'react'
+import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { TradeGoodSellSchema } from './trade-good-sell.schema'
-import { type TradeGoodSellFormProps } from './trade-good-sell.types'
+import type { TradeGoodSellFormProps } from './trade-good-sell.types'
 
 const SubmitPurchase = () => {
   const { t } = useTranslation()

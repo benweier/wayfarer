@@ -1,4 +1,4 @@
-import { type FC, type PropsWithChildren, type ReactNode } from 'react'
+import type { FC, PropsWithChildren, ReactNode } from 'react'
 
 export type ShipLoadoutListProps = {
   Item?: FC<PropsWithChildren<ShipLoadoutItemProps>>

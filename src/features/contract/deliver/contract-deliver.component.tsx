@@ -1,9 +1,9 @@
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import * as ContractActions from '@/features/contract/actions'
+import { useTranslation } from 'react-i18next'
 import { ContractDeliverForm } from './contract-deliver.form'
-import { type ContractDeliverProps } from './contract-deliver.types'
+import type { ContractDeliverProps } from './contract-deliver.types'
 
 export const ContractDeliver = ({ contract }: ContractDeliverProps) => {
   const { t } = useTranslation()

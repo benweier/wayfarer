@@ -1,6 +1,6 @@
-import { type FocusEventHandler, type ReactNode } from 'react'
-import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { type ShipResponse } from '@/types/spacetraders'
+import type { Meta, SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import type { ShipResponse } from '@/types/spacetraders'
+import type { FocusEventHandler, ReactNode } from 'react'
 
 export type ShipSelectItem = {
   ship: ShipResponse

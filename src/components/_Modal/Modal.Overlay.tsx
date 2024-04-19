@@ -1,7 +1,7 @@
 import { cx } from 'class-variance-authority'
 import { useContext } from 'react'
 import { ModalContext } from './Modal.Context'
-import { type OverlayProps } from './modal.types'
+import type { OverlayProps } from './modal.types'
 import { useInOutTransition } from './useInOutTransition'
 
 export const Overlay = ({ variant = 'auto' }: OverlayProps) => {

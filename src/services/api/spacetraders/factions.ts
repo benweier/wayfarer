@@ -1,8 +1,8 @@
-import { queryOptions } from '@tanstack/react-query'
 import { type Meta, type SpaceTradersResponse, createHeaders } from '@/services/api/spacetraders/core'
 import { get } from '@/services/fetch'
-import { type FactionResponse } from '@/types/spacetraders'
+import type { FactionResponse } from '@/types/spacetraders'
 import { getPageList } from '@/utilities/get-page-list.helper'
+import { queryOptions } from '@tanstack/react-query'
 
 export const getFactionListQuery = () =>
   queryOptions({

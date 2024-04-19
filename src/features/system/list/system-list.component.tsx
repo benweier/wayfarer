@@ -1,12 +1,12 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useEffect } from 'react'
 import { Pagination } from '@/components/pagination'
 import { useFleetResponse } from '@/context/fleet.context'
 import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
 import { getSystemListQuery } from '@/services/api/spacetraders'
 import { formatNumber } from '@/utilities/number.helper'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { SystemListTable } from './system-list.table'
-import { type SystemListProps } from './system-list.types'
+import type { SystemListProps } from './system-list.types'
 
 export const SystemList = ({ page = 1, limit = 20, setPage }: SystemListProps) => {
   const systemsListQuery = useSuspenseQuery(getSystemListQuery({ page, limit }))

@@ -2,7 +2,7 @@ import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { getSortingIcon } from '@/utilities/get-sorting-icon.helper'
 import { getSortingLabel } from '@/utilities/get-sorting-label.helper'
-import { type SortActionProps } from './table.types'
+import type { SortActionProps } from './table.types'
 
 export const Sort = ({ type, column }: SortActionProps) => {
   const sorted = column.getIsSorted()

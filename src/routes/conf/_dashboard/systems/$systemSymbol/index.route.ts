@@ -1,7 +1,7 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
 import { meta } from '@/routes/systems/system/system-route.meta'
 import { getSystemByIdQuery } from '@/services/api/spacetraders'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/')({
   parseParams: ({ systemSymbol }) => ({ systemSymbol: systemSymbol.toUpperCase() }),

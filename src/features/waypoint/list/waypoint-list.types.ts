@@ -1,4 +1,4 @@
-import { type WaypointResponse } from '@/types/spacetraders'
+import type { WaypointResponse } from '@/types/spacetraders'
 
 export type WaypointListTableSchema = {
   waypoint: WaypointResponse

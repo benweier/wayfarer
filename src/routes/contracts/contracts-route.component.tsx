@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ContractList, ContractListFallback } from '@/features/contract/list'
+import { useTranslation } from 'react-i18next'
 
 export const ContractsRoute = () => {
   const { t } = useTranslation()

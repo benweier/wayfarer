@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { LeaderboardList, LeaderboardListFallback } from '@/features/leaderboard/list'
+import { useTranslation } from 'react-i18next'
 
 export const LeaderboardRoute = () => {
   const { t } = useTranslation()

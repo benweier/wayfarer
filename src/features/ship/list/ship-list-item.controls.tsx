@@ -1,16 +1,16 @@
-import { FloatingPortal } from '@floating-ui/react'
-import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
-import { Menu, Transition } from '@headlessui/react'
-import { useIsMutating } from '@tanstack/react-query'
-import { Fragment } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as ShipActions from '@/features/ship/actions'
 import { WaypointNavigation, WaypointNavigationFallback } from '@/features/waypoint/navigation'
-import { type ShipResponse } from '@/types/spacetraders'
+import type { ShipResponse } from '@/types/spacetraders'
+import { FloatingPortal } from '@floating-ui/react'
+import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react-dom'
+import { Menu, Transition } from '@headlessui/react'
+import { useIsMutating } from '@tanstack/react-query'
+import { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()

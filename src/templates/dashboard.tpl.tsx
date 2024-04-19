@@ -1,9 +1,3 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Link } from '@tanstack/react-router'
-import { cx } from 'class-variance-authority'
-import { atom, useAtom } from 'jotai'
-import { Fragment, type PropsWithChildren, Suspense } from 'react'
-import { useTranslation } from 'react-i18next'
 import { AppIcon, MenuIcon } from '@/components/icons'
 import { Preferences } from '@/components/preferences'
 import { Wayfarer } from '@/components/wayfarer'
@@ -11,6 +5,12 @@ import { Navigation } from '@/features/navigation'
 import { sidebarAtom } from '@/store/atoms/sidebar'
 import { useAuthStore } from '@/store/auth'
 import { formatNumber } from '@/utilities/number.helper'
+import { Dialog, Transition } from '@headlessui/react'
+import { Link } from '@tanstack/react-router'
+import { cx } from 'class-variance-authority'
+import { atom, useAtom } from 'jotai'
+import { Fragment, type PropsWithChildren, Suspense } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const menu = [
   { key: 'navigation.fleet', to: '/fleet', icon: 'fleet' },

@@ -1,5 +1,5 @@
-import { type ComponentPropsWithRef, type ReactNode } from 'react'
-import { type ShipyardShip } from '@/types/spacetraders'
+import type { ShipyardShip } from '@/types/spacetraders'
+import type { ComponentPropsWithRef, ReactNode } from 'react'
 
 export type ShipyardPurchaseShipProps = {
   ship: ShipyardShip

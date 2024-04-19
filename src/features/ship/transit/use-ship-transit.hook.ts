@@ -1,13 +1,13 @@
-import { useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
-import { startTransition, useEffect, useMemo, useState } from 'react'
 import {
   getShipByIdQuery,
   getShipListQuery,
   getWaypointMarketQuery,
   getWaypointShipyardQuery,
 } from '@/services/api/spacetraders'
-import { type ShipResponse } from '@/types/spacetraders'
+import type { ShipResponse } from '@/types/spacetraders'
+import { useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
+import { startTransition, useEffect, useMemo, useState } from 'react'
 
 export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const client = useQueryClient()

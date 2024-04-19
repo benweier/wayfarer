@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import * as Select from '@/components/select'
 import { getShipListQuery } from '@/services/api/spacetraders'
+import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { defaultGetShipItem } from './ship-item-reducer.helper'
-import { type ShipSelectFieldProps, type ShipSelectItem } from './ship-select-field.types'
+import type { ShipSelectFieldProps, ShipSelectItem } from './ship-select-field.types'
 
 export const ShipSelectField = ({
   id,

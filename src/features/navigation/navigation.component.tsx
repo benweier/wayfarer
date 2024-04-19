@@ -1,7 +1,7 @@
-import { Link } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import { useAuthStore } from '@/store/auth'
+import { Link } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 
 const menu = [
   { key: 'navigation.fleet', to: '/fleet', icon: 'fleet', auth: true },

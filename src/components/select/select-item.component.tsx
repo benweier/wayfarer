@@ -1,7 +1,7 @@
+import { AppIcon } from '@/components/icons'
 import * as Select from '@radix-ui/react-select'
 import { cx } from 'class-variance-authority'
 import { type ForwardedRef, forwardRef } from 'react'
-import { AppIcon } from '@/components/icons'
 
 const SelectItemComponent = (
   { children, className, ...props }: Select.SelectItemProps,

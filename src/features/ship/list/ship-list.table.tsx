@@ -1,3 +1,4 @@
+import { Table } from '@/components/table'
 import {
   type SortingState,
   getCoreRowModel,
@@ -8,9 +9,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
-import { Table } from '@/components/table'
 import { columns } from './ship-list.columns'
-import { type ShipListTableProps } from './ship-list.types'
+import type { ShipListTableProps } from './ship-list.types'
 
 export const ShipListTable = ({ data }: ShipListTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])

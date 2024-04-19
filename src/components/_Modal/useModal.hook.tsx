@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { Modal } from './Modal.Portal'
-import { type UseModalOptions } from './modal.types.d'
+import type { UseModalOptions } from './modal.types.d'
 
 export const useModal = ({ initialOpen = false, Portal = Modal }: UseModalOptions = {}) => {
   const [isOpen, setOpen] = useState(initialOpen)

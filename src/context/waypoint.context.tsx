@@ -1,5 +1,5 @@
+import type { WaypointResponse } from '@/types/spacetraders'
 import { createContext, useContext } from 'react'
-import { type WaypointResponse } from '@/types/spacetraders'
 
 export const WaypointContext = createContext<WaypointResponse | undefined>(undefined)
 

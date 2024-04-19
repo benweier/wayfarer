@@ -1,5 +1,5 @@
-import { type ColumnDef } from '@tanstack/react-table'
-import { type ContractResponse } from '@/types/spacetraders'
+import type { ContractResponse } from '@/types/spacetraders'
+import type { ColumnDef } from '@tanstack/react-table'
 
 export type ContractListTableSchema = {
   contract: ContractResponse

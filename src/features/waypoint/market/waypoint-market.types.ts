@@ -1,5 +1,5 @@
-import { type FC, type PropsWithChildren, type ReactNode } from 'react'
-import { type MarketGood, type MarketTradeGood } from '@/types/spacetraders'
+import type { MarketGood, MarketTradeGood } from '@/types/spacetraders'
+import type { FC, PropsWithChildren, ReactNode } from 'react'
 
 export type WaypointMarketLayoutProps = {
   imports: ReactNode

@@ -1,5 +1,5 @@
 import * as Select from '@radix-ui/react-select'
-import { type PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 
 export const Label = ({ children }: PropsWithChildren) => {
   return (

@@ -1,5 +1,5 @@
-import { type ReactNode } from 'react'
-import { type ResponsiveComponentProps } from './responsive.types'
+import type { ReactNode } from 'react'
+import type { ResponsiveComponentProps } from './responsive.types'
 import {
   useDesktopMediaQuery,
   useMobileMediaQuery,

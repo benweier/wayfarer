@@ -1,15 +1,15 @@
-import * as Tooltip from '@radix-ui/react-tooltip'
-import { createColumnHelper } from '@tanstack/react-table'
-import { type PropsWithChildren } from 'react'
-import { Translation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
 import { Sort } from '@/components/table'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { type ShipyardShip } from '@/types/spacetraders'
+import type { ShipyardShip } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number.helper'
-import { type WaypointShipyardTableSchema } from './waypoint-shipyard.types'
+import * as Tooltip from '@radix-ui/react-tooltip'
+import { createColumnHelper } from '@tanstack/react-table'
+import type { PropsWithChildren } from 'react'
+import { Translation } from 'react-i18next'
+import type { WaypointShipyardTableSchema } from './waypoint-shipyard.types'
 
 const BuyShip = ({ ship }: PropsWithChildren<{ ship?: ShipyardShip }>) => {
   const waypoint = useWaypointResponse()

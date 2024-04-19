@@ -1,15 +1,15 @@
-import * as Tooltip from '@radix-ui/react-tooltip'
-import { Link } from '@tanstack/react-router'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointTraits } from '@/config/spacetraders'
-import { type WaypointTrait } from '@/types/spacetraders'
-import { type WaypointListTableSchema } from './waypoint-list.types'
+import type { WaypointTrait } from '@/types/spacetraders'
+import * as Tooltip from '@radix-ui/react-tooltip'
+import { Link } from '@tanstack/react-router'
+import { createColumnHelper } from '@tanstack/react-table'
+import { Translation } from 'react-i18next'
+import type { WaypointListTableSchema } from './waypoint-list.types'
 
 const FILTERED_TRAITS = new Set<WaypointTraits>([
   WaypointTraits.Uncharted,

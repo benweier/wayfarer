@@ -1,9 +1,9 @@
-import { useIsMutating } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import * as Dropdown from '@/components/dropdown'
 import * as ShipActions from '@/features/ship/actions'
-import { type ShipResponse } from '@/types/spacetraders'
+import type { ShipResponse } from '@/types/spacetraders'
+import { useIsMutating } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 
 export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()

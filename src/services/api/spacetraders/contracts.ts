@@ -1,8 +1,8 @@
-import { queryOptions } from '@tanstack/react-query'
 import { get, post } from '@/services/fetch'
 import { authStore } from '@/store/auth'
-import { type AgentResponse, type ContractResponse, type ShipCargo } from '@/types/spacetraders'
+import type { AgentResponse, ContractResponse, ShipCargo } from '@/types/spacetraders'
 import { getPageList } from '@/utilities/get-page-list.helper'
+import { queryOptions } from '@tanstack/react-query'
 import { type Meta, type SpaceTradersResponse, createHeaders } from './core'
 
 export const getContractListQuery = () =>

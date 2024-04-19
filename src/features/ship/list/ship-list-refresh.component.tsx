@@ -1,8 +1,8 @@
+import { Button } from '@/components/button'
+import { getShipListQuery } from '@/services/api/spacetraders'
 import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 import { startTransition, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@/components/button'
-import { getShipListQuery } from '@/services/api/spacetraders'
 
 export const ShipListRefresh = () => {
   const { t } = useTranslation()

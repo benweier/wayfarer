@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { type WaypointMarketLayoutProps } from './waypoint-market.types'
+import type { WaypointMarketLayoutProps } from './waypoint-market.types'
 
 export const WaypointMarketLayout = ({ imports, exports, exchange }: WaypointMarketLayoutProps) => {
   const { t } = useTranslation()

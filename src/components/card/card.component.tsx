@@ -1,5 +1,5 @@
 import { cx } from 'class-variance-authority'
-import { type PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 
 export const Card = ({ className, children }: PropsWithChildren<{ className?: string }>) => {
   return (

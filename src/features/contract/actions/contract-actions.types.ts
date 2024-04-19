@@ -1,5 +1,5 @@
-import { type ReactNode, type RefAttributes } from 'react'
-import { type ContractResponse } from '@/types/spacetraders'
+import type { ContractResponse } from '@/types/spacetraders'
+import type { ReactNode, RefAttributes } from 'react'
 
 export type ContractActionProps<OnClickArgs = never, R = unknown, T = unknown> = {
   contract: ContractResponse

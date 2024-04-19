@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import * as ContractActions from '@/features/contract/actions'
 import { ContractDeliver } from '@/features/contract/deliver'
-import { type ContractResponse } from '@/types/spacetraders'
+import type { ContractResponse } from '@/types/spacetraders'
+import { useTranslation } from 'react-i18next'
 
 export const AvailableContractAction = ({ contract }: { contract: ContractResponse }) => {
   const { t } = useTranslation()

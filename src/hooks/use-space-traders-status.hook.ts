@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
-import { type StatusResponse } from '@/types/spacetraders'
+import type { StatusResponse } from '@/types/spacetraders'
+import { useQuery } from '@tanstack/react-query'
 
 const select = (response: StatusResponse) => ({
   status: response.status === 'SpaceTraders is currently online and available to play',

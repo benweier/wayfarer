@@ -1,9 +1,9 @@
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { useModalActions } from '@/components/modal'
 import * as ShipActions from '@/features/ship/actions'
-import { type CargoInventory, type ShipResponse } from '@/types/spacetraders'
+import type { CargoInventory, ShipResponse } from '@/types/spacetraders'
+import { useTranslation } from 'react-i18next'
 
 export const CargoJettison = ({ ship, item }: { ship: ShipResponse; item: CargoInventory }) => {
   const { t } = useTranslation()

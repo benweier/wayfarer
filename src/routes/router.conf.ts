@@ -1,8 +1,8 @@
-import { createRouter } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
 import { client } from '@/services/query-client'
 import { authStore } from '@/store/auth'
+import { createRouter } from '@tanstack/react-router'
 import { routeTree } from './route-tree.gen'
 import { Fallback } from './router.fallback'
 

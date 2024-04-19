@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useModalActions } from '@/components/modal'
 import * as ShipActions from '@/features/ship/actions'
-import { type CargoInventory, type ShipResponse } from '@/types/spacetraders'
+import type { CargoInventory, ShipResponse } from '@/types/spacetraders'
+import { useTranslation } from 'react-i18next'
 import { CargoTransferForm } from './cargo-transfer.form'
 
 export const CargoTransfer = ({ ship, item }: { ship: ShipResponse; item: CargoInventory }) => {

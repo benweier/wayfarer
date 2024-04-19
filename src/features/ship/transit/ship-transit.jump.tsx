@@ -2,7 +2,7 @@ import { Loading } from '@/components/loading'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
-import { type ShipTransitActionProps } from './ship-transit.types'
+import type { ShipTransitActionProps } from './ship-transit.types'
 
 export const ShipTransitJump = ({ trigger }: ShipTransitActionProps) => {
   const ship = useShipResponse()

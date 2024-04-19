@@ -1,7 +1,7 @@
 import { createFocusTrap } from 'focus-trap'
 import { type PropsWithChildren, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { type ModalContextType } from './modal.types.d'
+import type { ModalContextType } from './modal.types.d'
 import { useEscapeKey } from './useEscapeKey'
 import { useScrollLock } from './useScrollLock'
 

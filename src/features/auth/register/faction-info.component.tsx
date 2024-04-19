@@ -1,9 +1,9 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useFormContext, useWatch } from 'react-hook-form'
 import { Badge } from '@/components/badge'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
-import { type FactionResponse } from '@/types/spacetraders'
-import { type RegisterSchema } from './register.schema'
+import type { FactionResponse } from '@/types/spacetraders'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useFormContext, useWatch } from 'react-hook-form'
+import type { RegisterSchema } from './register.schema'
 
 export const FactionInfo = () => {
   const { control } = useFormContext<RegisterSchema>()

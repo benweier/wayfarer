@@ -1,11 +1,11 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { WaypointMarketTable } from './waypoint-market-list.table'
 import { WaypointMarketLayout } from './waypoint-market.layout'
 

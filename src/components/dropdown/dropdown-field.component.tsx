@@ -1,5 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { type PropsWithChildren, type ReactNode } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 
 export const Field = ({ trigger, children }: PropsWithChildren<{ trigger: ReactNode }>) => {
   return (

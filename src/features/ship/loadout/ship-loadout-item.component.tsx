@@ -1,5 +1,5 @@
-import { type PropsWithChildren } from 'react'
-import { type ShipLoadoutItemProps } from './ship-loadout.types'
+import type { PropsWithChildren } from 'react'
+import type { ShipLoadoutItemProps } from './ship-loadout.types'
 
 export const ShipLoadoutItem = ({ name, description, action, children }: PropsWithChildren<ShipLoadoutItemProps>) => {
   return (

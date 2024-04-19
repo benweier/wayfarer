@@ -1,10 +1,10 @@
+import * as Select from '@/components/select'
+import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import type { ContractDelivery, ShipResponse } from '@/types/spacetraders'
+import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import * as Select from '@/components/select'
-import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
-import { type ContractDelivery, type ShipResponse } from '@/types/spacetraders'
-import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { DeliverContractSchema } from './contract-deliver.schema'
 
 const getShipOption: ShipSelectItemReducer = (ships, ship) => {

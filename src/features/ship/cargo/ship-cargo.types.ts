@@ -1,4 +1,4 @@
-import { type CargoInventory, type MarketTradeGood } from '@/types/spacetraders'
+import type { CargoInventory, MarketTradeGood } from '@/types/spacetraders'
 
 export type ShipCargoTableSchema = { item: CargoInventory; trade?: MarketTradeGood }
 

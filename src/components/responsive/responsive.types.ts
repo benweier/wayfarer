@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type ReactNode } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 
 export type ResponsiveOptions = {
   up?: boolean

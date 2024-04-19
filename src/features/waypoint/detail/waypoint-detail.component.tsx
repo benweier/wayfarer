@@ -1,9 +1,9 @@
-import { Link } from '@tanstack/react-router'
-import { type PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { useWaypointResponse } from '@/context/waypoint.context'
+import { Link } from '@tanstack/react-router'
+import type { PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation()

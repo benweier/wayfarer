@@ -1,7 +1,7 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointShipyardQuery } from '@/services/api/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { WaypointShipyardTable } from './waypoint-shipyard.table'
 
 export const WaypointShipyardList = () => {

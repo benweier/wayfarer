@@ -1,4 +1,4 @@
-import { type ToggleGroupMultipleProps, type ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
+import type { ToggleGroupMultipleProps, ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
 import { type ForwardedRef, type RefAttributes, forwardRef } from 'react'
 

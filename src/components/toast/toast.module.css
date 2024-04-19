@@ -1,5 +1,5 @@
 .toast {
-  @apply border-2;
+  @apply border-2 pointer-events-auto;
 
   .toast-label {
     @apply text-lg;

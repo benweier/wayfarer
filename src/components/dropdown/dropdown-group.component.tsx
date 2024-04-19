@@ -1,6 +1,6 @@
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { type PropsWithChildren, type ReactNode } from 'react'
 import { AppIcon } from '@/components/icons'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import type { PropsWithChildren, ReactNode } from 'react'
 
 export const Group = ({ trigger, children }: PropsWithChildren<{ trigger: ReactNode }>) => {
   return (

@@ -1,9 +1,9 @@
+import { getShipByIdQuery } from '@/services/api/spacetraders'
+import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import type { ShipResponse } from '@/types/spacetraders'
 import { useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { startTransition, useEffect, useMemo, useState } from 'react'
-import { getShipByIdQuery } from '@/services/api/spacetraders'
-import { type SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { type ShipResponse } from '@/types/spacetraders'
 
 export const useShipCooldown = (ship: ShipResponse) => {
   const client = useQueryClient()

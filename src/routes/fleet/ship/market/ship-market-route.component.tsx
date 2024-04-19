@@ -1,5 +1,3 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
 import { WaypointContext } from '@/context/waypoint.context'
@@ -10,6 +8,8 @@ import {
   WaypointMarketPreferences,
 } from '@/features/waypoint/market'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 
 export const ShipMarketRoute = () => {
   const { t } = useTranslation()

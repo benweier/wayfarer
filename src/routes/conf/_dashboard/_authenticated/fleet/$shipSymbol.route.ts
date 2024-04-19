@@ -1,7 +1,7 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
 import { meta } from '@/routes/fleet/ship/ship-route.meta'
 import { getShipByIdQuery, getWaypointByIdQuery } from '@/services/api/spacetraders'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymbol')({
   parseParams: ({ shipSymbol }) => ({ shipSymbol: shipSymbol.toUpperCase() }),

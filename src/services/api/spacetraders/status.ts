@@ -1,7 +1,7 @@
-import { queryOptions } from '@tanstack/react-query'
 import { createHeaders } from '@/services/api/spacetraders/core'
 import { get } from '@/services/fetch'
-import { type StatusResponse } from '@/types/spacetraders'
+import type { StatusResponse } from '@/types/spacetraders'
+import { queryOptions } from '@tanstack/react-query'
 
 export const getStatusQuery = () =>
   queryOptions({

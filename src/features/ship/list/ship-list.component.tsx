@@ -1,5 +1,5 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { getShipListQuery } from '@/services/api/spacetraders'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { ShipListRefresh } from './ship-list-refresh.component'
 import { ShipListTable } from './ship-list.table'
 

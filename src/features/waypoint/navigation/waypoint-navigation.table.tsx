@@ -1,3 +1,4 @@
+import { Table } from '@/components/table'
 import {
   type ColumnFiltersState,
   type SortingState,
@@ -9,9 +10,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
-import { Table } from '@/components/table'
 import { columns } from './waypoint-navigation.columns'
-import { type WaypointNavigationTableProps } from './waypoint-navigation.types'
+import type { WaypointNavigationTableProps } from './waypoint-navigation.types'
 
 export const WaypointNavigationTable = ({ data }: WaypointNavigationTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'distance_time', desc: false }])

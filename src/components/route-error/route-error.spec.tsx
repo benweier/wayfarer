@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react'
 import { STATUS_MESSAGES } from '@/services/http'
+import { render } from '@testing-library/react'
 import { RouteError } from './route-error.component'
 
 describe('RouteError', () => {

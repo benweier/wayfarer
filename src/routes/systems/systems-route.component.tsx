@@ -1,8 +1,8 @@
-import { getRouteApi, useNavigate } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
 import { SystemList, SystemListFallback } from '@/features/system/list'
+import { getRouteApi, useNavigate } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 
 const api = getRouteApi(ROUTES.SYSTEMS)
 

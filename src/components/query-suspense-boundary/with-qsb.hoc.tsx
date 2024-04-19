@@ -1,6 +1,6 @@
 import { type ComponentType, type PropsWithChildren, memo } from 'react'
 import { QuerySuspenseBoundary } from './query-suspense-boundary.component'
-import { type QuerySuspenseBoundaryProps } from './query-suspense-boundary.types'
+import type { QuerySuspenseBoundaryProps } from './query-suspense-boundary.types'
 
 export const withQSB =
   ({ error, fallback, onError }: QuerySuspenseBoundaryProps = {}) =>

@@ -1,9 +1,9 @@
+import { Button } from '@/components/button'
+import { Meta } from '@/components/meta'
 import * as Sentry from '@sentry/react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Outlet, ScrollRestoration, useRouterState } from '@tanstack/react-router'
 import { lazy } from 'react'
-import { Button } from '@/components/button'
-import { Meta } from '@/components/meta'
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null

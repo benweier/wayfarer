@@ -1,9 +1,9 @@
+import type { ShipActionProps } from '@/features/ship/actions/ship-actions.types'
+import { createShipTransferCargoMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
+import type { Meta, SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import type { CargoInventory, ShipResponse } from '@/types/spacetraders'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { type ShipActionProps } from '@/features/ship/actions/ship-actions.types'
-import { createShipTransferCargoMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
-import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { type CargoInventory, type ShipResponse } from '@/types/spacetraders'
 
 export const TransferCargo = ({
   ship,

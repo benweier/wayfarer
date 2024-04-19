@@ -1,8 +1,8 @@
+import { client } from '@/services/query-client'
+import type { AgentResponse } from '@/types/spacetraders'
 import { useStore } from 'zustand/react'
 import { createStore } from 'zustand/vanilla'
-import { client } from '@/services/query-client'
-import { type AgentResponse } from '@/types/spacetraders'
-import { type BoundStoreSelector } from './store.types'
+import type { BoundStoreSelector } from './store.types'
 
 export type AuthState =
   | { agent: null; token: null; isAuthenticated: false }

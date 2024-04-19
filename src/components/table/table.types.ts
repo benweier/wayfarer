@@ -1,5 +1,5 @@
-import { type Column, type Row, type Table } from '@tanstack/react-table'
-import { type FC } from 'react'
+import type { Column, Row, Table } from '@tanstack/react-table'
+import type { FC } from 'react'
 
 export type TableProps<T> = {
   table: Table<T>

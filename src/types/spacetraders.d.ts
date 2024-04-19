@@ -1,4 +1,4 @@
-import { type WaypointTraits, type WaypointTypes } from '@/config/spacetraders'
+import type { WaypointTraits, WaypointTypes } from '@/config/spacetraders'
 
 type StatusResponse = {
   status: string

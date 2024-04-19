@@ -1,3 +1,7 @@
+import { Button } from '@/components/button'
+import { ROUTES } from '@/config/routes'
+import { getAgentMutation } from '@/services/api/spacetraders/auth'
+import { useAuthStore } from '@/store/auth'
 import { ErrorMessage } from '@hookform/error-message'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useMutation } from '@tanstack/react-query'
@@ -5,10 +9,6 @@ import { Link, getRouteApi, useNavigate } from '@tanstack/react-router'
 import { useCallback } from 'react'
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { Trans, useTranslation } from 'react-i18next'
-import { Button } from '@/components/button'
-import { ROUTES } from '@/config/routes'
-import { getAgentMutation } from '@/services/api/spacetraders/auth'
-import { useAuthStore } from '@/store/auth'
 import { LoginSchema } from './login.schema'
 
 const api = getRouteApi(ROUTES.LOGIN)

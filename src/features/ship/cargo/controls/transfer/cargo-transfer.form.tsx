@@ -1,9 +1,9 @@
+import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import type { ShipResponse } from '@/types/spacetraders'
 import { valibotResolver } from '@hookform/resolvers/valibot'
-import { type PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
-import { type ShipResponse } from '@/types/spacetraders'
 import { CargoTransferSchema } from './cargo-transfer.validation'
 
 const getShipOption: ShipSelectItemReducer = (ships, ship) => {

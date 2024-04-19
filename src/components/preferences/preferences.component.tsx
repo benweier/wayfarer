@@ -1,7 +1,7 @@
+import { MenuIcon } from '@/components/icons'
 import * as Popover from '@radix-ui/react-popover'
 import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
-import { MenuIcon } from '@/components/icons'
 import styles from './preferences.module.css'
 import { Sidebar } from './sidebar.component'
 import { Theme } from './theme.component'

@@ -2,7 +2,7 @@ import { type ForwardedRef, type PropsWithChildren, forwardRef, useImperativeHan
 import { createStore } from 'zustand'
 import { ModalContext } from './modal.context'
 import { Root } from './modal.root'
-import { type ModalImperativeRef, type ModalProps, type ModalStore } from './modal.types'
+import type { ModalImperativeRef, ModalProps, ModalStore } from './modal.types'
 
 const ModalProviderComponent = (
   { trigger, isOpen = false, size, close, disableExternalClose, children }: PropsWithChildren<ModalProps>,

@@ -1,4 +1,4 @@
-import { type ShipResponse, type WaypointResponse } from '@/types/spacetraders'
+import type { ShipResponse, WaypointResponse } from '@/types/spacetraders'
 
 export type WaypointNavigationProps = { ship: ShipResponse }
 

@@ -1,12 +1,12 @@
-import { keepPreviousData, useQuery, useSuspenseQuery } from '@tanstack/react-query'
-import { Outlet, getRouteApi } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
 import { ROUTES } from '@/config/routes'
 import { ShipContext } from '@/context/ship.context'
 import { WaypointContext } from '@/context/waypoint.context'
 import { ShipDetail } from '@/features/ship/detail'
 import { ShipTabs } from '@/features/ship/tabs'
 import { getShipByIdQuery, getWaypointByIdQuery } from '@/services/api/spacetraders'
+import { keepPreviousData, useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { Outlet, getRouteApi } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 
 const api = getRouteApi(ROUTES.SHIP)
 

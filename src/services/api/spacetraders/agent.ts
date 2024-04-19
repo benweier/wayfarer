@@ -1,4 +1,3 @@
-import { queryOptions } from '@tanstack/react-query'
 import {
   type Meta,
   type SpaceTradersResponse,
@@ -6,7 +5,8 @@ import {
   createHeaders,
 } from '@/services/api/spacetraders/core'
 import { get } from '@/services/fetch'
-import { type AgentResponse } from '@/types/spacetraders'
+import type { AgentResponse } from '@/types/spacetraders'
+import { queryOptions } from '@tanstack/react-query'
 
 export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; limit?: number } = {}) =>
   queryOptions({

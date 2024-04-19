@@ -1,8 +1,8 @@
+import { AppIcon } from '@/components/icons'
 import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as Select from '@radix-ui/react-select'
-import { type PropsWithChildren } from 'react'
-import { AppIcon } from '@/components/icons'
-import { type SelectFieldProps } from './select.types'
+import type { PropsWithChildren } from 'react'
+import type { SelectFieldProps } from './select.types'
 
 export const Field = ({
   id,

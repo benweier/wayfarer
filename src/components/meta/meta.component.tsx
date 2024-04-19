@@ -1,7 +1,7 @@
 import { useRouterState } from '@tanstack/react-router'
 import { Fragment, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { type MetaProps } from './meta.types'
+import type { MetaProps } from './meta.types'
 
 export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
   const { t } = useTranslation('meta')

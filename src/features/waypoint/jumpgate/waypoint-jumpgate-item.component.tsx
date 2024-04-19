@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router'
 import { Card } from '@/components/card'
-import { type WaypointJumpGateItemProps } from './waypoint-jumpgate.types'
+import { Link } from '@tanstack/react-router'
+import type { WaypointJumpGateItemProps } from './waypoint-jumpgate.types'
 
 export const WaypointJumpGateItem = ({ system }: WaypointJumpGateItemProps) => {
   return (

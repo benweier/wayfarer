@@ -1,4 +1,4 @@
-import { type ShipResponse } from '@/types/spacetraders'
+import type { ShipResponse } from '@/types/spacetraders'
 
 export const getShipPresence = (ships: ShipResponse[], property: 'systemSymbol' | 'waypointSymbol') => {
   return new Map(

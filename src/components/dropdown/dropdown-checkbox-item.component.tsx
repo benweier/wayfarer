@@ -1,6 +1,6 @@
+import { AppIcon } from '@/components/icons'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { type ForwardedRef, forwardRef } from 'react'
-import { AppIcon } from '@/components/icons'
 import { ItemIcon } from './dropdown-item-icon.component'
 
 const CheckboxItemComponent = (

@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as SurveyActions from '@/features/survey/actions'
 import { SurveyContext } from '@/features/survey/context'
 import { SurveyList } from '@/features/survey/list'
+import { useTranslation } from 'react-i18next'
 
 const SURVEYS_CONTEXT = {
   Discard: SurveyActions.Discard,

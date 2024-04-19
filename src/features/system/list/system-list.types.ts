@@ -1,4 +1,4 @@
-import { type SystemResponse } from '@/types/spacetraders'
+import type { SystemResponse } from '@/types/spacetraders'
 
 export type SystemListProps = {
   page?: number

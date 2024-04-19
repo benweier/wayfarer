@@ -1,25 +1,25 @@
-import { queryOptions } from '@tanstack/react-query'
 import { get, patch, post } from '@/services/fetch'
 import { authStore } from '@/store/auth'
-import {
-  type AgentResponse,
-  type ChartResponse,
-  type ContractResponse,
-  type CooldownResponse,
-  type ExtractResponse,
-  type FuelResponse,
-  type MarketTransaction,
-  type NavigationResponse,
-  type ShipCargo,
-  type ShipMount,
-  type ShipRepairTransaction,
-  type ShipResponse,
-  type ShipScrapTransaction,
-  type ShipSiphonResponse,
-  type SurveyResponse,
-  type WaypointResponse,
+import type {
+  AgentResponse,
+  ChartResponse,
+  ContractResponse,
+  CooldownResponse,
+  ExtractResponse,
+  FuelResponse,
+  MarketTransaction,
+  NavigationResponse,
+  ShipCargo,
+  ShipMount,
+  ShipRepairTransaction,
+  ShipResponse,
+  ShipScrapTransaction,
+  ShipSiphonResponse,
+  SurveyResponse,
+  WaypointResponse,
 } from '@/types/spacetraders'
 import { getPageList } from '@/utilities/get-page-list.helper'
+import { queryOptions } from '@tanstack/react-query'
 import { type Meta, type SpaceTradersResponse, createHeaders } from './core'
 
 type ShipMutationKey = { shipSymbol: string }

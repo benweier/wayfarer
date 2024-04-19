@@ -1,7 +1,7 @@
-import { type PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 import { SystemTag } from '@/components/system/tag'
 import { useSystemResponse } from '@/context/system.context'
+import type { PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const SystemDetail = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation('spacetraders.system_type')

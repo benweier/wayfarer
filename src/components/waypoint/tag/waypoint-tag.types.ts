@@ -1,4 +1,4 @@
-import { type HTMLAttributes, type ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 
 export type WaypointTagProps = {
   type: string

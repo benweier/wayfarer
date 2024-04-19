@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export const WaypointJumpGateLayout = ({ children }: { children: ReactNode }) => {
   return (

@@ -1,6 +1,6 @@
+import { AppIcon } from '@/components/icons'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
 import { type ForwardedRef, forwardRef } from 'react'
-import { AppIcon } from '@/components/icons'
 
 const MultiSelectItemComponent = (
   { children, ...props }: ToggleGroup.ToggleGroupItemProps,

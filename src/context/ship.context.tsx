@@ -1,7 +1,7 @@
+import { getShipByIdQuery } from '@/services/api/spacetraders'
+import type { ShipResponse } from '@/types/spacetraders'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { type PropsWithChildren, createContext, useContext } from 'react'
-import { getShipByIdQuery } from '@/services/api/spacetraders'
-import { type ShipResponse } from '@/types/spacetraders'
 
 export type ShipStoreProps = {
   shipSymbol: string

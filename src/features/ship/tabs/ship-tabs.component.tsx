@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Tabs from '@/components/tabs'
 import { useShipResponse } from '@/context/ship.context'
@@ -8,6 +7,7 @@ import { ShipResources } from '@/features/ship/resourecs'
 import * as SurveyActions from '@/features/survey/actions'
 import { SurveyContext } from '@/features/survey/context'
 import { SurveyList } from '@/features/survey/list'
+import { useTranslation } from 'react-i18next'
 
 export const ShipTabs = () => {
   const { t } = useTranslation()

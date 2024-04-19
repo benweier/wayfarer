@@ -1,9 +1,9 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { Outlet } from '@tanstack/react-router'
-import { type PropsWithChildren } from 'react'
 import { FleetContext } from '@/context/fleet.context'
 import { getShipListQuery } from '@/services/api/spacetraders'
 import { DashboardTemplate } from '@/templates/dashboard.tpl'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Outlet } from '@tanstack/react-router'
+import type { PropsWithChildren } from 'react'
 
 export const DashboardLayout = ({ children = <Outlet /> }: PropsWithChildren) => {
   const ships = useSuspenseQuery(getShipListQuery())

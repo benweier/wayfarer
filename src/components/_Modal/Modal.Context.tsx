@@ -6,7 +6,7 @@ import {
   forwardRef,
   useImperativeHandle,
 } from 'react'
-import { type ModalContextType, type ModalProps, type ModalRefType } from './modal.types'
+import type { ModalContextType, ModalProps, ModalRefType } from './modal.types'
 import { useModal } from './useModal.hook'
 
 export const ModalContext = createContext<ModalContextType>({

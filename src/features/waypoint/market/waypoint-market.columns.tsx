@@ -1,11 +1,11 @@
-import { createColumnHelper } from '@tanstack/react-table'
-import { cx } from 'class-variance-authority'
-import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Sort } from '@/components/table'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { formatNumber } from '@/utilities/number.helper'
-import { type WaypointMarketTableSchema } from './waypoint-market.types'
+import { createColumnHelper } from '@tanstack/react-table'
+import { cx } from 'class-variance-authority'
+import { Translation } from 'react-i18next'
+import type { WaypointMarketTableSchema } from './waypoint-market.types'
 
 const columnHelper = createColumnHelper<WaypointMarketTableSchema>()
 

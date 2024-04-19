@@ -1,6 +1,3 @@
-import { Link } from '@tanstack/react-router'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
@@ -8,9 +5,12 @@ import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointTraits } from '@/config/spacetraders'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
-import { type WaypointTrait } from '@/types/spacetraders'
+import type { WaypointTrait } from '@/types/spacetraders'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
-import { type WaypointNavigationTableSchema } from './waypoint-navigation.types'
+import { Link } from '@tanstack/react-router'
+import { createColumnHelper } from '@tanstack/react-table'
+import { Translation } from 'react-i18next'
+import type { WaypointNavigationTableSchema } from './waypoint-navigation.types'
 
 const FILTER_TRAITS = new Set<WaypointTraits>([
   WaypointTraits.Stripped,

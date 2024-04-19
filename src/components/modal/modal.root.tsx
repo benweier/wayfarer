@@ -1,8 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as ScrollArea from '@radix-ui/react-scroll-area'
 import { cx } from 'class-variance-authority'
-import { type PropsWithChildren } from 'react'
-import { type ModalDialogProps } from './modal.types'
+import type { PropsWithChildren } from 'react'
+import type { ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
 
 export const Root = ({

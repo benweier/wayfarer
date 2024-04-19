@@ -1,4 +1,4 @@
-import { type FocusEventHandler, type ReactNode } from 'react'
+import type { FocusEventHandler, ReactNode } from 'react'
 
 export type SelectFieldProps = {
   id?: string

@@ -1,13 +1,13 @@
-import * as Tooltip from '@radix-ui/react-tooltip'
-import { createColumnHelper } from '@tanstack/react-table'
-import { cx } from 'class-variance-authority'
-import { Translation } from 'react-i18next'
 import { AppIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { ShipCargoItemControls } from '@/features/ship/cargo/ship-cargo-item.controls'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { formatNumber } from '@/utilities/number.helper'
-import { type ShipCargoTableSchema } from './ship-cargo.types'
+import * as Tooltip from '@radix-ui/react-tooltip'
+import { createColumnHelper } from '@tanstack/react-table'
+import { cx } from 'class-variance-authority'
+import { Translation } from 'react-i18next'
+import type { ShipCargoTableSchema } from './ship-cargo.types'
 
 const columnHelper = createColumnHelper<ShipCargoTableSchema>()
 

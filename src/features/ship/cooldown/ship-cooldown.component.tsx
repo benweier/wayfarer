@@ -1,6 +1,6 @@
+import type { ShipResponse } from '@/types/spacetraders'
 import { cx } from 'class-variance-authority'
 import { useTranslation } from 'react-i18next'
-import { type ShipResponse } from '@/types/spacetraders'
 import { useShipCooldown } from './use-ship-cooldown.hook'
 
 export const ShipCooldown = ({ ship }: { ship: ShipResponse }) => {

@@ -1,6 +1,6 @@
-import { queryOptions } from '@tanstack/react-query'
 import { get } from '@/services/fetch'
-import { type SystemResponse } from '@/types/spacetraders'
+import type { SystemResponse } from '@/types/spacetraders'
+import { queryOptions } from '@tanstack/react-query'
 import { type Meta, type SpaceTradersResponse, attachQueryParams, createHeaders } from './core'
 
 export const getSystemListQuery = ({ page = 1, limit = 20 }: { page?: number; limit?: number } = {}) =>

@@ -1,6 +1,3 @@
-import { Link } from '@tanstack/react-router'
-import { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
@@ -10,7 +7,10 @@ import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
 import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
-import { type ShipResponse } from '@/types/spacetraders'
+import type { ShipResponse } from '@/types/spacetraders'
+import { Link } from '@tanstack/react-router'
+import { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()

@@ -1,12 +1,12 @@
-import { Link } from '@tanstack/react-router'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { useShipTransit } from '@/features/ship/transit'
-import { type ShipResponse } from '@/types/spacetraders'
-import { type ShipListTableSchema } from './ship-list.types'
+import type { ShipResponse } from '@/types/spacetraders'
+import { Link } from '@tanstack/react-router'
+import { createColumnHelper } from '@tanstack/react-table'
+import { Translation } from 'react-i18next'
+import type { ShipListTableSchema } from './ship-list.types'
 
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   const transit = useShipTransit(ship)

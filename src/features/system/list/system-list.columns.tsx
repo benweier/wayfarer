@@ -1,9 +1,9 @@
+import { ShipIcon } from '@/components/icons'
+import { SystemTag } from '@/components/system/tag'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { ShipIcon } from '@/components/icons'
-import { SystemTag } from '@/components/system/tag'
-import { type SystemListTableSchema } from './system-list.types'
+import type { SystemListTableSchema } from './system-list.types'
 import { SystemWaypointsCell } from './waypoints-cell.component'
 
 const columnHelper = createColumnHelper<SystemListTableSchema>()

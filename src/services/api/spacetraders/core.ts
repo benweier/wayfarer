@@ -1,5 +1,5 @@
-import { authStore } from '@/store/auth'
 import type * as f from '@/services/fetch'
+import { authStore } from '@/store/auth'
 
 export type Meta = {
   total: number

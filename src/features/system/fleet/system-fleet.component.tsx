@@ -1,10 +1,10 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { useSystemResponse } from '@/context/system.context'
 import { ShipListTable } from '@/features/ship/list/ship-list.table'
 import { SystemFleetEmpty } from '@/features/system/fleet/system-fleet.empty'
 import { getShipListQuery } from '@/services/api/spacetraders'
-import { type Meta, type SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { type ShipResponse } from '@/types/spacetraders'
+import type { Meta, SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import type { ShipResponse } from '@/types/spacetraders'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 export const SystemFleet = () => {
   const system = useSystemResponse()

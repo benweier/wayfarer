@@ -1,5 +1,3 @@
-import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
 import {
   createShipNavigateMutation,
   getShipByIdQuery,
@@ -7,7 +5,9 @@ import {
   getWaypointMarketQuery,
   getWaypointShipyardQuery,
 } from '@/services/api/spacetraders'
-import { type ShipActionProps } from './ship-actions.types'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
+import type { ShipActionProps } from './ship-actions.types'
 
 export const Navigate = ({
   ship,

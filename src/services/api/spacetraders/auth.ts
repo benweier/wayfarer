@@ -1,6 +1,6 @@
 import { type SpaceTradersResponse, createHeaders } from '@/services/api/spacetraders/core'
 import { get, post } from '@/services/fetch'
-import { type AgentResponse, type RegisterAgentResponse } from '@/types/spacetraders'
+import type { AgentResponse, RegisterAgentResponse } from '@/types/spacetraders'
 
 export const getAgentMutation = {
   getMutationKey: () => [{ scope: 'agent' }] as const,

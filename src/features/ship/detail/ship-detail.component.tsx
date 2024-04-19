@@ -1,8 +1,8 @@
-import { type PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useShipResponse } from '@/context/ship.context'
 import { ShipStatus } from '@/features/ship/status'
 import { ShipTransit } from '@/features/ship/transit'
+import type { PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ShipDetailRefresh } from './ship-detail-refresh.component'
 
 export const ShipDetail = ({ children }: PropsWithChildren) => {

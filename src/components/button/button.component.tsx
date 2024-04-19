@@ -1,7 +1,7 @@
 import { cx } from 'class-variance-authority'
 import { type Ref, forwardRef } from 'react'
 import { button } from './button.cva'
-import { type ButtonProps } from './button.types'
+import type { ButtonProps } from './button.types'
 
 export const ButtonComponent = (
   { intent, size, kind, icon, adornment, className, children, ...props }: ButtonProps,

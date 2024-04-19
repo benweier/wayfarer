@@ -1,5 +1,5 @@
-import { type Row } from '@tanstack/react-table'
-import { type ShipResponse } from '@/types/spacetraders'
+import type { ShipResponse } from '@/types/spacetraders'
+import type { Row } from '@tanstack/react-table'
 
 export type ShipListTableSchema = { ship: ShipResponse }
 

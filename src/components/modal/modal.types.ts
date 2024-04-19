@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
 

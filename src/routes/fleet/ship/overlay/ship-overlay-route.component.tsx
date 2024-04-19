@@ -1,6 +1,6 @@
-import { Outlet, getRouteApi, useNavigate } from '@tanstack/react-router'
 import { Modal } from '@/components/modal'
 import { ROUTES } from '@/config/routes'
+import { Outlet, getRouteApi, useNavigate } from '@tanstack/react-router'
 
 const api = getRouteApi(ROUTES.SHIP)
 

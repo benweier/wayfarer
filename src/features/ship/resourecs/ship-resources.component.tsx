@@ -1,10 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipCooldown } from '@/features/ship/cooldown'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders'
-import { type ShipResponse } from '@/types/spacetraders'
+import type { ShipResponse } from '@/types/spacetraders'
+import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 
 export const ShipResources = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()

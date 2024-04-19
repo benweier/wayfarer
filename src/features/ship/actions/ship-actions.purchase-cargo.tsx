@@ -1,8 +1,8 @@
-import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
 import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
 import { useAuthStore } from '@/store/auth'
-import { type ShipActionProps } from './ship-actions.types'
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
+import type { ShipActionProps } from './ship-actions.types'
 
 export const PurchaseCargo = ({
   ship,

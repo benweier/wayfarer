@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ShipList, ShipListFallback } from '@/features/ship/list'
+import { useTranslation } from 'react-i18next'
 
 export const FleetRoute = () => {
   const { t } = useTranslation()

@@ -1,7 +1,7 @@
-import { Link } from '@tanstack/react-router'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { type SystemWaypoint } from '@/types/spacetraders'
+import type { SystemWaypoint } from '@/types/spacetraders'
 import { chunk } from '@/utilities/chunk.helper'
+import { Link } from '@tanstack/react-router'
 
 const EXCLUDED_WAYPOINTS = new Set(['ASTEROID', 'ENGINEERED_ASTEROID', 'ASTEROID_BASE'])
 

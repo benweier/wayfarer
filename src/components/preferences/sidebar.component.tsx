@@ -1,8 +1,8 @@
-import { useAtom } from 'jotai'
-import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import * as ToggleGroup from '@/components/toggle-group'
 import { type SidebarState, sidebarAtom } from '@/store/atoms/sidebar'
+import { useAtom } from 'jotai'
+import { useTranslation } from 'react-i18next'
 
 export const Sidebar = () => {
   const { t } = useTranslation()

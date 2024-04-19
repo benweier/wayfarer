@@ -1,4 +1,4 @@
-import { type SVGProps } from 'react'
+import type { SVGProps } from 'react'
 
 export const Icon = ({ id, href, ...props }: SVGProps<SVGSVGElement>) => {
   if (!id || !href) return null

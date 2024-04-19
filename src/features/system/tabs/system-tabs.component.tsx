@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Tabs from '@/components/tabs'
 import { SystemFleet, SystemFleetFallback } from '@/features/system/fleet'
 import { WaypointList, WaypointListError, WaypointListFallback } from '@/features/waypoint/list'
+import { useTranslation } from 'react-i18next'
 
 export const SystemTabs = () => {
   const { t } = useTranslation()

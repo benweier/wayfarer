@@ -1,10 +1,10 @@
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
 import { RemoveMount } from '@/features/ship/actions'
+import { useTranslation } from 'react-i18next'
 import { ShipLoadoutItem } from './ship-loadout-item.component'
-import { type ShipLoadoutListProps } from './ship-loadout.types'
+import type { ShipLoadoutListProps } from './ship-loadout.types'
 
 export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps) => {
   const { t } = useTranslation()

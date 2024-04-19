@@ -1,8 +1,8 @@
-import { getRouteApi } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ROUTES } from '@/config/routes'
 import { AgentDetail } from '@/features/agent/detail'
+import { getRouteApi } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 
 const api = getRouteApi(ROUTES.AGENT)
 

@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid/non-secure'
 import { create } from 'zustand/react'
-import { type ToastStore } from './toast.types'
+import type { ToastStore } from './toast.types'
 
 export const useToastStore = create<ToastStore>()((set, get) => ({
   toasts: new Map(),

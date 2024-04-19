@@ -1,5 +1,5 @@
 import styles from './system-tag.module.css'
-import { type SystemTagProps } from './system-tag.types'
+import type { SystemTagProps } from './system-tag.types'
 
 export const SystemTag = ({ type, children }: SystemTagProps) => {
   return (

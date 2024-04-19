@@ -1,9 +1,9 @@
-import { useIsFetching, useQueryClient } from '@tanstack/react-query'
-import { startTransition, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders'
+import { useIsFetching, useQueryClient } from '@tanstack/react-query'
+import { startTransition, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const WaypointMarketRefresh = () => {
   const { t } = useTranslation()

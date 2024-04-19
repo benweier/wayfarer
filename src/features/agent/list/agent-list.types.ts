@@ -1,4 +1,4 @@
-import { type AgentResponse } from '@/types/spacetraders'
+import type { AgentResponse } from '@/types/spacetraders'
 
 export type AgentListProps = {
   page?: number

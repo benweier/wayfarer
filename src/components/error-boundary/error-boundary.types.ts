@@ -1,4 +1,4 @@
-import { type ErrorInfo, type ReactNode } from 'react'
+import type { ErrorInfo, ReactNode } from 'react'
 
 export type OnErrorCaptureHandler = (error: Error, info: ErrorInfo) => void
 

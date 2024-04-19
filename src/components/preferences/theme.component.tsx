@@ -1,8 +1,8 @@
-import { useAtom } from 'jotai'
-import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import * as ToggleGroup from '@/components/toggle-group'
 import { type ThemeState, themeAtom } from '@/store/atoms/theme'
+import { useAtom } from 'jotai'
+import { useTranslation } from 'react-i18next'
 
 export const Theme = () => {
   const { t } = useTranslation()

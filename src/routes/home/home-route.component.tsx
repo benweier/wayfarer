@@ -1,5 +1,5 @@
-import { Navigate } from '@tanstack/react-router'
 import { useAuthStore } from '@/store/auth'
+import { Navigate } from '@tanstack/react-router'
 
 export const HomeRoute = () => {
   const { isAuthenticated } = useAuthStore()

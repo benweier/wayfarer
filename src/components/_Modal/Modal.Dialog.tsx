@@ -2,7 +2,7 @@ import { cx } from 'class-variance-authority'
 import { type PropsWithChildren, useContext, useRef } from 'react'
 import { ModalContext } from './Modal.Context'
 import { Overlay } from './Modal.Overlay'
-import { type DialogProps } from './modal.types.d'
+import type { DialogProps } from './modal.types.d'
 import { useClickOutside } from './useClickOutside'
 import { useInOutTransition } from './useInOutTransition'
 
