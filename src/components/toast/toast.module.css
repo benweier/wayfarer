@@ -1,135 +1,85 @@
 .toast {
-  @apply border-2 pointer-events-auto;
+  pointer-events: auto;
+  border-style: solid;
+  border-width: 2px;
 
   .toast-label {
-    @apply text-lg;
+    font-size: var(--font-size-text-xl);
+    line-height: var(--line-height-text-xl);
   }
 
   .toast-description {
-    @apply text-base;
+    font-size: var(--font-size-text-base);
+    line-height: var(--line-height-text-base);
   }
 
   &[data-status='success'] {
-    @apply border-emerald-200 bg-emerald-300;
+    background-color: var(--toast-bg-success);
+    border-color: var(--toast-border-success);
 
     .toast-label {
-      @apply font-bold text-emerald-800;
+      font-weight: bold;
+      color: var(--toast-fg-success);
     }
 
     .toast-description {
-      @apply text-emerald-700;
+      color: var(--toast-fg-success-secondary);
     }
   }
 
   &[data-status='warning'] {
-    @apply border-yellow-200 bg-yellow-300;
+    background-color: var(--toast-bg-warning);
+    border-color: var(--toast-border-warning);
 
     .toast-label {
-      @apply font-bold text-yellow-800;
+      font-weight: bold;
+      color: var(--toast-fg-warning);
     }
 
     .toast-description {
-      @apply text-yellow-700;
+      color: var(--toast-fg-warning-secondary);
     }
   }
 
   &[data-status='error'] {
-    @apply border-rose-200 bg-rose-300;
+    background-color: var(--toast-bg-error);
+    border-color: var(--toast-border-error);
 
     .toast-label {
-      @apply font-bold text-rose-800;
+      font-weight: bold;
+      color: var(--toast-fg-error);
     }
 
     .toast-description {
-      @apply text-rose-700;
+      color: var(--toast-fg-error-secondary);
     }
   }
 
   &[data-status='info'] {
-    @apply border-blue-200 bg-blue-300;
+    background-color: var(--toast-bg-info);
+    border-color: var(--toast-border-info);
 
     .toast-label {
-      @apply font-bold text-blue-800;
+      font-weight: bold;
+      color: var(--toast-fg-info);
     }
 
     .toast-description {
-      @apply text-blue-700;
+      color: var(--toast-fg-info-secondary);
     }
   }
 
   &[data-status='neutral'] {
-    @apply border-gray-200 bg-gray-300;
+    background-color: var(--toast-bg-neutral);
+    border-color: var(--toast-border-neutral);
 
     .toast-label {
-      @apply font-bold text-gray-800;
+      font-weight: bold;
+        color: var(--toast-fg-neutral);
     }
 
     .toast-description {
-      @apply text-gray-700;
-    }
-  }
-}
-
-:global(.dark) {
-  .toast {
-    &[data-status='success'] {
-      @apply border-emerald-800 bg-emerald-700;
-
-      .toast-label {
-        @apply font-bold text-emerald-100;
-      }
-
-      .toast-description {
-        @apply text-emerald-200;
-      }
-    }
-
-    &[data-status='warning'] {
-      @apply border-yellow-800 bg-yellow-700;
-
-      .toast-label {
-        @apply font-bold text-yellow-100;
-      }
-
-      .toast-description {
-        @apply text-yellow-200;
-      }
-    }
-
-    &[data-status='error'] {
-      @apply border-rose-800 bg-rose-700;
-
-      .toast-label {
-        @apply font-bold text-rose-100;
-      }
-
-      .toast-description {
-        @apply text-rose-200;
-      }
-    }
-
-    &[data-status='info'] {
-      @apply border-blue-800 bg-blue-700;
-
-      .toast-label {
-        @apply font-bold text-blue-100;
-      }
-
-      .toast-description {
-        @apply text-blue-200;
-      }
-    }
-
-    &[data-status='neutral'] {
-      @apply border-gray-800 bg-gray-700;
-
-      .toast-label {
-        @apply font-bold text-gray-100;
-      }
-
-      .toast-description {
-        @apply text-gray-200;
-      }
+      color: var(--toast-fg-neutral-secondary);
     }
   }
 }
