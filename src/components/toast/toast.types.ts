@@ -23,7 +23,7 @@ type ToastActions = {
 
 export type ToastStore = ToastState & { actions: ToastActions }
 
-export type ToastElementProps = {
+export type ToastItemProps = {
   id: string
   toast: Toast
 }
