@@ -89,6 +89,29 @@
     --link-fg: var(--color-sky-600);
   }
 
+  .toast {
+    --toast-fg-info: var(--u-color-info-700);
+    --toast-fg-info-secondary: var(--u-color-info-500);
+    --toast-bg-info: var(--u-color-info-200);
+    --toast-border-info: var(--u-color-info-300);
+    --toast-fg-success: var(--u-color-success-700);
+    --toast-fg-success-secondary: var(--u-color-success-500);
+    --toast-bg-success: var(--u-color-success-200);
+    --toast-border-success: var(--u-color-success-300);
+    --toast-fg-warning: var(--u-color-warning-700);
+    --toast-fg-warning-secondary: var(--u-color-warning-500);
+    --toast-bg-warning: var(--u-color-warning-200);
+    --toast-border-warning: var(--u-color-warning-300);
+    --toast-fg-error: var(--u-color-error-700);
+    --toast-fg-error-secondary: var(--u-color-error-500);
+    --toast-bg-error: var(--u-color-error-200);
+    --toast-border-error: var(--u-color-error-300);
+    --toast-fg-neutral: var(--u-color-neutral-700);
+    --toast-fg-neutral-secondary: var(--u-color-neutral-500);
+    --toast-bg-neutral: var(--u-color-neutral-200);
+    --toast-border-neutral: var(--u-color-neutral-300);
+  }
+
   .btn-brand {
     &.btn-solid {
       --button-bg-color: var(--u-color-brand-main);
