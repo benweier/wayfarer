@@ -1,8 +1,9 @@
 /// <reference types="vite/client" />
-import { type TFunction } from 'i18next'
+import type { TFunction } from 'i18next'
 import type React from 'react'
 
 declare global {
+  type Keys<T> = keyof T
   type Values<T> = T[keyof T]
 
   type MetaObject =
