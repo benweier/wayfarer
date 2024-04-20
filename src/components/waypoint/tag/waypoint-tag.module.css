@@ -70,8 +70,9 @@
 
   display: inline-flex;
   padding: var(--waypoint-tag-padding-y) var(--waypoint-tag-padding-x);
-  font-size: var(--font-size-text-xs);
+  font-size: var(--font-size-text-sm);
   font-weight: bold;
+    line-height: var(--line-height-text-sm);
   color: var(--waypoint-tag-fg);
   background-color: var(--waypoint-tag-bg);
   border-radius: var(--waypoint-tag-radius);

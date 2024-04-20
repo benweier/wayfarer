@@ -10,7 +10,7 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
   const ship = useShipResponse()
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="flex items-center justify-between gap-2">
         <div className="typography-base">
           <span className="font-bold">{t('ship.registration')}:</span> {ship.registration.name} •{' '}
@@ -19,13 +19,10 @@ export const ShipDetail = ({ children }: PropsWithChildren) => {
         <ShipDetailRefresh />
       </div>
 
-      <div>
-        <ShipStatus ship={ship} />
-      </div>
+      <ShipStatus ship={ship} />
 
-      <div>
-        <ShipTransit nav={ship.nav} />
-      </div>
+      <ShipTransit nav={ship.nav} />
+
       {children}
     </div>
   )

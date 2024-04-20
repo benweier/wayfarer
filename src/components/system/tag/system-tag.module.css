@@ -55,8 +55,9 @@
 
   display: inline-flex;
   padding: var(--system-tag-padding-y) var(--system-tag-padding-x);
-  font-size: var(--font-size-text-xs);
+  font-size: var(--font-size-text-sm);
   font-weight: bold;
+  line-height: var(--line-height-text-sm);
   color: var(--system-tag-fg);
   background-color: var(--system-tag-bg);
   border-radius: var(--system-tag-radius);

@@ -43,15 +43,15 @@
 .btn-xs {
   --button-padding-y: var(--u-spacing-0-5);
   --button-padding-x: var(--u-spacing-2);
-  --button-font-size: var(--u-font-size-text-sm);
-  --button-line-height: var(--u-line-height-text-sm);
+  --button-font-size: var(--u-font-size-text-xs);
+  --button-line-height: var(--u-line-height-text-xs);
 }
 
 .btn-sm {
   --button-padding-y: var(--u-spacing-1);
   --button-padding-x: var(--u-spacing-3);
-  --button-font-size: var(--u-font-size-text-xs);
-  --button-line-height: var(--u-line-height-text-xs);
+  --button-font-size: var(--u-font-size-text-sm);
+  --button-line-height: var(--u-line-height-text-sm);
   --button-radius: var(--radius-sm);
 }
 

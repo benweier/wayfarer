@@ -21,13 +21,13 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
       <div className="flex flex-row items-end gap-2">
         <div className="flex gap-8">
           <div>
-            <div className="text-foreground-secondary typography-xs uppercase">{t('system.label')}</div>
+            <div className="text-foreground-secondary typography-sm uppercase">{t('system.label')}</div>
             <Link to="/systems/$systemSymbol" params={{ systemSymbol: ship.nav.systemSymbol }} className="link">
               {ship.nav.systemSymbol}
             </Link>
           </div>
           <div>
-            <div className="text-foreground-secondary typography-xs uppercase">{t('waypoint.label')}</div>
+            <div className="text-foreground-secondary typography-sm uppercase">{t('waypoint.label')}</div>
             <div className="flex flex-col items-start">
               <Link
                 to="/systems/$systemSymbol/waypoint/$waypointSymbol"
@@ -47,7 +47,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             </div>
           </div>
           <div>
-            <div className="text-foreground-secondary typography-xs uppercase">{t('ship.status')}</div>
+            <div className="text-foreground-secondary typography-sm uppercase">{t('ship.status')}</div>
             <div className="flex h-6 items-center gap-1">
               <Badge>{t(ship.nav.status, { ns: 'spacetraders.nav_status' })}</Badge>
               <Badge>{t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}</Badge>
@@ -78,8 +78,8 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
 
       <div className="flex items-start gap-0.5">
         <div className="flex flex-col items-end gap-0.5">
-          <div className="bg-background-secondary min-w-24 rounded-sm rounded-l-lg py-2 px-3">
-            <div className="text-foreground-secondary typography-xs text-right uppercase">{t('ship.fuel')}</div>
+          <div className="bg-background-secondary min-w-28 rounded-sm rounded-l-lg py-2 px-3">
+            <div className="text-foreground-secondary typography-sm text-right uppercase">{t('ship.fuel')}</div>
             <div className="flex items-center justify-end gap-2">
               <ShipIcon id="fuel" className="text-foreground-fuel size-4" />
               <div className="typography-sm font-semibold">
@@ -113,7 +113,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
           </WaypointContext.Consumer>
         </div>
         <div className="bg-background-secondary min-w-24 rounded-sm py-2 px-3">
-          <div className="text-foreground-secondary typography-xs text-right uppercase">{t('ship.cargo')}</div>
+          <div className="text-foreground-secondary typography-sm text-right uppercase">{t('ship.cargo')}</div>
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="cargo" className="text-foreground-cargo size-4" />
             <div className="typography-sm font-semibold">
@@ -128,8 +128,8 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
           </div>
         </div>
         <div className="flex flex-col items-end gap-0.5">
-          <div className="bg-background-secondary w-full min-w-24 rounded-sm rounded-r-lg py-2 px-3">
-            <div className="text-foreground-secondary typography-xs text-right uppercase">{t('ship.condition')}</div>
+          <div className="bg-background-secondary w-full min-w-28 rounded-sm rounded-r-lg py-2 px-3">
+            <div className="text-foreground-secondary typography-sm text-right uppercase">{t('ship.condition')}</div>
             <div className="flex items-center justify-end gap-2">
               <ShipIcon id="condition" className="text-foreground-condition size-4" />
               <div className="typography-sm font-semibold">
