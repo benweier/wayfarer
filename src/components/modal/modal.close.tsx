@@ -5,7 +5,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 export const Close = ({
   children = (
     <Button intent="danger" kind="outline" size="small" icon>
-      <AppIcon id="x" className="size-3" />
+      <AppIcon id="x" className="size-4" />
     </Button>
   ),
   ...props
