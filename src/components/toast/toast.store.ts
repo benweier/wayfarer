@@ -1,8 +1,9 @@
 import { nanoid } from 'nanoid/non-secure'
-import { create } from 'zustand/react'
+import { create } from 'zustand'
+import { useStore } from 'zustand/react'
 import type { ToastStore } from './toast.types'
 
-export const useToastStore = create<ToastStore>()((set, get) => ({
+export const useToastStore = create<ToastStore>((set, get) => ({
   toasts: new Map(),
   actions: {
     create: (status, { label, description }) => {
@@ -26,3 +27,11 @@ export const useToastStore = create<ToastStore>()((set, get) => ({
     },
   },
 }))
+
+export const useToastState = () => {
+  return useStore(useToastStore, (state) => state.toasts)
+}
+
+export const useToastActions = () => {
+  return useStore(useToastStore, (state) => state.actions)
+}
