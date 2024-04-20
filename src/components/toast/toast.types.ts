@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react'
 
 export type Toast = {
-  label: ReactNode
+  title: ReactNode
   description?: ReactNode
+  adornment?: ReactNode
   status: 'success' | 'error' | 'warning' | 'info' | 'neutral'
 }
 
@@ -14,8 +15,9 @@ type ToastActions = {
   create: (
     status: 'success' | 'error' | 'warning' | 'info' | 'neutral',
     toast: {
-      label: ReactNode
+      title: ReactNode
       description?: ReactNode
+      adornment?: ReactNode
     },
   ) => void
   remove: (id: string) => void

@@ -1,19 +1,16 @@
-import { Button } from '@/components/button'
-import { AppIcon } from '@/components/icons'
 import type { ToastItemProps } from './toast.types'
 
-export const ToastItem = ({ id, toast }: ToastItemProps) => {
+export const ToastItem = ({ toast }: ToastItemProps) => {
   return (
-    <div id={`toast-${id}`} className={'toast w-full rounded-lg py-3 px-4 md:w-96'} data-status={toast.status}>
-      <div className="flex items-start justify-between gap-2">
+    <div className="toast w-full rounded-md p-4 md:w-120" data-status={toast.status}>
+      <div className="flex grow-0 shrink-0 gap-4">
+        {toast.adornment && (
+          <div className="toast-adornment flex items-center justify-center size-6">{toast.adornment}</div>
+        )}
+
         <div>
-          <div className={'toast-label'}>{toast.label}</div>
-          {toast.description && <div className={'toast-description'}>{toast.description}</div>}
-        </div>
-        <div>
-          <Button icon>
-            <AppIcon id="x" className="size-5" />
-          </Button>
+          <div className="toast-title">{toast.title}</div>
+          {toast.description && <div className="toast-description">{toast.description}</div>}
         </div>
       </div>
     </div>

@@ -6,11 +6,11 @@ import type { ToastStore } from './toast.types'
 export const useToastStore = create<ToastStore>((set, get) => ({
   toasts: new Map(),
   actions: {
-    create: (status, { label, description }) => {
+    create: (status, { title, description, adornment }) => {
       const id = nanoid()
       const toasts = get().toasts
 
-      toasts.set(id, { status, label, description })
+      toasts.set(id, { status, title, description, adornment })
 
       set({ toasts: new Map(toasts) })
 
