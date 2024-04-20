@@ -37,7 +37,7 @@ export const getFactionListQuery = () =>
 export const getFactionByIdQuery = (args: { factionSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'factions', entity: 'item' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(`factions/${args.factionSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<FactionResponse>>(url, { signal, headers: createHeaders() })

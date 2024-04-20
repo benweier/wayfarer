@@ -1,4 +1,4 @@
-import { createContractAcceptMutation, getContractListQuery } from '@/services/api/spacetraders'
+import { createContractAcceptMutation, getContractListQuery } from '@/services/api/spacetraders/contracts'
 import { useAuthStore } from '@/store/auth'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'

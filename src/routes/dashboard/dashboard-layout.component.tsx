@@ -1,5 +1,5 @@
 import { FleetContext } from '@/context/fleet.context'
-import { getShipListQuery } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { DashboardTemplate } from '@/templates/dashboard.tpl'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Outlet } from '@tanstack/react-router'

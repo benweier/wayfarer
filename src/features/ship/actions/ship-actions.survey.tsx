@@ -1,4 +1,4 @@
-import { createShipSurveyMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders'
+import { createShipSurveyMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useSurveyStore } from '@/store/surveys'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'

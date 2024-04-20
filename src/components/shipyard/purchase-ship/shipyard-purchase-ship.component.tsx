@@ -1,5 +1,5 @@
 import { Button } from '@/components/button'
-import { createShipPurchaseMutation, getShipListQuery } from '@/services/api/spacetraders'
+import { createShipPurchaseMutation, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useAuthStore } from '@/store/auth'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'

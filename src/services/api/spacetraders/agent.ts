@@ -14,7 +14,7 @@ export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; lim
       { scope: 'agents', entity: 'list' },
       { page, limit },
     ],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL('agents', import.meta.env.SPACETRADERS_API_BASE_URL)
 
       attachQueryParams(url, { page, limit })
@@ -26,7 +26,7 @@ export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; lim
 export const getAgentBySymbolQuery = (args: { agentSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'agents', entity: 'item' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(`agents/${args.agentSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<AgentResponse>>(url, { signal, headers: createHeaders() })

@@ -1,5 +1,5 @@
 import { Button } from '@/components/button'
-import { getShipListQuery } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 import { startTransition, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'

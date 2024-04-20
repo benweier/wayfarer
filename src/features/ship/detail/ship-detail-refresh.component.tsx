@@ -1,6 +1,7 @@
 import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
-import { getShipByIdQuery, getWaypointByIdQuery } from '@/services/api/spacetraders'
+import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
+import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
 import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 import { startTransition, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'

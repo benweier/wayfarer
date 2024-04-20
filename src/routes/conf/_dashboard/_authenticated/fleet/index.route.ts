@@ -1,5 +1,5 @@
 import { meta } from '@/routes/fleet/fleet-route.meta'
-import { getShipListQuery } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { createFileRoute, defer } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/_authenticated/fleet/')({

@@ -7,7 +7,7 @@ import {
   WaypointMarketList,
   WaypointMarketPreferences,
 } from '@/features/waypoint/market'
-import { getWaypointByIdQuery } from '@/services/api/spacetraders'
+import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 

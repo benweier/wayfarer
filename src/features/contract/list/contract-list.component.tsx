@@ -1,7 +1,7 @@
 import * as Tabs from '@/components/tabs'
 import { AcceptContractAction } from '@/features/contract/list/accept-contract.action'
 import { AvailableContractAction } from '@/features/contract/list/available-contract.action'
-import { getContractListQuery } from '@/services/api/spacetraders'
+import { getContractListQuery } from '@/services/api/spacetraders/contracts'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { acceptedContractsColumns, availableContractsColumns, completedContractsColumns } from './contract-list.columns'

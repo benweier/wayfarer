@@ -1,7 +1,7 @@
 import { useFleetResponse } from '@/context/fleet.context'
 import { useSystemResponse } from '@/context/system.context'
 import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
-import { getWaypointListQuery } from '@/services/api/spacetraders'
+import { getWaypointListQuery } from '@/services/api/spacetraders/waypoints'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useDeferredValue, useState } from 'react'
 import { WaypointListTable } from './waypoint-list.table'

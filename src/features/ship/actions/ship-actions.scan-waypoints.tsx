@@ -1,6 +1,6 @@
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
-import { createShipScanWaypointsMutation } from '@/services/api/spacetraders'
+import { createShipScanWaypointsMutation } from '@/services/api/spacetraders/fleet'
 import { useMutation } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 

@@ -60,7 +60,7 @@ export const getShipListQuery = () =>
 export const getShipByIdQuery = (args: { shipSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'ships', entity: 'item' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(`my/ships/${args.shipSymbol.toUpperCase()}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<ShipResponse>>(url, { signal, headers: createHeaders() })
@@ -69,7 +69,7 @@ export const getShipByIdQuery = (args: { shipSymbol: string }) =>
 
 export const createShipPurchaseMutation = {
   getMutationKey: () => [{ scope: 'ships', entity: 'list', action: 'purchase' }],
-  mutationFn: async ({ shipType, waypointSymbol }: { shipType: string; waypointSymbol: string }) => {
+  mutationFn: ({ shipType, waypointSymbol }: { shipType: string; waypointSymbol: string }) => {
     const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse }>>(
@@ -85,7 +85,7 @@ export const createShipCargoPurchaseMutation = {
     { scope: 'ships', entity: 'item', action: 'purchase-cargo' },
     args,
   ],
-  mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
+  mutationFn: ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/purchase`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>>(
@@ -98,7 +98,7 @@ export const createShipCargoPurchaseMutation = {
 
 export const createShipCargoSellMutation = {
   getMutationKey: (args?: ShipMutationKey | null) => [{ scope: 'ships', entity: 'item', action: 'sell-cargo' }, args],
-  mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
+  mutationFn: ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/sell`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; cargo: ShipCargo; transaction: MarketTransaction }>>(
@@ -111,7 +111,7 @@ export const createShipCargoSellMutation = {
 
 export const createShipScanWaypointsMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'scan-waypoints' }, args],
-  mutationFn: async (args: { shipSymbol: string }) => {
+  mutationFn: (args: { shipSymbol: string }) => {
     const url = new URL(
       `my/ships/${args.shipSymbol.toUpperCase()}/scan/waypoints`,
       import.meta.env.SPACETRADERS_API_BASE_URL,
@@ -125,7 +125,7 @@ export const createShipScanWaypointsMutation = {
 
 export const createShipScanSystemMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'scan-system' }, args],
-  mutationFn: async (args: { shipSymbol: string }) => {
+  mutationFn: (args: { shipSymbol: string }) => {
     const url = new URL(
       `my/ships/${args.shipSymbol.toUpperCase()}/scan/systems`,
       import.meta.env.SPACETRADERS_API_BASE_URL,
@@ -150,7 +150,7 @@ export const createShipScanSystemMutation = {
 
 export const createShipOrbitMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'orbit' }, args],
-  mutationFn: async (args: ShipMutationKey) => {
+  mutationFn: (args: ShipMutationKey) => {
     const url = new URL(`my/ships/${args.shipSymbol.toUpperCase()}/orbit`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ nav: NavigationResponse }>>(url, undefined, {
@@ -161,7 +161,7 @@ export const createShipOrbitMutation = {
 
 export const createShipDockMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'dock' }, args],
-  mutationFn: async (args: ShipMutationKey) => {
+  mutationFn: (args: ShipMutationKey) => {
     const url = new URL(`my/ships/${args.shipSymbol.toUpperCase()}/dock`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ nav: NavigationResponse }>>(url, undefined, {
@@ -172,7 +172,7 @@ export const createShipDockMutation = {
 
 export const createShipNavigateMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'navigate' }, args],
-  mutationFn: async ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) => {
+  mutationFn: ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/navigate`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>>(
@@ -185,7 +185,7 @@ export const createShipNavigateMutation = {
 
 export const createShipWarpMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'warp' }, args],
-  mutationFn: async ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) => {
+  mutationFn: ({ shipSymbol, waypointSymbol }: { shipSymbol: string; waypointSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/warp`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ nav: NavigationResponse; fuel: FuelResponse }>>(
@@ -198,7 +198,7 @@ export const createShipWarpMutation = {
 
 export const createShipJumpMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'jump' }, args],
-  mutationFn: async ({ shipSymbol, systemSymbol }: { shipSymbol: string; systemSymbol: string }) => {
+  mutationFn: ({ shipSymbol, systemSymbol }: { shipSymbol: string; systemSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/jump`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ nav: NavigationResponse; cooldown: CooldownResponse }>>(
@@ -211,7 +211,7 @@ export const createShipJumpMutation = {
 
 export const createShipRefuelMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'refuel' }, args],
-  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+  mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/refuel`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>>(url, undefined, {
@@ -222,7 +222,7 @@ export const createShipRefuelMutation = {
 
 export const createShipFlightModeMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'flight-mode' }, args],
-  mutationFn: async ({ shipSymbol, flightMode }: { shipSymbol: string; flightMode: string }) => {
+  mutationFn: ({ shipSymbol, flightMode }: { shipSymbol: string; flightMode: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/nav`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return patch<SpaceTradersResponse<NavigationResponse>>(
@@ -237,7 +237,7 @@ export const createShipFlightModeMutation = {
 
 export const createShipSurveyMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'survey' }, args],
-  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+  mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/survey`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>>(url, undefined, {
@@ -248,7 +248,7 @@ export const createShipSurveyMutation = {
 
 export const createShipExtractMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'extract' }, args],
-  mutationFn: async ({ shipSymbol, survey }: { shipSymbol: string; survey?: SurveyResponse }) => {
+  mutationFn: ({ shipSymbol, survey }: { shipSymbol: string; survey?: SurveyResponse }) => {
     const url =
       survey === undefined
         ? new URL(`my/ships/${shipSymbol.toUpperCase()}/extract`, import.meta.env.SPACETRADERS_API_BASE_URL)
@@ -264,7 +264,7 @@ export const createShipExtractMutation = {
 
 export const createShipSiphonMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'siphon' }, args],
-  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+  mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/siphon`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<ShipSiphonResponse>>(url, undefined, { headers: createHeaders() })
@@ -273,7 +273,7 @@ export const createShipSiphonMutation = {
 
 export const createShipRefineMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'refine' }, args],
-  mutationFn: async ({ shipSymbol, produce }: { shipSymbol: string; produce: string }) => {
+  mutationFn: ({ shipSymbol, produce }: { shipSymbol: string; produce: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/refine`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<
@@ -289,7 +289,7 @@ export const createShipRefineMutation = {
 
 export const createShipTransferCargoMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'transfer-cargo' }, args],
-  mutationFn: async ({
+  mutationFn: ({
     shipSymbol,
     itemSymbol,
     units,
@@ -313,7 +313,7 @@ export const createShipTransferCargoMutation = {
 
 export const createShipJettisonMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'jettison' }, args],
-  mutationFn: async ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
+  mutationFn: ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/jettison`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ cargo: ShipCargo }>>(
@@ -326,7 +326,7 @@ export const createShipJettisonMutation = {
 
 export const createShipChartMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'chart' }, args],
-  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+  mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/chart`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>>(url, undefined, {
@@ -337,7 +337,7 @@ export const createShipChartMutation = {
 
 export const createShipInstallMountMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'install-mount' }, args],
-  mutationFn: async ({ shipSymbol, mountSymbol }: { shipSymbol: string; mountSymbol: string }) => {
+  mutationFn: ({ shipSymbol, mountSymbol }: { shipSymbol: string; mountSymbol: string }) => {
     const url = new URL(
       `my/ships/${shipSymbol.toUpperCase()}/mounts/install`,
       import.meta.env.SPACETRADERS_API_BASE_URL,
@@ -352,7 +352,7 @@ export const createShipInstallMountMutation = {
 
 export const createShipRemoveMountMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'remove-mount' }, args],
-  mutationFn: async ({ shipSymbol, mountSymbol }: { shipSymbol: string; mountSymbol: string }) => {
+  mutationFn: ({ shipSymbol, mountSymbol }: { shipSymbol: string; mountSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/mounts/remove`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<
@@ -364,7 +364,7 @@ export const createShipRemoveMountMutation = {
 
 export const createShipNegotiateContractMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'negotiate-contract' }, args],
-  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+  mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol}/negotiate/contract`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ contract: ContractResponse }>>(url, undefined, { headers: createHeaders() })
@@ -374,7 +374,7 @@ export const createShipNegotiateContractMutation = {
 export const getShipScrapQuery = (args: { shipSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'ships', entity: 'scrap' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(`my/ships/${args.shipSymbol.toUpperCase()}/scrap`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<{ transaction: ShipScrapTransaction }>>(url, { signal, headers: createHeaders() })
@@ -383,7 +383,7 @@ export const getShipScrapQuery = (args: { shipSymbol: string }) =>
 
 export const createShipScrapMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'scrap' }, args],
-  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+  mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/scrap`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; transaction: ShipScrapTransaction }>>(url, undefined, {
@@ -395,7 +395,7 @@ export const createShipScrapMutation = {
 export const getShipRepairQuery = (args: { shipSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'ships', entity: 'repair' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(`my/ships/${args.shipSymbol.toUpperCase()}/repair`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<{ transaction: ShipRepairTransaction }>>(url, {
@@ -407,7 +407,7 @@ export const getShipRepairQuery = (args: { shipSymbol: string }) =>
 
 export const createShipRepairMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'repair' }, args],
-  mutationFn: async ({ shipSymbol }: { shipSymbol: string }) => {
+  mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     const url = new URL(`my/ships/${shipSymbol.toUpperCase()}/repair`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse; transaction: ShipRepairTransaction }>>(

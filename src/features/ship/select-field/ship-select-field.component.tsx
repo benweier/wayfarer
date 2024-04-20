@@ -1,5 +1,5 @@
 import * as Select from '@/components/select'
-import { getShipListQuery } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { defaultGetShipItem } from './ship-item-reducer.helper'

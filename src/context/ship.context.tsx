@@ -1,4 +1,4 @@
-import { getShipByIdQuery } from '@/services/api/spacetraders'
+import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
 import type { ShipResponse } from '@/types/spacetraders'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { type PropsWithChildren, createContext, useContext } from 'react'

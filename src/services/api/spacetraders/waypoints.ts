@@ -38,7 +38,7 @@ export const getWaypointListQuery = (args: { systemSymbol: string }) =>
 export const getWaypointByIdQuery = (args: { systemSymbol: string; waypointSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'item' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(
         `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}`,
         import.meta.env.SPACETRADERS_API_BASE_URL,
@@ -51,7 +51,7 @@ export const getWaypointByIdQuery = (args: { systemSymbol: string; waypointSymbo
 export const getWaypointMarketQuery = (args: { systemSymbol: string; waypointSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'market' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(
         `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/market`,
         import.meta.env.SPACETRADERS_API_BASE_URL,
@@ -64,7 +64,7 @@ export const getWaypointMarketQuery = (args: { systemSymbol: string; waypointSym
 export const getWaypointShipyardQuery = (args: { systemSymbol: string; waypointSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'shipyard' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(
         `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/shipyard`,
         import.meta.env.SPACETRADERS_API_BASE_URL,
@@ -77,7 +77,7 @@ export const getWaypointShipyardQuery = (args: { systemSymbol: string; waypointS
 export const getWaypointJumpGateQuery = (args: { systemSymbol: string; waypointSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'jump-gate' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(
         `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/jump-gate`,
         import.meta.env.SPACETRADERS_API_BASE_URL,

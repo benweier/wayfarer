@@ -1,7 +1,7 @@
 import { Pagination } from '@/components/pagination'
 import { useFleetResponse } from '@/context/fleet.context'
 import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
-import { getSystemListQuery } from '@/services/api/spacetraders'
+import { getSystemListQuery } from '@/services/api/spacetraders/systems'
 import { formatNumber } from '@/utilities/number.helper'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'

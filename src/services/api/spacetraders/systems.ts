@@ -9,7 +9,7 @@ export const getSystemListQuery = ({ page = 1, limit = 20 }: { page?: number; li
       { scope: 'systems', entity: 'list' },
       { page, limit },
     ],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(`systems`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       attachQueryParams(url, { page, limit })
@@ -21,7 +21,7 @@ export const getSystemListQuery = ({ page = 1, limit = 20 }: { page?: number; li
 export const getSystemByIdQuery = (args: { systemSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'systems', entity: 'item' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(`systems/${args.systemSymbol.toUpperCase()}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<SystemResponse>>(url, { signal, headers: createHeaders() })

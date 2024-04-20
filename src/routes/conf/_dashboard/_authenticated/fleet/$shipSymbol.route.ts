@@ -1,6 +1,7 @@
 import { NotFound } from '@/components/not-found'
 import { meta } from '@/routes/fleet/ship/ship-route.meta'
-import { getShipByIdQuery, getWaypointByIdQuery } from '@/services/api/spacetraders'
+import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
+import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymbol')({

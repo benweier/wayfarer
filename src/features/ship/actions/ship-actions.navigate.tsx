@@ -1,10 +1,5 @@
-import {
-  createShipNavigateMutation,
-  getShipByIdQuery,
-  getShipListQuery,
-  getWaypointMarketQuery,
-  getWaypointShipyardQuery,
-} from '@/services/api/spacetraders'
+import { createShipNavigateMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
+import { getWaypointMarketQuery, getWaypointShipyardQuery } from '@/services/api/spacetraders/waypoints'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import type { ShipActionProps } from './ship-actions.types'

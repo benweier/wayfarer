@@ -3,7 +3,7 @@ import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-a
 import { ShipStatus } from '@/features/ship/status'
 import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
 import { WaypointNavigationAction } from '@/features/waypoint/navigation/waypoint-navigation.action'
-import { getWaypointListQuery } from '@/services/api/spacetraders'
+import { getWaypointListQuery } from '@/services/api/spacetraders/waypoints'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useDeferredValue, useState } from 'react'
 import { WaypointNavigationTable } from './waypoint-navigation.table'

@@ -1,7 +1,7 @@
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipListTable } from '@/features/ship/list/ship-list.table'
 import { WaypointFleetEmpty } from '@/features/waypoint/fleet/waypoint-fleet.empty'
-import { getShipListQuery } from '@/services/api/spacetraders'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 export const WaypointFleetList = () => {

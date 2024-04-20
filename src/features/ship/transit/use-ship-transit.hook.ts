@@ -1,9 +1,5 @@
-import {
-  getShipByIdQuery,
-  getShipListQuery,
-  getWaypointMarketQuery,
-  getWaypointShipyardQuery,
-} from '@/services/api/spacetraders'
+import { getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
+import { getWaypointMarketQuery, getWaypointShipyardQuery } from '@/services/api/spacetraders/waypoints'
 import type { ShipResponse } from '@/types/spacetraders'
 import { useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'

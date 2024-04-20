@@ -6,7 +6,7 @@ import { queryOptions } from '@tanstack/react-query'
 export const getStatusQuery = () =>
   queryOptions({
     queryKey: [{ scope: 'status' }],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<StatusResponse>(url, { signal, headers: createHeaders() })

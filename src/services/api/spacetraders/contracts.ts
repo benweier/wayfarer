@@ -42,7 +42,7 @@ export const getContractListQuery = () =>
 export const getContractByIdQuery = (args: { contractId: string }) =>
   queryOptions({
     queryKey: [{ scope: 'contracts', entity: 'item' }, args],
-    queryFn: async ({ signal }) => {
+    queryFn: ({ signal }) => {
       const url = new URL(`my/contracts/${args.contractId}`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
       return get<SpaceTradersResponse<ContractResponse>>(url, { signal, headers: createHeaders() })
@@ -51,7 +51,7 @@ export const getContractByIdQuery = (args: { contractId: string }) =>
 
 export const createContractAcceptMutation = {
   getMutationKey: (args: { contractId: string }) => [{ scope: 'contracts', entity: 'item', action: 'accept' }, args],
-  mutationFn: async (args: { contractId: string }) => {
+  mutationFn: (args: { contractId: string }) => {
     const url = new URL(`my/contracts/${args.contractId}/accept`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; contract: ContractResponse }>>(url, undefined, {
@@ -65,7 +65,7 @@ export const createContractDeliverMutation = {
     { scope: 'contracts', entity: 'item', action: 'deliver' },
     args,
   ],
-  mutationFn: async (args: { contractId: string; shipSymbol: string; tradeSymbol: string; units: number }) => {
+  mutationFn: (args: { contractId: string; shipSymbol: string; tradeSymbol: string; units: number }) => {
     const url = new URL(`my/contracts/${args.contractId}/deliver`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<
@@ -87,7 +87,7 @@ export const createContractDeliverMutation = {
 
 export const createContractFulfillMutation = {
   getMutationKey: (args: { contractId: string }) => [{ scope: 'contracts', entity: 'item', action: 'fulfill' }, args],
-  mutationFn: async (args: { contractId: string }) => {
+  mutationFn: (args: { contractId: string }) => {
     const url = new URL(`my/contracts/${args.contractId}/fulfill`, import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; contract: ContractResponse }>>(url, undefined, {

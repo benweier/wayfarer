@@ -1,6 +1,7 @@
 import { WaypointTraits } from '@/config/spacetraders'
 import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
-import { getShipByIdQuery, getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders'
+import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
+import { getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders/waypoints'
 import { createFileRoute, defer, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market')({

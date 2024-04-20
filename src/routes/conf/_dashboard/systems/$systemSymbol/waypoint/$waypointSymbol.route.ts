@@ -1,6 +1,6 @@
 import { NotFound } from '@/components/not-found'
 import { meta } from '@/routes/systems/waypoint/waypoint-route.meta'
-import { getWaypointByIdQuery } from '@/services/api/spacetraders'
+import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol')({

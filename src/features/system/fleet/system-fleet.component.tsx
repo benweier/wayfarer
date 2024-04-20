@@ -1,8 +1,8 @@
 import { useSystemResponse } from '@/context/system.context'
 import { ShipListTable } from '@/features/ship/list/ship-list.table'
 import { SystemFleetEmpty } from '@/features/system/fleet/system-fleet.empty'
-import { getShipListQuery } from '@/services/api/spacetraders'
 import type { Meta, SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import type { ShipResponse } from '@/types/spacetraders'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
