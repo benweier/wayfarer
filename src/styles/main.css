@@ -6,6 +6,7 @@
 @import url('./components/tabs.css') layer(components);
 @import url('./components/toggle-group.css') layer(components);
 @import url('./components/typography.css') layer(utilities);
+@import url('./components/toast.css') layer(utilities);
 
 @keyframes loader {
   0% {

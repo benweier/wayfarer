@@ -1,0 +1,85 @@
+.toast {
+    pointer-events: auto;
+    border-style: solid;
+    border-width: 2px;
+
+    .toast-label {
+        font-size: var(--font-size-text-xl);
+        line-height: var(--line-height-text-xl);
+    }
+
+    .toast-description {
+        font-size: var(--font-size-text-base);
+        line-height: var(--line-height-text-base);
+    }
+
+    &[data-status='success'] {
+        background-color: var(--toast-bg-success);
+        border-color: var(--toast-border-success);
+
+        .toast-label {
+            font-weight: bold;
+            color: var(--toast-fg-success);
+        }
+
+        .toast-description {
+            color: var(--toast-fg-success-secondary);
+        }
+    }
+
+    &[data-status='warning'] {
+        background-color: var(--toast-bg-warning);
+        border-color: var(--toast-border-warning);
+
+        .toast-label {
+            font-weight: bold;
+            color: var(--toast-fg-warning);
+        }
+
+        .toast-description {
+            color: var(--toast-fg-warning-secondary);
+        }
+    }
+
+    &[data-status='error'] {
+        background-color: var(--toast-bg-error);
+        border-color: var(--toast-border-error);
+
+        .toast-label {
+            font-weight: bold;
+            color: var(--toast-fg-error);
+        }
+
+        .toast-description {
+            color: var(--toast-fg-error-secondary);
+        }
+    }
+
+    &[data-status='info'] {
+        background-color: var(--toast-bg-info);
+        border-color: var(--toast-border-info);
+
+        .toast-label {
+            font-weight: bold;
+            color: var(--toast-fg-info);
+        }
+
+        .toast-description {
+            color: var(--toast-fg-info-secondary);
+        }
+    }
+
+    &[data-status='neutral'] {
+        background-color: var(--toast-bg-neutral);
+        border-color: var(--toast-border-neutral);
+
+        .toast-label {
+            font-weight: bold;
+            color: var(--toast-fg-neutral);
+        }
+
+        .toast-description {
+            color: var(--toast-fg-neutral-secondary);
+        }
+    }
+}
