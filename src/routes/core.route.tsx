@@ -1,5 +1,6 @@
 import { Button } from '@/components/button'
 import { Meta } from '@/components/meta'
+import { ToastContainer } from '@/components/toast'
 import * as Sentry from '@sentry/react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Outlet, ScrollRestoration, useRouterState } from '@tanstack/react-router'
@@ -53,6 +54,7 @@ export const Core = () => {
       <div className="min-h-screen">
         <NavigationLoader />
         <Outlet />
+        <ToastContainer />
         <TanStackRouterDevtools />
         <TanStackQueryDevtools />
       </div>
