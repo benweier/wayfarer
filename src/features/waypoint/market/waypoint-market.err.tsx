@@ -1,11 +1,11 @@
 import { Button } from '@/components/button'
 import type { ErrorComponentProps } from '@/components/error-boundary'
-import { STATUS_CODES, isHttpErrorResponse } from '@/services/http'
+import { StatusCode, isHttpErrorResponse } from '@/services/http'
 import { useContext } from 'react'
 import { ErrorBoundaryContext } from 'react-error-boundary'
 
 const Message = ({ error, onReset }: ErrorComponentProps) => {
-  if (isHttpErrorResponse(error, STATUS_CODES.NOT_FOUND)) {
+  if (isHttpErrorResponse(error, StatusCode.NotFound)) {
     return <>Market is not available for this waypoint</>
   }
 

@@ -1,6 +1,3 @@
-type Keys<T> = keyof T
-type Values<T> = T[keyof T]
-
 export const http = async <T = unknown>(url: URL | RequestInfo, args: RequestInit): Promise<T> => {
   const response = await fetch(url, args)
 
@@ -17,7 +14,7 @@ export const http = async <T = unknown>(url: URL | RequestInfo, args: RequestIni
   }
 }
 
-export const isHttpErrorResponse = (err: any, status?: Values<typeof STATUS_CODES>): err is Response => {
+export const isHttpErrorResponse = (err: any, status?: StatusCode): err is Response => {
   if (!err || !(err instanceof Response)) return false
 
   if (status !== undefined) {
@@ -27,42 +24,46 @@ export const isHttpErrorResponse = (err: any, status?: Values<typeof STATUS_CODE
   return true
 }
 
-export const STATUS_MESSAGES: Record<Keys<typeof STATUS_CODES>, string> = {
+export const StatusMessage = {
   OK: 'OK',
-  CREATED: 'Created',
-  NO_CONTENT: 'No Content',
-  BAD_REQUEST: 'Bad Request',
-  UNAUTHORIZED: 'Unauthorized',
-  FORBIDDEN: 'Forbidden',
-  NOT_FOUND: 'Not Found',
-  METHOD_NOT_ALLOWED: 'Method Not Allowed',
-  NOT_ACCEPTABLE: 'Not Acceptable',
-  REQUEST_TIMEOUT: 'Request Timeout',
-  CONFLICT: 'Conflict',
-  TEAPOT: "I'm a teapot",
-  UNPROCESSABLE_ENTITY: 'Unprocessable Entity',
-  INTERNAL_SERVER_ERROR: 'Internal Server Error',
-  BAD_GATEWAY: 'Bad Gateway',
-  SERVICE_UNAVAILABLE: 'Service Unavailable',
-  GATEWAY_TIMEOUT: 'Gateway Timeout',
-}
-
-export const STATUS_CODES = {
-  OK: 200,
-  CREATED: 201,
-  NO_CONTENT: 204,
-  BAD_REQUEST: 400,
-  UNAUTHORIZED: 401,
-  FORBIDDEN: 403,
-  NOT_FOUND: 404,
-  METHOD_NOT_ALLOWED: 405,
-  NOT_ACCEPTABLE: 406,
-  REQUEST_TIMEOUT: 408,
-  CONFLICT: 409,
-  TEAPOT: 418,
-  UNPROCESSABLE_ENTITY: 422,
-  INTERNAL_SERVER_ERROR: 500,
-  BAD_GATEWAY: 502,
-  SERVICE_UNAVAILABLE: 503,
-  GATEWAY_TIMEOUT: 504,
+  Created: 'Created',
+  NoContent: 'No Content',
+  BadRequest: 'Bad Request',
+  Unauthorized: 'Unauthorized',
+  Forbidden: 'Forbidden',
+  NotFound: 'Not Found',
+  MethodNotAllowed: 'Method Not Allowed',
+  NotAcceptable: 'Not Acceptable',
+  RequestTimeout: 'Request Timeout',
+  Conflict: 'Conflict',
+  Teapot: "I'm a teapot",
+  UnprocessableEntity: 'Unprocessable Entity',
+  InternalServerError: 'Internal Server Error',
+  BadGateway: 'Bad Gateway',
+  ServiceUnavailable: 'Service Unavailable',
+  GatewayTimeout: 'Gateway Timeout',
 } as const
+
+export type StatusMessage = Values<typeof StatusMessage>
+
+export const StatusCode = {
+  OK: 200,
+  Created: 201,
+  NoContent: 204,
+  BadRequest: 400,
+  Unauthorized: 401,
+  Forbidden: 403,
+  NotFound: 404,
+  MethodNotAllowed: 405,
+  NotAcceptable: 406,
+  RequestTimeout: 408,
+  Conflict: 409,
+  Teapot: 418,
+  UnprocessableEntity: 422,
+  InternalServerError: 500,
+  BadGateway: 502,
+  ServiceUnavailable: 503,
+  GatewayTimeout: 504,
+} as const
+
+export type StatusCode = Values<typeof StatusCode>

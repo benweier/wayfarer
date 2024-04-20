@@ -1,21 +1,23 @@
-import { Navigate } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
-import { STATUS_CODES, isHttpErrorResponse } from '@/services/http'
+import { StatusCode, isHttpErrorResponse } from '@/services/http'
+import { Navigate } from '@tanstack/react-router'
 
-export const RouteError = ({ error }: { error: any }) => {
+export const RouteError = ({ error }: { error?: any }) => {
   if (isHttpErrorResponse(error)) {
-    if (error.status === STATUS_CODES.UNAUTHORIZED) {
+    if (error.status === StatusCode.Unauthorized) {
       return <Navigate to="/login" replace search={{ redirect: location.pathname }} mask={{ to: '/login' }} />
     }
 
-    if (error.status === STATUS_CODES.NOT_FOUND) {
+    if (error.status === StatusCode.NotFound) {
       return <NotFound />
     }
   }
 
   return (
-    <div className="flex h-full grow flex-col items-center justify-center p-5">
-      <div className="text-5xl font-black">An error occurred while displaying this content</div>
+    <div className="flex h-full flex-col items-center justify-center gap-4 p-5">
+      <div className="container-paragraph display-xl text-center font-bold">
+        An error occurred while displaying this content
+      </div>
     </div>
   )
 }
