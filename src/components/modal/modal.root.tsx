@@ -27,6 +27,9 @@ export const Root = ({
       <Dialog.Portal>
         <Dialog.Overlay className="backdrop-blur-xs bg-background-primary/20 fixed inset-0 z-40" />
         <Dialog.Content
+          onPointerDownOutside={(event) => {
+            event.preventDefault()
+          }}
           style={{
             '--dialog-content-max-height': '85vh',
           }}
