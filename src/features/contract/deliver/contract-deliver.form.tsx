@@ -48,7 +48,9 @@ export const ContractDeliverForm = ({
           name="ship"
           render={({ field }) => (
             <div>
-              <label htmlFor={field.name}>{t('general.fields.ship')}</label>
+              <label className="label" htmlFor={field.name}>
+                {t('general.fields.ship')}
+              </label>
               <ShipSelectField
                 id={field.name}
                 selected={field.value}
@@ -74,7 +76,9 @@ export const ContractDeliverForm = ({
 
               return (
                 <div>
-                  <label htmlFor={field.name}>Item</label>
+                  <label className="label" htmlFor={field.name}>
+                    Item
+                  </label>
                   <Select.Field
                     id={field.name}
                     selected={

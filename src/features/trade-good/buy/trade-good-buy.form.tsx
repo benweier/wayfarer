@@ -90,7 +90,9 @@ export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps
             name="ship"
             render={({ field }) => (
               <div>
-                <label htmlFor={field.name}>{t('general.fields.ship')}</label>
+                <label className="label" htmlFor={field.name}>
+                  {t('general.fields.ship')}
+                </label>
                 <ShipSelectField
                   id={field.name}
                   selected={field.value}
