@@ -18,14 +18,15 @@ export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
       close={<Modal.Close />}
       trigger={<Modal.Trigger disabled={ship.nav.status !== 'IN_ORBIT'}>{trigger}</Modal.Trigger>}
     >
-      <div className="grid gap-8">
-        <h3 className="display-lg font-bold">
+      <Modal.Header>
+        <Modal.Title>
           Warp Ship: <span className="font-normal">{ship.symbol}</span>
-        </h3>
-        <QuerySuspenseBoundary>
-          <Warp ship={ship} />
-        </QuerySuspenseBoundary>
-      </div>
+        </Modal.Title>
+      </Modal.Header>
+
+      <QuerySuspenseBoundary>
+        <Warp ship={ship} />
+      </QuerySuspenseBoundary>
     </Modal>
   )
 }

@@ -10,8 +10,7 @@ export const CargoJettison = ({ ship, item }: { ship: ShipResponse; item: CargoI
   const { closeModal } = useModalActions()
 
   return (
-    <div className="grid gap-8">
-      <h3 className="text-title">{t('general.are_you_sure')}</h3>
+    <div className="space-y-8">
       <div>
         {t('ship.action.confirm_jettison', {
           itemSymbol: item.symbol,

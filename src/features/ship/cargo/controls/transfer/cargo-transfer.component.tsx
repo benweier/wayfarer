@@ -10,42 +10,36 @@ export const CargoTransfer = ({ ship, item }: { ship: ShipResponse; item: CargoI
   const { closeModal } = useModalActions()
 
   return (
-    <div className="grid gap-8">
-      <h3 className="text-title">{t('cargo.transfer.heading')}</h3>
+    <div className="space-y-2">
+      <ShipActions.TransferCargo ship={ship} item={item}>
+        {({ execute }) => (
+          <CargoTransferForm
+            fromShip={ship}
+            onSubmit={async (values) => {
+              await execute({
+                toShipSymbol: values.ship,
+                symbol: item.symbol,
+                units: values.quantity,
+              })
 
-      <p>{t('cargo.transfer.message')}</p>
-
-      <div className="flex gap-2">
-        <ShipActions.TransferCargo ship={ship} item={item}>
-          {({ execute }) => (
-            <CargoTransferForm
-              fromShip={ship}
-              onSubmit={async (values) => {
-                await execute({
-                  toShipSymbol: values.ship,
-                  symbol: item.symbol,
-                  units: values.quantity,
-                })
-
-                closeModal()
-              }}
-            >
-              <div className="flex gap-2">
-                <Button type="submit" intent="info">
-                  {t('cargo.transfer.confirm', { context: 'action' })}
-                </Button>
-                <Button
-                  onClick={() => {
-                    closeModal()
-                  }}
-                >
-                  {t('general.cancel')}
-                </Button>
-              </div>
-            </CargoTransferForm>
-          )}
-        </ShipActions.TransferCargo>
-      </div>
+              closeModal()
+            }}
+          >
+            <div className="flex gap-2">
+              <Button type="submit" intent="info">
+                {t('cargo.transfer.confirm', { context: 'action' })}
+              </Button>
+              <Button
+                onClick={() => {
+                  closeModal()
+                }}
+              >
+                {t('general.cancel')}
+              </Button>
+            </div>
+          </CargoTransferForm>
+        )}
+      </ShipActions.TransferCargo>
     </div>
   )
 }

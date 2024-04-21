@@ -21,26 +21,26 @@ export const ContractDeliver = ({ contract }: ContractDeliverProps) => {
         </Modal.Trigger>
       }
     >
-      <div className="space-y-8">
-        <div className="display-sm">{t('contract.deliver_heading')}</div>
+      <Modal.Header>
+        <Modal.Title>{t('contract.deliver_heading')}</Modal.Title>
+      </Modal.Header>
 
-        <ContractActions.Deliver contract={contract}>
-          {({ execute }) => (
-            <ContractDeliverForm
-              deliver={contract.terms.deliver}
-              onSubmit={async (values) => {
-                await execute({
-                  shipSymbol: values.ship,
-                  tradeSymbol: values.item,
-                  units: values.quantity,
-                })
+      <ContractActions.Deliver contract={contract}>
+        {({ execute }) => (
+          <ContractDeliverForm
+            deliver={contract.terms.deliver}
+            onSubmit={async (values) => {
+              await execute({
+                shipSymbol: values.ship,
+                tradeSymbol: values.item,
+                units: values.quantity,
+              })
 
-                modal.close()
-              }}
-            />
-          )}
-        </ContractActions.Deliver>
-      </div>
+              modal.close()
+            }}
+          />
+        )}
+      </ContractActions.Deliver>
     </Modal>
   )
 }

@@ -46,10 +46,19 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
       </Dropdown.Field>
 
       <Modal ref={transfer.ref} size="sm" close={<Modal.Close />}>
+        <Modal.Header>
+          <Modal.Title>{t('cargo.transfer.heading')}</Modal.Title>
+          <Modal.Description>{t('cargo.transfer.message')}</Modal.Description>
+        </Modal.Header>
+
         <CargoTransfer ship={ship} item={item} />
       </Modal>
 
       <Modal ref={jettison.ref} size="sm" close={<Modal.Close />}>
+        <Modal.Header>
+          <Modal.Title>{t('general.are_you_sure')}</Modal.Title>
+        </Modal.Header>
+
         <CargoJettison ship={ship} item={item} />
       </Modal>
     </>

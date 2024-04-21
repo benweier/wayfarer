@@ -69,11 +69,13 @@ export const TradeGoodBuy = ({
       trigger={<Modal.Trigger disabled={disabled || good.tradeVolume === 0 || noCapacity}>{trigger}</Modal.Trigger>}
       close={<Modal.Close />}
     >
-      <div className="space-y-8">
-        <div className="display-lg font-bold">
+      <Modal.Header>
+        <Modal.Title>
           {t('market.buy')}: <span className="font-light">{t(good.symbol, { ns: 'spacetraders.trade_good' })}</span>
-        </div>
+        </Modal.Title>
+      </Modal.Header>
 
+      <div className="space-y-8">
         <TradeGoodInfo price={good.purchasePrice} volume={good.tradeVolume} supply={good.supply} />
 
         <TradeGoodBuyForm

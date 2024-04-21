@@ -13,20 +13,21 @@ export const ShipTransitJump = ({ trigger }: ShipTransitActionProps) => {
       close={<Modal.Close />}
       trigger={<Modal.Trigger disabled={ship.nav.status !== 'IN_ORBIT'}>{trigger}</Modal.Trigger>}
     >
-      <div className="grid gap-8">
-        <h3 className="display-lg font-bold">
+      <Modal.Header>
+        <Modal.Title>
           Jump Ship: <span className="font-normal">{ship.symbol}</span>
-        </h3>
-        <QuerySuspenseBoundary
-          fallback={
-            <div className="grid">
-              <Loading />
-              <Loading />
-              <Loading />
-            </div>
-          }
-        ></QuerySuspenseBoundary>
-      </div>
+        </Modal.Title>
+      </Modal.Header>
+
+      <QuerySuspenseBoundary
+        fallback={
+          <div className="grid">
+            <Loading />
+            <Loading />
+            <Loading />
+          </div>
+        }
+      ></QuerySuspenseBoundary>
     </Modal>
   )
 }
