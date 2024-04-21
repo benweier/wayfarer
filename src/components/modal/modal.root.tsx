@@ -34,7 +34,7 @@ export const Root = ({
             '--dialog-content-max-height': '85vh',
           }}
           className={cx(
-            'popover bg-background-primary border-border-primary ring-border-primary/20 fixed top-1/2 left-1/2 z-50 max-h-[var(--dialog-content-max-height)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl ring-3 focus:outline-none',
+            'popover bg-background-primary border-1 border-border-secondary ring-border-primary/20 fixed top-1/2 left-1/2 z-50 max-h-[var(--dialog-content-max-height)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl ring-3 focus:outline-none',
             {
               'w-auto': size === 'auto',
               'w-screen': size === 'full',
@@ -49,7 +49,7 @@ export const Root = ({
             <ScrollArea.Viewport className="relative h-full max-h-[var(--dialog-content-max-height)] p-6">
               {children}
 
-              {close && <div className="absolute top-4 right-4">{close}</div>}
+              {close && <div className="absolute top-7 right-6">{close}</div>}
             </ScrollArea.Viewport>
 
             <ScrollArea.Scrollbar
