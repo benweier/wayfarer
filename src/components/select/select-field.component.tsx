@@ -30,7 +30,7 @@ export const Field = ({
           sideOffset={8}
           className="popover bg-background-primary border-border-primary z-50 w-[var(--radix-select-trigger-width)] rounded-md border"
         >
-          <ScrollArea.Root className="max-h-[320px] overflow-hidden" type="scroll">
+          <ScrollArea.Root type="scroll">
             <Select.Viewport asChild>
               <ScrollArea.Viewport className="h-full max-h-[320px] p-2">{children}</ScrollArea.Viewport>
             </Select.Viewport>
