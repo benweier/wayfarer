@@ -1,3 +1,4 @@
+import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { useShipResponse } from '@/context/ship.context'
 import { WaypointContext } from '@/context/waypoint.context'
@@ -22,12 +23,12 @@ export const ShipMarketRoute = () => {
   )
 
   return (
-    <div className="space-y-4 p-4">
-      <div className="flex items-center justify-start gap-6">
-        <h1 className="display-md font-bold">
+    <>
+      <Modal.Header>
+        <Modal.Title>
           {t('market.label')}: <span className="font-normal">{ship.nav.waypointSymbol}</span>
-        </h1>
-      </div>
+        </Modal.Title>
+      </Modal.Header>
 
       <WaypointContext.Provider value={waypoint.data.data}>
         <div className="space-y-4">
@@ -38,6 +39,6 @@ export const ShipMarketRoute = () => {
           </QuerySuspenseBoundary>
         </div>
       </WaypointContext.Provider>
-    </div>
+    </>
   )
 }
