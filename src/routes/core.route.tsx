@@ -21,7 +21,7 @@ const TanStackQueryDevtools = import.meta.env.PROD
       })),
     )
 const NavigationLoader = () => {
-  const isLoading = useRouterState({ select: (state) => state.status === 'pending' })
+  const isLoading = useRouterState({ select: (state) => state.isLoading || state.isTransitioning })
 
   return isLoading && <span className="loader" />
 }
