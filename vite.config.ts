@@ -17,7 +17,7 @@ export default defineConfig({
     modulePreload: { polyfill: false },
     rollupOptions: {
       output: {
-        chunkFileNames: '[hash:12].js',
+        chunkFileNames: 'assets/[hash:8].js',
         manualChunks: {
           react: ['react', 'react-dom'],
           core: ['@tanstack/react-router', '@tanstack/react-query', '@sentry/react'],
