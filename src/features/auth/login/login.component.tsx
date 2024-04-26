@@ -1,19 +1,23 @@
 import { Button } from '@/components/button'
 import { ROUTES } from '@/config/routes'
 import { getAgentMutation } from '@/services/api/spacetraders/auth'
+import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import { StatusCode, isHttpErrorResponse } from '@/services/http'
 import { useAuthStore } from '@/store/auth'
+import type { AgentResponse } from '@/types/spacetraders'
 import { ErrorMessage } from '@hookform/error-message'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useMutation } from '@tanstack/react-query'
 import { Link, getRouteApi, useNavigate } from '@tanstack/react-router'
-import { useCallback } from 'react'
-import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
+import { useTransition } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { Trans, useTranslation } from 'react-i18next'
 import { LoginSchema } from './login.schema'
 
 const api = getRouteApi(ROUTES.LOGIN)
 
 export const Login = () => {
+  const [isTransitionPending, startTransition] = useTransition()
   const { redirect } = api.useSearch()
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -21,15 +25,19 @@ export const Login = () => {
   const methods = useForm<LoginSchema>({
     resolver: valibotResolver(LoginSchema),
   })
+
+  const onSuccessHandler = (response: SpaceTradersResponse<AgentResponse>, variables: { token: string }) => {
+    startTransition(async () => {
+      signin({ agent: response.data, token: variables.token })
+      await navigate({ to: redirect === undefined ? '/fleet' : redirect })
+    })
+  }
   const { mutateAsync, isPending } = useMutation({
     mutationKey: getAgentMutation.getMutationKey(),
     mutationFn: getAgentMutation.mutationFn,
-    onSuccess: (response, { token }) => {
-      signin({ agent: response.data, token: token })
-      void navigate({ to: redirect === undefined ? '/fleet' : (redirect as '/') })
-    },
-    onError: (err: any) => {
-      if (err.status === 401) {
+    onSuccess: onSuccessHandler,
+    onError: (err) => {
+      if (isHttpErrorResponse(err, StatusCode.Unauthorized)) {
         methods.setError('token', {
           type: 'manual',
           message: 'auth.validation.invalid_token',
@@ -37,13 +45,12 @@ export const Login = () => {
       }
     },
   })
-  const onSubmit = useCallback<SubmitHandler<LoginSchema>>((values) => mutateAsync(values), [mutateAsync])
 
   return (
     <div className="grid gap-8">
       <div className="display-xs text-center">{t('auth.login_heading')}</div>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
             <div className="space-y-1">
               <label className="label" htmlFor="symbol">
@@ -75,7 +82,7 @@ export const Login = () => {
               />
             </div>
 
-            <Button intent="info" size="large" type="submit" disabled={isPending}>
+            <Button intent="info" size="large" type="submit" disabled={isPending || isTransitionPending}>
               {t('auth.login', { context: 'action' })}
             </Button>
 
