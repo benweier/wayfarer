@@ -30,7 +30,7 @@ export const ShipMarketRoute = () => {
         </Modal.Title>
       </Modal.Header>
 
-      <WaypointContext.Provider value={waypoint.data.data}>
+      <WaypointContext value={waypoint.data.data}>
         <div className="space-y-4">
           <WaypointMarketPreferences />
 
@@ -38,7 +38,7 @@ export const ShipMarketRoute = () => {
             <WaypointMarketList />
           </QuerySuspenseBoundary>
         </div>
-      </WaypointContext.Provider>
+      </WaypointContext>
     </>
   )
 }

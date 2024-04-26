@@ -71,7 +71,7 @@ export const ShipCargoList = () => {
   }
 
   return (
-    <TradeGoodContext.Provider
+    <TradeGoodContext
       value={{
         Buy: TradeGoodBuy,
         Sell: TradeGoodSell,
@@ -99,6 +99,6 @@ export const ShipCargoList = () => {
           trade: data?.trade.get(item.symbol),
         }))}
       />
-    </TradeGoodContext.Provider>
+    </TradeGoodContext>
   )
 }

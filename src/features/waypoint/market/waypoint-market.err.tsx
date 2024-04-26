@@ -1,7 +1,7 @@
 import { Button } from '@/components/button'
 import type { ErrorComponentProps } from '@/components/error-boundary'
 import { StatusCode, isHttpErrorResponse } from '@/services/http'
-import { useContext } from 'react'
+import { use } from 'react'
 import { ErrorBoundaryContext } from 'react-error-boundary'
 
 const Message = ({ error, onReset }: ErrorComponentProps) => {
@@ -27,7 +27,7 @@ const Message = ({ error, onReset }: ErrorComponentProps) => {
 }
 
 export const WaypointMarketError = () => {
-  const ctx = useContext(ErrorBoundaryContext)
+  const ctx = use(ErrorBoundaryContext)
 
   if (!ctx?.error) return <></>
 

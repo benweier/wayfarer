@@ -10,7 +10,7 @@ export const DashboardLayout = ({ children = <Outlet /> }: PropsWithChildren) =>
 
   return (
     <DashboardTemplate>
-      <FleetContext.Provider value={ships.data.data}>{children}</FleetContext.Provider>
+      <FleetContext value={ships.data.data}>{children}</FleetContext>
     </DashboardTemplate>
   )
 }

@@ -41,9 +41,9 @@ export const WaypointNavigation = ({ ship }: WaypointNavigationProps) => {
         onChange={(event) => setSearch(event.target.value)}
       />
 
-      <WaypointNavigationActionContext.Provider value={WAYPOINT_NAVIGATION_CONTEXT}>
+      <WaypointNavigationActionContext value={WAYPOINT_NAVIGATION_CONTEXT}>
         <WaypointNavigationTable data={rows} />
-      </WaypointNavigationActionContext.Provider>
+      </WaypointNavigationActionContext>
     </div>
   )
 }

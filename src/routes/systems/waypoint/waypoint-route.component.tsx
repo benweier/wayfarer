@@ -26,11 +26,11 @@ export const WaypointRoute = () => {
       </h1>
 
       <div>
-        <WaypointContext.Provider value={waypoint.data.data}>
+        <WaypointContext value={waypoint.data.data}>
           <WaypointDetail>
             <WaypointTabs />
           </WaypointDetail>
-        </WaypointContext.Provider>
+        </WaypointContext>
       </div>
     </div>
   )

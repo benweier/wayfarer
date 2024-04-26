@@ -1,7 +1,7 @@
 import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
 import type { ShipResponse } from '@/types/spacetraders'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { type PropsWithChildren, createContext, useContext } from 'react'
+import { type PropsWithChildren, createContext, use } from 'react'
 
 export type ShipStoreProps = {
   shipSymbol: string
@@ -10,7 +10,7 @@ export type ShipStoreProps = {
 export const ShipContext = createContext<ShipResponse | undefined>(undefined)
 
 export const useShipResponse = () => {
-  const ship = useContext(ShipContext)
+  const ship = use(ShipContext)
 
   if (!ship) throw new Error('ShipContext is missing a ship value.')
 
@@ -20,5 +20,5 @@ export const useShipResponse = () => {
 export const ShipStore = ({ shipSymbol, children }: PropsWithChildren<ShipStoreProps>) => {
   const { data } = useSuspenseQuery(getShipByIdQuery({ shipSymbol }))
 
-  return <ShipContext.Provider value={data.data}>{children}</ShipContext.Provider>
+  return <ShipContext value={data.data}>{children}</ShipContext>
 }

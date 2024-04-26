@@ -34,15 +34,15 @@ export const ShipRoute = () => {
       </h1>
 
       <div>
-        <ShipContext.Provider value={ship.data.data}>
-          <WaypointContext.Provider value={waypoint.data?.data}>
+        <ShipContext value={ship.data.data}>
+          <WaypointContext value={waypoint.data?.data}>
             <ShipDetail>
               <ShipTabs />
             </ShipDetail>
 
             <Outlet />
-          </WaypointContext.Provider>
-        </ShipContext.Provider>
+          </WaypointContext>
+        </ShipContext>
       </div>
     </div>
   )

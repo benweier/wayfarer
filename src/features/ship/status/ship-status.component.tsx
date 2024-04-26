@@ -9,12 +9,12 @@ import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-
 import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
 import type { ShipResponse } from '@/types/spacetraders'
 import { Link } from '@tanstack/react-router'
-import { useContext } from 'react'
+import { use } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()
-  const waypoint = useContext(WaypointContext)
+  const waypoint = use(WaypointContext)
 
   return (
     <div className="flex items-start justify-between gap-4">
@@ -22,7 +22,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         <div className="flex gap-8">
           <div>
             <div className="text-foreground-secondary typography-sm uppercase">{t('system.label')}</div>
-            <Link to="/systems/$systemSymbol" params={{ systemSymbol: ship.nav.systemSymbol }} className="link">
+            <Link to="/systems" params={{ systemSymbol: ship.nav.systemSymbol }} className="link">
               {ship.nav.systemSymbol}
             </Link>
           </div>

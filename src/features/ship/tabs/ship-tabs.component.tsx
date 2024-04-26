@@ -30,7 +30,7 @@ export const ShipTabs = () => {
       <Tabs.Content value="resources">
         <div className="space-y-4">
           <ShipResources ship={ship} />
-          <SurveyContext.Provider
+          <SurveyContext
             value={{
               Extract: SurveyActions.Extract,
               Discard: SurveyActions.Discard,
@@ -41,7 +41,7 @@ export const ShipTabs = () => {
                 return survey.symbol === ship.nav.waypointSymbol
               }}
             />
-          </SurveyContext.Provider>
+          </SurveyContext>
         </div>
       </Tabs.Content>
 

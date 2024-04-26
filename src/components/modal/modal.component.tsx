@@ -37,10 +37,10 @@ export const Modal = ({
   }))
 
   return (
-    <ModalContext.Provider value={store}>
+    <ModalContext value={store}>
       <Root trigger={trigger} size={size} close={close} disableExternalClose={disableExternalClose}>
         {children}
       </Root>
-    </ModalContext.Provider>
+    </ModalContext>
   )
 }

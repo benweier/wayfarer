@@ -6,7 +6,7 @@ import { createShipCargoSellMutation, getShipByIdQuery, getShipListQuery } from 
 import { useAuthStore } from '@/store/auth'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { useContext } from 'react'
+import { use } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TradeGoodSellForm } from './trade-good-sell.form'
 import type { TradeGoodSellProps } from './trade-good-sell.types'
@@ -21,7 +21,7 @@ export const TradeGoodSell = ({
   ),
 }: TradeGoodSellProps) => {
   const { t } = useTranslation()
-  const ship = useContext(ShipContext)
+  const ship = use(ShipContext)
   const { ref, modal } = useModalImperativeHandle()
   const { setAgent } = useAuthStore((state) => state.actions)
   const client = useQueryClient()

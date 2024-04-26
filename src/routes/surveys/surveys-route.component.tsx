@@ -17,9 +17,9 @@ export const SurveysRoute = () => {
 
       <div>
         <QuerySuspenseBoundary>
-          <SurveyContext.Provider value={SURVEYS_CONTEXT}>
+          <SurveyContext value={SURVEYS_CONTEXT}>
             <SurveyList />
-          </SurveyContext.Provider>
+          </SurveyContext>
         </QuerySuspenseBoundary>
       </div>
     </div>

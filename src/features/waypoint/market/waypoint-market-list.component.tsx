@@ -40,9 +40,9 @@ export const WaypointMarketList = () => {
             <div className="typography-lg text-center font-semibold">{t('market.imports_empty')}</div>
           </div>
         ) : (
-          <TradeGoodContext.Provider value={IMPORT_MARKET_CONTEXT}>
+          <TradeGoodContext value={IMPORT_MARKET_CONTEXT}>
             <WaypointMarketTable data={market.imports.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
-          </TradeGoodContext.Provider>
+          </TradeGoodContext>
         )
       }
       exports={
@@ -51,9 +51,9 @@ export const WaypointMarketList = () => {
             <div className="typography-lg text-center font-semibold">{t('market.exports_empty')}</div>
           </div>
         ) : (
-          <TradeGoodContext.Provider value={EXPORT_MARKET_CONTEXT}>
+          <TradeGoodContext value={EXPORT_MARKET_CONTEXT}>
             <WaypointMarketTable data={market.exports.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
-          </TradeGoodContext.Provider>
+          </TradeGoodContext>
         )
       }
       exchange={
@@ -62,9 +62,9 @@ export const WaypointMarketList = () => {
             <div className="typography-lg text-center font-semibold">{t('market.exchange_empty')}</div>
           </div>
         ) : (
-          <TradeGoodContext.Provider value={EXCHANGE_MARKET_CONTEXT}>
+          <TradeGoodContext value={EXCHANGE_MARKET_CONTEXT}>
             <WaypointMarketTable data={market.exchange.map((good) => ({ good, trade: tradeGoods.get(good.symbol) }))} />
-          </TradeGoodContext.Provider>
+          </TradeGoodContext>
         )
       }
     />

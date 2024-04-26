@@ -15,9 +15,7 @@ export const ErrorBoundary = ({
     onError={onError}
     fallbackRender={({ error, resetErrorBoundary }) => {
       return (
-        <ErrorBoundaryContext.Provider value={{ didCatch: true, error, resetErrorBoundary }}>
-          {component}
-        </ErrorBoundaryContext.Provider>
+        <ErrorBoundaryContext value={{ didCatch: true, error, resetErrorBoundary }}>{component}</ErrorBoundaryContext>
       )
     }}
   >

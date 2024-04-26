@@ -57,21 +57,21 @@ export const ContractList = () => {
       </Tabs.List>
 
       <Tabs.Content value="accepted">
-        <ContractListContext.Provider value={ACCEPT_CONTRACTS_CONTEXT}>
+        <ContractListContext value={ACCEPT_CONTRACTS_CONTEXT}>
           <ContractListTable
             data={contracts.accepted.map((contract) => ({ contract }))}
             columns={acceptedContractsColumns}
           />
-        </ContractListContext.Provider>
+        </ContractListContext>
       </Tabs.Content>
 
       <Tabs.Content value="available">
-        <ContractListContext.Provider value={AVAILABLE_CONTRACTS_CONTEXT}>
+        <ContractListContext value={AVAILABLE_CONTRACTS_CONTEXT}>
           <ContractListTable
             data={contracts.available.map((contract) => ({ contract }))}
             columns={availableContractsColumns}
           />
-        </ContractListContext.Provider>
+        </ContractListContext>
       </Tabs.Content>
 
       <Tabs.Content value="completed">

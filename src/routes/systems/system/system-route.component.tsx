@@ -21,11 +21,11 @@ export const SystemRoute = () => {
       </h1>
 
       <div>
-        <SystemContext.Provider value={system.data.data}>
+        <SystemContext value={system.data.data}>
           <SystemDetail>
             <SystemTabs />
           </SystemDetail>
-        </SystemContext.Provider>
+        </SystemContext>
       </div>
     </div>
   )
