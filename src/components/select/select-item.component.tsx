@@ -1,12 +1,14 @@
 import { AppIcon } from '@/components/icons'
 import * as Select from '@radix-ui/react-select'
 import { cx } from 'class-variance-authority'
-import { type ForwardedRef, forwardRef } from 'react'
+import type { RefAttributes } from 'react'
 
-const SelectItemComponent = (
-  { children, className, ...props }: Select.SelectItemProps,
-  ref: ForwardedRef<HTMLDivElement>,
-) => {
+export const Item = ({
+  ref,
+  children,
+  className,
+  ...props
+}: Select.SelectItemProps & RefAttributes<HTMLDivElement>) => {
   return (
     <Select.Item
       ref={ref}
@@ -23,5 +25,3 @@ const SelectItemComponent = (
     </Select.Item>
   )
 }
-
-export const Item = forwardRef(SelectItemComponent)

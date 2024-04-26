@@ -1,10 +1,11 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { type ForwardedRef, forwardRef } from 'react'
+import type { RefAttributes } from 'react'
 
-const DropdownItem = (
-  { children, ...props }: DropdownMenu.DropdownMenuItemProps,
-  ref: ForwardedRef<HTMLDivElement>,
-) => {
+export const Item = ({
+  ref,
+  children,
+  ...props
+}: DropdownMenu.DropdownMenuItemProps & RefAttributes<HTMLDivElement>) => {
   return (
     <DropdownMenu.Item
       ref={ref}
@@ -15,5 +16,3 @@ const DropdownItem = (
     </DropdownMenu.Item>
   )
 }
-
-export const Item = forwardRef(DropdownItem)

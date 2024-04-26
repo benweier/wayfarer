@@ -1,12 +1,19 @@
 import { cx } from 'class-variance-authority'
-import { type Ref, forwardRef } from 'react'
+import type { RefAttributes } from 'react'
 import { button } from './button.cva'
 import type { ButtonProps } from './button.types'
 
-export const ButtonComponent = (
-  { intent, size, kind, icon, adornment, className, children, ...props }: ButtonProps,
-  ref: Ref<HTMLButtonElement>,
-) => {
+export const Button = ({
+  ref,
+  intent,
+  size,
+  kind,
+  icon,
+  adornment,
+  className,
+  children,
+  ...props
+}: ButtonProps & RefAttributes<HTMLButtonElement>) => {
   return (
     <button
       ref={ref}
@@ -23,5 +30,3 @@ export const ButtonComponent = (
     </button>
   )
 }
-
-export const Button = forwardRef(ButtonComponent)

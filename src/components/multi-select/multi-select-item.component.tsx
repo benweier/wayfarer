@@ -1,11 +1,12 @@
 import { AppIcon } from '@/components/icons'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
-import { type ForwardedRef, forwardRef } from 'react'
+import type { RefAttributes } from 'react'
 
-const MultiSelectItemComponent = (
-  { children, ...props }: ToggleGroup.ToggleGroupItemProps,
-  ref: ForwardedRef<HTMLButtonElement>,
-) => {
+export const Item = ({
+  ref,
+  children,
+  ...props
+}: ToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>) => {
   return (
     <ToggleGroup.Item
       ref={ref}
@@ -20,5 +21,3 @@ const MultiSelectItemComponent = (
     </ToggleGroup.Item>
   )
 }
-
-export const Item = forwardRef(MultiSelectItemComponent)

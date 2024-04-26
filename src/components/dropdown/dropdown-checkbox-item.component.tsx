@@ -1,12 +1,13 @@
 import { AppIcon } from '@/components/icons'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { type ForwardedRef, forwardRef } from 'react'
+import type { RefAttributes } from 'react'
 import { ItemIcon } from './dropdown-item-icon.component'
 
-const CheckboxItemComponent = (
-  { children, ...props }: DropdownMenu.DropdownMenuCheckboxItemProps,
-  ref: ForwardedRef<HTMLDivElement>,
-) => {
+export const CheckboxItem = ({
+  ref,
+  children,
+  ...props
+}: DropdownMenu.DropdownMenuCheckboxItemProps & RefAttributes<HTMLDivElement>) => {
   return (
     <DropdownMenu.CheckboxItem
       ref={ref}
@@ -23,5 +24,3 @@ const CheckboxItemComponent = (
     </DropdownMenu.CheckboxItem>
   )
 }
-
-export const CheckboxItem = forwardRef(CheckboxItemComponent)

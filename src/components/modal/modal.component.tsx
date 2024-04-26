@@ -1,13 +1,18 @@
-import { type ForwardedRef, type PropsWithChildren, forwardRef, useImperativeHandle, useState } from 'react'
+import { type PropsWithChildren, type RefAttributes, useImperativeHandle, useState } from 'react'
 import { createStore } from 'zustand'
 import { ModalContext } from './modal.context'
 import { Root } from './modal.root'
 import type { ModalImperativeRef, ModalProps, ModalStore } from './modal.types'
 
-const ModalProviderComponent = (
-  { trigger, isOpen = false, size, close, disableExternalClose, children }: PropsWithChildren<ModalProps>,
-  ref?: ForwardedRef<ModalImperativeRef | undefined>,
-) => {
+export const Modal = ({
+  ref,
+  trigger,
+  isOpen = false,
+  size,
+  close,
+  disableExternalClose,
+  children,
+}: PropsWithChildren<ModalProps> & RefAttributes<ModalImperativeRef>) => {
   const [store] = useState(() => {
     return createStore<ModalStore>((set) => ({
       isOpen,
@@ -39,5 +44,3 @@ const ModalProviderComponent = (
     </ModalContext.Provider>
   )
 }
-
-export const Modal = forwardRef(ModalProviderComponent)

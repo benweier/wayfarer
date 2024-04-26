@@ -1,15 +1,14 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
-import { type ForwardedRef, forwardRef } from 'react'
+import type { RefAttributes } from 'react'
 
-const ToggleGroupItemComponent = (
-  { children, ...props }: ToggleGroup.ToggleGroupItemProps,
-  ref: ForwardedRef<HTMLButtonElement>,
-) => {
+export const Item = ({
+  ref,
+  children,
+  ...props
+}: ToggleGroup.ToggleGroupItemProps & RefAttributes<HTMLButtonElement>) => {
   return (
     <ToggleGroup.Item ref={ref} {...props} className="toggle-group-item">
       {children}
     </ToggleGroup.Item>
   )
 }
-
-export const Item = forwardRef(ToggleGroupItemComponent)
