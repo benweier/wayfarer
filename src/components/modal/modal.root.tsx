@@ -1,5 +1,5 @@
+import * as ScrollArea from '@/components/scroll-area'
 import * as Dialog from '@radix-ui/react-dialog'
-import * as ScrollArea from '@radix-ui/react-scroll-area'
 import { cx } from 'class-variance-authority'
 import type { PropsWithChildren } from 'react'
 import type { ModalDialogProps } from './modal.types'
@@ -45,19 +45,12 @@ export const Root = ({
             },
           )}
         >
-          <ScrollArea.Root className="max-h-[var(--dialog-content-max-height)] overflow-hidden" type="scroll">
-            <ScrollArea.Viewport className="relative h-full max-h-[var(--dialog-content-max-height)] p-6">
+          <ScrollArea.Root height="var(--dialog-content-max-height)">
+            <ScrollArea.Viewport className="p-6">
               {children}
-
               {close && <div className="absolute top-7 right-6">{close}</div>}
             </ScrollArea.Viewport>
-
-            <ScrollArea.Scrollbar
-              className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
-              orientation="vertical"
-            >
-              <ScrollArea.Thumb className="bg-background-quaternary relative flex-1 rounded-full" />
-            </ScrollArea.Scrollbar>
+            <ScrollArea.Scrollbar orientation="vertical" />
           </ScrollArea.Root>
         </Dialog.Content>
       </Dialog.Portal>

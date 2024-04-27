@@ -1,5 +1,5 @@
 import { AppIcon } from '@/components/icons'
-import * as ScrollArea from '@radix-ui/react-scroll-area'
+import * as ScrollArea from '@/components/scroll-area'
 import * as Select from '@radix-ui/react-select'
 import type { PropsWithChildren } from 'react'
 import type { SelectFieldProps } from './select.types'
@@ -30,17 +30,12 @@ export const Field = ({
           sideOffset={8}
           className="popover bg-background-primary border-border-primary z-50 w-[var(--radix-select-trigger-width)] rounded-md border"
         >
-          <ScrollArea.Root type="scroll">
+          <ScrollArea.Root height={320}>
             <Select.Viewport asChild>
-              <ScrollArea.Viewport className="h-full max-h-[320px] p-2">{children}</ScrollArea.Viewport>
+              <ScrollArea.Viewport className="p-2">{children}</ScrollArea.Viewport>
             </Select.Viewport>
 
-            <ScrollArea.Scrollbar
-              className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
-              orientation="vertical"
-            >
-              <ScrollArea.Thumb className="bg-background-quaternary relative flex-1 rounded-full" />
-            </ScrollArea.Scrollbar>
+            <ScrollArea.Scrollbar orientation="vertical" />
           </ScrollArea.Root>
         </Select.Content>
       </Select.Portal>

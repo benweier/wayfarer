@@ -1,5 +1,5 @@
+import * as ScrollArea from '@/components/scroll-area'
 import * as Popover from '@radix-ui/react-popover'
-import * as ScrollArea from '@radix-ui/react-scroll-area'
 import type { PropsWithChildren } from 'react'
 import { Options } from './multi-select-options.component'
 import type { MultiSelectFieldProps } from './multi-select.types'
@@ -11,23 +11,17 @@ export const Field = ({ trigger, id, value, onChange, children }: PropsWithChild
 
       <Popover.Portal>
         <Popover.Content side="bottom" align="center" sideOffset={8} asChild>
-          <ScrollArea.Root
-            className="popover bg-background-primary border-border-primary relative z-50 rounded-md border"
-            type="scroll"
-          >
-            <ScrollArea.Viewport className="h-full max-h-[320px] p-2">
-              <Options type="multiple" aria-labelledby={id} value={value} onValueChange={onChange}>
-                {children}
-              </Options>
-            </ScrollArea.Viewport>
+          <div className="popover bg-background-primary border-border-primary z-50 rounded-md border">
+            <ScrollArea.Root height={320}>
+              <ScrollArea.Viewport className="p-2">
+                <Options type="multiple" aria-labelledby={id} value={value} onValueChange={onChange}>
+                  {children}
+                </Options>
+              </ScrollArea.Viewport>
 
-            <ScrollArea.Scrollbar
-              className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3"
-              orientation="vertical"
-            >
-              <ScrollArea.Thumb className="bg-background-quaternary relative flex-1 rounded-full" />
-            </ScrollArea.Scrollbar>
-          </ScrollArea.Root>
+              <ScrollArea.Scrollbar orientation="vertical" />
+            </ScrollArea.Root>
+          </div>
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
