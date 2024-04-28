@@ -7,7 +7,7 @@ import type { ModalImperativeRef, ModalProps, ModalStore } from './modal.types'
 export const Modal = ({
   ref,
   trigger,
-  isOpen = false,
+  defaultOpen = false,
   size,
   close,
   disableExternalClose,
@@ -15,7 +15,7 @@ export const Modal = ({
 }: PropsWithChildren<ModalProps> & RefAttributes<ModalImperativeRef>) => {
   const [store] = useState(() => {
     return createStore<ModalStore>((set) => ({
-      isOpen,
+      isOpen: defaultOpen,
       actions: {
         openModal: () => {
           set({ isOpen: true })

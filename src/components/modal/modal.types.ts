@@ -4,7 +4,7 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
 
 export type ModalProps = {
   trigger?: ReactNode
-  isOpen?: boolean
+  defaultOpen?: boolean
   size?: DialogSize
   close?: ReactNode
   disableExternalClose?: boolean
