@@ -1,5 +1,5 @@
 import { Button } from '@/components/button'
-import { Modal } from '@/components/modal'
+import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
 import { createAgentMutation } from '@/services/api/spacetraders/auth'
@@ -69,9 +69,13 @@ export const Register = () => {
   const methods = useForm<RegisterSchema>({
     resolver: valibotResolver(RegisterSchema),
   })
+  const { ref, modal } = useModalImperativeHandle()
   const { mutateAsync, isPending, isSuccess, data } = useMutation({
     mutationKey: createAgentMutation.getMutationKey(),
     mutationFn: createAgentMutation.mutationFn,
+    onSuccess: () => {
+      modal.open()
+    },
   })
   const agent = isSuccess ? data.data : undefined
 
@@ -151,7 +155,7 @@ export const Register = () => {
           </div>
         </form>
       </FormProvider>
-      <Modal isOpen={isSuccess} size="md" disableExternalClose>
+      <Modal ref={ref} size="md" disableExternalClose>
         {isSuccess && <AccessTokenDialog registration={agent} />}
       </Modal>
     </div>
