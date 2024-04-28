@@ -51,13 +51,11 @@ export const Core = () => {
     >
       <ScrollRestoration />
       <Meta titleTemplate="%s • Wayfarer" />
-      <div className="min-h-screen">
-        <NavigationLoader />
-        <Outlet />
-        <ToastContainer />
-        <TanStackRouterDevtools />
-        <TanStackQueryDevtools />
-      </div>
+      <NavigationLoader />
+      <Outlet />
+      <ToastContainer />
+      <TanStackRouterDevtools />
+      <TanStackQueryDevtools />
     </Sentry.ErrorBoundary>
   )
 }
