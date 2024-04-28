@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react'
 import type { ModalImperativeRef } from './modal.types'
 
 export const useModalImperativeHandle = () => {
-  const modal = useRef<ModalImperativeRef>()
+  const modal = useRef<ModalImperativeRef>(null)
   const ref = useCallback((instance: ModalImperativeRef) => {
     modal.current = instance
   }, [])
