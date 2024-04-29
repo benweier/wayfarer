@@ -2,6 +2,8 @@
 import type { TFunction } from 'i18next'
 
 declare global {
+  type WithClassName = { className?: string }
+
   type Keys<T> = keyof T
   type Values<T> = T[keyof T]
 
