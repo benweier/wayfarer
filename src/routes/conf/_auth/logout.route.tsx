@@ -1,4 +1,4 @@
-import { Navigate, createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_auth/logout')({
   beforeLoad: ({ context }) => {
@@ -6,8 +6,9 @@ export const Route = createFileRoute('/_auth/logout')({
 
     if (auth.isAuthenticated) {
       auth.actions.signout()
-      throw redirect({ to: '/login', replace: true })
     }
+
+    throw redirect({ to: '/login', replace: true })
   },
-  component: () => <Navigate to="/login" replace />,
+  component: () => null,
 })
