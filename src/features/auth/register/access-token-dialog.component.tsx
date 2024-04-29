@@ -58,14 +58,13 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
             </div>
           </div>
         </div>
-        <div className="text-foreground-warning-primary flex items-center justify-center gap-2">
-          <div>
-            <AppIcon id="alert" className="size-6" />
-          </div>
+        <div className="text-foreground-warning-primary flex flex-col items-center justify-center gap-2">
+          <AppIcon id="alert" className="size-8" />
 
-          <span className="typography-lg font-semibold">
-            Your access token cannot be retrieved if you lose it. Please save it somewhere safe, like a password
-            manager, before proceeding!
+          <span className="typography-lg text-center font-semibold">
+            Your access token cannot be retrieved if you lose it.
+            <br />
+            Save it somewhere safe, like a password manager, before proceeding!
           </span>
         </div>
       </div>
