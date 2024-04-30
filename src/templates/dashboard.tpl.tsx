@@ -110,7 +110,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                   direction="left"
                 >
                   <Drawer.Content width={300} height="100dvh">
-                    <div className="h-[100dvh] flex flex-col p-6 mb-6">
+                    <div className="min-h-[100dvh] flex flex-col gap-6 p-6">
                       <Drawer.Header>
                         <Drawer.Title className="text-center">Wayfarer</Drawer.Title>
                       </Drawer.Header>
