@@ -14,7 +14,7 @@ export const Root = ({
 }>) => {
   return (
     <ScrollArea.Root
-      className={cx('overflow-hidden', className)}
+      className={cx('h-full w-full overflow-hidden', className)}
       type="scroll"
       style={{
         '--scroll-area-max-height': typeof height === 'number' ? `${height}px` : height,
