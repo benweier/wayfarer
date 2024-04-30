@@ -1,5 +1,6 @@
+import { cx } from 'class-variance-authority'
 import type { PropsWithChildren } from 'react'
 
-export const Header = ({ children }: PropsWithChildren) => {
-  return <div className="flex flex-col gap-1 p-6 pb-5 -m-6 mb-6">{children}</div>
+export const Header = ({ className, children }: PropsWithChildren<WithClassName>) => {
+  return <div className={cx('flex flex-col gap-1 px-5 my-4', className)}>{children}</div>
 }
