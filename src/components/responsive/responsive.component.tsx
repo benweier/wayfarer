@@ -1,26 +1,32 @@
+import { breakpoints } from '@/components/responsive/breakpoints.conf'
 import type { ReactNode } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import type { ResponsiveComponentProps } from './responsive.types'
-import {
-  useDesktopMediaQuery,
-  useMobileMediaQuery,
-  usePrefersColorSchemeQuery,
-  useTabletMediaQuery,
-} from './use-responsive.hook'
+import { usePrefersColorSchemeQuery } from './use-responsive.hook'
 
-export const Desktop = ({ up, below, fallback, children }: ResponsiveComponentProps) => {
-  const isDesktop = useDesktopMediaQuery({ up, below })
+export const Desktop = ({ fallback, children }: ResponsiveComponentProps) => {
+  const isDesktop = useMediaQuery({
+    minWidth: breakpoints.lg.min,
+    maxWidth: breakpoints.xl.max,
+  })
 
   return isDesktop ? children : fallback
 }
 
-export const Tablet = ({ up, below, fallback, children }: ResponsiveComponentProps) => {
-  const isTablet = useTabletMediaQuery({ up, below })
+export const Tablet = ({ fallback, children }: ResponsiveComponentProps) => {
+  const isTablet = useMediaQuery({
+    minWidth: breakpoints.md.min,
+    maxWidth: breakpoints.md.max,
+  })
 
   return isTablet ? children : fallback
 }
 
-export const Mobile = ({ up, below, fallback, children }: ResponsiveComponentProps) => {
-  const isMobile = useMobileMediaQuery({ up, below })
+export const Mobile = ({ fallback, children }: ResponsiveComponentProps) => {
+  const isMobile = useMediaQuery({
+    minWidth: breakpoints.xs.min,
+    maxWidth: breakpoints.sm.max,
+  })
 
   return isMobile ? children : fallback
 }
