@@ -25,15 +25,15 @@ export const MobileNavigation = () => {
               key={item.key}
               to={item.to}
               onClick={actions.closeDrawer}
-              className="relative flex w-full items-center gap-4 rounded-md py-2 px-3 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-white"
+              className="relative flex w-full items-center gap-4 rounded-md py-2 px-3 font-medium text-foreground-secondary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-foreground-primary"
             >
               {item.auth && !isAuthenticated && (
-                <span className="absolute top-0 left-0 rounded-full bg-blue-100 p-1 text-blue-950">
-                  <MenuIcon id="key" className="size-2" aria-hidden />
+                <span className="absolute top-0 left-0 rounded-full text-background-secondary bg-foreground-secondary p-1">
+                  <MenuIcon id="key" className="size-3" aria-hidden />
                 </span>
               )}
 
-              <MenuIcon id={item.icon} className="size-5 text-blue-100" aria-hidden />
+              <MenuIcon id={item.icon} className="size-5" aria-hidden />
 
               <span className="typography-sm">{t(item.key)}</span>
             </Link>

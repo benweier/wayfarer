@@ -95,14 +95,14 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
             <div className="flex items-center justify-between bg-blue-600 py-3 px-4 sm:px-6 lg:px-8">
               <div>
                 <Link to="/">
-                  <Wayfarer className="display-xs" />
+                  <Wayfarer className="display-xs text-white" />
                 </Link>
               </div>
               <div>
                 <Drawer
                   trigger={
                     <Drawer.Trigger>
-                      <Button intent="info" kind="outline" icon>
+                      <Button intent="info" kind="solid" icon>
                         <AppIcon id="hamburger" className="size-6" />
                       </Button>
                     </Drawer.Trigger>
