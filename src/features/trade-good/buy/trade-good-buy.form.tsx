@@ -2,6 +2,7 @@ import { Button } from '@/components/button'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { useAuthStore } from '@/store/auth'
+import type { ShipResponse } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number.helper'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { cx } from 'class-variance-authority'
@@ -10,29 +11,28 @@ import { useTranslation } from 'react-i18next'
 import { TradeGoodBuySchema } from './trade-good-buy.schema'
 import type { TradeGoodBuyFormProps } from './trade-good-buy.types'
 
+const ShipSelection = ({ ship }: { ship: ShipResponse }) => (
+  <div className="flex items-baseline gap-2">
+    <span className="font-bold">{ship.symbol}</span>
+    <span className="text-foreground-secondary">
+      (Cargo: {ship.cargo.units} / {ship.cargo.capacity})
+    </span>
+  </div>
+)
+
+const ShipOption = ({ ship }: { ship: ShipResponse }) => (
+  <div className="typography-sm flex flex-col">
+    <div className="font-bold">{ship.symbol}</div>
+    <div className="text-foreground-secondary">
+      Cargo: {ship.cargo.units} / {ship.cargo.capacity}
+    </div>
+  </div>
+)
+
 const getShipItem: ShipSelectItemReducer = (ships, ship) => {
   const disabled = ship.cargo.units >= ship.cargo.capacity
 
-  return ships.set(ship.symbol, {
-    ship,
-    label: (
-      <div className="flex items-baseline gap-2">
-        <span className="font-bold">{ship.symbol}</span>
-        <span className="text-foreground-secondary">
-          (Cargo: {ship.cargo.units} / {ship.cargo.capacity})
-        </span>
-      </div>
-    ),
-    option: (
-      <div className="typography-sm flex flex-col">
-        <div className="font-bold">{ship.symbol}</div>
-        <div className="text-foreground-secondary">
-          Cargo: {ship.cargo.units} / {ship.cargo.capacity}
-        </div>
-      </div>
-    ),
-    disabled,
-  })
+  return ships.set(ship.symbol, { ship, disabled })
 }
 const TradeGoodBuySubmit = () => {
   const { t } = useTranslation()
@@ -99,9 +99,11 @@ export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps
                   onChange={field.onChange}
                   onBlur={field.onBlur}
                   getShipItem={getShipItem}
-                  getShipList={(response) => ({
-                    ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
-                  })}
+                  getShipList={(ships) => ships.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol)}
+                  slots={{
+                    Selection: ShipSelection,
+                    Option: ShipOption,
+                  }}
                 />
               </div>
             )}

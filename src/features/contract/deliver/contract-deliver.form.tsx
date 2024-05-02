@@ -1,27 +1,11 @@
 import * as Select from '@/components/select'
-import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import { ShipSelectField } from '@/features/ship/select-field'
 import type { ContractDelivery, ShipResponse } from '@/types/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { DeliverContractSchema } from './contract-deliver.schema'
-
-const getShipOption: ShipSelectItemReducer = (ships, ship) => {
-  return ships.set(ship.symbol, {
-    ship,
-    label: (
-      <div className="flex items-baseline gap-2">
-        <span className="font-bold">{ship.symbol}</span>
-      </div>
-    ),
-    option: (
-      <div className="flex flex-col">
-        <div className="font-semibold">{ship.symbol}</div>
-      </div>
-    ),
-  })
-}
 
 export const ContractDeliverForm = ({
   deliver,
@@ -51,18 +35,7 @@ export const ContractDeliverForm = ({
               <label className="label" htmlFor={field.name}>
                 {t('general.fields.ship')}
               </label>
-              <ShipSelectField
-                id={field.name}
-                selected={field.value}
-                onChange={(value) => {
-                  if (value) field.onChange(value)
-                }}
-                onBlur={field.onBlur}
-                getShipItem={getShipOption}
-                getShipList={(response) => ({
-                  ships: response.data,
-                })}
-              />
+              <ShipSelectField id={field.name} selected={field.value} onChange={field.onChange} onBlur={field.onBlur} />
             </div>
           )}
         />

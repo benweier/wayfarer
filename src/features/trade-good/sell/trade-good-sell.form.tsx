@@ -1,6 +1,7 @@
 import { Button } from '@/components/button'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import type { MarketTradeGood, ShipResponse } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number.helper'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCallback } from 'react'
@@ -8,6 +9,32 @@ import { Controller, FormProvider, useForm, useFormContext, useFormState, useWat
 import { useTranslation } from 'react-i18next'
 import { TradeGoodSellSchema } from './trade-good-sell.schema'
 import type { TradeGoodSellFormProps } from './trade-good-sell.types'
+
+const ShipSelection = ({ ship, good, count }: { ship: ShipResponse; good: MarketTradeGood; count: number }) => {
+  const { t } = useTranslation()
+
+  return (
+    <div className="flex items-baseline gap-2 ">
+      <span className="font-bold">{ship.symbol}</span>
+      <span className="text-foreground-secondary">
+        ({t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count})
+      </span>
+    </div>
+  )
+}
+
+const ShipOption = ({ ship, good, count }: { ship: ShipResponse; good: MarketTradeGood; count: number }) => {
+  const { t } = useTranslation()
+
+  return (
+    <div className="typography-sm flex flex-col">
+      <div className="font-semibold">{ship.symbol}</div>
+      <div className="text-foreground-secondary">
+        {t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count}
+      </div>
+    </div>
+  )
+}
 
 const SubmitPurchase = () => {
   const { t } = useTranslation()
@@ -45,7 +72,7 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
       }),
     ),
   })
-  const getShipItem: ShipSelectItemReducer = useCallback(
+  const getShipItem: ShipSelectItemReducer<{ good: MarketTradeGood; count: number }> = useCallback(
     (ships, ship) => {
       const disabled = ship.cargo.inventory.findIndex((item) => item.symbol === good.symbol) === -1
       const count = ship.cargo.inventory.reduce((count, item) => {
@@ -54,28 +81,9 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
         return count
       }, 0)
 
-      return ships.set(ship.symbol, {
-        ship,
-        label: (
-          <div className="flex items-baseline gap-2 ">
-            <span className="font-bold">{ship.symbol}</span>
-            <span className="text-foreground-secondary">
-              ({t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count})
-            </span>
-          </div>
-        ),
-        option: (
-          <div className="typography-sm flex flex-col">
-            <div className="font-semibold">{ship.symbol}</div>
-            <div className="text-foreground-secondary">
-              {t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count}
-            </div>
-          </div>
-        ),
-        disabled,
-      })
+      return ships.set(ship.symbol, { ship, good, count, disabled })
     },
-    [good.symbol, t],
+    [good.symbol],
   )
 
   return (
@@ -90,15 +98,17 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
                 <label className="label" htmlFor={field.name}>
                   {t('general.fields.ship')}
                 </label>
-                <ShipSelectField
+                <ShipSelectField<{ good: MarketTradeGood; count: number }>
                   id={field.name}
                   selected={field.value}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
                   getShipItem={getShipItem}
-                  getShipList={(response) => ({
-                    ships: response.data.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
-                  })}
+                  getShipList={(ships) => ships.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol)}
+                  slots={{
+                    Selection: ShipSelection,
+                    Option: ShipOption,
+                  }}
                 />
               </div>
             )}

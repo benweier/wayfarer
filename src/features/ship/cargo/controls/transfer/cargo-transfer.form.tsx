@@ -1,26 +1,10 @@
-import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import { ShipSelectField } from '@/features/ship/select-field'
 import type { ShipResponse } from '@/types/spacetraders'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import type { PropsWithChildren } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { CargoTransferSchema } from './cargo-transfer.validation'
-
-const getShipOption: ShipSelectItemReducer = (ships, ship) => {
-  return ships.set(ship.symbol, {
-    ship,
-    label: (
-      <div className="flex items-baseline gap-2">
-        <span className="font-bold">{ship.symbol}</span>
-      </div>
-    ),
-    option: (
-      <div className="flex flex-col">
-        <div className="font-semibold">{ship.symbol}</div>
-      </div>
-    ),
-  })
-}
 
 export const CargoTransferForm = ({
   fromShip,
@@ -49,16 +33,15 @@ export const CargoTransferForm = ({
                   selected={field.value}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
-                  getShipItem={getShipOption}
-                  getShipList={(response) => ({
-                    ships: response.data.filter((ship) => {
+                  getShipList={(ships) =>
+                    ships.filter((ship) => {
                       return (
                         ship.cargo.capacity - ship.cargo.units > 0 &&
                         ship.symbol !== fromShip.symbol &&
                         ship.nav.waypointSymbol === fromShip.nav.waypointSymbol
                       )
-                    }),
-                  })}
+                    })
+                  }
                 />
               </div>
             )}
