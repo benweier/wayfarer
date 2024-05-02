@@ -4,25 +4,25 @@ import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { defaultGetShipItem } from './ship-item-reducer.helper'
 import type { ShipSelectFieldProps, ShipSelectItem } from './ship-select-field.types'
+import { ShipOption, ShipSelection } from './ship-select-slots.component'
 
-export const ShipSelectField = ({
+export const ShipSelectField = <T extends Record<string, unknown>>({
   id,
   selected,
   onBlur,
   onChange,
-  getShipList = (response) => ({ ships: response.data }),
+  getShipList = (ships) => ships,
   getShipItem = defaultGetShipItem,
-}: ShipSelectFieldProps) => {
+  slots: { Selection = ShipSelection, Option = ShipOption } = {},
+}: ShipSelectFieldProps<T>) => {
   const { t } = useTranslation()
-  const { data, isSuccess } = useQuery({ ...getShipListQuery(), select: getShipList })
-  const ships: Map<string, ShipSelectItem> = isSuccess
-    ? data.ships.reduce<Map<string, ShipSelectItem>>(getShipItem, new Map())
-    : new Map()
+  const { data, isSuccess } = useQuery({ ...getShipListQuery(), select: (response) => getShipList(response.data) })
+  const ships: ReadonlyMap<string, ShipSelectItem<T>> = isSuccess ? data.reduce(getShipItem, new Map()) : new Map()
 
   return (
     <Select.Field
       id={id}
-      selected={(selected && ships.get(selected)?.label) ?? selected}
+      selected={selected && ships.has(selected) ? <Selection {...ships.get(selected)!}></Selection> : undefined}
       placeholder={t('ship.select_placeholder')}
       onChange={onChange}
       onBlur={onBlur}
@@ -30,7 +30,7 @@ export const ShipSelectField = ({
       {Array.from(ships).map(([key, item]) => {
         return (
           <Select.Item key={key} value={item.ship.symbol} disabled={item.disabled}>
-            {item.option}
+            <Option {...item} />
           </Select.Item>
         )
       })}
