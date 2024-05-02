@@ -18,8 +18,8 @@ export type ShipSelectFieldProps<
   SelectionComponent extends FC<{ ship: ShipResponse } & T> = FC<{ ship: ShipResponse } & T>,
   OptionComponent extends FC<{ ship: ShipResponse } & T> = FC<{ ship: ShipResponse } & T>,
 > = {
-  id?: string
-  selected?: string
+  name?: string
+  value?: string
   onBlur?: FocusEventHandler<HTMLButtonElement>
   onChange: (value?: string) => void
   slots?: {

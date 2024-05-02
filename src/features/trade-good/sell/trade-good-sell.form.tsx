@@ -72,7 +72,7 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
       }),
     ),
   })
-  const getShipItem: ShipSelectItemReducer<{ good: MarketTradeGood; count: number }> = useCallback(
+  const getShipItem = useCallback<ShipSelectItemReducer<{ good: MarketTradeGood; count: number }>>(
     (ships, ship) => {
       const disabled = ship.cargo.inventory.findIndex((item) => item.symbol === good.symbol) === -1
       const count = ship.cargo.inventory.reduce((count, item) => {
@@ -84,6 +84,10 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
       return ships.set(ship.symbol, { ship, good, count, disabled })
     },
     [good.symbol],
+  )
+  const getShipList = useCallback(
+    (ships: ShipResponse[]) => ships.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
+    [good.symbol, waypoint.symbol],
   )
 
   return (
@@ -99,12 +103,9 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
                   {t('general.fields.ship')}
                 </label>
                 <ShipSelectField<{ good: MarketTradeGood; count: number }>
-                  id={field.name}
-                  selected={field.value}
-                  onChange={field.onChange}
-                  onBlur={field.onBlur}
+                  {...field}
                   getShipItem={getShipItem}
-                  getShipList={(ships) => ships.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol)}
+                  getShipList={getShipList}
                   slots={{
                     Selection: ShipSelection,
                     Option: ShipOption,

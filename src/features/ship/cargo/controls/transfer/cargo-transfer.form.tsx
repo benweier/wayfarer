@@ -29,10 +29,7 @@ export const CargoTransferForm = ({
                   {t('general.fields.ship')}
                 </label>
                 <ShipSelectField
-                  id={field.name}
-                  selected={field.value}
-                  onChange={field.onChange}
-                  onBlur={field.onBlur}
+                  {...field}
                   getShipList={(ships) =>
                     ships.filter((ship) => {
                       return (

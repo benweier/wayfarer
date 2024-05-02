@@ -7,8 +7,8 @@ import type { ShipSelectFieldProps, ShipSelectItem } from './ship-select-field.t
 import { ShipOption, ShipSelection } from './ship-select-slots.component'
 
 export const ShipSelectField = <T extends Record<string, unknown>>({
-  id,
-  selected,
+  name,
+  value,
   onBlur,
   onChange,
   getShipList = (ships) => ships,
@@ -18,11 +18,12 @@ export const ShipSelectField = <T extends Record<string, unknown>>({
   const { t } = useTranslation()
   const { data, isSuccess } = useQuery({ ...getShipListQuery(), select: (response) => getShipList(response.data) })
   const ships: ReadonlyMap<string, ShipSelectItem<T>> = isSuccess ? data.reduce(getShipItem, new Map()) : new Map()
+  const selected = value && ships.has(value) ? ships.get(value) : undefined
 
   return (
     <Select.Field
-      id={id}
-      selected={selected && ships.has(selected) ? <Selection {...ships.get(selected)!}></Selection> : undefined}
+      id={name}
+      selected={selected && <Selection {...selected} />}
       placeholder={t('ship.select_placeholder')}
       onChange={onChange}
       onBlur={onBlur}

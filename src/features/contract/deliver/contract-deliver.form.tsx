@@ -35,7 +35,7 @@ export const ContractDeliverForm = ({
               <label className="label" htmlFor={field.name}>
                 {t('general.fields.ship')}
               </label>
-              <ShipSelectField id={field.name} selected={field.value} onChange={field.onChange} onBlur={field.onBlur} />
+              <ShipSelectField {...field} />
             </div>
           )}
         />

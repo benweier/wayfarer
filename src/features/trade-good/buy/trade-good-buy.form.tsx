@@ -94,10 +94,7 @@ export const TradeGoodBuyForm = ({ ship, good, onSubmit }: TradeGoodBuyFormProps
                   {t('general.fields.ship')}
                 </label>
                 <ShipSelectField
-                  id={field.name}
-                  selected={field.value}
-                  onChange={field.onChange}
-                  onBlur={field.onBlur}
+                  {...field}
                   getShipItem={getShipItem}
                   getShipList={(ships) => ships.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol)}
                   slots={{
