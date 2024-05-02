@@ -34,6 +34,7 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
           {t('ship.action.transfer')}
         </Dropdown.Item>
         <Dropdown.Item
+          variant="danger"
           onSelect={() => {
             jettison.modal.open()
           }}
