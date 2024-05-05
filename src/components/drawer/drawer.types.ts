@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
 export type DrawerProps = {
   trigger: ReactNode
@@ -22,3 +22,13 @@ export type DrawerActions = {
 }
 
 export type DrawerStore = DrawerState & { actions: DrawerActions }
+
+export type DrawerRootProps = {
+  trigger: ReactNode
+  direction?: 'left' | 'right' | 'bottom'
+}
+
+export type DrawerContentProps = {
+  height?: CSSProperties['height']
+  width?: CSSProperties['width']
+} & WithClassName

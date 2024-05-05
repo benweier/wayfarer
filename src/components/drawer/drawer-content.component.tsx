@@ -1,19 +1,15 @@
 import * as ScrollArea from '@/components/scroll-area'
 import { cx } from 'class-variance-authority'
-import type { CSSProperties, PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 import { Drawer } from 'vaul'
+import type { DrawerContentProps } from './drawer.types'
 
 export const Content = ({
   className,
   height = 'auto',
   width = 'auto',
   children,
-}: PropsWithChildren<
-  {
-    height?: CSSProperties['height']
-    width?: CSSProperties['width']
-  } & WithClassName
->) => {
+}: PropsWithChildren<DrawerContentProps>) => {
   return (
     <Drawer.Content
       style={{
