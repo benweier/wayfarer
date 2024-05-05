@@ -1,19 +1,23 @@
 import { Button } from '@/components/button'
-import { Modal } from '@/components/modal'
+import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { createShipScanWaypointsMutation } from '@/services/api/spacetraders/fleet'
 import { useMutation } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 
 export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
+  const { ref, modal } = useModalImperativeHandle()
   const { mutate, isSuccess, data } = useMutation({
     mutationKey: createShipScanWaypointsMutation.getMutationKey({ shipSymbol }),
     mutationFn: createShipScanWaypointsMutation.mutationFn,
+    onSuccess: () => {
+      modal.open()
+    },
   })
   const waypoints = isSuccess ? data.data.waypoints : []
 
   return (
     <Modal
-      isOpen={isSuccess}
+      ref={ref}
       trigger={
         <Button
           size="small"
