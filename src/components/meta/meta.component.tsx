@@ -13,9 +13,9 @@ export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
           'meta' in match.routeContext &&
           typeof match.routeContext.meta === 'function'
         ) {
-          const meta: MetaObject[] = match.routeContext.meta(t, match.loaderData)
+          const meta: MetaObject[] = match.routeContext.meta(t, match.loaderData as any)
 
-          meta.forEach((tag) => {
+          for (const tag of meta) {
             if ('title' in tag) {
               metas.set('title', <title>{`${titleTemplate.replace(/%s/g, () => tag.title)}`}</title>)
             }
@@ -27,7 +27,7 @@ export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
             if ('property' in tag) {
               metas.set(tag.property, <meta property={tag.property} content={tag.content} />)
             }
-          })
+          }
         }
 
         return metas
