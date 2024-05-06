@@ -1,3 +1,4 @@
+import { KBar } from '@/components/kbar'
 import { PrefersColorScheme } from '@/components/responsive'
 import { router } from '@/routes/router.conf'
 import { i18n } from '@/services/i18n'
@@ -17,11 +18,14 @@ enableMapSet()
 
 export const App = () => {
   return (
-    <Suspense fallback={<></>}>
+    <Suspense fallback={null}>
       <ThemeStyleSheet />
+
       <I18nextProvider i18n={i18n}>
         <QueryClientProvider client={client}>
-          <RouterProvider router={router} />
+          <KBar>
+            <RouterProvider router={router} />
+          </KBar>
         </QueryClientProvider>
       </I18nextProvider>
     </Suspense>
