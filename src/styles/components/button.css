@@ -29,11 +29,15 @@
 
   &:active {
     background-color: var(--button-bg-active);
-    transform: scaleX(0.975) scaleY(0.975);
+
+    &:not(:disabled) {
+      transform: scaleX(0.975) scaleY(0.975);
+    }
   }
 
   &:disabled {
     color: var(--button-fg-disabled);
+    pointer-events: none;
     cursor: default;
     background-color: var(--button-bg-disabled);
     border-color: var(--button-border-disabled);
