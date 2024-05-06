@@ -8,11 +8,7 @@ export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
   const metas = useRouterState({
     select: (state) => {
       const metas = state.matches.reduce<Map<string, ReactNode>>((metas, match) => {
-        if (
-          typeof match.routeContext === 'object' &&
-          'meta' in match.routeContext &&
-          typeof match.routeContext.meta === 'function'
-        ) {
+        if (match.routeContext && 'meta' in match.routeContext && typeof match.routeContext.meta === 'function') {
           const meta: MetaObject[] = match.routeContext.meta(t, match.loaderData as any)
 
           for (const tag of meta) {
