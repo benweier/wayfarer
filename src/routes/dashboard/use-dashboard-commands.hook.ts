@@ -1,9 +1,11 @@
+import { useAuthStore } from '@/store/auth'
 import { useNavigate } from '@tanstack/react-router'
 import { type Action, useRegisterActions } from 'kbar'
 import { useMemo } from 'react'
 
 export const useDashboardCommands = () => {
   const navigate = useNavigate()
+  const { isAuthenticated } = useAuthStore()
 
   const actions = useMemo<Action[]>(() => {
     return [
@@ -37,7 +39,7 @@ export const useDashboardCommands = () => {
       {
         id: 'surveys',
         name: 'Surveys',
-        shortcut: ['Alt+KeyS'],
+        shortcut: ['Alt+KeyV'],
         keywords: 'surveys',
         perform: () => {
           void navigate({ to: '/surveys' })
@@ -61,8 +63,27 @@ export const useDashboardCommands = () => {
           void navigate({ to: '/agents' })
         },
       },
+      isAuthenticated
+        ? {
+            id: 'logout',
+            name: 'Logout',
+            shortcut: ['Alt+KeyX'],
+            keywords: 'logout',
+            perform: () => {
+              void navigate({ to: '/logout' })
+            },
+          }
+        : {
+            id: 'login',
+            name: 'Login',
+            shortcut: ['Alt+KeyX'],
+            keywords: 'login',
+            perform: () => {
+              void navigate({ to: '/login' })
+            },
+          },
     ]
-  }, [navigate])
+  }, [navigate, isAuthenticated])
 
   useRegisterActions(actions)
 }
