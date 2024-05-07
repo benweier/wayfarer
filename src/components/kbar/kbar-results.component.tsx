@@ -21,9 +21,7 @@ export function Results() {
             className="group text-foreground-secondary data-[disabled]:text-foreground-disabled data-[highlighted=true]:bg-background-secondary data-[highlighted=true]:text-foreground-primary typography-base relative py-3 px-6 outline-none select-none data-[disabled]:pointer-events-none"
           >
             <div className="flex justify-between gap-8">
-              <div className="flex grow justify-between">
-                <div>{item.name}</div> <div>{item.children.length > 0 && '>'}</div>
-              </div>
+              <div className="grow">{item.name}</div>
               {item.shortcut && (
                 <div dir="ltr" className="shrink">
                   {item.shortcut.map((shortcut, index) => {
