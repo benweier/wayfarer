@@ -19,10 +19,7 @@ const PurchaseShipComponent = (
   ref: Ref<HTMLButtonElement>,
 ) => {
   const client = useQueryClient()
-  const { credits, setAgent } = useAuthStore((state) => ({
-    credits: state.isAuthenticated ? state.agent.credits : 0,
-    setAgent: state.actions.setAgent,
-  }))
+  const { isAuthenticated, agent, actions } = useAuthStore()
   const { mutate, isPending } = useMutation({
     mutationKey: createShipPurchaseMutation.getMutationKey(),
     mutationFn: createShipPurchaseMutation.mutationFn,
@@ -37,9 +34,11 @@ const PurchaseShipComponent = (
           }),
         )
       }
-      setAgent(response.data.agent)
+      actions.setAgent(response.data.agent)
     },
   })
+
+  const credits = isAuthenticated ? agent.credits : 0
 
   return children({
     ref,
