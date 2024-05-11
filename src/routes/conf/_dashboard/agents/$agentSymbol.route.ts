@@ -13,7 +13,7 @@ export const Route = createFileRoute('/_dashboard/agents/$agentSymbol')({
       return {
         agent: await agent,
       }
-    } catch (err) {
+    } catch (_err) {
       throw notFound()
     }
   },

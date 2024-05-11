@@ -12,7 +12,7 @@ export const DesktopNavigation = () => {
     <nav className="flex flex-col items-center justify-center gap-2 p-4">
       {menu.map((item) => {
         if ('divider' in item) {
-          return <div key={item.key} className="my-2 h-0.5 w-full rounded-full bg-white/30"></div>
+          return <div key={item.key} className="my-2 h-0.5 w-full rounded-full bg-white/30" />
         }
 
         return (

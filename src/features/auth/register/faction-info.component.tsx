@@ -13,7 +13,9 @@ export const FactionInfo = () => {
     select: (response) => {
       const factions = new Map<string, FactionResponse>()
 
-      response.data.forEach((faction) => factions.set(faction.symbol, faction))
+      for (const faction of response.data) {
+        factions.set(faction.symbol, faction)
+      }
 
       return { factions }
     },

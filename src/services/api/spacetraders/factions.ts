@@ -6,8 +6,8 @@ import { queryOptions } from '@tanstack/react-query'
 
 export const getFactionListQuery = () =>
   queryOptions({
-    staleTime: Infinity,
-    gcTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
+    gcTime: Number.POSITIVE_INFINITY,
     queryKey: [{ scope: 'factions', entity: 'list' }],
     queryFn: async ({ signal }) => {
       const url = new URL('factions', import.meta.env.SPACETRADERS_API_BASE_URL)

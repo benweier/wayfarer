@@ -17,7 +17,7 @@ export const MobileNavigation = () => {
       <nav className="flex flex-col items-center gap-2">
         {menu.map((item) => {
           if ('divider' in item) {
-            return <div key={item.key} className="my-2 h-0.5 w-full rounded-full bg-background-tertiary"></div>
+            return <div key={item.key} className="my-2 h-0.5 w-full rounded-full bg-background-tertiary" />
           }
 
           return (
@@ -43,7 +43,10 @@ export const MobileNavigation = () => {
       <div className="flex flex-col items-center gap-2">
         <Popover
           trigger={
-            <button className="group relative flex w-full items-center gap-4 rounded-md py-2 px-3 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-white">
+            <button
+              type="button"
+              className="group relative flex w-full items-center gap-4 rounded-md py-2 px-3 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-white"
+            >
               <MenuIcon id="settings" className="size-6 group-data-[state=open]:animate-spin" aria-hidden />
               <span className="typography-sm">{t('preferences.label')}</span>
             </button>

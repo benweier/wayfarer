@@ -71,7 +71,6 @@ export const Login = () => {
                 onFocus={(node) => {
                   node.target.select()
                 }}
-                autoFocus
               />
               <ErrorMessage
                 errors={methods.formState.errors}

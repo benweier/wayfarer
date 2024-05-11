@@ -31,7 +31,6 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
                   event.target.select()
                 }}
                 readOnly
-                autoFocus
               />
               <div className="absolute inset-y-0 right-0 flex items-center pr-1.5">
                 <Copy

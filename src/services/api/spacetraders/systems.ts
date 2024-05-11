@@ -10,7 +10,7 @@ export const getSystemListQuery = ({ page = 1, limit = 20 }: { page?: number; li
       { page, limit },
     ],
     queryFn: ({ signal }) => {
-      const url = new URL(`systems`, import.meta.env.SPACETRADERS_API_BASE_URL)
+      const url = new URL('systems', import.meta.env.SPACETRADERS_API_BASE_URL)
 
       attachQueryParams(url, { page, limit })
 

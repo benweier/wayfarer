@@ -18,7 +18,7 @@ export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/waypoint
       return {
         waypoint: await waypoint,
       }
-    } catch (err) {
+    } catch (_err) {
       throw notFound()
     }
   },

@@ -96,7 +96,6 @@ export const Register = () => {
                 className="input"
                 type="text"
                 autoComplete="off"
-                autoFocus
               />
             </div>
 

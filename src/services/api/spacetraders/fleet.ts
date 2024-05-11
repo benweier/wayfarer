@@ -26,8 +26,8 @@ type ShipMutationKey = { shipSymbol: string }
 
 export const getShipListQuery = () =>
   queryOptions({
-    staleTime: Infinity,
-    gcTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
+    gcTime: Number.POSITIVE_INFINITY,
     queryKey: [{ scope: 'ships', entity: 'list' }],
     queryFn: async ({ signal }) => {
       const { isAuthenticated } = authStore.getState()
@@ -70,7 +70,7 @@ export const getShipByIdQuery = (args: { shipSymbol: string }) =>
 export const createShipPurchaseMutation = {
   getMutationKey: () => [{ scope: 'ships', entity: 'list', action: 'purchase' }],
   mutationFn: ({ shipType, waypointSymbol }: { shipType: string; waypointSymbol: string }) => {
-    const url = new URL(`my/ships`, import.meta.env.SPACETRADERS_API_BASE_URL)
+    const url = new URL('my/ships', import.meta.env.SPACETRADERS_API_BASE_URL)
 
     return post<SpaceTradersResponse<{ agent: AgentResponse; ship: ShipResponse }>>(
       url,

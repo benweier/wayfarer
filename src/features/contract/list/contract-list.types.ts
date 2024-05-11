@@ -7,5 +7,5 @@ export type ContractListTableSchema = {
 
 export type ContractListTableProps = {
   data: ContractListTableSchema[]
-  columns: Array<ColumnDef<ContractListTableSchema, any>>
+  columns: ColumnDef<ContractListTableSchema, any>[]
 }

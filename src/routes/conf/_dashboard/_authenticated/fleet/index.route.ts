@@ -11,6 +11,6 @@ export const Route = createFileRoute('/_dashboard/_authenticated/fleet/')({
       ships: defer(ships),
     }
   },
-  staleTime: Infinity,
-  gcTime: Infinity,
+  staleTime: Number.POSITIVE_INFINITY,
+  gcTime: Number.POSITIVE_INFINITY,
 })

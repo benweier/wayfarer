@@ -9,7 +9,7 @@ export const http = async <T = unknown>(url: URL | RequestInfo, args: RequestIni
     if (response.status === 204) return undefined as never
 
     return response.json()
-  } catch (err) {
+  } catch (_err) {
     throw response
   }
 }

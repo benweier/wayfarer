@@ -55,7 +55,9 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
     <div className="flex flex-wrap items-center gap-12">
       <div className="[max-width:50%]">
         <div className="text-foreground-secondary typography-sm">{t('market.sell_price')}</div>
-        <div className="typography-xl truncate font-bold">{isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}</div>
+        <div className="typography-xl truncate font-bold">
+          {Number.isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}
+        </div>
       </div>
     </div>
   )
@@ -76,18 +78,18 @@ export const TradeGoodSellForm = ({ ship, good, onSubmit }: TradeGoodSellFormPro
     (ships, ship) => {
       const disabled = ship.cargo.inventory.findIndex((item) => item.symbol === good.symbol) === -1
       const count = ship.cargo.inventory.reduce((count, item) => {
-        if (item.symbol === good.symbol) count = count + item.units
+        if (item.symbol === good.symbol) return count + item.units
 
         return count
       }, 0)
 
       return ships.set(ship.symbol, { ship, good, count, disabled })
     },
-    [good.symbol],
+    [good],
   )
   const getShipList = useCallback(
     (ships: ShipResponse[]) => ships.filter((ship) => ship.nav.waypointSymbol === waypoint.symbol),
-    [good.symbol, waypoint.symbol],
+    [waypoint.symbol],
   )
 
   return (

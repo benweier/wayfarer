@@ -140,7 +140,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                 </div>
               }
             >
-              <>{children}</>
+              {children}
             </Suspense>
           </section>
 

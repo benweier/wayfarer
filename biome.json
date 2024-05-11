@@ -1,5 +1,14 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "ignore": ["*.gen.ts"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -11,7 +20,7 @@
   },
   "linter": {
     "rules": {
-      "recommended": false,
+      "recommended": true,
       "complexity": {
         "noBannedTypes": "error",
         "noExcessiveCognitiveComplexity": "error",
@@ -54,7 +63,9 @@
         "useBlockStatements": "off",
         "useConsistentArrayType": {
           "level": "error",
-          "options": { "syntax": "shorthand" }
+          "options": {
+            "syntax": "shorthand"
+          }
         },
         "useExportType": "error",
         "useImportType": "error"
@@ -92,6 +103,15 @@
     },
     "ignore": ["src/routes/route-tree.gen.ts", "**/node_modules", "**/build", "**/coverage", "**/.turbo"]
   },
+  "json": {
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineEnding": "lf",
+      "trailingCommas": "none"
+    }
+  },
   "javascript": {
     "formatter": {
       "jsxQuoteStyle": "double",
@@ -108,8 +128,12 @@
   "overrides": [
     {
       "include": ["src/**/*", "test/**/*"],
-      "javascript": { "globals": ["React"] },
-      "linter": { "rules": {} }
+      "javascript": {
+        "globals": ["React"]
+      },
+      "linter": {
+        "rules": {}
+      }
     },
     {
       "include": ["*.ts", "*.tsx", "*.mts", "*.cts"],

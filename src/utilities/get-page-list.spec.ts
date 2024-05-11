@@ -26,7 +26,7 @@ describe('get page list', () => {
   })
 
   test('it returns no pages if the length is invalid', () => {
-    const pages = getPageList(NaN)
+    const pages = getPageList(Number.NaN)
 
     expect(pages).toEqual([])
   })
