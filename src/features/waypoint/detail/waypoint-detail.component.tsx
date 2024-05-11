@@ -48,17 +48,19 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
         <div className="space-y-1">
           <div className="text-foreground-secondary typography-xs uppercase">{t('waypoint.orbitals')}</div>
           <div className="flex flex-wrap gap-1">
-            {waypoint.orbitals.map((orbital) => (
-              <div key={orbital.symbol} className="bg-background-secondary rounded py-2 px-4 shadow-sm">
-                <Link
-                  to="/systems/$systemSymbol/waypoint/$waypointSymbol"
-                  params={{ systemSymbol: waypoint.systemSymbol, waypointSymbol: orbital.symbol }}
-                  className="link"
-                >
-                  {orbital.symbol}
-                </Link>
-              </div>
-            ))}
+            {waypoint.orbitals
+              .toSorted((a, b) => a.symbol.localeCompare(b.symbol))
+              .map((orbital) => (
+                <div key={orbital.symbol} className="bg-background-secondary rounded py-2 px-4 shadow-sm">
+                  <Link
+                    to="/systems/$systemSymbol/waypoint/$waypointSymbol"
+                    params={{ systemSymbol: waypoint.systemSymbol, waypointSymbol: orbital.symbol }}
+                    className="link"
+                  >
+                    {orbital.symbol}
+                  </Link>
+                </div>
+              ))}
           </div>
         </div>
       )}
