@@ -15,7 +15,9 @@ export const useShipCooldown = (ship: ShipResponse) => {
   }, [ship.cooldown.expiration])
   const totalSeconds = ship.cooldown.totalSeconds
   const remainingSeconds = Math.floor(Math.max(-1, expiration - Date.now()) / 1000)
-  const progress = Math.min(100, Math.max(0, Math.round((100 / totalSeconds) * (totalSeconds - remainingSeconds))))
+  const progress =
+    100 - Math.min(100, Math.max(0, Math.round((100 / totalSeconds) * (totalSeconds - remainingSeconds))))
+
   const status = remainingSeconds < 0 ? 'complete' : 'in_progress'
 
   useUpdateInterval(() => {
