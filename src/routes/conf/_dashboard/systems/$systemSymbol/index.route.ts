@@ -13,7 +13,7 @@ export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/')({
       return {
         system: await system,
       }
-    } catch (err) {
+    } catch (_err) {
       throw notFound()
     }
   },

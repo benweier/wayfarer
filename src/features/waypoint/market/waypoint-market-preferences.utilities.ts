@@ -30,7 +30,6 @@ export const makeSortByTradeAttributeFn = (
     case 'volume':
       return sortByTradeAttribute('tradeVolume', tradeGoods)
 
-    case 'name':
     default:
       return (a, b) => a.name.localeCompare(b.name)
   }

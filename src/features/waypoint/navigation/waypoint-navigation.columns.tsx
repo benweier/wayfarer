@@ -75,13 +75,13 @@ export const columns = [
   columnHelper.accessor(
     (row) => {
       if (!row.activeWaypoint) {
-        return Number(Math.sqrt(Math.pow(row.waypoint.x, 2) + Math.pow(row.waypoint.y, 2)).toFixed(3))
+        return Number(Math.sqrt(row.waypoint.x ** 2 + row.waypoint.y ** 2).toFixed(3))
       }
 
       const xd = row.activeWaypoint.x - row.waypoint.x
       const yd = row.activeWaypoint.y - row.waypoint.y
 
-      return Number(Math.sqrt(Math.pow(xd, 2) + Math.pow(yd, 2)).toFixed(3))
+      return Number(Math.sqrt(xd ** 2 + yd ** 2).toFixed(3))
     },
     {
       id: 'distance_time',

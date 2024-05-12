@@ -86,7 +86,7 @@ export const columns = [
           <Tooltip.Provider delayDuration={100}>
             <Tooltip.Root>
               <Tooltip.Trigger asChild>
-                <button>
+                <button type="button">
                   <AppIcon id="help" className="text-foreground-secondary size-5" />
                 </button>
               </Tooltip.Trigger>
@@ -107,8 +107,8 @@ export const columns = [
       return <div className="text-foreground-secondary typography-sm text-left">{getValue()}</div>
     },
     sortingFn: (a, b) => {
-      const ad = Math.pow(a.original.waypoint.x, 2) + Math.pow(a.original.waypoint.y, 2)
-      const bd = Math.pow(b.original.waypoint.x, 2) + Math.pow(b.original.waypoint.y, 2)
+      const ad = a.original.waypoint.x ** 2 + a.original.waypoint.y ** 2
+      const bd = b.original.waypoint.x ** 2 + b.original.waypoint.y ** 2
 
       return ad - bd
     },

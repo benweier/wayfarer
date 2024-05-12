@@ -21,7 +21,7 @@ export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymb
         ship,
         waypoint,
       }
-    } catch (err) {
+    } catch (_err) {
       throw notFound()
     }
   },

@@ -17,7 +17,7 @@ export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
     <>
       <Dropdown.Field
         trigger={
-          <button className="btn btn-icon data-[state=open]:bg-blue-500 data-[state=open]:text-white">
+          <button type="button" className="btn btn-icon data-[state=open]:bg-blue-500 data-[state=open]:text-white">
             <span className="sr-only">Manage</span>
             <AppIcon id="more:vertical" className="size-4" aria-hidden="true" />
           </button>

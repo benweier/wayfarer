@@ -27,7 +27,7 @@ export const ShipTransitJump = ({ trigger }: ShipTransitActionProps) => {
             <Loading />
           </div>
         }
-      ></QuerySuspenseBoundary>
+      />
     </Modal>
   )
 }

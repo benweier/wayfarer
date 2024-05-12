@@ -84,7 +84,7 @@ export const columns = [
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
-                  <button>
+                  <button type="button">
                     <AppIcon id="help" className="text-foreground-secondary size-5" />
                   </button>
                 </Tooltip.Trigger>
@@ -143,7 +143,7 @@ export const columns = [
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
-                  <button>
+                  <button type="button">
                     <AppIcon id="help" className="text-foreground-secondary size-5" />
                   </button>
                 </Tooltip.Trigger>
@@ -194,7 +194,7 @@ export const columns = [
             <Tooltip.Provider delayDuration={100}>
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
-                  <button>
+                  <button type="button">
                     <AppIcon id="help" className="text-foreground-secondary size-5" />
                   </button>
                 </Tooltip.Trigger>

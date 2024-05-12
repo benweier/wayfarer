@@ -14,8 +14,8 @@ export const WaypointFleetList = () => {
       ),
       meta: response.meta,
     }),
-    staleTime: Infinity,
-    gcTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
+    gcTime: Number.POSITIVE_INFINITY,
   })
   const ships = data.data
 

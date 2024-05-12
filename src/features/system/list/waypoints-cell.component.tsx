@@ -78,8 +78,10 @@ export const SystemWaypointsCell = ({
   return (
     <div className="relative isolate list-none -space-y-1.5">
       {pages.map((page, index) => {
+        const key = `page-${index}`
+
         return (
-          <div key={index} className="flex items-center justify-end -space-x-1.5">
+          <div key={key} className="flex items-center justify-end -space-x-1.5">
             {page.map((waypoint) => {
               if (waypoint.type !== 'ASTEROID') {
                 return (
@@ -93,7 +95,7 @@ export const SystemWaypointsCell = ({
                       className="border-border-primary flex size-7 items-center justify-center border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125"
                       style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
                     >
-                      <span className="typography-sm font-medium" aria-hidden>
+                      <span className="typography-sm font-medium" aria-hidden="true">
                         {waypoint.label}
                       </span>
                       <span className="sr-only">
@@ -113,7 +115,7 @@ export const SystemWaypointsCell = ({
                     className="border-border-primary flex size-7 items-center justify-center border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125"
                     style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
                   >
-                    <span className="typography-sm font-medium" aria-hidden>
+                    <span className="typography-sm font-medium" aria-hidden="true">
                       {waypoint.label}
                     </span>
                     <span className="sr-only">
