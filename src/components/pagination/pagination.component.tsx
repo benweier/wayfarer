@@ -3,10 +3,13 @@ import { AppIcon } from '@/components/icons'
 import { useTranslation } from 'react-i18next'
 import type { PaginationProps } from './pagination.types'
 import { getPagingRange } from './pagination.utils'
+import { usePaginationCommands } from './use-pagination-commands.hook'
 
 export const Pagination = ({ current, min, max, length = 5, onChange }: PaginationProps) => {
   const { t } = useTranslation()
   const pages = getPagingRange({ current, max, length })
+
+  usePaginationCommands({ min, max })
 
   return (
     <div className="flex gap-2">
