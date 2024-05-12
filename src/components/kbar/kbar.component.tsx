@@ -1,10 +1,11 @@
-import { KBarAnimator, KBarPortal, KBarPositioner, KBarProvider, KBarSearch } from 'kbar'
+import { type Action, KBarAnimator, KBarPortal, KBarPositioner, KBarProvider, KBarSearch } from 'kbar'
 import type { PropsWithChildren } from 'react'
 import { Results } from './kbar-results.component'
 
-export const KBar = ({ children }: PropsWithChildren) => {
+export const KBar = ({ actions, children }: PropsWithChildren<{ actions?: Action[] }>) => {
   return (
     <KBarProvider
+      actions={actions}
       options={{
         disableDocumentLock: true,
         disableScrollbarManagement: true,
