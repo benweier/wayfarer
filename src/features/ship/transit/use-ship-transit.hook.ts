@@ -1,33 +1,23 @@
+import { useUpdateInterval } from '@/hooks/use-update-interval.hook'
 import { getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { getWaypointMarketQuery, getWaypointShipyardQuery } from '@/services/api/spacetraders/waypoints'
 import type { ShipResponse } from '@/types/spacetraders'
 import { useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { startTransition, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 
 export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const client = useQueryClient()
-  const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const arrival = useMemo(() => new Date(nav.route.arrival), [nav.route.arrival])
   const departed = useMemo(() => new Date(nav.route.departureTime), [nav.route.departureTime])
   const totalSeconds = (arrival.getTime() - departed.getTime()) / 1000
-  const remainingSeconds = Math.floor(Math.max(-1, arrival.getTime() - lastUpdate) / 1000)
+  const remainingSeconds = Math.floor(Math.max(-1, arrival.getTime() - Date.now()) / 1000)
   const progress = Math.min(100, Math.max(0, Math.round((100 / totalSeconds) * (totalSeconds - remainingSeconds))))
   const status = remainingSeconds < 0 ? 'complete' : 'in_progress'
 
-  useEffect(() => {
-    if (status === 'complete') return
-
-    const timeout = setTimeout(() => {
-      startTransition(() => {
-        forceUpdate(Date.now())
-      })
-    }, 1000)
-
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, [arrival, status, lastUpdate])
+  useUpdateInterval(() => {
+    return status !== 'complete'
+  }, 1000)
 
   useEffect(() => {
     if (status === 'complete' && nav.status === 'IN_TRANSIT') {
@@ -68,7 +58,7 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
         )
       }
     }
-  }, [client, nav.status, status, symbol, lastUpdate])
+  }, [client, nav.status, status, symbol])
 
   return {
     remainingSeconds,

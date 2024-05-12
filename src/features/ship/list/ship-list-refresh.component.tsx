@@ -1,28 +1,19 @@
 import { Button } from '@/components/button'
+import { useUpdateInterval } from '@/hooks/use-update-interval.hook'
 import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsFetching, useQueryClient } from '@tanstack/react-query'
-import { startTransition, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export const ShipListRefresh = () => {
   const { t } = useTranslation()
-  const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const client = useQueryClient()
   const shipListQueryKey = getShipListQuery().queryKey
   const isFetching = useIsFetching({ queryKey: shipListQueryKey }) > 0
   const state = client.getQueryState(shipListQueryKey)
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      startTransition(() => {
-        forceUpdate(Date.now())
-      })
-    }, 10_000)
-
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, [lastUpdate, state?.dataUpdatedAt])
+  useUpdateInterval(() => {
+    return state?.dataUpdatedAt !== undefined
+  }, 10_000)
 
   return (
     <div className="flex items-center gap-2">

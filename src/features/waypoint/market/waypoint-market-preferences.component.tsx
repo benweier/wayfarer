@@ -1,13 +1,12 @@
 import { Button } from '@/components/button'
 import { useWaypointResponse } from '@/context/waypoint.context'
+import { useUpdateInterval } from '@/hooks/use-update-interval.hook'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders/waypoints'
 import { useIsFetching, useQueryClient } from '@tanstack/react-query'
-import { startTransition, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const WaypointMarketRefresh = () => {
   const { t } = useTranslation()
-  const [lastUpdate, forceUpdate] = useState(() => Date.now())
   const client = useQueryClient()
   const waypoint = useWaypointResponse()
   const waypointMarketQueryKey = getWaypointMarketQuery({
@@ -17,17 +16,9 @@ const WaypointMarketRefresh = () => {
   const isFetching = useIsFetching({ queryKey: waypointMarketQueryKey }) > 0
   const state = client.getQueryState(waypointMarketQueryKey)
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      startTransition(() => {
-        forceUpdate(Date.now())
-      })
-    }, 10_000)
-
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, [lastUpdate, state?.dataUpdatedAt])
+  useUpdateInterval(() => {
+    return state?.dataUpdatedAt !== undefined
+  }, 10_000)
 
   return (
     <div className="flex items-center gap-2">
