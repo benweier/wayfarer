@@ -6,10 +6,10 @@ import { getPagingRange } from './pagination.utils'
 
 describe('pagination.utils', () => {
   test('getPagingRange', () => {
-    const result1 = getPagingRange({ current: 1, total: 10, length: 5 })
-    const result2 = getPagingRange({ current: 2, total: 10, length: 3 })
-    const result3 = getPagingRange({ current: 4, total: 3, length: 1 })
-    const result4 = getPagingRange({ current: 10, total: 20, length: 4 })
+    const result1 = getPagingRange({ current: 1, max: 10, length: 5 })
+    const result2 = getPagingRange({ current: 2, max: 10, length: 3 })
+    const result3 = getPagingRange({ current: 4, max: 3, length: 1 })
+    const result4 = getPagingRange({ current: 10, max: 20, length: 4 })
 
     expect(result1).toEqual([1, 2, 3, 4, 5])
     expect(result2).toEqual([1, 2, 3])
@@ -23,12 +23,12 @@ describe('pagination.component', () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
     const { getAllByLabelText, getByLabelText, rerender } = render(
-      <Pagination current={1} total={10} onChange={handleChange} />,
+      <Pagination current={1} min={1} max={10} onChange={handleChange} />,
     )
 
     expect(getAllByLabelText(/go to page/i)).toHaveLength(5)
 
-    rerender(<Pagination length={3} current={1} total={10} onChange={handleChange} />)
+    rerender(<Pagination length={3} current={1} min={1} max={10} onChange={handleChange} />)
 
     expect(getAllByLabelText(/go to page/i)).toHaveLength(3)
 
@@ -45,12 +45,12 @@ describe('pagination.component', () => {
   test('first page button', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getByLabelText, rerender } = render(<Pagination current={1} total={10} onChange={handleChange} />)
+    const { getByLabelText, rerender } = render(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
     const firstPage = getByLabelText(/first page/i)
 
     expect(firstPage).toBeDisabled()
 
-    rerender(<Pagination current={3} total={10} onChange={handleChange} />)
+    rerender(<Pagination current={3} min={1} max={10} onChange={handleChange} />)
 
     expect(firstPage).toBeEnabled()
 
@@ -62,12 +62,12 @@ describe('pagination.component', () => {
   test('previous page button', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getByLabelText, rerender } = render(<Pagination current={1} total={10} onChange={handleChange} />)
+    const { getByLabelText, rerender } = render(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
     const previousPage = getByLabelText(/previous page/i)
 
     expect(previousPage).toBeDisabled()
 
-    rerender(<Pagination current={3} total={10} onChange={handleChange} />)
+    rerender(<Pagination current={3} min={1} max={10} onChange={handleChange} />)
 
     expect(previousPage).toBeEnabled()
 
@@ -79,7 +79,7 @@ describe('pagination.component', () => {
   test('next page button', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getByLabelText, rerender } = render(<Pagination current={1} total={10} onChange={handleChange} />)
+    const { getByLabelText, rerender } = render(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
     const nextPage = getByLabelText(/next page/i)
 
     expect(nextPage).toBeEnabled()
@@ -88,7 +88,7 @@ describe('pagination.component', () => {
 
     expect(handleChange).toHaveBeenCalledWith(2)
 
-    rerender(<Pagination current={3} total={3} onChange={handleChange} />)
+    rerender(<Pagination current={3} min={1} max={3} onChange={handleChange} />)
 
     expect(nextPage).toBeDisabled()
   })
@@ -96,7 +96,7 @@ describe('pagination.component', () => {
   test('last page button', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getByLabelText, rerender } = render(<Pagination current={1} total={10} onChange={handleChange} />)
+    const { getByLabelText, rerender } = render(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
     const lastPage = getByLabelText(/last page/i)
 
     expect(lastPage).toBeEnabled()
@@ -105,7 +105,7 @@ describe('pagination.component', () => {
 
     expect(handleChange).toHaveBeenCalledWith(10)
 
-    rerender(<Pagination current={3} total={3} onChange={handleChange} />)
+    rerender(<Pagination current={3} min={1} max={3} onChange={handleChange} />)
 
     expect(lastPage).toBeDisabled()
   })

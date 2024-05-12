@@ -1,6 +1,7 @@
 export type PaginationProps = {
   current: number
-  total: number
+  min: number
+  max: number
   length?: 3 | 5 | 7
   onChange: (page: number) => void
 }

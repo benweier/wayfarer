@@ -42,7 +42,7 @@ export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => 
           )}
         </div>
 
-        <Pagination current={meta.page} total={Math.ceil(meta.total / limit)} length={5} onChange={setPage} />
+        <Pagination current={meta.page} min={1} max={Math.ceil(meta.total / limit)} length={5} onChange={setPage} />
       </div>
     </div>
   )
