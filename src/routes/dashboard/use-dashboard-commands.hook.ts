@@ -69,6 +69,7 @@ export const useDashboardCommands = () => {
             name: 'Logout',
             shortcut: ['Alt+KeyX'],
             keywords: 'logout',
+            priority: -10,
             perform: () => {
               void navigate({ to: '/logout' })
             },
@@ -78,6 +79,7 @@ export const useDashboardCommands = () => {
             name: 'Login',
             shortcut: ['Alt+KeyX'],
             keywords: 'login',
+            priority: -10,
             perform: () => {
               void navigate({ to: '/login' })
             },
