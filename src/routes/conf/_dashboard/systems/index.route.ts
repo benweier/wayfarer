@@ -1,21 +1,32 @@
+import { ROUTES } from '@/config/routes'
 import { meta } from '@/routes/systems/systems-route.meta'
 import { getSystemListQuery } from '@/services/api/spacetraders/systems'
-import { createFileRoute, defer } from '@tanstack/react-router'
-import { fallback, minValue, number, object, optional, parse } from 'valibot'
+import { createFileRoute, redirect } from '@tanstack/react-router'
+import { fallback, integer, number, object, parse, toMinValue } from 'valibot'
+
+const LIMIT = 20
 
 const SearchParamsSchema = object({
-  page: fallback(optional(number([minValue(1)])), 1),
+  page: fallback(number([integer(), toMinValue(1)]), 1),
 })
 
-export const Route = createFileRoute('/_dashboard/systems/')({
+export const Route = createFileRoute(ROUTES.SYSTEMS)({
   validateSearch: (search) => parse(SearchParamsSchema, search),
-  loaderDeps: ({ search }) => ({ page: search.page ?? 1 }),
+  loaderDeps: ({ search }) => ({ page: search.page }),
   beforeLoad: () => ({ meta }),
-  loader: ({ context, deps }) => {
-    const systems = context.client.ensureQueryData(getSystemListQuery({ page: deps.page, limit: 20 }))
+  loader: async ({ context, deps }) => {
+    const systems = await context.client.ensureQueryData(getSystemListQuery({ page: deps.page, limit: LIMIT }))
+    const max = Math.ceil(systems.meta.total / LIMIT)
+
+    if (deps.page > max) {
+      return redirect({
+        search: { page: max },
+        replace: true,
+      })
+    }
 
     return {
-      systems: defer(systems),
+      systems,
     }
   },
 })
