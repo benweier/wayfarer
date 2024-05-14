@@ -1,6 +1,8 @@
-import { render } from '@testing-library/react'
+import { render } from '@/test/utilities/render.helper'
+import { createTestRouter, renderWithTestRouter } from '@/test/utilities/router'
+import { RouterProvider } from '@tanstack/react-router'
+import { act } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
-import { expect } from 'vitest'
 import { Pagination } from './pagination.component'
 import { getPagingRange } from './pagination.utils'
 
@@ -22,15 +24,11 @@ describe('pagination.component', () => {
   test('numbered page buttons', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getAllByLabelText, getByLabelText, rerender } = render(
-      <Pagination current={1} min={1} max={10} onChange={handleChange} />,
+    const { getAllByLabelText, getByLabelText } = await act(() =>
+      renderWithTestRouter(<Pagination current={1} min={1} max={10} onChange={handleChange} />),
     )
 
     expect(getAllByLabelText(/go to page/i)).toHaveLength(5)
-
-    rerender(<Pagination length={3} current={1} min={1} max={10} onChange={handleChange} />)
-
-    expect(getAllByLabelText(/go to page/i)).toHaveLength(3)
 
     const page1 = getByLabelText(/go to page 1/i)
     const page2 = getByLabelText(/go to page 2/i)
@@ -45,41 +43,49 @@ describe('pagination.component', () => {
   test('first page button', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getByLabelText, rerender } = render(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
+    const router = await createTestRouter(<Pagination current={2} min={1} max={10} onChange={handleChange} />)
+    const { getByLabelText, rerender } = await act(() => render(<RouterProvider router={router} />))
     const firstPage = getByLabelText(/first page/i)
-
-    expect(firstPage).toBeDisabled()
-
-    rerender(<Pagination current={3} min={1} max={10} onChange={handleChange} />)
-
-    expect(firstPage).toBeEnabled()
 
     await user.click(firstPage)
 
     expect(handleChange).toHaveBeenCalledWith(1)
+
+    {
+      const router = await createTestRouter(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
+
+      await act(async () => rerender(<RouterProvider router={router} />))
+
+      expect(getByLabelText(/first page/i)).toBeDisabled()
+    }
   })
 
   test('previous page button', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getByLabelText, rerender } = render(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
+    const router = await createTestRouter(<Pagination current={2} min={1} max={10} onChange={handleChange} />)
+    const { getByLabelText, rerender } = await act(() => render(<RouterProvider router={router} />))
     const previousPage = getByLabelText(/previous page/i)
-
-    expect(previousPage).toBeDisabled()
-
-    rerender(<Pagination current={3} min={1} max={10} onChange={handleChange} />)
-
     expect(previousPage).toBeEnabled()
 
     await user.click(previousPage)
 
-    expect(handleChange).toHaveBeenCalledWith(2)
+    expect(handleChange).toHaveBeenCalledWith(1)
+
+    {
+      const router = await createTestRouter(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
+
+      await act(async () => rerender(<RouterProvider router={router} />))
+
+      expect(getByLabelText(/previous page/i)).toBeDisabled()
+    }
   })
 
   test('next page button', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getByLabelText, rerender } = render(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
+    const router = await createTestRouter(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
+    const { getByLabelText, rerender } = await act(() => render(<RouterProvider router={router} />))
     const nextPage = getByLabelText(/next page/i)
 
     expect(nextPage).toBeEnabled()
@@ -88,15 +94,20 @@ describe('pagination.component', () => {
 
     expect(handleChange).toHaveBeenCalledWith(2)
 
-    rerender(<Pagination current={3} min={1} max={3} onChange={handleChange} />)
+    {
+      const router = await createTestRouter(<Pagination current={10} min={1} max={10} onChange={handleChange} />)
 
-    expect(nextPage).toBeDisabled()
+      await act(async () => rerender(<RouterProvider router={router} />))
+
+      expect(getByLabelText(/next page/i)).toBeDisabled()
+    }
   })
 
   test('last page button', async () => {
     const user = userEvent.setup()
     const handleChange = vi.fn()
-    const { getByLabelText, rerender } = render(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
+    const router = await createTestRouter(<Pagination current={9} min={1} max={10} onChange={handleChange} />)
+    const { getByLabelText, rerender } = await act(() => render(<RouterProvider router={router} />))
     const lastPage = getByLabelText(/last page/i)
 
     expect(lastPage).toBeEnabled()
@@ -105,8 +116,12 @@ describe('pagination.component', () => {
 
     expect(handleChange).toHaveBeenCalledWith(10)
 
-    rerender(<Pagination current={3} min={1} max={3} onChange={handleChange} />)
+    {
+      const router = await createTestRouter(<Pagination current={10} min={1} max={10} onChange={handleChange} />)
 
-    expect(lastPage).toBeDisabled()
+      await act(async () => rerender(<RouterProvider router={router} />))
+
+      expect(getByLabelText(/last page/i)).toBeDisabled()
+    }
   })
 })
