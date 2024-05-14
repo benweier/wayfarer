@@ -205,90 +205,156 @@ const DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute =
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRoute
     }
     '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRoute
     }
     '/_dashboard': {
+      id: '/_dashboard'
+      path: ''
+      fullPath: ''
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRoute
     }
     '/_auth/login': {
+      id: '/_auth/login'
+      path: '/login'
+      fullPath: '/login'
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRouteImport
     }
     '/_auth/logout': {
+      id: '/_auth/logout'
+      path: '/logout'
+      fullPath: '/logout'
       preLoaderRoute: typeof AuthLogoutRouteImport
       parentRoute: typeof AuthRouteImport
     }
     '/_auth/register': {
+      id: '/_auth/register'
+      path: '/register'
+      fullPath: '/register'
       preLoaderRoute: typeof AuthRegisterRouteImport
       parentRoute: typeof AuthRouteImport
     }
     '/_dashboard/_authenticated': {
+      id: '/_dashboard/_authenticated'
+      path: ''
+      fullPath: ''
       preLoaderRoute: typeof DashboardAuthenticatedRouteImport
       parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/agents': {
+      id: '/_dashboard/agents'
+      path: '/agents'
+      fullPath: '/agents'
       preLoaderRoute: typeof DashboardAgentsRouteImport
       parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/leaderboard': {
+      id: '/_dashboard/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
       preLoaderRoute: typeof DashboardLeaderboardRouteImport
       parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/systems': {
+      id: '/_dashboard/systems'
+      path: '/systems'
+      fullPath: '/systems'
       preLoaderRoute: typeof DashboardSystemsRouteImport
       parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/_authenticated/contracts': {
+      id: '/_dashboard/_authenticated/contracts'
+      path: '/contracts'
+      fullPath: '/contracts'
       preLoaderRoute: typeof DashboardAuthenticatedContractsRouteImport
       parentRoute: typeof DashboardAuthenticatedRouteImport
     }
     '/_dashboard/_authenticated/fleet': {
+      id: '/_dashboard/_authenticated/fleet'
+      path: '/fleet'
+      fullPath: '/fleet'
       preLoaderRoute: typeof DashboardAuthenticatedFleetRouteImport
       parentRoute: typeof DashboardAuthenticatedRouteImport
     }
     '/_dashboard/_authenticated/surveys': {
+      id: '/_dashboard/_authenticated/surveys'
+      path: '/surveys'
+      fullPath: '/surveys'
       preLoaderRoute: typeof DashboardAuthenticatedSurveysRouteImport
       parentRoute: typeof DashboardAuthenticatedRouteImport
     }
     '/_dashboard/agents/$agentSymbol': {
+      id: '/_dashboard/agents/$agentSymbol'
+      path: '/$agentSymbol'
+      fullPath: '/agents/$agentSymbol'
       preLoaderRoute: typeof DashboardAgentsAgentSymbolRouteImport
       parentRoute: typeof DashboardAgentsRouteImport
     }
     '/_dashboard/agents/': {
+      id: '/_dashboard/agents/'
+      path: '/'
+      fullPath: '/agents/'
       preLoaderRoute: typeof DashboardAgentsIndexRouteImport
       parentRoute: typeof DashboardAgentsRouteImport
     }
     '/_dashboard/systems/': {
+      id: '/_dashboard/systems/'
+      path: '/'
+      fullPath: '/systems/'
       preLoaderRoute: typeof DashboardSystemsIndexRouteImport
       parentRoute: typeof DashboardSystemsRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol': {
+      id: '/_dashboard/_authenticated/fleet/$shipSymbol'
+      path: '/$shipSymbol'
+      fullPath: '/fleet/$shipSymbol'
       preLoaderRoute: typeof DashboardAuthenticatedFleetShipSymbolRouteImport
       parentRoute: typeof DashboardAuthenticatedFleetRouteImport
     }
     '/_dashboard/_authenticated/fleet/': {
+      id: '/_dashboard/_authenticated/fleet/'
+      path: '/'
+      fullPath: '/fleet/'
       preLoaderRoute: typeof DashboardAuthenticatedFleetIndexRouteImport
       parentRoute: typeof DashboardAuthenticatedFleetRouteImport
     }
     '/_dashboard/systems/$systemSymbol/': {
+      id: '/_dashboard/systems/$systemSymbol/'
+      path: '/$systemSymbol/'
+      fullPath: '/systems/$systemSymbol/'
       preLoaderRoute: typeof DashboardSystemsSystemSymbolIndexRouteImport
       parentRoute: typeof DashboardSystemsRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay': {
+      id: '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay'
+      path: ''
+      fullPath: '/fleet/$shipSymbol'
       preLoaderRoute: typeof DashboardAuthenticatedFleetShipSymbolOverlayRouteImport
       parentRoute: typeof DashboardAuthenticatedFleetShipSymbolRouteImport
     }
     '/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol': {
+      id: '/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol'
+      path: '/$systemSymbol/waypoint/$waypointSymbol'
+      fullPath: '/systems/$systemSymbol/waypoint/$waypointSymbol'
       preLoaderRoute: typeof DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport
       parentRoute: typeof DashboardSystemsRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market': {
+      id: '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market'
+      path: '/market'
+      fullPath: '/fleet/$shipSymbol/market'
       preLoaderRoute: typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteImport
       parentRoute: typeof DashboardAuthenticatedFleetShipSymbolOverlayRouteImport
     }
@@ -297,37 +363,43 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([
+export const routeTree = rootRoute.addChildren({
   IndexRouteRoute,
-  AuthRouteRoute.addChildren([
+  AuthRouteRoute: AuthRouteRoute.addChildren({
     AuthLoginRouteRoute,
     AuthLogoutRouteRoute,
     AuthRegisterRouteRoute,
-  ]),
-  DashboardRouteRoute.addChildren([
-    DashboardAuthenticatedRouteRoute.addChildren([
-      DashboardAuthenticatedContractsRouteRoute,
-      DashboardAuthenticatedFleetRouteRoute.addChildren([
-        DashboardAuthenticatedFleetShipSymbolRouteRoute.addChildren([
-          DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute.addChildren([
-            DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute,
-          ]),
-        ]),
-        DashboardAuthenticatedFleetIndexRouteRoute,
-      ]),
-      DashboardAuthenticatedSurveysRouteRoute,
-    ]),
-    DashboardAgentsRouteRoute.addChildren([
+  }),
+  DashboardRouteRoute: DashboardRouteRoute.addChildren({
+    DashboardAuthenticatedRouteRoute:
+      DashboardAuthenticatedRouteRoute.addChildren({
+        DashboardAuthenticatedContractsRouteRoute,
+        DashboardAuthenticatedFleetRouteRoute:
+          DashboardAuthenticatedFleetRouteRoute.addChildren({
+            DashboardAuthenticatedFleetShipSymbolRouteRoute:
+              DashboardAuthenticatedFleetShipSymbolRouteRoute.addChildren({
+                DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute:
+                  DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute.addChildren(
+                    {
+                      DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute,
+                    },
+                  ),
+              }),
+            DashboardAuthenticatedFleetIndexRouteRoute,
+          }),
+        DashboardAuthenticatedSurveysRouteRoute,
+      }),
+    DashboardAgentsRouteRoute: DashboardAgentsRouteRoute.addChildren({
       DashboardAgentsAgentSymbolRouteRoute,
       DashboardAgentsIndexRouteRoute,
-    ]),
+    }),
     DashboardLeaderboardRouteRoute,
-    DashboardSystemsRouteRoute.addChildren([
+    DashboardSystemsRouteRoute: DashboardSystemsRouteRoute.addChildren({
       DashboardSystemsIndexRouteRoute,
       DashboardSystemsSystemSymbolIndexRouteRoute,
       DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute,
-    ]),
-  ]),
-])
+    }),
+  }),
+})
 
 /* prettier-ignore-end */
