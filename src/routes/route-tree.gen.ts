@@ -332,8 +332,8 @@ declare module '@tanstack/react-router' {
     }
     '/_dashboard/systems/$systemSymbol/': {
       id: '/_dashboard/systems/$systemSymbol/'
-      path: '/$systemSymbol/'
-      fullPath: '/systems/$systemSymbol/'
+      path: '/$systemSymbol'
+      fullPath: '/systems/$systemSymbol'
       preLoaderRoute: typeof DashboardSystemsSystemSymbolIndexRouteImport
       parentRoute: typeof DashboardSystemsRouteImport
     }
