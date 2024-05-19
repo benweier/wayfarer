@@ -2,6 +2,7 @@ import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ShipNavStatus } from '@/config/spacetraders'
 import * as ShipActions from '@/features/ship/actions'
 import { WaypointNavigation, WaypointNavigationFallback } from '@/features/waypoint/navigation'
 import type { ShipResponse } from '@/types/spacetraders'
@@ -33,7 +34,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
       <Menu>
         <Menu.Button
           ref={refs.setReference}
-          disabled={ship.nav.status === 'IN_TRANSIT' || isMutating}
+          disabled={ship.nav.status === ShipNavStatus.InTransit || isMutating}
           className="btn btn-icon ui-open:bg-black/5 ui-open:dark:bg-blue-500"
         >
           <span className="sr-only">Manage</span>
@@ -58,7 +59,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
               leaveTo="transform opacity-0 scale-95"
             >
               <Menu.Items className="flex w-52 origin-top-right flex-col gap-1 overflow-y-auto rounded-md bg-zinc-100/75 p-1 ring-3 ring-black/5 backdrop-blur-lg dark:bg-zinc-900/75 dark:ring-white/5">
-                {ship.nav.status === 'DOCKED' && (
+                {ship.nav.status === ShipNavStatus.Docked && (
                   <Menu.Item as={Fragment}>
                     {({ active }) => (
                       <ShipActions.Orbit ship={ship}>
@@ -78,7 +79,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                     )}
                   </Menu.Item>
                 )}
-                {ship.nav.status === 'IN_ORBIT' && (
+                {ship.nav.status === ShipNavStatus.InOrbit && (
                   <Menu.Item as={Fragment}>
                     {({ active }) => (
                       <ShipActions.Dock ship={ship}>
@@ -98,7 +99,7 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
                     )}
                   </Menu.Item>
                 )}
-                {ship.nav.status === 'IN_ORBIT' && (
+                {ship.nav.status === ShipNavStatus.InOrbit && (
                   <Menu.Item as={Fragment}>
                     {({ active }) => (
                       <Button

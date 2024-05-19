@@ -1,14 +1,17 @@
 import { Button } from '@/components/button'
-import { WaypointTraits } from '@/config/spacetraders'
+import { ShipNavStatus, WaypointTraits } from '@/config/spacetraders'
 import { useShipResponse } from '@/context/ship.context'
+import { useWaypointResponse } from '@/context/waypoint.context'
 import { TradeGoodBuy } from '@/features/trade-good/buy'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
 import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
-import { getWaypointByIdQuery, getWaypointMarketQuery } from '@/services/api/spacetraders/waypoints'
+import { getWaypointMarketQuery } from '@/services/api/spacetraders/waypoints'
+import type { MarketTradeGood } from '@/types/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
+import { useCallback } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { ShipCargoTable } from './ship-cargo-list.table'
 
@@ -16,35 +19,28 @@ export const ShipCargoList = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const ship = useShipResponse()
-  const waypoint = useQuery(
-    getWaypointByIdQuery({
-      systemSymbol: ship.nav.systemSymbol,
-      waypointSymbol: ship.nav.waypointSymbol,
-    }),
-  )
-  const hasMarketplace = waypoint.isSuccess && hasTrait(waypoint.data.data.traits, [WaypointTraits.Marketplace])
+  const waypoint = useWaypointResponse()
+  const hasMarketplace = hasTrait(waypoint.traits, [WaypointTraits.Marketplace])
   const { data, isSuccess } = useQuery({
     ...getWaypointMarketQuery({
-      systemSymbol: ship.nav.systemSymbol,
-      waypointSymbol: ship.nav.waypointSymbol,
+      systemSymbol: waypoint.systemSymbol,
+      waypointSymbol: waypoint.symbol,
     }),
-    select: (response) => {
-      return {
-        market: {
-          imports: reduceArrayToMap(response.data.imports, 'symbol'),
-          exports: reduceArrayToMap(response.data.exports, 'symbol'),
-          exchange: reduceArrayToMap(response.data.exchange, 'symbol'),
-        },
-        trade: reduceArrayToMap(response.data.tradeGoods, 'symbol'),
-      }
-    },
-    enabled: hasMarketplace && ship.nav.status !== 'IN_TRANSIT',
+    enabled: hasMarketplace,
   })
   const inventory = ship.cargo.inventory
+  const market = isSuccess
+    ? {
+        imports: reduceArrayToMap(data.data.imports, 'symbol'),
+        exports: reduceArrayToMap(data.data.exports, 'symbol'),
+        exchange: reduceArrayToMap(data.data.exchange, 'symbol'),
+        trade: reduceArrayToMap(data.data.tradeGoods, 'symbol'),
+      }
+    : null
 
   if (!inventory.length) {
     return (
-      <div className="flex flex-col gap-2 rounded border-2 border-dashed border-zinc-300 py-9 px-3 dark:border-zinc-600">
+      <div className="flex flex-col gap-2 rounded border-2 border-dashed border-border-secondary py-9 px-3">
         <div className="text-secondary text-center">
           <Trans
             i18nKey="ship.cargo_empty"
@@ -75,28 +71,34 @@ export const ShipCargoList = () => {
       value={{
         Buy: TradeGoodBuy,
         Sell: TradeGoodSell,
-        canBuy: (good) => {
-          if (!isSuccess || good === undefined || ship.nav.status !== 'DOCKED') return false
+        canBuy: useCallback(
+          (good: MarketTradeGood) => {
+            if (good === undefined || ship.nav.status !== ShipNavStatus.Docked) return false
 
-          const hasExport = data.market.exports.has(good.symbol)
-          const hasExchange = data.market.exchange.has(good.symbol)
+            const hasExport = market?.exports.has(good.symbol)
+            const hasExchange = market?.exchange.has(good.symbol)
 
-          return hasExport || hasExchange
-        },
-        canSell: (good) => {
-          if (!isSuccess || good === undefined || ship.nav.status !== 'DOCKED') return false
+            return Boolean(hasExport) || Boolean(hasExchange)
+          },
+          [market, ship],
+        ),
+        canSell: useCallback(
+          (good: MarketTradeGood) => {
+            if (good === undefined || ship.nav.status !== ShipNavStatus.Docked) return false
 
-          const hasImport = data.market.imports.has(good.symbol)
-          const hasExchange = data.market.exchange.has(good.symbol)
+            const hasImport = market?.imports.has(good.symbol)
+            const hasExchange = market?.exchange.has(good.symbol)
 
-          return hasImport || hasExchange
-        },
+            return Boolean(hasImport) || Boolean(hasExchange)
+          },
+          [market, ship],
+        ),
       }}
     >
       <ShipCargoTable
         data={inventory.map((item) => ({
           item,
-          trade: data?.trade.get(item.symbol),
+          trade: market?.trade.get(item.symbol),
         }))}
       />
     </TradeGoodContext>

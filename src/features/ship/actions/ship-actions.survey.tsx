@@ -1,3 +1,4 @@
+import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipSurveyMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useSurveyStore } from '@/store/surveys'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
@@ -45,7 +46,7 @@ export const Survey = ({
   })
 
   return children({
-    disabled: disabled || isMutating > 0 || isPending || hasCooldown || ship.nav.status !== 'IN_ORBIT',
+    disabled: disabled || isMutating > 0 || isPending || hasCooldown || ship.nav.status !== ShipNavStatus.InOrbit,
     execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol })
     },

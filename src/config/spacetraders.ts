@@ -1,3 +1,11 @@
+export const ShipNavStatus = {
+  Docked: 'DOCKED',
+  InOrbit: 'IN_ORBIT',
+  InTransit: 'IN_TRANSIT',
+} as const
+
+export type ShipNavStatus = Values<typeof ShipNavStatus>
+
 export const WaypointTypes = {
   Planet: 'PLANET',
   GasGiant: 'GAS_GIANT',

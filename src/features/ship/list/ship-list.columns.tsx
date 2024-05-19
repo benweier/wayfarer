@@ -1,6 +1,7 @@
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
+import { ShipNavStatus } from '@/config/spacetraders'
 import { useShipTransit } from '@/features/ship/transit'
 import type { ShipResponse } from '@/types/spacetraders'
 import { Link } from '@tanstack/react-router'
@@ -11,7 +12,7 @@ import type { ShipListTableSchema } from './ship-list.types'
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   const transit = useShipTransit(ship)
 
-  if (ship.nav.status !== 'IN_TRANSIT') return null
+  if (ship.nav.status !== ShipNavStatus.InTransit) return null
 
   return (
     <div className="bg-background-tertiary h-1 grow rounded-full">

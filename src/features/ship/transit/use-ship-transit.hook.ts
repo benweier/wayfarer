@@ -1,3 +1,4 @@
+import { ShipNavStatus } from '@/config/spacetraders'
 import { useUpdateInterval } from '@/hooks/use-update-interval.hook'
 import { getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { getWaypointMarketQuery, getWaypointShipyardQuery } from '@/services/api/spacetraders/waypoints'
@@ -20,7 +21,7 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   }, 1000)
 
   useEffect(() => {
-    if (status === 'complete' && nav.status === 'IN_TRANSIT') {
+    if (status === 'complete' && nav.status === ShipNavStatus.InTransit) {
       const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: symbol }).queryKey
       const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
@@ -45,7 +46,7 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
         client.setQueryData(
           shipByIdQueryKey,
           produce(ship, (draft) => {
-            draft.data.nav.status = 'IN_ORBIT'
+            draft.data.nav.status = ShipNavStatus.InOrbit
           }),
         )
       }
@@ -53,7 +54,7 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
         client.setQueryData(
           shipListQueryKey,
           produce(ships, (draft) => {
-            draft.data[index].nav.status = 'IN_ORBIT'
+            draft.data[index].nav.status = ShipNavStatus.InOrbit
           }),
         )
       }

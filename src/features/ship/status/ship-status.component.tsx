@@ -2,7 +2,7 @@ import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { WaypointTag } from '@/components/waypoint/tag'
-import { WaypointTraits } from '@/config/spacetraders'
+import { ShipNavStatus, WaypointTraits } from '@/config/spacetraders'
 import { WaypointContext } from '@/context/waypoint.context'
 import * as ShipActions from '@/features/ship/actions'
 import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-mode'
@@ -53,7 +53,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
               <Badge>{t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}</Badge>
             </div>
             <div className="flex gap-2">
-              {ship.nav.status === 'DOCKED' ? (
+              {ship.nav.status === ShipNavStatus.Docked ? (
                 <ShipActions.Orbit ship={ship}>
                   {({ disabled, execute }) => (
                     <Button intent="info" kind="outline" size="small" disabled={disabled} onClick={() => execute()}>
@@ -101,7 +101,9 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             {(ctx) => (
               <ShipActions.Refuel
                 ship={ship}
-                disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, [WaypointTraits.Marketplace])}
+                disabled={
+                  ship.nav.status !== ShipNavStatus.Docked || !hasTrait(ctx?.traits, [WaypointTraits.Marketplace])
+                }
               >
                 {({ disabled, execute }) => (
                   <Button intent="info" kind="outline" size="small" disabled={disabled} onClick={() => execute()}>
@@ -149,7 +151,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             {(ctx) => (
               <ShipActions.Repair
                 ship={ship}
-                disabled={ship.nav.status !== 'DOCKED' || !hasTrait(ctx?.traits, [WaypointTraits.Shipyard])}
+                disabled={ship.nav.status !== ShipNavStatus.Docked || !hasTrait(ctx?.traits, [WaypointTraits.Shipyard])}
               >
                 {({ disabled, execute }) => (
                   <Button intent="success" kind="outline" size="small" disabled={disabled} onClick={() => execute()}>

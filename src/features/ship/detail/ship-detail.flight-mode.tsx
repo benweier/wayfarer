@@ -1,5 +1,6 @@
 import { Button } from '@/components/button'
 import * as Dropdown from '@/components/dropdown'
+import { ShipNavStatus } from '@/config/spacetraders'
 import * as ShipActions from '@/features/ship/actions'
 import type { ShipResponse } from '@/types/spacetraders'
 import { useIsMutating } from '@tanstack/react-query'
@@ -17,7 +18,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
           intent="success"
           kind="outline"
           size="small"
-          disabled={isMutating || ship.fuel.capacity === 0 || ship.nav.status === 'IN_TRANSIT'}
+          disabled={isMutating || ship.fuel.capacity === 0 || ship.nav.status === ShipNavStatus.InTransit}
         >
           {t('ship.action.flight_mode')}
         </Button>

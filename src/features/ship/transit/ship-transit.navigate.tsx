@@ -1,5 +1,6 @@
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ShipNavStatus } from '@/config/spacetraders'
 import { useShipResponse } from '@/context/ship.context'
 import { WaypointNavigation, WaypointNavigationFallback } from '@/features/waypoint/navigation'
 import type { ShipTransitActionProps } from './ship-transit.types'
@@ -11,7 +12,7 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
     <Modal
       size="xl"
       close={<Modal.Close />}
-      trigger={<Modal.Trigger disabled={ship.nav.status !== 'IN_ORBIT'}>{trigger}</Modal.Trigger>}
+      trigger={<Modal.Trigger disabled={ship.nav.status !== ShipNavStatus.InOrbit}>{trigger}</Modal.Trigger>}
     >
       <Modal.Header>
         <Modal.Title>

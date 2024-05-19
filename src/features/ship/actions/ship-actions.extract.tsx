@@ -1,3 +1,4 @@
+import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipExtractMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useSurveyStore } from '@/store/surveys'
 import type { SurveyResponse } from '@/types/spacetraders'
@@ -54,7 +55,7 @@ export const Extract = ({
   })
 
   return children({
-    disabled: disabled || hasCooldown || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
+    disabled: disabled || hasCooldown || isMutating > 0 || isPending || ship.nav.status !== ShipNavStatus.InOrbit,
     execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol, survey })
     },

@@ -1,3 +1,4 @@
+import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipNavigateMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { getWaypointMarketQuery, getWaypointShipyardQuery } from '@/services/api/spacetraders/waypoints'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
@@ -102,7 +103,7 @@ export const Navigate = ({
   })
 
   return children({
-    disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
+    disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== ShipNavStatus.InOrbit,
     execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol, waypointSymbol })
     },

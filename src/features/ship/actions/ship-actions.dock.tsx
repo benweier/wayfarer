@@ -1,3 +1,4 @@
+import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipDockMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
@@ -69,7 +70,7 @@ export const Dock = ({
   })
 
   return children({
-    disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'IN_ORBIT',
+    disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== ShipNavStatus.InOrbit,
     execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol })
     },

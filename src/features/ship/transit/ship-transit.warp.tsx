@@ -1,6 +1,7 @@
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
+import { ShipNavStatus } from '@/config/spacetraders'
 import { useShipResponse } from '@/context/ship.context'
 import { createShipWarpMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import type { ShipResponse } from '@/types/spacetraders'
@@ -16,7 +17,7 @@ export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
     <Modal
       size="md"
       close={<Modal.Close />}
-      trigger={<Modal.Trigger disabled={ship.nav.status !== 'IN_ORBIT'}>{trigger}</Modal.Trigger>}
+      trigger={<Modal.Trigger disabled={ship.nav.status !== ShipNavStatus.InOrbit}>{trigger}</Modal.Trigger>}
     >
       <Modal.Header>
         <Modal.Title>
@@ -72,7 +73,7 @@ const Warp = ({ ship }: { ship: ShipResponse }) => {
         mutateAsync({ shipSymbol: ship.symbol, waypointSymbol: values.waypointSymbol }),
       )}
     >
-      <fieldset disabled={isPending || ship.nav.status !== 'IN_ORBIT'} className="grid gap-4">
+      <fieldset disabled={isPending || ship.nav.status !== ShipNavStatus.InOrbit} className="grid gap-4">
         <div>
           <label className="label" htmlFor="waypointSymbol">
             Waypoint Symbol

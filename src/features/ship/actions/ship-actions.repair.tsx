@@ -1,3 +1,4 @@
+import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipRepairMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useAuthStore } from '@/store/auth'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
@@ -45,7 +46,7 @@ export const Repair = ({
   })
 
   return children({
-    disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== 'DOCKED',
+    disabled: disabled || isMutating > 0 || isPending || ship.nav.status !== ShipNavStatus.Docked,
     execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol })
     },

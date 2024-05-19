@@ -1,3 +1,4 @@
+import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipFlightModeMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
@@ -41,7 +42,12 @@ export const FlightMode = ({
   })
 
   return children({
-    disabled: disabled || isMutating > 0 || isPending || ship.fuel.capacity === 0 || ship.nav.status === 'IN_TRANSIT',
+    disabled:
+      disabled ||
+      isMutating > 0 ||
+      isPending ||
+      ship.fuel.capacity === 0 ||
+      ship.nav.status === ShipNavStatus.InTransit,
     execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol, flightMode })
     },

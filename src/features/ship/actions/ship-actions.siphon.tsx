@@ -1,3 +1,4 @@
+import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipSiphonMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
@@ -43,7 +44,7 @@ export const Siphon = ({
   })
 
   return children({
-    disabled: disabled || hasCooldown || isMutating > 0 || ship.nav.status !== 'IN_ORBIT',
+    disabled: disabled || hasCooldown || isMutating > 0 || ship.nav.status !== ShipNavStatus.InOrbit,
     execute: () => {
       return mutateAsync({ shipSymbol: ship.symbol })
     },
