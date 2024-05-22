@@ -1,12 +1,6 @@
-import {
-  type Meta,
-  type SpaceTradersResponse,
-  attachQueryParams,
-  createHeaders,
-} from '@/services/api/spacetraders/core'
-import { get } from '@/services/fetch'
 import type { AgentResponse } from '@/types/spacetraders'
 import { queryOptions } from '@tanstack/react-query'
+import { type Meta, type SpaceTradersResponse, api } from './core'
 
 export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; limit?: number } = {}) =>
   queryOptions({
@@ -15,11 +9,7 @@ export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; lim
       { page, limit },
     ],
     queryFn: ({ signal }) => {
-      const url = new URL('agents', import.meta.env.SPACETRADERS_API_BASE_URL)
-
-      attachQueryParams(url, { page, limit })
-
-      return get<SpaceTradersResponse<AgentResponse[], Meta>>(url, { signal, headers: createHeaders() })
+      return api.get('agents', { signal }).json<SpaceTradersResponse<AgentResponse[], Meta>>()
     },
   })
 
@@ -27,8 +17,6 @@ export const getAgentBySymbolQuery = (args: { agentSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'agents', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      const url = new URL(`agents/${args.agentSymbol}`, import.meta.env.SPACETRADERS_API_BASE_URL)
-
-      return get<SpaceTradersResponse<AgentResponse>>(url, { signal, headers: createHeaders() })
+      return api.get(`agents/${args.agentSymbol}`, { signal }).json<SpaceTradersResponse<AgentResponse>>()
     },
   })

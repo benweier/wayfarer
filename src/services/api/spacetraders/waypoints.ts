@@ -1,5 +1,5 @@
-import { type Meta, type SpaceTradersResponse, createHeaders } from '@/services/api/spacetraders/core'
-import { get } from '@/services/fetch'
+import { type Meta, type SpaceTradersResponse, api } from '@/services/api/spacetraders/core'
+
 import type { JumpGateResponse, MarketResponse, ShipyardResponse, WaypointResponse } from '@/types/spacetraders'
 import { getPageList } from '@/utilities/get-page-list.helper'
 import { queryOptions } from '@tanstack/react-query'
@@ -8,24 +8,15 @@ export const getWaypointListQuery = (args: { systemSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'list' }, args],
     queryFn: async ({ signal }) => {
-      const url = new URL(
-        `systems/${args.systemSymbol.toUpperCase()}/waypoints`,
-        import.meta.env.SPACETRADERS_API_BASE_URL,
-      )
+      const path = `systems/${args.systemSymbol.toUpperCase()}/waypoints`
 
-      url.searchParams.set('page', '1')
-      url.searchParams.set('limit', '20')
-
-      const initial = await get<SpaceTradersResponse<WaypointResponse[], Meta>>(url, {
-        signal,
-        headers: createHeaders(),
-      })
+      const initial = await api
+        .get(path, { page: 1, limit: 20 }, { signal })
+        .json<SpaceTradersResponse<WaypointResponse[], Meta>>()
       const pages = getPageList(Math.ceil(initial.meta.total / initial.meta.limit), 1)
       const remaining = await Promise.all(
         pages.map((page) => {
-          url.searchParams.set('page', String(page))
-
-          return get<SpaceTradersResponse<WaypointResponse[], Meta>>(url, { signal, headers: createHeaders() })
+          return api.get(path, { page, limit: 20 }, { signal }).json<SpaceTradersResponse<WaypointResponse[], Meta>>()
         }),
       )
       const data = initial.data.concat(...remaining.map((page) => page.data))
@@ -39,12 +30,9 @@ export const getWaypointByIdQuery = (args: { systemSymbol: string; waypointSymbo
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      const url = new URL(
-        `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}`,
-        import.meta.env.SPACETRADERS_API_BASE_URL,
-      )
+      const path = `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}`
 
-      return get<SpaceTradersResponse<WaypointResponse>>(url, { signal, headers: createHeaders() })
+      return api.get(path, { signal }).json<SpaceTradersResponse<WaypointResponse>>()
     },
   })
 
@@ -52,12 +40,9 @@ export const getWaypointMarketQuery = (args: { systemSymbol: string; waypointSym
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'market' }, args],
     queryFn: ({ signal }) => {
-      const url = new URL(
-        `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/market`,
-        import.meta.env.SPACETRADERS_API_BASE_URL,
-      )
+      const path = `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/market`
 
-      return get<SpaceTradersResponse<MarketResponse>>(url, { signal, headers: createHeaders() })
+      return api.get(path, undefined, { signal }).json<SpaceTradersResponse<MarketResponse>>()
     },
   })
 
@@ -65,12 +50,9 @@ export const getWaypointShipyardQuery = (args: { systemSymbol: string; waypointS
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'shipyard' }, args],
     queryFn: ({ signal }) => {
-      const url = new URL(
-        `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/shipyard`,
-        import.meta.env.SPACETRADERS_API_BASE_URL,
-      )
+      const path = `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/shipyard`
 
-      return get<SpaceTradersResponse<ShipyardResponse>>(url, { signal, headers: createHeaders() })
+      return api.get(path, undefined, { signal }).json<SpaceTradersResponse<ShipyardResponse>>()
     },
   })
 
@@ -78,11 +60,8 @@ export const getWaypointJumpGateQuery = (args: { systemSymbol: string; waypointS
   queryOptions({
     queryKey: [{ scope: 'waypoints', entity: 'jump-gate' }, args],
     queryFn: ({ signal }) => {
-      const url = new URL(
-        `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/jump-gate`,
-        import.meta.env.SPACETRADERS_API_BASE_URL,
-      )
+      const path = `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}/jump-gate`
 
-      return get<SpaceTradersResponse<JumpGateResponse>>(url, { signal, headers: createHeaders() })
+      return api.get(path, undefined, { signal }).json<SpaceTradersResponse<JumpGateResponse>>()
     },
   })

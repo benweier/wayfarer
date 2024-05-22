@@ -1,7 +1,6 @@
-import { get } from '@/services/fetch'
 import type { SystemResponse } from '@/types/spacetraders'
 import { queryOptions } from '@tanstack/react-query'
-import { type Meta, type SpaceTradersResponse, attachQueryParams, createHeaders } from './core'
+import { type Meta, type SpaceTradersResponse, api } from './core'
 
 export const getSystemListQuery = ({ page = 1, limit = 20 }: { page?: number; limit?: number } = {}) =>
   queryOptions({
@@ -10,11 +9,7 @@ export const getSystemListQuery = ({ page = 1, limit = 20 }: { page?: number; li
       { page, limit },
     ],
     queryFn: ({ signal }) => {
-      const url = new URL('systems', import.meta.env.SPACETRADERS_API_BASE_URL)
-
-      attachQueryParams(url, { page, limit })
-
-      return get<SpaceTradersResponse<SystemResponse[], Meta>>(url, { signal, headers: createHeaders() })
+      return api.get('systems', { page, limit }, { signal }).json<SpaceTradersResponse<SystemResponse[], Meta>>()
     },
   })
 
@@ -22,8 +17,8 @@ export const getSystemByIdQuery = (args: { systemSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'systems', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      const url = new URL(`systems/${args.systemSymbol.toUpperCase()}`, import.meta.env.SPACETRADERS_API_BASE_URL)
-
-      return get<SpaceTradersResponse<SystemResponse>>(url, { signal, headers: createHeaders() })
+      return api
+        .get(`systems/${args.systemSymbol.toUpperCase()}`, { signal })
+        .json<SpaceTradersResponse<SystemResponse>>()
     },
   })
