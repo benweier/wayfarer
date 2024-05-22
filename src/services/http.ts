@@ -1,17 +1,11 @@
-export const http = async <T = unknown>(url: URL | RequestInfo, args: RequestInit): Promise<T> => {
+export const http = async (url: URL | RequestInfo, args: RequestInit) => {
   const response = await fetch(url, args)
 
   if (!response.ok) {
     throw response
   }
 
-  try {
-    if (response.status === 204) return undefined as never
-
-    return response.json()
-  } catch (_err) {
-    throw response
-  }
+  return response
 }
 
 export const isHttpErrorResponse = (err: any, status?: StatusCode): err is Response => {
