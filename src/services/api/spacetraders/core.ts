@@ -1,3 +1,4 @@
+import { createFetcher } from '@/services/create-fetcher'
 import type * as f from '@/services/fetch'
 import { authStore } from '@/store/auth'
 
@@ -36,3 +37,5 @@ export const attachQueryParams = (url: URL, params?: f.QueryParams) => {
 
   return url
 }
+
+export const api = createFetcher(import.meta.env.SPACETRADERS_API_BASE_URL, createHeaders)
