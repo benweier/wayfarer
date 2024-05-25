@@ -403,3 +403,138 @@ export const routeTree = rootRoute.addChildren({
 })
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.ts",
+      "children": [
+        "/",
+        "/_auth",
+        "/_dashboard"
+      ]
+    },
+    "/": {
+      "filePath": "index.route.ts"
+    },
+    "/_auth": {
+      "filePath": "_auth.route.ts",
+      "children": [
+        "/_auth/login",
+        "/_auth/logout",
+        "/_auth/register"
+      ]
+    },
+    "/_dashboard": {
+      "filePath": "_dashboard.route.ts",
+      "children": [
+        "/_dashboard/_authenticated",
+        "/_dashboard/agents",
+        "/_dashboard/leaderboard",
+        "/_dashboard/systems"
+      ]
+    },
+    "/_auth/login": {
+      "filePath": "_auth/login.route.ts",
+      "parent": "/_auth"
+    },
+    "/_auth/logout": {
+      "filePath": "_auth/logout.route.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/register": {
+      "filePath": "_auth/register.route.ts",
+      "parent": "/_auth"
+    },
+    "/_dashboard/_authenticated": {
+      "filePath": "_dashboard/_authenticated.route.ts",
+      "parent": "/_dashboard",
+      "children": [
+        "/_dashboard/_authenticated/contracts",
+        "/_dashboard/_authenticated/fleet",
+        "/_dashboard/_authenticated/surveys"
+      ]
+    },
+    "/_dashboard/agents": {
+      "filePath": "_dashboard/agents.route.ts",
+      "parent": "/_dashboard",
+      "children": [
+        "/_dashboard/agents/$agentSymbol",
+        "/_dashboard/agents/"
+      ]
+    },
+    "/_dashboard/leaderboard": {
+      "filePath": "_dashboard/leaderboard.route.ts",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/systems": {
+      "filePath": "_dashboard/systems.route.ts",
+      "parent": "/_dashboard",
+      "children": [
+        "/_dashboard/systems/",
+        "/_dashboard/systems/$systemSymbol/",
+        "/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol"
+      ]
+    },
+    "/_dashboard/_authenticated/contracts": {
+      "filePath": "_dashboard/_authenticated/contracts.route.ts",
+      "parent": "/_dashboard/_authenticated"
+    },
+    "/_dashboard/_authenticated/fleet": {
+      "filePath": "_dashboard/_authenticated/fleet.route.ts",
+      "parent": "/_dashboard/_authenticated",
+      "children": [
+        "/_dashboard/_authenticated/fleet/$shipSymbol",
+        "/_dashboard/_authenticated/fleet/"
+      ]
+    },
+    "/_dashboard/_authenticated/surveys": {
+      "filePath": "_dashboard/_authenticated/surveys.route.ts",
+      "parent": "/_dashboard/_authenticated"
+    },
+    "/_dashboard/agents/$agentSymbol": {
+      "filePath": "_dashboard/agents/$agentSymbol.route.ts",
+      "parent": "/_dashboard/agents"
+    },
+    "/_dashboard/agents/": {
+      "filePath": "_dashboard/agents/index.route.ts",
+      "parent": "/_dashboard/agents"
+    },
+    "/_dashboard/systems/": {
+      "filePath": "_dashboard/systems/index.route.ts",
+      "parent": "/_dashboard/systems"
+    },
+    "/_dashboard/_authenticated/fleet/$shipSymbol": {
+      "filePath": "_dashboard/_authenticated/fleet/$shipSymbol.route.ts",
+      "parent": "/_dashboard/_authenticated/fleet",
+      "children": [
+        "/_dashboard/_authenticated/fleet/$shipSymbol/_overlay"
+      ]
+    },
+    "/_dashboard/_authenticated/fleet/": {
+      "filePath": "_dashboard/_authenticated/fleet/index.route.ts",
+      "parent": "/_dashboard/_authenticated/fleet"
+    },
+    "/_dashboard/systems/$systemSymbol/": {
+      "filePath": "_dashboard/systems/$systemSymbol/index.route.ts",
+      "parent": "/_dashboard/systems"
+    },
+    "/_dashboard/_authenticated/fleet/$shipSymbol/_overlay": {
+      "filePath": "_dashboard/_authenticated/fleet/$shipSymbol/_overlay.route.ts",
+      "parent": "/_dashboard/_authenticated/fleet/$shipSymbol",
+      "children": [
+        "/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market"
+      ]
+    },
+    "/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol": {
+      "filePath": "_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.route.ts",
+      "parent": "/_dashboard/systems"
+    },
+    "/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market": {
+      "filePath": "_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.route.ts",
+      "parent": "/_dashboard/_authenticated/fleet/$shipSymbol/_overlay"
+    }
+  }
+}
+ROUTE_MANIFEST_END */
