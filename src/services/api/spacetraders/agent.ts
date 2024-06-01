@@ -9,7 +9,7 @@ export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; lim
       { page, limit },
     ],
     queryFn: ({ signal }) => {
-      return api.get('agents', { signal }).json<SpaceTradersResponse<AgentResponse[], Meta>>()
+      return api.get('agents', { page, limit }, { signal }).json<SpaceTradersResponse<AgentResponse[], Meta>>()
     },
   })
 
@@ -17,6 +17,6 @@ export const getAgentBySymbolQuery = (args: { agentSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'agents', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      return api.get(`agents/${args.agentSymbol}`, { signal }).json<SpaceTradersResponse<AgentResponse>>()
+      return api.get(`agents/${args.agentSymbol}`, undefined, { signal }).json<SpaceTradersResponse<AgentResponse>>()
     },
   })

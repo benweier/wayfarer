@@ -1,21 +1,31 @@
 import { meta } from '@/routes/agents/agents-route.meta'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
-import { createFileRoute, defer } from '@tanstack/react-router'
-import { fallback, minValue, number, object, optional, parse } from 'valibot'
+import { createFileRoute, redirect } from '@tanstack/react-router'
+import { fallback, integer, number, object, parse, toMinValue } from 'valibot'
+
+const LIMIT = 20
 
 const SearchParamsSchema = object({
-  page: fallback(optional(number([minValue(1)])), 1),
+  page: fallback(number([integer(), toMinValue(1)]), 1),
 })
 
 export const Route = createFileRoute('/_dashboard/agents/')({
   validateSearch: (search) => parse(SearchParamsSchema, search),
-  loaderDeps: ({ search }) => ({ page: search.page ?? 1 }),
+  loaderDeps: ({ search }) => ({ page: search.page }),
   beforeLoad: () => ({ meta }),
-  loader: ({ context, deps }) => {
-    const agents = context.client.ensureQueryData(getAgentListQuery({ page: deps.page, limit: 20 }))
+  loader: async ({ context, deps }) => {
+    const agents = await context.client.ensureQueryData(getAgentListQuery({ page: deps.page, limit: LIMIT }))
+    const max = Math.ceil(agents.meta.total / LIMIT)
+
+    if (deps.page > max) {
+      return redirect({
+        search: { page: max },
+        replace: true,
+      })
+    }
 
     return {
-      agents: defer(agents),
+      agents,
     }
   },
 })
