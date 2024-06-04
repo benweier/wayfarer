@@ -54,7 +54,7 @@ describe('pagination.component', () => {
     {
       const router = await createTestRouter(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
 
-      await act(async () => rerender(<RouterProvider router={router} />))
+      act(() => rerender(<RouterProvider router={router} />))
 
       expect(getByLabelText(/first page/i)).toBeDisabled()
     }
@@ -75,7 +75,7 @@ describe('pagination.component', () => {
     {
       const router = await createTestRouter(<Pagination current={1} min={1} max={10} onChange={handleChange} />)
 
-      await act(async () => rerender(<RouterProvider router={router} />))
+      act(() => rerender(<RouterProvider router={router} />))
 
       expect(getByLabelText(/previous page/i)).toBeDisabled()
     }
@@ -97,7 +97,7 @@ describe('pagination.component', () => {
     {
       const router = await createTestRouter(<Pagination current={10} min={1} max={10} onChange={handleChange} />)
 
-      await act(async () => rerender(<RouterProvider router={router} />))
+      act(() => rerender(<RouterProvider router={router} />))
 
       expect(getByLabelText(/next page/i)).toBeDisabled()
     }
@@ -119,7 +119,7 @@ describe('pagination.component', () => {
     {
       const router = await createTestRouter(<Pagination current={10} min={1} max={10} onChange={handleChange} />)
 
-      await act(async () => rerender(<RouterProvider router={router} />))
+      act(() => rerender(<RouterProvider router={router} />))
 
       expect(getByLabelText(/last page/i)).toBeDisabled()
     }
