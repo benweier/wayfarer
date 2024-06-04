@@ -36,7 +36,9 @@ export const getContractByIdQuery = (args: { contractId: string }) =>
   queryOptions({
     queryKey: [{ scope: 'contracts', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      return api.get(`my/contracts/${args.contractId}`, { signal }).json<SpaceTradersResponse<ContractResponse>>()
+      return api
+        .get(`my/contracts/${args.contractId}`, undefined, { signal })
+        .json<SpaceTradersResponse<ContractResponse>>()
     },
   })
 
@@ -44,7 +46,7 @@ export const createContractAcceptMutation = {
   getMutationKey: (args: { contractId: string }) => [{ scope: 'contracts', entity: 'item', action: 'accept' }, args],
   mutationFn: (args: { contractId: string }) => {
     return api
-      .post(`my/contracts/${args.contractId}/accept`, undefined)
+      .post(`my/contracts/${args.contractId}/accept`)
       .json<SpaceTradersResponse<{ agent: AgentResponse; contract: ContractResponse }>>()
   },
 }

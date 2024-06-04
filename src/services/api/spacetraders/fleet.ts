@@ -55,7 +55,9 @@ export const getShipByIdQuery = (args: { shipSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'ships', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      return api.get(`my/ships/${args.shipSymbol.toUpperCase()}`, { signal }).json<SpaceTradersResponse<ShipResponse>>()
+      return api
+        .get(`my/ships/${args.shipSymbol.toUpperCase()}`, undefined, { signal })
+        .json<SpaceTradersResponse<ShipResponse>>()
     },
   })
 
@@ -120,7 +122,7 @@ export const createShipOrbitMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'orbit' }, args],
   mutationFn: (args: ShipMutationKey) => {
     return api
-      .post(`my/ships/${args.shipSymbol.toUpperCase()}/orbit`, undefined)
+      .post(`my/ships/${args.shipSymbol.toUpperCase()}/orbit`)
       .json<SpaceTradersResponse<{ nav: NavigationResponse }>>()
   },
 }
@@ -129,7 +131,7 @@ export const createShipDockMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'dock' }, args],
   mutationFn: (args: ShipMutationKey) => {
     return api
-      .post(`my/ships/${args.shipSymbol.toUpperCase()}/dock`, undefined)
+      .post(`my/ships/${args.shipSymbol.toUpperCase()}/dock`)
       .json<SpaceTradersResponse<{ nav: NavigationResponse }>>()
   },
 }
@@ -165,7 +167,7 @@ export const createShipRefuelMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'refuel' }, args],
   mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     return api
-      .post(`my/ships/${shipSymbol.toUpperCase()}/refuel`, undefined)
+      .post(`my/ships/${shipSymbol.toUpperCase()}/refuel`)
       .json<SpaceTradersResponse<{ agent: AgentResponse; fuel: FuelResponse }>>()
   },
 }
@@ -183,7 +185,7 @@ export const createShipSurveyMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'survey' }, args],
   mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
     return api
-      .post(`my/ships/${shipSymbol.toUpperCase()}/survey`, undefined)
+      .post(`my/ships/${shipSymbol.toUpperCase()}/survey`)
       .json<SpaceTradersResponse<{ surveys: SurveyResponse[]; cooldown: CooldownResponse }>>()
   },
 }
@@ -205,9 +207,7 @@ export const createShipExtractMutation = {
 export const createShipSiphonMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'siphon' }, args],
   mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
-    return api
-      .post(`my/ships/${shipSymbol.toUpperCase()}/siphon`, undefined)
-      .json<SpaceTradersResponse<ShipSiphonResponse>>()
+    return api.post(`my/ships/${shipSymbol.toUpperCase()}/siphon`).json<SpaceTradersResponse<ShipSiphonResponse>>()
   },
 }
 

@@ -31,6 +31,8 @@ export const getFactionByIdQuery = (args: { factionSymbol: string }) =>
   queryOptions({
     queryKey: [{ scope: 'factions', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      return api.get(`factions/${args.factionSymbol}`, { signal }).json<SpaceTradersResponse<FactionResponse>>()
+      return api
+        .get(`factions/${args.factionSymbol}`, undefined, { signal })
+        .json<SpaceTradersResponse<FactionResponse>>()
     },
   })

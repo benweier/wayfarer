@@ -18,7 +18,7 @@ export const getSystemByIdQuery = (args: { systemSymbol: string }) =>
     queryKey: [{ scope: 'systems', entity: 'item' }, args],
     queryFn: ({ signal }) => {
       return api
-        .get(`systems/${args.systemSymbol.toUpperCase()}`, { signal })
+        .get(`systems/${args.systemSymbol.toUpperCase()}`, undefined, { signal })
         .json<SpaceTradersResponse<SystemResponse>>()
     },
   })
