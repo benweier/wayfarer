@@ -32,7 +32,7 @@ export const getWaypointByIdQuery = (args: { systemSymbol: string; waypointSymbo
     queryFn: ({ signal }) => {
       const path = `systems/${args.systemSymbol.toUpperCase()}/waypoints/${args.waypointSymbol.toUpperCase()}`
 
-      return api.get(path, { signal }).json<SpaceTradersResponse<WaypointResponse>>()
+      return api.get(path, undefined, { signal }).json<SpaceTradersResponse<WaypointResponse>>()
     },
   })
 
