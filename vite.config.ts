@@ -9,6 +9,8 @@ import { defineConfig } from 'vite'
 import dynamic from 'vite-plugin-dynamic-import'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
+const isTest = process.env.NODE_ENV === 'test'
+
 export default defineConfig({
   build: {
     sourcemap: true,
@@ -55,7 +57,7 @@ export default defineConfig({
     { enforce: 'pre', ...mdx() },
     tailwindcss(),
     react(),
-    TanStackRouterVite(),
+    !isTest && TanStackRouterVite(),
     sentryVitePlugin({
       authToken: process.env.SENTRY_AUTH_TOKEN,
       org: process.env.SENTRY_ORG_NAME,
