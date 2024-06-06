@@ -1,8 +1,8 @@
-import { type Input, minValue, number, object, string } from 'valibot'
+import { type InferInput, minValue, number, object, pipe, string } from 'valibot'
 
 export const CargoTransferSchema = object({
   ship: string(),
-  quantity: number([minValue(1)]),
+  quantity: pipe(number(), minValue(1)),
 })
 
-export type CargoTransferSchema = Input<typeof CargoTransferSchema>
+export type CargoTransferSchema = InferInput<typeof CargoTransferSchema>

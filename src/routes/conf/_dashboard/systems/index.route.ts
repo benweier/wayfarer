@@ -2,12 +2,12 @@ import { ROUTES } from '@/config/routes'
 import { meta } from '@/routes/systems/systems-route.meta'
 import { getSystemListQuery } from '@/services/api/spacetraders/systems'
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import { fallback, integer, number, object, parse, toMinValue } from 'valibot'
+import { fallback, integer, number, object, parse, pipe, toMinValue } from 'valibot'
 
 const LIMIT = 20
 
 const SearchParamsSchema = object({
-  page: fallback(number([integer(), toMinValue(1)]), 1),
+  page: fallback(pipe(number(), integer(), toMinValue(1)), 1),
 })
 
 export const Route = createFileRoute(ROUTES.SYSTEMS)({

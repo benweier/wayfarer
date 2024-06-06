@@ -1,8 +1,8 @@
-import { type Input, minLength, object, optional, string, toTrimmed } from 'valibot'
+import { type InferInput, minLength, object, optional, pipe, string, trim } from 'valibot'
 
 export const LoginSchema = object({
-  symbol: optional(string([toTrimmed()])),
-  token: string([toTrimmed(), minLength(1, 'auth.validation.access_token_required')]),
+  symbol: optional(pipe(string(), trim())),
+  token: pipe(string(), trim(), minLength(1, 'auth.validation.access_token_required')),
 })
 
-export type LoginSchema = Input<typeof LoginSchema>
+export type LoginSchema = InferInput<typeof LoginSchema>

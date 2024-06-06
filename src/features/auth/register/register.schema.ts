@@ -1,21 +1,28 @@
 import {
-  type Input,
+  type InferInput,
   email,
   literal,
   maxLength,
   minLength,
   object,
   optional,
+  pipe,
   string,
-  toTrimmed,
   transform,
+  trim,
   union,
 } from 'valibot'
 
 export const RegisterSchema = object({
-  symbol: string([minLength(3), maxLength(14)]),
+  symbol: pipe(string(), minLength(3), maxLength(14)),
   faction: string(),
-  email: union([optional(string([toTrimmed(), email()])), transform(literal(''), () => undefined)]),
+  email: union([
+    optional(pipe(string(), trim(), email())),
+    pipe(
+      literal(''),
+      transform(() => undefined),
+    ),
+  ]),
 })
 
-export type RegisterSchema = Input<typeof RegisterSchema>
+export type RegisterSchema = InferInput<typeof RegisterSchema>

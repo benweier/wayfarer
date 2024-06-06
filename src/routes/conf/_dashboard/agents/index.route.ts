@@ -1,12 +1,12 @@
 import { meta } from '@/routes/agents/agents-route.meta'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import { fallback, integer, number, object, parse, toMinValue } from 'valibot'
+import { fallback, integer, number, object, parse, pipe, toMinValue } from 'valibot'
 
 const LIMIT = 20
 
 const SearchParamsSchema = object({
-  page: fallback(number([integer(), toMinValue(1)]), 1),
+  page: fallback(pipe(number(), integer(), toMinValue(1)), 1),
 })
 
 export const Route = createFileRoute('/_dashboard/agents/')({
