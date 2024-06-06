@@ -7,6 +7,7 @@ import type { ModalImperativeRef, ModalProps, ModalStore } from './modal.types'
 export const Modal = ({
   ref,
   trigger,
+  overlay,
   defaultOpen = false,
   size,
   close,
@@ -38,7 +39,7 @@ export const Modal = ({
 
   return (
     <ModalContext value={store}>
-      <Root trigger={trigger} size={size} close={close} disableExternalClose={disableExternalClose}>
+      <Root trigger={trigger} overlay={overlay} size={size} close={close} disableExternalClose={disableExternalClose}>
         {children}
       </Root>
     </ModalContext>

@@ -4,6 +4,7 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
 
 export type ModalProps = {
   trigger?: ReactNode
+  overlay?: ReactNode
   defaultOpen?: boolean
   size?: DialogSize
   close?: ReactNode
@@ -12,6 +13,7 @@ export type ModalProps = {
 
 export type ModalDialogProps = {
   trigger?: ReactNode
+  overlay?: ReactNode
   size?: DialogSize
   close?: ReactNode
   disableExternalClose?: boolean

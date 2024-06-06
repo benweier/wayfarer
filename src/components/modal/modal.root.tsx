@@ -2,11 +2,13 @@ import * as ScrollArea from '@/components/scroll-area'
 import * as Dialog from '@radix-ui/react-dialog'
 import { cx } from 'class-variance-authority'
 import type { PropsWithChildren } from 'react'
+import { Overlay } from './modal.overlay'
 import type { ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
 
 export const Root = ({
   trigger,
+  overlay = <Overlay />,
   size = 'auto',
   close,
   disableExternalClose = false,
@@ -25,7 +27,8 @@ export const Root = ({
       {trigger}
 
       <Dialog.Portal>
-        <Dialog.Overlay className="backdrop-blur-xs bg-background-primary/20 fixed inset-0 z-40" />
+        {overlay}
+
         <Dialog.Content
           onPointerDownOutside={(event) => {
             event.preventDefault()
