@@ -13,6 +13,7 @@ import type { Action } from 'kbar'
 import { Suspense } from 'react'
 import { I18nextProvider } from 'react-i18next'
 
+import '@/services/valibot'
 import '@/services/sentry'
 import '@/styles/main.css'
 
