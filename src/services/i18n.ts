@@ -19,6 +19,7 @@ void i18n
     ns: [
       'common',
       'meta',
+      'validation',
       'spacetraders.contract_type',
       'spacetraders.crew_rotation',
       'spacetraders.engine_type',
