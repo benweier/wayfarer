@@ -1,11 +1,11 @@
 import { Button } from '@/components/button'
+import { ErrorMessage, FormControl, Hint, Input, Label } from '@/components/forms'
 import { ROUTES } from '@/config/routes'
 import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
 import { StatusCode, isHttpErrorResponse } from '@/services/http'
 import { useAuthStore } from '@/store/auth'
 import type { AgentResponse } from '@/types/spacetraders'
-import { ErrorMessage } from '@hookform/error-message'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useMutation } from '@tanstack/react-query'
 import { Link, getRouteApi, useNavigate } from '@tanstack/react-router'
@@ -52,34 +52,22 @@ export const Login = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
-            <div className="space-y-1">
-              <label className="label" htmlFor="symbol">
-                {t('auth.fields.agent_symbol.label')}
-              </label>
-              <input id="symbol" {...methods.register('symbol')} className="input" type="text" />
-              <div className="typography-sm mt-1">{t('auth.fields.agent_symbol.hint')}</div>
-            </div>
-            <div className="space-y-1">
-              <label className="label" htmlFor="token">
-                {t('auth.fields.access_token.label')}
-              </label>
-              <input
-                id="token"
-                {...methods.register('token', { required: true })}
-                className="input"
+            <FormControl {...methods.register('symbol')}>
+              <Label>{t('auth.fields.agent_symbol.label')}</Label>
+              <Input type="text" />
+              <Hint>{t('auth.fields.agent_symbol.hint')}</Hint>
+            </FormControl>
+
+            <FormControl {...methods.register('token', { required: true })}>
+              <Label>{t('auth.fields.access_token.label')}</Label>
+              <Input
                 type="password"
                 onFocus={(node) => {
                   node.target.select()
                 }}
               />
-              <ErrorMessage
-                errors={methods.formState.errors}
-                name="token"
-                render={({ message }) => (
-                  <div className="typography-sm text-foreground-error-secondary">{t(message)}</div>
-                )}
-              />
-            </div>
+              <ErrorMessage />
+            </FormControl>
 
             <Button intent="info" size="large" type="submit" disabled={isPending || isTransitionPending}>
               {t('auth.login', { context: 'action' })}

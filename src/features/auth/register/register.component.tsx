@@ -1,4 +1,5 @@
 import { Button } from '@/components/button'
+import { ErrorMessage, FormControl, Hint, Input, Label } from '@/components/forms'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
@@ -86,28 +87,21 @@ export const Register = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
-            <div className="space-y-1">
-              <label className="label" htmlFor="symbol">
-                {t('auth.fields.agent_symbol.label')}
-              </label>
-              <input
-                id="symbol"
-                {...methods.register('symbol', { required: true })}
-                className="input"
-                type="text"
-                autoComplete="off"
-              />
-            </div>
+            <FormControl {...methods.register('symbol', { required: true })}>
+              <Label>{t('auth.fields.agent_symbol.label')}</Label>
+              <Input type="text" autoComplete="off" />
+              <ErrorMessage />
+            </FormControl>
 
-            <div className="space-y-1">
-              <label className="label" htmlFor="email">
+            <FormControl {...methods.register('email')}>
+              <Label>
                 {t('auth.fields.email.label')}{' '}
                 <span className="text-foreground-tertiary typography-xs font-normal">
                   {t('general.fields.optional')}
                 </span>
-              </label>
-              <input id="email" {...methods.register('email')} className="input" type="email" autoComplete="off" />
-              <div className="typography-sm mt-2">
+              </Label>
+              <Input type="email" autoComplete="off" />
+              <Hint>
                 <Trans
                   i18nKey="auth.fields.email.hint"
                   components={{
@@ -123,8 +117,8 @@ export const Register = () => {
                     ),
                   }}
                 />
-              </div>
-            </div>
+              </Hint>
+            </FormControl>
 
             <div>
               <FactionField />
