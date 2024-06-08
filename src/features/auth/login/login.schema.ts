@@ -1,8 +1,9 @@
-import { type InferInput, minLength, object, optional, pipe, string, trim } from 'valibot'
+import { i18n } from '@/services/i18n'
+import * as v from 'valibot'
 
-export const LoginSchema = object({
-  symbol: optional(pipe(string(), trim())),
-  token: pipe(string(), trim(), minLength(1, 'auth.validation.access_token_required')),
+export const LoginSchema = v.object({
+  symbol: v.optional(v.pipe(v.string(), v.trim())),
+  token: v.pipe(v.string(), v.trim(), v.minLength(1, i18n.t('auth.validation.access_token_required'))),
 })
 
-export type LoginSchema = InferInput<typeof LoginSchema>
+export type LoginSchema = v.InferInput<typeof LoginSchema>

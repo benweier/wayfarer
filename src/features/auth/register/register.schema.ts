@@ -1,28 +1,15 @@
-import {
-  type InferInput,
-  email,
-  literal,
-  maxLength,
-  minLength,
-  object,
-  optional,
-  pipe,
-  string,
-  transform,
-  trim,
-  union,
-} from 'valibot'
+import * as v from 'valibot'
 
-export const RegisterSchema = object({
-  symbol: pipe(string(), minLength(3), maxLength(14)),
-  faction: string(),
-  email: union([
-    optional(pipe(string(), trim(), email())),
-    pipe(
-      literal(''),
-      transform(() => undefined),
+export const RegisterSchema = v.object({
+  symbol: v.pipe(v.string(), v.trim(), v.minLength(3), v.maxLength(14)),
+  faction: v.string(),
+  email: v.union([
+    v.optional(v.pipe(v.string(), v.trim(), v.email())),
+    v.pipe(
+      v.literal(''),
+      v.transform(() => undefined),
     ),
   ]),
 })
 
-export type RegisterSchema = InferInput<typeof RegisterSchema>
+export type RegisterSchema = v.InferInput<typeof RegisterSchema>
