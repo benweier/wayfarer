@@ -40,7 +40,7 @@ export const Login = () => {
       if (isHttpErrorResponse(err, StatusCode.Unauthorized)) {
         methods.setError('token', {
           type: 'manual',
-          message: 'auth.validation.invalid_token',
+          message: t('auth.validation.invalid_token'),
         })
       }
     },
