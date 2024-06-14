@@ -1,9 +1,10 @@
 import { FormControlContext } from '@/components/forms/form-control.component'
 import { ErrorMessage as ReactHookFormErrorMessage } from '@hookform/error-message'
+import { cx } from 'class-variance-authority'
 import { type HTMLAttributes, use } from 'react'
 import { useFormState } from 'react-hook-form'
 
-export const ErrorMessage = (props: HTMLAttributes<HTMLDivElement>) => {
+export const ErrorMessage = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
   const formState = useFormState()
   const ctx = use(FormControlContext)
 
@@ -11,10 +12,15 @@ export const ErrorMessage = (props: HTMLAttributes<HTMLDivElement>) => {
 
   return (
     <ReactHookFormErrorMessage
-      errors={formState.errors}
       name={ctx.name}
+      errors={formState.errors}
       render={({ message }) => (
-        <div className="typography-sm text-foreground-error-secondary mx-1" {...props}>
+        <div
+          {...props}
+          id={`${ctx.name}-error`}
+          data-has-error={formState.errors[ctx.name] ? 'true' : 'false'}
+          className={cx('typography-sm text-foreground-error-secondary mx-1', className)}
+        >
           {message}
         </div>
       )}
