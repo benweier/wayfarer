@@ -1,4 +1,8 @@
 export { FormControl } from './form-control.component'
+export { FieldControl } from './form-field-control.component'
+export { FieldErrorMessage } from './form-field-control.error'
+export { FieldInput } from './form-field-control.input'
+export { FieldLabel } from './form-field-control.label'
 export { ErrorMessage } from './form-error-message.component'
 export { Hint } from './form-hint-text.component'
 export { Input } from './form-input.component'
