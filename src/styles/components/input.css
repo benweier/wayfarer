@@ -24,6 +24,7 @@
   --input-border: var(--u-border-primary);
   --input-border-hover: var(--u-border-brand);
   --input-border-focus: var(--u-border-brand);
+  --input-border-error: var(--u-border-error);
 
   position: relative;
   display: block;
@@ -63,5 +64,13 @@
   &::placeholder {
     font-style: italic;
     color: var(--input-fg-placeholder);
+  }
+
+  &.invalid, &:invalid {
+    border-color: var(--input-border-error);
+  }
+
+  &:is(:where(.form-control):has([data-has-error="true"]) *) {
+    border-color: var(--input-border-error);
   }
 }
