@@ -14,9 +14,7 @@ import { Route as rootRoute } from './conf/__root'
 import { Route as DashboardRouteImport } from './conf/_dashboard.route'
 import { Route as AuthRouteImport } from './conf/_auth.route'
 import { Route as IndexRouteImport } from './conf/index.route'
-import { Route as DashboardSystemsRouteImport } from './conf/_dashboard/systems.route'
 import { Route as DashboardLeaderboardRouteImport } from './conf/_dashboard/leaderboard.route'
-import { Route as DashboardAgentsRouteImport } from './conf/_dashboard/agents.route'
 import { Route as DashboardAuthenticatedRouteImport } from './conf/_dashboard/_authenticated.route'
 import { Route as AuthRegisterRouteImport } from './conf/_auth/register.route'
 import { Route as AuthLogoutRouteImport } from './conf/_auth/logout.route'
@@ -44,16 +42,11 @@ const DashboardRouteRoute = DashboardRouteImport.update({
 const AuthRouteRoute = AuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./conf/_auth.lazy').then((d) => d.Route))
+} as any)
 
 const IndexRouteRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardSystemsRouteRoute = DashboardSystemsRouteImport.update({
-  path: '/systems',
-  getParentRoute: () => DashboardRouteRoute,
 } as any)
 
 const DashboardLeaderboardRouteRoute = DashboardLeaderboardRouteImport.update({
@@ -62,11 +55,6 @@ const DashboardLeaderboardRouteRoute = DashboardLeaderboardRouteImport.update({
 } as any).lazy(() =>
   import('./conf/_dashboard/leaderboard.lazy').then((d) => d.Route),
 )
-
-const DashboardAgentsRouteRoute = DashboardAgentsRouteImport.update({
-  path: '/agents',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
 
 const DashboardAuthenticatedRouteRoute =
   DashboardAuthenticatedRouteImport.update({
@@ -91,24 +79,24 @@ const AuthLoginRouteRoute = AuthLoginRouteImport.update({
 
 const DashboardSystemsIndexRouteRoute = DashboardSystemsIndexRouteImport.update(
   {
-    path: '/',
-    getParentRoute: () => DashboardSystemsRouteRoute,
+    path: '/systems/',
+    getParentRoute: () => DashboardRouteRoute,
   } as any,
 ).lazy(() =>
   import('./conf/_dashboard/systems/index.lazy').then((d) => d.Route),
 )
 
 const DashboardAgentsIndexRouteRoute = DashboardAgentsIndexRouteImport.update({
-  path: '/',
-  getParentRoute: () => DashboardAgentsRouteRoute,
+  path: '/agents/',
+  getParentRoute: () => DashboardRouteRoute,
 } as any).lazy(() =>
   import('./conf/_dashboard/agents/index.lazy').then((d) => d.Route),
 )
 
 const DashboardAgentsAgentSymbolRouteRoute =
   DashboardAgentsAgentSymbolRouteImport.update({
-    path: '/$agentSymbol',
-    getParentRoute: () => DashboardAgentsRouteRoute,
+    path: '/agents/$agentSymbol',
+    getParentRoute: () => DashboardRouteRoute,
   } as any).lazy(() =>
     import('./conf/_dashboard/agents/$agentSymbol.lazy').then((d) => d.Route),
   )
@@ -141,8 +129,8 @@ const DashboardAuthenticatedContractsRouteRoute =
 
 const DashboardSystemsSystemSymbolIndexRouteRoute =
   DashboardSystemsSystemSymbolIndexRouteImport.update({
-    path: '/$systemSymbol/',
-    getParentRoute: () => DashboardSystemsRouteRoute,
+    path: '/systems/$systemSymbol/',
+    getParentRoute: () => DashboardRouteRoute,
   } as any).lazy(() =>
     import('./conf/_dashboard/systems/$systemSymbol/index.lazy').then(
       (d) => d.Route,
@@ -171,8 +159,8 @@ const DashboardAuthenticatedFleetShipSymbolRouteRoute =
 
 const DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute =
   DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport.update({
-    path: '/$systemSymbol/waypoint/$waypointSymbol',
-    getParentRoute: () => DashboardSystemsRouteRoute,
+    path: '/systems/$systemSymbol/waypoint/$waypointSymbol',
+    getParentRoute: () => DashboardRouteRoute,
   } as any).lazy(() =>
     import(
       './conf/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.lazy'
@@ -253,25 +241,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAuthenticatedRouteImport
       parentRoute: typeof DashboardRouteImport
     }
-    '/_dashboard/agents': {
-      id: '/_dashboard/agents'
-      path: '/agents'
-      fullPath: '/agents'
-      preLoaderRoute: typeof DashboardAgentsRouteImport
-      parentRoute: typeof DashboardRouteImport
-    }
     '/_dashboard/leaderboard': {
       id: '/_dashboard/leaderboard'
       path: '/leaderboard'
       fullPath: '/leaderboard'
       preLoaderRoute: typeof DashboardLeaderboardRouteImport
-      parentRoute: typeof DashboardRouteImport
-    }
-    '/_dashboard/systems': {
-      id: '/_dashboard/systems'
-      path: '/systems'
-      fullPath: '/systems'
-      preLoaderRoute: typeof DashboardSystemsRouteImport
       parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/_authenticated/contracts': {
@@ -297,24 +271,24 @@ declare module '@tanstack/react-router' {
     }
     '/_dashboard/agents/$agentSymbol': {
       id: '/_dashboard/agents/$agentSymbol'
-      path: '/$agentSymbol'
+      path: '/agents/$agentSymbol'
       fullPath: '/agents/$agentSymbol'
       preLoaderRoute: typeof DashboardAgentsAgentSymbolRouteImport
-      parentRoute: typeof DashboardAgentsRouteImport
+      parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/agents/': {
       id: '/_dashboard/agents/'
-      path: '/'
-      fullPath: '/agents/'
+      path: '/agents'
+      fullPath: '/agents'
       preLoaderRoute: typeof DashboardAgentsIndexRouteImport
-      parentRoute: typeof DashboardAgentsRouteImport
+      parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/systems/': {
       id: '/_dashboard/systems/'
-      path: '/'
-      fullPath: '/systems/'
+      path: '/systems'
+      fullPath: '/systems'
       preLoaderRoute: typeof DashboardSystemsIndexRouteImport
-      parentRoute: typeof DashboardSystemsRouteImport
+      parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol': {
       id: '/_dashboard/_authenticated/fleet/$shipSymbol'
@@ -332,10 +306,10 @@ declare module '@tanstack/react-router' {
     }
     '/_dashboard/systems/$systemSymbol/': {
       id: '/_dashboard/systems/$systemSymbol/'
-      path: '/$systemSymbol'
+      path: '/systems/$systemSymbol'
       fullPath: '/systems/$systemSymbol'
       preLoaderRoute: typeof DashboardSystemsSystemSymbolIndexRouteImport
-      parentRoute: typeof DashboardSystemsRouteImport
+      parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay': {
       id: '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay'
@@ -346,10 +320,10 @@ declare module '@tanstack/react-router' {
     }
     '/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol': {
       id: '/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol'
-      path: '/$systemSymbol/waypoint/$waypointSymbol'
+      path: '/systems/$systemSymbol/waypoint/$waypointSymbol'
       fullPath: '/systems/$systemSymbol/waypoint/$waypointSymbol'
       preLoaderRoute: typeof DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport
-      parentRoute: typeof DashboardSystemsRouteImport
+      parentRoute: typeof DashboardRouteImport
     }
     '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market': {
       id: '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market'
@@ -389,16 +363,12 @@ export const routeTree = rootRoute.addChildren({
           }),
         DashboardAuthenticatedSurveysRouteRoute,
       }),
-    DashboardAgentsRouteRoute: DashboardAgentsRouteRoute.addChildren({
-      DashboardAgentsAgentSymbolRouteRoute,
-      DashboardAgentsIndexRouteRoute,
-    }),
     DashboardLeaderboardRouteRoute,
-    DashboardSystemsRouteRoute: DashboardSystemsRouteRoute.addChildren({
-      DashboardSystemsIndexRouteRoute,
-      DashboardSystemsSystemSymbolIndexRouteRoute,
-      DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute,
-    }),
+    DashboardAgentsAgentSymbolRouteRoute,
+    DashboardAgentsIndexRouteRoute,
+    DashboardSystemsIndexRouteRoute,
+    DashboardSystemsSystemSymbolIndexRouteRoute,
+    DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute,
   }),
 })
 
@@ -430,9 +400,12 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_dashboard.route.ts",
       "children": [
         "/_dashboard/_authenticated",
-        "/_dashboard/agents",
         "/_dashboard/leaderboard",
-        "/_dashboard/systems"
+        "/_dashboard/agents/$agentSymbol",
+        "/_dashboard/agents/",
+        "/_dashboard/systems/",
+        "/_dashboard/systems/$systemSymbol/",
+        "/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol"
       ]
     },
     "/_auth/login": {
@@ -456,26 +429,9 @@ export const routeTree = rootRoute.addChildren({
         "/_dashboard/_authenticated/surveys"
       ]
     },
-    "/_dashboard/agents": {
-      "filePath": "_dashboard/agents.route.ts",
-      "parent": "/_dashboard",
-      "children": [
-        "/_dashboard/agents/$agentSymbol",
-        "/_dashboard/agents/"
-      ]
-    },
     "/_dashboard/leaderboard": {
       "filePath": "_dashboard/leaderboard.route.ts",
       "parent": "/_dashboard"
-    },
-    "/_dashboard/systems": {
-      "filePath": "_dashboard/systems.route.ts",
-      "parent": "/_dashboard",
-      "children": [
-        "/_dashboard/systems/",
-        "/_dashboard/systems/$systemSymbol/",
-        "/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol"
-      ]
     },
     "/_dashboard/_authenticated/contracts": {
       "filePath": "_dashboard/_authenticated/contracts.route.ts",
@@ -495,15 +451,15 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_dashboard/agents/$agentSymbol": {
       "filePath": "_dashboard/agents/$agentSymbol.route.ts",
-      "parent": "/_dashboard/agents"
+      "parent": "/_dashboard"
     },
     "/_dashboard/agents/": {
       "filePath": "_dashboard/agents/index.route.ts",
-      "parent": "/_dashboard/agents"
+      "parent": "/_dashboard"
     },
     "/_dashboard/systems/": {
       "filePath": "_dashboard/systems/index.route.ts",
-      "parent": "/_dashboard/systems"
+      "parent": "/_dashboard"
     },
     "/_dashboard/_authenticated/fleet/$shipSymbol": {
       "filePath": "_dashboard/_authenticated/fleet/$shipSymbol.route.ts",
@@ -518,7 +474,7 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_dashboard/systems/$systemSymbol/": {
       "filePath": "_dashboard/systems/$systemSymbol/index.route.ts",
-      "parent": "/_dashboard/systems"
+      "parent": "/_dashboard"
     },
     "/_dashboard/_authenticated/fleet/$shipSymbol/_overlay": {
       "filePath": "_dashboard/_authenticated/fleet/$shipSymbol/_overlay.route.ts",
@@ -529,7 +485,7 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol": {
       "filePath": "_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol.route.ts",
-      "parent": "/_dashboard/systems"
+      "parent": "/_dashboard"
     },
     "/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market": {
       "filePath": "_dashboard/_authenticated/fleet/$shipSymbol/_overlay.market.route.ts",
