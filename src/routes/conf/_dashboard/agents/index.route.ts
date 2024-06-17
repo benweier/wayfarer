@@ -1,20 +1,36 @@
+import { ROUTES } from '@/config/routes'
 import { meta } from '@/routes/agents/agents-route.meta'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
-import { createFileRoute, redirect } from '@tanstack/react-router'
-import { fallback, integer, number, object, parse, pipe, toMinValue } from 'valibot'
+import { type SearchSchemaInput, createFileRoute, redirect } from '@tanstack/react-router'
+import * as v from 'valibot'
 
 const LIMIT = 20
 
-const SearchParamsSchema = object({
-  page: fallback(pipe(number(), integer(), toMinValue(1)), 1),
+const SearchParamsSchema = v.object({
+  page: v.fallback(v.optional(v.pipe(v.number(), v.integer(), v.toMinValue(1)), 1), 1),
 })
 
-export const Route = createFileRoute('/_dashboard/agents/')({
-  validateSearch: (search) => parse(SearchParamsSchema, search),
-  loaderDeps: ({ search }) => ({ page: search.page }),
-  beforeLoad: () => ({ meta }),
-  loader: async ({ context, deps }) => {
-    const agents = await context.client.ensureQueryData(getAgentListQuery({ page: deps.page, limit: LIMIT }))
+type SearchParamsSchema = typeof SearchParamsSchema
+type SearchParamsInput = v.InferInput<SearchParamsSchema>
+type SearchParamsOutput = v.InferOutput<SearchParamsSchema>
+
+export const Route = createFileRoute(ROUTES.AGENTS)({
+  validateSearch(search: SearchParamsInput & SearchSchemaInput): SearchParamsOutput {
+    return v.parse(SearchParamsSchema, search)
+  },
+  loaderDeps({ search }) {
+    return { page: search.page }
+  },
+  beforeLoad() {
+    return { meta }
+  },
+  async loader({ context, deps }) {
+    const agents = await context.client.ensureQueryData(
+      getAgentListQuery({
+        page: deps.page,
+        limit: LIMIT,
+      }),
+    )
     const max = Math.ceil(agents.meta.total / LIMIT)
 
     if (deps.page > max) {
