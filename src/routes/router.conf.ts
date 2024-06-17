@@ -1,8 +1,10 @@
 import { NotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
 import { client } from '@/services/query-client'
-import { authStore } from '@/store/auth'
+import { type AuthStore, authStore } from '@/store/auth'
+import type { QueryClient } from '@tanstack/react-query'
 import { createRouter } from '@tanstack/react-router'
+import type { StoreApi } from 'zustand'
 import { routeTree } from './route-tree.gen'
 import { Fallback } from './router.fallback'
 
@@ -23,5 +25,9 @@ export const router = createRouter({
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router
+  }
+  interface RouteContext {
+    client: QueryClient
+    auth: StoreApi<AuthStore>
   }
 }
