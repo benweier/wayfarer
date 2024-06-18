@@ -22,7 +22,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         <div className="flex gap-8">
           <div>
             <div className="text-foreground-secondary typography-sm uppercase">{t('system.label')}</div>
-            <Link to="/systems" params={{ systemSymbol: ship.nav.systemSymbol }} className="link">
+            <Link to="/systems/$systemSymbol" params={{ systemSymbol: ship.nav.systemSymbol }} className="link">
               {ship.nav.systemSymbol}
             </Link>
           </div>
