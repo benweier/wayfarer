@@ -5,7 +5,7 @@ export const RegisterSchema = v.object({
   symbol: v.pipe(v.string(), v.trim(), v.minLength(3), v.maxLength(14)),
   faction: v.string(),
   email: v.optional(
-    v.union([v.literal(''), v.pipe(v.string(), v.trim(), v.email())], i18n.t('email', { ns: 'validation' })),
+    v.union([v.literal(''), v.pipe(v.string(), v.trim(), v.email())], () => i18n.t('email', { ns: 'validation' })),
   ),
 })
 
