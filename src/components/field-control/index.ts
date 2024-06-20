@@ -1,0 +1,5 @@
+export { Root } from './field-control.component'
+export { Label } from './field-control.label'
+export { Input } from './field-control.input'
+export { ErrorMessage } from './field-control.error-message'
+export { Hint } from './field-control.hint'

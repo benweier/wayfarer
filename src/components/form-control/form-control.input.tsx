@@ -1,6 +1,6 @@
-import { FormControlContext } from '@/components/forms/form-control.component'
 import { cx } from 'class-variance-authority'
 import { type InputHTMLAttributes, type RefAttributes, use } from 'react'
+import { FormControlContext } from './form-control.component'
 
 export const Input = ({
   className,

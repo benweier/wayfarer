@@ -1,5 +1,5 @@
 import { Button } from '@/components/button'
-import { ErrorMessage, FormControl, Hint, Input, Label } from '@/components/forms'
+import * as FormControl from '@/components/form-control'
 import { ROUTES } from '@/config/routes'
 import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
@@ -52,22 +52,22 @@ export const Login = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
-            <FormControl {...methods.register('symbol')}>
-              <Label>{t('auth.fields.agent_symbol.label')}</Label>
-              <Input type="text" />
-              <Hint>{t('auth.fields.agent_symbol.hint')}</Hint>
-            </FormControl>
+            <FormControl.Root {...methods.register('symbol')}>
+              <FormControl.Label>{t('auth.fields.agent_symbol.label')}</FormControl.Label>
+              <FormControl.Input type="text" />
+              <FormControl.Hint>{t('auth.fields.agent_symbol.hint')}</FormControl.Hint>
+            </FormControl.Root>
 
-            <FormControl {...methods.register('token', { required: true })}>
-              <Label>{t('auth.fields.access_token.label')}</Label>
-              <Input
+            <FormControl.Root {...methods.register('token', { required: true })}>
+              <FormControl.Label>{t('auth.fields.access_token.label')}</FormControl.Label>
+              <FormControl.Input
                 type="password"
                 onFocus={(node) => {
                   node.target.select()
                 }}
               />
-              <ErrorMessage />
-            </FormControl>
+              <FormControl.ErrorMessage />
+            </FormControl.Root>
 
             <Button intent="info" size="large" type="submit" disabled={isPending || isTransitionPending}>
               {t('auth.login', { context: 'action' })}

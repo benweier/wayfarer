@@ -1,6 +1,6 @@
-import { FormControlContext } from '@/components/forms/form-control.component'
 import { cx } from 'class-variance-authority'
 import { type HTMLAttributes, use } from 'react'
+import { FormControlContext } from './form-control.component'
 
 export const Hint = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
   const ctx = use(FormControlContext)

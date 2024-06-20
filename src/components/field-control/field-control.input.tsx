@@ -1,8 +1,8 @@
-import { FieldControlContext } from '@/components/forms/form-field-control.component'
 import { cx } from 'class-variance-authority'
 import { type InputHTMLAttributes, type RefAttributes, use } from 'react'
+import { FieldControlContext } from './field-control.component'
 
-export const FieldInput = ({
+export const Input = ({
   id,
   className,
   ...props

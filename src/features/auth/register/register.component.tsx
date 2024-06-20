@@ -1,5 +1,6 @@
 import { Button } from '@/components/button'
-import * as Forms from '@/components/forms'
+import * as FieldControl from '@/components/field-control'
+import * as FormControl from '@/components/form-control'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
@@ -32,12 +33,12 @@ const FactionField = () => {
         const selected = field.value ? factions.get(field.value) : undefined
 
         return (
-          <Forms.FieldControl<RegisterFormFieldValues, 'faction'>
+          <FieldControl.Root<RegisterFormFieldValues, 'faction'>
             field={field}
             fieldState={fieldState}
             formState={formState}
           >
-            <Forms.FieldLabel>{t('faction.label')}</Forms.FieldLabel>
+            <FieldControl.Label>{t('faction.label')}</FieldControl.Label>
 
             <Select.Field
               id={field.name}
@@ -64,8 +65,8 @@ const FactionField = () => {
               })}
             </Select.Field>
 
-            <Forms.FieldErrorMessage />
-          </Forms.FieldControl>
+            <FieldControl.ErrorMessage />
+          </FieldControl.Root>
         )
       }}
     />
@@ -99,24 +100,24 @@ export const Register = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
-            <Forms.FormControl {...methods.register('symbol', { required: true })}>
-              <Forms.Label>{t('auth.fields.agent_symbol.label')}</Forms.Label>
-              <Forms.Input type="text" autoComplete="off" />
-              <Forms.ErrorMessage />
-            </Forms.FormControl>
+            <FormControl.Root {...methods.register('symbol', { required: true })}>
+              <FormControl.Label>{t('auth.fields.agent_symbol.label')}</FormControl.Label>
+              <FormControl.Input type="text" autoComplete="off" />
+              <FormControl.ErrorMessage />
+            </FormControl.Root>
 
-            <Forms.FormControl {...methods.register('email')}>
-              <Forms.Label>
+            <FormControl.Root {...methods.register('email')}>
+              <FormControl.Label>
                 {t('auth.fields.email.label')}{' '}
                 <span className="text-foreground-tertiary typography-xs font-normal">
                   {t('general.fields.optional')}
                 </span>
-              </Forms.Label>
+              </FormControl.Label>
 
-              <Forms.Input type="email" autoComplete="off" />
-              <Forms.ErrorMessage />
+              <FormControl.Input type="email" autoComplete="off" />
+              <FormControl.ErrorMessage />
 
-              <Forms.Hint>
+              <FormControl.Hint>
                 <Trans
                   i18nKey="auth.fields.email.hint"
                   components={{
@@ -132,8 +133,8 @@ export const Register = () => {
                     ),
                   }}
                 />
-              </Forms.Hint>
-            </Forms.FormControl>
+              </FormControl.Hint>
+            </FormControl.Root>
 
             <div>
               <FactionField />

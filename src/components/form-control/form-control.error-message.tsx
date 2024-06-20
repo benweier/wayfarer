@@ -1,8 +1,8 @@
-import { FormControlContext } from '@/components/forms/form-control.component'
 import { ErrorMessage as ReactHookFormErrorMessage } from '@hookform/error-message'
 import { cx } from 'class-variance-authority'
 import { type HTMLAttributes, use } from 'react'
 import { useFormState } from 'react-hook-form'
+import { FormControlContext } from './form-control.component'
 
 export const ErrorMessage = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
   const formState = useFormState()

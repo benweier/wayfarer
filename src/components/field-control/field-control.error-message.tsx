@@ -1,9 +1,9 @@
-import { FieldControlContext } from '@/components/forms/form-field-control.component'
 import { ErrorMessage as ReactHookFormErrorMessage } from '@hookform/error-message'
 import { cx } from 'class-variance-authority'
 import { type HTMLAttributes, use } from 'react'
+import { FieldControlContext } from './field-control.component'
 
-export const FieldErrorMessage = ({ id, className, ...props }: HTMLAttributes<HTMLDivElement>) => {
+export const ErrorMessage = ({ id, className, ...props }: HTMLAttributes<HTMLDivElement>) => {
   const ctx = use(FieldControlContext)
 
   if (!ctx) return null

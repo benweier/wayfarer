@@ -1,7 +1,7 @@
-import { FieldControlContext } from '@/components/forms/form-field-control.component'
 import { type HTMLAttributes, use } from 'react'
+import { FieldControlContext } from './field-control.component'
 
-export const FieldLabel = (props: HTMLAttributes<HTMLLabelElement>) => {
+export const Label = (props: HTMLAttributes<HTMLLabelElement>) => {
   const ctx = use(FieldControlContext)
 
   return (

@@ -13,7 +13,7 @@ export const FieldControlContext = createContext<{
   formState?: UseFormStateReturn<any>
 } | null>(null)
 
-export const FieldControl = <T extends FieldValues, N extends Path<T>>({
+export const Root = <T extends FieldValues, N extends Path<T>>({
   children,
   ...props
 }: PropsWithChildren<{
