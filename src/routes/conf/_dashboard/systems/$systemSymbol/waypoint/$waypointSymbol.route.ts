@@ -4,10 +4,20 @@ import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol')({
-  parseParams: ({ systemSymbol, waypointSymbol }) => ({
-    systemSymbol: systemSymbol.toUpperCase(),
-    waypointSymbol: waypointSymbol.toUpperCase(),
-  }),
+  params: {
+    parse({ systemSymbol, waypointSymbol }) {
+      return {
+        systemSymbol: systemSymbol.toUpperCase(),
+        waypointSymbol: waypointSymbol.toUpperCase(),
+      }
+    },
+    stringify({ systemSymbol, waypointSymbol }) {
+      return {
+        systemSymbol: systemSymbol.toUpperCase(),
+        waypointSymbol: waypointSymbol.toUpperCase(),
+      }
+    },
+  },
   beforeLoad: () => ({ meta }),
   loader: async ({ context, params }) => {
     try {

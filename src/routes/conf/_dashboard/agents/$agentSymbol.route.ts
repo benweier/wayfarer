@@ -4,7 +4,14 @@ import { getAgentBySymbolQuery } from '@/services/api/spacetraders/agent'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/agents/$agentSymbol')({
-  parseParams: ({ agentSymbol }) => ({ agentSymbol: agentSymbol.toUpperCase() }),
+  params: {
+    parse({ agentSymbol }) {
+      return { agentSymbol: agentSymbol.toUpperCase() }
+    },
+    stringify({ agentSymbol }) {
+      return { agentSymbol: agentSymbol.toUpperCase() }
+    },
+  },
   beforeLoad: () => ({ meta }),
   loader: async ({ context, params }) => {
     try {

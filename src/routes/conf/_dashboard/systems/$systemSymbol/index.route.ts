@@ -4,7 +4,14 @@ import { getSystemByIdQuery } from '@/services/api/spacetraders/systems'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/')({
-  parseParams: ({ systemSymbol }) => ({ systemSymbol: systemSymbol.toUpperCase() }),
+  params: {
+    parse({ systemSymbol }) {
+      return { systemSymbol: systemSymbol.toUpperCase() }
+    },
+    stringify({ systemSymbol }) {
+      return { systemSymbol: systemSymbol.toUpperCase() }
+    },
+  },
   beforeLoad: () => ({ meta }),
   loader: async ({ context, params }) => {
     try {

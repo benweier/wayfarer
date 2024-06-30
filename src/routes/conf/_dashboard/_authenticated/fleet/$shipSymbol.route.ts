@@ -5,7 +5,14 @@ import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymbol')({
-  parseParams: ({ shipSymbol }) => ({ shipSymbol: shipSymbol.toUpperCase() }),
+  params: {
+    parse({ shipSymbol }) {
+      return { shipSymbol: shipSymbol.toUpperCase() }
+    },
+    stringify({ shipSymbol }) {
+      return { shipSymbol: shipSymbol.toUpperCase() }
+    },
+  },
   beforeLoad: () => ({ meta }),
   loader: async ({ context, params }) => {
     try {
