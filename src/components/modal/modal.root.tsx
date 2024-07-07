@@ -47,6 +47,7 @@ export const Root = ({
               'max-w-screen-xl w-full': size === 'xl',
             },
           )}
+          aria-describedby={undefined}
         >
           <ScrollArea.Root height="var(--dialog-content-max-height)">
             <ScrollArea.Viewport className="p-6">
