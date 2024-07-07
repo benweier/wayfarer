@@ -1,6 +1,6 @@
 const Mac: Record<string, string> = {
   Alt: '⌥',
-  Ctrl: 'Ctrl',
+  Ctrl: '⌃',
   Shift: '⇧',
   Meta: '⌘',
 }
@@ -22,11 +22,11 @@ const Arrows: Record<string, string> = {
 // Get OS specific shortcut keys
 const getShortcutKey = (key: string) => {
   const shortcut = key
-    .replace(/(Key|\+)/g, '')
+    .replace(/(Key)/g, '')
     .replace(/(ArrowUp|ArrowDown|ArrowLeft|ArrowRight)/g, (_, k) => Arrows[k])
 
   if (navigator.userAgent.includes('Mac')) {
-    return shortcut.replace(/(Alt|Ctrl|Shift|Meta)/g, (_, k) => Mac[k])
+    return shortcut.replace(/(\+)/g, '').replace(/(Alt|Ctrl|Shift|Meta)/g, (_, k) => Mac[k])
   }
 
   return shortcut.replace(/(Alt|Ctrl|Shift|Meta)/g, (_, k) => Win[k])
