@@ -2,12 +2,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area'
 import { cx } from 'class-variance-authority'
 import type { PropsWithChildren } from 'react'
 
-export const Viewport = ({
-  className,
-  children,
-}: PropsWithChildren<{
-  className?: string
-}>) => {
+export const Viewport = ({ className, children }: PropsWithChildren<WithClassName>) => {
   return (
     <ScrollArea.Viewport
       className={cx(
