@@ -11,11 +11,7 @@ export const FactionInfo = () => {
   const { data } = useSuspenseQuery({
     ...getFactionListQuery(),
     select: (response) => {
-      const factions = new Map<string, FactionResponse>()
-
-      for (const faction of response.data) {
-        factions.set(faction.symbol, faction)
-      }
+      const factions = new Map<string, FactionResponse>(response.data.map((faction) => [faction.symbol, faction]))
 
       return { factions }
     },
