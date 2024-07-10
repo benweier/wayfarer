@@ -7,7 +7,7 @@ import * as v from 'valibot'
 const LIMIT = 20
 
 const SearchParamsSchema = v.object({
-  page: v.fallback(v.optional(v.pipe(v.number(), v.integer(), v.toMinValue(1)), 1), 1),
+  page: v.fallback(v.pipe(v.number(), v.integer(), v.minValue(1)), 1),
 })
 
 type SearchParamsSchema = typeof SearchParamsSchema
@@ -25,16 +25,21 @@ export const Route = createFileRoute(ROUTES.SYSTEMS)({
     return { meta }
   },
   async loader({ context, deps }) {
-    const systems = await context.client.ensureQueryData(
-      getSystemListQuery({
-        page: deps.page,
-        limit: LIMIT,
-      }),
-    )
+    const query = getSystemListQuery({
+      page: deps.page,
+      limit: LIMIT,
+    })
+    const systems = await context.client.ensureQueryData(query)
     const max = Math.ceil(systems.meta.total / LIMIT)
 
     if (deps.page > max) {
-      return redirect({
+      context.client.removeQueries({
+        queryKey: query.queryKey,
+      })
+      context.client.setQueryData(getSystemListQuery({ page: max, limit: LIMIT }).queryKey, systems)
+
+      throw redirect({
+        to: '/systems',
         search: { page: max },
         replace: true,
       })
