@@ -1,19 +1,23 @@
-import { Pagination } from '@/components/pagination'
+import { Pagination, usePaginationCommands } from '@/components/pagination'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
-import { formatNumber } from '@/utilities/number.helper'
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { AgentListTable } from './agent-list.table'
 import type { AgentListProps } from './agent-list.types'
 
 export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => {
+  const { t } = useTranslation()
   const agentsListQuery = useSuspenseQuery(getAgentListQuery({ page, limit }))
   const agents = agentsListQuery.data.data
   const meta = agentsListQuery.data.meta
   const results = {
-    from: formatNumber(page * limit + 1 - limit),
-    to: formatNumber(page * limit - limit + agents.length),
-    total: formatNumber(meta.total),
+    from: page * limit + 1 - limit,
+    to: page * limit - limit + agents.length,
+    total: meta.total,
   }
+  const max = Math.ceil(meta.total / limit)
+
+  usePaginationCommands({ min: 1, max })
 
   return (
     <div className="space-y-4">
@@ -26,15 +30,15 @@ export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => 
           ) : (
             <>
               <div>
-                {results.from} - {results.to}
+                {t('general.number', { value: results.from })} - {t('general.number', { value: results.to })}
               </div>
               <div className="text-foreground-secondary">of</div>
-              <div>{results.total}</div>
+              <div>{t('general.number', { value: results.total })}</div>
             </>
           )}
         </div>
 
-        <Pagination current={meta.page} min={1} max={Math.ceil(meta.total / limit)} length={5} onChange={setPage} />
+        <Pagination current={meta.page} max={max} length={5} onChange={setPage} />
       </div>
     </div>
   )
