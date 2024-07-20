@@ -77,11 +77,12 @@
     "cancel": "Cancel",
     "refresh": "Refresh",
     "last_updated": {
-      "relative": "Last updated {{value, formatRelativeTime}}",
-      "absolute": "Last updated {{value, formatDateTime}}"
+      "relative": "Last updated {{value, relativeTime}}",
+      "absolute": "Last updated {{value, absoluteDateTime}}"
     },
     "right_now": "right now",
     "seconds_ago": "a few seconds ago",
+    "number": "{{value, number}}",
     "status": {
       "online": "Online",
       "offline": "Offline",

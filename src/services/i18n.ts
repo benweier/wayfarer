@@ -55,6 +55,6 @@ void i18n
       }
     },
   })
-i18n.services.formatter?.add('formatNumber', formatNumber)
-i18n.services.formatter?.add('formatRelativeTime', formatRelativeTime)
-i18n.services.formatter?.add('formatDateTime', formatDateTime)
+i18n.services.formatter?.add('number', formatNumber)
+i18n.services.formatter?.add('relativeTime', formatRelativeTime)
+i18n.services.formatter?.add('absoluteDateTime', formatDateTime)
