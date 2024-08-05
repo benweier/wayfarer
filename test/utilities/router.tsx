@@ -1,3 +1,5 @@
+import { client } from '@/services/query-client'
+import { authStore } from '@/store/auth'
 import { render } from '@/test/utilities/render.helper'
 import {
   Outlet,
@@ -20,6 +22,10 @@ export const createTestRouter = async (el: ReactNode) => {
     history: createMemoryHistory({
       initialEntries: ['/'],
     }),
+    context: {
+      auth: authStore,
+      client: client,
+    },
     routeTree: rootRoute.addChildren([testRoute]),
   })
 
