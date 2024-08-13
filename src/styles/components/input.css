@@ -66,10 +66,8 @@
     color: var(--input-fg-placeholder);
   }
 
-  &.invalid, &:invalid {
-    border-color: var(--input-border-error);
-  }
-
+  &.invalid, &:invalid,
+  &[data-has-error="true"],
   &:is(:where(.form-control):has([data-has-error="true"]) *) {
     border-color: var(--input-border-error);
   }
