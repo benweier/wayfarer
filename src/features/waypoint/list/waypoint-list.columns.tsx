@@ -1,11 +1,11 @@
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
+import { Tooltip } from '@/components/tooltip'
 import { WaypointTypeFilter } from '@/components/waypoint/filters'
 import { WaypointTag } from '@/components/waypoint/tag'
 import { WaypointTraits } from '@/config/spacetraders'
 import type { WaypointTrait } from '@/types/spacetraders'
-import * as Tooltip from '@radix-ui/react-tooltip'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
@@ -58,17 +58,11 @@ export const columns = [
     maxSize: 10,
     cell: ({ row }) =>
       row.original.presence > 0 && (
-        <Translation>
-          {(t) => {
-            const title = t('waypoint.presence', { count: row.original.presence, symbol: row.original.waypoint.symbol })
-
-            return (
-              <span title={title}>
-                <ShipIcon id="anchor" className="size-5" />
-              </span>
-            )
-          }}
-        </Translation>
+        <Tooltip trigger={<ShipIcon id="anchor" className="size-5" />}>
+          <Translation>
+            {(t) => t('waypoint.presence', { count: row.original.presence, symbol: row.original.waypoint.symbol })}
+          </Translation>
+        </Tooltip>
       ),
   }),
   columnHelper.accessor((row) => `${row.waypoint.x}, ${row.waypoint.y}`, {
@@ -83,23 +77,9 @@ export const columns = [
             <Sort column={column} type="numeric" />
           </div>
 
-          <Tooltip.Provider delayDuration={100}>
-            <Tooltip.Root>
-              <Tooltip.Trigger asChild>
-                <button type="button">
-                  <AppIcon id="help" className="text-foreground-secondary size-5" />
-                </button>
-              </Tooltip.Trigger>
-              <Tooltip.Portal>
-                <Tooltip.Content
-                  className="bg-foreground-secondary text-background-secondary typography-sm w-72 rounded-md py-2 px-4"
-                  sideOffset={5}
-                >
-                  <Translation>{(t) => t('waypoint.sort_coordinates_tooltip')}</Translation>
-                </Tooltip.Content>
-              </Tooltip.Portal>
-            </Tooltip.Root>
-          </Tooltip.Provider>
+          <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-5" />}>
+            <Translation>{(t) => t('waypoint.sort_coordinates_tooltip')}</Translation>
+          </Tooltip>
         </div>
       )
     },

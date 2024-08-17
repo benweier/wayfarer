@@ -2,10 +2,10 @@ import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
 import { Sort } from '@/components/table'
+import { Tooltip } from '@/components/tooltip'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import type { ShipyardShip } from '@/types/spacetraders'
 import { formatNumber } from '@/utilities/number.helper'
-import * as Tooltip from '@radix-ui/react-tooltip'
 import { createColumnHelper } from '@tanstack/react-table'
 import type { PropsWithChildren } from 'react'
 import { Translation } from 'react-i18next'
@@ -81,23 +81,9 @@ export const columns = [
           <div className="flex items-center justify-end gap-2">
             <div className="typography-sm text-center">{value.name}</div>
 
-            <Tooltip.Provider delayDuration={100}>
-              <Tooltip.Root>
-                <Tooltip.Trigger asChild>
-                  <button type="button">
-                    <AppIcon id="help" className="text-foreground-secondary size-5" />
-                  </button>
-                </Tooltip.Trigger>
-                <Tooltip.Portal>
-                  <Tooltip.Content
-                    className="typography-xs bg-foreground-secondary text-background-secondary w-64 rounded-md py-2 px-4"
-                    sideOffset={5}
-                  >
-                    {value.description}
-                  </Tooltip.Content>
-                </Tooltip.Portal>
-              </Tooltip.Root>
-            </Tooltip.Provider>
+            <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-5" />}>
+              {value.description}
+            </Tooltip>
           </div>
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
@@ -140,24 +126,11 @@ export const columns = [
           <div className="flex items-center justify-end gap-2">
             <div className="typography-sm text-center">{value.name}</div>
 
-            <Tooltip.Provider delayDuration={100}>
-              <Tooltip.Root>
-                <Tooltip.Trigger asChild>
-                  <button type="button">
-                    <AppIcon id="help" className="text-foreground-secondary size-5" />
-                  </button>
-                </Tooltip.Trigger>
-                <Tooltip.Portal>
-                  <Tooltip.Content
-                    className="typography-xs bg-foreground-secondary text-background-secondary w-64 rounded-md py-2 px-4"
-                    sideOffset={5}
-                  >
-                    {value.description}
-                  </Tooltip.Content>
-                </Tooltip.Portal>
-              </Tooltip.Root>
-            </Tooltip.Provider>
+            <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-5" />}>
+              {value.description}
+            </Tooltip>
           </div>
+
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
@@ -191,24 +164,11 @@ export const columns = [
           <div className="flex items-center justify-end gap-2">
             <div className="typography-sm text-center">{value.name}</div>
 
-            <Tooltip.Provider delayDuration={100}>
-              <Tooltip.Root>
-                <Tooltip.Trigger asChild>
-                  <button type="button">
-                    <AppIcon id="help" className="text-foreground-secondary size-5" />
-                  </button>
-                </Tooltip.Trigger>
-                <Tooltip.Portal>
-                  <Tooltip.Content
-                    className="typography-xs bg-foreground-secondary text-background-secondary w-64 rounded-md py-2 px-4"
-                    sideOffset={5}
-                  >
-                    {value.description}
-                  </Tooltip.Content>
-                </Tooltip.Portal>
-              </Tooltip.Root>
-            </Tooltip.Provider>
+            <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-5" />}>
+              {value.description}
+            </Tooltip>
           </div>
+
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">

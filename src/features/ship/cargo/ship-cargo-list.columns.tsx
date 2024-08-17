@@ -1,9 +1,9 @@
 import { AppIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
+import { Tooltip } from '@/components/tooltip'
 import { ShipCargoItemControls } from '@/features/ship/cargo/ship-cargo-item.controls'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { formatNumber } from '@/utilities/number.helper'
-import * as Tooltip from '@radix-ui/react-tooltip'
 import { createColumnHelper } from '@tanstack/react-table'
 import { cx } from 'class-variance-authority'
 import { Translation } from 'react-i18next'
@@ -71,23 +71,9 @@ export const columns = [
         <div className="flex items-center justify-end gap-2">
           <Translation>{(t) => <div>{t('general.header.market_value')}</div>}</Translation>
 
-          <Tooltip.Provider delayDuration={100}>
-            <Tooltip.Root>
-              <Tooltip.Trigger asChild>
-                <button type="button" className="btn btn-icon">
-                  <AppIcon id="help" className="text-foreground-secondary size-4" />
-                </button>
-              </Tooltip.Trigger>
-              <Tooltip.Portal>
-                <Tooltip.Content
-                  className="typography-sm w-64 rounded-md bg-zinc-200 py-2 px-4 text-zinc-800"
-                  sideOffset={5}
-                >
-                  <Translation>{(t) => t('ship.cargo_market_value_tooltip')}</Translation>
-                </Tooltip.Content>
-              </Tooltip.Portal>
-            </Tooltip.Root>
-          </Tooltip.Provider>
+          <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-4" />}>
+            <Translation>{(t) => t('ship.cargo_market_value_tooltip')}</Translation>
+          </Tooltip>
         </div>
       ),
       cell: ({ getValue }) => {

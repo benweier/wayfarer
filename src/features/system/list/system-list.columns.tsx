@@ -1,5 +1,6 @@
 import { ShipIcon } from '@/components/icons'
 import { SystemTag } from '@/components/system/tag'
+import { Tooltip } from '@/components/tooltip'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
@@ -36,17 +37,11 @@ export const columns = [
     maxSize: 10,
     cell: ({ row }) =>
       row.original.presence > 0 && (
-        <Translation>
-          {(t) => {
-            const title = t('system.presence', { count: row.original.presence, symbol: row.original.system.symbol })
-
-            return (
-              <span title={title}>
-                <ShipIcon id="anchor" className="size-5" />
-              </span>
-            )
-          }}
-        </Translation>
+        <Tooltip trigger={<ShipIcon id="anchor" className="size-5" />}>
+          <Translation>
+            {(t) => t('system.presence', { count: row.original.presence, symbol: row.original.system.symbol })}
+          </Translation>
+        </Tooltip>
       ),
   }),
   columnHelper.accessor((row) => row.system.type, {
