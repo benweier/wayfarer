@@ -3,7 +3,7 @@ import { SystemTag } from '@/components/system/tag'
 import { Tooltip } from '@/components/tooltip'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
+import { Trans, Translation } from 'react-i18next'
 import type { SystemListTableSchema } from './system-list.types'
 import { SystemWaypointsCell } from './waypoints-cell.component'
 
@@ -38,9 +38,10 @@ export const columns = [
     cell: ({ row }) =>
       row.original.presence > 0 && (
         <Tooltip trigger={<ShipIcon id="anchor" className="size-5" />}>
-          <Translation>
-            {(t) => t('system.presence', { count: row.original.presence, symbol: row.original.system.symbol })}
-          </Translation>
+          <Trans
+            i18nKey="system.presence"
+            values={{ count: row.original.presence, symbol: row.original.system.symbol }}
+          />
         </Tooltip>
       ),
   }),

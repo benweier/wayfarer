@@ -152,9 +152,9 @@
   },
   "system": {
     "label": "System",
-    "presence_zero": "You have no ships in {{symbol}}",
-    "presence_one": "You have {{count, formatNumber}} ship in {{symbol}}",
-    "presence_other": "You have {{count, formatNumber}} ships in {{symbol}}",
+    "presence_zero": "You have <strong>no ships</strong> in {{symbol}}",
+    "presence_one": "You have <strong>{{count, formatNumber}}</strong< ship in {{symbol}}",
+    "presence_other": "You have <strong>{{count, formatNumber}}</strong> ships in {{symbol}}",
     "fleet|empty": "You have no ships in <system_symbol />",
     "fleet|unauthenticated": "<login_link /> to view your ships in <system_symbol />"
   },
@@ -163,9 +163,9 @@
   },
   "waypoint": {
     "label": "Waypoint",
-    "presence_zero": "You have no ships at {{symbol}}",
-    "presence_one": "You have {{count, formatNumber}} ship at {{symbol}}",
-    "presence_other": "You have {{count, formatNumber}} ships at {{symbol}}",
+    "presence_zero": "You have <strong>no ships</strong> at {{symbol}}",
+    "presence_one": "You have <strong>{{count, formatNumber}} ship</strong> at {{symbol}}",
+    "presence_other": "You have <strong>{{count, formatNumber}}</strong> ships at {{symbol}}",
     "sort_coordinates_tooltip": "Sort coordinates by their distance from the system origin (0, 0)",
     "navigate_ship_to_waypoint": "Navigate ship {{shipSymbol}} to waypoint {{waypointSymbol}}",
     "ship_at_waypoint": "Ship {{shipSymbol}} is at waypoint {{waypointSymbol}}",

@@ -8,7 +8,7 @@ import { WaypointTraits } from '@/config/spacetraders'
 import type { WaypointTrait } from '@/types/spacetraders'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
+import { Trans, Translation } from 'react-i18next'
 import type { WaypointListTableSchema } from './waypoint-list.types'
 
 const FILTERED_TRAITS = new Set<WaypointTraits>([
@@ -59,13 +59,14 @@ export const columns = [
     cell: ({ row }) =>
       row.original.presence > 0 && (
         <Tooltip trigger={<ShipIcon id="anchor" className="size-5" />}>
-          <Translation>
-            {(t) => t('waypoint.presence', { count: row.original.presence, symbol: row.original.waypoint.symbol })}
-          </Translation>
+          <Trans
+            i18nKey="waypoint.presence"
+            values={{ count: row.original.presence, symbol: row.original.waypoint.symbol }}
+          />
         </Tooltip>
       ),
   }),
-  columnHelper.accessor((row) => `${row.waypoint.x}, ${row.waypoint.y}`, {
+  columnHelper.accessor((row) => ({ x: row.waypoint.x, y: row.waypoint.y }), {
     id: 'coordinates',
     minSize: 20,
     maxSize: 20,
@@ -84,7 +85,8 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      return <div className="text-foreground-secondary typography-sm text-left">{getValue()}</div>
+      const { x, y } = getValue()
+      return <div className="text-foreground-secondary typography-sm text-left">{`${x}, ${y}`}</div>
     },
     sortingFn: (a, b) => {
       const ad = a.original.waypoint.x ** 2 + a.original.waypoint.y ** 2
