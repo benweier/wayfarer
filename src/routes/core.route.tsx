@@ -1,10 +1,11 @@
 import { Button } from '@/components/button'
 import { Meta } from '@/components/meta'
-import { ToastContainer } from '@/components/toast'
 import * as Sentry from '@sentry/react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Outlet, ScrollRestoration, useRouterState } from '@tanstack/react-router'
+import { cx } from 'class-variance-authority'
 import { lazy } from 'react'
+import { Toaster } from 'sonner'
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -53,7 +54,15 @@ export const Core = () => {
       <Meta titleTemplate="%s • Wayfarer" />
       <NavigationLoader />
       <Outlet />
-      <ToastContainer />
+      <Toaster
+        position="bottom-right"
+        visibleToasts={5}
+        toastOptions={{
+          unstyled: true,
+        }}
+        duration={Number.POSITIVE_INFINITY}
+        cn={cx}
+      />
       <TanStackRouterDevtools />
       <TanStackQueryDevtools />
     </Sentry.ErrorBoundary>
