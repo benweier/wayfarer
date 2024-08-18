@@ -94,24 +94,29 @@
   .toast {
     --toast-fg-info: var(--u-color-info-50);
     --toast-fg-info-secondary: var(--u-color-info-100);
-    --toast-bg-info: var(--color-background-secondary);
-    --toast-border-info: var(--u-color-info-400);
+    --toast-bg-info: color-mix(in srgb, hsl(202deg 62% 57%) 8%, var(--color-background-primary));
+    --toast-border-info: color-mix(in srgb, hsl(202deg 62% 57%) 20%, var(--color-background-primary));
+    --toast-icon-info: color-mix(in srgb, hsl(202deg 62% 57%) 80%, transparent);
     --toast-fg-success: var(--u-color-success-50);
     --toast-fg-success-secondary: var(--u-color-success-100);
-    --toast-bg-success: var(--color-background-secondary);
-    --toast-border-success: var(--u-color-success-400);
+    --toast-bg-success: color-mix(in srgb, hsl(162deg 40% 60%) 8%, var(--color-background-primary));
+    --toast-border-success: color-mix(in srgb, hsl(162deg 40% 60%) 20%, var(--color-background-primary));
+    --toast-icon-success: color-mix(in srgb, hsl(162deg 40% 60%) 80%, transparent);
     --toast-fg-warning: var(--u-color-warning-50);
     --toast-fg-warning-secondary: var(--u-color-warning-100);
-    --toast-bg-warning: var(--color-background-secondary);
-    --toast-border-warning: var(--u-color-warning-400);
+    --toast-bg-warning: color-mix(in srgb, hsl(42deg 50% 65%) 8%, var(--color-background-primary));
+    --toast-border-warning: color-mix(in srgb, hsl(42deg 50% 65%) 20%, var(--color-background-primary));
+    --toast-icon-warning: color-mix(in srgb, hsl(42deg 50% 65%) 80%, transparent);
     --toast-fg-error: var(--u-color-error-50);
     --toast-fg-error-secondary: var(--u-color-error-100);
-    --toast-bg-error: var(--color-background-secondary);
-    --toast-border-error: var(--u-color-error-400);
+    --toast-bg-error: color-mix(in srgb, hsl(0deg 38% 58%) 8%, var(--color-background-primary));
+    --toast-border-error: color-mix(in srgb, hsl(0deg 38% 58%) 20%, var(--color-background-primary));
+    --toast-icon-error: color-mix(in srgb, hsl(0deg 38% 58%) 80%, transparent);
     --toast-fg-neutral: var(--u-color-neutral-50);
     --toast-fg-neutral-secondary: var(--u-color-neutral-100);
-    --toast-bg-neutral: var(--color-background-secondary);
-    --toast-border-neutral: var(--u-color-neutral-400);
+    --toast-bg-neutral: color-mix(in srgb, hsl(0deg 0% 24%) 4%, var(--color-background-primary));
+    --toast-border-neutral: color-mix(in srgb, hsl(0deg 0% 96%) 8%, var(--color-background-primary));
+    --toast-icon-neutral: color-mix(in srgb, hsl(0deg 0% 96%) 60%, transparent);
   }
 
   .btn-brand {
