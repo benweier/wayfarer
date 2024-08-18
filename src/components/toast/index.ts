@@ -1,4 +1,3 @@
-export { ToastContainer } from './toast-container.component'
-export { ToastItem } from './toast-item.component'
-export { useToastState, useToastActions } from './toast.store'
-export type { Toast, ToastStore } from './toast.types'
+export { Toast } from './toast.component'
+export { toast } from './toast.helper'
+export type { ToastConf, ToastProps, ToastStatus } from './toast.types'
