@@ -53,6 +53,11 @@
     "validation": {
       "invalid_token": "Invalid token",
       "access_token_required": "Access token is required"
+    },
+    "toast": {
+      "login_success_title": "Successfully signed in!",
+      "login_error_title": "Could not sign in",
+      "login_error_description": "Please check the access token and try again"
     }
   },
   "leaderboard": {

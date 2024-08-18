@@ -60,7 +60,7 @@ export const Core = () => {
         toastOptions={{
           unstyled: true,
         }}
-        duration={Number.POSITIVE_INFINITY}
+        duration={5000}
         cn={cx}
       />
       <TanStackRouterDevtools />

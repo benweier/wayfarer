@@ -1,5 +1,6 @@
 import { Button } from '@/components/button'
 import * as FormControl from '@/components/form-control'
+import { toast } from '@/components/toast'
 import { ROUTES } from '@/config/routes'
 import { getAgentMutation } from '@/services/api/spacetraders/auth'
 import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
@@ -27,6 +28,9 @@ export const Login = () => {
   })
 
   const onSuccessHandler = (response: SpaceTradersResponse<AgentResponse>, variables: { token: string }) => {
+    toast.success({
+      title: t('auth.toast.login_success_title'),
+    })
     startTransition(async () => {
       signin({ agent: response.data, token: variables.token })
       await navigate({ to: redirect === undefined ? '/fleet' : redirect })
@@ -37,6 +41,10 @@ export const Login = () => {
     mutationFn: getAgentMutation.mutationFn,
     onSuccess: onSuccessHandler,
     onError: (err) => {
+      toast.error({
+        title: t('auth.toast.login_error_title'),
+        description: t('auth.toast.login_error_description'),
+      })
       if (isHttpErrorResponse(err, StatusCode.Unauthorized)) {
         methods.setError('token', {
           type: 'manual',
