@@ -16,6 +16,26 @@ import { AccessTokenDialog } from './access-token-dialog.component'
 import { FactionInfo } from './faction-info.component'
 import { type RegisterFormFieldValues, RegisterSchema } from './register.schema'
 
+const SupportLink = () => {
+  const { t } = useTranslation()
+
+  return (
+    <a href={t('auth.support', { context: 'href' })} target="_blank" className="link" rel="noreferrer noopener">
+      {t('auth.support', { context: 'text' })}
+    </a>
+  )
+}
+
+const LoginLink = () => {
+  const { t } = useTranslation()
+
+  return (
+    <Link to="/login" className="link">
+      {t('auth.login', { context: 'text' })}
+    </Link>
+  )
+}
+
 const FactionField = () => {
   const { t } = useTranslation()
   const methods = useFormContext<RegisterFormFieldValues>()
@@ -42,16 +62,10 @@ const FactionField = () => {
 
             <Select.Field
               id={field.name}
-              selected={selected?.name ? <div className="text-foreground-primary">{selected.name}</div> : null}
+              selected={<Select.Value>{selected?.name}</Select.Value>}
               onChange={field.onChange}
               onBlur={field.onBlur}
-              placeholder={
-                isPending ? (
-                  <div className="bg-background-quaternary my-2 h-2 w-2/3 animate-pulse rounded-full" />
-                ) : (
-                  t('faction.select_placeholder')
-                )
-              }
+              placeholder={isPending ? <Select.Pending /> : t('faction.select_placeholder')}
             >
               {Array.from(factions).map(([key, faction]) => {
                 return (
@@ -121,16 +135,7 @@ export const Register = () => {
                 <Trans
                   i18nKey="auth.fields.email.hint"
                   components={{
-                    support_link: (
-                      <a
-                        href={t('auth.support', { context: 'href' })}
-                        target="_blank"
-                        className="link"
-                        rel="noreferrer noopener"
-                      >
-                        {t('auth.support', { context: 'text' })}
-                      </a>
-                    ),
+                    support_link: <SupportLink key="support_link" />,
                   }}
                 />
               </FormControl.Hint>
@@ -152,11 +157,7 @@ export const Register = () => {
                 <Trans
                   i18nKey="auth.already_registered"
                   components={{
-                    login_link: (
-                      <Link to="/login" className="link">
-                        {t('auth.login', { context: 'text' })}
-                      </Link>
-                    ),
+                    login_link: <LoginLink key="login_link" />,
                   }}
                 />
               </div>

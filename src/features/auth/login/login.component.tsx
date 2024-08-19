@@ -17,6 +17,16 @@ import { LoginSchema } from './login.schema'
 
 const api = getRouteApi(ROUTES.LOGIN)
 
+const RegisterLink = () => {
+  const { t } = useTranslation()
+
+  return (
+    <Link to="/register" className="link">
+      {t('auth.register', { context: 'text' })}
+    </Link>
+  )
+}
+
 export const Login = () => {
   const [isTransitionPending, startTransition] = useTransition()
   const { redirect } = api.useSearch()
@@ -85,11 +95,7 @@ export const Login = () => {
               <Trans
                 i18nKey="auth.not_registered"
                 components={{
-                  register_link: (
-                    <Link to="/register" className="link">
-                      {t('auth.register', { context: 'text' })}
-                    </Link>
-                  ),
+                  register_link: <RegisterLink key="register_link" />,
                 }}
               />
             </div>
