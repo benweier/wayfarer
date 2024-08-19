@@ -1,17 +1,17 @@
 import type { MarketGood, MarketTradeGood } from '@/types/spacetraders'
-import type { FC, PropsWithChildren, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
+
+export type WaypointMarketListProps = {
+  imports?: FC<WaypointMarketGroupProps>
+  exports?: FC<WaypointMarketGroupProps>
+  exchange?: FC<WaypointMarketGroupProps>
+}
 
 export type WaypointMarketLayoutProps = {
   imports: ReactNode
   exports: ReactNode
   exchange: ReactNode
 }
-
-export type WaypointMarketListProps = {
-  Item?: FC<PropsWithChildren<WaypointMarketItemProps>>
-}
-
-export type WaypointMarketItemProps = { item: MarketGood; trade?: ReactNode }
 
 export type WaypointMarketTableSchema = {
   good: MarketGood
@@ -20,4 +20,9 @@ export type WaypointMarketTableSchema = {
 
 export type WaypointMarketTableProps = {
   data: WaypointMarketTableSchema[]
+}
+
+export type WaypointMarketGroupProps = {
+  data: MarketGood[]
+  trade: Map<string, MarketTradeGood>
 }
