@@ -1,4 +1,4 @@
-import { WaypointTag } from '@/components/waypoint/tag'
+import { WaypointTag } from '@/features/waypoint/tag'
 import type { SystemWaypoint } from '@/types/spacetraders'
 import { chunk } from '@/utilities/chunk.helper'
 import { Link } from '@tanstack/react-router'

@@ -1,6 +1,6 @@
 import { Badge } from '@/components/badge'
-import { WaypointTag } from '@/components/waypoint/tag'
 import { useWaypointResponse } from '@/context/waypoint.context'
+import { WaypointTag } from '@/features/waypoint/tag'
 import { Link } from '@tanstack/react-router'
 import type { PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
