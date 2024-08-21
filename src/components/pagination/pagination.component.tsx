@@ -3,10 +3,12 @@ import { AppIcon } from '@/components/icons'
 import { useTranslation } from 'react-i18next'
 import type { PaginationProps } from './pagination.types'
 import { getPagingRange } from './pagination.utils'
+import { usePaginationHandlers } from './use-pagination-handlers.hook'
 
 export const Pagination = ({ current, min = 1, max, length = 5, onChange }: PaginationProps) => {
   const { t } = useTranslation()
   const pages = getPagingRange({ current, max, length })
+  const handlers = usePaginationHandlers({ current, min, max }, onChange)
 
   return (
     <div className="flex gap-2">
@@ -14,9 +16,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
         key="first"
         intent="success"
         kind="outline"
-        onClick={() => {
-          if (current > min) onChange(min)
-        }}
+        onClick={handlers.firstPage}
         disabled={current <= 1}
         aria-label={t('general.first_page')}
       >
@@ -27,9 +27,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
         key="previous"
         intent="success"
         kind="outline"
-        onClick={() => {
-          if (current > min) onChange(current - 1)
-        }}
+        onClick={handlers.prevPage}
         disabled={current <= min}
         aria-label={t('general.previous_page')}
       >
@@ -42,9 +40,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
           key={page}
           intent="info"
           kind={page === current ? 'solid' : 'outline'}
-          onClick={() => {
-            if (current !== page) onChange(page)
-          }}
+          onClick={handlers.goto(page)}
           aria-label={t('general.go_to_page', { page })}
           aria-current={page === current ? 'page' : undefined}
         >
@@ -56,9 +52,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
         key="next"
         intent="success"
         kind="outline"
-        onClick={() => {
-          if (current < max) onChange(current + 1)
-        }}
+        onClick={handlers.nextPage}
         disabled={current >= max}
         aria-label={t('general.next_page')}
       >
@@ -69,9 +63,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
         key="last"
         intent="success"
         kind="outline"
-        onClick={() => {
-          if (current < max) onChange(max)
-        }}
+        onClick={handlers.lastPage}
         disabled={current >= max}
         aria-label={t('general.last_page')}
       >
