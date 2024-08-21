@@ -6,10 +6,22 @@ export const usePaginationHandlers = (
     if (current > min) onChange(min)
   }
   const prevPage = () => {
-    if (current > min) onChange(current - 1)
+    if (current > min) {
+      if (current > max) {
+        onChange(max)
+      } else {
+        onChange(current - 1)
+      }
+    }
   }
   const nextPage = () => {
-    if (current < max) onChange(current + 1)
+    if (current < max) {
+      if (current < min) {
+        onChange(min)
+      } else {
+        onChange(current + 1)
+      }
+    }
   }
   const lastPage = () => {
     if (current < max) onChange(max)
