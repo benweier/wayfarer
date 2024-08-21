@@ -1,6 +1,6 @@
 import { ShipIcon } from '@/components/icons'
-import { SystemTag } from '@/components/system/tag'
 import { Tooltip } from '@/components/tooltip'
+import { SystemTag } from '@/features/system/tag'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Trans, Translation } from 'react-i18next'

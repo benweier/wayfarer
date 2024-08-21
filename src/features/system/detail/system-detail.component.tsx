@@ -1,5 +1,5 @@
-import { SystemTag } from '@/components/system/tag'
 import { useSystemResponse } from '@/context/system.context'
+import { SystemTag } from '@/features/system/tag'
 import type { PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 
