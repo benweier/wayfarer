@@ -1,5 +1,6 @@
 import { Button } from '@/components/button'
 import * as Dropdown from '@/components/dropdown'
+import { AppIcon } from '@/components/icons'
 import { ShipNavStatus } from '@/config/spacetraders'
 import * as ShipActions from '@/features/ship/actions'
 import type { ShipResponse } from '@/types/spacetraders'
@@ -18,6 +19,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
           intent="success"
           kind="outline"
           size="small"
+          adornment={{ end: <AppIcon id="chevron:down" className="size-4" /> }}
           disabled={isMutating || ship.fuel.capacity === 0 || ship.nav.status === ShipNavStatus.InTransit}
         >
           {t('ship.action.flight_mode')}
