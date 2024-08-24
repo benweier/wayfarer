@@ -152,6 +152,9 @@
       "optional": "(optional)"
     }
   },
+  "formatter": {
+    "datetime": "{{value, absoluteDateTime}}"
+  },
   "systems": {
     "label": "Systems"
   },
