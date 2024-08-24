@@ -6,6 +6,7 @@ import type { ShipResponse } from '@/types/spacetraders'
 import { useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { useEffect, useMemo } from 'react'
+import { ShipTransitState } from './ship-transit.conf'
 
 export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const client = useQueryClient()
@@ -14,14 +15,14 @@ export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const totalSeconds = (arrival.getTime() - departed.getTime()) / 1000
   const remainingSeconds = Math.floor(Math.max(-1, arrival.getTime() - Date.now()) / 1000)
   const progress = Math.min(100, Math.max(0, Math.round((100 / totalSeconds) * (totalSeconds - remainingSeconds))))
-  const status = remainingSeconds < 0 ? 'complete' : 'in_progress'
+  const status = remainingSeconds < 0 ? ShipTransitState.Complete : ShipTransitState.InProgress
 
   useUpdateInterval(() => {
-    return status !== 'complete'
+    return status !== ShipTransitState.Complete
   }, 1000)
 
   useEffect(() => {
-    if (status === 'complete' && nav.status === ShipNavStatus.InTransit) {
+    if (status === ShipTransitState.Complete && nav.status === ShipNavStatus.InTransit) {
       const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: symbol }).queryKey
       const shipListQueryKey = getShipListQuery().queryKey
       const ship = client.getQueryData(shipByIdQueryKey)
