@@ -1,7 +1,6 @@
 import { Badge } from '@/components/badge'
 import { Sort } from '@/components/table'
 import { SurveyContext } from '@/features/survey/context'
-import { formatDateTime } from '@/utilities/date.helper'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import type { SurveyListTableSchema } from './survey-list.types'
@@ -67,7 +66,9 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="typography-sm">{formatDateTime(value)}</div>
+      return (
+        <Translation>{(t) => <div className="typography-sm">{t('formatter.datetime', { value })}</div>}</Translation>
+      )
     },
     enableSorting: true,
     enableColumnFilter: true,
