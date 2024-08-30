@@ -1,4 +1,4 @@
-import type { WaypointTraits, WaypointTypes } from '@/config/spacetraders'
+import type { FlightMode, WaypointTraits, WaypointTypes } from '@/config/spacetraders'
 
 type StatusResponse = {
   status: string
@@ -99,7 +99,7 @@ export type NavigationResponse = {
   waypointSymbol: string
   route: NavigationRoute
   status: string
-  flightMode: string
+  flightMode: FlightMode
 }
 
 export type ShipCrew = {
