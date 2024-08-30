@@ -15,7 +15,7 @@ const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   if (ship.nav.status !== ShipNavStatus.InTransit) return null
 
   return (
-    <div className="bg-background-tertiary h-1 grow rounded-full">
+    <div className="bg-background-quaternary h-1 grow rounded-full">
       <div className="bg-background-success-secondary h-full rounded-full" style={{ width: `${transit.progress}%` }} />
     </div>
   )
@@ -128,7 +128,7 @@ export const columns = [
           <Badge>
             <Translation ns="spacetraders.flight_mode">{(t) => t(row.original.ship.nav.flightMode)}</Translation>
           </Badge>
-          <div className="absolute inset-x-0 -bottom-1">
+          <div className="absolute inset-x-0 -bottom-1.5">
             <TransitStatusPreview ship={row.original.ship} />
           </div>
         </div>
