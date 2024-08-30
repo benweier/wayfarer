@@ -1,4 +1,4 @@
-import { ShipNavStatus } from '@/config/spacetraders'
+import { type ShipFlightMode, ShipNavStatus } from '@/config/spacetraders'
 import { createShipFlightModeMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
@@ -9,7 +9,7 @@ export const FlightMode = ({
   disabled = false,
   flightMode,
   children,
-}: ShipActionProps<ReturnType<typeof createShipFlightModeMutation.mutationFn>, { flightMode: string }>) => {
+}: ShipActionProps<ReturnType<typeof createShipFlightModeMutation.mutationFn>, { flightMode: ShipFlightMode }>) => {
   const client = useQueryClient()
   const shipByIdQueryKey = getShipByIdQuery({ shipSymbol: ship.symbol }).queryKey
   const shipListQueryKey = getShipListQuery().queryKey

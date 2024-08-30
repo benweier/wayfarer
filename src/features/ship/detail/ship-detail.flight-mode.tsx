@@ -1,7 +1,7 @@
 import { Button } from '@/components/button'
 import * as Dropdown from '@/components/dropdown'
 import { AppIcon } from '@/components/icons'
-import { ShipNavStatus } from '@/config/spacetraders'
+import { ShipFlightMode, ShipNavStatus } from '@/config/spacetraders'
 import * as ShipActions from '@/features/ship/actions'
 import type { ShipResponse } from '@/types/spacetraders'
 import { useIsMutating } from '@tanstack/react-query'
@@ -27,33 +27,33 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
       }
     >
       <Dropdown.RadioGroup value={ship.nav.flightMode}>
-        <ShipActions.FlightMode ship={ship} flightMode="CRUISE">
+        <ShipActions.FlightMode ship={ship} flightMode={ShipFlightMode.Cruise}>
           {({ execute, disabled }) => (
-            <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value="CRUISE">
+            <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value={ShipFlightMode.Cruise}>
               {t('ship.flight_mode.cruise')}
             </Dropdown.RadioItem>
           )}
         </ShipActions.FlightMode>
 
-        <ShipActions.FlightMode ship={ship} flightMode="BURN">
+        <ShipActions.FlightMode ship={ship} flightMode={ShipFlightMode.Burn}>
           {({ execute, disabled }) => (
-            <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value="BURN">
+            <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value={ShipFlightMode.Burn}>
               {t('ship.flight_mode.burn')}
             </Dropdown.RadioItem>
           )}
         </ShipActions.FlightMode>
 
-        <ShipActions.FlightMode ship={ship} flightMode="DRIFT">
+        <ShipActions.FlightMode ship={ship} flightMode={ShipFlightMode.Drift}>
           {({ execute, disabled }) => (
-            <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value="DRIFT">
+            <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value={ShipFlightMode.Drift}>
               {t('ship.flight_mode.drift')}
             </Dropdown.RadioItem>
           )}
         </ShipActions.FlightMode>
 
-        <ShipActions.FlightMode ship={ship} flightMode="STEALTH">
+        <ShipActions.FlightMode ship={ship} flightMode={ShipFlightMode.Stealth}>
           {({ execute, disabled }) => (
-            <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value="STEALTH">
+            <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value={ShipFlightMode.Stealth}>
               {t('ship.flight_mode.stealth')}
             </Dropdown.RadioItem>
           )}

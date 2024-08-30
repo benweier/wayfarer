@@ -6,6 +6,15 @@ export const ShipNavStatus = {
 
 export type ShipNavStatus = Values<typeof ShipNavStatus>
 
+export const ShipFlightMode = {
+  Cruise: 'CRUISE',
+  Burn: 'BURN',
+  Stealth: 'STEALTH',
+  Drift: 'DRIFT',
+}
+
+export type ShipFlightMode = Values<typeof ShipFlightMode>
+
 export const WaypointTypes = {
   Planet: 'PLANET',
   GasGiant: 'GAS_GIANT',
