@@ -21,7 +21,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
         aria-label={t('general.first_page')}
       >
         <AppIcon id="chevron:double-left" className="size-5" />
-        <span className="sr-only">Page 1</span>
+        <span className="sr-only">{t('general.page_number', { value: min })}</span>
       </Button>
       <Button
         key="previous"
@@ -32,7 +32,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
         aria-label={t('general.previous_page')}
       >
         <AppIcon id="chevron:left" className="size-5" />
-        <span className="sr-only">Page {current - 1}</span>
+        <span className="sr-only">{t('general.page_number', { value: current - 1 })}</span>
       </Button>
 
       {pages.map((page) => (
@@ -57,7 +57,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
         aria-label={t('general.next_page')}
       >
         <AppIcon id="chevron:right" className="size-5" />
-        <span className="sr-only">Page {current + 1}</span>
+        <span className="sr-only">{t('general.page_number', { value: current + 1 })}</span>
       </Button>
       <Button
         key="last"
@@ -68,7 +68,7 @@ export const Pagination = ({ current, min = 1, max, length = 5, onChange }: Pagi
         aria-label={t('general.last_page')}
       >
         <AppIcon id="chevron:double-right" className="size-5" />
-        <span className="sr-only">Page {max}</span>
+        <span className="sr-only">{t('general.page_number', { value: max })}</span>
       </Button>
     </div>
   )
