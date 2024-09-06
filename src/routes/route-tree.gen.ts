@@ -337,40 +337,257 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRouteRoute,
-  AuthRouteRoute: AuthRouteRoute.addChildren({
-    AuthLoginRouteRoute,
-    AuthLogoutRouteRoute,
-    AuthRegisterRouteRoute,
-  }),
-  DashboardRouteRoute: DashboardRouteRoute.addChildren({
-    DashboardAuthenticatedRouteRoute:
-      DashboardAuthenticatedRouteRoute.addChildren({
-        DashboardAuthenticatedContractsRouteRoute,
-        DashboardAuthenticatedFleetRouteRoute:
-          DashboardAuthenticatedFleetRouteRoute.addChildren({
-            DashboardAuthenticatedFleetShipSymbolRouteRoute:
-              DashboardAuthenticatedFleetShipSymbolRouteRoute.addChildren({
-                DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute:
-                  DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute.addChildren(
-                    {
-                      DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute,
-                    },
-                  ),
-              }),
-            DashboardAuthenticatedFleetIndexRouteRoute,
-          }),
-        DashboardAuthenticatedSurveysRouteRoute,
-      }),
-    DashboardLeaderboardRouteRoute,
-    DashboardAgentsAgentSymbolRouteRoute,
-    DashboardAgentsIndexRouteRoute,
-    DashboardSystemsIndexRouteRoute,
+interface AuthRouteRouteChildren {
+  AuthLoginRouteRoute: typeof AuthLoginRouteRoute
+  AuthLogoutRouteRoute: typeof AuthLogoutRouteRoute
+  AuthRegisterRouteRoute: typeof AuthRegisterRouteRoute
+}
+
+const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthLoginRouteRoute: AuthLoginRouteRoute,
+  AuthLogoutRouteRoute: AuthLogoutRouteRoute,
+  AuthRegisterRouteRoute: AuthRegisterRouteRoute,
+}
+
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
+  AuthRouteRouteChildren,
+)
+
+interface DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteChildren {
+  DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute: typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute
+}
+
+const DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteChildren: DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteChildren =
+  {
+    DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute:
+      DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute,
+  }
+
+const DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteWithChildren =
+  DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute._addFileChildren(
+    DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteChildren,
+  )
+
+interface DashboardAuthenticatedFleetShipSymbolRouteRouteChildren {
+  DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute: typeof DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteWithChildren
+}
+
+const DashboardAuthenticatedFleetShipSymbolRouteRouteChildren: DashboardAuthenticatedFleetShipSymbolRouteRouteChildren =
+  {
+    DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute:
+      DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteWithChildren,
+  }
+
+const DashboardAuthenticatedFleetShipSymbolRouteRouteWithChildren =
+  DashboardAuthenticatedFleetShipSymbolRouteRoute._addFileChildren(
+    DashboardAuthenticatedFleetShipSymbolRouteRouteChildren,
+  )
+
+interface DashboardAuthenticatedFleetRouteRouteChildren {
+  DashboardAuthenticatedFleetShipSymbolRouteRoute: typeof DashboardAuthenticatedFleetShipSymbolRouteRouteWithChildren
+  DashboardAuthenticatedFleetIndexRouteRoute: typeof DashboardAuthenticatedFleetIndexRouteRoute
+}
+
+const DashboardAuthenticatedFleetRouteRouteChildren: DashboardAuthenticatedFleetRouteRouteChildren =
+  {
+    DashboardAuthenticatedFleetShipSymbolRouteRoute:
+      DashboardAuthenticatedFleetShipSymbolRouteRouteWithChildren,
+    DashboardAuthenticatedFleetIndexRouteRoute:
+      DashboardAuthenticatedFleetIndexRouteRoute,
+  }
+
+const DashboardAuthenticatedFleetRouteRouteWithChildren =
+  DashboardAuthenticatedFleetRouteRoute._addFileChildren(
+    DashboardAuthenticatedFleetRouteRouteChildren,
+  )
+
+interface DashboardAuthenticatedRouteRouteChildren {
+  DashboardAuthenticatedContractsRouteRoute: typeof DashboardAuthenticatedContractsRouteRoute
+  DashboardAuthenticatedFleetRouteRoute: typeof DashboardAuthenticatedFleetRouteRouteWithChildren
+  DashboardAuthenticatedSurveysRouteRoute: typeof DashboardAuthenticatedSurveysRouteRoute
+}
+
+const DashboardAuthenticatedRouteRouteChildren: DashboardAuthenticatedRouteRouteChildren =
+  {
+    DashboardAuthenticatedContractsRouteRoute:
+      DashboardAuthenticatedContractsRouteRoute,
+    DashboardAuthenticatedFleetRouteRoute:
+      DashboardAuthenticatedFleetRouteRouteWithChildren,
+    DashboardAuthenticatedSurveysRouteRoute:
+      DashboardAuthenticatedSurveysRouteRoute,
+  }
+
+const DashboardAuthenticatedRouteRouteWithChildren =
+  DashboardAuthenticatedRouteRoute._addFileChildren(
+    DashboardAuthenticatedRouteRouteChildren,
+  )
+
+interface DashboardRouteRouteChildren {
+  DashboardAuthenticatedRouteRoute: typeof DashboardAuthenticatedRouteRouteWithChildren
+  DashboardLeaderboardRouteRoute: typeof DashboardLeaderboardRouteRoute
+  DashboardAgentsAgentSymbolRouteRoute: typeof DashboardAgentsAgentSymbolRouteRoute
+  DashboardAgentsIndexRouteRoute: typeof DashboardAgentsIndexRouteRoute
+  DashboardSystemsIndexRouteRoute: typeof DashboardSystemsIndexRouteRoute
+  DashboardSystemsSystemSymbolIndexRouteRoute: typeof DashboardSystemsSystemSymbolIndexRouteRoute
+  DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute: typeof DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute
+}
+
+const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
+  DashboardAuthenticatedRouteRoute:
+    DashboardAuthenticatedRouteRouteWithChildren,
+  DashboardLeaderboardRouteRoute: DashboardLeaderboardRouteRoute,
+  DashboardAgentsAgentSymbolRouteRoute: DashboardAgentsAgentSymbolRouteRoute,
+  DashboardAgentsIndexRouteRoute: DashboardAgentsIndexRouteRoute,
+  DashboardSystemsIndexRouteRoute: DashboardSystemsIndexRouteRoute,
+  DashboardSystemsSystemSymbolIndexRouteRoute:
     DashboardSystemsSystemSymbolIndexRouteRoute,
+  DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute:
     DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute,
-  }),
-})
+}
+
+const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
+  DashboardRouteRouteChildren,
+)
+
+interface FileRoutesByFullPath {
+  '/': typeof IndexRouteRoute
+  '': typeof DashboardAuthenticatedRouteRouteWithChildren
+  '/login': typeof AuthLoginRouteRoute
+  '/logout': typeof AuthLogoutRouteRoute
+  '/register': typeof AuthRegisterRouteRoute
+  '/leaderboard': typeof DashboardLeaderboardRouteRoute
+  '/contracts': typeof DashboardAuthenticatedContractsRouteRoute
+  '/fleet': typeof DashboardAuthenticatedFleetRouteRouteWithChildren
+  '/surveys': typeof DashboardAuthenticatedSurveysRouteRoute
+  '/agents/$agentSymbol': typeof DashboardAgentsAgentSymbolRouteRoute
+  '/agents': typeof DashboardAgentsIndexRouteRoute
+  '/systems': typeof DashboardSystemsIndexRouteRoute
+  '/fleet/$shipSymbol': typeof DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteWithChildren
+  '/fleet/': typeof DashboardAuthenticatedFleetIndexRouteRoute
+  '/systems/$systemSymbol': typeof DashboardSystemsSystemSymbolIndexRouteRoute
+  '/systems/$systemSymbol/waypoint/$waypointSymbol': typeof DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute
+  '/fleet/$shipSymbol/market': typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute
+}
+
+interface FileRoutesByTo {
+  '/': typeof IndexRouteRoute
+  '': typeof DashboardAuthenticatedRouteRouteWithChildren
+  '/login': typeof AuthLoginRouteRoute
+  '/logout': typeof AuthLogoutRouteRoute
+  '/register': typeof AuthRegisterRouteRoute
+  '/leaderboard': typeof DashboardLeaderboardRouteRoute
+  '/contracts': typeof DashboardAuthenticatedContractsRouteRoute
+  '/surveys': typeof DashboardAuthenticatedSurveysRouteRoute
+  '/agents/$agentSymbol': typeof DashboardAgentsAgentSymbolRouteRoute
+  '/agents': typeof DashboardAgentsIndexRouteRoute
+  '/systems': typeof DashboardSystemsIndexRouteRoute
+  '/fleet/$shipSymbol': typeof DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteWithChildren
+  '/fleet': typeof DashboardAuthenticatedFleetIndexRouteRoute
+  '/systems/$systemSymbol': typeof DashboardSystemsSystemSymbolIndexRouteRoute
+  '/systems/$systemSymbol/waypoint/$waypointSymbol': typeof DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute
+  '/fleet/$shipSymbol/market': typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute
+}
+
+interface FileRoutesById {
+  '/': typeof IndexRouteRoute
+  '/_auth': typeof AuthRouteRouteWithChildren
+  '/_dashboard': typeof DashboardRouteRouteWithChildren
+  '/_auth/login': typeof AuthLoginRouteRoute
+  '/_auth/logout': typeof AuthLogoutRouteRoute
+  '/_auth/register': typeof AuthRegisterRouteRoute
+  '/_dashboard/_authenticated': typeof DashboardAuthenticatedRouteRouteWithChildren
+  '/_dashboard/leaderboard': typeof DashboardLeaderboardRouteRoute
+  '/_dashboard/_authenticated/contracts': typeof DashboardAuthenticatedContractsRouteRoute
+  '/_dashboard/_authenticated/fleet': typeof DashboardAuthenticatedFleetRouteRouteWithChildren
+  '/_dashboard/_authenticated/surveys': typeof DashboardAuthenticatedSurveysRouteRoute
+  '/_dashboard/agents/$agentSymbol': typeof DashboardAgentsAgentSymbolRouteRoute
+  '/_dashboard/agents/': typeof DashboardAgentsIndexRouteRoute
+  '/_dashboard/systems/': typeof DashboardSystemsIndexRouteRoute
+  '/_dashboard/_authenticated/fleet/$shipSymbol': typeof DashboardAuthenticatedFleetShipSymbolRouteRouteWithChildren
+  '/_dashboard/_authenticated/fleet/': typeof DashboardAuthenticatedFleetIndexRouteRoute
+  '/_dashboard/systems/$systemSymbol/': typeof DashboardSystemsSystemSymbolIndexRouteRoute
+  '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay': typeof DashboardAuthenticatedFleetShipSymbolOverlayRouteRouteWithChildren
+  '/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol': typeof DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute
+  '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market': typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute
+}
+
+interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | ''
+    | '/login'
+    | '/logout'
+    | '/register'
+    | '/leaderboard'
+    | '/contracts'
+    | '/fleet'
+    | '/surveys'
+    | '/agents/$agentSymbol'
+    | '/agents'
+    | '/systems'
+    | '/fleet/$shipSymbol'
+    | '/fleet/'
+    | '/systems/$systemSymbol'
+    | '/systems/$systemSymbol/waypoint/$waypointSymbol'
+    | '/fleet/$shipSymbol/market'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | ''
+    | '/login'
+    | '/logout'
+    | '/register'
+    | '/leaderboard'
+    | '/contracts'
+    | '/surveys'
+    | '/agents/$agentSymbol'
+    | '/agents'
+    | '/systems'
+    | '/fleet/$shipSymbol'
+    | '/fleet'
+    | '/systems/$systemSymbol'
+    | '/systems/$systemSymbol/waypoint/$waypointSymbol'
+    | '/fleet/$shipSymbol/market'
+  id:
+    | '/'
+    | '/_auth'
+    | '/_dashboard'
+    | '/_auth/login'
+    | '/_auth/logout'
+    | '/_auth/register'
+    | '/_dashboard/_authenticated'
+    | '/_dashboard/leaderboard'
+    | '/_dashboard/_authenticated/contracts'
+    | '/_dashboard/_authenticated/fleet'
+    | '/_dashboard/_authenticated/surveys'
+    | '/_dashboard/agents/$agentSymbol'
+    | '/_dashboard/agents/'
+    | '/_dashboard/systems/'
+    | '/_dashboard/_authenticated/fleet/$shipSymbol'
+    | '/_dashboard/_authenticated/fleet/'
+    | '/_dashboard/systems/$systemSymbol/'
+    | '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay'
+    | '/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol'
+    | '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market'
+  fileRoutesById: FileRoutesById
+}
+
+interface RootRouteChildren {
+  IndexRouteRoute: typeof IndexRouteRoute
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren
+  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRouteRoute: IndexRouteRoute,
+  AuthRouteRoute: AuthRouteRouteWithChildren,
+  DashboardRouteRoute: DashboardRouteRouteWithChildren,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
