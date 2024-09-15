@@ -7,10 +7,10 @@ export const Scrollbar = ({
 }) => {
   return (
     <ScrollArea.Scrollbar
-      className="bg-background-secondary flex touch-none rounded-tr-md rounded-br-md p-0.5 transition-colors duration-100 ease-out select-none data-[orientation=vertical]:w-3 data-[orientation=horizontal]:h-3"
+      className="z-50 flex touch-none select-none bg-background-secondary p-0.5 transition-colors duration-100 ease-out data-[orientation=horizontal]:h-3 data-[orientation=vertical]:w-3"
       orientation={orientation}
     >
-      <ScrollArea.Thumb className="bg-background-quaternary relative flex-1 rounded-full" />
+      <ScrollArea.Thumb className="relative flex-1 rounded-full bg-background-quaternary hover:cursor-pointer" />
     </ScrollArea.Scrollbar>
   )
 }

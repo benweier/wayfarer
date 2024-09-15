@@ -6,7 +6,7 @@ export const Viewport = ({ className, children }: PropsWithChildren<WithClassNam
   return (
     <ScrollArea.Viewport
       className={cx(
-        'relative h-full w-full max-h-[var(--scroll-area-max-height)] max-w-[var(--scroll-area-max-width)]',
+        'relative h-full max-h-[var(--scroll-area-max-height)] w-full max-w-[var(--scroll-area-max-width)]',
         className,
       )}
     >
