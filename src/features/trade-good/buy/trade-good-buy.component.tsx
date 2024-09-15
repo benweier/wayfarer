@@ -69,27 +69,31 @@ export const TradeGoodBuy = ({
       trigger={<Modal.Trigger disabled={disabled || good.tradeVolume === 0 || noCapacity}>{trigger}</Modal.Trigger>}
       close={<Modal.Close />}
     >
-      <Modal.Header>
-        <Modal.Title>
-          {t('market.buy')}: <span className="font-light">{t(good.symbol, { ns: 'spacetraders.trade_good' })}</span>
-        </Modal.Title>
-      </Modal.Header>
+      <Modal.Content
+        header={
+          <Modal.Header>
+            <Modal.Title>
+              {t('market.buy')}: <span className="font-light">{t(good.symbol, { ns: 'spacetraders.trade_good' })}</span>
+            </Modal.Title>
+          </Modal.Header>
+        }
+      >
+        <div className="space-y-8">
+          <TradeGoodInfo price={good.purchasePrice} volume={good.tradeVolume} supply={good.supply} />
 
-      <div className="space-y-8">
-        <TradeGoodInfo price={good.purchasePrice} volume={good.tradeVolume} supply={good.supply} />
-
-        <TradeGoodBuyForm
-          ship={ship}
-          good={good}
-          onSubmit={(values) =>
-            mutateAsync({
-              shipSymbol: values.ship,
-              itemSymbol: values.item,
-              units: values.quantity,
-            })
-          }
-        />
-      </div>
+          <TradeGoodBuyForm
+            ship={ship}
+            good={good}
+            onSubmit={(values) =>
+              mutateAsync({
+                shipSymbol: values.ship,
+                itemSymbol: values.item,
+                units: values.quantity,
+              })
+            }
+          />
+        </div>
+      </Modal.Content>
     </Modal>
   )
 }
