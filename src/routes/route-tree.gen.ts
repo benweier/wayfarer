@@ -449,7 +449,7 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
   DashboardRouteRouteChildren,
 )
 
-interface FileRoutesByFullPath {
+export interface FileRoutesByFullPath {
   '/': typeof IndexRouteRoute
   '': typeof DashboardAuthenticatedRouteRouteWithChildren
   '/login': typeof AuthLoginRouteRoute
@@ -469,7 +469,7 @@ interface FileRoutesByFullPath {
   '/fleet/$shipSymbol/market': typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute
 }
 
-interface FileRoutesByTo {
+export interface FileRoutesByTo {
   '/': typeof IndexRouteRoute
   '': typeof DashboardAuthenticatedRouteRouteWithChildren
   '/login': typeof AuthLoginRouteRoute
@@ -488,7 +488,8 @@ interface FileRoutesByTo {
   '/fleet/$shipSymbol/market': typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute
 }
 
-interface FileRoutesById {
+export interface FileRoutesById {
+  __root__: typeof rootRoute
   '/': typeof IndexRouteRoute
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_dashboard': typeof DashboardRouteRouteWithChildren
@@ -511,7 +512,7 @@ interface FileRoutesById {
   '/_dashboard/_authenticated/fleet/$shipSymbol/_overlay/market': typeof DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute
 }
 
-interface FileRouteTypes {
+export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
@@ -550,6 +551,7 @@ interface FileRouteTypes {
     | '/systems/$systemSymbol/waypoint/$waypointSymbol'
     | '/fleet/$shipSymbol/market'
   id:
+    | '__root__'
     | '/'
     | '/_auth'
     | '/_dashboard'
@@ -573,7 +575,7 @@ interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 
-interface RootRouteChildren {
+export interface RootRouteChildren {
   IndexRouteRoute: typeof IndexRouteRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
