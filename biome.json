@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -21,6 +24,9 @@
   "linter": {
     "rules": {
       "recommended": true,
+      "nursery": {
+        "useSortedClasses": "warn"
+      },
       "complexity": {
         "noBannedTypes": "error",
         "noExcessiveCognitiveComplexity": "error",
