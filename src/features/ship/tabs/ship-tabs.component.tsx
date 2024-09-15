@@ -30,12 +30,7 @@ export const ShipTabs = () => {
       <Tabs.Content value="resources">
         <div className="space-y-4">
           <ShipResources ship={ship} />
-          <SurveyContext
-            value={{
-              Extract: SurveyActions.Extract,
-              Discard: SurveyActions.Discard,
-            }}
-          >
+          <SurveyContext value={SurveyActions}>
             <SurveyList
               predicate={(survey) => {
                 return survey.symbol === ship.nav.waypointSymbol
