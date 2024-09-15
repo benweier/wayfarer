@@ -1,4 +1,3 @@
-import * as ScrollArea from '@/components/scroll-area'
 import * as Dialog from '@radix-ui/react-dialog'
 import { cx } from 'class-variance-authority'
 import type { PropsWithChildren } from 'react'
@@ -34,28 +33,23 @@ export const Root = ({
             event.preventDefault()
           }}
           style={{
-            '--dialog-content-max-height': '85vh',
+            '--dialog-content-max-height': '85dvh',
           }}
           className={cx(
-            'popover bg-background-primary border-1 border-border-secondary ring-border-primary/20 fixed top-1/2 left-1/2 z-50 max-h-[var(--dialog-content-max-height)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl ring-3 focus:outline-none',
+            'popover -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 flex max-h-[var(--dialog-content-max-height)] flex-col overflow-hidden rounded-xl border-1 border-border-secondary bg-background-primary ring-3 ring-border-primary/20 focus:outline-none',
             {
               'w-auto': size === 'auto',
               'w-screen': size === 'full',
-              'max-w-screen-sm w-full': size === 'sm',
-              'max-w-screen-md w-full': size === 'md',
-              'max-w-screen-lg w-full': size === 'lg',
-              'max-w-screen-xl w-full': size === 'xl',
+              'w-full max-w-screen-sm': size === 'sm',
+              'w-full max-w-screen-md': size === 'md',
+              'w-full max-w-screen-lg': size === 'lg',
+              'w-full max-w-screen-xl': size === 'xl',
             },
           )}
           aria-describedby={undefined}
         >
-          <ScrollArea.Root height="var(--dialog-content-max-height)">
-            <ScrollArea.Viewport className="p-6">
-              {children}
-              {close && <div className="absolute top-7 right-6">{close}</div>}
-            </ScrollArea.Viewport>
-            <ScrollArea.Scrollbar orientation="vertical" />
-          </ScrollArea.Root>
+          {children}
+          {close && <div className="absolute top-7 right-6 z-50">{close}</div>}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
