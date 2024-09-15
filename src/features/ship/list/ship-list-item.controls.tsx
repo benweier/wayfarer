@@ -122,15 +122,17 @@ export const ShipControls = ({ ship }: { ship: ShipResponse }) => {
         </FloatingPortal>
       </Menu>
       <Modal ref={ref} size="lg" close={<Modal.Close />}>
-        <div className="space-y-8">
-          <h3 className="text-title">
-            Navigate Ship: <span className="font-normal">{ship.symbol}</span>
-          </h3>
-
+        <Modal.Content
+          header={
+            <h3 className="text-title">
+              Navigate Ship: <span className="font-normal">{ship.symbol}</span>
+            </h3>
+          }
+        >
           <QuerySuspenseBoundary fallback={<WaypointNavigationFallback />}>
             <WaypointNavigation ship={ship} />
           </QuerySuspenseBoundary>
-        </div>
+        </Modal.Content>
       </Modal>
     </>
   )

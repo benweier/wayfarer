@@ -19,15 +19,19 @@ export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
       close={<Modal.Close />}
       trigger={<Modal.Trigger disabled={ship.nav.status !== ShipNavStatus.InOrbit}>{trigger}</Modal.Trigger>}
     >
-      <Modal.Header>
-        <Modal.Title>
-          Warp Ship: <span className="font-normal">{ship.symbol}</span>
-        </Modal.Title>
-      </Modal.Header>
-
-      <QuerySuspenseBoundary>
-        <Warp ship={ship} />
-      </QuerySuspenseBoundary>
+      <Modal.Content
+        header={
+          <Modal.Header>
+            <Modal.Title>
+              Warp Ship: <span className="font-normal">{ship.symbol}</span>
+            </Modal.Title>
+          </Modal.Header>
+        }
+      >
+        <QuerySuspenseBoundary>
+          <Warp ship={ship} />
+        </QuerySuspenseBoundary>
+      </Modal.Content>
     </Modal>
   )
 }

@@ -23,13 +23,15 @@ export const ShipMarketRoute = () => {
   )
 
   return (
-    <>
-      <Modal.Header>
-        <Modal.Title>
-          {t('market.label')}: <span className="font-normal">{ship.nav.waypointSymbol}</span>
-        </Modal.Title>
-      </Modal.Header>
-
+    <Modal.Content
+      header={
+        <Modal.Header>
+          <Modal.Title>
+            {t('market.label')}: <span className="font-normal">{ship.nav.waypointSymbol}</span>
+          </Modal.Title>
+        </Modal.Header>
+      }
+    >
       <WaypointContext value={waypoint.data.data}>
         <div className="space-y-4">
           <WaypointMarketPreferences />
@@ -39,6 +41,6 @@ export const ShipMarketRoute = () => {
           </QuerySuspenseBoundary>
         </div>
       </WaypointContext>
-    </>
+    </Modal.Content>
   )
 }

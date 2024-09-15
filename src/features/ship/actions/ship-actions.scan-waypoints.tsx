@@ -29,27 +29,31 @@ export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
         </Button>
       }
     >
-      <Modal.Header>
-        <Modal.Title>
-          Waypoints <span className="font-light">({waypoints.length})</span>
-        </Modal.Title>
-      </Modal.Header>
-
-      <div className="grid gap-2">
-        {waypoints.map((waypoint) => (
-          <div key={waypoint.symbol}>
-            <Link
-              to="/systems/$systemSymbol/waypoint/$waypointSymbol"
-              params={{
-                systemSymbol: waypoint.systemSymbol,
-                waypointSymbol: waypoint.symbol,
-              }}
-            >
-              {waypoint.symbol}
-            </Link>
-          </div>
-        ))}
-      </div>
+      <Modal.Content
+        header={
+          <Modal.Header>
+            <Modal.Title>
+              Waypoints <span className="font-light">({waypoints.length})</span>
+            </Modal.Title>
+          </Modal.Header>
+        }
+      >
+        <div className="grid gap-2">
+          {waypoints.map((waypoint) => (
+            <div key={waypoint.symbol}>
+              <Link
+                to="/systems/$systemSymbol/waypoint/$waypointSymbol"
+                params={{
+                  systemSymbol: waypoint.systemSymbol,
+                  waypointSymbol: waypoint.symbol,
+                }}
+              >
+                {waypoint.symbol}
+              </Link>
+            </div>
+          ))}
+        </div>
+      </Modal.Content>
     </Modal>
   )
 }

@@ -14,15 +14,19 @@ export const ShipTransitNavigate = ({ trigger }: ShipTransitActionProps) => {
       close={<Modal.Close />}
       trigger={<Modal.Trigger disabled={ship.nav.status !== ShipNavStatus.InOrbit}>{trigger}</Modal.Trigger>}
     >
-      <Modal.Header>
-        <Modal.Title>
-          Navigate Ship: <span className="font-normal">{ship.symbol}</span>
-        </Modal.Title>
-      </Modal.Header>
-
-      <QuerySuspenseBoundary fallback={<WaypointNavigationFallback />}>
-        <WaypointNavigation ship={ship} />
-      </QuerySuspenseBoundary>
+      <Modal.Content
+        header={
+          <Modal.Header>
+            <Modal.Title>
+              Navigate Ship: <span className="font-normal">{ship.symbol}</span>
+            </Modal.Title>
+          </Modal.Header>
+        }
+      >
+        <QuerySuspenseBoundary fallback={<WaypointNavigationFallback />}>
+          <WaypointNavigation ship={ship} />
+        </QuerySuspenseBoundary>
+      </Modal.Content>
     </Modal>
   )
 }
