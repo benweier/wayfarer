@@ -16,8 +16,8 @@
   "packageManager": "pnpm@9.8.0",
   "dependencies": {
     "@epic-web/invariant": "^1.0.0",
-    "@floating-ui/react": "^0.26.23",
-    "@floating-ui/react-dom": "^2.1.1",
+    "@floating-ui/react": "^0.26.24",
+    "@floating-ui/react-dom": "^2.1.2",
     "@headlessui/react": "^1.7.19",
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.9.0",
@@ -63,10 +63,10 @@
     "sonner": "^1.5.0",
     "tailwindcss": "4.0.0-alpha.24",
     "use-resize-observer": "^9.1.0",
-    "valibot": "^0.41.0",
+    "valibot": "^0.42.0",
     "vaul": "^0.9.3",
     "xstate": "^5.18.1",
-    "zustand": "5.0.0-rc.1"
+    "zustand": "5.0.0-rc.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
