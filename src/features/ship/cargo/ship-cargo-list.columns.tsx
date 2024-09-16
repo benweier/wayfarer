@@ -28,7 +28,7 @@ export const columns = [
       return (
         <>
           <div>{getValue()}</div>
-          <div className="text-foreground-secondary typography-sm whitespace-pre-wrap">
+          <div className="typography-sm whitespace-pre-wrap text-foreground-secondary">
             {row.original.item.description}
           </div>
         </>
@@ -71,7 +71,7 @@ export const columns = [
         <div className="flex items-center justify-end gap-2">
           <Translation>{(t) => <div>{t('general.header.market_value')}</div>}</Translation>
 
-          <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-4" />}>
+          <Tooltip trigger={<AppIcon id="help" className="size-4 text-foreground-secondary" />}>
             <Translation>{(t) => t('ship.cargo_market_value_tooltip')}</Translation>
           </Tooltip>
         </div>
@@ -80,7 +80,7 @@ export const columns = [
         const value = getValue()
 
         if (value === undefined) {
-          return <div className="text-foreground-secondary typography-sm text-right">-</div>
+          return <div className="typography-sm text-right text-foreground-secondary">-</div>
         }
 
         return <div className="text-right">{formatNumber(value)}</div>
@@ -108,7 +108,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -151,7 +151,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return (

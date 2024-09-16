@@ -25,7 +25,12 @@
     "rules": {
       "recommended": true,
       "nursery": {
-        "useSortedClasses": "warn"
+        "useSortedClasses": {
+          "level": "error",
+          "options": {
+            "functions": ["cx", "cva"]
+          }
+        }
       },
       "complexity": {
         "noBannedTypes": "error",

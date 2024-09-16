@@ -15,8 +15,8 @@ const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   if (ship.nav.status !== ShipNavStatus.InTransit) return null
 
   return (
-    <div className="bg-background-quaternary h-1 grow rounded-full">
-      <div className="bg-background-success-secondary h-full rounded-full" style={{ width: `${transit.progress}%` }} />
+    <div className="h-1 grow rounded-full bg-background-quaternary">
+      <div className="h-full rounded-full bg-background-success-secondary" style={{ width: `${transit.progress}%` }} />
     </div>
   )
 }
@@ -128,7 +128,7 @@ export const columns = [
           <Badge>
             <Translation ns="spacetraders.flight_mode">{(t) => t(row.original.ship.nav.flightMode)}</Translation>
           </Badge>
-          <div className="absolute inset-x-0 -bottom-1.5">
+          <div className="-bottom-1.5 absolute inset-x-0">
             <TransitStatusPreview ship={row.original.ship} />
           </div>
         </div>
@@ -155,7 +155,7 @@ export const columns = [
       return (
         <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
-            <ShipIcon id="fuel" className="text-foreground-fuel size-4" />
+            <ShipIcon id="fuel" className="size-4 text-foreground-fuel" />
             <div className="typography-sm font-semibold">
               {fuel.capacity === 0 ? (
                 <AppIcon id="infinity" className="size-5" aria-label="Infinite" />
@@ -164,9 +164,9 @@ export const columns = [
               )}
             </div>
           </div>
-          <div className="bg-background-fuel/30 h-1 w-full max-w-[100px] rounded-full">
+          <div className="h-1 w-full max-w-[100px] rounded-full bg-background-fuel/30">
             <div
-              className="bg-foreground-fuel h-1 rounded-full"
+              className="h-1 rounded-full bg-foreground-fuel"
               style={{ width: `${(fuel.current / fuel.capacity) * 100}%` }}
             />
           </div>
@@ -215,9 +215,9 @@ export const columns = [
               {cargo.units} / {cargo.capacity}
             </div>
           </div>
-          <div className="bg-background-cargo/30 h-1 w-full max-w-[100px] rounded-full">
+          <div className="h-1 w-full max-w-[100px] rounded-full bg-background-cargo/30">
             <div
-              className="bg-foreground-cargo h-1 rounded-full"
+              className="h-1 rounded-full bg-foreground-cargo"
               style={{ width: `${(cargo.units / cargo.capacity) * 100}%` }}
             />
           </div>

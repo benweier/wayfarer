@@ -18,7 +18,7 @@ export const ShipResources = ({ ship }: { ship: ShipResponse }) => {
   const canSiphon = waypointQuery.data?.data.type === 'GAS_GIANT'
 
   return (
-    <div className="border-border-primary flex flex-col items-center justify-center gap-4 rounded border-2 border-dashed py-9 px-3">
+    <div className="flex flex-col items-center justify-center gap-4 rounded border-2 border-border-primary border-dashed px-3 py-9">
       <div className="flex gap-2">
         <ShipActions.Survey ship={ship} disabled={!canSurveyExtract}>
           {({ disabled, execute }) => (

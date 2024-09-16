@@ -8,7 +8,7 @@ export const Field = ({ trigger, children }: PropsWithChildren<{ trigger: ReactN
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="popover bg-background-primary border-border-primary relative z-50 rounded-md border p-2 space-y-1"
+          className="popover relative z-50 space-y-1 rounded-md border border-border-primary bg-background-primary p-2"
           sideOffset={8}
         >
           {children}

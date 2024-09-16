@@ -16,8 +16,8 @@ export const WaypointJumpGateItem = ({ system }: WaypointJumpGateItemProps) => {
         </Link>
       </div>
       <div className="flex items-center justify-between gap-4">
-        <div className="text-foreground-secondary typography-sm">Distance: {system.distance}</div>
-        <div className="text-foreground-secondary typography-sm">
+        <div className="typography-sm text-foreground-secondary">Distance: {system.distance}</div>
+        <div className="typography-sm text-foreground-secondary">
           ({system.x}, {system.y})
         </div>
       </div>

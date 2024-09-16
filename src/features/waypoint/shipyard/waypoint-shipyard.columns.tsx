@@ -53,7 +53,7 @@ export const columns = [
         <div className="h-full space-y-2">
           <Translation>{(t) => <div>{t(value, { ns: 'spacetraders.ship_type' })}</div>}</Translation>
           {row.original.ship && (
-            <div className="text-foreground-secondary typography-sm whitespace-break-spaces">
+            <div className="typography-sm whitespace-break-spaces text-foreground-secondary">
               {row.original.ship.description}
             </div>
           )}
@@ -73,7 +73,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -81,26 +81,26 @@ export const columns = [
           <div className="flex items-center justify-end gap-2">
             <div className="typography-sm text-center">{value.name}</div>
 
-            <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-5" />}>
+            <Tooltip trigger={<AppIcon id="help" className="size-5 text-foreground-secondary" />}>
               {value.description}
             </Tooltip>
           </div>
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
-                <ShipIcon id="power" className="text-foreground-secondary size-4" />
+                <ShipIcon id="power" className="size-4 text-foreground-secondary" />
                 <div className="typography-sm">{value.requirements.power}</div>
               </div>
               <div className="flex items-center gap-2">
-                <ShipIcon id="fuel" className="text-foreground-secondary size-4" />
+                <ShipIcon id="fuel" className="size-4 text-foreground-secondary" />
                 <div className="typography-sm">{value.fuelCapacity}</div>
               </div>
               <div className="flex items-center gap-2">
-                <ShipIcon id="modules" className="text-foreground-secondary size-4" />
+                <ShipIcon id="modules" className="size-4 text-foreground-secondary" />
                 <div className="typography-sm">{value.moduleSlots}</div>
               </div>
               <div className="flex items-center gap-2">
-                <ShipIcon id="mounts" className="text-foreground-secondary size-4" />
+                <ShipIcon id="mounts" className="size-4 text-foreground-secondary" />
                 <div className="typography-sm">{value.mountingPoints}</div>
               </div>
             </div>
@@ -118,7 +118,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -126,7 +126,7 @@ export const columns = [
           <div className="flex items-center justify-end gap-2">
             <div className="typography-sm text-center">{value.name}</div>
 
-            <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-5" />}>
+            <Tooltip trigger={<AppIcon id="help" className="size-5 text-foreground-secondary" />}>
               {value.description}
             </Tooltip>
           </div>
@@ -134,11 +134,11 @@ export const columns = [
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
-                <ShipIcon id="power" className="text-foreground-secondary size-4" />
+                <ShipIcon id="power" className="size-4 text-foreground-secondary" />
                 <div className="typography-sm">{value.requirements.power}</div>
               </div>
               <div className="flex items-center gap-2">
-                <ShipIcon id="speed" className="text-foreground-secondary size-4" />
+                <ShipIcon id="speed" className="size-4 text-foreground-secondary" />
                 <div className="typography-sm">{value.speed}</div>
               </div>
             </div>
@@ -156,7 +156,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -164,7 +164,7 @@ export const columns = [
           <div className="flex items-center justify-end gap-2">
             <div className="typography-sm text-center">{value.name}</div>
 
-            <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-5" />}>
+            <Tooltip trigger={<AppIcon id="help" className="size-5 text-foreground-secondary" />}>
               {value.description}
             </Tooltip>
           </div>
@@ -172,7 +172,7 @@ export const columns = [
           <div className="rounded-md bg-zinc-500/10 p-2">
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2">
-                <ShipIcon id="power" className="text-foreground-secondary size-4" />
+                <ShipIcon id="power" className="size-4 text-foreground-secondary" />
                 <div className="typography-sm">{value.powerOutput}</div>
               </div>
             </div>
@@ -199,7 +199,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return <BuyShip ship={row.original.ship} />

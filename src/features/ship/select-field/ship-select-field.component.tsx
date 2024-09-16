@@ -18,12 +18,12 @@ export const ShipSelectField = <T extends Record<string, unknown>>({
   const { t } = useTranslation()
   const { data, isSuccess } = useQuery({ ...getShipListQuery(), select: (response) => getShipList(response.data) })
   const ships: ReadonlyMap<string, ShipSelectItem<T>> = isSuccess ? data.reduce(getShipItem, new Map()) : new Map()
-  const selected = value && ships.has(value) ? ships.get(value) : undefined
+  const selected = value ? ships.get(value) : undefined
 
   return (
     <Select.Field
       id={name}
-      selected={selected && <Selection {...selected} />}
+      selected={selected ? <Selection {...selected} /> : null}
       placeholder={t('ship.select_placeholder')}
       onChange={onChange}
       onBlur={onBlur}

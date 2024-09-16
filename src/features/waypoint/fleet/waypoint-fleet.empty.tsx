@@ -8,7 +8,7 @@ export const WaypointFleetEmpty = ({ waypoint }: { waypoint: WaypointResponse })
   const { isAuthenticated } = useAuthStore()
 
   return (
-    <div className="border-border-primary rounded border-2 border-dashed py-9 px-3">
+    <div className="rounded border-2 border-border-primary border-dashed px-3 py-9">
       <div className="text-center">
         <Trans
           i18nKey="waypoint.fleet"

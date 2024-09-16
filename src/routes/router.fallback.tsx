@@ -1,5 +1,5 @@
 export const Fallback = () => (
-  <div className="display-xl text-foreground-quinary flex h-screen w-full animate-pulse items-center justify-center font-black">
+  <div className="display-xl flex h-screen w-full animate-pulse items-center justify-center font-black text-foreground-quinary">
     <div>Wayfarer</div>
   </div>
 )

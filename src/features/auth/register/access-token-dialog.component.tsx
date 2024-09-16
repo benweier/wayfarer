@@ -57,7 +57,7 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
             </div>
           </div>
         </div>
-        <div className="text-foreground-warning-primary flex flex-col items-center justify-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-2 text-foreground-warning-primary">
           <AppIcon id="alert" className="size-8" />
 
           <span className="typography-lg text-center font-semibold">

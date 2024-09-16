@@ -19,7 +19,7 @@ export const DesktopNavigation = () => {
           <Link
             key={item.key}
             to={item.to}
-            className="relative flex w-full max-w-full items-center gap-4 rounded-md border-2 border-blue-600 py-2 px-3 font-medium text-white transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 @[220px]/side:w-full [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-800"
+            className="relative flex @[220px]/side:w-full w-full max-w-full items-center gap-4 rounded-md border-2 border-blue-600 px-3 py-2 font-medium text-white transition-all duration-100 hover:scale-105 hover:bg-blue-50/10 hover:shadow-sm active:scale-100 [&.active]:bg-blue-50/20 [&.active]:text-white [&.active]:shadow [&.active]:shadow-blue-800"
           >
             {item.auth && !isAuthenticated && (
               <span className="absolute top-0 left-0 rounded-full bg-blue-100 p-1 text-blue-950">

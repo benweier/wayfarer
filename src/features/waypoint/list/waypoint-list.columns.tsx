@@ -78,7 +78,7 @@ export const columns = [
             <Sort column={column} type="numeric" />
           </div>
 
-          <Tooltip trigger={<AppIcon id="help" className="text-foreground-secondary size-5" />}>
+          <Tooltip trigger={<AppIcon id="help" className="size-5 text-foreground-secondary" />}>
             <Translation>{(t) => t('waypoint.sort_coordinates_tooltip')}</Translation>
           </Tooltip>
         </div>
@@ -86,7 +86,7 @@ export const columns = [
     },
     cell: ({ getValue }) => {
       const { x, y } = getValue()
-      return <div className="text-foreground-secondary typography-sm text-left">{`${x}, ${y}`}</div>
+      return <div className="typography-sm text-left text-foreground-secondary">{`${x}, ${y}`}</div>
     },
     sortingFn: (a, b) => {
       const ad = a.original.waypoint.x ** 2 + a.original.waypoint.y ** 2

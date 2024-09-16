@@ -54,7 +54,7 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
   return (
     <div className="flex flex-wrap items-center gap-12">
       <div className="[max-width:50%]">
-        <div className="text-foreground-secondary typography-sm">{t('market.sell_price')}</div>
+        <div className="typography-sm text-foreground-secondary">{t('market.sell_price')}</div>
         <div className="typography-xl truncate font-bold">
           {Number.isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}
         </div>

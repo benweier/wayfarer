@@ -76,12 +76,12 @@ export const SystemWaypointsCell = ({
   }
 
   return (
-    <div className="relative isolate list-none -space-y-1.5">
+    <div className="-space-y-1.5 relative isolate list-none">
       {pages.map((page, index) => {
         const key = `page-${index}`
 
         return (
-          <div key={key} className="flex items-center justify-end -space-x-1.5">
+          <div key={key} className="-space-x-1.5 flex items-center justify-end">
             {page.map((waypoint) => {
               if (waypoint.type !== 'ASTEROID') {
                 return (
@@ -92,7 +92,7 @@ export const SystemWaypointsCell = ({
                   >
                     <WaypointTag
                       type={waypoint.type}
-                      className="border-border-primary flex size-7 items-center justify-center border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125"
+                      className="flex size-7 items-center justify-center border-2 border-border-primary transition duration-100 ease-in-out hover:z-0 hover:scale-125"
                       style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
                     >
                       <span className="typography-sm font-medium" aria-hidden="true">
@@ -112,7 +112,7 @@ export const SystemWaypointsCell = ({
                 <Link key={waypoint.symbol} to="/systems/$systemSymbol" params={{ systemSymbol }}>
                   <WaypointTag
                     type="ASTEROID"
-                    className="border-border-primary flex size-7 items-center justify-center border-2 transition duration-100 ease-in-out hover:z-0 hover:scale-125"
+                    className="flex size-7 items-center justify-center border-2 border-border-primary transition duration-100 ease-in-out hover:z-0 hover:scale-125"
                     style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
                   >
                     <span className="typography-sm font-medium" aria-hidden="true">

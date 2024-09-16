@@ -26,7 +26,7 @@ export const columns = [
       return (
         <>
           <div>{getValue()}</div>
-          <div className="text-foreground-secondary typography-sm whitespace-pre-wrap">
+          <div className="typography-sm whitespace-pre-wrap text-foreground-secondary">
             {row.original.good.description}
           </div>
         </>
@@ -47,7 +47,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return <div className="typography-sm text-right">{formatNumber(value)}</div>
@@ -67,7 +67,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -100,7 +100,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -141,7 +141,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="text-foreground-secondary typography-sm text-right">-</div>
+        return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
       return (

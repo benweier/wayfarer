@@ -14,7 +14,7 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
   return (
     <div className="flex items-start justify-between gap-4">
       <div className="flex flex-col items-start">
-        <div className="text-foreground-secondary typography-sm uppercase">{t('ship.transit.route')}</div>
+        <div className="typography-sm text-foreground-secondary uppercase">{t('ship.transit.route')}</div>
         <div className="flex items-center gap-2">
           <div className="font-medium">
             <Link to="/systems/$systemSymbol" params={{ systemSymbol: nav.route.origin.systemSymbol }} className="link">
@@ -29,10 +29,10 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
               {nav.route.origin.symbol}
             </Link>
           </div>
-          <div className="flex flex-row flex-nowrap -space-x-2">
-            <AppIcon id="chevron:right" className="text-foreground-tertiary size-4" />
-            <AppIcon id="chevron:right" className="text-foreground-tertiary size-4" />
-            <AppIcon id="chevron:right" className="text-foreground-tertiary size-4" />
+          <div className="-space-x-2 flex flex-row flex-nowrap">
+            <AppIcon id="chevron:right" className="size-4 text-foreground-tertiary" />
+            <AppIcon id="chevron:right" className="size-4 text-foreground-tertiary" />
+            <AppIcon id="chevron:right" className="size-4 text-foreground-tertiary" />
           </div>
           <div className="font-medium">
             <Link

@@ -21,7 +21,7 @@ export const WaypointMarketImports = ({ data, trade }: WaypointMarketGroupProps)
 
   if (data.length === 0) {
     return (
-      <div className="border-border-primary flex flex-col gap-4 rounded border-2 border-dashed py-9 px-3">
+      <div className="flex flex-col gap-4 rounded border-2 border-border-primary border-dashed px-3 py-9">
         <div className="typography-lg text-center font-semibold">{t('market.imports_empty')}</div>
       </div>
     )
@@ -39,7 +39,7 @@ export const WaypointMarketExports = ({ data, trade }: WaypointMarketGroupProps)
 
   if (data.length === 0) {
     return (
-      <div className="border-border-primary flex flex-col gap-4 rounded border-2 border-dashed py-9 px-3">
+      <div className="flex flex-col gap-4 rounded border-2 border-border-primary border-dashed px-3 py-9">
         <div className="typography-lg text-center font-semibold">{t('market.exports_empty')}</div>
       </div>
     )
@@ -57,7 +57,7 @@ export const WaypointMarketExchange = ({ data, trade }: WaypointMarketGroupProps
 
   if (data.length === 0) {
     return (
-      <div className="border-border-primary flex flex-col gap-4 rounded border-2 border-dashed py-9 px-3">
+      <div className="flex flex-col gap-4 rounded border-2 border-border-primary border-dashed px-3 py-9">
         <div className="typography-lg text-center font-semibold">{t('market.exchange_empty')}</div>
       </div>
     )

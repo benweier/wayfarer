@@ -5,10 +5,10 @@ import type { PropsWithChildren, ReactNode } from 'react'
 export const Group = ({ trigger, children }: PropsWithChildren<{ trigger: ReactNode }>) => {
   return (
     <DropdownMenu.Sub>
-      <DropdownMenu.SubTrigger className="group text-foreground-secondary data-[state=open]:bg-background-secondary data-[state=open]:text-foreground-primary data-[disabled]:text-foreground-disabled data-[highlighted]:bg-background-tertiary data-[highlighted]:text-foreground-primary data-[highlighted]:data-[state=open]:bg-background-tertiary data-[highlighted]:data-[state=open]:text-foreground-primary typography-sm relative flex items-center rounded-md p-2 pl-6 outline-none select-none data-[disabled]:pointer-events-none">
+      <DropdownMenu.SubTrigger className="group typography-sm relative flex select-none items-center rounded-md p-2 pl-6 text-foreground-secondary outline-none data-[highlighted]:data-[state=open]:bg-background-tertiary data-[highlighted]:data-[state=open]:text-foreground-primary data-[disabled]:pointer-events-none data-[highlighted]:bg-background-tertiary data-[state=open]:bg-background-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:text-foreground-primary data-[state=open]:text-foreground-primary">
         {trigger}
 
-        <div className="text-foreground-success-primary group-data-[disabled]:text-foreground-disabled group-data-[highlighted]:text-foreground-success-secondary ml-auto pl-[20px]">
+        <div className="ml-auto pl-[20px] text-foreground-success-primary group-data-[disabled]:text-foreground-disabled group-data-[highlighted]:text-foreground-success-secondary">
           <AppIcon id="chevron:right" aria-hidden="true" className="size-4" />
         </div>
       </DropdownMenu.SubTrigger>

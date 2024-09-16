@@ -6,8 +6,8 @@ export const WaypointListError = ({ error }: ErrorComponentProps) => {
 
   if (isHttpErrorResponse(error)) {
     return (
-      <div className="rounded border-2 border-transparent py-9 px-3">
-        <div className="text-secondary display-md text-center font-bold">{error.statusText}</div>
+      <div className="rounded border-2 border-transparent px-3 py-9">
+        <div className="display-md text-center font-bold text-secondary">{error.statusText}</div>
       </div>
     )
   }

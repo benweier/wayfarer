@@ -4,17 +4,17 @@ import type { ToastProps } from './toast.types'
 
 export const Toast = ({ title, description, icon, status, onDismiss }: ToastProps) => {
   return (
-    <div className="toast relative w-full max-w-full rounded-md p-4 flex gap-3 overflow-hidden" data-status={status}>
+    <div className="toast relative flex w-full max-w-full gap-3 overflow-hidden rounded-md p-4" data-status={status}>
       <span className="toast-status absolute inset-y-0 left-0 w-[3px]" />
-      <div className="toast-icon grow-0 shrink-0">{icon}</div>
+      <div className="toast-icon shrink-0 grow-0">{icon}</div>
 
-      <div className="toast-content flex flex-col gap-1 grow-1">
+      <div className="toast-content flex grow-1 flex-col gap-1">
         <div className="toast-title typography-base font-bold">{title}</div>
         {description && <div className="toast-description typography-sm">{description}</div>}
       </div>
 
       {onDismiss && (
-        <div className="toast-action grow-0 shrink-0">
+        <div className="toast-action shrink-0 grow-0">
           <Button icon aria-label="dismiss" onClick={() => onDismiss()} size="small" kind="flat" intent="neutral">
             <AppIcon id="x" className="size-4" />
           </Button>

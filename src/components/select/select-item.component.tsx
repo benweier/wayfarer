@@ -14,13 +14,13 @@ export const Item = ({
       ref={ref}
       {...props}
       className={cx(
-        'group text-foreground-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:bg-background-secondary data-[highlighted]:text-foreground-primary typography-sm relative flex items-center rounded-sm py-2 pr-16 pl-8 select-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none',
+        'group typography-sm relative flex select-none items-center rounded-sm py-2 pr-16 pl-8 text-foreground-secondary data-[disabled]:pointer-events-none data-[highlighted]:bg-background-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:text-foreground-primary data-[highlighted]:outline-none',
         className,
       )}
     >
       <Select.ItemText>{children}</Select.ItemText>
       <Select.ItemIndicator className="absolute left-1 inline-flex w-6 items-center justify-center">
-        <AppIcon id="check" aria-hidden="true" className="text-foreground-success-primary size-4" />
+        <AppIcon id="check" aria-hidden="true" className="size-4 text-foreground-success-primary" />
       </Select.ItemIndicator>
     </Select.Item>
   )

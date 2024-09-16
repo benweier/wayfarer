@@ -16,7 +16,7 @@ export const ErrorMessage = ({ id, className, ...props }: HTMLAttributes<HTMLDiv
         <div
           {...props}
           id={ctx?.field.name ? `${ctx.field.name}-error` : id}
-          className={cx('typography-sm text-foreground-error-secondary mx-1', className)}
+          className={cx('typography-sm mx-1 text-foreground-error-secondary', className)}
         >
           {message}
         </div>

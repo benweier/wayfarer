@@ -12,7 +12,7 @@ export const Tooltip = ({ trigger, children }: PropsWithChildren<{ trigger: Reac
         </RadixTooltip.Trigger>
         <RadixTooltip.Portal>
           <RadixTooltip.Content
-            className="bg-foreground-secondary text-background-secondary typography-sm max-w-96 rounded-md py-2 px-4"
+            className="typography-sm max-w-96 rounded-md bg-foreground-secondary px-4 py-2 text-background-secondary"
             sideOffset={5}
           >
             {children}

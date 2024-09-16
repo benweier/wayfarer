@@ -20,7 +20,7 @@ const Logout = () => {
   return (
     <Link
       to="/logout"
-      className="flex w-full items-center gap-4 rounded py-2 px-3 font-semibold text-white shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+      className="flex @[220px]/side:w-full w-full items-center gap-4 rounded px-3 py-2 font-semibold text-white shadow-rose-900 transition-all duration-100 hover:scale-105 hover:bg-rose-700 hover:shadow active:scale-100"
     >
       <div className="size-6">
         <MenuIcon id="logout" className="size-6 text-rose-100" aria-hidden />
@@ -39,7 +39,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
     <>
       {/* Static sidebar for desktop */}
       <Desktop>
-        <div className="z-10 hidden min-h-[100dvh] lg:fixed lg:flex inset-y-0">
+        <div className="inset-y-0 z-10 hidden min-h-[100dvh] lg:fixed lg:flex">
           <div
             className={cx('@container/side flex flex-col transition-all duration-100 ease-in-out', {
               'w-20': sidebarState === 'collapsed',
@@ -51,7 +51,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                 <div className="flex items-center justify-center bg-blue-700 py-4">
                   <Link to="/">
                     <div className="display-md text-center font-black text-white">
-                      W<span className="hidden @[220px]:inline">ayfarer</span>
+                      W<span className="@[220px]:inline hidden">ayfarer</span>
                     </div>
                   </Link>
                 </div>
@@ -62,18 +62,18 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                 <Preferences />
               </div>
               {isAuthenticated ? (
-                <div className="flex-shrink flex items-center justify-center gap-2 bg-rose-600 p-4">
+                <div className="flex flex-shrink items-center justify-center gap-2 bg-rose-600 p-4">
                   <Logout />
                 </div>
               ) : (
-                <div className="flex-shrink flex items-center justify-center gap-2 bg-emerald-600 p-4">
+                <div className="flex flex-shrink items-center justify-center gap-2 bg-emerald-600 p-4">
                   <Link
                     to="/login"
                     search={{
                       redirect: `${window.location.pathname}${window.location.search}`,
                     }}
                     mask={{ to: '/login' }}
-                    className="flex w-full items-center gap-4 rounded py-2 px-3 font-medium text-white shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100 @[220px]/side:w-full"
+                    className="flex @[220px]/side:w-full w-full items-center gap-4 rounded px-3 py-2 font-medium text-white shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100"
                   >
                     <div className="size-6">
                       <MenuIcon id="login" className="size-6 text-emerald-100" aria-hidden />
@@ -89,10 +89,10 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
         </div>
       </Desktop>
 
-      <div className="flex min-w-0 min-h-[100dvh] flex-1 flex-col">
+      <div className="flex min-h-[100dvh] min-w-0 flex-1 flex-col">
         <Desktop
           fallback={
-            <div className="flex items-center justify-between bg-blue-600 py-3 px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between bg-blue-600 px-4 py-3 sm:px-6 lg:px-8">
               <div>
                 <Link to="/">
                   <Wayfarer className="display-xs text-white" />
@@ -110,7 +110,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                   direction="left"
                 >
                   <Drawer.Content width={300} height="100dvh">
-                    <div className="min-h-[100dvh] flex flex-col gap-6 p-6">
+                    <div className="flex min-h-[100dvh] flex-col gap-6 p-6">
                       <Drawer.Header>
                         <Drawer.Title className="text-center">Wayfarer</Drawer.Title>
                       </Drawer.Header>
@@ -135,7 +135,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
           <section className="relative flex h-full min-w-0 flex-1 flex-col">
             <Suspense
               fallback={
-                <div className="flex h-full w-full animate-pulse items-center justify-center text-5xl font-black text-zinc-900/5 dark:text-zinc-500/10">
+                <div className="flex h-full w-full animate-pulse items-center justify-center font-black text-5xl text-zinc-900/5 dark:text-zinc-500/10">
                   <div>Wayfarer</div>
                 </div>
               }
@@ -145,8 +145,8 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
           </section>
 
           {/* Secondary column */}
-          <aside className="lg:flex-shrink-0 hidden lg:block">
-            <div className="bg-background-secondary relative flex h-full flex-col overflow-y-auto backdrop-blur-lg lg:w-64 2xl:w-96">
+          <aside className="hidden lg:block lg:flex-shrink-0">
+            <div className="relative flex h-full flex-col overflow-y-auto bg-background-secondary backdrop-blur-lg lg:w-64 2xl:w-96">
               {isAuthenticated && (
                 <div className="p-4">
                   <Agent />

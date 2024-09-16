@@ -16,7 +16,7 @@ export const Table = <T extends Record<string, any> = Record<string, never>>({
     <ScrollArea.Root width="100%">
       <ScrollArea.Viewport>
         <div className="overflow-hidden rounded-lg">
-          <table className="divide-border-primary w-full divide-y">
+          <table className="w-full divide-y divide-border-primary">
             <thead className="bg-background-tertiary">
               {groups.map((group) => (
                 <tr key={group.id}>
@@ -26,7 +26,7 @@ export const Table = <T extends Record<string, any> = Record<string, never>>({
                     return (
                       <th
                         key={header.id}
-                        className="text-foreground-primary typography-sm py-3.5 px-3 font-semibold"
+                        className="typography-sm px-3 py-3.5 font-semibold text-foreground-primary"
                         style={{ width: `${header.getSize()}%` }}
                         aria-sort={
                           sorted
@@ -45,7 +45,7 @@ export const Table = <T extends Record<string, any> = Record<string, never>>({
             </thead>
 
             {rows.length > 0 && (
-              <tbody className="bg-background-secondary divide-border-secondary divide-y">
+              <tbody className="divide-y divide-border-secondary bg-background-secondary">
                 {rows.map((row) => (
                   <Row key={row.id} row={row} />
                 ))}

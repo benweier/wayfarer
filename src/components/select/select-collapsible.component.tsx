@@ -5,12 +5,12 @@ export const Collapsible = ({ children, ...props }: ButtonHTMLAttributes<HTMLBut
   return (
     <button
       type="button"
-      className="group w-full text-foreground-secondary bg-background-secondary/50 typography-sm relative flex items-center justify-between gap-2 py-2 pr-8 pl-8 rounded-sm select-none"
+      className="group typography-sm relative flex w-full select-none items-center justify-between gap-2 rounded-sm bg-background-secondary/50 py-2 pr-8 pl-8 text-foreground-secondary"
       {...props}
     >
       {children}
 
-      <AppIcon id="chevron:down" className="text-foreground-secondary size-4" aria-hidden />
+      <AppIcon id="chevron:down" className="size-4 text-foreground-secondary" aria-hidden />
     </button>
   )
 }

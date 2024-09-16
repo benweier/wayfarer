@@ -1,8 +1,8 @@
 .dropdown-item {
-    &[data-variant="danger"] {
-        &:hover {
-            color: color-mix(in srgb, var(--color-foreground-error-primary) 12%, var(--color-foreground-primary));
-            background-color: color-mix(in srgb, var(--color-background-error-primary) 24%, var(--color-background-primary));
-        }
+  &[data-variant="danger"] {
+    &:hover {
+      color: color-mix(in srgb, var(--color-foreground-error-primary) 12%, var(--color-foreground-primary));
+      background-color: color-mix(in srgb, var(--color-background-error-primary) 24%, var(--color-background-primary));
     }
+  }
 }

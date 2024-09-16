@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react'
 
 export const Label = ({ children }: PropsWithChildren) => {
   return (
-    <Select.Label className="text-foreground-tertiary typography-sm py-2.5 px-2 pr-12 pl-8 uppercase">
+    <Select.Label className="typography-sm px-2 py-2.5 pr-12 pl-8 text-foreground-tertiary uppercase">
       {children}
     </Select.Label>
   )

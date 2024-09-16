@@ -78,7 +78,7 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      return <div className="text-foreground-secondary typography-sm text-left">{getValue()}</div>
+      return <div className="typography-sm text-left text-foreground-secondary">{getValue()}</div>
     },
     minSize: 20,
     maxSize: 20,

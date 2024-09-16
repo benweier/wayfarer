@@ -36,10 +36,10 @@ export const Layout = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation()
 
   return (
-    <div className="grid min-h-screen w-full auto-rows-min [grid-template-rows:auto_1fr_auto] items-center gap-6">
+    <div className="grid min-h-screen w-full auto-rows-min items-center gap-6 [grid-template-rows:auto_1fr_auto]">
       <div className="grid grid-flow-row items-center justify-center py-12">
         <Wayfarer className="display-lg display-xl text-center font-black" />
-        <div className="typography-xl text-foreground-tertiary text-center font-semibold">
+        <div className="typography-xl text-center font-semibold text-foreground-tertiary">
           {t('general.description')}
         </div>
         <div className="grid grid-flow-col items-center justify-center gap-2 py-4">
@@ -47,11 +47,11 @@ export const Layout = ({ children }: PropsWithChildren) => {
             fallback={
               <AppIcon
                 id="connection:unknown"
-                className="text-foreground-warning-secondary size-6 animate-spin"
+                className="size-6 animate-spin text-foreground-warning-secondary"
                 aria-hidden
               />
             }
-            error={<AppIcon id="connection:offline" className="text-foreground-error-secondary size-6" aria-hidden />}
+            error={<AppIcon id="connection:offline" className="size-6 text-foreground-error-secondary" aria-hidden />}
           >
             <SpaceTradersStatus />
           </QuerySuspenseBoundary>
@@ -67,7 +67,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       </div>
 
       <div className="grid grid-flow-col gap-8 py-12">
-        <div className="text-foreground-tertiary grid grid-flow-col items-center justify-center gap-8">
+        <div className="grid grid-flow-col items-center justify-center gap-8 text-foreground-tertiary">
           <a href="https://spacetraders.io" title="SpaceTraders" className="rounded-full p-2">
             <AppIcon id="rocket" className="size-8" />
           </a>

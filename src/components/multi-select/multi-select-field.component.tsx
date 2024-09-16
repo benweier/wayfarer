@@ -11,7 +11,7 @@ export const Field = ({ trigger, id, value, onChange, children }: PropsWithChild
 
       <Popover.Portal>
         <Popover.Content side="bottom" align="center" sideOffset={8} asChild>
-          <div className="popover bg-background-primary border-border-primary z-50 rounded-md border">
+          <div className="popover z-50 rounded-md border border-border-primary bg-background-primary">
             <ScrollArea.Root height={320}>
               <ScrollArea.Viewport className="p-2">
                 <Options type="multiple" aria-labelledby={id} value={value} onValueChange={onChange}>

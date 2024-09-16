@@ -123,7 +123,7 @@ export const Register = () => {
             <FormControl.Root {...methods.register('email')}>
               <FormControl.Label>
                 {t('auth.fields.email.label')}{' '}
-                <span className="text-foreground-tertiary typography-xs font-normal">
+                <span className="typography-xs font-normal text-foreground-tertiary">
                   {t('general.fields.optional')}
                 </span>
               </FormControl.Label>
@@ -166,7 +166,7 @@ export const Register = () => {
         </form>
       </FormProvider>
       <Modal ref={ref} size="md" disableExternalClose>
-        {isSuccess && <AccessTokenDialog registration={agent} />}
+        <Modal.Content>{isSuccess && <AccessTokenDialog registration={agent} />}</Modal.Content>
       </Modal>
     </div>
   )

@@ -1,3 +1,3 @@
 export const Loading = () => {
-  return <div className="bg-background-tertiary h-12 animate-pulse rounded-md" />
+  return <div className="h-12 animate-pulse rounded-md bg-background-tertiary" />
 }

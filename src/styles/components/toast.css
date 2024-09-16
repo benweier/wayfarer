@@ -1,62 +1,62 @@
 .toast {
-    pointer-events: auto;
-    background-color: var(--toast-bg);
-    border: 1px solid var(--toast-border);
-    border-left: none;
+  pointer-events: auto;
+  background-color: var(--toast-bg);
+  border: 1px solid var(--toast-border);
+  border-left: none;
 
-    .toast-status {
-        background-color: var(--toast-icon);
-    }
+  .toast-status {
+    background-color: var(--toast-icon);
+  }
 
-    .toast-icon {
-        color: var(--toast-icon);
-    }
+  .toast-icon {
+    color: var(--toast-icon);
+  }
 
-    .toast-title {
-        color: var(--toast-fg-strong);
-    }
+  .toast-title {
+    color: var(--toast-fg-strong);
+  }
 
-    .toast-description {
-        color: var(--toast-fg-subtle);
-    }
+  .toast-description {
+    color: var(--toast-fg-subtle);
+  }
 
-    &[data-status='success'] {
-        --toast-icon: var(--toast-icon-success);
-        --toast-bg: var(--toast-bg-success);
-        --toast-border: var(--toast-border-success);
-        --toast-fg-strong: var(--toast-fg-success);
-        --toast-fg-subtle: var(--toast-fg-success-secondary);
-    }
+  &[data-status="success"] {
+    --toast-icon: var(--toast-icon-success);
+    --toast-bg: var(--toast-bg-success);
+    --toast-border: var(--toast-border-success);
+    --toast-fg-strong: var(--toast-fg-success);
+    --toast-fg-subtle: var(--toast-fg-success-secondary);
+  }
 
-    &[data-status='warning'] {
-        --toast-icon: var(--toast-icon-warning);
-        --toast-bg: var(--toast-bg-warning);
-        --toast-border: var(--toast-border-warning);
-        --toast-fg-strong: var(--toast-fg-warning);
-        --toast-fg-subtle: var(--toast-fg-warning-secondary);
-    }
+  &[data-status="warning"] {
+    --toast-icon: var(--toast-icon-warning);
+    --toast-bg: var(--toast-bg-warning);
+    --toast-border: var(--toast-border-warning);
+    --toast-fg-strong: var(--toast-fg-warning);
+    --toast-fg-subtle: var(--toast-fg-warning-secondary);
+  }
 
-    &[data-status='error'] {
-        --toast-icon: var(--toast-icon-error);
-        --toast-bg: var(--toast-bg-error);
-        --toast-border: var(--toast-border-error);
-        --toast-fg-strong: var(--toast-fg-error);
-        --toast-fg-subtle: var(--toast-fg-error-secondary);
-    }
+  &[data-status="error"] {
+    --toast-icon: var(--toast-icon-error);
+    --toast-bg: var(--toast-bg-error);
+    --toast-border: var(--toast-border-error);
+    --toast-fg-strong: var(--toast-fg-error);
+    --toast-fg-subtle: var(--toast-fg-error-secondary);
+  }
 
-    &[data-status='info'] {
-        --toast-icon: var(--toast-icon-info);
-        --toast-bg: var(--toast-bg-info);
-        --toast-border: var(--toast-border-info);
-        --toast-fg-strong: var(--toast-fg-info);
-        --toast-fg-subtle: var(--toast-fg-info-secondary);
-    }
+  &[data-status="info"] {
+    --toast-icon: var(--toast-icon-info);
+    --toast-bg: var(--toast-bg-info);
+    --toast-border: var(--toast-border-info);
+    --toast-fg-strong: var(--toast-fg-info);
+    --toast-fg-subtle: var(--toast-fg-info-secondary);
+  }
 
-    &[data-status='neutral'] {
-        --toast-icon: var(--toast-icon-neutral);
-        --toast-bg: var(--toast-bg-neutral);
-        --toast-border: var(--toast-border-neutral);
-        --toast-fg-strong: var(--toast-fg-neutral);
-        --toast-fg-subtle: var(--toast-fg-neutral-secondary);
-    }
+  &[data-status="neutral"] {
+    --toast-icon: var(--toast-icon-neutral);
+    --toast-bg: var(--toast-bg-neutral);
+    --toast-border: var(--toast-border-neutral);
+    --toast-fg-strong: var(--toast-fg-neutral);
+    --toast-fg-subtle: var(--toast-fg-neutral-secondary);
+  }
 }

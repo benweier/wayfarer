@@ -21,9 +21,7 @@ const Arrows: Record<string, string> = {
 
 // Get OS specific shortcut keys
 const getShortcutKey = (key: string) => {
-  const shortcut = key
-    .replace(/(Key)/g, '')
-    .replace(/(ArrowUp|ArrowDown|ArrowLeft|ArrowRight)/g, (_, k) => Arrows[k])
+  const shortcut = key.replace(/(Key)/g, '').replace(/(ArrowUp|ArrowDown|ArrowLeft|ArrowRight)/g, (_, k) => Arrows[k])
 
   if (navigator.userAgent.includes('Mac')) {
     return shortcut.replace(/(\+)/g, '').replace(/(Alt|Ctrl|Shift|Meta)/g, (_, k) => Mac[k])
@@ -34,7 +32,7 @@ const getShortcutKey = (key: string) => {
 
 export const Kbd = ({ children }: { children: string }) => {
   return (
-    <kbd className="bg-background-tertiary typography-sm font-family-[unset] text-foreground-secondary tracking-widest border-1 border-b-3 border-border-primary rounded-sm px-1 mx-0.5">
+    <kbd className="typography-sm mx-0.5 rounded-sm border-1 border-border-primary border-b-3 bg-background-tertiary px-1 font-family-[unset] text-foreground-secondary tracking-widest">
       {getShortcutKey(children)}
     </kbd>
   )

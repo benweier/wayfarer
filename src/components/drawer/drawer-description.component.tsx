@@ -3,7 +3,7 @@ import { Drawer } from 'vaul'
 
 export const Description = ({ children, ...props }: DialogDescriptionProps) => {
   return (
-    <Drawer.Description {...props} className="text-foreground-secondary typography-base">
+    <Drawer.Description {...props} className="typography-base text-foreground-secondary">
       {children}
     </Drawer.Description>
   )

@@ -41,7 +41,7 @@
     border-bottom-right-radius: var(--radius-lg);
   }
 
-  &[data-state='active'] {
+  &[data-state="active"] {
     color: var(--tabs-trigger-fg-selected);
     background-color: var(--tabs-trigger-bg-selected);
 

@@ -18,7 +18,7 @@ export const KBar = ({ actions, children }: PropsWithChildren<{ actions?: Action
         <KBarPositioner>
           <div className="w-full max-w-[520px] p-4">
             <KBarAnimator>
-              <div className="flex flex-col rounded-lg border border-border-primary bg-background-primary ring-3 ring-border-primary/30 overflow-hidden shadow-[0_0_40px_-15px_var(--color-border-secondary)]">
+              <div className="flex flex-col overflow-hidden rounded-lg border border-border-primary bg-background-primary shadow-[0_0_40px_-15px_var(--color-border-secondary)] ring-3 ring-border-primary/30">
                 <div className="p-4">
                   <KBarSearch className="input" />
                 </div>

@@ -8,17 +8,17 @@ export const TradeGoodInfo = ({ price, volume, supply }: TradeGoodInfoProps) => 
   return (
     <div className="flex items-center gap-12">
       <div>
-        <div className="text-foreground-secondary typography-xs font-medium uppercase">Unit Price</div>
+        <div className="typography-xs font-medium text-foreground-secondary uppercase">Unit Price</div>
         <div className="typography-base font-semibold">{formatNumber(price)}</div>
       </div>
 
       <div>
-        <div className="text-foreground-secondary typography-xs font-medium uppercase">Units Available</div>
+        <div className="typography-xs font-medium text-foreground-secondary uppercase">Units Available</div>
         <div className="typography-base font-semibold">{formatNumber(volume)}</div>
       </div>
 
       <div>
-        <div className="text-foreground-secondary typography-xs font-medium uppercase">Supply</div>
+        <div className="typography-xs font-medium text-foreground-secondary uppercase">Supply</div>
         <div className="typography-base font-semibold">{t(supply, { ns: 'spacetraders.trade_supply' })}</div>
       </div>
     </div>

@@ -19,7 +19,7 @@ export const ErrorMessage = ({ className, ...props }: HTMLAttributes<HTMLDivElem
           {...props}
           id={`${ctx.name}-error`}
           data-has-error={formState.errors[ctx.name] ? 'true' : 'false'}
-          className={cx('typography-sm text-foreground-error-secondary mx-1', className)}
+          className={cx('typography-sm mx-1 text-foreground-error-secondary', className)}
         >
           {message}
         </div>

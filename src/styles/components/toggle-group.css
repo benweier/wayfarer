@@ -50,7 +50,7 @@
   }
 
   &:active,
-  &[data-state='on'] {
+  &[data-state="on"] {
     background-color: var(--toggle-group-item-bg-selected);
   }
 

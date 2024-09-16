@@ -12,7 +12,7 @@ export const Copy = ({
       {...props}
       type="button"
       className={cx(
-        'rounded-full border-0 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none enabled:hover:text-blue-400 disabled:cursor-default disabled:opacity-50',
+        'rounded-full border-0 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 enabled:hover:text-blue-400 disabled:cursor-default disabled:opacity-50',
         className,
       )}
     >

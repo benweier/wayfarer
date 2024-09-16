@@ -20,7 +20,7 @@ export const Field = ({
           {selected}
         </Select.Value>
         <Select.Icon className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-          <AppIcon id="chevron:up-down" className="text-fg-tertiary size-4" aria-hidden="true" />
+          <AppIcon id="chevron:up-down" className="size-4 text-fg-tertiary" aria-hidden="true" />
         </Select.Icon>
       </Select.Trigger>
 
@@ -28,7 +28,7 @@ export const Field = ({
         <Select.Content
           position="popper"
           sideOffset={8}
-          className="popover bg-background-primary border-border-primary z-50 w-[var(--radix-select-trigger-width)] rounded-md border"
+          className="popover z-50 w-[var(--radix-select-trigger-width)] rounded-md border border-border-primary bg-background-primary"
         >
           <ScrollArea.Root height={320}>
             <Select.Viewport asChild>

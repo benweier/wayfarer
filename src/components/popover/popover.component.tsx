@@ -8,7 +8,7 @@ export const Popover = ({ trigger, children }: PropsWithChildren<{ trigger: Reac
 
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content
-          className="popover origin-[var(--radix-popover-content-transform-origin)] bg-background-primary/90 ring-border-primary/20 relative z-50 rounded-md p-6 ring-3 backdrop-blur-lg will-change-[transform,opacity]"
+          className="popover relative z-50 origin-[var(--radix-popover-content-transform-origin)] rounded-md bg-background-primary/90 p-6 ring-3 ring-border-primary/20 backdrop-blur-lg will-change-[transform,opacity]"
           sideOffset={8}
           collisionPadding={16}
         >

@@ -13,7 +13,7 @@ export const MobileNavigation = () => {
   const { isAuthenticated } = useAuthStore()
 
   return (
-    <div className="flex flex-col grow justify-between gap-2">
+    <div className="flex grow flex-col justify-between gap-2">
       <nav className="flex flex-col items-center gap-2">
         {menu.map((item) => {
           if ('divider' in item) {
@@ -25,10 +25,10 @@ export const MobileNavigation = () => {
               key={item.key}
               to={item.to}
               onClick={actions.closeDrawer}
-              className="relative flex w-full items-center gap-4 rounded-md py-2 px-3 font-medium text-foreground-secondary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-foreground-primary"
+              className="relative flex w-full items-center gap-4 rounded-md px-3 py-2 font-medium text-foreground-secondary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-foreground-primary"
             >
               {item.auth && !isAuthenticated && (
-                <span className="absolute top-0 left-0 rounded-full text-background-secondary bg-foreground-secondary p-1">
+                <span className="absolute top-0 left-0 rounded-full bg-foreground-secondary p-1 text-background-secondary">
                   <MenuIcon id="key" className="size-3" aria-hidden />
                 </span>
               )}
@@ -45,7 +45,7 @@ export const MobileNavigation = () => {
           trigger={
             <button
               type="button"
-              className="group relative flex w-full items-center gap-4 rounded-md py-2 px-3 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-white"
+              className="group relative flex w-full items-center gap-4 rounded-md px-3 py-2 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-white"
             >
               <MenuIcon id="settings" className="size-6 group-data-[state=open]:animate-spin" aria-hidden />
               <span className="typography-sm">{t('preferences.label')}</span>
@@ -58,7 +58,7 @@ export const MobileNavigation = () => {
         {isAuthenticated ? (
           <Link
             to="/logout"
-            className="relative flex w-full items-center gap-4 rounded-md py-2 px-3 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-error-primary focus:bg-background-error-primary"
+            className="relative flex w-full items-center gap-4 rounded-md px-3 py-2 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-error-primary focus:bg-background-error-primary"
           >
             <MenuIcon id="logout" className="size-5" aria-hidden />
             <span className="typography-sm">{t('auth.logout', { context: 'action' })}</span>
@@ -70,7 +70,7 @@ export const MobileNavigation = () => {
               redirect: `${window.location.pathname}${window.location.search}`,
             }}
             mask={{ to: '/login' }}
-            className="relative flex w-full items-center gap-4 rounded-md py-2 px-3 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-success-primary focus:bg-background-success-primary"
+            className="relative flex w-full items-center gap-4 rounded-md px-3 py-2 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-success-primary focus:bg-background-success-primary"
           >
             <MenuIcon id="login" className="size-5" aria-hidden />
             <span className="typography-sm">{t('auth.login', { context: 'action' })}</span>
