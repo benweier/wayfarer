@@ -36,7 +36,7 @@ export const Root = ({
             '--dialog-content-max-height': '85dvh',
           }}
           className={cx(
-            'popover -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 flex max-h-[var(--dialog-content-max-height)] flex-col overflow-hidden rounded-xl border-1 border-border-secondary bg-background-primary ring-3 ring-border-primary/20 focus:outline-none',
+            'popover -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-40 flex max-h-[var(--dialog-content-max-height)] flex-col overflow-hidden rounded-xl border-1 border-border-secondary bg-background-primary ring-3 ring-border-primary/20 focus:outline-none',
             {
               'w-auto': size === 'auto',
               'w-screen': size === 'full',
