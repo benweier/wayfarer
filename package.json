@@ -69,7 +69,7 @@
     "zustand": "5.0.0-rc.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.0",
+    "@biomejs/biome": "^1.9.1",
     "@mdx-js/rollup": "^3.0.1",
     "@sentry/vite-plugin": "^2.22.4",
     "@tailwindcss/vite": "4.0.0-alpha.24",
@@ -122,7 +122,7 @@
     "check": "turbo lint test build",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "biome check --files-ignore-unknown=true src/",
-    "lint:fix": "biome check --files-ignore-unknown=true src/",
+    "lint:fix": "biome format --write --files-ignore-unknown=true src/",
     "lint:css": "stylelint src/**/*.css",
     "tc": "tsc",
     "test": "vitest run src",
