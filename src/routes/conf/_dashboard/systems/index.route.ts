@@ -18,11 +18,11 @@ export const Route = createFileRoute(ROUTES.SYSTEMS)({
   validateSearch(search: SearchParamsInput & SearchSchemaInput): SearchParamsOutput {
     return v.parse(SearchParamsSchema, search)
   },
-  loaderDeps({ search }) {
-    return { page: search.page }
-  },
   beforeLoad() {
     return { meta }
+  },
+  loaderDeps({ search }) {
+    return { page: search.page }
   },
   async loader({ context, deps }) {
     const query = getSystemListQuery({

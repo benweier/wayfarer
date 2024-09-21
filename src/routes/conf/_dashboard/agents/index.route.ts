@@ -18,11 +18,11 @@ export const Route = createFileRoute(ROUTES.AGENTS)({
   validateSearch(search: SearchParamsInput & SearchSchemaInput): SearchParamsOutput {
     return v.parse(SearchParamsSchema, search)
   },
-  loaderDeps({ search }) {
-    return { page: search.page }
-  },
   beforeLoad() {
     return { meta }
+  },
+  loaderDeps({ search }) {
+    return { page: search.page }
   },
   async loader({ context, deps }) {
     const agents = await context.client.ensureQueryData(
@@ -35,6 +35,7 @@ export const Route = createFileRoute(ROUTES.AGENTS)({
 
     if (deps.page > max) {
       return redirect({
+        to: '/agents',
         search: { page: max },
         replace: true,
       })
