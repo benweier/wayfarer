@@ -23,7 +23,7 @@ export const ShipOverlayRoute = () => {
       close={
         <Modal.Close
           onClick={() => {
-            void navigate({ to: '/fleet/$shipSymbol', params: { shipSymbol } })
+            void navigate({ to: '/fleet/$shipSymbol', params: { shipSymbol: data.data.symbol }, replace: true })
           }}
         >
           <Button

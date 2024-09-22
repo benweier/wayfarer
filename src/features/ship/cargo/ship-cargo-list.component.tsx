@@ -54,7 +54,7 @@ export const ShipCargoList = () => {
             intent="info"
             disabled={!hasMarketplace}
             onClick={() => {
-              void navigate({ to: '/fleet/$shipSymbol/market', params: { shipSymbol: ship.symbol } })
+              void navigate({ to: '/fleet/$shipSymbol/market', params: { shipSymbol: ship.symbol }, replace: true })
             }}
           >
             {hasMarketplace
