@@ -3,6 +3,7 @@ import { ThemeStyleSheet } from '@/components/theme-style-sheet'
 import { router } from '@/routes/router.conf'
 import { i18n } from '@/services/i18n'
 import { client } from '@/services/query-client'
+import { Provider as TooltipProvider } from '@radix-ui/react-tooltip'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider } from '@tanstack/react-router'
 import { enableMapSet } from 'immer'
@@ -26,7 +27,9 @@ export const App = () => {
       <I18nextProvider i18n={i18n}>
         <QueryClientProvider client={client}>
           <KBar actions={actions}>
-            <RouterProvider router={router} />
+            <TooltipProvider delayDuration={100}>
+              <RouterProvider router={router} />
+            </TooltipProvider>
           </KBar>
         </QueryClientProvider>
       </I18nextProvider>
