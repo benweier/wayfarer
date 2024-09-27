@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react'
 import { Drawer } from 'vaul'
 import type { DrawerRootProps } from './drawer.types'
 
-export const Root = ({ trigger, direction = 'bottom', children }: PropsWithChildren<DrawerRootProps>) => {
+export const Root = ({ trigger, modal, direction = 'bottom', children }: PropsWithChildren<DrawerRootProps>) => {
   const drawer = useDrawerContext()
 
   return (
@@ -13,7 +13,7 @@ export const Root = ({ trigger, direction = 'bottom', children }: PropsWithChild
         if (!isOpen) drawer.actions.closeDrawer()
       }}
       direction={direction}
-      modal={false}
+      modal={modal}
     >
       {trigger}
 

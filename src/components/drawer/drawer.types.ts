@@ -26,6 +26,7 @@ export type DrawerStore = DrawerState & { actions: DrawerActions }
 export type DrawerRootProps = {
   trigger: ReactNode
   direction?: 'left' | 'right' | 'bottom'
+  modal?: boolean
 }
 
 export type DrawerContentProps = {
