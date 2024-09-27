@@ -1,5 +1,5 @@
 .drawer {
-  &[vaul-drawer-direction="left"] {
+  &[data-vaul-drawer-direction="left"] {
     top: 0;
     bottom: 0;
     left: 0;
@@ -8,7 +8,7 @@
     border-bottom-right-radius: var(--radius-md);
   }
 
-  &[vaul-drawer-direction="right"] {
+  &[data-vaul-drawer-direction="right"] {
     top: 0;
     right: 0;
     bottom: 0;
@@ -17,7 +17,7 @@
     border-bottom-left-radius: var(--radius-md);
   }
 
-  &[vaul-drawer-direction="bottom"] {
+  &[data-vaul-drawer-direction="bottom"] {
     right: 0;
     bottom: 0;
     left: 0;
