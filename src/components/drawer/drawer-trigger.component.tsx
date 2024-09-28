@@ -9,7 +9,7 @@ export const Trigger = ({ children }: PropsWithChildren) => {
     <Drawer.Trigger
       asChild
       onClick={() => {
-        actions.openDrawer()
+        actions.open()
       }}
     >
       {children}

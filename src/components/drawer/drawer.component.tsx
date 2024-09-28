@@ -15,24 +15,24 @@ export const Drawer = ({
     return createStore<DrawerStore>((set) => ({
       isOpen: defaultOpen,
       actions: {
-        openDrawer: () => {
+        open: () => {
           set({ isOpen: true })
         },
-        closeDrawer: () => {
+        close: () => {
           set({ isOpen: false })
+        },
+        toggle: () => {
+          set(({ isOpen }) => ({ isOpen: !isOpen }))
         },
       },
     }))
   })
 
-  useImperativeHandle(ref, () => ({
-    openDrawer: () => {
-      store.setState({ isOpen: true })
-    },
-    closeDrawer: () => {
-      store.setState({ isOpen: false })
-    },
-  }))
+  useImperativeHandle(ref, () => {
+    const { actions } = store.getState()
+
+    return actions
+  })
 
   return (
     <DrawerContext value={store}>

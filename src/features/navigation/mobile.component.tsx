@@ -24,7 +24,7 @@ export const MobileNavigation = () => {
             <Link
               key={item.key}
               to={item.to}
-              onClick={actions.closeDrawer}
+              onClick={actions.close}
               className="relative flex w-full items-center gap-4 rounded-md px-3 py-2 font-medium text-foreground-secondary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-foreground-primary"
             >
               {item.auth && !isAuthenticated && (

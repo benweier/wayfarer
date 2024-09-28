@@ -6,10 +6,7 @@ export type DrawerProps = {
   direction?: 'left' | 'right' | 'bottom'
 }
 
-export type DrawerImperativeRef = {
-  openDrawer: () => void
-  closeDrawer: () => void
-}
+export type DrawerImperativeRef = DrawerActions
 
 export type DrawerState = {
   isOpen: boolean
@@ -17,8 +14,9 @@ export type DrawerState = {
 }
 
 export type DrawerActions = {
-  openDrawer: () => void
-  closeDrawer: () => void
+  open: () => void
+  close: () => void
+  toggle: () => void
 }
 
 export type DrawerStore = DrawerState & { actions: DrawerActions }
