@@ -7,7 +7,7 @@ import { CargoTransferForm } from './cargo-transfer.form'
 
 export const CargoTransfer = ({ ship, item }: { ship: ShipResponse; item: CargoInventory }) => {
   const { t } = useTranslation()
-  const { closeModal } = useModalActions()
+  const actions = useModalActions()
 
   return (
     <div className="space-y-2">
@@ -15,14 +15,14 @@ export const CargoTransfer = ({ ship, item }: { ship: ShipResponse; item: CargoI
         {({ execute }) => (
           <CargoTransferForm
             fromShip={ship}
-            onSubmit={async (values) => {
-              await execute({
+            onSubmit={(values) => {
+              execute({
                 toShipSymbol: values.ship,
                 symbol: item.symbol,
                 units: values.quantity,
               })
 
-              closeModal()
+              actions.close()
             }}
           >
             <div className="flex gap-2">
@@ -31,7 +31,7 @@ export const CargoTransfer = ({ ship, item }: { ship: ShipResponse; item: CargoI
               </Button>
               <Button
                 onClick={() => {
-                  closeModal()
+                  actions.close()
                 }}
               >
                 {t('general.cancel')}

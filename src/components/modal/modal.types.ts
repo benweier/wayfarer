@@ -19,10 +19,7 @@ export type ModalDialogProps = {
   disableExternalClose?: boolean
 }
 
-export type ModalImperativeRef = {
-  openModal: () => void
-  closeModal: () => void
-}
+export type ModalImperativeRef = ModalActions
 
 export type ModalState = {
   isOpen: boolean
@@ -30,8 +27,9 @@ export type ModalState = {
 }
 
 export type ModalActions = {
-  openModal: () => void
-  closeModal: () => void
+  open: () => void
+  close: () => void
+  toggle: () => void
 }
 
 export type ModalStore = ModalState & { actions: ModalActions }

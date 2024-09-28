@@ -18,24 +18,24 @@ export const Modal = ({
     return createStore<ModalStore>((set) => ({
       isOpen: defaultOpen,
       actions: {
-        openModal: () => {
+        open: () => {
           set({ isOpen: true })
         },
-        closeModal: () => {
+        close: () => {
           set({ isOpen: false })
+        },
+        toggle: () => {
+          set(({ isOpen }) => ({ isOpen: !isOpen }))
         },
       },
     }))
   })
 
-  useImperativeHandle(ref, () => ({
-    openModal: () => {
-      store.setState({ isOpen: true })
-    },
-    closeModal: () => {
-      store.setState({ isOpen: false })
-    },
-  }))
+  useImperativeHandle(ref, () => {
+    const { actions } = store.getState()
+
+    return actions
+  })
 
   return (
     <ModalContext value={store}>

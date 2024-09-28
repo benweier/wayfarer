@@ -6,18 +6,22 @@ export const useModalImperativeHandle = () => {
   const ref = useCallback((instance: ModalImperativeRef) => {
     modal.current = instance
   }, [])
-  const openModal = useCallback(() => {
-    if (modal.current) modal.current.openModal()
+  const open = useCallback(() => {
+    if (modal.current) modal.current.open()
   }, [])
-  const closeModal = useCallback(() => {
-    if (modal.current) modal.current.closeModal()
+  const close = useCallback(() => {
+    if (modal.current) modal.current.close()
+  }, [])
+  const toggle = useCallback(() => {
+    if (modal.current) modal.current.toggle()
   }, [])
 
   return {
     ref,
     modal: {
-      open: openModal,
-      close: closeModal,
+      open,
+      close,
+      toggle,
     },
   }
 }

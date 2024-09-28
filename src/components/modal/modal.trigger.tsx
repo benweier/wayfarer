@@ -9,7 +9,7 @@ export const Trigger = ({ children, ...props }: Dialog.DialogTriggerProps) => {
       {...props}
       asChild
       onClick={() => {
-        actions.openModal()
+        actions.open()
       }}
     >
       {children}

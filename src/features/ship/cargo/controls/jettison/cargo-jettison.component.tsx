@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 export const CargoJettison = ({ ship, item }: { ship: ShipResponse; item: CargoInventory }) => {
   const { t } = useTranslation()
-  const { closeModal } = useModalActions()
+  const modal = useModalActions()
 
   return (
     <div className="space-y-8">
@@ -24,7 +24,7 @@ export const CargoJettison = ({ ship, item }: { ship: ShipResponse; item: CargoI
           symbol={item.symbol}
           units={item.units}
           onDone={() => {
-            closeModal()
+            modal.close()
           }}
         >
           {({ disabled, execute }) => (
@@ -41,7 +41,7 @@ export const CargoJettison = ({ ship, item }: { ship: ShipResponse; item: CargoI
 
         <Button
           onClick={() => {
-            closeModal()
+            modal.close()
           }}
         >
           {t('general.cancel')}

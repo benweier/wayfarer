@@ -20,7 +20,7 @@ export const Root = ({
       open={modal.isOpen}
       onOpenChange={(isOpen) => {
         if (disableExternalClose) return
-        if (!isOpen) modal.actions.closeModal()
+        if (!isOpen) modal.actions.close()
       }}
     >
       {trigger}
