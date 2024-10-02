@@ -7,6 +7,7 @@
   font-weight: 800;
   line-height: var(--button-line-height);
   color: var(--button-fg);
+  text-align: center;
   appearance: none;
   cursor: pointer;
   background-color: var(--button-bg);
@@ -31,7 +32,7 @@
     background-color: var(--button-bg-active);
 
     &:not(:disabled) {
-      transform: scaleX(0.975) scaleY(0.975);
+      transform: scaleX(0.975) scaleY(0.925);
     }
   }
 
