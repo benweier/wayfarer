@@ -15,7 +15,7 @@ export const Table = <T extends Record<string, any> = Record<string, never>>({
   return (
     <ScrollArea.Root width="100%">
       <ScrollArea.Viewport>
-        <div className="overflow-hidden rounded-lg">
+        <div className="overflow-clip rounded-lg">
           <table className="w-full divide-y divide-border-primary">
             <thead className="bg-background-tertiary">
               {groups.map((group) => (
