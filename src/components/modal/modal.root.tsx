@@ -28,29 +28,29 @@ export const Root = ({
       <Dialog.Portal>
         {overlay}
 
-        <Dialog.Content
-          onPointerDownOutside={(event) => {
-            event.preventDefault()
-          }}
-          style={{
-            '--dialog-content-max-height': size === 'full' ? '100dvh' : '85dvh',
-          }}
-          className={cx(
-            'popover -translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-40 flex max-h-[var(--dialog-content-max-height)] flex-col overflow-hidden rounded-xl border-1 border-border-secondary bg-background-primary ring-3 ring-border-primary/20 focus:outline-none',
-            {
-              'w-auto': size === 'auto',
-              'w-screen': size === 'full',
-              'w-full max-w-screen-sm': size === 'sm',
-              'w-full max-w-screen-md': size === 'md',
-              'w-full max-w-screen-lg': size === 'lg',
-              'w-full max-w-screen-xl': size === 'xl',
-            },
-          )}
-          aria-describedby={undefined}
-        >
-          {children}
-          {close && <div className="absolute top-7 right-6 z-50">{close}</div>}
-        </Dialog.Content>
+        <div className="fixed inset-0 z-40 flex h-dvh w-screen items-center justify-center [--dialog-content-max-height:calc(100dvh-1rem)] [--dialog-content-max-width:calc(100vw-1rem)] md:[--dialog-content-max-height:80dvh]">
+          <Dialog.Content
+            onPointerDownOutside={(event) => {
+              event.preventDefault()
+            }}
+            className={cx(
+              'popover flex w-screen max-w-[var(--dialog-content-max-width)] flex-col overflow-clip rounded-xl border-1 border-border-secondary bg-background-primary ring-3 ring-border-primary/20 focus:outline-none',
+              {
+                'w-auto': size === 'auto',
+                // 'inset-0 h-dvh max-h-[calc(100dvh-1rem)]': size === 'full',
+                // 'max-h-[var(--dialog-content-max-height)] ': size !== 'full',
+                'md:max-w-screen-sm': size === 'sm',
+                'md:max-w-screen-md': size === 'md',
+                'md:max-w-screen-lg': size === 'lg',
+                'md:max-w-screen-xl': size === 'xl',
+              },
+            )}
+            aria-describedby={undefined}
+          >
+            {children}
+            {close && <div className="absolute top-7 right-6 z-50">{close}</div>}
+          </Dialog.Content>
+        </div>
       </Dialog.Portal>
     </Dialog.Root>
   )
