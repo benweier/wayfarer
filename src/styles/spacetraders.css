@@ -1,62 +1,64 @@
-:root {
-  /* Ships */
-  --color-ship-fuel: var(--color-teal-500);
-  --color-ship-cargo: var(--color-fuchsia-500);
-  --color-ship-condition: var(--color-rose-500);
-  --color-ship-frame: var(--color-red-50);
-  --color-ship-engine: var(--color-cyan-50);
-  --color-ship-reactor: var(--color-violet-50);
-  --color-ship-modules: var(--color-orange-50);
-  --color-ship-mounts: var(--color-blue-50);
-  --color-ship-crew: var(--color-pink-50);
+@layer base {
+  :root {
+    /* Ships */
+    --color-ship-fuel: var(--color-teal-500);
+    --color-ship-cargo: var(--color-fuchsia-500);
+    --color-ship-condition: var(--color-rose-500);
+    --color-ship-frame: var(--color-red-50);
+    --color-ship-engine: var(--color-cyan-50);
+    --color-ship-reactor: var(--color-violet-50);
+    --color-ship-modules: var(--color-orange-50);
+    --color-ship-mounts: var(--color-blue-50);
+    --color-ship-crew: var(--color-pink-50);
 
-  /* Systems */
-  --fg-system-neutron-star: var(--color-slate-50);
-  --bg-system-neutron-star: var(--color-slate-500);
-  --fg-system-red-star: var(--color-red-50);
-  --bg-system-red-star: var(--color-red-700);
-  --fg-system-orange-star: var(--color-orange-950);
-  --bg-system-orange-star: var(--color-orange-300);
-  --fg-system-blue-star: var(--color-cyan-950);
-  --bg-system-blue-star: var(--color-cyan-400);
-  --fg-system-young-star: var(--color-emerald-950);
-  --bg-system-young-star: var(--color-emerald-300);
-  --fg-system-white-dwarf: var(--color-gray-950);
-  --bg-system-white-dwarf: var(--color-gray-100);
-  --fg-system-black-hole: var(--color-gray-50);
-  --bg-system-black-hole: var(--color-gray-950);
-  --fg-system-hypergiant: var(--color-violet-950);
-  --bg-system-hypergiant: var(--color-violet-300);
-  --fg-system-nebula: var(--color-pink-50);
-  --bg-system-nebula: var(--color-pink-600);
-  --fg-system-unstable: var(--color-indigo-50);
-  --bg-system-unstable: var(--color-indigo-600);
+    /* Systems */
+    --fg-system-neutron-star: var(--color-slate-50);
+    --bg-system-neutron-star: var(--color-slate-500);
+    --fg-system-red-star: var(--color-red-50);
+    --bg-system-red-star: var(--color-red-700);
+    --fg-system-orange-star: var(--color-orange-950);
+    --bg-system-orange-star: var(--color-orange-300);
+    --fg-system-blue-star: var(--color-cyan-950);
+    --bg-system-blue-star: var(--color-cyan-400);
+    --fg-system-young-star: var(--color-emerald-950);
+    --bg-system-young-star: var(--color-emerald-300);
+    --fg-system-white-dwarf: var(--color-gray-950);
+    --bg-system-white-dwarf: var(--color-gray-100);
+    --fg-system-black-hole: var(--color-gray-50);
+    --bg-system-black-hole: var(--color-gray-950);
+    --fg-system-hypergiant: var(--color-violet-950);
+    --bg-system-hypergiant: var(--color-violet-300);
+    --fg-system-nebula: var(--color-pink-50);
+    --bg-system-nebula: var(--color-pink-600);
+    --fg-system-unstable: var(--color-indigo-50);
+    --bg-system-unstable: var(--color-indigo-600);
 
-  /* Waypoints */
-  --fg-waypoint-moon: var(--color-slate-50);
-  --bg-waypoint-moon: var(--color-slate-500);
-  --fg-waypoint-gas-giant: var(--color-orange-50);
-  --bg-waypoint-gas-giant: var(--color-orange-700);
-  --fg-waypoint-nebula: var(--color-amber-950);
-  --bg-waypoint-nebula: var(--color-amber-400);
-  --fg-waypoint-asteroid-field: var(--color-stone-100);
-  --bg-waypoint-asteroid-field: var(--color-stone-600);
-  --fg-waypoint-asteroid-base: var(--color-stone-100);
-  --bg-waypoint-asteroid-base: var(--color-stone-600);
-  --fg-waypoint-asteroid: var(--color-stone-100);
-  --bg-waypoint-asteroid: var(--color-stone-600);
-  --fg-waypoint-engineered-asteroid: var(--color-stone-100);
-  --bg-waypoint-engineered-asteroid: var(--color-stone-600);
-  --fg-waypoint-fuel-station: var(--color-lime-950);
-  --bg-waypoint-fuel-station: var(--color-lime-300);
-  --fg-waypoint-planet: var(--color-emerald-50);
-  --bg-waypoint-planet: var(--color-emerald-600);
-  --fg-waypoint-debris-field: var(--color-teal-950);
-  --bg-waypoint-debris-field: var(--color-teal-300);
-  --fg-waypoint-orbital-station: var(--color-fuchsia-50);
-  --bg-waypoint-orbital-station: var(--color-fuchsia-600);
-  --fg-waypoint-jump-gate: var(--color-gray-950);
-  --bg-waypoint-jump-gate: var(--color-gray-50);
-  --fg-waypoint-gravity-well: var(--color-gray-50);
-  --bg-waypoint-gravity-well: var(--color-gray-950);
+    /* Waypoints */
+    --fg-waypoint-moon: var(--color-slate-50);
+    --bg-waypoint-moon: var(--color-slate-500);
+    --fg-waypoint-gas-giant: var(--color-orange-50);
+    --bg-waypoint-gas-giant: var(--color-orange-700);
+    --fg-waypoint-nebula: var(--color-amber-950);
+    --bg-waypoint-nebula: var(--color-amber-400);
+    --fg-waypoint-asteroid-field: var(--color-stone-100);
+    --bg-waypoint-asteroid-field: var(--color-stone-600);
+    --fg-waypoint-asteroid-base: var(--color-stone-100);
+    --bg-waypoint-asteroid-base: var(--color-stone-600);
+    --fg-waypoint-asteroid: var(--color-stone-100);
+    --bg-waypoint-asteroid: var(--color-stone-600);
+    --fg-waypoint-engineered-asteroid: var(--color-stone-100);
+    --bg-waypoint-engineered-asteroid: var(--color-stone-600);
+    --fg-waypoint-fuel-station: var(--color-lime-950);
+    --bg-waypoint-fuel-station: var(--color-lime-300);
+    --fg-waypoint-planet: var(--color-emerald-50);
+    --bg-waypoint-planet: var(--color-emerald-600);
+    --fg-waypoint-debris-field: var(--color-teal-950);
+    --bg-waypoint-debris-field: var(--color-teal-300);
+    --fg-waypoint-orbital-station: var(--color-fuchsia-50);
+    --bg-waypoint-orbital-station: var(--color-fuchsia-600);
+    --fg-waypoint-jump-gate: var(--color-gray-950);
+    --bg-waypoint-jump-gate: var(--color-gray-50);
+    --fg-waypoint-gravity-well: var(--color-gray-50);
+    --bg-waypoint-gravity-well: var(--color-gray-950);
+  }
 }

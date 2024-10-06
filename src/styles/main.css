@@ -1,19 +1,13 @@
 @import "tailwindcss";
-
-@layer base {
-  @import "./base.css";
-  @import "./spacetraders.css";
-}
-
-@layer components {
-  @import "./components/button.css";
-  @import "./components/drawer.css";
-  @import "./components/input.css";
-  @import "./components/tabs.css";
-  @import "./components/toast.css";
-  @import "./components/toggle-group.css";
-  @import "./components/typography.css";
-}
+@import "./base.css";
+@import "./spacetraders.css";
+@import "./components/button.css";
+@import "./components/drawer.css";
+@import "./components/input.css";
+@import "./components/tabs.css";
+@import "./components/toast.css";
+@import "./components/toggle-group.css";
+@import "./components/typography.css";
 
 @keyframes loader {
   0% {

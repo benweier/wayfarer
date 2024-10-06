@@ -1,75 +1,77 @@
-.label {
-  display: block;
-  margin-bottom: var(--spacing-1);
-  font-size: var(--font-size-text-sm);
-  font-weight: 600;
-  color: var(--u-fg-secondary);
-}
-
-.input,
-.select {
-  --input-padding-y: var(--u-spacing-2);
-  --input-padding-x: var(--u-spacing-3);
-  --input-radius: var(--radius-md);
-  --input-focus-ring-width: 3px;
-  --input-focus-ring: var(--u-border-brand);
-  --input-font-size: var(--u-font-size-text-base);
-  --input-line-height: var(--u-line-height-text-base);
-  --input-fg: var(--u-fg-primary);
-  --input-fg-disabled: var(--u-fg-quinary);
-  --input-fg-placeholder: var(--u-fg-quaternary);
-  --input-bg: var(--u-bg-primary);
-  --input-bg-read-only: var(--u-bg-secondary);
-  --input-bg-disabled: var(--u-bg-disabled-subtle);
-  --input-border: var(--u-border-primary);
-  --input-border-hover: var(--u-border-brand);
-  --input-border-focus: var(--u-border-brand);
-  --input-border-error: var(--u-border-error);
-
-  position: relative;
-  display: block;
-  width: 100%;
-  padding: var(--input-padding-y) var(--input-padding-x);
-  font-size: var(--input-font-size);
-  line-height: var(--input-line-height);
-  color: var(--input-fg);
-  text-align: left;
-  appearance: none;
-  background-color: var(--input-bg);
-  border: 1px solid var(--input-border);
-  border-radius: var(--input-radius);
-  outline: none;
-
-  &:hover:not(:disabled) {
-    border-color: var(--input-border-hover);
+@layer components {
+  .label {
+    display: block;
+    margin-bottom: var(--spacing-1);
+    font-size: var(--font-size-text-sm);
+    font-weight: 600;
+    color: var(--u-fg-secondary);
   }
 
-  &:focus:not(:disabled) {
-    border-color: var(--input-border-focus);
-    box-shadow: 0 0 0 var(--input-focus-ring-width)
-      color-mix(in srgb, var(--input-focus-ring) 24%, var(--u-color-transparent));
-  }
+  .input,
+  .select {
+    --input-padding-y: var(--u-spacing-2);
+    --input-padding-x: var(--u-spacing-3);
+    --input-radius: var(--radius-md);
+    --input-focus-ring-width: 3px;
+    --input-focus-ring: var(--u-border-brand);
+    --input-font-size: var(--u-font-size-text-base);
+    --input-line-height: var(--u-line-height-text-base);
+    --input-fg: var(--u-fg-primary);
+    --input-fg-disabled: var(--u-fg-quinary);
+    --input-fg-placeholder: var(--u-fg-quaternary);
+    --input-bg: var(--u-bg-primary);
+    --input-bg-read-only: var(--u-bg-secondary);
+    --input-bg-disabled: var(--u-bg-disabled-subtle);
+    --input-border: var(--u-border-primary);
+    --input-border-hover: var(--u-border-brand);
+    --input-border-focus: var(--u-border-brand);
+    --input-border-error: var(--u-border-error);
 
-  &:not(button):read-only {
-    cursor: default;
-    background-color: var(--input-bg-read-only);
-  }
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: var(--input-padding-y) var(--input-padding-x);
+    font-size: var(--input-font-size);
+    line-height: var(--input-line-height);
+    color: var(--input-fg);
+    text-align: left;
+    appearance: none;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--input-radius);
+    outline: none;
 
-  &:disabled {
-    color: var(--input-fg-disabled);
-    cursor: not-allowed;
-    background-color: var(--input-bg-disabled);
-  }
+    &:hover:not(:disabled) {
+      border-color: var(--input-border-hover);
+    }
 
-  &::placeholder {
-    font-style: italic;
-    color: var(--input-fg-placeholder);
-  }
+    &:focus:not(:disabled) {
+      border-color: var(--input-border-focus);
+      box-shadow: 0 0 0 var(--input-focus-ring-width)
+        color-mix(in srgb, var(--input-focus-ring) 24%, var(--u-color-transparent));
+    }
 
-  &.invalid,
-  &:invalid,
-  &[data-has-error="true"],
-  &:is(:where(.form-control):has([data-has-error="true"]) *) {
-    border-color: var(--input-border-error);
+    &:not(button):read-only {
+      cursor: default;
+      background-color: var(--input-bg-read-only);
+    }
+
+    &:disabled {
+      color: var(--input-fg-disabled);
+      cursor: not-allowed;
+      background-color: var(--input-bg-disabled);
+    }
+
+    &::placeholder {
+      font-style: italic;
+      color: var(--input-fg-placeholder);
+    }
+
+    &.invalid,
+    &:invalid,
+    &[data-has-error="true"],
+    &:is(:where(.form-control):has([data-has-error="true"]) *) {
+      border-color: var(--input-border-error);
+    }
   }
 }
