@@ -98,6 +98,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                   <Wayfarer className="display-xs text-white" />
                 </Link>
               </div>
+
               <div>
                 <Drawer
                   trigger={
@@ -108,11 +109,15 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                     </Drawer.Trigger>
                   }
                   direction="left"
+                  shouldScaleBackground
                 >
+                  <Drawer.Overlay />
                   <Drawer.Content width={300} height="100dvh">
                     <div className="flex min-h-[100dvh] flex-col gap-6 p-6">
                       <Drawer.Header>
-                        <Drawer.Title className="text-center">Wayfarer</Drawer.Title>
+                        <Drawer.Title className="text-center">
+                          <Wayfarer className="typography-xl text-white" />
+                        </Drawer.Title>
                       </Drawer.Header>
 
                       <MobileNavigation />
