@@ -1,4 +1,6 @@
-.drawer {
+[data-vaul-drawer] {
+  position: fixed;
+
   &[data-vaul-drawer-direction="left"] {
     top: 0;
     bottom: 0;
