@@ -17,7 +17,7 @@ export const Content = ({
         '--drawer-max-width': typeof width === 'number' ? `${width}px` : width,
       }}
       className={cx(
-        'drawer fixed z-50 max-h-[var(--drawer-max-height)] max-w-[var(--drawer-max-width)] bg-background-primary/90 ring-3 ring-border-primary/20 backdrop-blur-lg',
+        'z-40 max-h-[var(--drawer-max-height)] max-w-[var(--drawer-max-width)] bg-background-primary/90 ring-3 ring-border-primary/20 backdrop-blur-lg',
         className,
       )}
     >
