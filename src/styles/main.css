@@ -1,13 +1,19 @@
-@import url('tailwindcss');
-@import url('./base.css') layer(base);
-@import url('./spacetraders.css') layer(base);
-@import url('./components/input.css') layer(components);
-@import url('./components/button.css') layer(components);
-@import url('./components/drawer.css') layer(components);
-@import url('./components/tabs.css') layer(components);
-@import url('./components/toggle-group.css') layer(components);
-@import url('./components/typography.css') layer(utilities);
-@import url('./components/toast.css') layer(utilities);
+@import "tailwindcss";
+
+@layer base {
+  @import "./base.css";
+  @import "./spacetraders.css";
+}
+
+@layer components {
+  @import "./components/button.css";
+  @import "./components/drawer.css";
+  @import "./components/input.css";
+  @import "./components/tabs.css";
+  @import "./components/toast.css";
+  @import "./components/toggle-group.css";
+  @import "./components/typography.css";
+}
 
 @keyframes loader {
   0% {
