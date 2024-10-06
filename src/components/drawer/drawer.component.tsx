@@ -1,15 +1,15 @@
-import { DrawerContext } from '@/components/drawer/drawer.context'
-import type { DrawerImperativeRef, DrawerProps, DrawerStore } from '@/components/drawer/drawer.types'
 import { type PropsWithChildren, type RefAttributes, useImperativeHandle, useState } from 'react'
 import { createStore } from 'zustand'
 import { Root } from './drawer-root.component'
+import { DrawerContext } from './drawer.context'
+import type { DrawerImperativeRef, DrawerProps, DrawerStore } from './drawer.types'
 
 export const Drawer = ({
   ref,
   trigger,
   defaultOpen = false,
-  direction = 'bottom',
   children,
+  ...props
 }: PropsWithChildren<DrawerProps & RefAttributes<DrawerImperativeRef>>) => {
   const [store] = useState(() => {
     return createStore<DrawerStore>((set) => ({
@@ -36,7 +36,7 @@ export const Drawer = ({
 
   return (
     <DrawerContext value={store}>
-      <Root trigger={trigger} direction={direction}>
+      <Root trigger={trigger} {...props}>
         {children}
       </Root>
     </DrawerContext>

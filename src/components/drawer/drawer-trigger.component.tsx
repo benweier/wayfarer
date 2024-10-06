@@ -1,6 +1,6 @@
-import { useDrawerActions } from '@/components/drawer/use-drawer-store.hook'
 import type { PropsWithChildren } from 'react'
 import { Drawer } from 'vaul'
+import { useDrawerActions } from './use-drawer-store.hook'
 
 export const Trigger = ({ children }: PropsWithChildren) => {
   const actions = useDrawerActions()

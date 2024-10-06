@@ -1,7 +1,7 @@
-import { useDrawerContext } from '@/components/drawer/use-drawer-store.hook'
 import type { PropsWithChildren } from 'react'
 import { Drawer } from 'vaul'
 import type { DrawerRootProps } from './drawer.types'
+import { useDrawerContext } from './use-drawer-store.hook'
 
 export const Root = ({ trigger, modal = true, direction = 'bottom', children }: PropsWithChildren<DrawerRootProps>) => {
   const drawer = useDrawerContext()
