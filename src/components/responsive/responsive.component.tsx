@@ -4,29 +4,34 @@ import { useMediaQuery } from 'react-responsive'
 import type { ResponsiveComponentProps } from './responsive.types'
 import { usePrefersColorSchemeQuery } from './use-responsive.hook'
 
-export const Desktop = ({ fallback, children }: ResponsiveComponentProps) => {
-  const isDesktop = useMediaQuery({
-    minWidth: breakpoints.lg.min,
-    maxWidth: breakpoints.xl.max,
-  })
+export const Desktop = ({ below, fallback, children }: ResponsiveComponentProps) => {
+  const query = {
+    minWidth: below ? undefined : breakpoints.lg.min,
+    maxWidth: 9999999,
+  }
+
+  const isDesktop = useMediaQuery(query)
 
   return isDesktop ? children : fallback
 }
 
-export const Tablet = ({ fallback, children }: ResponsiveComponentProps) => {
-  const isTablet = useMediaQuery({
-    minWidth: breakpoints.md.min,
-    maxWidth: breakpoints.md.max,
-  })
+export const Tablet = ({ up, below, fallback, children }: ResponsiveComponentProps) => {
+  const query = {
+    minWidth: below ? 0 : breakpoints.md.min,
+    maxWidth: up ? undefined : breakpoints.md.max,
+  }
+  const isTablet = useMediaQuery(query)
 
   return isTablet ? children : fallback
 }
 
-export const Mobile = ({ fallback, children }: ResponsiveComponentProps) => {
-  const isMobile = useMediaQuery({
-    minWidth: breakpoints.xs.min,
-    maxWidth: breakpoints.sm.max,
-  })
+export const Mobile = ({ up, fallback, children }: ResponsiveComponentProps) => {
+  const query = {
+    minWidth: 0,
+    maxWidth: up ? undefined : breakpoints.sm.max,
+  }
+
+  const isMobile = useMediaQuery(query)
 
   return isMobile ? children : fallback
 }
