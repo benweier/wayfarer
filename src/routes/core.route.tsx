@@ -51,7 +51,7 @@ export const Core = () => {
       )}
     >
       <ScrollRestoration />
-      <Meta titleTemplate="%s • Wayfarer" />
+      <Meta />
       <NavigationLoader />
       <Outlet />
       <Toaster

@@ -1,9 +1,8 @@
 import { useRouterState } from '@tanstack/react-router'
 import { Fragment, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { MetaProps } from './meta.types'
 
-export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
+export const Meta = () => {
   const { t } = useTranslation('meta')
   const metas = useRouterState({
     select: (state) => {
@@ -16,7 +15,10 @@ export const Meta = ({ titleTemplate = '%s' }: MetaProps) => {
 
         for (const tag of meta) {
           if ('title' in tag) {
-            metas.set('title', <title>{`${titleTemplate.replace(/%s/g, () => tag.title)}`}</title>)
+            metas.set(
+              'title',
+              <title>{`${t('title_template', { title: tag.title, ns: 'meta', defaultValue: tag.title })}`}</title>,
+            )
           }
 
           if ('name' in tag) {
