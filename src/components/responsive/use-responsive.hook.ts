@@ -1,48 +1,31 @@
 import { useMediaQuery } from 'react-responsive'
 import { breakpoints } from './breakpoints.conf'
-import { useContainerQuery } from './use-container-query.hook'
 
-export const useDesktopContainerQuery = (args: { up?: boolean; below?: boolean } = {}, ref?: HTMLElement | null) => {
+export const useDesktopMediaQuery = (args: { up?: boolean } | { below?: boolean } = {}) => {
   const query = {
-    minWidth: breakpoints.lg.min,
-    maxWidth: breakpoints.xl.max,
+    minWidth: 'below' in args ? 0 : breakpoints.lg.min,
+    maxWidth: 'up' in args ? undefined : breakpoints.xl.max,
   }
 
-  if ('below' in args) {
-    query.minWidth = breakpoints.xs.min
-  }
-
-  return useContainerQuery(query, ref)
+  return useMediaQuery(query)
 }
 
-export const useTabletContainerQuery = (args: { up?: boolean; below?: boolean } = {}, ref?: HTMLElement | null) => {
+export const useTabletMediaQuery = (args: { up?: boolean } | { below?: boolean } = {}) => {
   const query = {
-    minWidth: breakpoints.md.min,
-    maxWidth: breakpoints.md.max,
+    minWidth: 'below' in args ? 0 : breakpoints.md.min,
+    maxWidth: 'up' in args ? 99999 : breakpoints.md.max,
   }
 
-  if ('up' in args) {
-    query.maxWidth = breakpoints.xl.max
-  }
-
-  if ('below' in args) {
-    query.minWidth = breakpoints.xs.min
-  }
-
-  return useContainerQuery(query, ref)
+  return useMediaQuery(query)
 }
 
-export const useMobileContainerQuery = (args: { up?: boolean; below?: boolean } = {}, ref?: HTMLElement | null) => {
+export const useMobileMediaQuery = (args: { up?: boolean } | { below?: boolean } = {}) => {
   const query = {
     minWidth: breakpoints.xs.min,
-    maxWidth: breakpoints.sm.max,
+    maxWidth: 'up' in args ? 99999 : breakpoints.sm.max,
   }
 
-  if ('up' in args) {
-    query.maxWidth = breakpoints.xl.max
-  }
-
-  return useContainerQuery(query, ref)
+  return useMediaQuery(query)
 }
 
 export const usePrefersColorSchemeQuery = (preference: 'no-preference' | 'light' | 'dark' | 'system') => {

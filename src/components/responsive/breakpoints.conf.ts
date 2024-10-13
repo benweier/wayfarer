@@ -1,4 +1,6 @@
-export const breakpoints = {
+import type { Breakpoint, BreakpointQuery } from './responsive.types'
+
+export const breakpoints: Record<Breakpoint, BreakpointQuery> = {
   xs: {
     min: 0,
     max: 639,
