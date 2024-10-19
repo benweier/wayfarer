@@ -45,11 +45,13 @@ const AuthRouteRoute = AuthRouteImport.update({
 } as any)
 
 const IndexRouteRoute = IndexRouteImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
 const DashboardLeaderboardRouteRoute = DashboardLeaderboardRouteImport.update({
+  id: '/leaderboard',
   path: '/leaderboard',
   getParentRoute: () => DashboardRouteRoute,
 } as any).lazy(() =>
@@ -63,22 +65,26 @@ const DashboardAuthenticatedRouteRoute =
   } as any)
 
 const AuthRegisterRouteRoute = AuthRegisterRouteImport.update({
+  id: '/register',
   path: '/register',
   getParentRoute: () => AuthRouteRoute,
 } as any).lazy(() => import('./conf/_auth/register.lazy').then((d) => d.Route))
 
 const AuthLogoutRouteRoute = AuthLogoutRouteImport.update({
+  id: '/logout',
   path: '/logout',
   getParentRoute: () => AuthRouteRoute,
 } as any)
 
 const AuthLoginRouteRoute = AuthLoginRouteImport.update({
+  id: '/login',
   path: '/login',
   getParentRoute: () => AuthRouteRoute,
 } as any).lazy(() => import('./conf/_auth/login.lazy').then((d) => d.Route))
 
 const DashboardSystemsIndexRouteRoute = DashboardSystemsIndexRouteImport.update(
   {
+    id: '/systems/',
     path: '/systems/',
     getParentRoute: () => DashboardRouteRoute,
   } as any,
@@ -87,6 +93,7 @@ const DashboardSystemsIndexRouteRoute = DashboardSystemsIndexRouteImport.update(
 )
 
 const DashboardAgentsIndexRouteRoute = DashboardAgentsIndexRouteImport.update({
+  id: '/agents/',
   path: '/agents/',
   getParentRoute: () => DashboardRouteRoute,
 } as any).lazy(() =>
@@ -95,6 +102,7 @@ const DashboardAgentsIndexRouteRoute = DashboardAgentsIndexRouteImport.update({
 
 const DashboardAgentsAgentSymbolRouteRoute =
   DashboardAgentsAgentSymbolRouteImport.update({
+    id: '/agents/$agentSymbol',
     path: '/agents/$agentSymbol',
     getParentRoute: () => DashboardRouteRoute,
   } as any).lazy(() =>
@@ -103,6 +111,7 @@ const DashboardAgentsAgentSymbolRouteRoute =
 
 const DashboardAuthenticatedSurveysRouteRoute =
   DashboardAuthenticatedSurveysRouteImport.update({
+    id: '/surveys',
     path: '/surveys',
     getParentRoute: () => DashboardAuthenticatedRouteRoute,
   } as any).lazy(() =>
@@ -113,12 +122,14 @@ const DashboardAuthenticatedSurveysRouteRoute =
 
 const DashboardAuthenticatedFleetRouteRoute =
   DashboardAuthenticatedFleetRouteImport.update({
+    id: '/fleet',
     path: '/fleet',
     getParentRoute: () => DashboardAuthenticatedRouteRoute,
   } as any)
 
 const DashboardAuthenticatedContractsRouteRoute =
   DashboardAuthenticatedContractsRouteImport.update({
+    id: '/contracts',
     path: '/contracts',
     getParentRoute: () => DashboardAuthenticatedRouteRoute,
   } as any).lazy(() =>
@@ -129,6 +140,7 @@ const DashboardAuthenticatedContractsRouteRoute =
 
 const DashboardSystemsSystemSymbolIndexRouteRoute =
   DashboardSystemsSystemSymbolIndexRouteImport.update({
+    id: '/systems/$systemSymbol/',
     path: '/systems/$systemSymbol/',
     getParentRoute: () => DashboardRouteRoute,
   } as any).lazy(() =>
@@ -139,6 +151,7 @@ const DashboardSystemsSystemSymbolIndexRouteRoute =
 
 const DashboardAuthenticatedFleetIndexRouteRoute =
   DashboardAuthenticatedFleetIndexRouteImport.update({
+    id: '/',
     path: '/',
     getParentRoute: () => DashboardAuthenticatedFleetRouteRoute,
   } as any).lazy(() =>
@@ -149,6 +162,7 @@ const DashboardAuthenticatedFleetIndexRouteRoute =
 
 const DashboardAuthenticatedFleetShipSymbolRouteRoute =
   DashboardAuthenticatedFleetShipSymbolRouteImport.update({
+    id: '/$shipSymbol',
     path: '/$shipSymbol',
     getParentRoute: () => DashboardAuthenticatedFleetRouteRoute,
   } as any).lazy(() =>
@@ -159,6 +173,7 @@ const DashboardAuthenticatedFleetShipSymbolRouteRoute =
 
 const DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteRoute =
   DashboardSystemsSystemSymbolWaypointWaypointSymbolRouteImport.update({
+    id: '/systems/$systemSymbol/waypoint/$waypointSymbol',
     path: '/systems/$systemSymbol/waypoint/$waypointSymbol',
     getParentRoute: () => DashboardRouteRoute,
   } as any).lazy(() =>
@@ -179,6 +194,7 @@ const DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute =
 
 const DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteRoute =
   DashboardAuthenticatedFleetShipSymbolOverlayMarketRouteImport.update({
+    id: '/market',
     path: '/market',
     getParentRoute: () =>
       DashboardAuthenticatedFleetShipSymbolOverlayRouteRoute,
