@@ -30,7 +30,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
         <ShipActions.FlightMode ship={ship} flightMode={ShipFlightMode.Cruise}>
           {({ execute, disabled }) => (
             <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value={ShipFlightMode.Cruise}>
-              {t('ship.flight_mode.cruise')}
+              {t(ShipFlightMode.Cruise, { ns: 'spacetraders.flight_mode' })}
             </Dropdown.RadioItem>
           )}
         </ShipActions.FlightMode>
@@ -38,7 +38,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
         <ShipActions.FlightMode ship={ship} flightMode={ShipFlightMode.Burn}>
           {({ execute, disabled }) => (
             <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value={ShipFlightMode.Burn}>
-              {t('ship.flight_mode.burn')}
+              {t(ShipFlightMode.Burn, { ns: 'spacetraders.flight_mode' })}
             </Dropdown.RadioItem>
           )}
         </ShipActions.FlightMode>
@@ -46,7 +46,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
         <ShipActions.FlightMode ship={ship} flightMode={ShipFlightMode.Drift}>
           {({ execute, disabled }) => (
             <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value={ShipFlightMode.Drift}>
-              {t('ship.flight_mode.drift')}
+              {t(ShipFlightMode.Drift, { ns: 'spacetraders.flight_mode' })}
             </Dropdown.RadioItem>
           )}
         </ShipActions.FlightMode>
@@ -54,7 +54,7 @@ export const ShipDetailFlightMode = ({ ship }: { ship: ShipResponse }) => {
         <ShipActions.FlightMode ship={ship} flightMode={ShipFlightMode.Stealth}>
           {({ execute, disabled }) => (
             <Dropdown.RadioItem onSelect={() => execute()} disabled={disabled} value={ShipFlightMode.Stealth}>
-              {t('ship.flight_mode.stealth')}
+              {t(ShipFlightMode.Stealth, { ns: 'spacetraders.flight_mode' })}
             </Dropdown.RadioItem>
           )}
         </ShipActions.FlightMode>
