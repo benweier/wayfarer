@@ -1,32 +1,30 @@
-@layer components {
-  [data-vaul-drawer] {
-    position: fixed;
+[data-vaul-drawer] {
+  position: fixed;
 
-    &[data-vaul-drawer-direction="left"] {
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      border-top-right-radius: var(--radius-md);
-      border-bottom-right-radius: var(--radius-md);
-    }
+  &[data-vaul-drawer-direction="left"] {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+  }
 
-    &[data-vaul-drawer-direction="right"] {
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      border-top-left-radius: var(--radius-md);
-      border-bottom-left-radius: var(--radius-md);
-    }
+  &[data-vaul-drawer-direction="right"] {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+  }
 
-    &[data-vaul-drawer-direction="bottom"] {
-      right: 0;
-      bottom: 0;
-      left: 0;
-      margin: 0 auto;
-      border-top-left-radius: var(--radius-md);
-      border-top-right-radius: var(--radius-md);
-    }
+  &[data-vaul-drawer-direction="bottom"] {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
   }
 }
