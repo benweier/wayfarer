@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import basicSSL from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react-swc'
+import compiler from 'babel-plugin-react-compiler'
 import { defineConfig } from 'vite'
 import dynamic from 'vite-plugin-dynamic-import'
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -56,6 +57,7 @@ export default defineConfig({
     dynamic(),
     { enforce: 'pre', ...mdx() },
     tailwindcss(),
+    [compiler],
     react(),
     !isTest && TanStackRouterVite(),
     sentryVitePlugin({
