@@ -4,10 +4,12 @@
 @import "./components/button.css" layer(components);
 @import "./components/drawer.css" layer(components);
 @import "./components/input.css" layer(components);
+@import "./components/system-tag.css" layer(components);
 @import "./components/tabs.css" layer(components);
 @import "./components/toast.css" layer(components);
 @import "./components/toggle-group.css" layer(components);
 @import "./components/typography.css" layer(components);
+@import "./components/waypoint-tag.css" layer(components);
 
 @keyframes loader {
   0% {
