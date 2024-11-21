@@ -28,6 +28,11 @@ export default defineConfig({
       },
     },
   },
+  esbuild: {
+    supported: {
+      'top-level-await': true,
+    },
+  },
   server: {
     port: 8080,
     open: true,
