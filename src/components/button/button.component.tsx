@@ -1,6 +1,6 @@
-import { cx } from 'class-variance-authority'
+import { cx } from '@/utilities/cx.helper'
 import type { RefAttributes } from 'react'
-import { button } from './button.cva'
+import { button } from './button.styles'
 import type { ButtonProps } from './button.types'
 
 export const Button = ({
@@ -17,11 +17,13 @@ export const Button = ({
   return (
     <button
       ref={ref}
-      className={cx(
-        button({ intent, size, kind, icon }),
-        { 'btn-adornment': !!adornment?.start || !!adornment?.end },
-        className,
-      )}
+      className={button({
+        intent,
+        size,
+        kind,
+        icon,
+        className: cx({ 'btn-adornment': !!adornment?.start || !!adornment?.end }, className),
+      })}
       {...props}
     >
       {adornment?.start && <span className="adornment-start">{adornment.start}</span>}

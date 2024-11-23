@@ -1,6 +1,7 @@
-import { type VariantProps, cva } from 'class-variance-authority'
+import { type VariantProps, tv } from '@/utilities/tv.helper'
 
-export const button = cva('btn', {
+export const button = tv({
+  base: 'btn',
   variants: {
     intent: {
       brand: ['btn-brand'],
