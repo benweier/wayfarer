@@ -1,5 +1,5 @@
+import { cx } from '@/utilities/cx.helper'
 import type { DialogTitleProps } from '@radix-ui/react-dialog'
-import { cx } from 'class-variance-authority'
 import { Drawer } from 'vaul'
 
 export const Title = ({ className, children, ...props }: DialogTitleProps) => {

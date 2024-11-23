@@ -1,4 +1,4 @@
-import { cx } from 'class-variance-authority'
+import { cx } from '@/utilities/cx.helper'
 import type { PropsWithChildren } from 'react'
 
 export const ItemIcon = ({ className, children }: PropsWithChildren<{ className?: string }>) => {

@@ -1,5 +1,5 @@
+import { cx } from '@/utilities/cx.helper'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { cx } from 'class-variance-authority'
 import type { RefAttributes } from 'react'
 import classes from './dropdown-item.module.css'
 

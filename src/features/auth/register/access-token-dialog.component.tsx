@@ -1,8 +1,8 @@
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import type { RegisterAgentResponse } from '@/types/spacetraders'
+import { cx } from '@/utilities/cx.helper'
 import { useNavigate } from '@tanstack/react-router'
-import { cx } from 'class-variance-authority'
 import { Copy } from './copy-button.component'
 import { useCopy } from './use-copy.hook'
 

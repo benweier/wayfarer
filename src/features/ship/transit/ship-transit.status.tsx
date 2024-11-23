@@ -1,6 +1,6 @@
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
-import { cx } from 'class-variance-authority'
+import { cx } from '@/utilities/cx.helper'
 import { useTranslation } from 'react-i18next'
 import { ShipTransitState } from './ship-transit.conf'
 import { useShipTransit } from './use-ship-transit.hook'

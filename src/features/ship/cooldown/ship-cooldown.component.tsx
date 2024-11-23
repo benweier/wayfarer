@@ -1,5 +1,5 @@
 import type { ShipResponse } from '@/types/spacetraders'
-import { cx } from 'class-variance-authority'
+import { cx } from '@/utilities/cx.helper'
 import { useTranslation } from 'react-i18next'
 import { useShipCooldown } from './use-ship-cooldown.hook'
 

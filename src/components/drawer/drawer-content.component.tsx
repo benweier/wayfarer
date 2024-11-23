@@ -1,5 +1,5 @@
 import * as ScrollArea from '@/components/scroll-area'
-import { cx } from 'class-variance-authority'
+import { cx } from '@/utilities/cx.helper'
 import type { PropsWithChildren } from 'react'
 import { Drawer } from 'vaul'
 import type { DrawerContentProps } from './drawer.types'

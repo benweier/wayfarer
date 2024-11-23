@@ -1,5 +1,5 @@
+import { cx } from '@/utilities/cx.helper'
 import { ErrorMessage as ReactHookFormErrorMessage } from '@hookform/error-message'
-import { cx } from 'class-variance-authority'
 import { type HTMLAttributes, use } from 'react'
 import { FieldControlContext } from './field-control.component'
 

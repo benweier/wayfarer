@@ -1,5 +1,5 @@
+import { cx } from '@/utilities/cx.helper'
 import * as Dialog from '@radix-ui/react-dialog'
-import { cx } from 'class-variance-authority'
 import type { PropsWithChildren } from 'react'
 import { Overlay } from './modal.overlay'
 import type { ModalDialogProps } from './modal.types'

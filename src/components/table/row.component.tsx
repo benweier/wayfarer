@@ -1,5 +1,5 @@
+import { cx } from '@/utilities/cx.helper'
 import { flexRender } from '@tanstack/react-table'
-import { cx } from 'class-variance-authority'
 import type { RowProps } from './table.types'
 
 export const Row = ({ className, row }: RowProps) => {

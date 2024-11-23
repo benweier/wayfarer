@@ -1,6 +1,6 @@
 import { WAYPOINT_TYPE_STYLES } from '@/config/waypoint.styles'
 import type { SystemResponse } from '@/types/spacetraders'
-import { cx } from 'class-variance-authority'
+import { cx } from '@/utilities/cx.helper'
 
 export const SystemOverview = ({ system }: { system: SystemResponse }) => {
   return (

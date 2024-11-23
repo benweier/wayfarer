@@ -1,9 +1,9 @@
 import { Badge } from '@/components/badge'
 import { Sort } from '@/components/table'
 import { TradeGoodContext } from '@/features/trade-good/context'
+import { cx } from '@/utilities/cx.helper'
 import { formatNumber } from '@/utilities/number.helper'
 import { createColumnHelper } from '@tanstack/react-table'
-import { cx } from 'class-variance-authority'
 import { Translation } from 'react-i18next'
 import type { WaypointMarketTableSchema } from './waypoint-market.types'
 

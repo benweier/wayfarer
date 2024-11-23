@@ -1,5 +1,5 @@
 import { AppIcon } from '@/components/icons'
-import { cx } from 'class-variance-authority'
+import { cx } from '@/utilities/cx.helper'
 import type { ButtonHTMLAttributes } from 'react'
 
 export const Copy = ({

@@ -1,9 +1,9 @@
 import { Button } from '@/components/button'
 import { Meta } from '@/components/meta'
+import { cx } from '@/utilities/cx.helper'
 import * as Sentry from '@sentry/react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import { Outlet, ScrollRestoration, useRouterState } from '@tanstack/react-router'
-import { cx } from 'class-variance-authority'
 import { lazy } from 'react'
 import { Toaster } from 'sonner'
 

@@ -1,4 +1,4 @@
-import { cx } from 'class-variance-authority'
+import { cx } from '@/utilities/cx.helper'
 import { type HTMLAttributes, use } from 'react'
 import { FieldControlContext } from './field-control.component'
 

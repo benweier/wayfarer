@@ -1,6 +1,6 @@
 import { AppIcon } from '@/components/icons'
+import { cx } from '@/utilities/cx.helper'
 import * as Select from '@radix-ui/react-select'
-import { cx } from 'class-variance-authority'
 import type { RefAttributes } from 'react'
 
 export const Item = ({
