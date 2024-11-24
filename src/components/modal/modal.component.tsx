@@ -1,8 +1,8 @@
-import { type PropsWithChildren, type RefAttributes, useImperativeHandle, useState } from 'react'
+import { useImperativeHandle, useState } from 'react'
 import { createStore } from 'zustand'
 import { ModalContext } from './modal.context'
 import { Root } from './modal.root'
-import type { ModalImperativeRef, ModalProps, ModalStore } from './modal.types'
+import type { ModalProps, ModalStore } from './modal.types'
 
 export const Modal = ({
   ref,
@@ -13,7 +13,7 @@ export const Modal = ({
   close,
   disableExternalClose,
   children,
-}: PropsWithChildren<ModalProps> & RefAttributes<ModalImperativeRef>) => {
+}: ModalProps) => {
   const [store] = useState(() => {
     return createStore<ModalStore>((set) => ({
       isOpen: defaultOpen,

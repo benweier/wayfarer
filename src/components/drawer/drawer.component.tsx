@@ -1,16 +1,10 @@
-import { type PropsWithChildren, type RefAttributes, useImperativeHandle, useState } from 'react'
+import { useImperativeHandle, useState } from 'react'
 import { createStore } from 'zustand'
 import { Root } from './drawer-root.component'
 import { DrawerContext } from './drawer.context'
-import type { DrawerImperativeRef, DrawerProps, DrawerStore } from './drawer.types'
+import type { DrawerProps, DrawerStore } from './drawer.types'
 
-export const Drawer = ({
-  ref,
-  trigger,
-  defaultOpen = false,
-  children,
-  ...props
-}: PropsWithChildren<DrawerProps & RefAttributes<DrawerImperativeRef>>) => {
+export const Drawer = ({ ref, trigger, defaultOpen = false, children, ...props }: DrawerProps) => {
   const [store] = useState(() => {
     return createStore<DrawerStore>((set) => ({
       isOpen: defaultOpen,

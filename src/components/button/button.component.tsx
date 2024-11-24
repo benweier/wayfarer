@@ -1,19 +1,8 @@
 import { cx } from '@/utilities/cx.helper'
-import type { RefAttributes } from 'react'
 import { button } from './button.styles'
 import type { ButtonProps } from './button.types'
 
-export const Button = ({
-  ref,
-  intent,
-  size,
-  kind,
-  icon,
-  adornment,
-  className,
-  children,
-  ...props
-}: ButtonProps & RefAttributes<HTMLButtonElement>) => {
+export const Button = ({ ref, intent, size, kind, icon, adornment, className, children, ...props }: ButtonProps) => {
   return (
     <button
       ref={ref}

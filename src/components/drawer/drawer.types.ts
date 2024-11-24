@@ -1,12 +1,14 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, PropsWithChildren, ReactNode } from 'react'
+import type { RefAttributes } from 'types-react'
 
-export type DrawerProps = {
+export type DrawerProps = PropsWithChildren<{
   trigger: ReactNode
   defaultOpen?: boolean
   direction?: 'left' | 'right' | 'bottom'
   modal?: boolean
   shouldScaleBackground?: boolean
-}
+}> &
+  RefAttributes<DrawerImperativeRef>
 
 export type DrawerImperativeRef = DrawerActions
 

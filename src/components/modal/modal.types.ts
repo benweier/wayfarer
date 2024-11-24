@@ -1,15 +1,17 @@
-import type { ReactNode } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
+import type { RefAttributes } from 'types-react'
 
 type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
 
-export type ModalProps = {
+export type ModalProps = PropsWithChildren<{
   trigger?: ReactNode
   overlay?: ReactNode
   defaultOpen?: boolean
   size?: DialogSize
   close?: ReactNode
   disableExternalClose?: boolean
-}
+}> &
+  RefAttributes<ModalImperativeRef>
 
 export type ModalDialogProps = {
   trigger?: ReactNode
