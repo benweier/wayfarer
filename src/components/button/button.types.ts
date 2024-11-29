@@ -4,4 +4,4 @@ import type { ButtonVariantProps } from './button.styles'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   RefAttributes<HTMLButtonElement> &
-  ButtonVariantProps & { adornment?: { start?: ReactNode; end?: ReactNode } }
+  ButtonVariantProps & { asChild?: boolean; adornment?: { start?: ReactNode; end?: ReactNode } }

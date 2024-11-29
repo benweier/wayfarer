@@ -1,23 +1,41 @@
-import { cx } from '@/utilities/cx.helper'
+import { twm } from '@/utilities/twm.helper'
+import { Slot, Slottable } from '@radix-ui/react-slot'
+import { cx } from 'class-variance-authority'
 import { button } from './button.styles'
 import type { ButtonProps } from './button.types'
 
-export const Button = ({ ref, intent, size, kind, icon, adornment, className, children, ...props }: ButtonProps) => {
+export const Button = ({
+  ref,
+  asChild = false,
+  intent,
+  size,
+  kind,
+  icon,
+  adornment,
+  className,
+  children,
+  ...props
+}: ButtonProps) => {
+  const Component = asChild ? Slot : 'button'
+
   return (
-    <button
+    <Component
       ref={ref}
-      className={button({
-        intent,
-        size,
-        kind,
-        icon,
-        className: cx({ 'btn-adornment': !!adornment?.start || !!adornment?.end }, className),
-      })}
+      className={twm(
+        button({
+          intent,
+          size,
+          kind,
+          icon,
+        }),
+        cx({ 'btn-adornment': !!adornment }),
+        className,
+      )}
       {...props}
     >
-      {adornment?.start && <span className="adornment-start">{adornment.start}</span>}
-      {children}
-      {adornment?.end && <span className="adornment-end">{adornment.end}</span>}
-    </button>
+      <span className="adornment-start">{adornment?.start}</span>
+      <Slottable>{children}</Slottable>
+      <span className="adornment-end">{adornment?.end}</span>
+    </Component>
   )
 }
