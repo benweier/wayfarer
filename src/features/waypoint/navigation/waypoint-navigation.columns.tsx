@@ -1,6 +1,7 @@
 import { Badge } from '@/components/badge'
 import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
+import { Tooltip } from '@/components/tooltip'
 import { WaypointTraits } from '@/config/spacetraders'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
 import { WaypointTypeFilter } from '@/features/waypoint/filters'
@@ -9,7 +10,7 @@ import type { WaypointTrait } from '@/types/spacetraders'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
+import { Trans, Translation } from 'react-i18next'
 import type { WaypointNavigationTableSchema } from './waypoint-navigation.types'
 
 const FILTER_TRAITS = new Set<WaypointTraits>([
@@ -57,20 +58,18 @@ export const columns = [
     id: 'presence',
     minSize: 10,
     maxSize: 10,
-    cell: ({ row }) =>
-      row.original.presence > 0 && (
-        <Translation>
-          {(t) => {
-            const title = t('waypoint.presence', { count: row.original.presence, symbol: row.original.waypoint.symbol })
-
-            return (
-              <span title={title}>
-                <ShipIcon id="anchor" className="size-5" />
-              </span>
-            )
-          }}
-        </Translation>
-      ),
+    cell: ({ row }) => {
+      return (
+        row.original.presence > 0 && (
+          <Tooltip trigger={<ShipIcon id="anchor" className="size-5" />}>
+            <Trans
+              i18nKey="waypoint.presence"
+              values={{ count: row.original.presence, symbol: row.original.waypoint.symbol }}
+            />
+          </Tooltip>
+        )
+      )
+    },
   }),
   columnHelper.accessor(
     (row) => {
