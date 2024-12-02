@@ -22,7 +22,7 @@ const WaypointMarketRefresh = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="typography-xs text-right text-foregrouns-secondary">
+      <div className="typography-xs text-right text-foreground-secondary">
         {isFetching || !state ? '...' : t('general.last_updated.relative', { value: state.dataUpdatedAt })}
       </div>
       <Button
