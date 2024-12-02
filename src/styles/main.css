@@ -1,3 +1,4 @@
+/* stylelint-disable import-notation */
 @import "tailwindcss";
 @import "./base.css" layer(base);
 @import "./spacetraders.css" layer(base);
@@ -10,6 +11,7 @@
 @import "./components/toggle-group.css" layer(components);
 @import "./components/typography.css" layer(components);
 @import "./components/waypoint-tag.css" layer(components);
+/* stylelint-enable import-notation */
 
 @keyframes loader {
   0% {
