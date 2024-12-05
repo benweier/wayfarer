@@ -50,8 +50,9 @@
 }
 
 @theme {
-  --default-font-family: 'Space Grotesk', var(--font-family-sans);
-  --default-font-feature-settings: 'ss01', 'ss03', 'case' 1, 'zero' 1;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --default-font-feature-settings: "ss01", "ss03", "case" 1, "zero" 1;
   --animate-loader: loader 1s linear infinite;
   --blur-xs: 2px;
   --width-screen-sm: var(--breakpoint-sm);
@@ -110,6 +111,7 @@
   --spacing-4: 16px;
   --spacing-5: 20px;
   --spacing-6: 24px;
+  --spacing-7: 28px;
   --spacing-8: 32px;
   --spacing-10: 40px;
   --spacing-12: 48px;
