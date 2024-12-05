@@ -235,7 +235,7 @@
       inset: 0;
       display: block;
       width: 20%;
-      content: '';
+      content: "";
       background-color: var(--color-green-500);
       animation: var(--animate-loader);
     }
@@ -245,21 +245,23 @@
     font-weight: bold;
     color: var(--link-fg);
     border-radius: var(--radius-sm);
-    outline: none;
+    outline-width: 2px;
+    outline-color: transparent;
+    outline-offset: 4px;
 
-    &:focus {
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--link-fg) 67%, transparent);
+    &:focus-visible {
+      outline-color: var(--link-fg);
     }
   }
 
   .popover {
     will-change: transform, opacity;
 
-    &[data-state='open'] {
+    &[data-state="open"] {
       animation: scale-in 72ms ease-out;
     }
 
-    &[data-state='closed'] {
+    &[data-state="closed"] {
       animation: scale-out 72ms ease-in;
     }
   }
