@@ -1,4 +1,5 @@
 import { i18n } from '@/services/i18n'
+
 export const formatRelativeTime = (value: number | Date, lng?: string) => {
   const date = new Date(value)
   const rtf = new Intl.RelativeTimeFormat(lng, { numeric: 'auto' })

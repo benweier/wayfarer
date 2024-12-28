@@ -2,7 +2,6 @@ import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
-import { formatDateTime } from '@/utilities/date.helper'
 import { ContractListContext } from './contract-list.context'
 import { type ContractListTableSchema } from './contract-list.types'
 
@@ -107,7 +106,15 @@ export const availableContractsColumns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="typography-sm text-left">{formatDateTime(value)}</div>
+      return (
+        <div className="typography-sm text-left">
+          <Translation>
+            {(t) => {
+              return t('formatter.datetime', { value })
+            }}
+          </Translation>
+        </div>
+      )
     },
     minSize: 15,
     maxSize: 15,
@@ -124,7 +131,15 @@ export const availableContractsColumns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="typography-sm text-left">{formatDateTime(value)}</div>
+      return (
+        <div className="typography-sm text-left">
+          <Translation>
+            {(t) => {
+              return t('formatter.datetime', { value })
+            }}
+          </Translation>
+        </div>
+      )
     },
     minSize: 15,
     maxSize: 15,
@@ -333,7 +348,15 @@ export const acceptedContractsColumns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="typography-sm text-left">{formatDateTime(value)}</div>
+      return (
+        <div className="typography-sm text-left">
+          <Translation>
+            {(t) => {
+              return t('formatter.datetime', { value })
+            }}
+          </Translation>
+        </div>
+      )
     },
     minSize: 15,
     maxSize: 15,
