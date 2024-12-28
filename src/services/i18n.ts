@@ -1,10 +1,9 @@
-import { sentry } from '@/services/sentry'
-import { formatDateTime, formatRelativeTime } from '@/utilities/date.helper'
-import { formatNumber } from '@/utilities/number.helper'
 import { createInstance } from 'i18next'
 import languageDetector from 'i18next-browser-languagedetector'
 import backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
+import { sentry } from '@/services/sentry'
+import { formatDateTime, formatRelativeTime } from '@/utilities/date.helper'
 
 export const i18n = createInstance()
 
@@ -55,6 +54,10 @@ void i18n
       }
     },
   })
-i18n.services.formatter?.add('number', formatNumber)
+i18n.services.formatter?.addCached('number', (lng, opts?: Intl.NumberFormatOptions) => {
+  const formatter = new Intl.NumberFormat(lng, opts)
+
+  return (val: number) => formatter.format(val)
+})
 i18n.services.formatter?.add('relativeTime', formatRelativeTime)
 i18n.services.formatter?.add('absoluteDateTime', formatDateTime)

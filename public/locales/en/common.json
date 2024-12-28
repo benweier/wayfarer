@@ -155,7 +155,9 @@
     }
   },
   "formatter": {
-    "datetime": "{{value, absoluteDateTime}}"
+    "number": "{{value, number}}",
+    "datetime": "{{value, absoluteDateTime}}",
+    "datetime|relative": "{{value, relativeDateTime}}"
   },
   "systems": {
     "label": "Systems"
