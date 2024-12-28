@@ -1,14 +1,13 @@
-import { Button } from '@/components/button'
-import { useWaypointResponse } from '@/context/waypoint.context'
-import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
-import type { MarketTradeGood, ShipResponse } from '@/types/spacetraders'
-import { formatNumber } from '@/utilities/number.helper'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useCallback } from 'react'
 import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { Button } from '@/components/button'
+import { useWaypointResponse } from '@/context/waypoint.context'
+import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
+import { type MarketTradeGood, type ShipResponse } from '@/types/spacetraders'
 import { TradeGoodSellSchema } from './trade-good-sell.schema'
-import type { TradeGoodSellFormProps } from './trade-good-sell.types'
+import { type TradeGoodSellFormProps } from './trade-good-sell.types'
 
 const ShipSelection = ({ ship, good, count }: { ship: ShipResponse; good: MarketTradeGood; count: number }) => {
   const { t } = useTranslation()
@@ -17,7 +16,12 @@ const ShipSelection = ({ ship, good, count }: { ship: ShipResponse; good: Market
     <div className="flex items-baseline gap-2 ">
       <span className="font-bold">{ship.symbol}</span>
       <span className="text-foreground-secondary">
-        ({t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count})
+        (
+        {t(good.symbol, { ns: 'spacetraders.trade_good' })}
+        :
+        {' '}
+        {count}
+        )
       </span>
     </div>
   )
@@ -30,7 +34,9 @@ const ShipOption = ({ ship, good, count }: { ship: ShipResponse; good: MarketTra
     <div className="typography-sm flex flex-col">
       <div className="font-semibold">{ship.symbol}</div>
       <div className="text-foreground-secondary">
-        {t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count}
+        {t(good.symbol, { ns: 'spacetraders.trade_good' })}
+        :
+        {count}
       </div>
     </div>
   )
@@ -56,7 +62,7 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
       <div className="[max-width:50%]">
         <div className="typography-sm text-foreground-secondary">{t('market.sell_price')}</div>
         <div className="typography-xl truncate font-bold">
-          {Number.isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}
+          {Number.isNaN(quantity) ? 0 : t('formatter.number', { value: quantity * perUnit })}
         </div>
       </div>
     </div>

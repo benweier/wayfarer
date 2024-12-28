@@ -1,3 +1,7 @@
+import { Link } from '@tanstack/react-router'
+import { useAtom } from 'jotai'
+import { type PropsWithChildren, Suspense } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { Drawer } from '@/components/drawer'
 import { AppIcon, MenuIcon } from '@/components/icons'
@@ -8,11 +12,6 @@ import { DesktopNavigation, MobileNavigation } from '@/features/navigation'
 import { sidebarAtom } from '@/store/atoms/sidebar'
 import { useAuthStore } from '@/store/auth'
 import { cx } from '@/utilities/cx.helper'
-import { formatNumber } from '@/utilities/number.helper'
-import { Link } from '@tanstack/react-router'
-import { useAtom } from 'jotai'
-import { type PropsWithChildren, Suspense } from 'react'
-import { useTranslation } from 'react-i18next'
 
 const Logout = () => {
   const { t } = useTranslation()
@@ -51,7 +50,8 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                 <div className="flex items-center justify-center bg-blue-700 py-4">
                   <Link to="/">
                     <div className="display-md text-center font-black text-white">
-                      W<span className="@[220px]:inline hidden">ayfarer</span>
+                      W
+                      <span className="@[220px]:inline hidden">ayfarer</span>
                     </div>
                   </Link>
                 </div>
@@ -61,29 +61,31 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
               <div className="flex flex-col items-center justify-center gap-2 p-4">
                 <Preferences />
               </div>
-              {isAuthenticated ? (
-                <div className="flex flex-shrink items-center justify-center gap-2 bg-rose-600 p-4">
-                  <Logout />
-                </div>
-              ) : (
-                <div className="flex flex-shrink items-center justify-center gap-2 bg-emerald-600 p-4">
-                  <Link
-                    to="/login"
-                    search={{
-                      redirect: `${window.location.pathname}${window.location.search}`,
-                    }}
-                    mask={{ to: '/login' }}
-                    className="flex @[220px]/side:w-full w-full items-center gap-4 rounded px-3 py-2 font-medium text-white shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100"
-                  >
-                    <div className="size-6">
-                      <MenuIcon id="login" className="size-6 text-emerald-100" aria-hidden />
+              {isAuthenticated
+                ? (
+                    <div className="flex flex-shrink items-center justify-center gap-2 bg-rose-600 p-4">
+                      <Logout />
                     </div>
-                    <span className="typography-sm sr-only @[220px]/side:not-sr-only">
-                      {t('auth.login', { context: 'action' })}
-                    </span>
-                  </Link>
-                </div>
-              )}
+                  )
+                : (
+                    <div className="flex flex-shrink items-center justify-center gap-2 bg-emerald-600 p-4">
+                      <Link
+                        to="/login"
+                        search={{
+                          redirect: `${window.location.pathname}${window.location.search}`,
+                        }}
+                        mask={{ to: '/login' }}
+                        className="flex @[220px]/side:w-full w-full items-center gap-4 rounded px-3 py-2 font-medium text-white shadow-emerald-900 transition-all duration-100 hover:scale-105 hover:bg-emerald-700 hover:shadow active:scale-100"
+                      >
+                        <div className="size-6">
+                          <MenuIcon id="login" className="size-6 text-emerald-100" aria-hidden />
+                        </div>
+                        <span className="typography-sm sr-only @[220px]/side:not-sr-only">
+                          {t('auth.login', { context: 'action' })}
+                        </span>
+                      </Link>
+                    </div>
+                  )}
             </div>
           </div>
         </div>
@@ -91,7 +93,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
 
       <div className="flex min-h-[100dvh] min-w-0 flex-1 flex-col">
         <Desktop
-          fallback={
+          fallback={(
             <div className="flex items-center justify-between bg-blue-600 px-4 py-3 sm:px-6 lg:px-8">
               <div>
                 <Link to="/">
@@ -101,13 +103,13 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
 
               <div>
                 <Drawer
-                  trigger={
+                  trigger={(
                     <Drawer.Trigger>
                       <Button intent="info" kind="solid" icon>
                         <AppIcon id="hamburger" className="size-6" />
                       </Button>
                     </Drawer.Trigger>
-                  }
+                  )}
                   direction="left"
                   shouldScaleBackground
                 >
@@ -126,7 +128,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
                 </Drawer>
               </div>
             </div>
-          }
+          )}
         />
 
         <main className="flex flex-1">
@@ -139,11 +141,11 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
           {/* Primary column */}
           <section className="relative flex h-full min-w-0 flex-1 flex-col">
             <Suspense
-              fallback={
+              fallback={(
                 <div className="flex h-full w-full animate-pulse items-center justify-center font-black text-5xl text-zinc-900/5 dark:text-zinc-500/10">
                   <div>Wayfarer</div>
                 </div>
-              }
+              )}
             >
               {children}
             </Suspense>
@@ -167,6 +169,7 @@ export const DashboardTemplate = ({ children }: PropsWithChildren) => {
 
 const Agent = () => {
   const { agent, isAuthenticated } = useAuthStore()
+  const { t } = useTranslation()
 
   if (!isAuthenticated) return null
 
@@ -176,10 +179,15 @@ const Agent = () => {
     <div>
       <div className="typography-xl text-right font-black">{agent.symbol}</div>
       <div className="typography-sm text-right">
-        Credits: <span className="font-bold">{formatNumber(agent.credits)}</span>
+        Credits:
+        {' '}
+        <span className="font-bold">
+          {t('formatter.number', { value: agent.credits })}
+        </span>
       </div>
       <div className="typography-sm text-right">
-        HQ:{' '}
+        HQ:
+        {' '}
         <span className="font-semibold">
           <Link
             className="link"
@@ -194,10 +202,14 @@ const Agent = () => {
         </span>
       </div>
       <div className="typography-sm text-right">
-        Faction: <span className="font-semibold">{agent.startingFaction}</span>
+        Faction:
+        {' '}
+        <span className="font-semibold">{agent.startingFaction}</span>
       </div>
       <div className="typography-sm text-right">
-        Ship Count: <span className="font-semibold">{agent.shipCount}</span>
+        Ship Count:
+        {' '}
+        <span className="font-semibold">{t('formatter.number', { value: agent.shipCount })}</span>
       </div>
     </div>
   )

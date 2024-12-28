@@ -1,15 +1,14 @@
+import { createColumnHelper } from '@tanstack/react-table'
+import { type PropsWithChildren } from 'react'
+import { Translation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { ShipyardPurchaseShip } from '@/components/shipyard/purchase-ship'
 import { Sort } from '@/components/table'
 import { Tooltip } from '@/components/tooltip'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import type { ShipyardShip } from '@/types/spacetraders'
-import { formatNumber } from '@/utilities/number.helper'
-import { createColumnHelper } from '@tanstack/react-table'
-import type { PropsWithChildren } from 'react'
-import { Translation } from 'react-i18next'
-import type { WaypointShipyardTableSchema } from './waypoint-shipyard.types'
+import { type ShipyardShip } from '@/types/spacetraders'
+import { type WaypointShipyardTableSchema } from './waypoint-shipyard.types'
 
 const BuyShip = ({ ship }: PropsWithChildren<{ ship?: ShipyardShip }>) => {
   const waypoint = useWaypointResponse()
@@ -18,7 +17,13 @@ const BuyShip = ({ ship }: PropsWithChildren<{ ship?: ShipyardShip }>) => {
 
   return (
     <div className="flex items-center justify-end gap-2">
-      <div className="typography-sm text-right">{formatNumber(ship.purchasePrice)}</div>
+      <div className="typography-sm text-right">
+        <Translation>
+          {(t) => {
+            return t('formatter.number', { value: ship.purchasePrice })
+          }}
+        </Translation>
+      </div>
       <div>
         <ShipyardPurchaseShip ship={ship} waypointSymbol={waypoint.symbol}>
           {(props) => (

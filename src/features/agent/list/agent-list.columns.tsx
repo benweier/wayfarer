@@ -1,8 +1,7 @@
-import { formatNumber } from '@/utilities/number.helper'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import type { AgentListTableSchema } from './agent-list.types'
+import { type AgentListTableSchema } from './agent-list.types'
 
 const columnHelper = createColumnHelper<AgentListTableSchema>()
 
@@ -40,7 +39,13 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return formatNumber(value)
+      return (
+        <Translation>
+          {(t) => {
+            return t('formatter.number', { value: value })
+          }}
+        </Translation>
+      )
     },
     minSize: 15,
     maxSize: 15,
@@ -95,7 +100,15 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-right">{formatNumber(value)}</div>
+      return (
+        <div className="text-right">
+          <Translation>
+            {(t) => {
+              return t('formatter.number', { value: value })
+            }}
+          </Translation>
+        </div>
+      )
     },
     minSize: 20,
     maxSize: 20,

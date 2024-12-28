@@ -1,13 +1,12 @@
+import { createColumnHelper } from '@tanstack/react-table'
+import { Translation } from 'react-i18next'
 import { AppIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { Tooltip } from '@/components/tooltip'
 import { ShipCargoItemControls } from '@/features/ship/cargo/ship-cargo-item.controls'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { cx } from '@/utilities/cx.helper'
-import { formatNumber } from '@/utilities/number.helper'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
-import type { ShipCargoTableSchema } from './ship-cargo.types'
+import { type ShipCargoTableSchema } from './ship-cargo.types'
 
 const columnHelper = createColumnHelper<ShipCargoTableSchema>()
 
@@ -48,7 +47,7 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-right">{formatNumber(value)}</div>
+      return <div className="text-right"><Translation>{(t) => t('formatter.number', { value })}</Translation></div>
     },
     enableSorting: false,
     minSize: 15,
@@ -83,7 +82,7 @@ export const columns = [
           return <div className="typography-sm text-right text-foreground-secondary">-</div>
         }
 
-        return <div className="text-right">{formatNumber(value)}</div>
+        return <div className="text-right"><Translation>{(t) => t('formatter.number', { value })}</Translation></div>
       },
       enableSorting: false,
       minSize: 15,
@@ -120,7 +119,7 @@ export const columns = [
               return (
                 <>
                   <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Buy || !canBuy })}>
-                    {formatNumber(value)}
+                    <Translation>{(t) => t('formatter.number', { value })}</Translation>
                   </div>
                   {ctx.Buy && <ctx.Buy good={row.original.trade} disabled={!canBuy} />}
                 </>
@@ -163,7 +162,7 @@ export const columns = [
               return (
                 <>
                   <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Sell || !canSell })}>
-                    {formatNumber(value)}
+                    <Translation>{(t) => t('formatter.number', { value })}</Translation>
                   </div>
                   {ctx.Sell && <ctx.Sell good={row.original.trade} disabled={!canSell} />}
                 </>

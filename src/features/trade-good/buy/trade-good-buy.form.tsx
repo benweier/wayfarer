@@ -1,21 +1,27 @@
+import { valibotResolver } from '@hookform/resolvers/valibot'
+import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
 import { useAuthStore } from '@/store/auth'
-import type { ShipResponse } from '@/types/spacetraders'
+import { type ShipResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx.helper'
-import { formatNumber } from '@/utilities/number.helper'
-import { valibotResolver } from '@hookform/resolvers/valibot'
-import { Controller, FormProvider, useForm, useFormContext, useFormState, useWatch } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { TradeGoodBuySchema } from './trade-good-buy.schema'
-import type { TradeGoodBuyFormProps } from './trade-good-buy.types'
+import { type TradeGoodBuyFormProps } from './trade-good-buy.types'
 
 const ShipSelection = ({ ship }: { ship: ShipResponse }) => (
   <div className="flex items-baseline gap-2">
     <span className="font-bold">{ship.symbol}</span>
     <span className="text-foreground-secondary">
-      (Cargo: {ship.cargo.units} / {ship.cargo.capacity})
+      (Cargo:
+      {' '}
+      {ship.cargo.units}
+      {' '}
+      /
+      {' '}
+      {ship.cargo.capacity}
+      )
     </span>
   </div>
 )
@@ -24,7 +30,13 @@ const ShipOption = ({ ship }: { ship: ShipResponse }) => (
   <div className="typography-sm flex flex-col">
     <div className="font-bold">{ship.symbol}</div>
     <div className="text-foreground-secondary">
-      Cargo: {ship.cargo.units} / {ship.cargo.capacity}
+      Cargo:
+      {' '}
+      {ship.cargo.units}
+      {' '}
+      /
+      {' '}
+      {ship.cargo.capacity}
     </div>
   </div>
 )
@@ -60,13 +72,13 @@ const TradeGoodBuyPrice = ({ perUnit }: { perUnit: number }) => {
       >
         <div className="typography-xs text-foreground-secondary">{t('market.purchase_price')}</div>
         <div className="typography-xl truncate font-bold">
-          {Number.isNaN(quantity) ? 0 : formatNumber(quantity * perUnit)}
+          {Number.isNaN(quantity) ? 0 : t('formatter.number', { value: quantity * perUnit })}
         </div>
       </div>
 
       <div>
         <div className="typography-xs text-foreground-secondary">{t('market.available_credits')}</div>
-        <div className="typography-xl truncate font-bold">{formatNumber(credits)}</div>
+        <div className="typography-xl truncate font-bold">{t('formatter.number', { value: credits })}</div>
       </div>
     </div>
   )

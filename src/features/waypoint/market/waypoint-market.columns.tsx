@@ -1,11 +1,10 @@
+import { createColumnHelper } from '@tanstack/react-table'
+import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Sort } from '@/components/table'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { cx } from '@/utilities/cx.helper'
-import { formatNumber } from '@/utilities/number.helper'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
-import type { WaypointMarketTableSchema } from './waypoint-market.types'
+import { type WaypointMarketTableSchema } from './waypoint-market.types'
 
 const columnHelper = createColumnHelper<WaypointMarketTableSchema>()
 
@@ -50,7 +49,11 @@ export const columns = [
         return <div className="typography-sm text-right text-foreground-secondary">-</div>
       }
 
-      return <div className="typography-sm text-right">{formatNumber(value)}</div>
+      return (
+        <div className="typography-sm text-right">
+          <Translation>{(t) => t('formatter.number', { value })}</Translation>
+        </div>
+      )
     },
     enableSorting: false,
     minSize: 15,
@@ -109,11 +112,13 @@ export const columns = [
             {(ctx) => (
               <>
                 <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Buy })}>
-                  {formatNumber(value)}
+                  <Translation>{(t) => t('formatter.number', { value })}</Translation>
                 </div>
-                {ctx.Buy !== undefined && row.original.trade !== undefined ? (
-                  <ctx.Buy good={row.original.trade} />
-                ) : null}
+                {ctx.Buy !== undefined && row.original.trade !== undefined
+                  ? (
+                      <ctx.Buy good={row.original.trade} />
+                    )
+                  : null}
               </>
             )}
           </TradeGoodContext.Consumer>
@@ -150,11 +155,13 @@ export const columns = [
             {(ctx) => (
               <>
                 <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Sell })}>
-                  {formatNumber(value)}
+                  <Translation>{(t) => t('formatter.number', { value })}</Translation>
                 </div>
-                {ctx.Sell !== undefined && row.original.trade !== undefined ? (
-                  <ctx.Sell good={row.original.trade} />
-                ) : null}
+                {ctx.Sell !== undefined && row.original.trade !== undefined
+                  ? (
+                      <ctx.Sell good={row.original.trade} />
+                    )
+                  : null}
               </>
             )}
           </TradeGoodContext.Consumer>

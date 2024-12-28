@@ -1,9 +1,8 @@
-import * as Tabs from '@/components/tabs'
-import { getStatusQuery } from '@/services/api/spacetraders/status'
-import { formatNumber } from '@/utilities/number.helper'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
+import * as Tabs from '@/components/tabs'
+import { getStatusQuery } from '@/services/api/spacetraders/status'
 
 export const LeaderboardList = () => {
   const { t } = useTranslation()
@@ -30,7 +29,7 @@ export const LeaderboardList = () => {
                     {item.agentSymbol}
                   </Link>
                 </div>
-                <div>{formatNumber(item.credits)}</div>
+                <div>{t('formatter.number', { value: item.credits })}</div>
               </div>
             )
           })}
@@ -50,7 +49,7 @@ export const LeaderboardList = () => {
                     {item.agentSymbol}
                   </Link>
                 </div>
-                <div>{formatNumber(item.chartCount)}</div>
+                <div>{t('formatter.number', { value: item.chartCount })}</div>
               </div>
             )
           })}

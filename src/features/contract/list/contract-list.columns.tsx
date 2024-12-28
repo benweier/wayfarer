@@ -1,11 +1,10 @@
-import { Badge } from '@/components/badge'
-import { formatDateTime } from '@/utilities/date.helper'
-import { formatNumber } from '@/utilities/number.helper'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
+import { Badge } from '@/components/badge'
+import { formatDateTime } from '@/utilities/date.helper'
 import { ContractListContext } from './contract-list.context'
-import type { ContractListTableSchema } from './contract-list.types'
+import { type ContractListTableSchema } from './contract-list.types'
 
 const columnHelper = createColumnHelper<ContractListTableSchema>()
 
@@ -75,8 +74,18 @@ export const availableContractsColumns = [
                 >
                   {item.destinationSymbol}
                 </Link>
-                ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
-                <span className="text-foreground-secondary">({formatNumber(item.unitsRequired)})</span>
+                ]
+                {' '}
+                <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>
+                {' '}
+                <span className="text-foreground-secondary">
+                  (
+                  <Translation>
+                    {(t) => {
+                      return t('formatter.number', { value: item.unitsRequired })
+                    }}
+                  </Translation>
+                </span>
               </div>
             )
           })}
@@ -134,8 +143,21 @@ export const availableContractsColumns = [
 
       return (
         <div className="typography-sm text-right">
-          {formatNumber(payment.onFulfilled)}{' '}
-          <span className="text-foreground-secondary">({formatNumber(payment.onAccepted)})</span>
+          <Translation>
+            {(t) => {
+              return t('formatter.number', { value: payment.onFulfilled })
+            }}
+          </Translation>
+          {' '}
+          <span className="text-foreground-secondary">
+            (
+            <Translation>
+              {(t) => {
+                return t('formatter.number', { value: payment.onAccepted })
+              }}
+            </Translation>
+            )
+          </span>
         </div>
       )
     },
@@ -228,8 +250,19 @@ export const acceptedContractsColumns = [
                 >
                   {item.destinationSymbol}
                 </Link>
-                ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
-                <span className="text-foreground-secondary">({formatNumber(item.unitsRequired)})</span>
+                ]
+                {' '}
+                <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>
+                {' '}
+                <span className="text-foreground-secondary">
+                  (
+                  <Translation>
+                    {(t) => {
+                      return t('formatter.number', { value: item.unitsRequired })
+                    }}
+                  </Translation>
+                  )
+                </span>
               </div>
             )
           })}
@@ -266,8 +299,19 @@ export const acceptedContractsColumns = [
                 >
                   {item.destinationSymbol}
                 </Link>
-                ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
-                <span className="text-foreground-secondary">({formatNumber(item.unitsFulfilled)})</span>
+                ]
+                {' '}
+                <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>
+                {' '}
+                <span className="text-foreground-secondary">
+                  (
+                  <Translation>
+                    {(t) => {
+                      return t('formatter.number', { value: item.unitsFulfilled })
+                    }}
+                  </Translation>
+                  )
+                </span>
               </div>
             )
           })}
@@ -308,8 +352,21 @@ export const acceptedContractsColumns = [
 
       return (
         <div className="typography-sm text-right">
-          {formatNumber(payment.onFulfilled)}{' '}
-          <span className="text-foreground-secondary">({formatNumber(payment.onAccepted)})</span>
+          <Translation>
+            {(t) => {
+              return t('formatter.number', { value: payment.onFulfilled })
+            }}
+          </Translation>
+          {' '}
+          <span className="text-foreground-secondary">
+            (
+            <Translation>
+              {(t) => {
+                return t('formatter.number', { value: payment.onAccepted })
+              }}
+            </Translation>
+            )
+          </span>
         </div>
       )
     },
@@ -400,8 +457,19 @@ export const completedContractsColumns = [
                 >
                   {item.destinationSymbol}
                 </Link>
-                ] <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>{' '}
-                <span className="text-foreground-secondary">({formatNumber(item.unitsFulfilled)})</span>
+                ]
+                {' '}
+                <Translation>{(t) => t(item.tradeSymbol, { ns: 'spacetraders.trade_good' })}</Translation>
+                {' '}
+                <span className="text-foreground-secondary">
+                  (
+                  <Translation>
+                    {(t) => {
+                      return t('formatter.number', { value: item.unitsFulfilled })
+                    }}
+                  </Translation>
+                  )
+                </span>
               </div>
             )
           })}
@@ -425,8 +493,21 @@ export const completedContractsColumns = [
 
       return (
         <div className="typography-sm text-right">
-          {formatNumber(payment.onFulfilled)}{' '}
-          <span className="text-foreground-secondary">({formatNumber(payment.onAccepted)})</span>
+          <Translation>
+            {(t) => {
+              return t('formatter.number', { value: payment.onFulfilled })
+            }}
+          </Translation>
+          {' '}
+          <span className="text-foreground-secondary">
+            (
+            <Translation>
+              {(t) => {
+                return t('formatter.number', { value: payment.onAccepted })
+              }}
+            </Translation>
+            )
+          </span>
         </div>
       )
     },
