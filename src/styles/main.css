@@ -1,17 +1,14 @@
-/* stylelint-disable import-notation */
-@import "tailwindcss";
-@import "./base.css" layer(base);
-@import "./spacetraders.css" layer(base);
-@import "./components/button.css" layer(components);
-@import "./components/drawer.css" layer(components);
-@import "./components/input.css" layer(components);
-@import "./components/system-tag.css" layer(components);
-@import "./components/tabs.css" layer(components);
-@import "./components/toast.css" layer(components);
-@import "./components/toggle-group.css" layer(components);
-@import "./components/typography.css" layer(components);
-@import "./components/waypoint-tag.css" layer(components);
-/* stylelint-enable import-notation */
+@import 'tailwindcss';
+@import './base.css' layer(base);
+@import './spacetraders.css' layer(base);
+@import './components/button.css' layer(components);
+@import './components/drawer.css' layer(components);
+@import './components/input.css' layer(components);
+@import './components/system-tag.css' layer(components);
+@import './components/tabs.css' layer(components);
+@import './components/toast.css' layer(components);
+@import './components/toggle-group.css' layer(components);
+@import './components/waypoint-tag.css' layer(components);
 
 @keyframes loader {
   0% {
@@ -50,9 +47,10 @@
 }
 
 @theme {
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
-  --default-font-feature-settings: "ss01", "ss03", "case" 1, "zero" 1;
+  --text-*: initial;
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --default-font-feature-settings: 'ss01', 'ss03', 'case' 1, 'zero' 1;
   --animate-loader: loader 1s linear infinite;
   --blur-xs: 2px;
   --width-screen-sm: var(--breakpoint-sm);
@@ -77,85 +75,32 @@
   --z-50: 50;
   --z-99: 99;
 
+  /* SPACING */
+  --spacing: 0.25rem;
+
   /* Typography */
-  --font-size-display-xs: 1.5rem;
-  --font-size-display-sm: 1.875rem;
-  --font-size-display-md: 2.25rem;
-  --font-size-display-lg: 3rem;
-  --font-size-display-xl: 3.75rem;
-  --line-height-display-xs: 2rem;
-  --line-height-display-sm: 2.375rem;
-  --line-height-display-md: 2.75rem;
-  --line-height-display-lg: 3.75rem;
-  --line-height-display-xl: 4.5rem;
-  --font-size-text-xs: 0.75rem;
-  --font-size-text-sm: 0.875rem;
-  --font-size-text-base: 1rem;
-  --font-size-text-lg: 1.125rem;
-  --font-size-text-xl: 1.25rem;
-  --line-height-text-xs: 1.125rem;
-  --line-height-text-sm: 1.25rem;
-  --line-height-text-base: 1.5rem;
-  --line-height-text-lg: 1.75rem;
-  --line-height-text-xl: 1.875rem;
-
-  /* Spacing */
-  --spacing-0: 0;
-  --spacing-px: 1px;
-  --spacing-0-5: 2px;
-  --spacing-1: 4px;
-  --spacing-1-5: 6px;
-  --spacing-2: 8px;
-  --spacing-2-5: 8px;
-  --spacing-3: 12px;
-  --spacing-4: 16px;
-  --spacing-5: 20px;
-  --spacing-6: 24px;
-  --spacing-7: 28px;
-  --spacing-8: 32px;
-  --spacing-10: 40px;
-  --spacing-12: 48px;
-  --spacing-16: 64px;
-  --spacing-20: 80px;
-  --spacing-24: 96px;
-  --spacing-32: 128px;
-  --spacing-40: 160px;
-  --spacing-48: 192px;
-  --spacing-56: 224px;
-  --spacing-64: 256px;
-  --spacing-80: 320px;
-  --spacing-96: 384px;
-  --spacing-120: 480px;
-  --spacing-140: 560px;
-  --spacing-160: 640px;
-  --spacing-180: 720px;
-  --spacing-192: 768px;
-  --spacing-256: 1024px;
-  --spacing-320: 1280px;
-  --spacing-360: 1440px;
-  --spacing-400: 1600px;
-  --spacing-480: 1920px;
-
-  /* Gap */
-  --gap-none: var(--spacing-0);
-  --gap-px: var(--spacing-px);
-  --gap-us: var(--spacing-0-5);
-  --gap-xs: var(--spacing-1);
-  --gap-sm: var(--spacing-1-5);
-  --gap-md: var(--spacing-2);
-  --gap-lg: var(--spacing-3);
-  --gap-xl: var(--spacing-4);
-  --gap-2xl: var(--spacing-5);
-  --gap-3xl: var(--spacing-6);
-  --gap-4xl: var(--spacing-8);
-  --gap-5xl: var(--spacing-10);
-  --gap-6xl: var(--spacing-12);
-  --gap-7xl: var(--spacing-16);
-  --gap-8xl: var(--spacing-20);
-  --gap-9xl: var(--spacing-24);
-  --gap-10xl: var(--spacing-32);
-  --gap-11xl: var(--spacing-40);
-  --gap-12xl: var(--spacing-48);
+  --font-size-h1: 3.75rem;
+  --font-size-h2: 3rem;
+  --font-size-h3: 2.25rem;
+  --font-size-h4: 1.875rem;
+  --font-size-h5: 1.5rem;
+  --font-size-h6: 1.25rem;
+  --line-height-h6: 1.5rem;
+  --line-height-h5: 2rem;
+  --line-height-h4: 2.375rem;
+  --line-height-h3: 2.75rem;
+  --line-height-h2: 3.75rem;
+  --line-height-h1: 4.5rem;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --line-height-xs: 1.125rem;
+  --line-height-sm: 1.25rem;
+  --line-height-base: 1.5rem;
+  --line-height-lg: 1.75rem;
+  --line-height-xl: 1.875rem;
 
   /* Foreground */
   --color-foreground-white: var(--u-color-white);
@@ -210,6 +155,41 @@
   --color-border-disabled-subtle: var(--u-border-disabled-subtle);
   --color-border-brand: var(--u-border-brand);
   --color-border-error: var(--u-border-error);
+
+  /* Typography */
+  --text-h1: var(--font-size-h1);
+  --text-h1--line-height: var(--line-height-h1);
+  --text-h1--font-weight: 700;
+  --text-h2: var(--font-size-h2);
+  --text-h2--line-height: var(--line-height-h2);
+  --text-h2--font-weight: 700;
+  --text-h3: var(--font-size-h3);
+  --text-h3--line-height: var(--line-height-h3);
+  --text-h3--font-weight: 700;
+  --text-h4: var(--font-size-h4);
+  --text-h4--line-height: var(--line-height-h4);
+  --text-h4--font-weight: 600;
+  --text-h5: var(--font-size-h5);
+  --text-h5--line-height: var(--line-height-h5);
+  --text-h5--font-weight: 600;
+  --text-h6: var(--font-size-h6);
+  --text-h6--line-height: var(--line-height-h6);
+  --text-h6--font-weight: 500;
+  --text-xs: var(--font-size-xs);
+  --text-xs--line-height: var(--line-height-xs);
+  --text-xs--font-weight: 400;
+  --text-sm: var(--font-size-sm);
+  --text-sm--line-height: var(--line-height-sm);
+  --text-sm--font-weight: 400;
+  --text-base: var(--font-size-base);
+  --text-base--line-height: var(--line-height-base);
+  --text-base--font-weight: 400;
+  --text-lg: var(--font-size-lg);
+  --text-lg--line-height: var(--line-height-lg);
+  --text-lg--font-weight: 400;
+  --text-xl: var(--font-size-xl);
+  --text-xl--line-height: var(--line-height-xl);
+  --text-xl--font-weight: 400;
 }
 
 @layer base {
@@ -259,11 +239,11 @@
   .popover {
     will-change: transform, opacity;
 
-    &[data-state="open"] {
+    &[data-state='open'] {
       animation: scale-in 72ms ease-out;
     }
 
-    &[data-state="closed"] {
+    &[data-state='closed'] {
       animation: scale-out 72ms ease-in;
     }
   }
