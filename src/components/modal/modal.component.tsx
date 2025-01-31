@@ -1,8 +1,7 @@
-import { useImperativeHandle, useState } from 'react'
-import { createStore } from 'zustand'
 import { ModalContext } from './modal.context'
 import { Root } from './modal.root'
-import type { ModalProps, ModalStore } from './modal.types'
+import { useCreateModalStore } from './use-modal-store.hook'
+import type { ModalProps } from './modal.types'
 
 export const Modal = ({
   ref,
@@ -14,28 +13,7 @@ export const Modal = ({
   disableExternalClose,
   children,
 }: ModalProps) => {
-  const [store] = useState(() => {
-    return createStore<ModalStore>((set) => ({
-      isOpen: defaultOpen,
-      actions: {
-        open: () => {
-          set({ isOpen: true })
-        },
-        close: () => {
-          set({ isOpen: false })
-        },
-        toggle: () => {
-          set(({ isOpen }) => ({ isOpen: !isOpen }))
-        },
-      },
-    }))
-  })
-
-  useImperativeHandle(ref, () => {
-    const { actions } = store.getState()
-
-    return actions
-  })
+  const store = useCreateModalStore(ref, { defaultOpen })
 
   return (
     <ModalContext value={store}>
