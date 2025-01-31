@@ -44,7 +44,10 @@
         "hint": "If you have reserved your agent symbol by supporting the <support_link />, enter the email address you used to reserve it"
       },
       "faction": {
-        "label": "Faction"
+        "label": "Faction",
+        "validation": {
+          "required": "Please select a faction"
+        }
       },
       "access_token": {
         "label": "Access Token"
