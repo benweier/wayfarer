@@ -60,6 +60,12 @@ const FONT_SIZE = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'xs', 'sm', 'base', 'lg',
 
 export const twm = extendTailwindMerge<'button-size' | 'button-kind' | 'button-intent'>({
   cacheSize: 1000,
+  override: {
+    theme: {
+      color: COLORS,
+      font: FONT_SIZE,
+    },
+  },
   extend: {
     classGroups: {
       'text-color': [{ text: COLORS }],
