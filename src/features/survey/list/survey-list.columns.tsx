@@ -1,8 +1,8 @@
+import { createColumnHelper } from '@tanstack/react-table'
+import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Sort } from '@/components/table'
 import { SurveyContext } from '@/features/survey/context'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
 import type { SurveyListTableSchema } from './survey-list.types'
 
 const columnHelper = createColumnHelper<SurveyListTableSchema>()
@@ -42,7 +42,7 @@ export const columns = [
 
       return (
         <Translation>
-          {(t) => <div className="typography-sm">{t(value, { ns: 'spacetraders.survey_size' })}</div>}
+          {(t) => <div className="text-sm">{t(value, { ns: 'spacetraders.survey_size' })}</div>}
         </Translation>
       )
     },
@@ -66,9 +66,7 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return (
-        <Translation>{(t) => <div className="typography-sm">{t('formatter.datetime', { value })}</div>}</Translation>
-      )
+      return <Translation>{(t) => <div className="text-sm">{t('formatter.datetime', { value })}</div>}</Translation>
     },
     enableSorting: true,
     enableColumnFilter: true,

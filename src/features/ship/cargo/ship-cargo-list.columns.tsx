@@ -6,7 +6,7 @@ import { Tooltip } from '@/components/tooltip'
 import { ShipCargoItemControls } from '@/features/ship/cargo/ship-cargo-item.controls'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { cx } from '@/utilities/cx.helper'
-import { type ShipCargoTableSchema } from './ship-cargo.types'
+import type { ShipCargoTableSchema } from './ship-cargo.types'
 
 const columnHelper = createColumnHelper<ShipCargoTableSchema>()
 
@@ -27,9 +27,7 @@ export const columns = [
       return (
         <>
           <div>{getValue()}</div>
-          <div className="typography-sm whitespace-pre-wrap text-foreground-secondary">
-            {row.original.item.description}
-          </div>
+          <div className="text-sm whitespace-pre-wrap text-foreground-secondary">{row.original.item.description}</div>
         </>
       )
     },
@@ -47,7 +45,11 @@ export const columns = [
     cell: ({ getValue }) => {
       const value = getValue()
 
-      return <div className="text-right"><Translation>{(t) => t('formatter.number', { value })}</Translation></div>
+      return (
+        <div className="text-right">
+          <Translation>{(t) => t('formatter.number', { value })}</Translation>
+        </div>
+      )
     },
     enableSorting: false,
     minSize: 15,
@@ -79,10 +81,14 @@ export const columns = [
         const value = getValue()
 
         if (value === undefined) {
-          return <div className="typography-sm text-right text-foreground-secondary">-</div>
+          return <div className="text-sm text-right text-foreground-secondary">-</div>
         }
 
-        return <div className="text-right"><Translation>{(t) => t('formatter.number', { value })}</Translation></div>
+        return (
+          <div className="text-right">
+            <Translation>{(t) => t('formatter.number', { value })}</Translation>
+          </div>
+        )
       },
       enableSorting: false,
       minSize: 15,
@@ -107,7 +113,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="typography-sm text-right text-foreground-secondary">-</div>
+        return <div className="text-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -118,7 +124,7 @@ export const columns = [
 
               return (
                 <>
-                  <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Buy || !canBuy })}>
+                  <div className={cx('text-sm', { 'text-foreground-secondary': !ctx.Buy || !canBuy })}>
                     <Translation>{(t) => t('formatter.number', { value })}</Translation>
                   </div>
                   {ctx.Buy && <ctx.Buy good={row.original.trade} disabled={!canBuy} />}
@@ -150,7 +156,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="typography-sm text-right text-foreground-secondary">-</div>
+        return <div className="text-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -161,7 +167,7 @@ export const columns = [
 
               return (
                 <>
-                  <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Sell || !canSell })}>
+                  <div className={cx('text-sm', { 'text-foreground-secondary': !ctx.Sell || !canSell })}>
                     <Translation>{(t) => t('formatter.number', { value })}</Translation>
                   </div>
                   {ctx.Sell && <ctx.Sell good={row.original.trade} disabled={!canSell} />}

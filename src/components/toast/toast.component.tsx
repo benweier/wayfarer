@@ -9,8 +9,8 @@ export const Toast = ({ title, description, icon, status, onDismiss }: ToastProp
       <div className="toast-icon shrink-0 grow-0">{icon}</div>
 
       <div className="toast-content flex grow-1 flex-col gap-1">
-        <div className="toast-title typography-base font-bold">{title}</div>
-        {description && <div className="toast-description typography-sm">{description}</div>}
+        <div className="toast-title text-base font-bold">{title}</div>
+        {description && <div className="toast-description text-sm">{description}</div>}
       </div>
 
       {onDismiss && (

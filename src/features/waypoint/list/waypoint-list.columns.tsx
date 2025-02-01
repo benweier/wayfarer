@@ -1,3 +1,6 @@
+import { Link } from '@tanstack/react-router'
+import { createColumnHelper } from '@tanstack/react-table'
+import { Trans, Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
@@ -5,11 +8,8 @@ import { Tooltip } from '@/components/tooltip'
 import { WaypointTraits } from '@/config/spacetraders'
 import { WaypointTypeFilter } from '@/features/waypoint/filters'
 import { WaypointTag } from '@/features/waypoint/tag'
-import type { WaypointTrait } from '@/types/spacetraders'
-import { Link } from '@tanstack/react-router'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Trans, Translation } from 'react-i18next'
 import type { WaypointListTableSchema } from './waypoint-list.types'
+import type { WaypointTrait } from '@/types/spacetraders'
 
 const FILTERED_TRAITS = new Set<WaypointTraits>([
   WaypointTraits.Uncharted,
@@ -86,7 +86,7 @@ export const columns = [
     },
     cell: ({ getValue }) => {
       const { x, y } = getValue()
-      return <div className="typography-sm text-left text-foreground-secondary">{`${x}, ${y}`}</div>
+      return <div className="text-sm text-left text-foreground-secondary">{`${x}, ${y}`}</div>
     },
     sortingFn: (a, b) => {
       const ad = a.original.waypoint.x ** 2 + a.original.waypoint.y ** 2

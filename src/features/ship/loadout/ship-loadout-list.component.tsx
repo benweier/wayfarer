@@ -1,8 +1,8 @@
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import { useShipResponse } from '@/context/ship.context'
 import { RemoveMount } from '@/features/ship/actions'
-import { useTranslation } from 'react-i18next'
 import { ShipLoadoutItem } from './ship-loadout-item.component'
 import type { ShipLoadoutListProps } from './ship-loadout.types'
 
@@ -15,7 +15,7 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-6">
           <div>
-            <div className="typography-sm text-secondary uppercase">{t('ship.loadout.frame')}</div>
+            <div className="text-sm text-secondary uppercase">{t('ship.loadout.frame')}</div>
             <div className="text-overline">{ship.frame.name}</div>
             <div className="w-4/5">{ship.frame.description}</div>
           </div>
@@ -26,28 +26,28 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
                 <ShipIcon id="modules" className="size-5 text-lime-500" />
                 <div>{ship.frame.moduleSlots}</div>
               </div>
-              <div className="typography-xs text-secondary uppercase">{t('ship.loadout.module_slots')}</div>
+              <div className="text-xs text-secondary uppercase">{t('ship.loadout.module_slots')}</div>
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <ShipIcon id="mounts" className="size-5 text-orange-500" />
                 <div>{ship.frame.mountingPoints}</div>
               </div>
-              <div className="typography-xs text-secondary uppercase">{t('ship.loadout.mounting_points')}</div>
+              <div className="text-xs text-secondary uppercase">{t('ship.loadout.mounting_points')}</div>
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="size-5 text-indigo-500" />
                 <div>{ship.frame.requirements.power}</div>
               </div>
-              <div className="typography-xs text-secondary uppercase">{t('ship.loadout.power_required')}</div>
+              <div className="text-xs text-secondary uppercase">{t('ship.loadout.power_required')}</div>
             </div>
           </div>
         </div>
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <div className="typography-sm text-secondary uppercase">{t('ship.loadout.reactor')}</div>
+            <div className="text-sm text-secondary uppercase">{t('ship.loadout.reactor')}</div>
             <Item name={ship.reactor.name} description={ship.reactor.description}>
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="size-5 text-indigo-500" />
@@ -57,7 +57,7 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
           </div>
 
           <div className="space-y-2">
-            <div className="typography-sm text-secondary uppercase">{t('ship.loadout.engine')}</div>
+            <div className="text-sm text-secondary uppercase">{t('ship.loadout.engine')}</div>
             <Item name={ship.engine.name} description={ship.engine.description}>
               <div className="flex items-center gap-2">
                 <ShipIcon id="power" className="size-5 text-indigo-500" />
@@ -70,7 +70,7 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
 
       {ship.frame.moduleSlots > 0 && (
         <div className="space-y-2">
-          <div className="typography-sm text-secondary uppercase">
+          <div className="text-sm text-secondary uppercase">
             {t('ship.loadout.modules')} (
             {`${ship.modules.reduce((count, module) => {
               return count + module.requirements.slots
@@ -85,15 +85,15 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
                   <div className="grid grid-cols-3 gap-2">
                     <div className="flex items-center justify-center gap-2">
                       <ShipIcon id="modules" className="size-4 text-lime-500" />
-                      <div className="typography-sm">{module.requirements.slots}</div>
+                      <div className="text-sm">{module.requirements.slots}</div>
                     </div>
                     <div className="flex items-center justify-center gap-2">
                       <ShipIcon id="crew" className="size-4 text-amber-500" />
-                      <div className="typography-sm">{module.requirements.crew}</div>
+                      <div className="text-sm">{module.requirements.crew}</div>
                     </div>
                     <div className="flex items-center justify-center gap-2">
                       <ShipIcon id="power" className="size-4 text-indigo-500" />
-                      <div className="typography-sm">{module.requirements.power}</div>
+                      <div className="text-sm">{module.requirements.power}</div>
                     </div>
                   </div>
                 </Item>
@@ -104,7 +104,7 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
       )}
       {ship.frame.mountingPoints > 0 && (
         <div className="space-y-2">
-          <div className="typography-sm text-secondary uppercase">
+          <div className="text-sm text-secondary uppercase">
             {t('ship.loadout.mounts')} ({`${ship.mounts.length}/${ship.frame.mountingPoints}`})
           </div>
           <div className="grid grid-cols-3 gap-2">
@@ -128,11 +128,11 @@ export const ShipLoadoutList = ({ Item = ShipLoadoutItem }: ShipLoadoutListProps
                   <div className="grid grid-cols-2 gap-2">
                     <div className="flex items-center justify-center gap-2">
                       <ShipIcon id="crew" className="size-4 text-amber-500" />
-                      <div className="typography-sm">{mount.requirements.crew}</div>
+                      <div className="text-sm">{mount.requirements.crew}</div>
                     </div>
                     <div className="flex items-center justify-center gap-2">
                       <ShipIcon id="power" className="size-4 text-indigo-500" />
-                      <div className="typography-sm">{mount.requirements.power}</div>
+                      <div className="text-sm">{mount.requirements.power}</div>
                     </div>
                   </div>
                 </Item>

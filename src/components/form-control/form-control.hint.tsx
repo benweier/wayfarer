@@ -1,6 +1,7 @@
+import { use } from 'react'
 import { cx } from '@/utilities/cx.helper'
-import { type HTMLAttributes, use } from 'react'
 import { FormControlContext } from './form-control.component'
+import type { HTMLAttributes } from 'react'
 
 export const Hint = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
   const ctx = use(FormControlContext)
@@ -9,7 +10,7 @@ export const Hint = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) =>
     <div
       {...props}
       id={ctx?.name ? `${ctx.name}-description` : undefined}
-      className={cx('typography-sm mx-1 text-foreground-secondary', className)}
+      className={cx('text-sm mx-1 text-foreground-secondary', className)}
     />
   )
 }

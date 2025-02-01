@@ -1,6 +1,6 @@
+import { Navigate } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
 import { StatusCode, isHttpErrorResponse } from '@/services/http'
-import { Navigate } from '@tanstack/react-router'
 
 export const RouteError = ({ error }: { error?: any }) => {
   if (isHttpErrorResponse(error)) {
@@ -15,7 +15,7 @@ export const RouteError = ({ error }: { error?: any }) => {
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4 p-5">
-      <div className="container-paragraph display-xl text-center font-bold">
+      <div className="container-paragraph text-h1 text-center font-bold">
         An error occurred while displaying this content
       </div>
     </div>

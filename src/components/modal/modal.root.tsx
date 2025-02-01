@@ -1,9 +1,9 @@
-import { cx } from '@/utilities/cx.helper'
 import * as Dialog from '@radix-ui/react-dialog'
-import type { PropsWithChildren } from 'react'
+import { cx } from '@/utilities/cx.helper'
 import { Overlay } from './modal.overlay'
-import type { ModalDialogProps } from './modal.types'
 import { useModalContext } from './use-modal-store.hook'
+import type { ModalDialogProps } from './modal.types'
+import type { PropsWithChildren } from 'react'
 
 export const Root = ({
   trigger,
@@ -34,7 +34,7 @@ export const Root = ({
               event.preventDefault()
             }}
             className={cx(
-              'popover flex w-screen max-w-[var(--dialog-content-max-width)] flex-col overflow-clip rounded-xl border-1 border-border-secondary bg-background-primary ring-3 ring-border-primary/20 focus:outline-none',
+              'popover flex w-screen max-w-(--dialog-content-max-width) flex-col overflow-clip rounded-xl border-1 border-border-secondary bg-background-primary ring-3 ring-border-primary/20 focus:outline-none',
               {
                 'w-auto': size === 'auto',
                 // 'inset-0 h-dvh max-h-[calc(100dvh-1rem)]': size === 'full',

@@ -1,9 +1,9 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import * as Tabs from '@/components/tabs'
 import { AcceptContractAction } from '@/features/contract/list/accept-contract.action'
 import { AvailableContractAction } from '@/features/contract/list/available-contract.action'
 import { getContractListQuery } from '@/services/api/spacetraders/contracts'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import { acceptedContractsColumns, availableContractsColumns, completedContractsColumns } from './contract-list.columns'
 import { ContractListContext } from './contract-list.context'
 import { ContractListTable } from './contract-list.table'
@@ -37,7 +37,7 @@ export const ContractList = () => {
   if (meta.total === 0) {
     return (
       <div className="flex flex-col">
-        <div className="typography-xl font-semibold">{t('contracts.no_contracts')}</div>
+        <div className="text-xl font-semibold">{t('contracts.no_contracts')}</div>
       </div>
     )
   }

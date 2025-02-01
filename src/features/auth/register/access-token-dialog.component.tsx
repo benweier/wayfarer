@@ -1,10 +1,10 @@
+import { useNavigate } from '@tanstack/react-router'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
-import type { RegisterAgentResponse } from '@/types/spacetraders'
 import { cx } from '@/utilities/cx.helper'
-import { useNavigate } from '@tanstack/react-router'
 import { Copy } from './copy-button.component'
 import { useCopy } from './use-copy.hook'
+import type { RegisterAgentResponse } from '@/types/spacetraders'
 
 export const AccessTokenDialog = ({ registration }: { registration?: RegisterAgentResponse }) => {
   const navigate = useNavigate()
@@ -14,12 +14,12 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
 
   return (
     <div className="grid gap-8">
-      <div className="display-md text-center font-bold">
+      <div className="text-h3 text-center font-bold">
         Welcome, <span className="font-bold">{registration.agent.symbol}</span>
       </div>
       <div className="grid gap-6">
         <div className="grid gap-2">
-          <h2 className="display-xs text-center">Access Token</h2>
+          <h2 className="text-h5 text-center">Access Token</h2>
           <div>
             <div className="relative">
               <input
@@ -51,16 +51,14 @@ export const AccessTokenDialog = ({ registration }: { registration?: RegisterAge
             >
               {isCopied ? <AppIcon id="check" className="size-5" /> : <AppIcon id="cancel" className="size-5" />}
 
-              <span className="typography-base whitespace-nowrap">
-                {isCopied ? 'Token Copied!' : 'Token Not Copied'}
-              </span>
+              <span className="text-base whitespace-nowrap">{isCopied ? 'Token Copied!' : 'Token Not Copied'}</span>
             </div>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-2 text-foreground-warning-primary">
           <AppIcon id="alert" className="size-8" />
 
-          <span className="typography-lg text-center font-semibold">
+          <span className="text-lg text-center font-semibold">
             Your access token cannot be retrieved if you lose it.
             <br />
             Save it somewhere safe, like a password manager, before proceeding!

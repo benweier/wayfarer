@@ -1,8 +1,8 @@
+import { Drawer } from 'vaul'
 import * as ScrollArea from '@/components/scroll-area'
 import { cx } from '@/utilities/cx.helper'
-import type { PropsWithChildren } from 'react'
-import { Drawer } from 'vaul'
 import type { DrawerContentProps } from './drawer.types'
+import type { PropsWithChildren } from 'react'
 
 export const Content = ({
   className,
@@ -17,7 +17,7 @@ export const Content = ({
         '--drawer-max-width': typeof width === 'number' ? `${width}px` : width,
       }}
       className={cx(
-        'z-40 max-h-[var(--drawer-max-height)] max-w-[var(--drawer-max-width)] bg-background-primary/90 ring-3 ring-border-primary/20 backdrop-blur-lg',
+        'z-40 max-h-(--drawer-max-height) max-w-(--drawer-max-width) bg-background-primary/90 ring-3 ring-border-primary/20 backdrop-blur-lg',
         className,
       )}
     >

@@ -1,10 +1,10 @@
+import { useIsFetching, useQueryClient } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
 import { useUpdateInterval } from '@/hooks/use-update-interval.hook'
 import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
-import { useIsFetching, useQueryClient } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 
 export const ShipDetailRefresh = () => {
   const { t } = useTranslation()
@@ -20,7 +20,7 @@ export const ShipDetailRefresh = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="typography-xs text-right text-foreground-secondary">
+      <div className="text-xs text-right text-foreground-secondary">
         {isFetching || !state ? '...' : t('general.last_updated.relative', { value: state.dataUpdatedAt })}
       </div>
       <Button

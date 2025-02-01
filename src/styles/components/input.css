@@ -1,7 +1,7 @@
 .label {
   display: block;
   margin-bottom: var(--spacing-1);
-  font-size: var(--font-size-text-sm);
+  font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--u-fg-secondary);
 }
@@ -13,8 +13,8 @@
   --input-radius: var(--radius-md);
   --input-focus-ring-width: 3px;
   --input-focus-ring: var(--u-border-brand);
-  --input-font-size: var(--u-font-size-text-base);
-  --input-line-height: var(--u-line-height-text-base);
+  --input-font-size: var(--u-font-size-base);
+  --input-line-height: var(--u-line-height-base);
   --input-fg: var(--u-fg-primary);
   --input-fg-disabled: var(--u-fg-quinary);
   --input-fg-placeholder: var(--u-fg-quaternary);
@@ -35,10 +35,10 @@
   color: var(--input-fg);
   text-align: left;
   appearance: none;
+  outline: none;
   background-color: var(--input-bg);
   border: 1px solid var(--input-border);
   border-radius: var(--input-radius);
-  outline: none;
 
   &:hover:not(:disabled) {
     border-color: var(--input-border-hover);
@@ -68,8 +68,8 @@
 
   &.invalid,
   &:invalid,
-  &[data-has-error="true"],
-  &:is(:where(.form-control):has([data-has-error="true"]) *) {
+  &[data-has-error='true'],
+  &:is(:where(.form-control):has([data-has-error='true']) *) {
     border-color: var(--input-border-error);
   }
 }

@@ -1,19 +1,19 @@
-import { Button } from '@/components/button'
-import * as FormControl from '@/components/form-control'
-import { toast } from '@/components/toast'
-import { ROUTES } from '@/config/routes'
-import { getAgentMutation } from '@/services/api/spacetraders/auth'
-import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { StatusCode, isHttpErrorResponse } from '@/services/http'
-import { useAuthStore } from '@/store/auth'
-import type { AgentResponse } from '@/types/spacetraders'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useMutation } from '@tanstack/react-query'
 import { Link, getRouteApi, useNavigate } from '@tanstack/react-router'
 import { useTransition } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Trans, useTranslation } from 'react-i18next'
+import { Button } from '@/components/button'
+import * as FormControl from '@/components/form-control'
+import { toast } from '@/components/toast'
+import { ROUTES } from '@/config/routes'
+import { getAgentMutation } from '@/services/api/spacetraders/auth'
+import { StatusCode, isHttpErrorResponse } from '@/services/http'
+import { useAuthStore } from '@/store/auth'
 import { LoginSchema } from './login.schema'
+import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import type { AgentResponse } from '@/types/spacetraders'
 
 const api = getRouteApi(ROUTES.LOGIN)
 
@@ -66,7 +66,7 @@ export const Login = () => {
 
   return (
     <div className="grid gap-8">
-      <div className="display-xs text-center">{t('auth.login_heading')}</div>
+      <div className="text-h5 text-center">{t('auth.login_heading')}</div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
           <div className="grid grid-cols-1 gap-8">
@@ -91,7 +91,7 @@ export const Login = () => {
               {t('auth.login', { context: 'action' })}
             </Button>
 
-            <div className="typography-md text-center">
+            <div className="text-base text-center">
               <Trans
                 i18nKey="auth.not_registered"
                 components={{

@@ -1,7 +1,7 @@
-import { MenuIcon } from '@/components/icons'
-import { useAuthStore } from '@/store/auth'
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
+import { MenuIcon } from '@/components/icons'
+import { useAuthStore } from '@/store/auth'
 import { menu } from './menu.conf'
 
 export const DesktopNavigation = () => {
@@ -29,7 +29,7 @@ export const DesktopNavigation = () => {
             <div>
               <MenuIcon id={item.icon} className="size-5 text-blue-100" aria-hidden />
             </div>
-            <span className="typography-sm sr-only @[220px]/side:not-sr-only">{t(item.key)}</span>
+            <span className="text-sm sr-only @[220px]/side:not-sr-only">{t(item.key)}</span>
           </Link>
         )
       })}

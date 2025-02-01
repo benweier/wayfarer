@@ -24,7 +24,7 @@ export const LeaderboardList = () => {
                 key={item.agentSymbol}
                 className="flex flex-col items-center justify-between gap-2 rounded bg-background-secondary px-5 py-3 sm:flex-row"
               >
-                <div className="typography-lg font-semibold">
+                <div className="text-lg font-semibold">
                   <Link to="/agents/$agentSymbol" params={{ agentSymbol: item.agentSymbol }} className="link">
                     {item.agentSymbol}
                   </Link>
@@ -44,7 +44,7 @@ export const LeaderboardList = () => {
                 key={item.agentSymbol}
                 className="flex flex-col items-center justify-between gap-2 rounded bg-background-secondary px-5 py-3 sm:flex-row"
               >
-                <div className="typography-lg font-semibold">
+                <div className="text-lg font-semibold">
                   <Link to="/agents/$agentSymbol" params={{ agentSymbol: item.agentSymbol }} className="link">
                     {item.agentSymbol}
                   </Link>

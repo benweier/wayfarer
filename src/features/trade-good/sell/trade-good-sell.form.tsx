@@ -4,10 +4,11 @@ import { Controller, FormProvider, useForm, useFormContext, useFormState, useWat
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import { ShipSelectField, type ShipSelectItemReducer } from '@/features/ship/select-field'
-import { type MarketTradeGood, type ShipResponse } from '@/types/spacetraders'
+import { ShipSelectField } from '@/features/ship/select-field'
 import { TradeGoodSellSchema } from './trade-good-sell.schema'
-import { type TradeGoodSellFormProps } from './trade-good-sell.types'
+import type { TradeGoodSellFormProps } from './trade-good-sell.types'
+import type { ShipSelectItemReducer } from '@/features/ship/select-field'
+import type { MarketTradeGood, ShipResponse } from '@/types/spacetraders'
 
 const ShipSelection = ({ ship, good, count }: { ship: ShipResponse; good: MarketTradeGood; count: number }) => {
   const { t } = useTranslation()
@@ -16,12 +17,7 @@ const ShipSelection = ({ ship, good, count }: { ship: ShipResponse; good: Market
     <div className="flex items-baseline gap-2 ">
       <span className="font-bold">{ship.symbol}</span>
       <span className="text-foreground-secondary">
-        (
-        {t(good.symbol, { ns: 'spacetraders.trade_good' })}
-        :
-        {' '}
-        {count}
-        )
+        ({t(good.symbol, { ns: 'spacetraders.trade_good' })}: {count})
       </span>
     </div>
   )
@@ -31,12 +27,10 @@ const ShipOption = ({ ship, good, count }: { ship: ShipResponse; good: MarketTra
   const { t } = useTranslation()
 
   return (
-    <div className="typography-sm flex flex-col">
+    <div className="text-sm flex flex-col">
       <div className="font-semibold">{ship.symbol}</div>
       <div className="text-foreground-secondary">
-        {t(good.symbol, { ns: 'spacetraders.trade_good' })}
-        :
-        {count}
+        {t(good.symbol, { ns: 'spacetraders.trade_good' })}:{count}
       </div>
     </div>
   )
@@ -60,8 +54,8 @@ const SellPrice = ({ perUnit }: { perUnit: number }) => {
   return (
     <div className="flex flex-wrap items-center gap-12">
       <div className="[max-width:50%]">
-        <div className="typography-sm text-foreground-secondary">{t('market.sell_price')}</div>
-        <div className="typography-xl truncate font-bold">
+        <div className="text-sm text-foreground-secondary">{t('market.sell_price')}</div>
+        <div className="text-xl truncate font-bold">
           {Number.isNaN(quantity) ? 0 : t('formatter.number', { value: quantity * perUnit })}
         </div>
       </div>

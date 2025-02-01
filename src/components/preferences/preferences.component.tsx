@@ -1,6 +1,6 @@
+import { useTranslation } from 'react-i18next'
 import { MenuIcon } from '@/components/icons'
 import { Popover } from '@/components/popover'
-import { useTranslation } from 'react-i18next'
 import { Sidebar } from './sidebar.component'
 import { Theme } from './theme.component'
 
@@ -17,7 +17,7 @@ export const Preferences = () => {
           <div className="size-6 text-blue-100">
             <MenuIcon id="settings" className="size-6 group-data-[state=open]:animate-spin" aria-hidden />
           </div>
-          <span className="typography-sm sr-only @[220px]/side:not-sr-only flex flex-col items-start justify-start">
+          <span className="text-sm sr-only @[220px]/side:not-sr-only flex flex-col items-start justify-start">
             {t('preferences.label')}
           </span>
         </button>

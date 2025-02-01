@@ -1,7 +1,7 @@
-import { WaypointTag } from '@/features/waypoint/tag'
-import type { SystemWaypoint } from '@/types/spacetraders'
-import { chunk } from '@/utilities/chunk.helper'
 import { Link } from '@tanstack/react-router'
+import { WaypointTag } from '@/features/waypoint/tag'
+import { chunk } from '@/utilities/chunk.helper'
+import type { SystemWaypoint } from '@/types/spacetraders'
 
 const EXCLUDED_WAYPOINTS = new Set(['ASTEROID', 'ENGINEERED_ASTEROID', 'ASTEROID_BASE'])
 
@@ -95,7 +95,7 @@ export const SystemWaypointsCell = ({
                       className="flex size-7 items-center justify-center border-2 border-border-primary transition duration-100 ease-in-out hover:z-0 hover:scale-125"
                       style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
                     >
-                      <span className="typography-sm font-medium" aria-hidden="true">
+                      <span className="text-sm font-medium" aria-hidden="true">
                         {waypoint.label}
                       </span>
                       <span className="sr-only">
@@ -115,7 +115,7 @@ export const SystemWaypointsCell = ({
                     className="flex size-7 items-center justify-center border-2 border-border-primary transition duration-100 ease-in-out hover:z-0 hover:scale-125"
                     style={{ '--waypoint-tag-radius': 'var(--radius-full)' }}
                   >
-                    <span className="typography-sm font-medium" aria-hidden="true">
+                    <span className="text-sm font-medium" aria-hidden="true">
                       {waypoint.label}
                     </span>
                     <span className="sr-only">

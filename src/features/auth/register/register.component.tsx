@@ -1,3 +1,8 @@
+import { valibotResolver } from '@hookform/resolvers/valibot'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Link } from '@tanstack/react-router'
+import { FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { Trans, useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import * as FieldControl from '@/components/field-control'
 import * as FormControl from '@/components/form-control'
@@ -7,14 +12,10 @@ import * as Select from '@/components/select'
 import { createAgentMutation } from '@/services/api/spacetraders/auth'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
-import { valibotResolver } from '@hookform/resolvers/valibot'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { Link } from '@tanstack/react-router'
-import { Controller, FormProvider, useForm, useFormContext } from 'react-hook-form'
-import { Trans, useTranslation } from 'react-i18next'
 import { AccessTokenDialog } from './access-token-dialog.component'
 import { FactionInfo } from './faction-info.component'
-import { type RegisterFormFieldValues, RegisterSchema } from './register.schema'
+import { RegisterSchema } from './register.schema'
+import type { RegisterSchemaInput, RegisterSchemaOutput } from './register.schema'
 
 const SupportLink = () => {
   const { t } = useTranslation()
@@ -38,7 +39,7 @@ const LoginLink = () => {
 
 const FactionField = () => {
   const { t } = useTranslation()
-  const methods = useFormContext<RegisterFormFieldValues>()
+  const methods = useFormContext<RegisterSchemaInput, any, RegisterSchemaOutput>()
   const { isPending, data } = useQuery(getFactionListQuery())
   const factions = reduceArrayToMap(
     data?.data.toSorted((a, z) => a.name.localeCompare(z.name)),
@@ -46,30 +47,22 @@ const FactionField = () => {
   )
 
   return (
-    <Controller
-      control={methods.control}
-      name="faction"
-      render={({ field, fieldState, formState }) => {
-        const selected = field.value ? factions.get(field.value) : undefined
+    <FieldControl.Root control={methods.control} name="faction">
+      <FieldControl.Label>{t('faction.label')}</FieldControl.Label>
 
-        return (
-          <FieldControl.Root<RegisterFormFieldValues, 'faction'>
-            field={field}
-            fieldState={fieldState}
-            formState={formState}
-          >
-            <FieldControl.Label>{t('faction.label')}</FieldControl.Label>
-
+      <FieldControl.Slot<RegisterSchemaInput, 'faction'>>
+        {({ field }) => {
+          return (
             <Select.Field
               id={field.name}
-              selected={<Select.Value>{selected?.name}</Select.Value>}
+              value={field.value}
               onChange={field.onChange}
               onBlur={field.onBlur}
               placeholder={isPending ? <Select.Pending /> : t('faction.select_placeholder')}
             >
               {Array.from(factions).map(([key, faction]) => {
                 return (
-                  <Select.Item key={key} value={faction.symbol}>
+                  <Select.Item key={key} value={faction.symbol} textValue={faction.symbol}>
                     <div className="flex gap-3">
                       <div>{faction.name}</div>
                       <div className="text-foreground-tertiary">[{faction.symbol}]</div>
@@ -78,22 +71,22 @@ const FactionField = () => {
                 )
               })}
             </Select.Field>
+          )
+        }}
+      </FieldControl.Slot>
 
-            <FieldControl.ErrorMessage />
-          </FieldControl.Root>
-        )
-      }}
-    />
+      <FieldControl.ErrorMessage />
+    </FieldControl.Root>
   )
 }
 
 export const Register = () => {
   const { t } = useTranslation()
-  const methods = useForm<RegisterFormFieldValues, any, RegisterSchema>({
+  const methods = useForm<RegisterSchemaInput, any, RegisterSchemaOutput>({
     defaultValues: {
       symbol: '',
-      email: undefined,
-      faction: undefined,
+      email: '',
+      faction: '',
     },
     resolver: valibotResolver(RegisterSchema),
   })
@@ -105,14 +98,13 @@ export const Register = () => {
       modal.open()
     },
   })
-  const agent = isSuccess ? data.data : undefined
 
   return (
     <div className="grid gap-8">
-      <div className="display-xs text-center">{t('auth.register_heading')}</div>
+      <div className="text-h5 text-center">{t('auth.register_heading')}</div>
 
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
+        <form noValidate onSubmit={methods.handleSubmit(mutateAsync)}>
           <div className="grid grid-cols-1 gap-8">
             <FormControl.Root {...methods.register('symbol', { required: true })}>
               <FormControl.Label>{t('auth.fields.agent_symbol.label')}</FormControl.Label>
@@ -123,9 +115,7 @@ export const Register = () => {
             <FormControl.Root {...methods.register('email')}>
               <FormControl.Label>
                 {t('auth.fields.email.label')}{' '}
-                <span className="typography-xs font-normal text-foreground-tertiary">
-                  {t('general.fields.optional')}
-                </span>
+                <span className="text-xs font-normal text-foreground-tertiary">{t('general.fields.optional')}</span>
               </FormControl.Label>
 
               <FormControl.Input type="email" autoComplete="off" />
@@ -153,7 +143,7 @@ export const Register = () => {
               {t('auth.register', { context: 'action' })}
             </Button>
             <div className="grid gap-4">
-              <div className="typography-base text-center">
+              <div className="text-base text-center">
                 <Trans
                   i18nKey="auth.already_registered"
                   components={{
@@ -166,7 +156,7 @@ export const Register = () => {
         </form>
       </FormProvider>
       <Modal ref={ref} size="md" disableExternalClose>
-        <Modal.Content>{isSuccess && <AccessTokenDialog registration={agent} />}</Modal.Content>
+        <Modal.Content>{isSuccess && <AccessTokenDialog registration={data.data} />}</Modal.Content>
       </Modal>
     </div>
   )

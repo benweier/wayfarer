@@ -1,5 +1,5 @@
-import { AppIcon } from '@/components/icons'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
+import { AppIcon } from '@/components/icons'
 import type { RefAttributes } from 'react'
 
 export const Item = ({
@@ -11,7 +11,7 @@ export const Item = ({
     <ToggleGroup.Item
       ref={ref}
       {...props}
-      className="group typography-sm relative relative w-full cursor-pointer rounded py-2 pr-14 pl-2 outline-none hover:bg-background-secondary focus:bg-background-secondary "
+      className="group text-sm relative relative w-full cursor-pointer rounded py-2 pr-14 pl-2 outline-none hover:bg-background-secondary focus:bg-background-secondary "
     >
       {children}
 

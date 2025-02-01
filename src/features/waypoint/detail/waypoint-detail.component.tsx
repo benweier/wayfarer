@@ -1,9 +1,9 @@
+import { Link } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { WaypointTag } from '@/features/waypoint/tag'
-import { Link } from '@tanstack/react-router'
 import type { PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export const WaypointDetail = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation()
@@ -14,7 +14,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
       <div className="flex flex-col gap-2">
         <div className="flex flex-row flex-wrap items-center justify-start gap-x-4 gap-y-2">
           <WaypointTag type={waypoint.type}>{t(waypoint.type, { ns: 'spacetraders.waypoint_type' })}</WaypointTag>
-          <div className="typography-sm font-light">
+          <div className="text-sm font-light">
             ({waypoint.x}, {waypoint.y})
           </div>
           <div className="whitespace-nowrap">
@@ -46,7 +46,7 @@ export const WaypointDetail = ({ children }: PropsWithChildren) => {
 
       {waypoint.orbitals.length > 0 && (
         <div className="space-y-1">
-          <div className="typography-xs text-foreground-secondary uppercase">{t('waypoint.orbitals')}</div>
+          <div className="text-xs text-foreground-secondary uppercase">{t('waypoint.orbitals')}</div>
           <div className="flex flex-wrap gap-1">
             {waypoint.orbitals
               .toSorted((a, b) => a.symbol.localeCompare(b.symbol))

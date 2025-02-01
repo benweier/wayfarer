@@ -1,6 +1,6 @@
-import * as ScrollArea from '@/components/scroll-area'
 import { flexRender } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
+import * as ScrollArea from '@/components/scroll-area'
 import { Row as RowComponent } from './row.component'
 import type { TableProps } from './table.types'
 
@@ -26,7 +26,7 @@ export const Table = <T extends Record<string, any> = Record<string, never>>({
                     return (
                       <th
                         key={header.id}
-                        className="typography-sm px-3 py-3.5 font-semibold text-foreground-primary"
+                        className="text-sm px-3 py-3.5 font-semibold text-foreground-primary"
                         style={{ width: `${header.getSize()}%` }}
                         aria-sort={
                           sorted

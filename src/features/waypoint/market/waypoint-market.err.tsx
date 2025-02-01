@@ -1,8 +1,8 @@
-import { Button } from '@/components/button'
-import type { ErrorComponentProps } from '@/components/error-boundary'
-import { StatusCode, isHttpErrorResponse } from '@/services/http'
 import { use } from 'react'
 import { ErrorBoundaryContext } from 'react-error-boundary'
+import { Button } from '@/components/button'
+import { StatusCode, isHttpErrorResponse } from '@/services/http'
+import type { ErrorComponentProps } from '@/components/error-boundary'
 
 const Message = ({ error, onReset }: ErrorComponentProps) => {
   if (isHttpErrorResponse(error, StatusCode.NotFound)) {
@@ -33,7 +33,7 @@ export const WaypointMarketError = () => {
 
   return (
     <div className="px-3 py-9">
-      <div className="typography-lg text-center font-bold text-foreground-secondary">
+      <div className="text-lg text-center font-bold text-foreground-secondary">
         <Message error={ctx.error} onReset={ctx.resetErrorBoundary} />
       </div>
     </div>

@@ -4,7 +4,7 @@ import { Badge } from '@/components/badge'
 import { Sort } from '@/components/table'
 import { TradeGoodContext } from '@/features/trade-good/context'
 import { cx } from '@/utilities/cx.helper'
-import { type WaypointMarketTableSchema } from './waypoint-market.types'
+import type { WaypointMarketTableSchema } from './waypoint-market.types'
 
 const columnHelper = createColumnHelper<WaypointMarketTableSchema>()
 
@@ -25,9 +25,7 @@ export const columns = [
       return (
         <>
           <div>{getValue()}</div>
-          <div className="typography-sm whitespace-pre-wrap text-foreground-secondary">
-            {row.original.good.description}
-          </div>
+          <div className="text-sm whitespace-pre-wrap text-foreground-secondary">{row.original.good.description}</div>
         </>
       )
     },
@@ -46,11 +44,11 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="typography-sm text-right text-foreground-secondary">-</div>
+        return <div className="text-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
-        <div className="typography-sm text-right">
+        <div className="text-sm text-right">
           <Translation>{(t) => t('formatter.number', { value })}</Translation>
         </div>
       )
@@ -70,7 +68,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="typography-sm text-right text-foreground-secondary">-</div>
+        return <div className="text-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -103,7 +101,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="typography-sm text-right text-foreground-secondary">-</div>
+        return <div className="text-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -111,14 +109,12 @@ export const columns = [
           <TradeGoodContext.Consumer>
             {(ctx) => (
               <>
-                <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Buy })}>
+                <div className={cx('text-sm', { 'text-foreground-secondary': !ctx.Buy })}>
                   <Translation>{(t) => t('formatter.number', { value })}</Translation>
                 </div>
-                {ctx.Buy !== undefined && row.original.trade !== undefined
-                  ? (
-                      <ctx.Buy good={row.original.trade} />
-                    )
-                  : null}
+                {ctx.Buy !== undefined && row.original.trade !== undefined ? (
+                  <ctx.Buy good={row.original.trade} />
+                ) : null}
               </>
             )}
           </TradeGoodContext.Consumer>
@@ -146,7 +142,7 @@ export const columns = [
       const value = getValue()
 
       if (value === undefined) {
-        return <div className="typography-sm text-right text-foreground-secondary">-</div>
+        return <div className="text-sm text-right text-foreground-secondary">-</div>
       }
 
       return (
@@ -154,14 +150,12 @@ export const columns = [
           <TradeGoodContext.Consumer>
             {(ctx) => (
               <>
-                <div className={cx('typography-sm', { 'text-foreground-secondary': !ctx.Sell })}>
+                <div className={cx('text-sm', { 'text-foreground-secondary': !ctx.Sell })}>
                   <Translation>{(t) => t('formatter.number', { value })}</Translation>
                 </div>
-                {ctx.Sell !== undefined && row.original.trade !== undefined
-                  ? (
-                      <ctx.Sell good={row.original.trade} />
-                    )
-                  : null}
+                {ctx.Sell !== undefined && row.original.trade !== undefined ? (
+                  <ctx.Sell good={row.original.trade} />
+                ) : null}
               </>
             )}
           </TradeGoodContext.Consumer>

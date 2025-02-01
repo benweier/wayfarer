@@ -1,7 +1,7 @@
-import { AppIcon } from '@/components/icons'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import type { RefAttributes } from 'react'
+import { AppIcon } from '@/components/icons'
 import { ItemIcon } from './dropdown-item-icon.component'
+import type { RefAttributes } from 'react'
 
 export const CheckboxItem = ({
   ref,
@@ -12,7 +12,7 @@ export const CheckboxItem = ({
     <DropdownMenu.CheckboxItem
       ref={ref}
       {...props}
-      className="group typography-sm relative flex select-none items-center rounded-sm py-2 pr-16 pl-8 text-foreground-secondary data-[disabled]:pointer-events-none data-[highlighted]:bg-background-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:text-foreground-primary data-[highlighted]:outline-none"
+      className="group text-sm relative flex select-none items-center rounded-sm py-2 pr-16 pl-8 text-foreground-secondary data-[disabled]:pointer-events-none data-[highlighted]:bg-background-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:text-foreground-primary data-[highlighted]:outline-none"
     >
       <DropdownMenu.ItemIndicator asChild>
         <ItemIcon>

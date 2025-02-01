@@ -1,7 +1,7 @@
-import type { ShipResponse } from '@/types/spacetraders'
-import { cx } from '@/utilities/cx.helper'
 import { useTranslation } from 'react-i18next'
+import { cx } from '@/utilities/cx.helper'
 import { useShipCooldown } from './use-ship-cooldown.hook'
+import type { ShipResponse } from '@/types/spacetraders'
 
 export const ShipCooldown = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()
@@ -9,7 +9,7 @@ export const ShipCooldown = ({ ship }: { ship: ShipResponse }) => {
 
   return (
     <div className="flex flex-col gap-1 ">
-      <div className="typography-sm flex justify-between text-foreground-secondary">
+      <div className="text-sm flex justify-between text-foreground-secondary">
         <div>{hasCooldown ? t('ship.cooldown.active') : t('ship.cooldown.inactive')}</div>
         <div>{hasCooldown && `${remainingSeconds}s left`}</div>
       </div>

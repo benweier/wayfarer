@@ -11,7 +11,7 @@ export const Tooltip = ({ trigger, children }: PropsWithChildren<{ trigger: Reac
       </RadixTooltip.Trigger>
       <RadixTooltip.Portal>
         <RadixTooltip.Content
-          className="typography-sm z-40 max-w-96 rounded-md bg-foreground-secondary px-4 py-2 text-background-secondary"
+          className="text-sm z-40 max-w-96 rounded-md bg-foreground-secondary px-4 py-2 text-background-secondary"
           sideOffset={4}
           collisionPadding={8}
         >

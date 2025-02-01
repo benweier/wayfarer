@@ -32,7 +32,7 @@ const getShortcutKey = (key: string) => {
 
 export const Kbd = ({ children }: { children: string }) => {
   return (
-    <kbd className="typography-sm mx-0.5 rounded-sm border-1 border-border-primary border-b-3 bg-background-tertiary px-1 font-family-[unset] text-foreground-secondary tracking-widest">
+    <kbd className="text-sm mx-0.5 rounded-sm border-1 border-border-primary border-b-3 bg-background-tertiary px-1 font-family-[unset] text-foreground-secondary tracking-widest">
       {getShortcutKey(children)}
     </kbd>
   )

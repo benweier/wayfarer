@@ -1,8 +1,8 @@
+import { RadioGroup, Switch } from '@headlessui/react'
+import { useAtom } from 'jotai'
 import { Button } from '@/components/button'
 import { cargoDescriptionAtom, cargoDisplayAtom } from '@/store/atoms/cargo.display'
 import { cx } from '@/utilities/cx.helper'
-import { RadioGroup, Switch } from '@headlessui/react'
-import { useAtom } from 'jotai'
 
 export const CargoPreferencesMarket = () => {
   return (
@@ -29,7 +29,7 @@ export const ShipCargoPreferences = () => {
   return (
     <div className="flex items-center justify-between gap-4">
       <RadioGroup value={cargoDisplayMode} onChange={setCargoDisplayMode}>
-        <RadioGroup.Label className="typography-sm sr-only font-bold">Display as</RadioGroup.Label>
+        <RadioGroup.Label className="text-sm sr-only font-bold">Display as</RadioGroup.Label>
         <div className="flex items-center gap-2">
           {[
             { label: 'List', value: 'list' },
@@ -40,7 +40,7 @@ export const ShipCargoPreferences = () => {
               value={item.value}
               className={({ checked }) => cx('btn btn-sm', { 'btn-primary btn-outline': checked })}
             >
-              <RadioGroup.Label className="typography-sm font-semibold">{item.label}</RadioGroup.Label>
+              <RadioGroup.Label className="text-sm font-semibold">{item.label}</RadioGroup.Label>
             </RadioGroup.Option>
           ))}
         </div>
@@ -48,7 +48,7 @@ export const ShipCargoPreferences = () => {
 
       <div className="flex items-center justify-end gap-4">
         <div className="flex items-center gap-2">
-          <span className="typography-sm text-secondary">Show item description</span>
+          <span className="text-sm text-secondary">Show item description</span>
           <Switch
             checked={showCargoDescription}
             onChange={setShowCargoDescription}

@@ -5,7 +5,7 @@ export const Collapsible = ({ children, ...props }: ButtonHTMLAttributes<HTMLBut
   return (
     <button
       type="button"
-      className="group typography-sm relative flex w-full select-none items-center justify-between gap-2 rounded-sm bg-background-secondary/50 py-2 pr-8 pl-8 text-foreground-secondary"
+      className="group text-sm relative flex w-full select-none items-center justify-between gap-2 rounded-sm bg-background-secondary/50 py-2 pr-8 pl-8 text-foreground-secondary"
       {...props}
     >
       {children}

@@ -1,10 +1,10 @@
+import { useTranslation } from 'react-i18next'
 import { AppIcon } from '@/components/icons'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { Wayfarer } from '@/components/wayfarer'
 import { useSpaceTradersStatus } from '@/hooks/use-space-traders-status.hook'
 import { cx } from '@/utilities/cx.helper'
 import type { PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 
 const icon = {
   unknown: 'connection:unknown',
@@ -17,7 +17,7 @@ const SpaceTradersStatus = () => {
 
   return (
     <>
-      <span className="typography-sm">Status:</span>
+      <span className="text-sm">Status:</span>
       <div
         className={cx({
           'text-foreground-success-secondary': status === 'online',
@@ -27,7 +27,7 @@ const SpaceTradersStatus = () => {
       >
         <AppIcon id={icon[status]} className="size-6" aria-hidden />
       </div>
-      <span className="typography-sm font-semibold">{t(`general.status.${status}`)}</span>
+      <span className="text-sm font-semibold">{t(`general.status.${status}`)}</span>
     </>
   )
 }
@@ -38,10 +38,8 @@ export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="grid min-h-screen w-full auto-rows-min items-center gap-6 [grid-template-rows:auto_1fr_auto]">
       <div className="grid grid-flow-row items-center justify-center py-12">
-        <Wayfarer className="display-lg display-xl text-center font-black" />
-        <div className="typography-xl text-center font-semibold text-foreground-tertiary">
-          {t('general.description')}
-        </div>
+        <Wayfarer className="text-h1 text-center font-black" />
+        <div className="text-xl text-center font-semibold text-foreground-tertiary">{t('general.description')}</div>
         <div className="grid grid-flow-col items-center justify-center gap-2 py-4">
           <QuerySuspenseBoundary
             fallback={

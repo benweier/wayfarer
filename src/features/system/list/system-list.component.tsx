@@ -1,9 +1,9 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { Pagination, usePaginationCommands } from '@/components/pagination'
 import { useFleetResponse } from '@/context/fleet.context'
 import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
 import { getSystemListQuery } from '@/services/api/spacetraders/systems'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
 import { SystemListTable } from './system-list.table'
 import type { SystemListProps } from './system-list.types'
 
@@ -28,7 +28,7 @@ export const SystemList = ({ page = 1, limit = 20, setPage }: SystemListProps) =
       <SystemListTable data={systems.map((system) => ({ system, presence: presence.get(system.symbol) ?? 0 }))} />
 
       <div className="row grid items-center justify-center gap-4">
-        <div className="typography-sm flex items-center justify-center gap-2">
+        <div className="text-sm flex items-center justify-center gap-2">
           {systemsListQuery.isFetching ? (
             <div>...</div>
           ) : (

@@ -1,3 +1,6 @@
+import { Link } from '@tanstack/react-router'
+import { use } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { AppIcon, ShipIcon } from '@/components/icons'
@@ -8,9 +11,6 @@ import { ShipDetailFlightMode } from '@/features/ship/detail/ship-detail.flight-
 import { WaypointTag } from '@/features/waypoint/tag'
 import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
 import type { ShipResponse } from '@/types/spacetraders'
-import { Link } from '@tanstack/react-router'
-import { use } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
   const { t } = useTranslation()
@@ -21,13 +21,13 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
       <div className="flex flex-row items-end gap-2">
         <div className="flex gap-8">
           <div>
-            <div className="typography-sm text-foreground-secondary uppercase">{t('system.label')}</div>
+            <div className="text-sm text-foreground-secondary uppercase">{t('system.label')}</div>
             <Link to="/systems/$systemSymbol" params={{ systemSymbol: ship.nav.systemSymbol }} className="link">
               {ship.nav.systemSymbol}
             </Link>
           </div>
           <div>
-            <div className="typography-sm text-foreground-secondary uppercase">{t('waypoint.label')}</div>
+            <div className="text-sm text-foreground-secondary uppercase">{t('waypoint.label')}</div>
             <div className="flex flex-col items-start">
               <Link
                 to="/systems/$systemSymbol/waypoint/$waypointSymbol"
@@ -47,7 +47,7 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
             </div>
           </div>
           <div>
-            <div className="typography-sm text-foreground-secondary uppercase">{t('ship.status')}</div>
+            <div className="text-sm text-foreground-secondary uppercase">{t('ship.status')}</div>
             <div className="flex h-6 items-center gap-1">
               <Badge>{t(ship.nav.status, { ns: 'spacetraders.nav_status' })}</Badge>
               <Badge>{t(ship.nav.flightMode, { ns: 'spacetraders.flight_mode' })}</Badge>
@@ -79,10 +79,10 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
       <div className="flex items-start gap-0.5">
         <div className="flex flex-col items-end gap-0.5">
           <div className="min-w-28 rounded-sm rounded-l-lg bg-background-secondary px-3 py-2">
-            <div className="typography-sm text-right text-foreground-secondary uppercase">{t('ship.fuel')}</div>
+            <div className="text-sm text-right text-foreground-secondary uppercase">{t('ship.fuel')}</div>
             <div className="flex items-center justify-end gap-2">
               <ShipIcon id="fuel" className="size-4 text-foreground-fuel" />
-              <div className="typography-sm font-semibold">
+              <div className="text-sm font-semibold">
                 {ship.fuel.capacity === 0 ? (
                   <AppIcon id="infinity" className="size-5" aria-label="Infinite" />
                 ) : (
@@ -115,10 +115,10 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
           </WaypointContext.Consumer>
         </div>
         <div className="min-w-24 rounded-sm bg-background-secondary px-3 py-2">
-          <div className="typography-sm text-right text-foreground-secondary uppercase">{t('ship.cargo')}</div>
+          <div className="text-sm text-right text-foreground-secondary uppercase">{t('ship.cargo')}</div>
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="cargo" className="size-4 text-foreground-cargo" />
-            <div className="typography-sm font-semibold">
+            <div className="text-sm font-semibold">
               {ship.cargo.units} / {ship.cargo.capacity}
             </div>
           </div>
@@ -131,10 +131,10 @@ export const ShipStatus = ({ ship }: { ship: ShipResponse }) => {
         </div>
         <div className="flex flex-col items-end gap-0.5">
           <div className="w-full min-w-28 rounded-sm rounded-r-lg bg-background-secondary px-3 py-2">
-            <div className="typography-sm text-right text-foreground-secondary uppercase">{t('ship.condition')}</div>
+            <div className="text-sm text-right text-foreground-secondary uppercase">{t('ship.condition')}</div>
             <div className="flex items-center justify-end gap-2">
               <ShipIcon id="condition" className="size-4 text-foreground-condition" />
-              <div className="typography-sm font-semibold">
+              <div className="text-sm font-semibold">
                 {ship.frame.condition} / {ship.engine.condition} / {ship.reactor.condition}
               </div>
             </div>

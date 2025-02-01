@@ -1,3 +1,6 @@
+import { Link } from '@tanstack/react-router'
+import { createColumnHelper } from '@tanstack/react-table'
+import { Trans, Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
@@ -6,12 +9,9 @@ import { WaypointTraits } from '@/config/spacetraders'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
 import { WaypointTypeFilter } from '@/features/waypoint/filters'
 import { WaypointTag } from '@/features/waypoint/tag'
-import type { WaypointTrait } from '@/types/spacetraders'
 import { getNavigationDuration } from '@/utilities/get-navigation-duration.helper'
-import { Link } from '@tanstack/react-router'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Trans, Translation } from 'react-i18next'
 import type { WaypointNavigationTableSchema } from './waypoint-navigation.types'
+import type { WaypointTrait } from '@/types/spacetraders'
 
 const FILTER_TRAITS = new Set<WaypointTraits>([
   WaypointTraits.Stripped,
@@ -103,7 +103,7 @@ export const columns = [
         )
 
         return (
-          <div className="typography-sm text-left">
+          <div className="text-sm text-left">
             {distance} <span className="text-foreground-secondary">({duration}s)</span>
           </div>
         )

@@ -9,7 +9,7 @@ export const Hint = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) =>
     <div
       {...props}
       id={ctx?.field.name ? `${ctx.field.name}-description` : undefined}
-      className={cx('typography-sm mx-1 text-foreground-secondary', className)}
+      className={cx('text-sm mx-1 text-foreground-secondary', className)}
     />
   )
 }

@@ -1,5 +1,5 @@
-import type { PropsWithChildren } from 'react'
 import type { ShipLoadoutItemProps } from './ship-loadout.types'
+import type { PropsWithChildren } from 'react'
 
 export const ShipLoadoutItem = ({ name, description, action, children }: PropsWithChildren<ShipLoadoutItemProps>) => {
   return (
@@ -9,7 +9,7 @@ export const ShipLoadoutItem = ({ name, description, action, children }: PropsWi
           <div className="font-semibold">{name}</div>
           {action && <div>{action}</div>}
         </div>
-        <div className="typography-sm text-foreground-secondary">{description}</div>
+        <div className="text-sm text-foreground-secondary">{description}</div>
       </div>
       {children && <div className="rounded bg-background-secondary p-2">{children}</div>}
     </div>

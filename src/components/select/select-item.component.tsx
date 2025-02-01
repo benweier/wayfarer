@@ -1,6 +1,6 @@
+import * as Select from '@radix-ui/react-select'
 import { AppIcon } from '@/components/icons'
 import { cx } from '@/utilities/cx.helper'
-import * as Select from '@radix-ui/react-select'
 import type { RefAttributes } from 'react'
 
 export const Item = ({
@@ -14,7 +14,7 @@ export const Item = ({
       ref={ref}
       {...props}
       className={cx(
-        'group typography-sm relative flex select-none items-center rounded-sm py-2 pr-16 pl-8 text-foreground-secondary data-[disabled]:pointer-events-none data-[highlighted]:bg-background-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:text-foreground-primary data-[highlighted]:outline-none',
+        'group text-sm relative flex select-none items-center rounded-sm py-2 pr-16 pl-8 text-foreground-secondary data-[disabled]:pointer-events-none data-[highlighted]:bg-background-secondary data-[disabled]:text-foreground-disabled data-[highlighted]:text-foreground-primary data-[highlighted]:outline-none',
         className,
       )}
     >

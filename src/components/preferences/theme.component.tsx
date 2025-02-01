@@ -1,8 +1,9 @@
-import { MenuIcon } from '@/components/icons'
-import * as ToggleGroup from '@/components/toggle-group'
-import { type ThemeState, themeAtom } from '@/store/atoms/theme'
 import { useAtom } from 'jotai'
 import { useTranslation } from 'react-i18next'
+import { MenuIcon } from '@/components/icons'
+import * as ToggleGroup from '@/components/toggle-group'
+import { themeAtom } from '@/store/atoms/theme'
+import type { ThemeState } from '@/store/atoms/theme'
 
 export const Theme = () => {
   const { t } = useTranslation()
@@ -22,19 +23,19 @@ export const Theme = () => {
         }}
       >
         <ToggleGroup.Item value="light">
-          <div className="typography-sm flex w-full items-center justify-between gap-2 font-semibold">
+          <div className="text-sm flex w-full items-center justify-between gap-2 font-semibold">
             <MenuIcon id="theme:light" className="size-4" aria-hidden />
             {t('preferences.light')}
           </div>
         </ToggleGroup.Item>
         <ToggleGroup.Item value="dark">
-          <div className="typography-sm flex w-full items-center justify-between gap-2 font-semibold">
+          <div className="text-sm flex w-full items-center justify-between gap-2 font-semibold">
             <MenuIcon id="theme:dark" className="size-4" aria-hidden />
             {t('preferences.dark')}
           </div>
         </ToggleGroup.Item>
         <ToggleGroup.Item value="system">
-          <div className="typography-sm flex w-full items-center justify-between gap-2 font-semibold">
+          <div className="text-sm flex w-full items-center justify-between gap-2 font-semibold">
             <MenuIcon id="theme:auto" className="size-4" aria-hidden />
             {t('preferences.system')}
           </div>

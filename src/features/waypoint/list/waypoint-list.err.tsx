@@ -1,5 +1,5 @@
-import type { ErrorComponentProps } from '@/components/error-boundary'
 import { isHttpErrorResponse } from '@/services/http'
+import type { ErrorComponentProps } from '@/components/error-boundary'
 
 export const WaypointListError = ({ error }: ErrorComponentProps) => {
   if (!error) return <></>
@@ -7,7 +7,7 @@ export const WaypointListError = ({ error }: ErrorComponentProps) => {
   if (isHttpErrorResponse(error)) {
     return (
       <div className="rounded border-2 border-transparent px-3 py-9">
-        <div className="display-md text-center font-bold text-secondary">{error.statusText}</div>
+        <div className="text-h3 text-center font-bold text-secondary">{error.statusText}</div>
       </div>
     )
   }

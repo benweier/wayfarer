@@ -1,10 +1,10 @@
+import { Link } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { useDrawerActions } from '@/components/drawer'
 import { MenuIcon } from '@/components/icons'
 import { Popover } from '@/components/popover'
 import { Theme } from '@/components/preferences/theme.component'
 import { useAuthStore } from '@/store/auth'
-import { Link } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
 import { menu } from './menu.conf'
 
 export const MobileNavigation = () => {
@@ -35,7 +35,7 @@ export const MobileNavigation = () => {
 
               <MenuIcon id={item.icon} className="size-5" aria-hidden />
 
-              <span className="typography-sm">{t(item.key)}</span>
+              <span className="text-sm">{t(item.key)}</span>
             </Link>
           )
         })}
@@ -48,7 +48,7 @@ export const MobileNavigation = () => {
               className="group relative flex w-full items-center gap-4 rounded-md px-3 py-2 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-tertiary focus:bg-background-active [&.active]:bg-background-active [&.active]:text-white"
             >
               <MenuIcon id="settings" className="size-6 group-data-[state=open]:animate-spin" aria-hidden />
-              <span className="typography-sm">{t('preferences.label')}</span>
+              <span className="text-sm">{t('preferences.label')}</span>
             </button>
           }
         >
@@ -61,7 +61,7 @@ export const MobileNavigation = () => {
             className="relative flex w-full items-center gap-4 rounded-md px-3 py-2 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-error-primary focus:bg-background-error-primary"
           >
             <MenuIcon id="logout" className="size-5" aria-hidden />
-            <span className="typography-sm">{t('auth.logout', { context: 'action' })}</span>
+            <span className="text-sm">{t('auth.logout', { context: 'action' })}</span>
           </Link>
         ) : (
           <Link
@@ -73,7 +73,7 @@ export const MobileNavigation = () => {
             className="relative flex w-full items-center gap-4 rounded-md px-3 py-2 font-medium text-foreground-primary transition-colors duration-75 hover:bg-background-success-primary focus:bg-background-success-primary"
           >
             <MenuIcon id="login" className="size-5" aria-hidden />
-            <span className="typography-sm">{t('auth.login', { context: 'action' })}</span>
+            <span className="text-sm">{t('auth.login', { context: 'action' })}</span>
           </Link>
         )}
       </div>

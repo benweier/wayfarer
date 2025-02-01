@@ -1,12 +1,12 @@
-import { Button } from '@/components/button'
-import { AppIcon } from '@/components/icons'
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
+import { Button } from '@/components/button'
+import { AppIcon } from '@/components/icons'
 import { ShipTransitJump } from './ship-transit.jump'
 import { ShipTransitNavigate } from './ship-transit.navigate'
 import { ShipTransitStatus } from './ship-transit.status'
-import type { ShipTransitProps } from './ship-transit.types'
 import { ShipTransitWarp } from './ship-transit.warp'
+import type { ShipTransitProps } from './ship-transit.types'
 
 export const ShipTransit = ({ nav }: ShipTransitProps) => {
   const { t } = useTranslation()
@@ -14,7 +14,7 @@ export const ShipTransit = ({ nav }: ShipTransitProps) => {
   return (
     <div className="flex items-start justify-between gap-4">
       <div className="flex flex-col items-start">
-        <div className="typography-sm text-foreground-secondary uppercase">{t('ship.transit.route')}</div>
+        <div className="text-sm text-foreground-secondary uppercase">{t('ship.transit.route')}</div>
         <div className="flex items-center gap-2">
           <div className="font-medium">
             <Link to="/systems/$systemSymbol" params={{ systemSymbol: nav.route.origin.systemSymbol }} className="link">

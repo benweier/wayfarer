@@ -5,7 +5,7 @@ export const Card = ({ className, children }: PropsWithChildren<{ className?: st
   return (
     <div
       className={cx(
-        'relative z-auto rounded border bg-zinc-100/50 p-3 dark:border-zinc-700/50 dark:bg-zinc-700/20',
+        'relative z-auto rounded border-1 p-3 border-border-primary accent-background-secondary',
         className,
       )}
     >

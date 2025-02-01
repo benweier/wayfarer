@@ -1,13 +1,13 @@
+import { Link } from '@tanstack/react-router'
+import { createColumnHelper } from '@tanstack/react-table'
+import { Translation } from 'react-i18next'
 import { Badge } from '@/components/badge'
 import { AppIcon, ShipIcon } from '@/components/icons'
 import { Sort } from '@/components/table'
 import { ShipNavStatus } from '@/config/spacetraders'
 import { useShipTransit } from '@/features/ship/transit'
-import type { ShipResponse } from '@/types/spacetraders'
-import { Link } from '@tanstack/react-router'
-import { createColumnHelper } from '@tanstack/react-table'
-import { Translation } from 'react-i18next'
 import type { ShipListTableSchema } from './ship-list.types'
+import type { ShipResponse } from '@/types/spacetraders'
 
 const TransitStatusPreview = ({ ship }: { ship: ShipResponse }) => {
   const transit = useShipTransit(ship)
@@ -40,7 +40,7 @@ export const columns = [
 
       return (
         <div className="flex items-center gap-4">
-          <Link to="/fleet/$shipSymbol" params={{ shipSymbol: symbol }} className="link typography-lg font-bold">
+          <Link to="/fleet/$shipSymbol" params={{ shipSymbol: symbol }} className="link text-lg font-bold">
             {symbol}
           </Link>
           <Badge>
@@ -156,7 +156,7 @@ export const columns = [
         <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="fuel" className="size-4 text-foreground-fuel" />
-            <div className="typography-sm font-semibold">
+            <div className="text-sm font-semibold">
               {fuel.capacity === 0 ? (
                 <AppIcon id="infinity" className="size-5" aria-label="Infinite" />
               ) : (
@@ -211,7 +211,7 @@ export const columns = [
         <div className="flex flex-col items-end">
           <div className="flex items-center justify-end gap-2">
             <ShipIcon id="cargo" className="size-4 text-fuchsia-500" />
-            <div className="typography-sm font-semibold">
+            <div className="text-sm font-semibold">
               {cargo.units} / {cargo.capacity}
             </div>
           </div>

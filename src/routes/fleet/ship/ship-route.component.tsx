@@ -1,3 +1,6 @@
+import { keepPreviousData, useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { Outlet, getRouteApi } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { ROUTES } from '@/config/routes'
 import { ShipContext } from '@/context/ship.context'
 import { WaypointContext } from '@/context/waypoint.context'
@@ -5,9 +8,6 @@ import { ShipDetail } from '@/features/ship/detail'
 import { ShipTabs } from '@/features/ship/tabs'
 import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
-import { keepPreviousData, useQuery, useSuspenseQuery } from '@tanstack/react-query'
-import { Outlet, getRouteApi } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
 
 const api = getRouteApi(ROUTES.SHIP)
 
@@ -29,7 +29,7 @@ export const ShipRoute = () => {
 
   return (
     <div key={shipSymbol} className="space-y-4 p-4">
-      <h1 className="display-md font-bold">
+      <h1 className="text-h3 font-bold">
         {t('ship.label')}: <span className="font-normal">{shipSymbol}</span>
       </h1>
 

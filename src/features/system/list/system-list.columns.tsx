@@ -1,11 +1,11 @@
-import { ShipIcon } from '@/components/icons'
-import { Tooltip } from '@/components/tooltip'
-import { SystemTag } from '@/features/system/tag'
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Trans, Translation } from 'react-i18next'
-import type { SystemListTableSchema } from './system-list.types'
+import { ShipIcon } from '@/components/icons'
+import { Tooltip } from '@/components/tooltip'
+import { SystemTag } from '@/features/system/tag'
 import { SystemWaypointsCell } from './waypoints-cell.component'
+import type { SystemListTableSchema } from './system-list.types'
 
 const columnHelper = createColumnHelper<SystemListTableSchema>()
 
@@ -78,7 +78,7 @@ export const columns = [
       )
     },
     cell: ({ getValue }) => {
-      return <div className="typography-sm text-left text-foreground-secondary">{getValue()}</div>
+      return <div className="text-sm text-left text-foreground-secondary">{getValue()}</div>
     },
     minSize: 20,
     maxSize: 20,

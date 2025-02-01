@@ -1,9 +1,9 @@
-import { Badge } from '@/components/badge'
-import { getFactionListQuery } from '@/services/api/spacetraders/factions'
-import type { FactionResponse } from '@/types/spacetraders'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useFormContext, useWatch } from 'react-hook-form'
+import { Badge } from '@/components/badge'
+import { getFactionListQuery } from '@/services/api/spacetraders/factions'
 import type { RegisterSchema } from './register.schema'
+import type { FactionResponse } from '@/types/spacetraders'
 
 export const FactionInfo = () => {
   const { control } = useFormContext<RegisterSchema>()
@@ -22,7 +22,7 @@ export const FactionInfo = () => {
 
   return (
     <div>
-      <div className="typography-sm">{info.description}</div>
+      <div className="text-sm">{info.description}</div>
       <div className="flex flex-wrap gap-1">
         {info.traits.map((trait) => (
           <Badge key={trait.symbol}>{trait.name}</Badge>

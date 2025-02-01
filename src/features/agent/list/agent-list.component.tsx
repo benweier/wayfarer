@@ -1,7 +1,7 @@
-import { Pagination, usePaginationCommands } from '@/components/pagination'
-import { getAgentListQuery } from '@/services/api/spacetraders/agent'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
+import { Pagination, usePaginationCommands } from '@/components/pagination'
+import { getAgentListQuery } from '@/services/api/spacetraders/agent'
 import { AgentListTable } from './agent-list.table'
 import type { AgentListProps } from './agent-list.types'
 
@@ -24,7 +24,7 @@ export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => 
       <AgentListTable data={agents.map((agent) => ({ agent }))} />
 
       <div className="grid items-center justify-center gap-4">
-        <div className="typography-sm flex items-center justify-center gap-2">
+        <div className="text-sm flex items-center justify-center gap-2">
           {agentsListQuery.isFetching ? (
             <div>...</div>
           ) : (
