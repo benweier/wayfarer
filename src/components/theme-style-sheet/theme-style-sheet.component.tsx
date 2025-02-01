@@ -1,6 +1,6 @@
+import { useAtomValue } from 'jotai'
 import { PrefersColorScheme } from '@/components/responsive'
 import { themeAtom } from '@/store/atoms/theme'
-import { useAtomValue } from 'jotai'
 
 export const ThemeStyleSheet = () => {
   const theme = useAtomValue(themeAtom)

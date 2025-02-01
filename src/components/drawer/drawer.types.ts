@@ -1,5 +1,4 @@
-import type { CSSProperties, PropsWithChildren, ReactNode } from 'react'
-import type { RefAttributes } from 'types-react'
+import type { CSSProperties, PropsWithChildren, ReactNode, RefAttributes } from 'react'
 
 export type DrawerProps = PropsWithChildren<{
   trigger: ReactNode

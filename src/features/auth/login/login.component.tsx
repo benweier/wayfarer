@@ -43,7 +43,7 @@ export const Login = () => {
     })
     startTransition(async () => {
       signin({ agent: response.data, token: variables.token })
-      await navigate({ to: redirect === undefined ? '/fleet' : redirect })
+      await navigate({ to: redirect ?? '/fleet' })
     })
   }
   const { mutateAsync, isPending } = useMutation({
@@ -91,7 +91,7 @@ export const Login = () => {
               {t('auth.login', { context: 'action' })}
             </Button>
 
-            <div className="text-base text-center">
+            <div className="text-center text-base">
               <Trans
                 i18nKey="auth.not_registered"
                 components={{

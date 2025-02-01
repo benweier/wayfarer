@@ -1,11 +1,11 @@
+import { useTranslation } from 'react-i18next'
 import * as Dropdown from '@/components/dropdown'
 import { AppIcon } from '@/components/icons'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { useShipResponse } from '@/context/ship.context'
-import type { CargoInventory } from '@/types/spacetraders'
-import { useTranslation } from 'react-i18next'
 import { CargoJettison } from './controls/jettison'
 import { CargoTransfer } from './controls/transfer'
+import type { CargoInventory } from '@/types/spacetraders'
 
 export const ShipCargoItemControls = ({ item }: { item: CargoInventory }) => {
   const { t } = useTranslation()

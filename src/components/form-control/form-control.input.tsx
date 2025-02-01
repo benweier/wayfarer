@@ -1,7 +1,8 @@
-import { cx } from '@/utilities/cx.helper'
-import { type InputHTMLAttributes, type RefAttributes, use } from 'react'
+import { use } from 'react'
 import { useFormState } from 'react-hook-form'
+import { cx } from '@/utilities/cx.helper'
 import { FormControlContext } from './form-control.component'
+import type { InputHTMLAttributes, RefAttributes } from 'react'
 
 export const Input = ({
   className,

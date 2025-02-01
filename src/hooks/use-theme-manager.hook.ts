@@ -1,6 +1,6 @@
-import { themeAtom } from '@/store/atoms/theme'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
+import { themeAtom } from '@/store/atoms/theme'
 
 const toggleThemeClass = (el: HTMLElement, preference: 'system' | 'light' | 'dark', system: 'light' | 'dark') => {
   el.classList.remove('light', 'dark')

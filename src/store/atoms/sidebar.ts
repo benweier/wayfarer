@@ -1,6 +1,6 @@
-import { createSyncStorage } from '@/store/create-sync-storage.helper'
 import { atomWithStorage } from 'jotai/utils'
 import * as v from 'valibot'
+import { createSyncStorage } from '@/store/create-sync-storage.helper'
 
 export type SidebarState = v.InferOutput<typeof SidebarSchema>
 

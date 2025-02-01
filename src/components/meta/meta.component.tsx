@@ -1,6 +1,7 @@
 import { useRouterState } from '@tanstack/react-router'
-import { Fragment, type ReactNode } from 'react'
+import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { ReactNode } from 'react'
 
 export const Meta = () => {
   const { t } = useTranslation('meta')

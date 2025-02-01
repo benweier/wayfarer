@@ -1,14 +1,14 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useWaypointResponse } from '@/context/waypoint.context'
-import type { WaypointMarketListProps } from '@/features/waypoint/market/waypoint-market.types'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders/waypoints'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import {
   WaypointMarketExchange,
   WaypointMarketExports,
   WaypointMarketImports,
 } from './waypoint-market-groups.component'
 import { WaypointMarketLayout } from './waypoint-market.layout'
+import type { WaypointMarketListProps } from '@/features/waypoint/market/waypoint-market.types'
 
 export const WaypointMarketList = ({
   imports: Imports = WaypointMarketImports,

@@ -1,8 +1,8 @@
-import * as ScrollArea from '@/components/scroll-area'
 import * as Popover from '@radix-ui/react-popover'
-import type { PropsWithChildren } from 'react'
+import * as ScrollArea from '@/components/scroll-area'
 import { Options } from './multi-select-options.component'
 import type { MultiSelectFieldProps } from './multi-select.types'
+import type { PropsWithChildren } from 'react'
 
 export const Field = ({ trigger, id, value, onChange, children }: PropsWithChildren<MultiSelectFieldProps>) => {
   return (

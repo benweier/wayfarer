@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { createColumnHelper } from '@tanstack/react-table'
 import { Translation } from 'react-i18next'
-import { type AgentListTableSchema } from './agent-list.types'
+import type {AgentListTableSchema} from './agent-list.types';
 
 const columnHelper = createColumnHelper<AgentListTableSchema>()
 

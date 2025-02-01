@@ -1,3 +1,7 @@
+import { useQuery } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
+import { useCallback } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { ShipNavStatus, WaypointTraits } from '@/config/spacetraders'
 import { useShipResponse } from '@/context/ship.context'
@@ -7,13 +11,9 @@ import { TradeGoodContext } from '@/features/trade-good/context'
 import { TradeGoodSell } from '@/features/trade-good/sell'
 import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
 import { getWaypointMarketQuery } from '@/services/api/spacetraders/waypoints'
-import type { MarketTradeGood } from '@/types/spacetraders'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
-import { useQuery } from '@tanstack/react-query'
-import { useNavigate } from '@tanstack/react-router'
-import { useCallback } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
 import { ShipCargoTable } from './ship-cargo-list.table'
+import type { MarketTradeGood } from '@/types/spacetraders'
 
 export const ShipCargoList = () => {
   const { t } = useTranslation()

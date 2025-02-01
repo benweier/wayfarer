@@ -1,7 +1,4 @@
-import { Table } from '@/components/table'
 import {
-  type ColumnFiltersState,
-  type SortingState,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -10,8 +7,10 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
+import { Table } from '@/components/table'
 import { columns } from './waypoint-list.columns'
 import type { WaypointListTableProps } from './waypoint-list.types'
+import type { ColumnFiltersState, SortingState } from '@tanstack/react-table'
 
 export const WaypointListTable = ({ data }: WaypointListTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'symbol', desc: false }])

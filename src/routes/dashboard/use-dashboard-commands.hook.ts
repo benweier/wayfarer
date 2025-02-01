@@ -1,7 +1,8 @@
-import { useAuthStore } from '@/store/auth'
 import { useNavigate } from '@tanstack/react-router'
-import { type Action, useRegisterActions } from 'kbar'
+import { useRegisterActions } from 'kbar'
 import { useMemo } from 'react'
+import { useAuthStore } from '@/store/auth'
+import type { Action } from 'kbar'
 
 export const useDashboardCommands = () => {
   const navigate = useNavigate()

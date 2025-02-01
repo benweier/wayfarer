@@ -1,10 +1,10 @@
-import * as Select from '@/components/select'
-import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
+import * as Select from '@/components/select'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { defaultGetShipItem } from './ship-item-reducer.helper'
-import type { ShipSelectFieldProps, ShipSelectItem } from './ship-select-field.types'
 import { ShipOption, ShipSelection } from './ship-select-slots.component'
+import type { ShipSelectFieldProps, ShipSelectItem } from './ship-select-field.types'
 
 export const ShipSelectField = <T extends Record<string, unknown>>({
   name,

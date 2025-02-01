@@ -3,14 +3,14 @@ import * as v from 'valibot'
 type Unsubscribe = () => void
 type Subscribe<Value> = (key: string, callback: (value: Value) => void, initialValue: Value) => Unsubscribe
 
-export interface SyncStorage<Value> {
+export type SyncStorage<Value> = {
   getItem: (key: string, initialValue: Value) => Value
   setItem: (key: string, newValue: Value) => void
   removeItem: (key: string) => void
   subscribe?: Subscribe<Value>
 }
 
-function parse(value?: string | null) {
+function parse(value?: string | null): any {
   if (!value) return null
 
   try {
@@ -20,11 +20,11 @@ function parse(value?: string | null) {
   }
 }
 
-function stringify(value: any) {
+function stringify(value: any): string {
   return JSON.stringify(value)
 }
 
-export function createSyncStorage<T extends v.BaseSchema<any, any, any> = v.BaseSchema<any, any, any>>(
+export function createSyncStorage<T extends v.BaseSchema<unknown, unknown, any> = v.BaseSchema<unknown, unknown, any>>(
   schema: T,
   parser = parse,
   stringifier = stringify,

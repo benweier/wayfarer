@@ -1,7 +1,7 @@
-import { useAuthStore } from '@/store/auth'
-import type { WaypointResponse } from '@/types/spacetraders'
 import { Link } from '@tanstack/react-router'
 import { Trans, useTranslation } from 'react-i18next'
+import { useAuthStore } from '@/store/auth'
+import type { WaypointResponse } from '@/types/spacetraders'
 
 export const WaypointFleetEmpty = ({ waypoint }: { waypoint: WaypointResponse }) => {
   const { t } = useTranslation()

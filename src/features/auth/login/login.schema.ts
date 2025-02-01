@@ -1,5 +1,5 @@
-import { i18n } from '@/services/i18n'
 import * as v from 'valibot'
+import { i18n } from '@/services/i18n'
 
 export const LoginSchema = v.object({
   symbol: v.optional(v.pipe(v.string(), v.trim())),

@@ -1,6 +1,4 @@
-import { Table } from '@/components/table'
 import {
-  type SortingState,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -9,8 +7,10 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
+import { Table } from '@/components/table'
 import { columns } from './waypoint-shipyard.columns'
 import type { WaypointShipyardTableProps } from './waypoint-shipyard.types'
+import type { SortingState } from '@tanstack/react-table'
 
 export const WaypointShipyardTable = ({ data }: WaypointShipyardTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'type', desc: false }])

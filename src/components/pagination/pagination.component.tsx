@@ -1,10 +1,10 @@
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
 import { Tablet } from '@/components/responsive'
-import { useTranslation } from 'react-i18next'
-import type { PaginationProps } from './pagination.types'
 import { getPagingRange } from './pagination.utils'
 import { usePaginationHandlers } from './use-pagination-handlers.hook'
+import type { PaginationProps } from './pagination.types'
 
 export const Pagination = ({ current, min = 1, max, length = 5, onChange }: PaginationProps) => {
   const { t } = useTranslation()

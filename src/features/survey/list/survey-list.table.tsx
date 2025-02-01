@@ -1,7 +1,4 @@
-import { Table } from '@/components/table'
 import {
-  type ColumnFiltersState,
-  type SortingState,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -10,8 +7,10 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
+import { Table } from '@/components/table'
 import { columns } from './survey-list.columns'
 import type { SurveyListTableProps } from './survey-list.types'
+import type { ColumnFiltersState, SortingState } from '@tanstack/react-table'
 
 export const SurveyListTable = ({ data }: SurveyListTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([{ id: 'expiration', desc: false }])

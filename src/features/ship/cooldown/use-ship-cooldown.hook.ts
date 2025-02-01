@@ -1,10 +1,10 @@
-import { useUpdateInterval } from '@/hooks/use-update-interval.hook'
-import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
-import type { ShipResponse } from '@/types/spacetraders'
 import { useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { useEffect, useMemo } from 'react'
+import { useUpdateInterval } from '@/hooks/use-update-interval.hook'
+import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
+import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import type { ShipResponse } from '@/types/spacetraders'
 
 export const useShipCooldown = (ship: ShipResponse) => {
   const client = useQueryClient()

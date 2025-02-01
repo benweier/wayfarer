@@ -1,6 +1,6 @@
-import { createShipRefineMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
+import { createShipRefineMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import type { ShipActionProps } from './ship-actions.types'
 
 export const Refine = ({

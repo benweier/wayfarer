@@ -1,8 +1,8 @@
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { ShipIcon } from '@/components/icons'
 import * as ShipActions from '@/features/ship/actions'
 import { getFuelConsumption } from '@/utilities/get-fuel-consumption.helper'
-import { useTranslation } from 'react-i18next'
 import type { WaypointNavigationActionProps } from './waypoint-navigation.types'
 
 export const WaypointNavigationAction = ({ ship, waypoint, distance }: WaypointNavigationActionProps) => {

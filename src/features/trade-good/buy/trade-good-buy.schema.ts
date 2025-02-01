@@ -1,4 +1,5 @@
-import { type InferInput, maxValue, minValue, number, object, pipe, string } from 'valibot'
+import { maxValue, minValue, number, object, pipe, string } from 'valibot'
+import type { InferInput } from 'valibot'
 
 export const TradeGoodBuySchema = (ctx: { max: number }) =>
   object({

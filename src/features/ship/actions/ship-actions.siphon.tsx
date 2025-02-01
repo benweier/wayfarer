@@ -1,12 +1,12 @@
-import { ShipNavStatus } from '@/config/spacetraders'
-import { createShipSiphonMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
+import { ShipNavStatus } from '@/config/spacetraders'
+import { createShipSiphonMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import type { ShipActionProps } from './ship-actions.types'
 
 export const Siphon = ({
   ship,
-  disabled,
+  disabled = false,
   children,
 }: ShipActionProps<ReturnType<typeof createShipSiphonMutation.mutationFn>>) => {
   const client = useQueryClient()

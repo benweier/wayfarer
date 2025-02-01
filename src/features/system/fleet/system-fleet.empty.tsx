@@ -1,6 +1,6 @@
-import { useAuthStore } from '@/store/auth'
 import { Link } from '@tanstack/react-router'
 import { Trans, useTranslation } from 'react-i18next'
+import { useAuthStore } from '@/store/auth'
 import type { SystemFleetProps } from './system-fleet.types'
 
 export const SystemFleetEmpty = ({ system }: SystemFleetProps) => {

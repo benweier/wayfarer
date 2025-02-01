@@ -1,6 +1,7 @@
-import type { AgentResponse } from '@/types/spacetraders'
 import { queryOptions } from '@tanstack/react-query'
-import { type Meta, type SpaceTradersResponse, api } from './core'
+import {   api } from './core'
+import type {Meta, SpaceTradersResponse} from './core';
+import type { AgentResponse } from '@/types/spacetraders'
 
 export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; limit?: number } = {}) =>
   queryOptions({

@@ -14,4 +14,4 @@ export const ROUTES = {
   LEADERBOARD: '/_dashboard/leaderboard',
   AGENTS: '/_dashboard/agents/',
   AGENT: '/_dashboard/agents/$agentSymbol',
-} as const
+} as const satisfies Record<string, string>

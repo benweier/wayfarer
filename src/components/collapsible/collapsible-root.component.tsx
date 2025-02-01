@@ -2,8 +2,8 @@ import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
 import { createStore } from 'zustand'
 import { CollapsibleContext } from './collapsible.context'
-import type { CollapsibleRootProps, CollapsibleStore } from './collapsible.types'
 import { useCollapsibleContext } from './use-collapsible-store.hook'
+import type { CollapsibleRootProps, CollapsibleStore } from './collapsible.types'
 
 export const Root = ({ defaultOpen = false, disabled, onOpenChange, trigger, children }: CollapsibleRootProps) => {
   const [store] = useState(() => {

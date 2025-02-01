@@ -1,5 +1,5 @@
-import { cx } from '@/utilities/cx.helper'
 import * as ScrollArea from '@radix-ui/react-scroll-area'
+import { cx } from '@/utilities/cx.helper'
 import type { CSSProperties, PropsWithChildren } from 'react'
 
 export const Root = ({

@@ -1,6 +1,6 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useWaypointResponse } from '@/context/waypoint.context'
 import { getWaypointJumpGateQuery } from '@/services/api/spacetraders/waypoints'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { WaypointJumpGateItem } from './waypoint-jumpgate-item.component'
 import { WaypointJumpGateLayout } from './waypoint-jumpgate.layout'
 

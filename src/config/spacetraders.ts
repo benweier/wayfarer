@@ -2,7 +2,7 @@ export const ShipNavStatus = {
   Docked: 'DOCKED',
   InOrbit: 'IN_ORBIT',
   InTransit: 'IN_TRANSIT',
-} as const
+} as const satisfies Record<string, string>
 
 export type ShipNavStatus = Values<typeof ShipNavStatus>
 
@@ -11,7 +11,7 @@ export const ShipFlightMode = {
   Burn: 'BURN',
   Stealth: 'STEALTH',
   Drift: 'DRIFT',
-}
+} as const satisfies Record<string, string>
 
 export type ShipFlightMode = Values<typeof ShipFlightMode>
 
@@ -30,7 +30,7 @@ export const WaypointTypes = {
   GravityWell: 'GRAVITY_WELL',
   ArtificialGravityWell: 'ARTIFICIAL_GRAVITY_WELL',
   FuelStation: 'FUEL_STATION',
-} as const
+} as const satisfies Record<string, string>
 
 export type WaypointTypes = Values<typeof WaypointTypes>
 
@@ -104,6 +104,6 @@ export const WaypointTraits = {
   VibrantAuroras: 'VIBRANT_AURORAS',
   Volcanic: 'VOLCANIC',
   WeakGravity: 'WEAK_GRAVITY',
-} as const
+} as const satisfies Record<string, string>
 
 export type WaypointTraits = Values<typeof WaypointTraits>

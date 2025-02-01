@@ -1,5 +1,5 @@
-import type { ToggleGroupMultipleProps, ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
+import type { ToggleGroupMultipleProps, ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
 import type { RefAttributes } from 'react'
 
 export const Options = ({

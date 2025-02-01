@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
-import useResizeObserver, { type ResizeHandler } from 'use-resize-observer'
+import useResizeObserver from 'use-resize-observer'
+import type { ResizeHandler } from 'use-resize-observer'
 
 export const useContainerQuery = (
   { minWidth, maxWidth }: { minWidth: number; maxWidth: number },

@@ -1,6 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
-import { type Action, useRegisterActions } from 'kbar'
+import { useRegisterActions } from 'kbar'
 import { useMemo } from 'react'
+import type { Action } from 'kbar'
 
 export const useAuthCommands = () => {
   const navigate = useNavigate()

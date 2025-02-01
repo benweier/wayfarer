@@ -1,7 +1,8 @@
-import type { FactionResponse } from '@/types/spacetraders'
-import { getPageList } from '@/utilities/get-page-list.helper'
 import { queryOptions } from '@tanstack/react-query'
-import { type Meta, type SpaceTradersResponse, api } from './core'
+import { getPageList } from '@/utilities/get-page-list.helper'
+import {   api } from './core'
+import type {Meta, SpaceTradersResponse} from './core';
+import type { FactionResponse } from '@/types/spacetraders'
 
 export const getFactionListQuery = () =>
   queryOptions({

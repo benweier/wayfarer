@@ -1,5 +1,5 @@
-import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { createFileRoute, defer } from '@tanstack/react-router'
+import { getShipListQuery } from '@/services/api/spacetraders/fleet'
 
 export const Route = createFileRoute('/_dashboard')({
   loader: ({ context }) => {

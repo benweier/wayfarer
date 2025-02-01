@@ -1,7 +1,7 @@
-import type { PropsWithChildren } from 'react'
 import { Drawer } from 'vaul'
-import type { DrawerRootProps } from './drawer.types'
 import { useDrawerContext } from './use-drawer-store.hook'
+import type { DrawerRootProps } from './drawer.types'
+import type { PropsWithChildren } from 'react'
 
 export const Root = ({
   trigger,

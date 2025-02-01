@@ -1,6 +1,6 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
-import type { CollapsibleTriggerProps } from './collapsible.types'
 import { useCollapsibleActions } from './use-collapsible-store.hook'
+import type { CollapsibleTriggerProps } from './collapsible.types'
 
 export const Trigger = ({ children }: CollapsibleTriggerProps) => {
   const actions = useCollapsibleActions()

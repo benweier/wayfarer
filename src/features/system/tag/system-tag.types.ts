@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react'
-import type { HTMLAttributes } from 'types-react'
+import type { HTMLAttributes, ReactNode } from 'react'
 
 export type SystemTagProps = {
   type: string

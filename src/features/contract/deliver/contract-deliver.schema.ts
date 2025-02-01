@@ -1,4 +1,5 @@
-import { type InferInput, minValue, number, object, pipe, string } from 'valibot'
+import { minValue, number, object, pipe, string } from 'valibot'
+import type { InferInput } from 'valibot'
 
 export const DeliverContractSchema = object({
   ship: string(),

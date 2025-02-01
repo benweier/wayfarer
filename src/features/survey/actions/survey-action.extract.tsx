@@ -1,8 +1,8 @@
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/button'
 import { useShipResponse } from '@/context/ship.context'
 import * as ShipActions from '@/features/ship/actions'
 import type { SurveyResponse } from '@/types/spacetraders'
-import { useTranslation } from 'react-i18next'
 
 export const Extract = ({ survey }: { survey: SurveyResponse }) => {
   const { t } = useTranslation()

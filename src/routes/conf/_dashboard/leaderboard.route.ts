@@ -1,6 +1,6 @@
+import { createFileRoute, defer } from '@tanstack/react-router'
 import { meta } from '@/routes/leaderboard/leaderboard-route.meta'
 import { getStatusQuery } from '@/services/api/spacetraders/status'
-import { createFileRoute, defer } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_dashboard/leaderboard')({
   beforeLoad: () => ({ meta }),

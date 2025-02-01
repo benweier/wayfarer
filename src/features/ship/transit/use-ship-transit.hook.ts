@@ -1,12 +1,12 @@
+import { useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
+import { useEffect, useMemo } from 'react'
 import { ShipNavStatus } from '@/config/spacetraders'
 import { useUpdateInterval } from '@/hooks/use-update-interval.hook'
 import { getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { getWaypointMarketQuery, getWaypointShipyardQuery } from '@/services/api/spacetraders/waypoints'
-import type { ShipResponse } from '@/types/spacetraders'
-import { useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
-import { useEffect, useMemo } from 'react'
 import { ShipTransitState } from './ship-transit.conf'
+import type { ShipResponse } from '@/types/spacetraders'
 
 export const useShipTransit = ({ symbol, nav }: ShipResponse) => {
   const client = useQueryClient()

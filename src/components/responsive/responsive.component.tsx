@@ -1,8 +1,8 @@
-import { breakpoints } from '@/components/responsive/breakpoints.conf'
-import type { ReactNode } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import type { ResponsiveComponentProps } from './responsive.types'
+import { breakpoints } from './breakpoints.conf'
 import { usePrefersColorSchemeQuery } from './use-responsive.hook'
+import type { ResponsiveComponentProps } from './responsive.types'
+import type { ReactNode } from 'react'
 
 export const Desktop = ({ below, fallback, children }: ResponsiveComponentProps) => {
   const query = {

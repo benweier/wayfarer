@@ -1,6 +1,7 @@
-import { type Action, KBarAnimator, KBarPortal, KBarPositioner, KBarProvider, KBarSearch } from 'kbar'
-import type { PropsWithChildren } from 'react'
+import { KBarAnimator, KBarPortal, KBarPositioner, KBarProvider, KBarSearch } from 'kbar'
 import { Results } from './kbar-results.component'
+import type { Action } from 'kbar'
+import type { PropsWithChildren } from 'react'
 
 export const KBar = ({ actions, children }: PropsWithChildren<{ actions?: Action[] }>) => {
   return (
@@ -18,7 +19,7 @@ export const KBar = ({ actions, children }: PropsWithChildren<{ actions?: Action
         <KBarPositioner>
           <div className="w-full max-w-[520px] p-4">
             <KBarAnimator>
-              <div className="flex flex-col overflow-hidden rounded-lg border border-border-primary bg-background-primary shadow-[0_0_40px_-15px_var(--color-border-secondary)] ring-3 ring-border-primary/30">
+              <div className="border-border-primary bg-background-primary ring-border-primary/30 flex flex-col overflow-hidden rounded-lg border ring-3 shadow-[0_0_40px_-15px_var(--color-border-secondary)]">
                 <div className="p-4">
                   <KBarSearch className="input" />
                 </div>

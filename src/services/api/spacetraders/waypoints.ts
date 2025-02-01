@@ -1,8 +1,8 @@
-import { type Meta, type SpaceTradersResponse, api } from '@/services/api/spacetraders/core'
-
-import type { JumpGateResponse, MarketResponse, ShipyardResponse, WaypointResponse } from '@/types/spacetraders'
-import { getPageList } from '@/utilities/get-page-list.helper'
 import { queryOptions } from '@tanstack/react-query'
+import { api } from '@/services/api/spacetraders/core'
+import { getPageList } from '@/utilities/get-page-list.helper'
+import type { Meta, SpaceTradersResponse } from '@/services/api/spacetraders/core'
+import type { JumpGateResponse, MarketResponse, ShipyardResponse, WaypointResponse } from '@/types/spacetraders'
 
 export const getWaypointListQuery = (args: { systemSymbol: string }) =>
   queryOptions({

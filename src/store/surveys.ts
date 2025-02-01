@@ -1,9 +1,9 @@
-import type { SurveyResponse } from '@/types/spacetraders'
 import { produce } from 'immer'
 import { persist } from 'zustand/middleware'
 import { useStore } from 'zustand/react'
 import { createStore } from 'zustand/vanilla'
 import type { BoundStoreSelector } from './store.types'
+import type { SurveyResponse } from '@/types/spacetraders'
 
 export type SurveyState = {
   surveys: SurveyResponse[]

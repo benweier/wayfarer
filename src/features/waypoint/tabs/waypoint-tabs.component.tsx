@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Tabs from '@/components/tabs'
 import { WaypointTraits, WaypointTypes } from '@/config/spacetraders'
@@ -14,7 +15,6 @@ import {
 import { WaypointShipyardError, WaypointShipyardFallback } from '@/features/waypoint/shipyard'
 import { hasTrait } from '@/features/waypoint/utilities/has-trait.helper'
 import { dynamic } from '@/utilities/dynamic.helper'
-import { useTranslation } from 'react-i18next'
 
 const { WaypointShipyardList } = dynamic(() => import('@/features/waypoint/shipyard'), 'WaypointShipyardList')
 const { WaypointJumpGateList } = dynamic(() => import('@/features/waypoint/jumpgate'), 'WaypointJumpGateList')

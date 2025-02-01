@@ -1,7 +1,8 @@
 import { useNavigate, useRouterState } from '@tanstack/react-router'
-import { type Action, useRegisterActions } from 'kbar'
+import { useRegisterActions } from 'kbar'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { Action } from 'kbar'
 
 export const usePaginationCommands = ({ min, max }: { min: number; max: number }) => {
   const { t } = useTranslation()

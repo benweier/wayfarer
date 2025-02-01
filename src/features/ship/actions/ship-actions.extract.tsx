@@ -1,15 +1,15 @@
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipExtractMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useSurveyStore } from '@/store/surveys'
-import type { SurveyResponse } from '@/types/spacetraders'
-import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
 import type { ShipActionProps } from './ship-actions.types'
+import type { SurveyResponse } from '@/types/spacetraders'
 
 export const Extract = ({
   ship,
   survey,
-  disabled,
+  disabled = false,
   children,
 }: ShipActionProps<
   ReturnType<typeof createShipExtractMutation.mutationFn>,

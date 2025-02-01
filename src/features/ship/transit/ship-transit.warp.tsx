@@ -1,14 +1,14 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
+import { useForm } from 'react-hook-form'
 import { Button } from '@/components/button'
 import { Modal } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import { ShipNavStatus } from '@/config/spacetraders'
 import { useShipResponse } from '@/context/ship.context'
 import { createShipWarpMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
-import type { ShipResponse } from '@/types/spacetraders'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
-import { useForm } from 'react-hook-form'
 import type { ShipTransitActionProps } from './ship-transit.types'
+import type { ShipResponse } from '@/types/spacetraders'
 
 export const ShipTransitWarp = ({ trigger }: ShipTransitActionProps) => {
   const ship = useShipResponse()

@@ -1,6 +1,6 @@
+import type { TradeGoodSellSchema } from './trade-good-sell.schema'
 import type { MarketTradeGood, ShipResponse } from '@/types/spacetraders'
 import type { ReactNode } from 'react'
-import type { TradeGoodSellSchema } from './trade-good-sell.schema'
 
 export type TradeGoodSellProps = {
   good?: MarketTradeGood

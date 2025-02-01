@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react'
 import type { CollapsibleImperativeRef } from './collapsible.types'
 
 export const useCollapsibleImperativeHandle = () => {
-  const collapsible = useRef<CollapsibleImperativeRef>(null)
+  const collapsible = useRef<CollapsibleImperativeRef | null>(null)
   const ref = useCallback((instance: CollapsibleImperativeRef) => {
     collapsible.current = instance
   }, [])

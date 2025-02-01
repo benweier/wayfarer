@@ -1,11 +1,11 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useDeferredValue, useState } from 'react'
 import { useFleetResponse } from '@/context/fleet.context'
 import { WaypointNavigationActionContext } from '@/context/waypoint-navigation-action.context'
 import { ShipStatus } from '@/features/ship/status'
 import { getShipPresence } from '@/features/ship/utilities/get-ship-presence.helper'
 import { WaypointNavigationAction } from '@/features/waypoint/navigation/waypoint-navigation.action'
 import { getWaypointListQuery } from '@/services/api/spacetraders/waypoints'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useDeferredValue, useState } from 'react'
 import { WaypointNavigationTable } from './waypoint-navigation.table'
 import type { WaypointNavigationProps } from './waypoint-navigation.types'
 

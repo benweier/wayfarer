@@ -1,9 +1,9 @@
-import { sidebarAtom } from '@/store/atoms/sidebar'
-import { themeAtom } from '@/store/atoms/theme'
 import { useSetAtom } from 'jotai'
-import type { Action } from 'kbar'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { sidebarAtom } from '@/store/atoms/sidebar'
+import { themeAtom } from '@/store/atoms/theme'
+import type { Action } from 'kbar'
 
 export const useAppActions = () => {
   const { t } = useTranslation()

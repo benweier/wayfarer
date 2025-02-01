@@ -1,8 +1,9 @@
-import { type ShipFlightMode, ShipNavStatus } from '@/config/spacetraders'
-import { createShipFlightModeMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
+import { ShipNavStatus } from '@/config/spacetraders'
+import { createShipFlightModeMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import type { ShipActionProps } from './ship-actions.types'
+import type { ShipFlightMode } from '@/config/spacetraders'
 
 export const FlightMode = ({
   ship,

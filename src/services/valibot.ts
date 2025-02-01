@@ -1,5 +1,5 @@
-import { i18n } from '@/services/i18n'
 import * as v from 'valibot'
+import { i18n } from '@/services/i18n'
 
 v.setSpecificMessage(v.minLength, (issue) => {
   return i18n.t('min_length', {

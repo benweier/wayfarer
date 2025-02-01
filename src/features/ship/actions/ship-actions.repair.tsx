@@ -1,8 +1,8 @@
+import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { ShipNavStatus } from '@/config/spacetraders'
 import { createShipRepairMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
 import { useAuthStore } from '@/store/auth'
-import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
-import { produce } from 'immer'
 import type { ShipActionProps } from './ship-actions.types'
 
 export const Repair = ({

@@ -1,8 +1,8 @@
+import { useMutation } from '@tanstack/react-query'
+import { Link } from '@tanstack/react-router'
 import { Button } from '@/components/button'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { createShipScanWaypointsMutation } from '@/services/api/spacetraders/fleet'
-import { useMutation } from '@tanstack/react-query'
-import { Link } from '@tanstack/react-router'
 
 export const ScanWaypoints = ({ shipSymbol }: { shipSymbol: string }) => {
   const { ref, modal } = useModalImperativeHandle()

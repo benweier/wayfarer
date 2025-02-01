@@ -1,6 +1,5 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
-import type { RefAttributes } from 'types-react'
 import type { ButtonVariantProps } from './button.styles'
+import type { ButtonHTMLAttributes, ReactNode, RefAttributes } from 'react'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   RefAttributes<HTMLButtonElement> &

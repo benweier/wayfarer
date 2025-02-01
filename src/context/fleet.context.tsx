@@ -1,5 +1,5 @@
-import type { ShipResponse } from '@/types/spacetraders'
 import { createContext, use } from 'react'
+import type { ShipResponse } from '@/types/spacetraders'
 
 export const FleetContext = createContext<ShipResponse[]>([])
 

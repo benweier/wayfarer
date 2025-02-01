@@ -1,4 +1,5 @@
-import { type PropsWithChildren, createContext } from 'react'
+import { createContext } from 'react'
+import type { PropsWithChildren } from 'react'
 import type { UseFormRegisterReturn } from 'react-hook-form'
 
 export const FormControlContext = createContext<UseFormRegisterReturn | null>(null)

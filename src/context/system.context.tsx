@@ -1,5 +1,5 @@
-import type { SystemResponse } from '@/types/spacetraders'
 import { createContext, use } from 'react'
+import type { SystemResponse } from '@/types/spacetraders'
 
 export const SystemContext = createContext<SystemResponse | null>(null)
 

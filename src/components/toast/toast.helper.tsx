@@ -1,5 +1,5 @@
-import { AppIcon } from '@/components/icons'
 import { toast as sonner } from 'sonner'
+import { AppIcon } from '@/components/icons'
 import { Toast } from './toast.component'
 import type { ToastConf } from './toast.types'
 

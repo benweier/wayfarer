@@ -1,22 +1,20 @@
+import { createFileRoute, redirect, retainSearchParams } from '@tanstack/react-router'
+import { valibotValidator } from '@tanstack/valibot-adapter'
+import * as v from 'valibot'
 import { ROUTES } from '@/config/routes'
 import { meta } from '@/routes/systems/systems-route.meta'
 import { getSystemListQuery } from '@/services/api/spacetraders/systems'
-import { type SearchSchemaInput, createFileRoute, redirect } from '@tanstack/react-router'
-import * as v from 'valibot'
 
 const LIMIT = 20
 
 const SearchParamsSchema = v.object({
-  page: v.fallback(v.pipe(v.number(), v.integer(), v.minValue(1)), 1),
+  page: v.fallback(v.optional(v.pipe(v.number(), v.integer(), v.minValue(1)), 1), 1),
 })
 
-type SearchParamsSchema = typeof SearchParamsSchema
-type SearchParamsInput = v.InferInput<SearchParamsSchema>
-type SearchParamsOutput = v.InferOutput<SearchParamsSchema>
-
 export const Route = createFileRoute(ROUTES.SYSTEMS)({
-  validateSearch(search: SearchParamsInput & SearchSchemaInput): SearchParamsOutput {
-    return v.parse(SearchParamsSchema, search)
+  validateSearch: valibotValidator(SearchParamsSchema),
+  search: {
+    middlewares: [retainSearchParams(true)],
   },
   beforeLoad() {
     return { meta }
@@ -38,7 +36,7 @@ export const Route = createFileRoute(ROUTES.SYSTEMS)({
       })
       context.client.setQueryData(getSystemListQuery({ page: max, limit: LIMIT }).queryKey, systems)
 
-      throw redirect({
+      return redirect({
         to: '/systems',
         search: { page: max },
         replace: true,

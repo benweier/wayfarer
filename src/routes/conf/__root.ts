@@ -1,7 +1,7 @@
+import { createRootRouteWithContext } from '@tanstack/react-router'
 import { Core } from '@/routes/core.route'
 import type { AuthStore } from '@/store/auth'
 import type { QueryClient } from '@tanstack/react-query'
-import { createRootRouteWithContext } from '@tanstack/react-router'
 import type { StoreApi } from 'zustand'
 
 export const Route = createRootRouteWithContext<{

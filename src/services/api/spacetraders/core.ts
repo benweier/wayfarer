@@ -1,6 +1,6 @@
 import { createFetcher } from '@/services/create-fetcher'
-import type * as f from '@/services/fetch'
 import { authStore } from '@/store/auth'
+import type * as f from '@/services/fetch'
 
 export type Meta = {
   total: number

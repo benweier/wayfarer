@@ -1,7 +1,7 @@
-import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
-import { useAuthStore } from '@/store/auth'
 import { useIsMutating, useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
+import { createShipCargoPurchaseMutation, getShipByIdQuery, getShipListQuery } from '@/services/api/spacetraders/fleet'
+import { useAuthStore } from '@/store/auth'
 import type { ShipActionProps } from './ship-actions.types'
 
 export const PurchaseCargo = ({

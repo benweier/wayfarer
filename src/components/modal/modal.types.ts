@@ -1,5 +1,4 @@
-import type { PropsWithChildren, ReactNode } from 'react'
-import type { RefAttributes } from 'types-react'
+import type { PropsWithChildren, ReactNode, RefAttributes } from 'react'
 
 type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'
 

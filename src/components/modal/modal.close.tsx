@@ -1,6 +1,6 @@
+import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '@/components/button'
 import { AppIcon } from '@/components/icons'
-import * as Dialog from '@radix-ui/react-dialog'
 
 export const Close = ({
   children = (

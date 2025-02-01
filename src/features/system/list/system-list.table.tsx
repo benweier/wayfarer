@@ -1,5 +1,5 @@
-import { Table } from '@/components/table'
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { Table } from '@/components/table'
 import { columns } from './system-list.columns'
 import type { SystemListTableProps } from './system-list.types'
 

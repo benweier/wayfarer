@@ -1,4 +1,8 @@
+import { queryOptions } from '@tanstack/react-query'
 import { authStore } from '@/store/auth'
+import { getPageList } from '@/utilities/get-page-list.helper'
+import { api } from './core'
+import type { Meta, SpaceTradersResponse } from './core'
 import type {
   AgentResponse,
   ChartResponse,
@@ -17,9 +21,6 @@ import type {
   SurveyResponse,
   WaypointResponse,
 } from '@/types/spacetraders'
-import { getPageList } from '@/utilities/get-page-list.helper'
-import { queryOptions } from '@tanstack/react-query'
-import { type Meta, type SpaceTradersResponse, api } from './core'
 
 type ShipMutationKey = { shipSymbol: string }
 
@@ -214,14 +215,14 @@ export const createShipSiphonMutation = {
 export const createShipRefineMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'refine' }, args],
   mutationFn: ({ shipSymbol, produce }: { shipSymbol: string; produce: string }) => {
-    return api.post<
+    return api.post(`my/ships/${shipSymbol.toUpperCase()}/refine`, { produce }).json<
       SpaceTradersResponse<{
         cooldown: CooldownResponse
         cargo: ShipCargo
         produced: Array<{ tradeSymbol: string; units: number }>
         consumed: Array<{ tradeSymbol: string; units: number }>
       }>
-    >(`my/ships/${shipSymbol.toUpperCase()}/refine`, { produce })
+    >()
   },
 }
 
@@ -239,31 +240,34 @@ export const createShipTransferCargoMutation = {
     itemSymbol: string
     units: number
   }) => {
-    return api.post<SpaceTradersResponse<{ cargo: ShipCargo }>>(`my/ships/${shipSymbol.from.toUpperCase()}/transfer`, {
-      shipSymbol: shipSymbol.to,
-      tradeSymbol: itemSymbol,
-      units,
-    })
+    return api
+      .post(`my/ships/${shipSymbol.from.toUpperCase()}/transfer`, {
+        shipSymbol: shipSymbol.to,
+        tradeSymbol: itemSymbol,
+        units,
+      })
+      .json<SpaceTradersResponse<{ cargo: ShipCargo }>>()
   },
 }
 
 export const createShipJettisonMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'jettison' }, args],
   mutationFn: ({ shipSymbol, itemSymbol, units }: { shipSymbol: string; itemSymbol: string; units: number }) => {
-    return api.post<SpaceTradersResponse<{ cargo: ShipCargo }>>(`my/ships/${shipSymbol.toUpperCase()}/jettison`, {
-      symbol: itemSymbol,
-      units,
-    })
+    return api
+      .post(`my/ships/${shipSymbol.toUpperCase()}/jettison`, {
+        symbol: itemSymbol,
+        units,
+      })
+      .json<SpaceTradersResponse<{ cargo: ShipCargo }>>()
   },
 }
 
 export const createShipChartMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'chart' }, args],
   mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
-    return api.post<SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>>(
-      `my/ships/${shipSymbol.toUpperCase()}/chart`,
-      undefined,
-    )
+    return api
+      .post(`my/ships/${shipSymbol.toUpperCase()}/chart`, undefined)
+      .json<SpaceTradersResponse<{ chart: ChartResponse; waypoint: WaypointResponse }>>()
   },
 }
 
@@ -288,7 +292,9 @@ export const createShipRemoveMountMutation = {
 export const createShipNegotiateContractMutation = {
   getMutationKey: (args: ShipMutationKey) => [{ scope: 'ships', entity: 'item', action: 'negotiate-contract' }, args],
   mutationFn: ({ shipSymbol }: { shipSymbol: string }) => {
-    return api.post<SpaceTradersResponse<{ contract: ContractResponse }>>(`my/ships/${shipSymbol}/negotiate/contract`)
+    return api
+      .post(`my/ships/${shipSymbol}/negotiate/contract`)
+      .json<SpaceTradersResponse<{ contract: ContractResponse }>>()
   },
 }
 

@@ -1,6 +1,6 @@
-import type { FC, PropsWithChildren } from 'react'
 import { ErrorBoundaryContext, ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
 import type { ErrorBoundaryProps, ErrorComponentProps } from './error-boundary.types'
+import type { FC, PropsWithChildren } from 'react'
 
 const DefaultErrorFallback: FC<ErrorComponentProps> = () => <></>
 
