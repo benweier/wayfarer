@@ -20,7 +20,7 @@ export default defineConfig({
     modulePreload: { polyfill: false },
     rollupOptions: {
       output: {
-        chunkFileNames: 'assets/[hash:8].js',
+        chunkFileNames: 'assets/chunk-[hash:8].js',
         manualChunks: {
           react: ['react', 'react-dom'],
           core: ['@tanstack/react-router', '@tanstack/react-query', '@sentry/react'],
