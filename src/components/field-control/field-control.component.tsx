@@ -1,28 +1,16 @@
-import { type PropsWithChildren, createContext } from 'react'
-import type {
-  ControllerFieldState,
-  ControllerRenderProps,
-  FieldValues,
-  Path,
-  UseFormStateReturn,
-} from 'react-hook-form'
+import { useController } from 'react-hook-form'
+import { FieldControlContext } from './field-control.context'
+import type { PropsWithChildren } from 'react'
+import type { FieldValues, Path, UseControllerProps } from 'react-hook-form'
 
-export const FieldControlContext = createContext<{
-  field: ControllerRenderProps<any, any>
-  fieldState?: ControllerFieldState
-  formState?: UseFormStateReturn<any>
-} | null>(null)
-
-export const Root = <T extends FieldValues, N extends Path<T>>({
+export const Root = <T extends FieldValues = FieldValues, N extends Path<T> = Path<T>>({
   children,
   ...props
-}: PropsWithChildren<{
-  field: ControllerRenderProps<T, N>
-  fieldState?: ControllerFieldState
-  formState?: UseFormStateReturn<T>
-}>) => {
+}: PropsWithChildren<UseControllerProps<T, N>>) => {
+  const ctx = useController<T, N>(props)
+
   return (
-    <FieldControlContext value={props}>
+    <FieldControlContext value={ctx}>
       <div className="form-control space-y-1">{children}</div>
     </FieldControlContext>
   )

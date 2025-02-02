@@ -1,13 +1,13 @@
 import { cx } from '@/utilities/cx.helper'
-import { type InputHTMLAttributes, type RefAttributes, use } from 'react'
-import { FieldControlContext } from './field-control.component'
+import { useFieldControl } from './field-control.context'
+import type { InputHTMLAttributes, RefAttributes } from 'react'
 
-export const Input = ({
+export function Input({
   id,
   className,
   ...props
-}: InputHTMLAttributes<HTMLInputElement> & RefAttributes<HTMLInputElement>) => {
-  const ctx = use(FieldControlContext)
+}: InputHTMLAttributes<HTMLInputElement> & RefAttributes<HTMLInputElement>) {
+  const ctx = useFieldControl()
 
   return (
     <input

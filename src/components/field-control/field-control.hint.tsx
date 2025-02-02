@@ -1,9 +1,9 @@
 import { cx } from '@/utilities/cx.helper'
-import { type HTMLAttributes, use } from 'react'
-import { FieldControlContext } from './field-control.component'
+import { useFieldControl } from './field-control.context'
+import type { HTMLAttributes } from 'react'
 
 export const Hint = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
-  const ctx = use(FieldControlContext)
+  const ctx = useFieldControl()
 
   return (
     <div

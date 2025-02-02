@@ -1,5 +1,7 @@
 export { Root } from './field-control.component'
 export { Label } from './field-control.label'
 export { Input } from './field-control.input'
+export { Slot } from './field-control.slot'
 export { ErrorMessage } from './field-control.error-message'
 export { Hint } from './field-control.hint'
+export { useFieldControl, FieldControlContext } from './field-control.context'
