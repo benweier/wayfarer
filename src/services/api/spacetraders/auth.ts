@@ -1,5 +1,6 @@
+import { api } from './core'
+import type { SpaceTradersResponse } from './core'
 import type { AgentResponse, RegisterAgentResponse } from '@/types/spacetraders'
-import { type SpaceTradersResponse, api } from './core'
 
 export const getAgentMutation = {
   getMutationKey: () => [{ scope: 'agent' }] as const,
@@ -15,6 +16,8 @@ export const getAgentMutation = {
 export const createAgentMutation = {
   getMutationKey: () => [{ scope: 'register' }] as const,
   mutationFn: (payload: { symbol: string; faction: string; email?: string }) => {
+    if (payload.email?.trim() === '') delete payload.email
+
     return api.post('register', payload).json<SpaceTradersResponse<RegisterAgentResponse>>()
   },
 }
