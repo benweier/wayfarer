@@ -15,6 +15,8 @@ export const router = createRouter({
     client,
     auth: authStore,
   },
+  scrollRestoration: true,
+  scrollRestorationBehavior: 'instant',
   defaultPreload: false,
   defaultErrorComponent: RouteError,
   defaultNotFoundComponent: NotFound,
