@@ -1,9 +1,8 @@
+import * as Sentry from '@sentry/react'
 import { createInstance } from 'i18next'
 import languageDetector from 'i18next-browser-languagedetector'
 import backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
-import { sentry } from '@/services/sentry'
-
 export const i18n = createInstance()
 
 void i18n
@@ -47,7 +46,7 @@ void i18n
       const msg = `Missing translation key - [${lng.join()}] ${ns}:${key} (${fallbackValue})`
 
       if (import.meta.env.PROD) {
-        sentry.captureMessage(msg, 'warning')
+        Sentry.captureMessage(msg, 'warning')
       } else {
         console.warn(msg)
       }
@@ -58,32 +57,35 @@ i18n.services.formatter?.addCached('number', (lng, opts?: Intl.NumberFormatOptio
 
   return (val: number) => formatter.format(val)
 })
-i18n.services.formatter?.addCached('relativeTime', (lng?: string, opts: Intl.RelativeTimeFormatOptions = { numeric: 'auto' }) => {
-  const rtf = new Intl.RelativeTimeFormat(lng, opts)
+i18n.services.formatter?.addCached(
+  'relativeTime',
+  (lng?: string, opts: Intl.RelativeTimeFormatOptions = { numeric: 'auto' }) => {
+    const rtf = new Intl.RelativeTimeFormat(lng, opts)
 
-  return (value: number | Date) => {
-    const date = new Date(value)
-    const now = new Date().getTime()
-    const diffMs = now - date.getTime()
-    const diffSec = Math.floor(diffMs / 1000)
-    const diffMin = Math.floor(diffSec / 60)
-    const diffHour = Math.floor(diffMin / 60)
-    const diffDay = Math.floor(diffHour / 24)
+    return (value: string | number | Date) => {
+      const date = new Date(value)
+      const now = new Date().getTime()
+      const diffMs = now - date.getTime()
+      const diffSec = Math.floor(diffMs / 1000)
+      const diffMin = Math.floor(diffSec / 60)
+      const diffHour = Math.floor(diffMin / 60)
+      const diffDay = Math.floor(diffHour / 24)
 
-    switch (true) {
-      case diffSec < 5:
-        return i18n.t('general.right_now')
-      case diffMin < 1:
-        return i18n.t('general.seconds_ago')
-      case diffHour < 1:
-        return rtf.format(-diffMin, 'minute')
-      case diffHour < 24:
-        return rtf.format(-diffHour, 'hour')
-      default:
-        return rtf.format(-diffDay, 'day')
+      switch (true) {
+        case diffSec < 5:
+          return i18n.t('general.right_now')
+        case diffMin < 1:
+          return i18n.t('general.seconds_ago')
+        case diffHour < 1:
+          return rtf.format(-diffMin, 'minute')
+        case diffHour < 24:
+          return rtf.format(-diffHour, 'hour')
+        default:
+          return rtf.format(-diffDay, 'day')
+      }
     }
-  }
-})
+  },
+)
 i18n.services.formatter?.addCached('absoluteDateTime', (lng) => {
   const dtf = new Intl.DateTimeFormat(lng, {
     day: '2-digit',
