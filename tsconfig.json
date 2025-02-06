@@ -38,6 +38,6 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "files": ["env.d.ts", "src/routes/router.conf.ts"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "test/**/*.ts", "test/**/*.tsx"],
-  "exclude": ["node_modules", "build", "dist"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "build", "dist", "src/**/*.spec.ts", "src/**/*.spec.tsx"]
 }
