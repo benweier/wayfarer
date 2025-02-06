@@ -111,6 +111,7 @@ export default tseslint.config(
           prefer: 'type-imports',
         },
       ],
+      '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
     },
     plugins: {
