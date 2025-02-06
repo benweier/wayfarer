@@ -1,8 +1,13 @@
 /// <reference types="vite/client" />
+
+/* eslint-disable @typescript-eslint/consistent-indexed-object-style */
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 import type { TFunction } from 'i18next'
 
 declare global {
-  type WithClassName = { className?: string }
+  interface WithClassName {
+    className?: string
+  }
 
   type Keys<T> = keyof T
   type Values<T> = T[keyof T]
@@ -18,8 +23,9 @@ declare global {
 }
 
 declare module 'react' {
-  /* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
   interface CSSProperties {
     [key: `--${string}`]: string | number | undefined
   }
 }
+/* eslint-enable @typescript-eslint/consistent-indexed-object-style */
+/* eslint-enable @typescript-eslint/consistent-type-definitions */
