@@ -3,12 +3,7 @@ import type { PropsWithChildren } from 'react'
 
 export const Card = ({ className, children }: PropsWithChildren<{ className?: string }>) => {
   return (
-    <div
-      className={cx(
-        'relative z-auto rounded border-1 p-3 border-border-primary accent-background-secondary',
-        className,
-      )}
-    >
+    <div className={cx('border-border-primary bg-background-secondary relative rounded border-1 p-3', className)}>
       {children}
     </div>
   )
