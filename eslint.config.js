@@ -113,6 +113,7 @@ export default tseslint.config(
       ],
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
+      '@typescript-eslint/unbound-method': ['error', { ignoreStatic: true }],
     },
     plugins: {
       'jsx-a11y': pluginJsxA11y,
