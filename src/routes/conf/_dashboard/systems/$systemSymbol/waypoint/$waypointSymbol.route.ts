@@ -1,6 +1,6 @@
+import { i18n } from '@/services/i18n'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
-import { meta } from '@/routes/systems/waypoint/waypoint-route.meta'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
 
 export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol')({
@@ -18,7 +18,6 @@ export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/waypoint
       }
     },
   },
-  beforeLoad: () => ({ meta }),
   loader: async ({ context, params }) => {
     try {
       const waypoint = context.client.ensureQueryData(
@@ -30,6 +29,19 @@ export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/waypoint
       }
     } catch (_err) {
       throw notFound()
+    }
+  },
+  head: (ctx) => {
+    return {
+      meta: [
+        {
+          title: i18n.t('title_template', {
+            title: 'waypoint.title',
+            waypointSymbol: ctx.loaderData.waypoint.data.symbol,
+            ns: 'meta',
+          }),
+        },
+      ],
     }
   },
   notFoundComponent: NotFound,

@@ -1,7 +1,6 @@
-import { Outlet, useRouterState } from '@tanstack/react-router'
+import { HeadContent, Outlet, useRouterState } from '@tanstack/react-router'
 import { lazy } from 'react'
 import { Toaster } from 'sonner'
-import { Meta } from '@/components/meta'
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -26,7 +25,7 @@ const NavigationLoader = () => {
 export const Core = () => {
   return (
     <>
-      <Meta />
+      <HeadContent />
       <NavigationLoader />
       <Outlet />
       <Toaster

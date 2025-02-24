@@ -1,7 +1,10 @@
+import { i18n } from '@/services/i18n'
 import { createFileRoute } from '@tanstack/react-router'
 
-const meta: MetaFunction = (t) => [{ title: t('auth.register.title') }]
-
 export const Route = createFileRoute('/_auth/register')({
-  beforeLoad: () => ({ meta }),
+  head: () => {
+    return {
+      meta: [{ title: i18n.t('title_template', { title: 'auth.register.title', ns: 'meta' }) }],
+    }
+  },
 })

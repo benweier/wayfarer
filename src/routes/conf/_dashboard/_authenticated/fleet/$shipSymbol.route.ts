@@ -1,6 +1,6 @@
+import { i18n } from '@/services/i18n'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
-import { meta } from '@/routes/fleet/ship/ship-route.meta'
 import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
 
@@ -13,7 +13,6 @@ export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymb
       return { shipSymbol: shipSymbol.toUpperCase() }
     },
   },
-  beforeLoad: () => ({ meta }),
   loader: async ({ context, params }) => {
     try {
       const ship = await context.client.ensureQueryData(getShipByIdQuery({ shipSymbol: params.shipSymbol }))
@@ -30,6 +29,19 @@ export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymb
       }
     } catch (_err) {
       throw notFound()
+    }
+  },
+  head: (ctx) => {
+    return {
+      meta: [
+        {
+          title: i18n.t('title_template', {
+            title: 'ship.title',
+            shipSymbol: ctx.loaderData.ship.data.symbol,
+            ns: 'meta',
+          }),
+        },
+      ],
     }
   },
   notFoundComponent: NotFound,

@@ -1,8 +1,8 @@
+import { i18n } from '@/services/i18n'
 import { createFileRoute, redirect, retainSearchParams } from '@tanstack/react-router'
 import { valibotValidator } from '@tanstack/valibot-adapter'
 import * as v from 'valibot'
 import { ROUTES } from '@/config/routes'
-import { meta } from '@/routes/agents/agents-route.meta'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
 
 const LIMIT = 20
@@ -15,9 +15,6 @@ export const Route = createFileRoute(ROUTES.AGENTS)({
   validateSearch: valibotValidator(SearchParamsSchema),
   search: {
     middlewares: [retainSearchParams(true)],
-  },
-  beforeLoad() {
-    return { meta }
   },
   loaderDeps({ search }) {
     return { page: search.page }
@@ -41,6 +38,11 @@ export const Route = createFileRoute(ROUTES.AGENTS)({
 
     return {
       agents,
+    }
+  },
+  head: () => {
+    return {
+      meta: [{ title: i18n.t('title_template', { title: 'agents.title', ns: 'meta' }) }],
     }
   },
 })
