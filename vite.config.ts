@@ -3,8 +3,7 @@ import mdx from '@mdx-js/rollup'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
-import basicSSL from '@vitejs/plugin-basic-ssl'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 import compiler from 'babel-plugin-react-compiler'
 import { defineConfig } from 'vite'
 import dynamic from 'vite-plugin-dynamic-import'
@@ -57,7 +56,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    basicSSL(),
     tsconfigPaths(),
     dynamic(),
     { enforce: 'pre', ...mdx() },
