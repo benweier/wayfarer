@@ -1,9 +1,9 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute, redirect, retainSearchParams } from '@tanstack/react-router'
 import { valibotValidator } from '@tanstack/valibot-adapter'
 import * as v from 'valibot'
 import { ROUTES } from '@/config/routes'
 import { getAgentListQuery } from '@/services/api/spacetraders/agent'
+import { i18n } from '@/services/i18n'
 
 const LIMIT = 20
 

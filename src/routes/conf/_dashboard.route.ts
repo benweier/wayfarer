@@ -1,6 +1,6 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute, defer } from '@tanstack/react-router'
 import { getShipListQuery } from '@/services/api/spacetraders/fleet'
+import { i18n } from '@/services/i18n'
 
 export const Route = createFileRoute('/_dashboard')({
   loader: ({ context }) => {

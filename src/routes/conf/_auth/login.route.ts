@@ -1,6 +1,6 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute } from '@tanstack/react-router'
 import { object, optional, parse, string } from 'valibot'
+import { i18n } from '@/services/i18n'
 
 const SearchParamsSchema = object({
   redirect: optional(string()),

@@ -1,5 +1,5 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute } from '@tanstack/react-router'
+import { i18n } from '@/services/i18n'
 import { surveyStore } from '@/store/surveys'
 
 export const Route = createFileRoute('/_dashboard/_authenticated/surveys')({

@@ -1,7 +1,7 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
 import { getAgentBySymbolQuery } from '@/services/api/spacetraders/agent'
+import { i18n } from '@/services/i18n'
 
 export const Route = createFileRoute('/_dashboard/agents/$agentSymbol')({
   params: {

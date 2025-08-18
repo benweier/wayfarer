@@ -1,8 +1,8 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
 import { getShipByIdQuery } from '@/services/api/spacetraders/fleet'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
+import { i18n } from '@/services/i18n'
 
 export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymbol')({
   params: {
@@ -37,7 +37,7 @@ export const Route = createFileRoute('/_dashboard/_authenticated/fleet/$shipSymb
         {
           title: i18n.t('title_template', {
             title: 'ship.title',
-            shipSymbol: ctx.loaderData.ship.data.symbol,
+            shipSymbol: ctx.loaderData?.ship.data.symbol,
             ns: 'meta',
           }),
         },

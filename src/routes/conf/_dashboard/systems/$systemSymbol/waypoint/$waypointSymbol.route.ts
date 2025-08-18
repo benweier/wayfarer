@@ -1,7 +1,7 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
 import { getWaypointByIdQuery } from '@/services/api/spacetraders/waypoints'
+import { i18n } from '@/services/i18n'
 
 export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/waypoint/$waypointSymbol')({
   params: {
@@ -37,7 +37,7 @@ export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/waypoint
         {
           title: i18n.t('title_template', {
             title: 'waypoint.title',
-            waypointSymbol: ctx.loaderData.waypoint.data.symbol,
+            waypointSymbol: ctx.loaderData?.waypoint.data.symbol,
             ns: 'meta',
           }),
         },

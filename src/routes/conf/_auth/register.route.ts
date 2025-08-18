@@ -1,5 +1,5 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute } from '@tanstack/react-router'
+import { i18n } from '@/services/i18n'
 
 export const Route = createFileRoute('/_auth/register')({
   head: () => {

@@ -1,7 +1,7 @@
-import { i18n } from '@/services/i18n'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { NotFound } from '@/components/not-found'
 import { getSystemByIdQuery } from '@/services/api/spacetraders/systems'
+import { i18n } from '@/services/i18n'
 
 export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/')({
   params: {
@@ -29,7 +29,7 @@ export const Route = createFileRoute('/_dashboard/systems/$systemSymbol/')({
         {
           title: i18n.t('title_template', {
             title: 'system.title',
-            systemSymbol: ctx.loaderData.system.data.symbol,
+            systemSymbol: ctx.loaderData?.system.data.symbol,
             ns: 'meta',
           }),
         },
