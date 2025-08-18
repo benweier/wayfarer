@@ -1,12 +1,18 @@
 import { queryOptions } from '@tanstack/react-query'
+import * as v from 'valibot'
 import { authStore } from '@/store/auth'
 import { getPageList } from '@/utilities/get-page-list.helper'
-import { api } from './core'
-import type { Meta, SpaceTradersResponse } from './core'
-import type { AgentResponse, ContractResponse, ShipCargo } from '@/types/spacetraders'
+import { api } from './api'
+import {
+  ContractResponseSchema,
+  AgentResponseSchema,
+  ShipCargoSchema,
+  SpaceTradersResponseSchema,
+  PaginationMetaSchema,
+} from './schema'
 
-export const getContractListQuery = () =>
-  queryOptions({
+export function getContractListQuery() {
+  return queryOptions({
     queryKey: [{ scope: 'contracts', entity: 'list' }],
     queryFn: async ({ signal }) => {
       const { isAuthenticated } = authStore.getState()
@@ -15,15 +21,19 @@ export const getContractListQuery = () =>
         return { data: [], meta: { page: 0, total: 0, limit: 0 } }
       }
 
-      const path = 'my/contracts'
-
-      const initial = await api
-        .get(path, { page: 1, limit: 20 }, { signal })
-        .json<SpaceTradersResponse<ContractResponse[], Meta>>()
+      const initial = await api('my/contracts', {
+        params: { page: 1, limit: 20 },
+        signal,
+        schema: SpaceTradersResponseSchema(v.array(ContractResponseSchema), PaginationMetaSchema),
+      })
       const pages = getPageList(Math.ceil(initial.meta.total / initial.meta.limit), 1)
       const remaining = await Promise.all(
         pages.map((page) => {
-          return api.get(path, { page, limit: 20 }, { signal }).json<SpaceTradersResponse<ContractResponse[], Meta>>()
+          return api('my/contracts', {
+            params: { page, limit: 20 },
+            signal,
+            schema: SpaceTradersResponseSchema(v.array(ContractResponseSchema), PaginationMetaSchema),
+          })
         }),
       )
       const data = initial.data.concat(...remaining.map((page) => page.data))
@@ -32,23 +42,32 @@ export const getContractListQuery = () =>
       return { data, meta }
     },
   })
+}
 
-export const getContractByIdQuery = (args: { contractId: string }) =>
-  queryOptions({
+export function getContractByIdQuery(args: { contractId: string }) {
+  return queryOptions({
     queryKey: [{ scope: 'contracts', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      return api
-        .get(`my/contracts/${args.contractId}`, undefined, { signal })
-        .json<SpaceTradersResponse<ContractResponse>>()
+      return api(`my/contracts/${args.contractId}`, {
+        signal,
+        schema: SpaceTradersResponseSchema(ContractResponseSchema),
+      })
     },
   })
+}
 
 export const createContractAcceptMutation = {
   getMutationKey: (args: { contractId: string }) => [{ scope: 'contracts', entity: 'item', action: 'accept' }, args],
   mutationFn: (args: { contractId: string }) => {
-    return api
-      .post(`my/contracts/${args.contractId}/accept`)
-      .json<SpaceTradersResponse<{ agent: AgentResponse; contract: ContractResponse }>>()
+    return api(`my/contracts/${args.contractId}/accept`, {
+      method: 'POST',
+      schema: SpaceTradersResponseSchema(
+        v.object({
+          agent: AgentResponseSchema,
+          contract: ContractResponseSchema,
+        }),
+      ),
+    })
   },
 }
 
@@ -58,21 +77,34 @@ export const createContractDeliverMutation = {
     args,
   ],
   mutationFn: (args: { contractId: string; shipSymbol: string; tradeSymbol: string; units: number }) => {
-    return api
-      .post(`my/contracts/${args.contractId}/deliver`, {
+    return api(`my/contracts/${args.contractId}/deliver`, {
+      method: 'POST',
+      body: {
         shipSymbol: args.shipSymbol,
         tradeSymbol: args.tradeSymbol,
         units: args.units,
-      })
-      .json<SpaceTradersResponse<{ contract: ContractResponse; cargo: ShipCargo }>>()
+      },
+      schema: SpaceTradersResponseSchema(
+        v.object({
+          contract: ContractResponseSchema,
+          cargo: ShipCargoSchema,
+        }),
+      ),
+    })
   },
 }
 
 export const createContractFulfillMutation = {
   getMutationKey: (args: { contractId: string }) => [{ scope: 'contracts', entity: 'item', action: 'fulfill' }, args],
   mutationFn: (args: { contractId: string }) => {
-    return api
-      .post(`my/contracts/${args.contractId}/fulfill`)
-      .json<SpaceTradersResponse<{ agent: AgentResponse; contract: ContractResponse }>>()
+    return api(`my/contracts/${args.contractId}/fulfill`, {
+      method: 'POST',
+      schema: SpaceTradersResponseSchema(
+        v.object({
+          agent: AgentResponseSchema,
+          contract: ContractResponseSchema,
+        }),
+      ),
+    })
   },
 }

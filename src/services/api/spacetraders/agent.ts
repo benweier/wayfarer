@@ -1,23 +1,36 @@
+import {
+  AgentResponseSchema,
+  SpaceTradersResponseSchema,
+  PaginationMetaSchema,
+} from '@/services/api/spacetraders/schema'
 import { queryOptions } from '@tanstack/react-query'
-import {   api } from './core'
-import type {Meta, SpaceTradersResponse} from './core';
-import type { AgentResponse } from '@/types/spacetraders'
+import { api } from './api'
+import * as v from 'valibot'
 
-export const getAgentListQuery = ({ page = 1, limit = 20 }: { page?: number; limit?: number } = {}) =>
-  queryOptions({
+export function getAgentListQuery({ page = 1, limit = 20 }: { page?: number; limit?: number } = {}) {
+  return queryOptions({
     queryKey: [
       { scope: 'agents', entity: 'list' },
       { page, limit },
     ],
     queryFn: ({ signal }) => {
-      return api.get('agents', { page, limit }, { signal }).json<SpaceTradersResponse<AgentResponse[], Meta>>()
+      return api('agents', {
+        params: { page, limit },
+        signal,
+        schema: SpaceTradersResponseSchema(v.array(AgentResponseSchema), PaginationMetaSchema),
+      })
     },
   })
+}
 
-export const getAgentBySymbolQuery = (args: { agentSymbol: string }) =>
-  queryOptions({
+export function getAgentBySymbolQuery(args: { agentSymbol: string }) {
+  return queryOptions({
     queryKey: [{ scope: 'agents', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      return api.get(`agents/${args.agentSymbol}`, undefined, { signal }).json<SpaceTradersResponse<AgentResponse>>()
+      return api(`agents/${args.agentSymbol.toUpperCase()}`, {
+        signal,
+        schema: SpaceTradersResponseSchema(AgentResponseSchema),
+      })
     },
   })
+}

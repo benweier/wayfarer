@@ -1,11 +1,15 @@
 import { queryOptions } from '@tanstack/react-query'
-import { api } from '@/services/api/spacetraders/core'
-import type { StatusResponse } from '@/types/spacetraders'
+import { api } from './api'
+import { StatusResponseSchema } from './schema'
 
-export const getStatusQuery = () =>
-  queryOptions({
+export function getStatusQuery() {
+  return queryOptions({
     queryKey: [{ scope: 'status' }],
     queryFn: ({ signal }) => {
-      return api.get('', undefined, { signal }).json<StatusResponse>()
+      return api('', {
+        signal,
+        schema: StatusResponseSchema,
+      })
     },
   })
+}

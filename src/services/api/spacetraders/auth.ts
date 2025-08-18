@@ -1,23 +1,28 @@
-import { api } from './core'
-import type { SpaceTradersResponse } from './core'
-import type { AgentResponse, RegisterAgentResponse } from '@/types/spacetraders'
+import { mutationOptions } from '@tanstack/react-query'
+import { api } from './api'
+import { AgentResponseSchema, RegisterAgentResponseSchema, SpaceTradersResponseSchema } from './schema'
 
-export const getAgentMutation = {
-  getMutationKey: () => [{ scope: 'agent' }] as const,
-  mutationFn: ({ token }: { token: string }) => {
-    return api
-      .get('my/agent', undefined, {
+export function getMyAgentMutation() {
+  return mutationOptions({
+    mutationKey: [{ scope: 'agent' }] as const,
+    mutationFn: ({ token }: { token: string }) => {
+      return api('my/agent', {
         headers: [['Authorization', `Bearer ${token}`]],
+        schema: SpaceTradersResponseSchema(AgentResponseSchema),
       })
-      .json<SpaceTradersResponse<AgentResponse>>()
-  },
+    },
+  })
 }
 
-export const createAgentMutation = {
-  getMutationKey: () => [{ scope: 'register' }] as const,
-  mutationFn: (payload: { symbol: string; faction: string; email?: string }) => {
-    if (payload.email?.trim() === '') delete payload.email
-
-    return api.post('register', payload).json<SpaceTradersResponse<RegisterAgentResponse>>()
-  },
+export function createMyAgentMutation() {
+  return mutationOptions({
+    mutationKey: [{ scope: 'register' }] as const,
+    mutationFn: (payload: { symbol: string; faction: string }) => {
+      return api('register', {
+        method: 'POST',
+        body: payload,
+        schema: SpaceTradersResponseSchema(RegisterAgentResponseSchema),
+      })
+    },
+  })
 }

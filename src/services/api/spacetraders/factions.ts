@@ -1,24 +1,32 @@
+import * as v from 'valibot'
+import {
+  FactionResponseSchema,
+  PaginationMetaSchema,
+  SpaceTradersResponseSchema,
+} from '@/services/api/spacetraders/schema'
 import { queryOptions } from '@tanstack/react-query'
 import { getPageList } from '@/utilities/get-page-list.helper'
-import {   api } from './core'
-import type {Meta, SpaceTradersResponse} from './core';
-import type { FactionResponse } from '@/types/spacetraders'
+import { api } from './api'
 
-export const getFactionListQuery = () =>
-  queryOptions({
+export function getFactionListQuery() {
+  return queryOptions({
     staleTime: Number.POSITIVE_INFINITY,
     gcTime: Number.POSITIVE_INFINITY,
     queryKey: [{ scope: 'factions', entity: 'list' }],
     queryFn: async ({ signal }) => {
-      const initial = await api
-        .get('factions', { page: 1, limit: 20 }, { signal })
-        .json<SpaceTradersResponse<FactionResponse[], Meta>>()
+      const initial = await api('factions', {
+        params: { page: 1, limit: 20 },
+        signal,
+        schema: SpaceTradersResponseSchema(v.array(FactionResponseSchema), PaginationMetaSchema),
+      })
       const pages = getPageList(Math.ceil(initial.meta.total / initial.meta.limit), 1)
       const remaining = await Promise.all(
         pages.map((page) => {
-          return api
-            .get('factions', { page, limit: 20 }, { signal })
-            .json<SpaceTradersResponse<FactionResponse[], Meta>>()
+          return api('factions', {
+            params: { page, limit: 20 },
+            signal,
+            schema: SpaceTradersResponseSchema(v.array(FactionResponseSchema), PaginationMetaSchema),
+          })
         }),
       )
       const data = initial.data.concat(...remaining.map((page) => page.data))
@@ -27,13 +35,16 @@ export const getFactionListQuery = () =>
       return { data, meta }
     },
   })
+}
 
-export const getFactionByIdQuery = (args: { factionSymbol: string }) =>
-  queryOptions({
+export function getFactionByIdQuery(args: { factionSymbol: string }) {
+  return queryOptions({
     queryKey: [{ scope: 'factions', entity: 'item' }, args],
     queryFn: ({ signal }) => {
-      return api
-        .get(`factions/${args.factionSymbol}`, undefined, { signal })
-        .json<SpaceTradersResponse<FactionResponse>>()
+      return api(`factions/${args.factionSymbol.toUpperCase()}`, {
+        signal,
+        schema: SpaceTradersResponseSchema(FactionResponseSchema),
+      })
     },
   })
+}
