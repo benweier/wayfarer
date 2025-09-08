@@ -1,17 +1,20 @@
 import globals from 'globals'
-import jseslint from '@eslint/js'
-import tseslint from 'typescript-eslint'
+import reactHooks from 'eslint-plugin-react-hooks'
+import jsEslint from '@eslint/js'
+import css from '@eslint/css'
+import tsEslint from 'typescript-eslint'
 import pluginReact from 'eslint-plugin-react'
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
 import pluginStylistic from '@stylistic/eslint-plugin'
 import pluginImport from 'eslint-plugin-import'
 import pluginTestingLibrary from 'eslint-plugin-testing-library'
 import configPrettier from 'eslint-config-prettier'
+import { tailwind4 } from 'tailwind-csstree'
 
-export default tseslint.config(
-  jseslint.configs.recommended,
-  tseslint.configs.recommendedTypeCheckedOnly,
-  tseslint.configs.stylisticTypeChecked,
+export default tsEslint.config(
+  jsEslint.configs.recommended,
+  tsEslint.configs.recommendedTypeCheckedOnly,
+  tsEslint.configs.stylisticTypeChecked,
   {
     languageOptions: {
       parserOptions: {
@@ -23,10 +26,25 @@ export default tseslint.config(
     },
   },
   {
+    files: ['**/*.css'],
+    language: 'css/css',
+    plugins: {
+      css: css,
+    },
+    languageOptions: {
+      customSyntax: tailwind4,
+    },
+  },
+  {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     languageOptions: {
-      ...pluginReact.configs.flat.recommended.languageOptions,
-      parser: tseslint.parser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+        ecmaVersion: 2024,
+        sourceType: 'module',
+      },
+      parser: tsEslint.parser,
       globals: {
         ...globals.browser,
       },
@@ -36,6 +54,7 @@ export default tseslint.config(
       pluginReact.configs.flat['jsx-runtime'],
       pluginImport.flatConfigs.recommended,
       pluginImport.flatConfigs.react,
+      reactHooks.configs['recommended-latest'],
       pluginImport.flatConfigs.typescript,
       // pluginStylistic.configs['recommended-flat'],
     ],
@@ -55,6 +74,8 @@ export default tseslint.config(
     rules: {
       'no-unused-vars': 'off',
       'react/react-in-jsx-scope': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
       'import/order': [
         'error',
