@@ -17,7 +17,7 @@ export const Preferences = () => {
           <div className="size-6 text-blue-100">
             <MenuIcon id="settings" className="size-6 group-data-[state=open]:animate-spin" aria-hidden />
           </div>
-          <span className="text-sm sr-only @[220px]/side:not-sr-only flex flex-col items-start justify-start">
+          <span className="sr-only flex flex-col items-start justify-start text-sm @[220px]/side:not-sr-only">
             {t('preferences.label')}
           </span>
         </button>

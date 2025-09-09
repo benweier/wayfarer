@@ -24,7 +24,7 @@ export const AgentList = ({ page = 1, limit = 20, setPage }: AgentListProps) => 
       <AgentListTable data={agents.map((agent) => ({ agent }))} />
 
       <div className="grid items-center justify-center gap-4">
-        <div className="text-sm flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 text-sm">
           {agentsListQuery.isFetching ? (
             <div>...</div>
           ) : (
