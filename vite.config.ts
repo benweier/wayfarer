@@ -2,7 +2,7 @@ import path from 'node:path'
 import mdx from '@mdx-js/rollup'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 import compiler from 'babel-plugin-react-compiler'
 import { defineConfig } from 'vite'
@@ -61,8 +61,12 @@ export default defineConfig({
     { enforce: 'pre', ...mdx() },
     tailwindcss(),
     [compiler],
-    react(),
-    !isTest && TanStackRouterVite(),
+    react({
+      babel: {
+        plugins: ['babel-plugin-react-compiler'],
+      },
+    }),
+    !isTest && tanstackRouter(),
     sentryVitePlugin({
       authToken: process.env.SENTRY_AUTH_TOKEN,
       org: process.env.SENTRY_ORG_NAME,
