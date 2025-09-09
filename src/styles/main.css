@@ -48,8 +48,9 @@
 
 @theme {
   --text-*: initial;
-  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans:
+    'Space Grotesk', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
   --default-font-feature-settings: 'ss01', 'ss03', 'case' 1, 'zero' 1;
   --animate-loader: loader 1s linear infinite;
   --blur-xs: 2px;
@@ -67,13 +68,6 @@
   --radius-2xl: 24px;
   --radius-3xl: 32px;
   --radius-full: 9999px;
-  --z-0: 0;
-  --z-10: 10;
-  --z-20: 20;
-  --z-30: 30;
-  --z-40: 40;
-  --z-50: 50;
-  --z-99: 99;
 
   /* SPACING */
   --spacing: 0.25rem;
@@ -217,7 +211,7 @@
       inset: 0;
       display: block;
       width: 20%;
-      content: "";
+      content: '';
       background-color: var(--color-green-500);
       animation: var(--animate-loader);
     }
@@ -226,10 +220,10 @@
   .link {
     font-weight: bold;
     color: var(--link-fg);
-    border-radius: var(--radius-sm);
     outline-width: 2px;
     outline-color: transparent;
     outline-offset: 4px;
+    border-radius: var(--radius-sm);
 
     &:focus-visible {
       outline-color: var(--link-fg);
