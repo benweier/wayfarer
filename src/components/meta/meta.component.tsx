@@ -12,7 +12,7 @@ export const Meta = () => {
           return metas
         }
 
-        const meta = match.context.meta(t, match.loaderData)
+        const meta = match.context.meta?.(t, match.loaderData)
 
         for (const tag of meta) {
           if ('title' in tag) {
