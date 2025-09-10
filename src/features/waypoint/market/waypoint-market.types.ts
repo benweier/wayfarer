@@ -1,10 +1,11 @@
-import type { MarketGood, MarketTradeGood } from '@/types/spacetraders'
+import type { MarketGood, MarketTradeGood, MarketTransaction } from '@/types/spacetraders'
 import type { FC, ReactNode } from 'react'
 
 export type WaypointMarketListProps = {
   imports?: FC<WaypointMarketGroupProps>
   exports?: FC<WaypointMarketGroupProps>
   exchange?: FC<WaypointMarketGroupProps>
+  transactions?: FC<{ data: MarketTransaction[] }>
 }
 
 export type WaypointMarketLayoutProps = {

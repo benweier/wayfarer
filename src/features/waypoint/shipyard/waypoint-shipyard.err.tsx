@@ -1,13 +1,13 @@
-import { isHttpErrorResponse } from '@/services/http'
+import { isResponseErrorStatus } from '@/services/http'
 import type { ErrorComponentProps } from '@/components/error-boundary'
 
 export const WaypointShipyardError = ({ error }: ErrorComponentProps) => {
   if (!error) return <></>
 
-  if (isHttpErrorResponse(error)) {
+  if (isResponseErrorStatus(error)) {
     return (
       <div className="rounded border-2 border-transparent px-3 py-9">
-        <div className="text-h3 text-center font-bold text-foreground-secondary">{error.message}</div>
+        <div className="text-h3 text-foreground-secondary text-center font-bold">{error.message}</div>
       </div>
     )
   }
