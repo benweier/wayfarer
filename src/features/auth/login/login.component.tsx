@@ -8,12 +8,10 @@ import { Button } from '@/components/button'
 import * as FormControl from '@/components/form-control'
 import { toast } from '@/components/toast'
 import { ROUTES } from '@/config/routes'
-import { getAgentMutation } from '@/services/api/spacetraders/auth'
-import { StatusCode, isHttpErrorResponse } from '@/services/http'
+import { getMyAgentMutation } from '@/services/api/spacetraders/auth'
+import { StatusCode, isResponseErrorStatus } from '@/services/http'
 import { useAuthStore } from '@/store/auth'
 import { LoginSchema } from './login.schema'
-import type { SpaceTradersResponse } from '@/services/api/spacetraders/core'
-import type { AgentResponse } from '@/types/spacetraders'
 
 const api = getRouteApi(ROUTES.LOGIN)
 
@@ -37,25 +35,23 @@ export const Login = () => {
     resolver: valibotResolver(LoginSchema),
   })
 
-  const onSuccessHandler = (response: SpaceTradersResponse<AgentResponse>, variables: { token: string }) => {
-    toast.success({
-      title: t('auth.toast.login_success_title'),
-    })
-    startTransition(async () => {
-      signin({ agent: response.data, token: variables.token })
-      await navigate({ to: redirect ?? '/fleet' })
-    })
-  }
   const { mutateAsync, isPending } = useMutation({
-    mutationKey: getAgentMutation.getMutationKey(),
-    mutationFn: getAgentMutation.mutationFn,
-    onSuccess: onSuccessHandler,
+    ...getMyAgentMutation(),
+    onSuccess: (response, variables: { token: string }) => {
+      toast.success({
+        title: t('auth.toast.login_success_title'),
+      })
+      startTransition(async () => {
+        signin({ agent: response.data, token: variables.token })
+        await navigate({ to: redirect ?? '/fleet' })
+      })
+    },
     onError: (err) => {
       toast.error({
         title: t('auth.toast.login_error_title'),
         description: t('auth.toast.login_error_description'),
       })
-      if (isHttpErrorResponse(err, StatusCode.Unauthorized)) {
+      if (isResponseErrorStatus(err, StatusCode.Unauthorized)) {
         methods.setError('token', {
           type: 'manual',
           message: t('auth.validation.invalid_token'),
@@ -65,11 +61,12 @@ export const Login = () => {
   })
 
   return (
-    <div className="grid gap-8">
+    <div className="space-y-8">
       <div className="text-h5 text-center">{t('auth.login_heading')}</div>
+
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
-          <div className="grid grid-cols-1 gap-8">
+          <div className="space-y-8">
             <FormControl.Root {...methods.register('symbol')}>
               <FormControl.Label>{t('auth.fields.agent_symbol.label')}</FormControl.Label>
               <FormControl.Input type="text" />
@@ -87,7 +84,13 @@ export const Login = () => {
               <FormControl.ErrorMessage />
             </FormControl.Root>
 
-            <Button intent="info" size="large" type="submit" disabled={isPending || isTransitionPending}>
+            <Button
+              intent="info"
+              size="large"
+              type="submit"
+              className="w-full"
+              disabled={isPending || isTransitionPending}
+            >
               {t('auth.login', { context: 'action' })}
             </Button>
 

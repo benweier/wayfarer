@@ -9,7 +9,7 @@ import * as FormControl from '@/components/form-control'
 import { Modal, useModalImperativeHandle } from '@/components/modal'
 import { QuerySuspenseBoundary } from '@/components/query-suspense-boundary'
 import * as Select from '@/components/select'
-import { createAgentMutation } from '@/services/api/spacetraders/auth'
+import { createMyAgentMutation } from '@/services/api/spacetraders/auth'
 import { getFactionListQuery } from '@/services/api/spacetraders/factions'
 import { reduceArrayToMap } from '@/utilities/reduce-array-to-map.helper'
 import { AccessTokenDialog } from './access-token-dialog.component'
@@ -85,50 +85,29 @@ export const Register = () => {
   const methods = useForm<RegisterSchemaInput, any, RegisterSchemaOutput>({
     defaultValues: {
       symbol: '',
-      email: '',
       faction: '',
     },
     resolver: valibotResolver(RegisterSchema),
   })
   const { ref, modal } = useModalImperativeHandle()
   const { mutateAsync, isPending, isSuccess, data } = useMutation({
-    mutationKey: createAgentMutation.getMutationKey(),
-    mutationFn: createAgentMutation.mutationFn,
+    ...createMyAgentMutation(),
     onSuccess: () => {
       modal.open()
     },
   })
 
   return (
-    <div className="grid gap-8">
+    <div className="space-y-8">
       <div className="text-h5 text-center">{t('auth.register_heading')}</div>
 
       <FormProvider {...methods}>
-        <form noValidate onSubmit={methods.handleSubmit(mutateAsync)}>
-          <div className="grid grid-cols-1 gap-8">
+        <form noValidate onSubmit={methods.handleSubmit((values) => mutateAsync(values))}>
+          <div className="space-y-8">
             <FormControl.Root {...methods.register('symbol', { required: true })}>
               <FormControl.Label>{t('auth.fields.agent_symbol.label')}</FormControl.Label>
               <FormControl.Input type="text" autoComplete="off" />
               <FormControl.ErrorMessage />
-            </FormControl.Root>
-
-            <FormControl.Root {...methods.register('email')}>
-              <FormControl.Label>
-                {t('auth.fields.email.label')}{' '}
-                <span className="text-xs font-normal text-foreground-tertiary">{t('general.fields.optional')}</span>
-              </FormControl.Label>
-
-              <FormControl.Input type="email" autoComplete="off" />
-              <FormControl.ErrorMessage />
-
-              <FormControl.Hint>
-                <Trans
-                  i18nKey="auth.fields.email.hint"
-                  components={{
-                    support_link: <SupportLink key="support_link" />,
-                  }}
-                />
-              </FormControl.Hint>
             </FormControl.Root>
 
             <div>
@@ -142,8 +121,8 @@ export const Register = () => {
             <Button intent="info" size="large" disabled={isPending} type="submit">
               {t('auth.register', { context: 'action' })}
             </Button>
-            <div className="grid gap-4">
-              <div className="text-base text-center">
+            <div className="space-y-4">
+              <div className="text-center text-base">
                 <Trans
                   i18nKey="auth.already_registered"
                   components={{
