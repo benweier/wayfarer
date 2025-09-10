@@ -44,18 +44,6 @@ src/features/
 
 Each feature contains: components, actions, hooks, types organized by responsibility.
 
-#### Data Fetching Pattern
-- **Always** use TanStack Query for server state
-- Wrap async components in Suspense boundaries
-- Use `ensureQueryData` in route loaders for prefetching
-- Handle errors with QuerySuspenseBoundary or error boundaries
-
-#### Component Architecture
-- Composition over inheritance
-- Headless components from Radix UI
-- Context providers for feature-specific state
-- TypeScript-first with strict type checking
-
 ### Development Patterns
 
 #### State Management
@@ -69,12 +57,6 @@ const sidebarAtom = atom(false)
 // Server state (TanStack Query)
 useQuery({ queryKey: ['ships'], queryFn: getShips })
 ```
-
-#### File Naming Conventions
-- Components: `component-name.component.tsx`
-- Hooks: `use-hook-name.hook.ts` 
-- Types: `entity.types.ts`
-- Actions: `feature-action.verb.tsx`
 
 #### Routing
 - File-based routing in `/src/routes/conf/`
@@ -102,11 +84,3 @@ useQuery({ queryKey: ['ships'], queryFn: getShips })
 - Stylelint for CSS
 - Strict TypeScript configuration
 - Pre-commit hooks via Husky
-
-## Important Notes
-
-- Always use Suspense boundaries for async components
-- Prefer server state (TanStack Query) over local state for API data
-- Follow existing component patterns in `/src/components/`
-- Use feature contexts for complex state management within features
-- Internationalization via i18next with namespace-based keys
