@@ -1,7 +1,7 @@
-import { authStore } from '@/store/auth'
 import { up } from 'up-fetch'
+import { authStore } from '@/store/auth'
 
-export const api = up(fetch, async () => {
+export const api = up(fetch, () => {
   const { isAuthenticated, token } = authStore.getState()
   const headers = new Headers()
 

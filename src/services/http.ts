@@ -1,21 +1,14 @@
-export const http = async (url: URL | RequestInfo, args: RequestInit) => {
-  const response = await fetch(url, args)
+import { isResponseError } from 'up-fetch'
+import type { ResponseError } from 'up-fetch'
 
-  if (!response.ok) {
-    throw response
+export function isResponseErrorStatus(err: any, status?: StatusCode): err is ResponseError {
+  if (!isResponseError(err)) return false
+
+  if (status === undefined) {
+    return true
   }
 
-  return response
-}
-
-export const isHttpErrorResponse = (err: any, status?: StatusCode): err is Response => {
-  if (!err || !(err instanceof Response)) return false
-
-  if (status !== undefined) {
-    return err.status === status
-  }
-
-  return true
+  return err.status === status
 }
 
 export const StatusMessage = {
