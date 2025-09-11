@@ -17,3 +17,5 @@ export const DashboardLayout = ({ children = <Outlet /> }: PropsWithChildren) =>
     </DashboardTemplate>
   )
 }
+
+export default DashboardLayout
